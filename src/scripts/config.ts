@@ -1,5 +1,9 @@
 export const config: Config = {
   title: "mtab",
+  animations: {
+    enabled: "on",
+    animationClass: "animate-up-bouncy"
+  },
   user: {
     name: "Max"
   },
@@ -35,6 +39,14 @@ export const config: Config = {
 
 export interface Config {
   title: string;
+  animations: {
+    enabled: "on" | "off";
+    animationClass:
+      | "animate-down-bouncy"
+      | "animate-down-smooth"
+      | "animate-up-bouncy"
+      | "animate-up-smooth";
+  };
   user: {
     name: string;
   };
