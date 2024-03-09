@@ -2,25 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+* {
+  font-family: "Fira Code", monospace;
+}
+
 ::selection {
-  background-color: #6366f140;
-}
-
-.rotate-animation {
-  animation: rotate infinite 1s ease-in-out;
-}
-
-@keyframes rotate {
-  0% {
-    transform: rotate(0deg);
-  }
-  70% {
-    transform: rotate(400deg);
-  }
-  85% {
-    transform: rotate(360deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
+  background-color: teal;
 }

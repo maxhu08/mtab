@@ -4,19 +4,18 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>neutrino template</title>
+  <title>...</title>
   <link rel="stylesheet" href="styles/index.css" />
   <link rel="icon" href="icon.svg" type="image/x-icon">
   <script src="scripts/index.ts" type="module" defer></script>
 </head>
 
-<body dir="ltr" class="bg-neutral-900">
-  <div class="min-h-screen grid place-items-center">
-    <div class="grid place-items-center mb-20">
-      <img src="icon.svg" class="rotate-animation h-80 mb-20" />
-      <p class="text-neutral-300 text-2xl text-center">
-        edit <code class="bg-neutral-800 p-1 rounded-md">src/index.html</code> and save to reload
-      </p>
+<body dir="ltr" class="bg-neutral-900 min-h-screen grid place-items-center">
+  <div class="grid place-items-center gap-6 pb-[10rem] w-[80%] max-w-[30rem]">
+    <p id="message" class="text-white text-6xl"></p>
+    <div class="grid grid-cols-[max-content_auto] text-2xl bg-neutral-800 w-full p-2 rounded-md">
+      <span class="text-teal-500 font-semibold select-none">→&nbsp;</span>
+      <input id="search" type="text" class="bg-transparent text-white placeholder-neutral-500" placeholder="search...">
     </div>
   </div>
 </body>
