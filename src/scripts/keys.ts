@@ -1,13 +1,13 @@
 // ui
+import { config } from "src/scripts/config";
 import { searchInputEl } from "src/scripts/ui";
 
 // utils
-import { focusSearch } from "src/scripts/utils/focus-search";
-import { unfocusSearch } from "src/scripts/utils/unfocus-search";
+import { focusSearch, search, unfocusSearch } from "src/scripts/utils/search";
 
 export const listenToKeys = () => {
   document.addEventListener("keydown", (e) => {
-    if (e.key === " ") focusSearch(e);
+    if (e.key === config.search.activationKey) focusSearch(e);
     if (e.key === "Escape") unfocusSearch();
   });
 
@@ -18,8 +18,7 @@ export const listenToKeys = () => {
   searchInputEl.addEventListener("keyup", (e) => {
     if (e.key === "Enter") {
       e.preventDefault();
-
-      window.location.href = `https://duckduckgo.com/?q=${searchInputEl.value}`;
+      search(searchInputEl.value);
     }
   });
 };
