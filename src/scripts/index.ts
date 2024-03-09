@@ -1,32 +1,17 @@
 // config
 import { config } from "src/scripts/config";
 
-// ui
-import { searchInputEl } from "src/scripts/ui";
-
 // utils
-import { setMessage } from "src/scripts/utils/set-message";
+import { setCustomMessage, setMorningAfternoonMessage } from "src/scripts/utils/set-message";
 import { setTitle } from "src/scripts/utils/set-title";
-import { unfocusSearch } from "src/scripts/utils/unfocus-search";
-import { focusSearch } from "src/scripts/utils/focus-search";
+
+// key events
+import { listenToKeys } from "src/scripts/keys";
 
 // initial page load
 setTitle(config.title);
-setMessage(`Hello, ${config.user.name}`);
 
-document.addEventListener("keydown", (e) => {
-  if (e.key === " ") focusSearch(e);
-  if (e.key === "Escape") unfocusSearch();
-});
+// setCustomMessage(`Hello, ${config.user.name}`);
+setMorningAfternoonMessage(config.user.name);
 
-searchInputEl.addEventListener("blur", () => {
-  unfocusSearch();
-});
-
-searchInputEl.addEventListener("keyup", (e) => {
-  if (e.key === "Enter") {
-    e.preventDefault();
-
-    window.location.href = `https://duckduckgo.com/?q=${searchInputEl.value}`;
-  }
-});
+listenToKeys();
