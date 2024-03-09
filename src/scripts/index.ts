@@ -1,25 +1,32 @@
+// config
 import { config } from "src/scripts/config";
+
+// ui
+import { searchInputEl } from "src/scripts/ui";
+
+// utils
 import { setMessage } from "src/scripts/utils/set-message";
 import { setTitle } from "src/scripts/utils/set-title";
+import { unfocusSearch } from "src/scripts/utils/unfocus-search";
+import { focusSearch } from "src/scripts/utils/focus-search";
 
 // initial page load
 setTitle(config.title);
 setMessage(`Hello, ${config.user.name}`);
 
-const searchEl = document.getElementById("search") as HTMLInputElement;
 document.addEventListener("keydown", (e) => {
-  if (e.key === " ") {
-    if (searchEl.matches(":focus")) return;
-    e.preventDefault();
-
-    searchEl.focus();
-  }
+  if (e.key === " ") focusSearch(e);
+  if (e.key === "Escape") unfocusSearch();
 });
 
-searchEl.addEventListener("keyup", (e) => {
+searchInputEl.addEventListener("blur", () => {
+  unfocusSearch();
+});
+
+searchInputEl.addEventListener("keyup", (e) => {
   if (e.key === "Enter") {
     e.preventDefault();
 
-    window.location.href = `https://duckduckgo.com/?q=${searchEl.value}`;
+    window.location.href = `https://duckduckgo.com/?q=${searchInputEl.value}`;
   }
 });
