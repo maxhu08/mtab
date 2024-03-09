@@ -9,6 +9,8 @@ export const listenToKeys = () => {
   document.addEventListener("keydown", (e) => {
     if (e.key === config.search.activationKey) focusSearch(e);
     if (e.key === "Escape") unfocusSearch();
+
+    if (e.key === config.closePageKey) window.close();
   });
 
   searchInputEl.addEventListener("blur", () => {

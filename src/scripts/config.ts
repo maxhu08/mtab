@@ -8,10 +8,32 @@ export const config: Config = {
     focusedBorderClass: "border-blue-500",
     activationKey: " "
   },
-  bookmarks: []
+  closePageKey: "x",
+  bookmarks: [
+    {
+      name: "github",
+      url: "https://github.com",
+      activationKey: "g"
+    },
+    {
+      name: "youtube",
+      url: "https://youtube.com",
+      activationKey: "y"
+    },
+    {
+      name: "studio",
+      url: "https://studio.youtube.com",
+      activationKey: "y"
+    },
+    {
+      name: "lh3000",
+      url: "http://localhost:3000",
+      activationKey: "l"
+    }
+  ]
 };
 
-interface Config {
+export interface Config {
   title: string;
   user: {
     name: string;
@@ -21,6 +43,7 @@ interface Config {
     focusedBorderClass: string;
     activationKey: string;
   };
+  closePageKey: string;
   bookmarks: {
     name: string;
     url: string;
