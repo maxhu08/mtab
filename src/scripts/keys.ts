@@ -9,7 +9,6 @@ export const listenToKeys = () => {
   document.addEventListener("keydown", (e) => {
     if (e.key === config.search.activationKey) tryFocusSearch(e);
     if (e.key === "Escape") unfocusSearch();
-
     if (e.key === config.closePageKey) window.close();
   });
 
@@ -22,5 +21,12 @@ export const listenToKeys = () => {
       e.preventDefault();
       search(searchInputEl.value);
     }
+  });
+
+  searchInputEl.addEventListener("input", () => {
+    if (!config.dynamicTitle) return;
+
+    if (searchInputEl.value !== "") document.title = searchInputEl.value;
+    else document.title = config.title;
   });
 };

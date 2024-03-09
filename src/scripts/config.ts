@@ -1,7 +1,8 @@
 import { icons } from "src/scripts/icons";
 
 export const config: Config = {
-  title: "mtab",
+  title: "new tab",
+  dynamicTitle: true, // changes when typing in search bar
   animations: {
     enabled: "on",
     animationClass: "animate-up-bouncy"
@@ -50,6 +51,7 @@ export const config: Config = {
 
 export interface Config {
   title: string;
+  dynamicTitle: boolean;
   animations: {
     enabled: "on" | "off";
     animationClass:
