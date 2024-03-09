@@ -1,5 +1,5 @@
-import { config, Config } from "src/scripts/config";
-import { bookmarksContainerEl, messageEl, searchContainerEl } from "src/scripts/ui";
+import { Config } from "src/scripts/config";
+import { messageEl, searchContainerEl } from "src/scripts/ui";
 
 export const addAnimations = (animations: Config["animations"]) => {
   if (animations.enabled === "off") return;

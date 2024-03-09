@@ -15,6 +15,7 @@ export const config: Config = {
     activationKey: " "
   },
   closePageKey: "x",
+  // TODO: bookmarks activation key
   bookmarks: [
     {
       name: "github",
@@ -54,6 +55,7 @@ export interface Config {
     animationClass:
       | "animate-down-bouncy"
       | "animate-down-smooth"
+      | "animate-down-fall"
       | "animate-up-bouncy"
       | "animate-up-smooth";
   };
