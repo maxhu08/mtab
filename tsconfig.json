@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "target": "ES5",
+    "module": "ESNext",
+    "strict": true,
+    "baseUrl": "./",
+    "esModuleInterop": true,
+    "moduleResolution": "Node",
+    "outDir": "./dist",
+    "noEmitOnError": true
+  },
+  "include": ["src/**/*.ts"],
+  "exclude": ["node_modules"]
+}

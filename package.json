@@ -1,0 +1,17 @@
+{
+  "name": "neutrino-template",
+  "version": "1.0.0",
+  "description": "🌌 lightweight template for creating a website with module bundling hmr, typescript, tailwindcss & sass",
+  "keywords": [],
+  "scripts": {
+    "dev": "parcel src/*.html & ./scripts/create_manifest.sh",
+    "build": "rm -rf dist && parcel build src/*.html && ./scripts/create_manifest.sh"
+  },
+  "dependencies": {
+    "parcel": "^2.11.0"
+  },
+  "devDependencies": {
+    "postcss": "^8.4.33",
+    "tailwindcss": "^3.4.1"
+  }
+}
