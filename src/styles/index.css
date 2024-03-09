@@ -6,3 +6,8 @@
   font-family: "Fira Code", monospace;
   transition-duration: 250ms;
 }
+
+.bookmark-icon svg {
+  height: 100%;
+  width: auto;
+}

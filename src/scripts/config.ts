@@ -1,3 +1,5 @@
+import { icons } from "src/scripts/icons";
+
 export const config: Config = {
   title: "mtab",
   animations: {
@@ -17,21 +19,29 @@ export const config: Config = {
     {
       name: "github",
       url: "https://github.com",
+      iconSvg: icons.github,
+      colorClass: "bg-indigo-500",
       activationKey: "g"
     },
     {
       name: "youtube",
       url: "https://youtube.com",
+      iconSvg: icons.youtube,
+      colorClass: "bg-red-500",
       activationKey: "y"
     },
     {
       name: "studio",
       url: "https://studio.youtube.com",
+      iconSvg: icons.world,
+      colorClass: "bg-red-500",
       activationKey: "y"
     },
     {
       name: "lh3000",
       url: "http://localhost:3000",
+      iconSvg: icons.world,
+      colorClass: "bg-teal-500",
       activationKey: "l"
     }
   ]
@@ -59,6 +69,8 @@ export interface Config {
   bookmarks: {
     name: string;
     url: string;
+    iconSvg: string;
+    colorClass: string;
     activationKey: string;
   }[];
 }
