@@ -35,7 +35,7 @@ export const config: Config = {
     {
       name: "studio",
       url: "https://studio.youtube.com",
-      iconSvg: icons.world,
+      iconSvg: icons.gear,
       colorClass: "bg-red-500",
       activationKey: "y"
     },

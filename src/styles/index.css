@@ -7,6 +7,10 @@
   transition-duration: 250ms;
 }
 
+::selection {
+  background-color: #ffffff20;
+}
+
 .bookmark-icon svg {
   height: 100%;
   width: auto;
