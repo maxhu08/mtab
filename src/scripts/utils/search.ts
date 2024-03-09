@@ -20,13 +20,17 @@ export const search = (value: string) => {
   window.location.href = searchUrl;
 };
 
-export const focusSearch = (e: KeyboardEvent) => {
+export const tryFocusSearch = (e: KeyboardEvent) => {
+  // in case already focused
   if (searchInputEl.matches(":focus")) return;
 
-  searchContainerEl.classList.replace("border-transparent", config.search.focusedBorderClass);
-  e.preventDefault();
+  focusSearch(e);
+};
 
+export const focusSearch = (e: Event) => {
+  searchContainerEl.classList.replace("border-transparent", config.search.focusedBorderClass);
   searchInputEl.focus();
+  e.preventDefault();
 };
 
 export const unfocusSearch = () => {
