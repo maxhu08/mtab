@@ -11,6 +11,7 @@
     "parcel": "^2.11.0"
   },
   "devDependencies": {
+    "@types/chrome": "^0.0.263",
     "postcss": "^8.4.33",
     "tailwindcss": "^3.4.1"
   }
