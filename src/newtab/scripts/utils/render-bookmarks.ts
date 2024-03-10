@@ -1,5 +1,5 @@
-import { Config } from "src/scripts/config";
-import { bookmarksContainerEl } from "src/scripts/ui";
+import { Config } from "../config";
+import { bookmarksContainerEl } from "../ui";
 
 // animations handled separately
 export const renderBookmarks = (config: Config) => {

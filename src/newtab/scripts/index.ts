@@ -1,19 +1,15 @@
 // Config
-import { config } from "src/scripts/config";
+import { config } from "./config";
 
 // Utils
-import {
-  setCustomMessage,
-  setMorningAfternoonMessage,
-  setTimeMessage
-} from "src/scripts/utils/set-message";
-import { setTitle } from "src/scripts/utils/set-title";
+import { setCustomMessage, setMorningAfternoonMessage, setTimeMessage } from "./utils/set-message";
+import { setTitle } from "./utils/set-title";
 
 // Key Events
-import { listenToKeys } from "src/scripts/keys";
-import { bookmarksContainerEl } from "src/scripts/ui";
-import { renderBookmarks } from "src/scripts/utils/render-bookmarks";
-import { addAnimations } from "src/scripts/utils/animations";
+import { listenToKeys } from "./keys";
+import { bookmarksContainerEl } from "./ui";
+import { renderBookmarks } from "./utils/render-bookmarks";
+import { addAnimations } from "./utils/animations";
 
 // ******************************************************************
 // initial page load logic start

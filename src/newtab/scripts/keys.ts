@@ -1,9 +1,9 @@
 // ui
-import { config } from "src/scripts/config";
-import { searchInputEl } from "src/scripts/ui";
+import { config } from "./config";
+import { searchInputEl } from "./ui";
 
 // utils
-import { focusSearch, search, tryFocusSearch, unfocusSearch } from "src/scripts/utils/search";
+import { focusSearch, search, tryFocusSearch, unfocusSearch } from "./utils/search";
 
 export const listenToKeys = () => {
   document.addEventListener("keydown", (e) => {

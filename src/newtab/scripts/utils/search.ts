@@ -1,5 +1,5 @@
-import { config } from "src/scripts/config";
-import { searchContainerEl, searchInputEl } from "src/scripts/ui";
+import { config } from "../config";
+import { searchContainerEl, searchInputEl } from "../ui";
 
 export const search = (value: string) => {
   let searchUrl = "";

@@ -9,7 +9,7 @@ manifest_content='{
   "description": "new tab x",
   "permissions": ["storage", "bookmarks", "favicon"],
   "chrome_url_overrides": {
-    "newtab": "index.html"
+    "newtab": "newtab/index.html"
   },
   "icons": {
     "16": "16.png",
@@ -27,9 +27,9 @@ manifest_content='{
       "128": "128.png"
     },
     "default_title": "mtab",
-    "default_popup": "popup.html"
+    "default_popup": "popup/popup.html"
   },
-  "options_page": "options.html"
+  "options_page": "options/options.html"
 }'
 
 # write the content to manifest.json in the dist folder

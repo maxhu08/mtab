@@ -1,4 +1,4 @@
-import { messageEl } from "src/scripts/ui";
+import { messageEl } from "../ui";
 
 export const setCustomMessage = (message: string) => {
   messageEl.textContent = message;

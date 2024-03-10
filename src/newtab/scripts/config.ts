@@ -1,4 +1,4 @@
-import { icons } from "src/scripts/icons";
+import { icons } from "./icons";
 
 export const config: Config = {
   title: "new tab",
