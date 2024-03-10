@@ -12,7 +12,6 @@ export const search = (value: string) => {
       searchUrl = `https://www.bing.com/search?q=${encodeURIComponent(value)}`;
       break;
     case "duckduckgo":
-    default:
       searchUrl = `https://duckduckgo.com/?q=${encodeURIComponent(value)}`;
       break;
   }
