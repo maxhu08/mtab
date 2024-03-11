@@ -3,6 +3,10 @@
   transition-duration: 250ms;
 }
 
+::selection {
+  background-color: #ffffff20;
+}
+
 .animate-float {
   -webkit-animation: float 2.5s !important;
   animation: float 2.5s !important;
