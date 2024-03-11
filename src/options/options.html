@@ -12,8 +12,8 @@
   <title>options</title>
 </head>
 
-<body class="bg-neutral-900 min-h-screen">
-  <div class="w-[95%] sm:w-[60%] md:w-[40%] mx-auto">
+<body dir="ltr" class="bg-neutral-900 min-h-screen">
+  <div class="grid grid-flow-row w-[95%] sm:w-[60%] md:w-[40%] mx-auto">
     <div class="grid place-items-center gap-4 p-4">
       <img src="../assets/icon.svg" class="w-40 aspect-square animate-float" alt="logo">
       <h1 class="text-white w-max text-4xl font-semibold">
@@ -22,6 +22,15 @@
     </div>
     <div>
       <p class="text-center text-white">this is the options page (wip)</p>
+    </div>
+    <div>
+      <div class="grid gap-2">
+        <p class="text-white">user.name</p>
+        <div class="bg-neutral-800 p-2 rounded-md">
+          <input id="user\.name-input" type="text" autocomplete="off"
+            class="w-full outline-none bg-transparent text-white placeholder-neutral-500" placeholder="set name...">
+        </div>
+      </div>
     </div>
   </div>
 </body>
