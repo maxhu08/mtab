@@ -132,3 +132,16 @@
     filter: blur(0);
   }
 }
+
+.animate-page-shrink {
+  animation: animatePageShrink 500ms ease-in-out;
+}
+
+@keyframes animatePageShrink {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(0);
+  }
+}

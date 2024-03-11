@@ -26,9 +26,11 @@
     <div>
       <div class="grid gap-2">
         <p class="text-white">user.name</p>
-        <div class="bg-neutral-800 p-2 rounded-md">
-          <input id="user\.name-input" type="text" autocomplete="off"
-            class="w-full outline-none bg-transparent text-white placeholder-neutral-500" placeholder="set name...">
+        <div id="username-container"
+          class="grid grid-cols-[max-content_auto] text-base bg-neutral-800 w-full p-1 rounded-md border-2 border-transparent">
+          <span class="text-pink-500 font-semibold select-none">→&nbsp;</span>
+          <input id="username-input" type="text" autocomplete="off"
+            class="outline-none bg-transparent text-white placeholder-neutral-500" placeholder="search... (SPC)">
         </div>
       </div>
     </div>

@@ -25,9 +25,15 @@ export const renderBookmarks = (config: Config) => {
     config.bookmarks.forEach((bookmark, index) => {
       const bookmarkEl = document.getElementById(`bookmark-${bookmark.name}-${index}`);
       if (bookmarkEl && config.animations) {
-        bookmarkEl.addEventListener("animationend", () => {
-          bookmarkEl.classList.remove("opacity-0");
-        });
+        bookmarkEl.addEventListener(
+          "animationend",
+          () => {
+            bookmarkEl.classList.remove("opacity-0");
+          },
+          {
+            once: true
+          }
+        );
       }
     });
 };

@@ -16,7 +16,19 @@ export const search = (value: string) => {
       break;
   }
 
-  window.location.href = searchUrl;
+  const content = document.getElementById("content") as HTMLDivElement;
+  content.classList.add("animate-page-shrink");
+
+  const animationDuration = 500;
+
+  setTimeout(() => {
+    content.classList.remove("animate-page-shrink");
+    content.style.opacity = "0";
+  }, animationDuration - 50);
+
+  setTimeout(() => {
+    window.location.href = searchUrl;
+  }, animationDuration);
 };
 
 export const tryFocusSearch = (e: KeyboardEvent) => {
