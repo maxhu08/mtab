@@ -134,14 +134,16 @@
 }
 
 .animate-page-shrink {
-  animation: animatePageShrink 350ms ease-in-out;
+  animation: animatePageShrink 350ms forwards ease-in-out;
 }
 
 @keyframes animatePageShrink {
-  from {
+  0% {
     transform: scale(1);
+    opacity: 1;
   }
-  to {
+  100% {
     transform: scale(0);
+    opacity: 0;
   }
 }

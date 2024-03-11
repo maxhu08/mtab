@@ -19,11 +19,11 @@ export const search = (value: string) => {
   const content = document.getElementById("content") as HTMLDivElement;
   content.classList.add("animate-page-shrink");
 
-  const animationDuration = 500;
+  const animationDuration = 350;
 
   setTimeout(() => {
     content.classList.remove("animate-page-shrink");
-    content.style.opacity = "0";
+    content.style.opacity = "0%";
   }, animationDuration * 0.75);
 
   setTimeout(() => {
