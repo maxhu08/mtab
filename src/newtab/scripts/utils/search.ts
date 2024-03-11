@@ -24,7 +24,7 @@ export const search = (value: string) => {
   setTimeout(() => {
     content.classList.remove("animate-page-shrink");
     content.style.opacity = "0";
-  }, animationDuration - 50);
+  }, animationDuration * 0.75);
 
   setTimeout(() => {
     window.location.href = searchUrl;

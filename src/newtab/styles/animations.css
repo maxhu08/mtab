@@ -134,7 +134,7 @@
 }
 
 .animate-page-shrink {
-  animation: animatePageShrink 500ms ease-in-out;
+  animation: animatePageShrink 350ms ease-in-out;
 }
 
 @keyframes animatePageShrink {
