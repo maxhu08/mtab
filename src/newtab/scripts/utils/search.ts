@@ -1,7 +1,7 @@
-import { config } from "../config";
+import { Config } from "src/newtab/scripts/config";
 import { searchContainerEl, searchInputEl } from "../ui";
 
-export const search = (value: string) => {
+export const search = (config: Config, value: string) => {
   let searchUrl = "";
 
   switch (config.search.engine) {
@@ -31,20 +31,20 @@ export const search = (value: string) => {
   }, animationDuration);
 };
 
-export const tryFocusSearch = (e: KeyboardEvent) => {
+export const tryFocusSearch = (config: Config, e: KeyboardEvent) => {
   // in case already focused
   if (searchInputEl.matches(":focus")) return;
 
-  focusSearch(e);
+  focusSearch(config, e);
 };
 
-export const focusSearch = (e: Event) => {
+export const focusSearch = (config: Config, e: Event) => {
   searchContainerEl.classList.replace("border-transparent", config.search.focusedBorderClass);
   searchInputEl.focus();
   e.preventDefault();
 };
 
-export const unfocusSearch = () => {
+export const unfocusSearch = (config: Config) => {
   searchInputEl.blur();
 
   searchContainerEl.classList.replace(config.search.focusedBorderClass, "border-transparent");

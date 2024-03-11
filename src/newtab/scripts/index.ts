@@ -1,5 +1,5 @@
 // Config
-import { config } from "./config";
+import { getConfig } from "./config";
 
 // Utils
 import { setCustomMessage, setMorningAfternoonMessage, setTimeMessage } from "./utils/set-message";
@@ -7,24 +7,25 @@ import { setTitle } from "./utils/set-title";
 
 // Key Events
 import { listenToKeys } from "./keys";
-import { bookmarksContainerEl } from "./ui";
 import { renderBookmarks } from "./utils/render-bookmarks";
 import { addAnimations } from "./utils/animations";
 
 // ******************************************************************
 // initial page load logic start
+getConfig(({ config }) => {
+  console.log(config);
 
-setTitle(config.title);
+  setTitle(config.title);
 
-// setCustomMessage(`Hello, ${config.user.name}`);
-setMorningAfternoonMessage(config.user.name);
-// setTimeMessage("12hr");
+  // setCustomMessage(`Hello, ${config.user.name}`);
+  setMorningAfternoonMessage(config.user.name);
+  // setTimeMessage("12hr");
 
-renderBookmarks(config);
+  renderBookmarks(config);
 
-addAnimations(config.animations);
+  addAnimations(config.animations);
 
+  listenToKeys(config);
+});
 // initial page load logic end
 // ******************************************************************
-
-listenToKeys();

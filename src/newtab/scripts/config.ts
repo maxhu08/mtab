@@ -1,6 +1,14 @@
 import { icons } from "./icons";
 
-export const config: Config = {
+export const getConfig = (f: ({ config }: { config: Config }) => void) => {
+  chrome.storage.local.get(["config"], (data) => {
+    f({
+      config: data.config as Config
+    });
+  });
+};
+
+export const defaultConfig: Config = {
   title: "new tab",
   dynamicTitle: true, // changes when typing in search bar
   animations: {

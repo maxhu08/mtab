@@ -1,4 +1,4 @@
-// import { config } from "src/newtab/scripts/config";
+import { oconfig } from "src/options/scripts/oconfig";
 import { inputs } from "./ui";
 
 inputs.forEach((input) => {
@@ -27,7 +27,7 @@ const unfocusInput = ({
 }) => {
   input.blur();
 
-  container.classList.replace("border-orange-500", "border-transparent");
+  container.classList.replace(oconfig.inputBorderClass, "border-transparent");
 };
 
 const focusInput = ({
@@ -39,7 +39,7 @@ const focusInput = ({
   input: HTMLInputElement;
   e: Event;
 }) => {
-  container.classList.replace("border-transparent", "border-orange-500");
+  container.classList.replace("border-transparent", oconfig.inputBorderClass);
   input.focus();
   e.preventDefault();
 };
