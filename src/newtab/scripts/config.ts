@@ -22,6 +22,11 @@ export const getConfig = (f: ({ config }: { config: Config }) => void) => {
 export const defaultConfig: Config = {
   title: "new tab",
   dynamicTitle: true, // changes when typing in search bar
+  wallpaper: {
+    enabled: true,
+    url: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.hdwallpapers.in%2Fdownload%2Freally_cool_landscape_wallpaper_4k_hd-HD.jpg&f=1&nofb=1&ipt=0c0009ff2f336ed3d94a204a1ecf8f401a7de711364a4497e7ec13597ae76ec2&ipo=images"
+  },
+  uiStyle: "glass",
   animations: {
     enabled: "on",
     animationClass: "animate-up-bouncy"
@@ -71,6 +76,11 @@ export const defaultConfig: Config = {
 export interface Config {
   title: string;
   dynamicTitle: boolean;
+  wallpaper: {
+    enabled: boolean;
+    url: string;
+  };
+  uiStyle: "solid" | "glass";
   animations: {
     enabled: "on" | "off";
     animationClass:

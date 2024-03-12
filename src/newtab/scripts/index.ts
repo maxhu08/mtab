@@ -9,11 +9,14 @@ import { setTitle } from "./utils/set-title";
 import { listenToKeys } from "./keys";
 import { renderBookmarks } from "./utils/render-bookmarks";
 import { addAnimations } from "./utils/animations";
+import { loadWallpaper } from "src/newtab/scripts/utils/load-wallpaper";
 
 // ******************************************************************
 // initial page load logic start
 getConfig(({ config }) => {
   setTitle(config.title);
+
+  loadWallpaper(config);
 
   // setCustomMessage(`Hello, ${config.user.name}`);
   setMorningAfternoonMessage(config.user.name);
