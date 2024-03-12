@@ -7,7 +7,8 @@
     "esModuleInterop": true,
     "moduleResolution": "Node",
     "outDir": "./dist",
-    "noEmitOnError": true
+    "noEmitOnError": true,
+    "lib": ["ES2015", "DOM"]
   },
   "include": ["src/**/*.ts"],
   "exclude": ["node_modules"]

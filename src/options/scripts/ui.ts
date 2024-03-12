@@ -1,4 +1,4 @@
-import { saveName } from "src/options/scripts/saving";
+import { saveConfig } from "src/options/scripts/utils/save-config";
 
 export const usernameContainerEl = document.getElementById("username-container") as HTMLDivElement;
 export const usernameInputEl = document.getElementById("username-input") as HTMLInputElement;
@@ -24,5 +24,5 @@ interface Input {
 const saveBtn = document.getElementById("save-button") as HTMLButtonElement;
 
 saveBtn.onclick = () => {
-  saveName();
+  saveConfig();
 };
