@@ -5,6 +5,10 @@ export const usernameInputEl = document.getElementById("username-input") as HTML
 export const titleContainerEl = document.getElementById("title-container") as HTMLDivElement;
 export const titleInputEl = document.getElementById("title-input") as HTMLInputElement;
 
+export const animationsEnabledCheckboxEl = document.getElementById(
+  "animations-enabled-checkbox"
+) as HTMLInputElement;
+
 export const inputs: Input[] = [
   {
     container: usernameContainerEl,
