@@ -4,9 +4,11 @@ export const usernameContainerEl = document.getElementById("username-container")
 export const usernameInputEl = document.getElementById("username-input") as HTMLInputElement;
 export const titleContainerEl = document.getElementById("title-container") as HTMLDivElement;
 export const titleInputEl = document.getElementById("title-input") as HTMLInputElement;
-
 export const animationsEnabledCheckboxEl = document.getElementById(
   "animations-enabled-checkbox"
+) as HTMLInputElement;
+export const dynamicTitleEnabledCheckbox = document.getElementById(
+  "dynamicTitle-enabled-checkbox"
 ) as HTMLInputElement;
 
 export const inputs: Input[] = [

@@ -24,7 +24,7 @@ export const listenToKeys = (config: Config) => {
   });
 
   searchInputEl.addEventListener("input", () => {
-    if (!config.dynamicTitle) return;
+    if (!config.dynamicTitle.enabled) return;
 
     if (searchInputEl.value !== "") document.title = searchInputEl.value;
     else document.title = config.title;
