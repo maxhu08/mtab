@@ -28,7 +28,7 @@ export const defaultConfig: Config = {
   },
   uiStyle: "glass",
   animations: {
-    enabled: "on",
+    enabled: true,
     animationClass: "animate-up-bouncy"
   },
   user: {
@@ -86,7 +86,7 @@ export interface Config {
   };
   uiStyle: UIStyle;
   animations: {
-    enabled: "on" | "off";
+    enabled: boolean;
     animationClass:
       | "animate-down-bouncy"
       | "animate-down-smooth"

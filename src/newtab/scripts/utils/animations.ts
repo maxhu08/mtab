@@ -2,7 +2,7 @@ import { Config } from "../config";
 import { messageEl, searchContainerEl } from "../ui";
 
 export const addAnimations = (animations: Config["animations"]) => {
-  if (animations.enabled === "off") return;
+  if (!animations.enabled) return;
 
   messageEl.style.animationDelay = "0ms";
   messageEl.classList.add(animations.animationClass);
