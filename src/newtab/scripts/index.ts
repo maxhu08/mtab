@@ -10,6 +10,7 @@ import { listenToKeys } from "./keys";
 import { renderBookmarks } from "./utils/render-bookmarks";
 import { addAnimations } from "./utils/animations";
 import { loadWallpaper } from "src/newtab/scripts/utils/load-wallpaper";
+import { styleSearch } from "src/newtab/scripts/utils/style-search";
 
 // ******************************************************************
 // initial page load logic start
@@ -17,6 +18,8 @@ getConfig(({ config }) => {
   setTitle(config.title);
 
   loadWallpaper(config);
+
+  styleSearch(config.uiStyle);
 
   // setCustomMessage(`Hello, ${config.user.name}`);
   setMorningAfternoonMessage(config.user.name);

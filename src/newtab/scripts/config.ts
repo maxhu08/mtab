@@ -73,6 +73,8 @@ export const defaultConfig: Config = {
   ]
 };
 
+export type UIStyle = "solid" | "glass";
+
 export interface Config {
   title: string;
   dynamicTitle: boolean;
@@ -80,7 +82,7 @@ export interface Config {
     enabled: boolean;
     url: string;
   };
-  uiStyle: "solid" | "glass";
+  uiStyle: UIStyle;
   animations: {
     enabled: "on" | "off";
     animationClass:

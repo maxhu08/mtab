@@ -11,3 +11,11 @@
   height: 100%;
   width: auto;
 }
+
+.glass-effect {
+  background-color: #ffffff20;
+  box-shadow: 0 25px 23px rgba(0, 0, 0, 0.15);
+  box-sizing: border-box !important;
+
+  backdrop-filter: blur(32px);
+}

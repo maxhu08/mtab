@@ -6,9 +6,9 @@ export const renderBookmarks = (config: Config) => {
   config.bookmarks.forEach((bookmark, index) => {
     bookmarksContainerEl.innerHTML += `
   <a href="${bookmark.url}" rel="noopener noreferrer">
-    <div id="bookmark-${
-      bookmark.name
-    }-${index}" class="hover:bg-white/20 cursor-pointer bg-neutral-800 rounded-md h-20 md:h-32 overflow-hidden ${
+    <div id="bookmark-${bookmark.name}-${index}" class="hover:bg-white/20 cursor-pointer ${
+      config.uiStyle === "glass" ? "glass-effect" : "bg-neutral-800"
+    } rounded-md h-20 md:h-32 overflow-hidden ${
       config.animations.enabled === "on" ? `${config.animations.animationClass} opacity-0` : ""
     }" ${config.animations ? `style="animation-delay: ${(index + 2) * 50 + 50}ms;"` : ""}>
       <div class="${bookmark.colorClass} h-1"></div>
