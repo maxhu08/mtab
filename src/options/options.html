@@ -10,7 +10,7 @@
   <script src="scripts/ui.ts" type="module" defer></script>
   <script src="scripts/inputs.ts" type="module" defer></script>
   <link rel="icon" href="../assets/icon.svg" type="image/x-icon">
-  <title>options</title>
+  <title>options ヽ(・ω・*)</title>
 </head>
 
 <body dir="ltr" class="bg-neutral-900 min-h-screen">
@@ -24,7 +24,16 @@
     <div>
       <p class="text-center text-white">this is the options page (wip)</p>
     </div>
-    <div>
+    <div class="grid grid-flow-row gap-4">
+      <div class="grid gap-2">
+        <p class="text-white">new tab title</p>
+        <div id="title-container"
+          class="grid grid-cols-[max-content_auto] text-base bg-neutral-800 w-full p-1 rounded-md border-2 border-transparent">
+          <span class="text-pink-500 font-semibold select-none">>&nbsp;</span>
+          <input id="title-input" type="text" autocomplete="off"
+            class="outline-none bg-transparent text-white placeholder-neutral-500" placeholder="input title...">
+        </div>
+      </div>
       <div class="grid gap-2">
         <p class="text-white">user.name</p>
         <div id="username-container"
