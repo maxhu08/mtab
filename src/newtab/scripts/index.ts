@@ -13,8 +13,6 @@ import { addAnimations } from "./utils/animations";
 // ******************************************************************
 // initial page load logic start
 getConfig(({ config }) => {
-  console.log(config);
-
   setTitle(config.title);
 
   // setCustomMessage(`Hello, ${config.user.name}`);

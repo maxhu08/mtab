@@ -2,8 +2,19 @@ import { icons } from "./icons";
 
 export const getConfig = (f: ({ config }: { config: Config }) => void) => {
   chrome.storage.local.get(["config"], (data) => {
+    if (Object.keys(data).length === 0) {
+      chrome.storage.local.set({
+        config: defaultConfig
+      });
+
+      f({
+        config: defaultConfig
+      });
+      return;
+    }
+
     f({
-      config: data.config as Config
+      config: data.config
     });
   });
 };
@@ -16,7 +27,7 @@ export const defaultConfig: Config = {
     animationClass: "animate-up-bouncy"
   },
   user: {
-    name: "Max"
+    name: "Default"
   },
   search: {
     engine: "duckduckgo",
