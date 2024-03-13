@@ -4,8 +4,8 @@
   "description": "🌌 lightweight template for creating a website with module bundling hmr, typescript, tailwindcss & sass",
   "keywords": [],
   "scripts": {
-    "dev": "parcel src/**/*.html & ./scripts/create_manifest.sh && ./scripts/copy_icons.sh",
-    "build": "rm -rf dist && parcel build src/**/*.html && ./scripts/create_manifest.sh && ./scripts/copy_icons.sh"
+    "dev": "mkdir -p dist && parcel src/**/*.html & ./scripts/create_manifest.sh && ./scripts/copy_icons.sh",
+    "build": "rm -rf dist && parcel build src/**/*.html & ./scripts/create_manifest.sh & ./scripts/copy_icons.sh"
   },
   "dependencies": {
     "parcel": "^2.12.0"
