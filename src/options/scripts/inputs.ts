@@ -1,5 +1,6 @@
 import { oconfig } from "src/options/scripts/oconfig";
-import { inputs } from "./ui";
+import { inputs, uiStyleGlassButtonEl, uiStyleSolidButtonEl } from "./ui";
+import { switchButtons } from "src/options/scripts/utils/switch-buttons";
 
 inputs.forEach((input) => {
   input.input.addEventListener("blur", () =>
@@ -43,3 +44,5 @@ const focusInput = ({
   input.focus();
   e.preventDefault();
 };
+
+switchButtons([uiStyleSolidButtonEl, uiStyleGlassButtonEl]);

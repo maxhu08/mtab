@@ -15,6 +15,13 @@ export const wallpaperUrlInputEl = document.getElementById(
   "wallpaper-url-input"
 ) as HTMLInputElement;
 
+export const uiStyleSolidButtonEl = document.getElementById(
+  "ui-style-solid-button"
+) as HTMLButtonElement;
+export const uiStyleGlassButtonEl = document.getElementById(
+  "ui-style-glass-button"
+) as HTMLButtonElement;
+
 export const dynamicTitleEnabledCheckboxEl = document.getElementById(
   "dynamicTitle-enabled-checkbox"
 ) as HTMLInputElement;

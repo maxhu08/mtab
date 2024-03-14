@@ -41,8 +41,6 @@
   }
 }
 
-.toggle-checkbox {
-}
-
-.toggle-label {
+button[selected="yes"] {
+  background-color: #22c55e !important;
 }
