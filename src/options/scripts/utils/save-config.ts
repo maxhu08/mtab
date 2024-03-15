@@ -1,11 +1,11 @@
 import { getConfig } from "src/newtab/scripts/config";
 import { modifyNestedObject } from "src/options/scripts/modify";
-import { saveAnimationsToDraft } from "src/options/scripts/utils/save-animations";
-import { saveDynamicTitleToDraft } from "src/options/scripts/utils/save-dynamic-title";
-import { saveNameToDraft } from "src/options/scripts/utils/save-name";
-import { saveTitleToDraft } from "src/options/scripts/utils/save-title";
-import { saveUiStyleToDraft } from "src/options/scripts/utils/save-ui-style";
-import { saveWallpaperSettingsToDraft } from "src/options/scripts/utils/save-wallpaper";
+import { saveAnimationsToDraft } from "src/options/scripts/utils/save-helpers/save-animations";
+import { saveDynamicTitleToDraft } from "src/options/scripts/utils/save-helpers/save-dynamic-title";
+import { saveNameToDraft } from "src/options/scripts/utils/save-helpers/save-name";
+import { saveTitleToDraft } from "src/options/scripts/utils/save-helpers/save-title";
+import { saveUiStyleToDraft } from "src/options/scripts/utils/save-helpers/save-ui-style";
+import { saveWallpaperSettingsToDraft } from "src/options/scripts/utils/save-helpers/save-wallpaper";
 
 export const saveConfig = () => {
   getConfig(({ config }) => {
