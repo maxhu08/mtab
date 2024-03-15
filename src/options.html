@@ -25,82 +25,117 @@
     <div>
       <p class="text-center text-white">this is the options page (wip)</p>
     </div>
-    <div class="grid grid-flow-row gap-4">
-      <div class="grid gap-2">
-        <p class="text-white text-base">new tab title</p>
-        <div id="title-container"
-          class="grid grid-cols-[max-content_auto] text-base bg-neutral-800 w-full p-1 rounded-md border-2 border-transparent">
-          <span class="text-pink-500 font-semibold select-none">>&nbsp;</span>
-          <input id="title-input" type="text" autocomplete="off"
-            class="outline-none bg-transparent text-white placeholder-neutral-500" placeholder="input title...">
+    <main class="grid grid-flow-row gap-20 pt-16">
+      <section class="grid grid-flow-row gap-4">
+        <div class="grid grid-cols-[1fr_max-content_1fr] gap-2">
+          <div class="bg-neutral-500 h-[0.1rem] rounded-md my-auto"></div>
+          <span class="text-neutral-500">user</span>
+          <div class="bg-neutral-500 h-[0.1rem] rounded-md my-auto"></div>
         </div>
-      </div>
-      <div class="grid gap-2">
-        <p class="text-white text-base">user.name</p>
-        <div id="username-container"
-          class="grid grid-cols-[max-content_auto] text-base bg-neutral-800 w-full p-1 rounded-md border-2 border-transparent">
-          <span class="text-pink-500 font-semibold select-none">>&nbsp;</span>
-          <input id="username-input" type="text" autocomplete="off"
-            class="outline-none bg-transparent text-white placeholder-neutral-500" placeholder="input name...">
+        <div class="grid gap-2">
+          <p class="text-white text-base">user.name</p>
+          <div id="username-container"
+            class="grid grid-cols-[max-content_auto] text-base bg-neutral-800 w-full p-1 rounded-md border-2 border-transparent">
+            <span class="text-pink-500 font-semibold select-none">>&nbsp;</span>
+            <input id="username-input" type="text" autocomplete="off"
+              class="outline-none bg-transparent text-white placeholder-neutral-500" placeholder="input name...">
+          </div>
         </div>
-      </div>
-      <div class="grid grid-cols-[max-content_auto] w-full place-items-center">
-        <p class="text-white text-base">dynamicTitle.enabled</p>
-        <div class="ml-auto">
-          <label class="relative inline-flex items-center cursor-pointer">
-            <input id="dynamicTitle-enabled-checkbox" type="checkbox" value="" class="sr-only peer" />
-            <div
-              class="w-11 h-6 peer bg-neutral-800 outline-none rounded-full peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[3px] after:left-[3px] after:bg-neutral-700 after:border-none after:rounded-full after:h-[1.15rem] after:aspect-square after:transition-all peer-checked:bg-emerald-500 peer-checked:after:bg-white">
-            </div>
-          </label>
+      </section>
+      <section class="grid grid-flow-row gap-4">
+        <div class="grid grid-cols-[1fr_max-content_1fr] gap-2">
+          <div class="bg-neutral-500 h-[0.1rem] rounded-md my-auto"></div>
+          <span class="text-neutral-500">title</span>
+          <div class="bg-neutral-500 h-[0.1rem] rounded-md my-auto"></div>
         </div>
-      </div>
-      <div class="grid grid-cols-[max-content_auto] w-full place-items-center">
-        <p class="text-white text-base">wallpaper.enabled</p>
-        <div class="ml-auto">
-          <label class="relative inline-flex items-center cursor-pointer">
-            <input id="wallpaper-enabled-checkbox" type="checkbox" value="" class="sr-only peer" />
-            <div
-              class="w-11 h-6 peer bg-neutral-800 outline-none rounded-full peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[3px] after:left-[3px] after:bg-neutral-700 after:border-none after:rounded-full after:h-[1.15rem] after:aspect-square after:transition-all peer-checked:bg-emerald-500 peer-checked:after:bg-white">
-            </div>
-          </label>
+        <div class="grid gap-2">
+          <p class="text-white text-base">new tab title</p>
+          <div id="title-container"
+            class="grid grid-cols-[max-content_auto] text-base bg-neutral-800 w-full p-1 rounded-md border-2 border-transparent">
+            <span class="text-pink-500 font-semibold select-none">>&nbsp;</span>
+            <input id="title-input" type="text" autocomplete="off"
+              class="outline-none bg-transparent text-white placeholder-neutral-500" placeholder="input title...">
+          </div>
         </div>
-      </div>
-      <div class="grid gap-2">
-        <p class="text-white text-base">wallpaper.url</p>
-        <div id="wallpaper-url-container"
-          class="grid grid-cols-[max-content_auto] text-base bg-neutral-800 w-full p-1 rounded-md border-2 border-transparent">
-          <span class="text-pink-500 font-semibold select-none">>&nbsp;</span>
-          <input id="wallpaper-url-input" type="text" autocomplete="off"
-            class="outline-none bg-transparent text-white placeholder-neutral-500" placeholder="input url...">
+        <div class="grid grid-cols-[max-content_auto] w-full place-items-center">
+          <p class="text-white text-base">dynamicTitle.enabled</p>
+          <div class="ml-auto">
+            <label class="relative inline-flex items-center cursor-pointer">
+              <input id="dynamicTitle-enabled-checkbox" type="checkbox" value="" class="sr-only peer" />
+              <div
+                class="w-11 h-6 peer bg-neutral-800 outline-none rounded-full peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[3px] after:left-[3px] after:bg-neutral-700 after:border-none after:rounded-full after:h-[1.15rem] after:aspect-square after:transition-all peer-checked:bg-emerald-500 peer-checked:after:bg-white">
+              </div>
+            </label>
+          </div>
         </div>
-      </div>
-      <div class="grid gap-2">
-        <p class="text-white">uiStyle</p>
-        <div>
-          <button id="ui-style-solid-button"
-            class="bg-neutral-800 hover:bg-neutral-700 py-2 px-4 rounded-md outline-none">
-            <span class="text-white">solid</span>
-          </button>
-          <button id="ui-style-glass-button"
-            class="bg-neutral-800 hover:bg-neutral-700 py-2 px-4 rounded-md outline-none">
-            <span class="text-white">glass</span>
-          </button>
+      </section>
+      <section class="grid grid-flow-row gap-4">
+        <div class="grid grid-cols-[1fr_max-content_1fr] gap-2">
+          <div class="bg-neutral-500 h-[0.1rem] rounded-md my-auto"></div>
+          <span class="text-neutral-500">wallpaper</span>
+          <div class="bg-neutral-500 h-[0.1rem] rounded-md my-auto"></div>
         </div>
-      </div>
-      <div class="grid grid-cols-[max-content_auto] w-full place-items-center">
-        <p class="text-white text-base">animations.enabled</p>
-        <div class="ml-auto">
-          <label class="relative inline-flex items-center cursor-pointer">
-            <input id="animations-enabled-checkbox" type="checkbox" value="" class="sr-only peer" />
-            <div
-              class="w-11 h-6 peer bg-neutral-800 outline-none rounded-full peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[3px] after:left-[3px] after:bg-neutral-700 after:border-none after:rounded-full after:h-[1.15rem] after:aspect-square after:transition-all peer-checked:bg-emerald-500 peer-checked:after:bg-white">
-            </div>
-          </label>
+        <div class="grid grid-cols-[max-content_auto] w-full place-items-center">
+          <p class="text-white text-base">wallpaper.enabled</p>
+          <div class="ml-auto">
+            <label class="relative inline-flex items-center cursor-pointer">
+              <input id="wallpaper-enabled-checkbox" type="checkbox" value="" class="sr-only peer" />
+              <div
+                class="w-11 h-6 peer bg-neutral-800 outline-none rounded-full peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[3px] after:left-[3px] after:bg-neutral-700 after:border-none after:rounded-full after:h-[1.15rem] after:aspect-square after:transition-all peer-checked:bg-emerald-500 peer-checked:after:bg-white">
+              </div>
+            </label>
+          </div>
         </div>
-      </div>
-    </div>
-    <div class="p-4 grid grid-flow-row gap-2 place-items-center">
+        <div class="grid gap-2">
+          <p class="text-white text-base">wallpaper.url</p>
+          <div id="wallpaper-url-container"
+            class="grid grid-cols-[max-content_auto] text-base bg-neutral-800 w-full p-1 rounded-md border-2 border-transparent">
+            <span class="text-pink-500 font-semibold select-none">>&nbsp;</span>
+            <input id="wallpaper-url-input" type="text" autocomplete="off"
+              class="outline-none bg-transparent text-white placeholder-neutral-500" placeholder="input url...">
+          </div>
+        </div>
+      </section>
+      <section class="grid grid-flow-row gap-4">
+        <div class="grid grid-cols-[1fr_max-content_1fr] gap-2">
+          <div class="bg-neutral-500 h-[0.1rem] rounded-md my-auto"></div>
+          <span class="text-neutral-500">ui</span>
+          <div class="bg-neutral-500 h-[0.1rem] rounded-md my-auto"></div>
+        </div>
+        <div class="grid gap-2">
+          <p class="text-white">uiStyle</p>
+          <div>
+            <button id="ui-style-solid-button"
+              class="bg-neutral-800 hover:bg-neutral-700 py-2 px-4 rounded-md outline-none">
+              <span class="text-white">solid</span>
+            </button>
+            <button id="ui-style-glass-button"
+              class="bg-neutral-800 hover:bg-neutral-700 py-2 px-4 rounded-md outline-none">
+              <span class="text-white">glass</span>
+            </button>
+          </div>
+        </div>
+      </section>
+      <section class="grid grid-flow-row gap-4">
+        <div class="grid grid-cols-[1fr_max-content_1fr] gap-2">
+          <div class="bg-neutral-500 h-[0.1rem] rounded-md my-auto"></div>
+          <span class="text-neutral-500">animations</span>
+          <div class="bg-neutral-500 h-[0.1rem] rounded-md my-auto"></div>
+        </div>
+        <div class="grid grid-cols-[max-content_auto] w-full place-items-center">
+          <p class="text-white text-base">animations.enabled</p>
+          <div class="ml-auto">
+            <label class="relative inline-flex items-center cursor-pointer">
+              <input id="animations-enabled-checkbox" type="checkbox" value="" class="sr-only peer" />
+              <div
+                class="w-11 h-6 peer bg-neutral-800 outline-none rounded-full peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[3px] after:left-[3px] after:bg-neutral-700 after:border-none after:rounded-full after:h-[1.15rem] after:aspect-square after:transition-all peer-checked:bg-emerald-500 peer-checked:after:bg-white">
+              </div>
+            </label>
+          </div>
+        </div>
+      </section>
+    </main>
+    <div class="p-4 grid grid-flow-row gap-2 place-items-center mt-20 mb-12">
       <div class="grid grid-flow-col place-items-center w-max gap-2">
         <button id="save-button"
           class="w-20 bg-emerald-500 hover:bg-emerald-600 duration-300 ease-in-out px-2 py-1 rounded-md cursor-pointer">
