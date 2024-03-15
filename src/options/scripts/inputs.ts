@@ -45,4 +45,4 @@ const focusInput = ({
   e.preventDefault();
 };
 
-switchButtons([uiStyleSolidButtonEl, uiStyleGlassButtonEl]);
+switchButtons([uiStyleSolidButtonEl, uiStyleGlassButtonEl], "ui-style");

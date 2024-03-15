@@ -1,8 +1,7 @@
-export const switchButtons = (buttons: HTMLButtonElement[]) => {
-  console.log(buttons);
-
+export const switchButtons = (buttons: HTMLButtonElement[], attr: string) => {
   buttons.forEach((btn) => {
     buttons.forEach((btn) => {
+      btn.setAttribute(`btn-option-type`, attr);
       btn.setAttribute("selected", "no");
     });
 

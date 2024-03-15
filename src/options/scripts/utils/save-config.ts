@@ -4,6 +4,7 @@ import { saveAnimationsToDraft } from "src/options/scripts/utils/save-animations
 import { saveDynamicTitleToDraft } from "src/options/scripts/utils/save-dynamic-title";
 import { saveNameToDraft } from "src/options/scripts/utils/save-name";
 import { saveTitleToDraft } from "src/options/scripts/utils/save-title";
+import { saveUiStyleToDraft } from "src/options/scripts/utils/save-ui-style";
 import { saveWallpaperSettingsToDraft } from "src/options/scripts/utils/save-wallpaper";
 
 export const saveConfig = () => {
@@ -18,6 +19,8 @@ export const saveConfig = () => {
       saveWallpaperSettingsToDraft(draft);
 
       saveAnimationsToDraft(draft);
+
+      saveUiStyleToDraft(draft);
 
       return draft;
     });
