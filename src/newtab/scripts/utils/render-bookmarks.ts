@@ -11,7 +11,7 @@ export const renderBookmarks = (config: Config) => {
     } cursor-pointer ${
       config.uiStyle === "glass" ? "glass-effect" : "bg-neutral-900"
     } rounded-md h-20 md:h-32 overflow-hidden ${
-      config.animations.enabled ? `${config.animations.animationClass} opacity-0` : ""
+      config.animations.enabled ? `${config.animations.type} opacity-0` : ""
     }" ${config.animations ? `style="animation-delay: ${(index + 2) * 50 + 50}ms;"` : ""}>
       <div class="${bookmark.colorClass} h-1"></div>
       <div class="p-1 md:p-2 grid place-items-center h-full">

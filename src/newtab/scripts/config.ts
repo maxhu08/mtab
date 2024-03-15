@@ -36,9 +36,9 @@ export const defaultConfig: Config = {
   },
   uiStyle: "glass",
   animations: {
-    uniformBookmarkAnimations: false,
     enabled: true,
-    animationClass: "animate-up-bouncy"
+    uniformBookmarkAnimations: false,
+    type: "animate-up-bouncy"
   },
   search: {
     font: "Fira Code",
@@ -102,9 +102,9 @@ export interface Config {
   };
   uiStyle: UIStyle;
   animations: {
-    uniformBookmarkAnimations: boolean;
     enabled: boolean;
-    animationClass:
+    uniformBookmarkAnimations: boolean;
+    type:
       | "animate-down-bouncy"
       | "animate-down-smooth"
       | "animate-down-fall"

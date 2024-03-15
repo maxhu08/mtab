@@ -18,8 +18,8 @@ export const addAnimations = (animations: Config["animations"]) => {
   console.log(styleElement);
 
   messageEl.style.animationDelay = "0ms";
-  messageEl.classList.add(animations.animationClass);
+  messageEl.classList.add(animations.type);
 
   searchContainerEl.style.animationDelay = "50ms";
-  searchContainerEl.classList.add(animations.animationClass);
+  searchContainerEl.classList.add(animations.type);
 };
