@@ -32,7 +32,7 @@ export const defaultConfig: Config = {
   },
   wallpaper: {
     enabled: true,
-    url: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.hdwallpapers.in%2Fdownload%2Freally_cool_landscape_wallpaper_4k_hd-HD.jpg&f=1&nofb=1&ipt=0c0009ff2f336ed3d94a204a1ecf8f401a7de711364a4497e7ec13597ae76ec2&ipo=images"
+    url: "./wallpapers/bg-1.png"
   },
   uiStyle: "glass",
   animations: {

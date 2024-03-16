@@ -15,8 +15,6 @@ export const addAnimations = (animations: Config["animations"]) => {
   styleElement.appendChild(document.createTextNode(animationCss));
   document.head.appendChild(styleElement);
 
-  console.log(styleElement);
-
   messageEl.style.animationDelay = "0ms";
   messageEl.classList.add(animations.type);
 
