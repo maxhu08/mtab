@@ -37,17 +37,19 @@ export const defaultConfig: Config = {
   uiStyle: "glass",
   animations: {
     enabled: true,
-    uniformBookmarkAnimations: false,
+    bookararkTiming: "left",
     type: "animate-up-bouncy"
   },
   search: {
     font: "Fira Code",
     placeholderText: "search...",
     engine: "duckduckgo",
-    focusedBorderClass: "border-blue-500",
-    activationKey: " "
+    focusedBorderColor: "red"
   },
-  closePageKey: "x",
+  hotkeys: {
+    activationKey: " ",
+    closePageKey: "x"
+  },
   // TODO: bookmarks activation key
   bookmarks: [
     {
@@ -82,6 +84,8 @@ export const defaultConfig: Config = {
 };
 
 export type UIStyle = "solid" | "glass";
+export type BookmarkTiming = "left" | "right" | "uniform";
+export type SearchEngine = "duckduckgo" | "google" | "bing";
 
 export interface Config {
   user: {
@@ -103,7 +107,7 @@ export interface Config {
   uiStyle: UIStyle;
   animations: {
     enabled: boolean;
-    uniformBookmarkAnimations: boolean;
+    bookararkTiming: BookmarkTiming;
     type:
       | "animate-down-bouncy"
       | "animate-down-smooth"
@@ -115,10 +119,12 @@ export interface Config {
     font: string;
     placeholderText: string;
     engine: "google" | "duckduckgo" | "bing";
-    focusedBorderClass: string;
-    activationKey: string;
+    focusedBorderColor: string;
   };
-  closePageKey: string;
+  hotkeys: {
+    activationKey: " ";
+    closePageKey: "x";
+  };
   bookmarks: {
     name: string;
     url: string;
