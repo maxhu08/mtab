@@ -1,25 +1,33 @@
 import { getConfig } from "src/newtab/scripts/config";
 import { modifyNestedObject } from "src/options/scripts/modify";
-import { saveAnimationsToDraft } from "src/options/scripts/utils/save-helpers/save-animations";
-import { saveDynamicTitleToDraft } from "src/options/scripts/utils/save-helpers/save-dynamic-title";
+
+// save helpers
 import { saveNameToDraft } from "src/options/scripts/utils/save-helpers/save-name";
-import { saveTitleToDraft } from "src/options/scripts/utils/save-helpers/save-title";
-import { saveUiStyleToDraft } from "src/options/scripts/utils/save-helpers/save-ui-style";
+import { saveTitleSettingsToDraft } from "src/options/scripts/utils/save-helpers/save-title";
+import { saveMessageSettingsToDraft } from "src/options/scripts/utils/save-helpers/save-message";
 import { saveWallpaperSettingsToDraft } from "src/options/scripts/utils/save-helpers/save-wallpaper";
+import { saveAnimationsToDraft } from "src/options/scripts/utils/save-helpers/save-animations";
+import { saveUiStyleToDraft } from "src/options/scripts/utils/save-helpers/save-ui-style";
 
 export const saveConfig = () => {
   getConfig(({ config }) => {
     const draft = modifyNestedObject(config, (draft) => {
-      saveTitleToDraft(draft);
-
+      // *** user ***
       saveNameToDraft(draft);
 
-      saveDynamicTitleToDraft(draft);
+      // *** title ***
+      saveTitleSettingsToDraft(draft);
 
+      // *** message ***
+      saveMessageSettingsToDraft(draft);
+
+      // *** wallpaper ***
       saveWallpaperSettingsToDraft(draft);
 
+      // *** animations ***
       saveAnimationsToDraft(draft);
 
+      // *** ui ***
       saveUiStyleToDraft(draft);
 
       return draft;

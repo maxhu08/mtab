@@ -2,6 +2,7 @@ import { getConfig } from "src/newtab/scripts/config";
 import {
   animationsEnabledCheckboxEl,
   dynamicTitleEnabledCheckboxEl,
+  messageFontInputEl,
   titleInputEl,
   uiStyleGlassButtonEl,
   uiStyleSolidButtonEl,
@@ -12,11 +13,17 @@ import {
 
 export const fillInputs = () => {
   getConfig(({ config }) => {
-    titleInputEl.value = config.title;
+    // *** user ***
     usernameInputEl.value = config.user.name;
 
+    // *** title ***
+    titleInputEl.value = config.title;
     dynamicTitleEnabledCheckboxEl.checked = config.dynamicTitle.enabled;
 
+    // *** message ***
+    messageFontInputEl.value = config.message.font;
+
+    // *** wallpaper ***
     wallpaperEnabledCheckboxEl.checked = config.dynamicTitle.enabled;
     wallpaperUrlInputEl.value = config.wallpaper.url;
 
