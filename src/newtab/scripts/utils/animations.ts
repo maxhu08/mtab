@@ -4,7 +4,6 @@ import { messageEl, searchContainerEl } from "../ui";
 export const addAnimations = (animations: Config["animations"]) => {
   if (!animations.enabled) return;
 
-  // Define your CSS rules as plaintext
   const animationCss = `
 * {
   transition-duration: 250ms;

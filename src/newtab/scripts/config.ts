@@ -26,7 +26,7 @@ export const defaultConfig: Config = {
   title: "new tab",
   dynamicTitle: { enabled: true }, // changes when typing in search bar
   message: {
-    font: "Fira Code",
+    font: `"Fira Code"`,
     type: "afternoon-morning",
     customText: "custom text test"
   },
