@@ -1,7 +1,28 @@
+import { MessageType } from "../config";
 import { messageEl } from "../ui";
 
-export const setCustomMessage = (message: string) => {
-  messageEl.textContent = message;
+export const setMessage = (type: MessageType, customText: string, username: string) => {
+  switch (type) {
+    case "custom": {
+      messageEl.textContent = customText;
+    }
+    case "date": {
+      messageEl.textContent = "date wip"
+      break;
+    }
+    case "afternoon-morning": {
+      setMorningAfternoonMessage(username)
+      break;
+    }
+    case "time-12": {
+      setTimeMessage("24hr");
+      break;
+    }
+    case "time-24": {
+      setTimeMessage("24hr");
+      break;
+    }
+  }
 };
 
 export const setMorningAfternoonMessage = (name: string) => {

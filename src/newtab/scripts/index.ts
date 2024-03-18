@@ -2,7 +2,7 @@
 import { getConfig } from "./config";
 
 // Utils
-import { setCustomMessage, setMorningAfternoonMessage, setTimeMessage } from "./utils/set-message";
+import { setMessage } from "./utils/set-message";
 import { setTitle } from "./utils/set-title";
 
 // Key Events
@@ -24,10 +24,8 @@ getConfig(({ config }) => {
   setSearchFont(config.search.font);
   styleSearch(config.uiStyle);
 
-  // setCustomMessage(`Hello, ${config.user.name}`);
   setMessageFont(config.message.font);
-  setMorningAfternoonMessage(config.user.name);
-  // setTimeMessage("12hr");
+  setMessage(config.message.type, config.message.customText, config.user.name);
 
   renderBookmarks(config);
 

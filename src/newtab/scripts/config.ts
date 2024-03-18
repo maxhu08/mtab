@@ -86,6 +86,7 @@ export const defaultConfig: Config = {
 export type UIStyle = "solid" | "glass";
 export type BookmarkTiming = "left" | "right" | "uniform";
 export type SearchEngine = "duckduckgo" | "google" | "bing";
+export type MessageType = "afternoon-morning" | "date" | "time-12" | "time-24" | "custom";
 
 export interface Config {
   user: {
@@ -97,7 +98,7 @@ export interface Config {
   };
   message: {
     font: string;
-    type: "afternoon-morning" | "date" | "time-12" | "time-24" | "custom";
+    type: MessageType;
     customText: string;
   };
   wallpaper: {
@@ -109,11 +110,11 @@ export interface Config {
     enabled: boolean;
     bookararkTiming: BookmarkTiming;
     type:
-      | "animate-down-bouncy"
-      | "animate-down-smooth"
-      | "animate-down-fall"
-      | "animate-up-bouncy"
-      | "animate-up-smooth";
+    | "animate-down-bouncy"
+    | "animate-down-smooth"
+    | "animate-down-fall"
+    | "animate-up-bouncy"
+    | "animate-up-smooth";
   };
   search: {
     font: string;
