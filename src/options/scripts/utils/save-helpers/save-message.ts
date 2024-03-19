@@ -1,5 +1,5 @@
 import { Config } from "src/newtab/scripts/config";
-import { messageFontInputEl } from "src/options/scripts/ui";
+import { messageCustomTextInputEl, messageFontInputEl } from "src/options/scripts/ui";
 
 export const saveMessageSettingsToDraft = (draft: Config) => {
   // font
@@ -33,5 +33,5 @@ export const saveMessageSettingsToDraft = (draft: Config) => {
     }
   }
 
-  // customText TODO
+  draft.message.customText = messageCustomTextInputEl.value;
 };

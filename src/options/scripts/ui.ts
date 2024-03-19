@@ -15,6 +15,9 @@ export const messageTypeTime12ButtonEl = document.getElementById("message-type-t
 export const messageTypeTime24ButtonEl = document.getElementById("message-type-time-24-button") as HTMLButtonElement;
 export const messageTypeCustomButtonEl = document.getElementById("message-type-custom-button") as HTMLButtonElement;
 
+export const messageCustomTextContainerEl = document.getElementById("message-custom-text-container") as HTMLDivElement;
+export const messageCustomTextInputEl = document.getElementById("message-custom-text-input") as HTMLInputElement;
+
 export const wallpaperEnabledCheckboxEl = document.getElementById("wallpaper-enabled-checkbox") as HTMLInputElement;
 export const wallpaperUrlContainerEl = document.getElementById("wallpaper-url-container") as HTMLInputElement;
 export const wallpaperUrlInputEl = document.getElementById("wallpaper-url-input") as HTMLInputElement;
@@ -37,6 +40,10 @@ export const inputs: Input[] = [
   {
     container: messageFontContainerEl,
     input: messageFontInputEl
+  },
+  {
+    container: messageCustomTextContainerEl,
+    input: messageCustomTextInputEl
   },
   {
     container: wallpaperUrlContainerEl,
