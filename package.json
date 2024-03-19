@@ -5,7 +5,8 @@
   "keywords": [],
   "scripts": {
     "dev": "mkdir -p dist && parcel src/**/*.html & ./scripts/create_manifest.sh && ./scripts/copy_assets.sh",
-    "build": "mkdir -p dist && parcel build src/**/*.html --no-scope-hoist & ./scripts/create_manifest.sh && ./scripts/copy_assets.sh"
+    "build": "mkdir -p dist && parcel build src/**/*.html --no-scope-hoist & ./scripts/create_manifest.sh && ./scripts/copy_assets.sh",
+    "prettier": "prettier --write \"./**/*.{js,jsx,mjs,cjs,ts,tsx,json}\""
   },
   "dependencies": {
     "parcel": "^2.12.0"

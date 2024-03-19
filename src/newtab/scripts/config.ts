@@ -110,11 +110,11 @@ export interface Config {
     enabled: boolean;
     bookararkTiming: BookmarkTiming;
     type:
-    | "animate-down-bouncy"
-    | "animate-down-smooth"
-    | "animate-down-fall"
-    | "animate-up-bouncy"
-    | "animate-up-smooth";
+      | "animate-down-bouncy"
+      | "animate-down-smooth"
+      | "animate-down-fall"
+      | "animate-up-bouncy"
+      | "animate-up-smooth";
   };
   search: {
     font: string;
