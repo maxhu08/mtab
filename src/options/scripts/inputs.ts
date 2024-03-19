@@ -1,5 +1,5 @@
 import { oconfig } from "src/options/scripts/oconfig";
-import { inputs, uiStyleGlassButtonEl, uiStyleSolidButtonEl } from "./ui";
+import { inputs, messageTypeAfternoonMorningButtonEl, messageTypeCustomButtonEl, messageTypeDateButtonEl, messageTypeTime12ButtonEl, messageTypeTime24ButtonEl, uiStyleGlassButtonEl, uiStyleSolidButtonEl } from "./ui";
 import { switchButtons } from "src/options/scripts/utils/switch-buttons";
 
 inputs.forEach((input) => {
@@ -46,3 +46,5 @@ const focusInput = ({
 };
 
 switchButtons([uiStyleSolidButtonEl, uiStyleGlassButtonEl], "ui-style");
+
+switchButtons([messageTypeAfternoonMorningButtonEl, messageTypeDateButtonEl, messageTypeTime12ButtonEl, messageTypeTime24ButtonEl, messageTypeCustomButtonEl], "message-type");

@@ -1,7 +1,7 @@
-// Config
+// config
 import { getConfig } from "./config";
 
-// Utils
+// utils
 import { setMessage } from "./utils/set-message";
 import { setTitle } from "./utils/set-title";
 

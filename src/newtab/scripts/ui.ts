@@ -4,6 +4,4 @@ export const messageEl = document.getElementById("message") as HTMLParagraphElem
 export const searchContainerEl = document.getElementById("search-container") as HTMLInputElement;
 export const searchInputEl = document.getElementById("search-input") as HTMLInputElement;
 
-export const bookmarksContainerEl = document.getElementById(
-  "bookmarks-container"
-) as HTMLDivElement;
+export const bookmarksContainerEl = document.getElementById("bookmarks-container") as HTMLDivElement;
