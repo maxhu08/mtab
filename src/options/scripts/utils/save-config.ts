@@ -34,6 +34,7 @@ export const saveConfig = () => {
     });
 
     console.log("[CONFIG_DEBUG]", draft);
+    alert("changes saved ☜(･ω･　)");
 
     chrome.storage.local.set({
       config: draft

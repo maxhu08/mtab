@@ -5,6 +5,7 @@ export const setMessage = (type: MessageType, customText: string, username: stri
   switch (type) {
     case "custom": {
       messageEl.textContent = customText;
+      break;
     }
     case "date": {
       setDateMessage();

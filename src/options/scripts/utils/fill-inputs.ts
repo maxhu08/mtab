@@ -2,7 +2,13 @@ import { getConfig } from "src/newtab/scripts/config";
 import {
   animationsEnabledCheckboxEl,
   dynamicTitleEnabledCheckboxEl,
+  messageCustomTextInputEl,
   messageFontInputEl,
+  messageTypeAfternoonMorningButtonEl,
+  messageTypeCustomButtonEl,
+  messageTypeDateButtonEl,
+  messageTypeTime12ButtonEl,
+  messageTypeTime24ButtonEl,
   titleInputEl,
   uiStyleGlassButtonEl,
   uiStyleSolidButtonEl,
@@ -22,6 +28,31 @@ export const fillInputs = () => {
 
     // *** message ***
     messageFontInputEl.value = config.message.font;
+
+    switch (config.message.type) {
+      case "afternoon-morning": {
+        messageTypeAfternoonMorningButtonEl.click();
+        break;
+      }
+      case "date": {
+        messageTypeDateButtonEl.click();
+        break;
+      }
+      case "time-12": {
+        messageTypeTime12ButtonEl.click();
+        break;
+      }
+      case "time-24": {
+        messageTypeTime24ButtonEl.click();
+        break;
+      }
+      case "custom": {
+        messageTypeCustomButtonEl.click();
+        break;
+      }
+    }
+
+    messageCustomTextInputEl.value = config.message.customText;
 
     // *** wallpaper ***
     wallpaperEnabledCheckboxEl.checked = config.dynamicTitle.enabled;
