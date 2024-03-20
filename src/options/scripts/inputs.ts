@@ -3,6 +3,11 @@ import {
   animationsBookmarkTimingLeftButtonEl,
   animationsBookmarkTimingRightButtonEl,
   animationsBookmarkTimingUniformButtonEl,
+  animationsTypeDownBouncyButtonEl,
+  animationsTypeDownFallButtonEl,
+  animationsTypeDownSmoothButtonEl,
+  animationsTypeUpBouncyButtonEl,
+  animationsTypeUpSmoothEl,
   inputs,
   messageTypeAfternoonMorningButtonEl,
   messageTypeCustomButtonEl,
@@ -77,4 +82,15 @@ switchButtons(
     animationsBookmarkTimingUniformButtonEl
   ],
   "animations-bookmark-timing"
+);
+
+switchButtons(
+  [
+    animationsTypeDownBouncyButtonEl,
+    animationsTypeDownSmoothButtonEl,
+    animationsTypeDownFallButtonEl,
+    animationsTypeUpBouncyButtonEl,
+    animationsTypeUpSmoothEl
+  ],
+  "animations-type"
 );

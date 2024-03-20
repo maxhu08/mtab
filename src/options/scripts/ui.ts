@@ -32,6 +32,12 @@ export const animationsBookmarkTimingLeftButtonEl = document.getElementById("ani
 export const animationsBookmarkTimingRightButtonEl = document.getElementById("animations-bookmark-timing-right-button") as HTMLButtonElement;
 export const animationsBookmarkTimingUniformButtonEl = document.getElementById("animations-bookmark-timing-uniform-button") as HTMLButtonElement;
 
+export const animationsTypeDownBouncyButtonEl = document.getElementById("animations-type-down-bouncy-button") as HTMLButtonElement;
+export const animationsTypeDownSmoothButtonEl = document.getElementById("animations-type-down-smooth-button") as HTMLButtonElement;
+export const animationsTypeDownFallButtonEl = document.getElementById("animations-type-down-fall-button") as HTMLButtonElement;
+export const animationsTypeUpBouncyButtonEl = document.getElementById("animations-type-up-bouncy-button") as HTMLButtonElement;
+export const animationsTypeUpSmoothEl = document.getElementById("animations-type-up-smooth-button") as HTMLButtonElement;
+
 export const inputs: Input[] = [
   {
     container: usernameContainerEl,

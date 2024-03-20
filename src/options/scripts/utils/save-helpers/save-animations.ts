@@ -4,11 +4,11 @@ import { animationsEnabledCheckboxEl } from "src/options/scripts/ui";
 export const saveAnimationsToDraft = (draft: Config) => {
   draft.animations.enabled = animationsEnabledCheckboxEl.checked;
 
-  const selectedEl = document.querySelector(
+  const selectedBookmarkTimingEl = document.querySelector(
     `button[btn-option-type="animations-bookmark-timing"][selected="yes"]`
   ) as HTMLButtonElement;
 
-  switch (selectedEl.id) {
+  switch (selectedBookmarkTimingEl.id) {
     case "animations-bookmark-timing-left-button": {
       draft.animations.bookmarkTiming = "left";
       break;
@@ -19,6 +19,33 @@ export const saveAnimationsToDraft = (draft: Config) => {
     }
     case "animations-bookmark-timing-uniform-button": {
       draft.animations.bookmarkTiming = "uniform";
+      break;
+    }
+  }
+
+  const selectedTypeEl = document.querySelector(
+    `button[btn-option-type="animations-type"][selected="yes"]`
+  ) as HTMLButtonElement;
+
+  switch (selectedTypeEl.id) {
+    case "animations-type-down-bouncy-button": {
+      draft.animations.type = "animate-down-bouncy";
+      break;
+    }
+    case "animations-type-down-smooth-button": {
+      draft.animations.type = "animate-down-smooth";
+      break;
+    }
+    case "animations-type-down-fall-button": {
+      draft.animations.type = "animate-down-fall";
+      break;
+    }
+    case "animations-type-up-bouncy-button": {
+      draft.animations.type = "animate-up-bouncy";
+      break;
+    }
+    case "animations-type-up-smooth-button": {
+      draft.animations.type = "animate-up-smooth";
       break;
     }
   }
