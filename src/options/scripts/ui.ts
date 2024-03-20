@@ -28,6 +28,10 @@ export const uiStyleGlassButtonEl = document.getElementById("ui-style-glass-butt
 export const dynamicTitleEnabledCheckboxEl = document.getElementById("dynamicTitle-enabled-checkbox") as HTMLInputElement;
 export const animationsEnabledCheckboxEl = document.getElementById("animations-enabled-checkbox") as HTMLInputElement;
 
+export const animationsBookmarkTimingLeftButtonEl = document.getElementById("animations-bookmark-timing-left-button") as HTMLButtonElement;
+export const animationsBookmarkTimingRightButtonEl = document.getElementById("animations-bookmark-timing-right-button") as HTMLButtonElement;
+export const animationsBookmarkTimingUniformButtonEl = document.getElementById("animations-bookmark-timing-uniform-button") as HTMLButtonElement;
+
 export const inputs: Input[] = [
   {
     container: usernameContainerEl,

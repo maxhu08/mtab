@@ -1,5 +1,8 @@
 import { getConfig } from "src/newtab/scripts/config";
 import {
+  animationsBookmarkTimingLeftButtonEl,
+  animationsBookmarkTimingRightButtonEl,
+  animationsBookmarkTimingUniformButtonEl,
   animationsEnabledCheckboxEl,
   dynamicTitleEnabledCheckboxEl,
   messageCustomTextInputEl,
@@ -70,5 +73,20 @@ export const fillInputs = () => {
     }
 
     animationsEnabledCheckboxEl.checked = config.animations.enabled;
+
+    switch (config.animations.bookmarkTiming) {
+      case "left": {
+        animationsBookmarkTimingLeftButtonEl.click();
+        break;
+      }
+      case "right": {
+        animationsBookmarkTimingRightButtonEl.click();
+        break;
+      }
+      case "uniform": {
+        animationsBookmarkTimingUniformButtonEl.click();
+        break;
+      }
+    }
   });
 };

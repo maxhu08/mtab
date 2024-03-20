@@ -1,5 +1,8 @@
 import { oconfig } from "src/options/scripts/oconfig";
 import {
+  animationsBookmarkTimingLeftButtonEl,
+  animationsBookmarkTimingRightButtonEl,
+  animationsBookmarkTimingUniformButtonEl,
   inputs,
   messageTypeAfternoonMorningButtonEl,
   messageTypeCustomButtonEl,
@@ -65,4 +68,13 @@ switchButtons(
     messageTypeCustomButtonEl
   ],
   "message-type"
+);
+
+switchButtons(
+  [
+    animationsBookmarkTimingLeftButtonEl,
+    animationsBookmarkTimingRightButtonEl,
+    animationsBookmarkTimingUniformButtonEl
+  ],
+  "animations-bookmark-timing"
 );

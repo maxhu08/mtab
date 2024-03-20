@@ -37,7 +37,7 @@ export const defaultConfig: Config = {
   uiStyle: "glass",
   animations: {
     enabled: true,
-    bookararkTiming: "left",
+    bookmarkTiming: "left",
     type: "animate-up-bouncy"
   },
   search: {
@@ -108,7 +108,7 @@ export interface Config {
   uiStyle: UIStyle;
   animations: {
     enabled: boolean;
-    bookararkTiming: BookmarkTiming;
+    bookmarkTiming: BookmarkTiming;
     type:
       | "animate-down-bouncy"
       | "animate-down-smooth"
