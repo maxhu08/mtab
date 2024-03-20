@@ -1,125 +1,26 @@
 import { getConfig } from "src/newtab/scripts/config";
-import {
-  animationsBookmarkTimingLeftButtonEl,
-  animationsBookmarkTimingRightButtonEl,
-  animationsBookmarkTimingUniformButtonEl,
-  animationsEnabledCheckboxEl,
-  animationsTypeDownBouncyButtonEl,
-  animationsTypeDownFallButtonEl,
-  animationsTypeDownSmoothButtonEl,
-  animationsTypeUpBouncyButtonEl,
-  animationsTypeUpSmoothEl,
-  dynamicTitleEnabledCheckboxEl,
-  messageCustomTextInputEl,
-  messageFontInputEl,
-  messageTypeAfternoonMorningButtonEl,
-  messageTypeCustomButtonEl,
-  messageTypeDateButtonEl,
-  messageTypeTime12ButtonEl,
-  messageTypeTime24ButtonEl,
-  searchFontInputEl,
-  searchPlaceholderTextInputEl,
-  titleInputEl,
-  uiStyleGlassButtonEl,
-  uiStyleSolidButtonEl,
-  usernameInputEl,
-  wallpaperEnabledCheckboxEl,
-  wallpaperUrlInputEl
-} from "src/options/scripts/ui";
+import { fillAnimationsInputs } from "src/options/scripts/utils/fill-helpers/fill-animations";
+import { fillMessageInputs } from "src/options/scripts/utils/fill-helpers/fill-message";
+import { fillSearchInputs } from "src/options/scripts/utils/fill-helpers/fill-search";
+import { fillTitleInputs } from "src/options/scripts/utils/fill-helpers/fill-title";
+import { fillUIStyleInputs } from "src/options/scripts/utils/fill-helpers/fill-ui-style";
+import { fillUserInputs } from "src/options/scripts/utils/fill-helpers/fill-user";
+import { fillWallpapersInputs } from "src/options/scripts/utils/fill-helpers/fill-wallpapers";
 
 export const fillInputs = () => {
   getConfig(({ config }) => {
-    // *** user ***
-    usernameInputEl.value = config.user.name;
+    fillUserInputs(config);
 
-    // *** title ***
-    titleInputEl.value = config.title;
-    dynamicTitleEnabledCheckboxEl.checked = config.dynamicTitle.enabled;
+    fillTitleInputs(config);
 
-    // *** message ***
-    messageFontInputEl.value = config.message.font;
+    fillMessageInputs(config);
 
-    switch (config.message.type) {
-      case "afternoon-morning": {
-        messageTypeAfternoonMorningButtonEl.click();
-        break;
-      }
-      case "date": {
-        messageTypeDateButtonEl.click();
-        break;
-      }
-      case "time-12": {
-        messageTypeTime12ButtonEl.click();
-        break;
-      }
-      case "time-24": {
-        messageTypeTime24ButtonEl.click();
-        break;
-      }
-      case "custom": {
-        messageTypeCustomButtonEl.click();
-        break;
-      }
-    }
+    fillWallpapersInputs(config);
 
-    messageCustomTextInputEl.value = config.message.customText;
+    fillUIStyleInputs(config);
 
-    // *** wallpaper ***
-    wallpaperEnabledCheckboxEl.checked = config.dynamicTitle.enabled;
-    wallpaperUrlInputEl.value = config.wallpaper.url;
+    fillAnimationsInputs(config);
 
-    switch (config.uiStyle) {
-      case "solid": {
-        uiStyleSolidButtonEl.click();
-        break;
-      }
-      case "glass": {
-        uiStyleGlassButtonEl.click();
-        break;
-      }
-    }
-
-    animationsEnabledCheckboxEl.checked = config.animations.enabled;
-
-    switch (config.animations.bookmarkTiming) {
-      case "left": {
-        animationsBookmarkTimingLeftButtonEl.click();
-        break;
-      }
-      case "right": {
-        animationsBookmarkTimingRightButtonEl.click();
-        break;
-      }
-      case "uniform": {
-        animationsBookmarkTimingUniformButtonEl.click();
-        break;
-      }
-    }
-
-    switch (config.animations.type) {
-      case "animate-down-bouncy": {
-        animationsTypeDownBouncyButtonEl.click();
-        break;
-      }
-      case "animate-down-fall": {
-        animationsTypeDownFallButtonEl.click();
-        break;
-      }
-      case "animate-down-smooth": {
-        animationsTypeDownSmoothButtonEl.click();
-        break;
-      }
-      case "animate-up-bouncy": {
-        animationsTypeUpBouncyButtonEl.click();
-        break;
-      }
-      case "animate-up-smooth": {
-        animationsTypeUpSmoothEl.click();
-        break;
-      }
-    }
-
-    searchFontInputEl.value = config.search.font;
-    searchPlaceholderTextInputEl.value = config.search.placeholderText;
+    fillSearchInputs(config);
   });
 };
