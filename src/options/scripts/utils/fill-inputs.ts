@@ -17,6 +17,8 @@ import {
   messageTypeDateButtonEl,
   messageTypeTime12ButtonEl,
   messageTypeTime24ButtonEl,
+  searchFontInputEl,
+  searchPlaceholderTextInputEl,
   titleInputEl,
   uiStyleGlassButtonEl,
   uiStyleSolidButtonEl,
@@ -116,5 +118,8 @@ export const fillInputs = () => {
         break;
       }
     }
+
+    searchFontInputEl.value = config.search.font;
+    searchPlaceholderTextInputEl.value = config.search.placeholderText;
   });
 };

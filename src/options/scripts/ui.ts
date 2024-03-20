@@ -38,6 +38,12 @@ export const animationsTypeDownFallButtonEl = document.getElementById("animation
 export const animationsTypeUpBouncyButtonEl = document.getElementById("animations-type-up-bouncy-button") as HTMLButtonElement;
 export const animationsTypeUpSmoothEl = document.getElementById("animations-type-up-smooth-button") as HTMLButtonElement;
 
+export const searchFontContainerEl = document.getElementById("search-font-container") as HTMLDivElement;
+export const searchFontInputEl = document.getElementById("search-font-input") as HTMLInputElement;
+
+export const searchPlaceholderTextContainerEl = document.getElementById("search-placeholder-text-container") as HTMLDivElement;
+export const searchPlaceholderTextInputEl = document.getElementById("search-placeholder-text-input") as HTMLInputElement;
+
 export const inputs: Input[] = [
   {
     container: usernameContainerEl,
@@ -58,6 +64,14 @@ export const inputs: Input[] = [
   {
     container: wallpaperUrlContainerEl,
     input: wallpaperUrlInputEl
+  },
+  {
+    container: searchFontContainerEl,
+    input: searchFontInputEl 
+  },
+  {
+    container: searchPlaceholderTextContainerEl,
+    input: searchPlaceholderTextInputEl 
   }
 ];
 
