@@ -80,6 +80,46 @@ interface Input {
   input: HTMLInputElement;
 }
 
+export const buttonSwitches: ButtonSwitch[] = [
+  {
+    buttons: [uiStyleSolidButtonEl, uiStyleGlassButtonEl],
+    attr: "ui-style"
+  },
+  {
+    buttons: [
+      messageTypeAfternoonMorningButtonEl,
+      messageTypeDateButtonEl,
+      messageTypeTime12ButtonEl,
+      messageTypeTime24ButtonEl,
+      messageTypeCustomButtonEl
+    ],
+    attr: "message-type" 
+  },
+  {
+    buttons: [
+      animationsBookmarkTimingLeftButtonEl,
+      animationsBookmarkTimingRightButtonEl,
+      animationsBookmarkTimingUniformButtonEl
+    ],
+    attr: "animations-bookmark-timing"
+  },
+  {
+    buttons: [
+      animationsTypeDownBouncyButtonEl,
+      animationsTypeDownSmoothButtonEl,
+      animationsTypeDownFallButtonEl,
+      animationsTypeUpBouncyButtonEl,
+      animationsTypeUpSmoothEl
+    ],
+    attr: "animations-type"
+  }
+];
+
+interface ButtonSwitch {
+  buttons: HTMLButtonElement[];
+  attr: string;
+}
+
 const saveBtn = document.getElementById("save-button") as HTMLButtonElement;
 
 saveBtn.onclick = () => {

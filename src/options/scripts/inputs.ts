@@ -1,22 +1,5 @@
 import { oconfig } from "src/options/scripts/oconfig";
-import {
-  animationsBookmarkTimingLeftButtonEl,
-  animationsBookmarkTimingRightButtonEl,
-  animationsBookmarkTimingUniformButtonEl,
-  animationsTypeDownBouncyButtonEl,
-  animationsTypeDownFallButtonEl,
-  animationsTypeDownSmoothButtonEl,
-  animationsTypeUpBouncyButtonEl,
-  animationsTypeUpSmoothEl,
-  inputs,
-  messageTypeAfternoonMorningButtonEl,
-  messageTypeCustomButtonEl,
-  messageTypeDateButtonEl,
-  messageTypeTime12ButtonEl,
-  messageTypeTime24ButtonEl,
-  uiStyleGlassButtonEl,
-  uiStyleSolidButtonEl
-} from "./ui";
+import { buttonSwitches, inputs } from "./ui";
 import { switchButtons } from "src/options/scripts/utils/switch-buttons";
 
 inputs.forEach((input) => {
@@ -62,35 +45,6 @@ const focusInput = ({
   e.preventDefault();
 };
 
-switchButtons([uiStyleSolidButtonEl, uiStyleGlassButtonEl], "ui-style");
-
-switchButtons(
-  [
-    messageTypeAfternoonMorningButtonEl,
-    messageTypeDateButtonEl,
-    messageTypeTime12ButtonEl,
-    messageTypeTime24ButtonEl,
-    messageTypeCustomButtonEl
-  ],
-  "message-type"
-);
-
-switchButtons(
-  [
-    animationsBookmarkTimingLeftButtonEl,
-    animationsBookmarkTimingRightButtonEl,
-    animationsBookmarkTimingUniformButtonEl
-  ],
-  "animations-bookmark-timing"
-);
-
-switchButtons(
-  [
-    animationsTypeDownBouncyButtonEl,
-    animationsTypeDownSmoothButtonEl,
-    animationsTypeDownFallButtonEl,
-    animationsTypeUpBouncyButtonEl,
-    animationsTypeUpSmoothEl
-  ],
-  "animations-type"
-);
+buttonSwitches.forEach((btnSwitch) => {
+  switchButtons(btnSwitch.buttons, btnSwitch.attr);
+});
