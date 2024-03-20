@@ -11,8 +11,8 @@ import { renderBookmarks } from "./utils/render-bookmarks";
 import { addAnimations } from "./utils/animations";
 import { loadWallpaper } from "src/newtab/scripts/utils/load-wallpaper";
 import { styleSearch } from "src/newtab/scripts/utils/style-search";
-import { setSearchFont } from "src/newtab/scripts/utils/set-search-font";
 import { setMessageFont } from "src/newtab/scripts/utils/set-message-font";
+import { setSearchStuff } from "src/newtab/scripts/utils/set-search-font";
 
 // ******************************************************************
 // initial page load logic start
@@ -21,7 +21,7 @@ getConfig(({ config }) => {
 
   loadWallpaper(config);
 
-  setSearchFont(config.search.font);
+  setSearchStuff(config.search.font, config.search.placeholderText);
   styleSearch(config.uiStyle);
 
   setMessageFont(config.message.font);
