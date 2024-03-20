@@ -14,6 +14,9 @@ export const search = (config: Config, value: string) => {
     case "duckduckgo":
       searchUrl = `https://duckduckgo.com/?q=${encodeURIComponent(value)}`;
       break;
+    case "yahoo":
+      searchUrl = `https://search.yahoo.com/search?q=${encodeURIComponent(value)}`;
+      break;
   }
 
   const content = document.getElementById("content") as HTMLDivElement;
@@ -39,13 +42,16 @@ export const tryFocusSearch = (config: Config, e: KeyboardEvent) => {
 };
 
 export const focusSearch = (config: Config, e: Event) => {
-  searchContainerEl.classList.replace("border-transparent", config.search.focusedBorderClass);
+  searchContainerEl.classList.remove("border-transparent");
+  searchContainerEl.style.borderColor = config.search.focusedBorderColor;
+
   searchInputEl.focus();
   e.preventDefault();
 };
 
-export const unfocusSearch = (config: Config) => {
+export const unfocusSearch = () => {
   searchInputEl.blur();
 
-  searchContainerEl.classList.replace(config.search.focusedBorderClass, "border-transparent");
+  searchContainerEl.style.borderColor = "#00000000";
+  searchContainerEl.classList.add("border-transparent");
 };

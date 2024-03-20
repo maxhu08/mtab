@@ -85,7 +85,7 @@ export const defaultConfig: Config = {
 
 export type UIStyle = "solid" | "glass";
 export type BookmarkTiming = "left" | "right" | "uniform";
-export type SearchEngine = "duckduckgo" | "google" | "bing";
+export type SearchEngine = "duckduckgo" | "google" | "bing" | "yahoo";
 export type MessageType = "afternoon-morning" | "date" | "time-12" | "time-24" | "custom";
 
 export interface Config {
@@ -119,7 +119,7 @@ export interface Config {
   search: {
     font: string;
     placeholderText: string;
-    engine: "google" | "duckduckgo" | "bing";
+    engine: SearchEngine;
     focusedBorderColor: string;
   };
   hotkeys: {
