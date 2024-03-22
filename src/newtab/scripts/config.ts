@@ -34,7 +34,11 @@ export const defaultConfig: Config = {
     enabled: true,
     url: "./wallpapers/bg-1.png"
   },
-  uiStyle: "glass",
+  ui: {
+    style: "glass",
+    foregroundColor: "blue",
+    backgroundColor: "red"
+  },
   animations: {
     enabled: true,
     bookmarkTiming: "left",
@@ -105,7 +109,11 @@ export interface Config {
     enabled: boolean;
     url: string;
   };
-  uiStyle: UIStyle;
+  ui: {
+    style: UIStyle;
+    foregroundColor: string;
+    backgroundColor: string;
+  };
   animations: {
     enabled: boolean;
     bookmarkTiming: BookmarkTiming;

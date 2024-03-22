@@ -22,7 +22,7 @@ getConfig(({ config }) => {
   loadWallpaper(config);
 
   setSearchStuff(config.search.font, config.search.placeholderText);
-  styleSearch(config.uiStyle);
+  styleSearch(config.ui.style, config.ui.foregroundColor);
 
   setMessageFont(config.message.font);
   setMessage(config.message.type, config.message.customText, config.user.name);

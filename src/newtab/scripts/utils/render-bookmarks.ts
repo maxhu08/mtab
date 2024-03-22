@@ -14,9 +14,9 @@ export const renderBookmarks = (config: Config) => {
     bookmarksContainerEl.innerHTML += `
   <a href="${bookmark.url}" rel="noopener noreferrer">
     <div id="bookmark-${bookmark.name}-${index}" class="duration-[250ms] ease-out ${
-      config.uiStyle === "glass" ? "hover:bg-white/20" : "hover:bg-neutral-800"
+      config.ui.style === "glass" ? "hover:bg-white/20" : "hover:bg-neutral-800"
     } cursor-pointer ${
-      config.uiStyle === "glass" ? "glass-effect" : "bg-neutral-900"
+      config.ui.style === "glass" ? "glass-effect" : config.ui.foregroundColor
     } rounded-md h-20 md:h-32 overflow-hidden ${
       config.animations.enabled ? `${config.animations.type} opacity-0` : ""
     }" ${config.animations ? `style="animation-delay: ${delay}ms;"` : ""}>
