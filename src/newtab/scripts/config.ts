@@ -31,6 +31,7 @@ export const defaultConfig: Config = {
     customText: "custom text test"
   },
   wallpaper: {
+    type: "url",
     enabled: true,
     url: "./wallpapers/bg-1.png"
   },
@@ -88,6 +89,7 @@ export const defaultConfig: Config = {
 };
 
 export type UIStyle = "solid" | "glass";
+export type WallpaperType = "url" | "fileUpload";
 export type BookmarkTiming = "left" | "right" | "uniform";
 export type SearchEngine = "duckduckgo" | "google" | "bing" | "yahoo";
 export type MessageType = "afternoon-morning" | "date" | "time-12" | "time-24" | "custom";
@@ -106,6 +108,7 @@ export interface Config {
     customText: string;
   };
   wallpaper: {
+    type: WallpaperType;
     enabled: boolean;
     url: string;
   };

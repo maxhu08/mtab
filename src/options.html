@@ -138,6 +138,19 @@
             </label>
           </div>
         </div>
+        <div class="grid gap-2 text-base">
+          <p class="text-white">wallpaper.type</p>
+          <div class="grid grid-cols-2 gap-2">
+            <button id="wallpaper-type-url-button"
+              class="bg-neutral-800 hover:bg-neutral-700 py-2 rounded-md outline-none">
+              <span class="text-white">url</span>
+            </button>
+            <button id="wallpaper-type-fileUpload-button"
+              class="bg-neutral-800 hover:bg-neutral-700 py-2 rounded-md outline-none">
+              <span class="text-white">fileUpload</span>
+            </button>
+          </div>
+        </div>
         <div class="grid gap-2">
           <p class="text-white text-base">wallpaper.url</p>
           <div id="wallpaper-url-container"
@@ -148,8 +161,11 @@
           </div>
         </div>
         <div class="grid gap-2">
-          <p class="text-white text-base">wallpaper.fileUpload</p>
-          <input type="file" id="wallpaper-file-upload" accept="image/*" class="bg-emerald-500 w-max p-2 rounded-md">
+          <p class="text-white text-base">wallpaper.fileUpload (needs wallpaper.type to be fileUpload)</p>
+          <div>
+            <input type="file" id="wallpaper-file-upload" accept="image/*"
+              class="bg-cyan-500 hover:bg-cyan-600 transition w-max p-2 rounded-md text-white text-base cursor-pointer">
+          </div>
         </div>
       </section>
       <!-- ui -->
