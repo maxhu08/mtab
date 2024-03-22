@@ -36,8 +36,8 @@ export const defaultConfig: Config = {
   },
   ui: {
     style: "glass",
-    foregroundColor: "#171717",
-    backgroundColor: "#262626"
+    foregroundColor: "#262626",
+    backgroundColor: "#171717"
   },
   animations: {
     enabled: true,
