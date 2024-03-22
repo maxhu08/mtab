@@ -1,7 +1,8 @@
 {
-  "name": "neutrino-template",
+  "name": "mtab",
+  "author": "maxhu08",
   "version": "1.0.0",
-  "description": "🌌 lightweight template for creating a website with module bundling hmr, typescript, tailwindcss & sass",
+  "description": "a simple configurable new tab extension",
   "keywords": [],
   "scripts": {
     "dev": "mkdir -p dist && parcel src/**/*.html & ./scripts/create_manifest.sh && ./scripts/copy_assets.sh",

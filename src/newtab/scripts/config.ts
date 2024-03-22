@@ -23,7 +23,7 @@ export const defaultConfig: Config = {
   user: {
     name: "Default"
   },
-  title: "new tab",
+  title: "mtab",
   dynamicTitle: { enabled: true }, // changes when typing in search bar
   message: {
     font: `"Fira Code"`,
