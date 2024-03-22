@@ -7,7 +7,7 @@ manifest_content='{
   "name": "mtab",
   "author": "maxhu08",
   "description": "a simple configurable new tab extension",
-  "permissions": ["storage", "bookmarks", "favicon"],
+  "permissions": ["storage", "bookmarks", "favicon", "fileSystem"],
   "chrome_url_overrides": {
     "newtab": "index.html"
   },
@@ -34,4 +34,3 @@ manifest_content='{
 
 # write the content to manifest.json in the dist folder
 echo "$manifest_content" > ./dist/manifest.json
-

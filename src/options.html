@@ -7,10 +7,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="./newtab/styles/tailwind.css">
   <link rel="stylesheet" href="options/options.css">
-  <script src="options/scripts/ui.ts" type="module" defer></script>
-  <script src="options/scripts/inputs.ts" type="module" defer></script>
-  <script src="options/scripts/onload.ts" type="module" defer></script>
-  <script src="options/scripts/keybinds.ts" type="module" defer></script>
   <script src="options/scripts/init.ts" type="module" defer></script>
   <link rel="icon" href="./assets/icon.svg" type="image/x-icon">
   <title>options ヽ(・ω・*)</title>
@@ -150,6 +146,10 @@
             <input id="wallpaper-url-input" type="text" autocomplete="off"
               class="outline-none bg-transparent text-white placeholder-neutral-500" placeholder="input url...">
           </div>
+        </div>
+        <div class="grid gap-2">
+          <p class="text-white text-base">wallpaper.fileUpload</p>
+          <input type="file" id="wallpaper-file-upload" accept="image/*" class="bg-emerald-500 w-max p-2 rounded-md">
         </div>
       </section>
       <!-- ui -->

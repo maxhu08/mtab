@@ -21,6 +21,7 @@ export const messageCustomTextInputEl = document.getElementById("message-custom-
 export const wallpaperEnabledCheckboxEl = document.getElementById("wallpaper-enabled-checkbox") as HTMLInputElement;
 export const wallpaperUrlContainerEl = document.getElementById("wallpaper-url-container") as HTMLInputElement;
 export const wallpaperUrlInputEl = document.getElementById("wallpaper-url-input") as HTMLInputElement;
+export const wallpaperFileInputEl = document.getElementById("wallpaper-file-upload") as HTMLInputElement;
 
 export const uiStyleSolidButtonEl = document.getElementById("ui-style-solid-button") as HTMLButtonElement;
 export const uiStyleGlassButtonEl = document.getElementById("ui-style-glass-button") as HTMLButtonElement;
