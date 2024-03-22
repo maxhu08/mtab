@@ -15,25 +15,23 @@ import { setMessageFont } from "src/newtab/scripts/utils/set-message-font";
 import { setSearchStuff } from "src/newtab/scripts/utils/set-search-font";
 import { setUISyle } from "src/newtab/scripts/utils/set-ui-style";
 
-// ******************************************************************
-// initial page load logic start
-getConfig(({ config }) => {
-  setTitle(config.title);
-  setUISyle(config.ui);
+export const loadPage = () => {
+  getConfig(({ config }) => {
+    setTitle(config.title);
+    setUISyle(config.ui);
 
-  loadWallpaper(config);
+    loadWallpaper(config);
 
-  setSearchStuff(config.search.font, config.search.placeholderText);
-  styleSearch(config.ui.style, config.ui.foregroundColor);
+    setSearchStuff(config.search.font, config.search.placeholderText);
+    styleSearch(config.ui.style, config.ui.foregroundColor);
 
-  setMessageFont(config.message.font);
-  setMessage(config.message.type, config.message.customText, config.user.name);
+    setMessageFont(config.message.font);
+    setMessage(config.message.type, config.message.customText, config.user.name);
 
-  renderBookmarks(config);
+    renderBookmarks(config);
 
-  addAnimations(config.animations);
+    addAnimations(config.animations);
 
-  listenToKeys(config);
-});
-// initial page load logic end
-// ******************************************************************
+    listenToKeys(config);
+  });
+};
