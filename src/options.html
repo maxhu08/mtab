@@ -159,7 +159,7 @@
           <div class="bg-neutral-500 h-[0.1rem] rounded-md my-auto"></div>
         </div>
         <div class="grid gap-2 text-base">
-          <p class="text-white">uiStyle</p>
+          <p class="text-white">ui.style</p>
           <div class="grid grid-cols-2 gap-2">
             <button id="ui-style-solid-button" class="bg-neutral-800 hover:bg-neutral-700 py-2 rounded-md outline-none">
               <span class="text-white">solid</span>
@@ -167,6 +167,24 @@
             <button id="ui-style-glass-button" class="bg-neutral-800 hover:bg-neutral-700 py-2 rounded-md outline-none">
               <span class="text-white">glass</span>
             </button>
+          </div>
+        </div>
+        <div class="grid gap-2">
+          <p class="text-white text-base">ui.foregroundColor</p>
+          <div id="ui-foreground-color-container"
+            class="grid grid-cols-[max-content_auto] text-base bg-neutral-800 w-full p-1 rounded-md border-2 border-transparent">
+            <span class="text-pink-500 font-semibold select-none">>&nbsp;</span>
+            <input id="ui-foreground-color-input" type="text" autocomplete="off"
+              class="outline-none bg-transparent text-white placeholder-neutral-500" placeholder="input color...">
+          </div>
+        </div>
+        <div class="grid gap-2">
+          <p class="text-white text-base">ui.backgroundColor</p>
+          <div id="ui-background-color-container"
+            class="grid grid-cols-[max-content_auto] text-base bg-neutral-800 w-full p-1 rounded-md border-2 border-transparent">
+            <span class="text-pink-500 font-semibold select-none">>&nbsp;</span>
+            <input id="ui-background-color-input" type="text" autocomplete="off"
+              class="outline-none bg-transparent text-white placeholder-neutral-500" placeholder="input color...">
           </div>
         </div>
       </section>

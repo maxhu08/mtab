@@ -7,7 +7,7 @@ import { saveTitleSettingsToDraft } from "src/options/scripts/utils/save-helpers
 import { saveMessageSettingsToDraft } from "src/options/scripts/utils/save-helpers/save-message";
 import { saveWallpaperSettingsToDraft } from "src/options/scripts/utils/save-helpers/save-wallpaper";
 import { saveAnimationsToDraft } from "src/options/scripts/utils/save-helpers/save-animations";
-import { saveUiStyleToDraft } from "src/options/scripts/utils/save-helpers/save-ui-style";
+import { saveUISettingsToDraft } from "src/options/scripts/utils/save-helpers/save-ui";
 import { saveSearchSettingsToDraft } from "src/options/scripts/utils/save-helpers/save-search";
 
 export const saveConfig = () => {
@@ -29,7 +29,7 @@ export const saveConfig = () => {
       saveAnimationsToDraft(draft);
 
       // *** ui ***
-      saveUiStyleToDraft(draft);
+      saveUISettingsToDraft(draft);
 
       // *** search **
       saveSearchSettingsToDraft(draft);

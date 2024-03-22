@@ -3,7 +3,7 @@ import { fillAnimationsInputs } from "src/options/scripts/utils/fill-helpers/fil
 import { fillMessageInputs } from "src/options/scripts/utils/fill-helpers/fill-message";
 import { fillSearchInputs } from "src/options/scripts/utils/fill-helpers/fill-search";
 import { fillTitleInputs } from "src/options/scripts/utils/fill-helpers/fill-title";
-import { fillUIStyleInputs } from "src/options/scripts/utils/fill-helpers/fill-ui-style";
+import { fillUIInputs } from "src/options/scripts/utils/fill-helpers/fill-ui";
 import { fillUserInputs } from "src/options/scripts/utils/fill-helpers/fill-user";
 import { fillWallpapersInputs } from "src/options/scripts/utils/fill-helpers/fill-wallpapers";
 
@@ -17,7 +17,7 @@ export const fillInputs = () => {
 
     fillWallpapersInputs(config);
 
-    fillUIStyleInputs(config);
+    fillUIInputs(config);
 
     fillAnimationsInputs(config);
 

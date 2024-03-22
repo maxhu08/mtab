@@ -25,6 +25,12 @@ export const wallpaperUrlInputEl = document.getElementById("wallpaper-url-input"
 export const uiStyleSolidButtonEl = document.getElementById("ui-style-solid-button") as HTMLButtonElement;
 export const uiStyleGlassButtonEl = document.getElementById("ui-style-glass-button") as HTMLButtonElement;
 
+export const uiForegroundColorContainerEl = document.getElementById("ui-foreground-color-container") as HTMLDivElement;
+export const uiForegroundColorInputEl = document.getElementById("ui-foreground-color-input") as HTMLInputElement;
+
+export const uiBackgroundColorContainerEl = document.getElementById("ui-background-color-container") as HTMLDivElement;
+export const uiBackgroundColorInputEl = document.getElementById("ui-background-color-input") as HTMLInputElement;
+
 export const dynamicTitleEnabledCheckboxEl = document.getElementById("dynamicTitle-enabled-checkbox") as HTMLInputElement;
 export const animationsEnabledCheckboxEl = document.getElementById("animations-enabled-checkbox") as HTMLInputElement;
 
@@ -64,6 +70,14 @@ export const inputs: Input[] = [
   {
     container: wallpaperUrlContainerEl,
     input: wallpaperUrlInputEl
+  },
+  {
+    container: uiForegroundColorContainerEl,
+    input: uiForegroundColorInputEl
+  },
+  {
+    container: uiBackgroundColorContainerEl,
+    input: uiBackgroundColorInputEl
   },
   {
     container: searchFontContainerEl,

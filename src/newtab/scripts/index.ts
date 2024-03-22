@@ -13,11 +13,13 @@ import { loadWallpaper } from "src/newtab/scripts/utils/load-wallpaper";
 import { styleSearch } from "src/newtab/scripts/utils/style-search";
 import { setMessageFont } from "src/newtab/scripts/utils/set-message-font";
 import { setSearchStuff } from "src/newtab/scripts/utils/set-search-font";
+import { setUISyle } from "src/newtab/scripts/utils/set-ui-style";
 
 // ******************************************************************
 // initial page load logic start
 getConfig(({ config }) => {
   setTitle(config.title);
+  setUISyle(config.ui);
 
   loadWallpaper(config);
 
