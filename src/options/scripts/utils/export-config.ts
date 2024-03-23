@@ -2,10 +2,13 @@ import { getConfig } from "src/newtab/scripts/config";
 
 export const exportConfig = () => {
   getConfig(({ config }) => {
-    const save = JSON.stringify(config);
+    const exportedSave = JSON.stringify(config);
+    const formattedExportedSave = `MTAB_SAVE_FORMAT_${window.btoa(
+      unescape(encodeURIComponent(JSON.stringify(exportedSave)))
+    )}`;
 
     navigator.clipboard
-      .writeText(save)
+      .writeText(formattedExportedSave)
       .then(() => {
         alert("config saved to clipboard (╯✧▽✧)╯");
       })

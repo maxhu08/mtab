@@ -8,7 +8,17 @@ export const importConfig = () => {
     return;
   }
 
-  const parsedData = JSON.parse(dataToImport);
+  const pattern = `MTAB_SAVE_FORMAT_`;
+  if (!dataToImport.startsWith(pattern)) {
+    alert(`incorrect save version (use ${pattern})`);
+    return;
+  }
+
+  const parsedData = JSON.parse(
+    decodeURIComponent(escape(window.atob(dataToImport.replace(pattern, ""))))
+  );
+
+  console.log("parseddata", parsedData);
 
   fillInputs(parsedData);
 };

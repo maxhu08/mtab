@@ -1,3 +1,4 @@
+import { icons } from "src/newtab/scripts/icons";
 import { Config } from "../config";
 import { bookmarksContainerEl } from "../ui";
 
@@ -23,7 +24,7 @@ export const renderBookmarks = (config: Config) => {
       <div class="${bookmark.colorClass} h-1"></div>
       <div class="p-1 md:p-2 grid place-items-center h-full">
         <div class="bookmark-icon text-white h-12">
-          ${bookmark.iconSvg}
+          ${icons[bookmark.iconType]}
         </div>
       </div>
     </div>
