@@ -1,5 +1,3 @@
-import { icons } from "./icons";
-
 export const getConfig = (f: ({ config }: { config: Config }) => void) => {
   chrome.storage.local.get(["config"], (data) => {
     if (Object.keys(data).length === 0) {
@@ -53,6 +51,7 @@ export const defaultConfig: Config = {
     focusedBorderColor: "red"
   },
   hotkeys: {
+    enabled: true,
     activationKey: " ",
     closePageKey: "x"
   },
@@ -136,6 +135,7 @@ export interface Config {
     focusedBorderColor: string;
   };
   hotkeys: {
+    enabled: boolean;
     activationKey: " ";
     closePageKey: "x";
   };

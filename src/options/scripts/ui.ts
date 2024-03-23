@@ -39,6 +39,9 @@ export const uiForegroundColorInputEl = document.getElementById("ui-foreground-c
 export const uiBackgroundColorContainerEl = document.getElementById("ui-background-color-container") as HTMLDivElement;
 export const uiBackgroundColorInputEl = document.getElementById("ui-background-color-input") as HTMLInputElement;
 
+export const uiHighlightColorContainerEl = document.getElementById("ui-highlight-color-container") as HTMLDivElement;
+export const uiHighlightColorInputEl = document.getElementById("ui-highlight-color-input") as HTMLInputElement;
+
 export const dynamicTitleEnabledCheckboxEl = document.getElementById("dynamicTitle-enabled-checkbox") as HTMLInputElement;
 export const animationsEnabledCheckboxEl = document.getElementById("animations-enabled-checkbox") as HTMLInputElement;
 
@@ -57,6 +60,9 @@ export const searchFontInputEl = document.getElementById("search-font-input") as
 
 export const searchPlaceholderTextContainerEl = document.getElementById("search-placeholder-text-container") as HTMLDivElement;
 export const searchPlaceholderTextInputEl = document.getElementById("search-placeholder-text-input") as HTMLInputElement;
+
+export const searchFocusedBorderColorContainerEl = document.getElementById("search-focused-border-color-container") as HTMLDivElement;
+export const searchFocusedBorderColorInputEl = document.getElementById("search-focused-border-color-input") as HTMLInputElement;
 
 export const inputs: Input[] = [
   {
@@ -88,12 +94,20 @@ export const inputs: Input[] = [
     input: uiBackgroundColorInputEl
   },
   {
+    container: uiHighlightColorContainerEl,
+    input: uiHighlightColorInputEl
+  },
+  {
     container: searchFontContainerEl,
     input: searchFontInputEl 
   },
   {
     container: searchPlaceholderTextContainerEl,
     input: searchPlaceholderTextInputEl 
+  },
+  {
+    container: searchFocusedBorderColorContainerEl,
+    input: searchFocusedBorderColorInputEl 
   }
 ];
 

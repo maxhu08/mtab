@@ -1,5 +1,9 @@
 import { Config } from "src/newtab/scripts/config";
-import { uiBackgroundColorInputEl, uiForegroundColorInputEl } from "src/options/scripts/ui";
+import {
+  uiBackgroundColorInputEl,
+  uiForegroundColorInputEl,
+  uiHighlightColorInputEl
+} from "src/options/scripts/ui";
 
 export const saveUISettingsToDraft = (draft: Config) => {
   const selectedEl = document.querySelector(
@@ -19,4 +23,5 @@ export const saveUISettingsToDraft = (draft: Config) => {
 
   draft.ui.foregroundColor = uiForegroundColorInputEl.value;
   draft.ui.backgroundColor = uiBackgroundColorInputEl.value;
+  draft.ui.highlightColor = uiHighlightColorInputEl.value;
 };
