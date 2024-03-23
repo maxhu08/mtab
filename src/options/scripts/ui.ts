@@ -1,3 +1,4 @@
+import { exportConfig } from "src/options/scripts/utils/export-config";
 import { saveConfig } from "src/options/scripts/utils/save-config";
 
 export const usernameContainerEl = document.getElementById("username-container") as HTMLDivElement;
@@ -148,7 +149,11 @@ interface ButtonSwitch {
 }
 
 const saveBtn = document.getElementById("save-button") as HTMLButtonElement;
-
 saveBtn.onclick = () => {
   saveConfig();
+};
+
+const exportBtn = document.getElementById("export-button") as HTMLButtonElement;
+exportBtn.onclick = () => {
+  exportConfig();
 };
