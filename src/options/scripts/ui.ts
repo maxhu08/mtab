@@ -1,4 +1,5 @@
 import { exportConfig } from "src/options/scripts/utils/export-config";
+import { importConfig } from "src/options/scripts/utils/import-config";
 import { saveConfig } from "src/options/scripts/utils/save-config";
 
 export const usernameContainerEl = document.getElementById("username-container") as HTMLDivElement;
@@ -156,4 +157,9 @@ saveBtn.onclick = () => {
 const exportBtn = document.getElementById("export-button") as HTMLButtonElement;
 exportBtn.onclick = () => {
   exportConfig();
+};
+
+const importBtn = document.getElementById("import-button") as HTMLButtonElement;
+importBtn.onclick = () => {
+  importConfig();
 };

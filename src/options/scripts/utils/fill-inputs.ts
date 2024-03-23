@@ -1,4 +1,4 @@
-import { getConfig } from "src/newtab/scripts/config";
+import { Config, getConfig } from "src/newtab/scripts/config";
 import { fillAnimationsInputs } from "src/options/scripts/utils/fill-helpers/fill-animations";
 import { fillMessageInputs } from "src/options/scripts/utils/fill-helpers/fill-message";
 import { fillSearchInputs } from "src/options/scripts/utils/fill-helpers/fill-search";
@@ -7,20 +7,18 @@ import { fillUIInputs } from "src/options/scripts/utils/fill-helpers/fill-ui";
 import { fillUserInputs } from "src/options/scripts/utils/fill-helpers/fill-user";
 import { fillWallpapersInputs } from "src/options/scripts/utils/fill-helpers/fill-wallpapers";
 
-export const fillInputs = () => {
-  getConfig(({ config }) => {
-    fillUserInputs(config);
+export const fillInputs = (config: Config) => {
+  fillUserInputs(config);
 
-    fillTitleInputs(config);
+  fillTitleInputs(config);
 
-    fillMessageInputs(config);
+  fillMessageInputs(config);
 
-    fillWallpapersInputs(config);
+  fillWallpapersInputs(config);
 
-    fillUIInputs(config);
+  fillUIInputs(config);
 
-    fillAnimationsInputs(config);
+  fillAnimationsInputs(config);
 
-    fillSearchInputs(config);
-  });
+  fillSearchInputs(config);
 };
