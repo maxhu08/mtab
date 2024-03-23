@@ -1,6 +1,16 @@
 import { Config } from "src/newtab/scripts/config";
 
 export const setUISyle = (ui: Config["ui"]) => {
+  const highlightSyleCss = `
+::selection {
+  background-color: ${ui.highlightColor};
+}`;
+
+  const highlightStyleElement = document.createElement("style");
+  highlightStyleElement.type = "text/css";
+  highlightStyleElement.appendChild(document.createTextNode(highlightSyleCss));
+  document.head.appendChild(highlightStyleElement);
+
   if (ui.style !== "solid") return;
 
   const uiStyleCss = `
