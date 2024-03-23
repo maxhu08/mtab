@@ -156,6 +156,7 @@ saveBtn.onclick = () => {
 
 const exportBtn = document.getElementById("export-button") as HTMLButtonElement;
 exportBtn.onclick = () => {
+  saveConfig()
   exportConfig();
 };
 

@@ -15,10 +15,9 @@ export const importConfig = () => {
   }
 
   const parsedData = JSON.parse(
-    decodeURIComponent(escape(window.atob(dataToImport.replace(pattern, ""))))
+    JSON.parse(decodeURIComponent(window.atob(dataToImport.replace(pattern, ""))))
   );
 
-  console.log("parseddata", parsedData);
-
+  console.log("[IMPORT_DEBUG]", parsedData);
   fillInputs(parsedData);
 };

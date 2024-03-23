@@ -4,7 +4,7 @@ export const exportConfig = () => {
   getConfig(({ config }) => {
     const exportedSave = JSON.stringify(config);
     const formattedExportedSave = `MTAB_SAVE_FORMAT_${window.btoa(
-      unescape(encodeURIComponent(JSON.stringify(exportedSave)))
+      encodeURIComponent(JSON.stringify(exportedSave))
     )}`;
 
     navigator.clipboard
