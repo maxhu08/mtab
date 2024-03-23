@@ -13,7 +13,7 @@
 </head>
 
 <body dir="ltr" class="bg-neutral-900 min-h-screen">
-  <div class="grid grid-flow-row w-[95%] sm:w-[60%] md:w-[40%] mx-auto">
+  <div class="grid grid-flow-row w-[95%] sm:w-[80%] md:w-[60%] lg:w-[40%] mx-auto">
     <div class="grid place-items-center gap-4 p-4">
       <img src="./assets/icon.png" class="w-40 aspect-square animate-float" alt="logo">
       <h1 class="text-white w-max text-2xl md:text-4xl font-semibold">
@@ -336,26 +336,30 @@
       </section>
     </main>
     <!-- save buttons and more -->
-    <div class="p-4 grid grid-flow-row gap-4 place-items-center mt-20 mb-12">
-      <div class="grid grid-cols-3 place-items-center w-max gap-2">
-        <button id="save-button"
-          class="w-full bg-emerald-500 hover:bg-emerald-600 duration-300 ease-in-out px-2 py-1 rounded-md cursor-pointer">
-          <span class="text-white text-base m-0">save (ctrl+s)</span>
-        </button>
-        <button id="export-button"
-          class="w-full bg-indigo-500 hover:bg-indigo-600 duration-300 ease-in-out px-2 py-1 rounded-md cursor-pointer">
-          <span class="text-white text-base m-0">export (ctrl+e)</span>
-        </button>
-        <button id="import-button"
-          class="w-full bg-indigo-500 hover:bg-indigo-600 duration-300 ease-in-out px-2 py-1 rounded-md cursor-pointer">
-          <span class="text-white text-base m-0">import (ctrl+i)</span>
-        </button>
-      </div>
-      <div class="grid grid-flow-col place-items-center w-max gap-2">
-        <button id="reset-to-default-button"
-          class="bg-rose-500 hover:bg-rose-600 duration-300 ease-in-out px-2 py-1 rounded-md cursor-pointer">
-          <span class="text-white text-base m-0">reset to default</span>
-        </button>
+    <div class="py-4 grid grid-flow-row gap-4 place-items-center mt-20 mb-12">
+      <div class="w-full grid grid-flow-row gap-4 place-items-center">
+        <div class="w-full grid grid-flow-row lg:grid-cols-3 gap-2">
+          <button id="save-button" class="bg-emerald-500 hover:bg-emerald-600 transition p-2 rounded-md cursor-pointer">
+            <span class="text-white text-base">save(ctrl+s)</span>
+          </button>
+          <button id="export-button" class="bg-indigo-500 hover:bg-indigo-600 transition p-2 rounded-md cursor-pointer">
+            <span class="text-white text-base">export</span>
+          </button>
+          <button id="import-button" class="bg-indigo-500 hover:bg-indigo-600 transition p-2 rounded-md cursor-pointer">
+            <span class="text-white text-base">import</span>
+          </button>
+        </div>
+        <div class="w-full grid grid-flow-row gap-4 place-items-center">
+          <div class="w-full grid grid-cols-[1fr_max-content_1fr] gap-2">
+            <div class="bg-neutral-500 h-[0.1rem] rounded-md my-auto"></div>
+            <span class="text-neutral-500 text-base">danger</span>
+            <div class="bg-neutral-500 h-[0.1rem] rounded-md my-auto"></div>
+          </div>
+          <button id="reset-to-default-button"
+            class="w-full lg:w-max bg-rose-500 hover:bg-rose-600 transition p-2 rounded-md cursor-pointer">
+            <span class="text-white text-base">reset to default</span>
+          </button>
+        </div>
       </div>
     </div>
   </div>
