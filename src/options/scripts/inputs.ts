@@ -2,22 +2,28 @@ import { oconfig } from "src/options/scripts/oconfig";
 import { buttonSwitches, inputs } from "./ui";
 import { switchButtons } from "src/options/scripts/utils/switch-buttons";
 
-inputs.forEach((input) => {
-  input.input.addEventListener("blur", () =>
-    unfocusInput({
-      container: input.container,
-      input: input.input
-    })
-  );
+export const listenToInputs = () => {
+  inputs.forEach((input) => {
+    input.input.addEventListener("blur", () =>
+      unfocusInput({
+        container: input.container,
+        input: input.input
+      })
+    );
 
-  input.input.addEventListener("focus", (e) =>
-    focusInput({
-      input: input.input,
-      container: input.container,
-      e
-    })
-  );
-});
+    input.input.addEventListener("focus", (e) =>
+      focusInput({
+        input: input.input,
+        container: input.container,
+        e
+      })
+    );
+  });
+
+  buttonSwitches.forEach((btnSwitch) => {
+    switchButtons(btnSwitch.buttons, btnSwitch.attr);
+  });
+};
 
 const unfocusInput = ({
   container,
@@ -44,7 +50,3 @@ const focusInput = ({
   input.focus();
   e.preventDefault();
 };
-
-buttonSwitches.forEach((btnSwitch) => {
-  switchButtons(btnSwitch.buttons, btnSwitch.attr);
-});

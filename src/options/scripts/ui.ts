@@ -19,8 +19,13 @@ export const messageCustomTextContainerEl = document.getElementById("message-cus
 export const messageCustomTextInputEl = document.getElementById("message-custom-text-input") as HTMLInputElement;
 
 export const wallpaperEnabledCheckboxEl = document.getElementById("wallpaper-enabled-checkbox") as HTMLInputElement;
+
+export const wallpaperTypeUrlButtonEl = document.getElementById("wallpaper-type-url-button") as HTMLButtonElement;
+export const wallpaperTypeFileUploadButtonEl = document.getElementById("wallpaper-type-file-upload-button") as HTMLButtonElement;
+
 export const wallpaperUrlContainerEl = document.getElementById("wallpaper-url-container") as HTMLInputElement;
 export const wallpaperUrlInputEl = document.getElementById("wallpaper-url-input") as HTMLInputElement;
+
 export const wallpaperFileInputEl = document.getElementById("wallpaper-file-upload") as HTMLInputElement;
 
 export const uiStyleSolidButtonEl = document.getElementById("ui-style-solid-button") as HTMLButtonElement;
@@ -109,6 +114,13 @@ export const buttonSwitches: ButtonSwitch[] = [
       messageTypeCustomButtonEl
     ],
     attr: "message-type" 
+  },
+  {
+    buttons: [
+      wallpaperTypeUrlButtonEl,
+      wallpaperTypeFileUploadButtonEl
+    ],
+    attr: "wallpaper-type"
   },
   {
     buttons: [

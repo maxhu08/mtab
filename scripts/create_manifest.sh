@@ -7,7 +7,7 @@ manifest_content='{
   "name": "mtab",
   "author": "maxhu08",
   "description": "a simple configurable new tab extension",
-  "permissions": ["storage", "bookmarks", "favicon", "fileSystem"],
+  "permissions": ["storage", "bookmarks", "favicon"],
   "chrome_url_overrides": {
     "newtab": "index.html"
   },

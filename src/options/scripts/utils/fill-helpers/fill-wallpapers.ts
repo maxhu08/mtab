@@ -1,7 +1,23 @@
 import { Config } from "src/newtab/scripts/config";
-import { wallpaperEnabledCheckboxEl, wallpaperUrlInputEl } from "src/options/scripts/ui";
+import {
+  wallpaperEnabledCheckboxEl,
+  wallpaperTypeFileUploadButtonEl,
+  wallpaperTypeUrlButtonEl,
+  wallpaperUrlInputEl
+} from "src/options/scripts/ui";
 
 export const fillWallpapersInputs = (config: Config) => {
+  switch (config.wallpaper.type) {
+    case "url": {
+      wallpaperTypeUrlButtonEl.click();
+      break;
+    }
+    case "fileUpload": {
+      wallpaperTypeFileUploadButtonEl.click();
+      break;
+    }
+  }
+
   wallpaperEnabledCheckboxEl.checked = config.dynamicTitle.enabled;
   wallpaperUrlInputEl.value = config.wallpaper.url;
 };
