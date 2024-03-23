@@ -61,6 +61,11 @@ export const searchFontInputEl = document.getElementById("search-font-input") as
 export const searchPlaceholderTextContainerEl = document.getElementById("search-placeholder-text-container") as HTMLDivElement;
 export const searchPlaceholderTextInputEl = document.getElementById("search-placeholder-text-input") as HTMLInputElement;
 
+export const searchEngineDuckduckgoButtonEl = document.getElementById("search-engine-duckduckgo-button") as HTMLButtonElement
+export const searchEngineGoogleButtonEl = document.getElementById("search-engine-google-button") as HTMLButtonElement
+export const searchEngineBingButtonEl = document.getElementById("search-engine-bing-button") as HTMLButtonElement
+export const searchEngineYahooButtonEl = document.getElementById("search-engine-yahoo-button") as HTMLButtonElement
+
 export const searchFocusedBorderColorContainerEl = document.getElementById("search-focused-border-color-container") as HTMLDivElement;
 export const searchFocusedBorderColorInputEl = document.getElementById("search-focused-border-color-input") as HTMLInputElement;
 
@@ -155,6 +160,15 @@ export const buttonSwitches: ButtonSwitch[] = [
       animationsTypeUpSmoothEl
     ],
     attr: "animations-type"
+  },
+  {
+    buttons: [
+      searchEngineDuckduckgoButtonEl,
+      searchEngineGoogleButtonEl,
+      searchEngineBingButtonEl,
+      searchEngineYahooButtonEl
+    ],
+    attr: "search-engine"
   }
 ];
 
