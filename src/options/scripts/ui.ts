@@ -121,7 +121,7 @@ export const inputs: Input[] = [
   }
 ];
 
-interface Input {
+export interface Input {
   container: HTMLDivElement;
   input: HTMLInputElement;
 }

@@ -1,6 +1,6 @@
 import { Bookmark, Config } from "src/newtab/scripts/config";
 import { focusInput, unfocusInput } from "src/options/scripts/inputs";
-import { bookmarksOptionsContainerEl } from "src/options/scripts/ui";
+import { Input, bookmarksOptionsContainerEl } from "src/options/scripts/ui";
 
 export const fillBookmarksInputs = (config: Config) => {
   config.bookmarks.forEach((bookmark, index) => {
@@ -55,32 +55,47 @@ export const fillBookmarksInputs = (config: Config) => {
   });
 };
 
+// prettier-ignore
 const handleBookmarkSettings = (bookmark: Bookmark, index: number) => {
   const bookmarkInputBorderClass = "border-sky-500";
 
-  const nameContainerEl = document.getElementById(
-    `bookmark-${index}-name-container`
-  ) as HTMLDivElement;
-  const nameInputEl = document.getElementById(`bookmark-${index}-name-input`) as HTMLInputElement;
+  const inputs: Input[] = [
+    {
+      container: document.getElementById(`bookmark-${index}-name-container`) as HTMLDivElement,
+      input: document.getElementById(`bookmark-${index}-name-input`) as HTMLInputElement
+    },
+    {
+      container: document.getElementById(`bookmark-${index}-url-container`) as HTMLDivElement,
+      input: document.getElementById(`bookmark-${index}-url-input`) as HTMLInputElement
+    },
+    {
+      container: document.getElementById(`bookmark-${index}-icon-type-container`) as HTMLDivElement,
+      input: document.getElementById(`bookmark-${index}-icon-type-input`) as HTMLInputElement
+    },
+    {
+      container: document.getElementById(`bookmark-${index}-color-container`) as HTMLDivElement,
+      input: document.getElementById(`bookmark-${index}-color-input`) as HTMLInputElement
+    }
+  ]
 
-  console.log("bookmar", index);
+  inputs.forEach((input) => {
+    input.input.addEventListener("blur", () =>
+      unfocusInput({
+        container: input.container,
+        input: input.input,
+        borderClassOld: bookmarkInputBorderClass,
+        borderClassNew: "border-transparent"
+      })
+    );
 
-  nameInputEl.addEventListener("blur", () => {
-    unfocusInput({
-      container: nameContainerEl,
-      input: nameInputEl,
-      borderClassOld: bookmarkInputBorderClass,
-      borderClassNew: "border-transparent"
-    });
-  });
-
-  nameInputEl.addEventListener("focus", (e: Event) => {
-    focusInput({
-      input: nameInputEl,
-      container: nameContainerEl,
-      borderClassOld: "border-transparent",
-      borderClassNew: bookmarkInputBorderClass,
-      e
-    });
+    input.input.addEventListener("focus", (e) =>
+      focusInput({
+        container: input.container,
+        input: input.input,
+        borderClassOld: "border-transparent",
+        borderClassNew: bookmarkInputBorderClass,
+        e
+      })
+    );
   });
 };
