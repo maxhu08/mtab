@@ -21,8 +21,12 @@ export const defaultConfig: Config = {
   user: {
     name: "Default"
   },
-  title: "mtab",
-  dynamicTitle: { enabled: true }, // changes when typing in search bar
+  title: {
+    defaultTitle: "mtab",
+    dynamic: {
+      enabled: true
+    }
+  },
   message: {
     font: `"Fira Code"`,
     type: "afternoon-morning",
@@ -98,9 +102,11 @@ export interface Config {
   user: {
     name: string;
   };
-  title: string;
-  dynamicTitle: {
-    enabled: boolean;
+  title: {
+    defaultTitle: string;
+    dynamic: {
+      enabled: boolean;
+    };
   };
   message: {
     font: string;

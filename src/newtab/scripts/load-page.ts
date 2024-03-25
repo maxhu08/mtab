@@ -17,7 +17,7 @@ import { setUISyle } from "src/newtab/scripts/utils/set-ui-style";
 
 export const loadPage = () => {
   getConfig(({ config }) => {
-    setTitle(config.title);
+    setTitle(config.title.defaultTitle);
     setUISyle(config.ui);
 
     loadWallpaper(config);

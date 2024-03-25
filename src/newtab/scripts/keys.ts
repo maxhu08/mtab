@@ -24,9 +24,11 @@ export const listenToKeys = (config: Config) => {
   });
 
   searchInputEl.addEventListener("input", () => {
-    if (!config.dynamicTitle.enabled) return;
+    if (!config.title.dynamic.enabled) return;
 
-    if (searchInputEl.value !== "") document.title = searchInputEl.value;
-    else document.title = config.title;
+    // not empty or just spaces
+    if (searchInputEl.value !== "" && !/^\s*$/.test(searchInputEl.value))
+      document.title = searchInputEl.value;
+    else document.title = config.title.defaultTitle;
   });
 };
