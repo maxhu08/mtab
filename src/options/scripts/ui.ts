@@ -70,6 +70,8 @@ export const searchEngineYahooButtonEl = document.getElementById("search-engine-
 export const searchFocusedBorderColorContainerEl = document.getElementById("search-focused-border-color-container") as HTMLDivElement;
 export const searchFocusedBorderColorInputEl = document.getElementById("search-focused-border-color-input") as HTMLInputElement;
 
+export const hotkeysEnabledCheckboxEl = document.getElementById("hotkeys-enabled-checkbox") as HTMLInputElement;
+
 export const inputs: Input[] = [
   {
     container: usernameContainerEl,

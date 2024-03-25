@@ -1,5 +1,6 @@
 import { Config, getConfig } from "src/newtab/scripts/config";
 import { fillAnimationsInputs } from "src/options/scripts/utils/fill-helpers/fill-animations";
+import { fillHotkeysInputs } from "src/options/scripts/utils/fill-helpers/fill-hotkeys";
 import { fillMessageInputs } from "src/options/scripts/utils/fill-helpers/fill-message";
 import { fillSearchInputs } from "src/options/scripts/utils/fill-helpers/fill-search";
 import { fillTitleInputs } from "src/options/scripts/utils/fill-helpers/fill-title";
@@ -21,4 +22,6 @@ export const fillInputs = (config: Config) => {
   fillAnimationsInputs(config);
 
   fillSearchInputs(config);
+
+  fillHotkeysInputs(config);
 };

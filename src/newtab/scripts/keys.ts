@@ -7,9 +7,12 @@ import { focusSearch, search, tryFocusSearch, unfocusSearch } from "./utils/sear
 
 export const listenToKeys = (config: Config) => {
   document.addEventListener("keydown", (e) => {
-    if (e.key === config.hotkeys.activationKey) tryFocusSearch(config, e);
     if (e.key === "Escape") unfocusSearch();
-    if (e.key === config.hotkeys.closePageKey) window.close();
+
+    if (config.hotkeys.enabled) {
+      if (e.key === config.hotkeys.activationKey) tryFocusSearch(config, e);
+      if (e.key === config.hotkeys.closePageKey) window.close();
+    }
   });
 
   searchInputEl.addEventListener("blur", () => unfocusSearch());

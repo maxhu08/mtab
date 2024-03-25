@@ -9,6 +9,7 @@ import { saveWallpaperSettingsToDraft } from "src/options/scripts/utils/save-hel
 import { saveAnimationsToDraft } from "src/options/scripts/utils/save-helpers/save-animations";
 import { saveUISettingsToDraft } from "src/options/scripts/utils/save-helpers/save-ui";
 import { saveSearchSettingsToDraft } from "src/options/scripts/utils/save-helpers/save-search";
+import { saveHotkeysSettingsToDraft } from "src/options/scripts/utils/save-helpers/save-hotkeys";
 
 export const saveConfig = () => {
   getConfig(({ config }) => {
@@ -33,6 +34,8 @@ export const saveConfig = () => {
 
       // *** search **
       saveSearchSettingsToDraft(draft);
+
+      saveHotkeysSettingsToDraft(draft);
 
       return draft;
     });
