@@ -64,25 +64,25 @@ export const defaultConfig: Config = {
       name: "github",
       url: "https://github.com",
       iconType: "github",
-      colorClass: "bg-indigo-500"
+      color: "purple"
     },
     {
       name: "youtube",
       url: "https://youtube.com",
       iconType: "youtube",
-      colorClass: "bg-red-500"
+      color: "red"
     },
     {
       name: "studio",
       url: "https://studio.youtube.com",
       iconType: "gear",
-      colorClass: "bg-red-500"
+      color: "red"
     },
     {
       name: "lh3000",
       url: "http://localhost:3000",
       iconType: "world",
-      colorClass: "bg-teal-500"
+      color: "blue"
     }
   ]
 };
@@ -92,6 +92,12 @@ export type WallpaperType = "url" | "fileUpload";
 export type BookmarkTiming = "left" | "right" | "uniform";
 export type SearchEngine = "duckduckgo" | "google" | "bing" | "yahoo";
 export type MessageType = "afternoon-morning" | "date" | "time-12" | "time-24" | "custom";
+export type Bookmark = {
+  name: string;
+  url: string;
+  iconType: string;
+  color: string;
+};
 
 export interface Config {
   user: {
@@ -140,10 +146,5 @@ export interface Config {
     activationKey: " ";
     closePageKey: "x";
   };
-  bookmarks: {
-    name: string;
-    url: string;
-    iconType: string;
-    colorClass: string;
-  }[];
+  bookmarks: Bookmark[];
 }
