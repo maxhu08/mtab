@@ -21,7 +21,7 @@ export const renderBookmarks = (config: Config) => {
     } rounded-md h-20 md:h-32 overflow-hidden ${
       config.animations.enabled ? `${config.animations.type} opacity-0` : ""
     }" ${config.animations ? `style="animation-delay: ${delay}ms;"` : ""}>
-      <div class="${bookmark.colorClass} h-1"></div>
+      <div class="h-1" style="background-color: ${bookmark.color}"></div>
       <div class="absolute w-full h-full hover:bg-white/20"></div>
       <div class="p-1 md:p-2 grid place-items-center h-full">
         <div class="bookmark-icon text-white h-12">
