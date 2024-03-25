@@ -72,6 +72,8 @@ export const searchFocusedBorderColorInputEl = document.getElementById("search-f
 
 export const hotkeysEnabledCheckboxEl = document.getElementById("hotkeys-enabled-checkbox") as HTMLInputElement;
 
+export const bookmarksOptionsContainerEl = document.getElementById("bookmarks-options-container") as HTMLDivElement;
+
 export const inputs: Input[] = [
   {
     container: usernameContainerEl,

@@ -59,35 +59,30 @@ export const defaultConfig: Config = {
     activationKey: " ",
     closePageKey: "x"
   },
-  // TODO: bookmarks activation key
   bookmarks: [
     {
       name: "github",
       url: "https://github.com",
       iconType: "github",
-      colorClass: "bg-indigo-500",
-      activationKey: "g"
+      colorClass: "bg-indigo-500"
     },
     {
       name: "youtube",
       url: "https://youtube.com",
       iconType: "youtube",
-      colorClass: "bg-red-500",
-      activationKey: "y"
+      colorClass: "bg-red-500"
     },
     {
       name: "studio",
       url: "https://studio.youtube.com",
       iconType: "gear",
-      colorClass: "bg-red-500",
-      activationKey: "y"
+      colorClass: "bg-red-500"
     },
     {
       name: "lh3000",
       url: "http://localhost:3000",
       iconType: "world",
-      colorClass: "bg-teal-500",
-      activationKey: "l"
+      colorClass: "bg-teal-500"
     }
   ]
 };
@@ -150,6 +145,5 @@ export interface Config {
     url: string;
     iconType: string;
     colorClass: string;
-    activationKey: string;
   }[];
 }
