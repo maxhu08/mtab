@@ -18,6 +18,6 @@ export const fillWallpapersInputs = (config: Config) => {
     }
   }
 
-  wallpaperEnabledCheckboxEl.checked = config.dynamicTitle.enabled;
+  wallpaperEnabledCheckboxEl.checked = config.wallpaper.enabled;
   wallpaperUrlInputEl.value = config.wallpaper.url;
 };

@@ -5,8 +5,10 @@ import { saveConfig } from "src/options/scripts/utils/save-config";
 export const usernameContainerEl = document.getElementById("username-container") as HTMLDivElement;
 export const usernameInputEl = document.getElementById("username-input") as HTMLInputElement;
 
-export const titleContainerEl = document.getElementById("title-container") as HTMLDivElement;
-export const titleInputEl = document.getElementById("title-input") as HTMLInputElement;
+export const titleDefaultTitleContainerEl = document.getElementById("title-default-title-container") as HTMLDivElement;
+export const titleDefaultTitleInputEl = document.getElementById("title-default-title-input") as HTMLInputElement;
+
+export const titleDynamicEnabledCheckboxEl = document.getElementById("title-dynamic-enabled-checkbox") as HTMLInputElement;
 
 export const messageFontContainerEl = document.getElementById("message-font-container") as HTMLInputElement;
 export const messageFontInputEl = document.getElementById("message-font-input") as HTMLInputElement;
@@ -42,7 +44,6 @@ export const uiBackgroundColorInputEl = document.getElementById("ui-background-c
 export const uiHighlightColorContainerEl = document.getElementById("ui-highlight-color-container") as HTMLDivElement;
 export const uiHighlightColorInputEl = document.getElementById("ui-highlight-color-input") as HTMLInputElement;
 
-export const dynamicTitleEnabledCheckboxEl = document.getElementById("dynamicTitle-enabled-checkbox") as HTMLInputElement;
 export const animationsEnabledCheckboxEl = document.getElementById("animations-enabled-checkbox") as HTMLInputElement;
 
 export const animationsBookmarkTimingLeftButtonEl = document.getElementById("animations-bookmark-timing-left-button") as HTMLButtonElement;
@@ -75,8 +76,8 @@ export const inputs: Input[] = [
     input: usernameInputEl
   },
   {
-    container: titleContainerEl,
-    input: titleInputEl
+    container: titleDefaultTitleContainerEl,
+    input: titleDefaultTitleInputEl
   },
   {
     container: messageFontContainerEl,
