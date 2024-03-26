@@ -1,4 +1,3 @@
-import { icons } from "src/newtab/scripts/icons";
 import { Config } from "../config";
 import { bookmarksContainerEl } from "../ui";
 
@@ -40,8 +39,8 @@ const renderUserDefinedBookmarks = (config: Config) => {
       <div class="h-1" style="background-color: ${bookmark.color}"></div>
       <div class="absolute w-full h-full hover:bg-white/20"></div>
       <div class="p-1 md:p-2 grid place-items-center h-full">
-        <div class="bookmark-icon text-white h-12">
-          ${icons[bookmark.iconType]}
+        <div class="bookmark-icon text-white text-4xl md:text-6xl">
+          <i class="${bookmark.iconType}"></i>
         </div>
       </div>
     </div>

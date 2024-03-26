@@ -65,25 +65,25 @@ export const defaultConfig: Config = {
       {
         name: "github",
         url: "https://github.com",
-        iconType: "github",
+        iconType: "ri-github-fill",
         color: "#6366f1"
       },
       {
         name: "youtube",
         url: "https://youtube.com",
-        iconType: "youtube",
+        iconType: "ri-youtube-fill",
         color: "#f43f5e"
       },
       {
         name: "studio",
         url: "https://www.reddit.com/",
-        iconType: "reddit",
+        iconType: "ri-reddit-fill",
         color: "#f97316"
       },
       {
         name: "lh3000",
         url: "http://localhost:3000",
-        iconType: "world",
+        iconType: "ri-global-fill",
         color: "#14b8a6"
       }
     ]
