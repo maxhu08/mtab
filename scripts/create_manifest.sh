@@ -5,7 +5,7 @@ manifest_content='{
   "manifest_version": 3,
   "version": "1.0.0",
   "name": "mtab",
-  "author": "maxhu08",
+  "author": "Max Hu",
   "description": "a simple configurable new tab extension",
   "permissions": ["storage", "bookmarks", "favicon"],
   "chrome_url_overrides": {
