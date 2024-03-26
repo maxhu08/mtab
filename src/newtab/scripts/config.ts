@@ -35,7 +35,7 @@ export const defaultConfig: Config = {
   wallpaper: {
     type: "url",
     enabled: true,
-    url: "./wallpapers/bg-1.png"
+    url: `chrome-extension://${chrome.runtime.id}/wallpapers/bg-1.png`
   },
   ui: {
     style: "glass",
@@ -59,32 +59,35 @@ export const defaultConfig: Config = {
     activationKey: " ",
     closePageKey: "x"
   },
-  bookmarks: [
-    {
-      name: "github",
-      url: "https://github.com",
-      iconType: "github",
-      color: "#6366f1"
-    },
-    {
-      name: "youtube",
-      url: "https://youtube.com",
-      iconType: "youtube",
-      color: "#f43f5e"
-    },
-    {
-      name: "studio",
-      url: "https://www.reddit.com/",
-      iconType: "reddit",
-      color: "#f97316"
-    },
-    {
-      name: "lh3000",
-      url: "http://localhost:3000",
-      iconType: "world",
-      color: "#14b8a6"
-    }
-  ]
+  bookmarks: {
+    type: "user-defined",
+    userDefined: [
+      {
+        name: "github",
+        url: "https://github.com",
+        iconType: "github",
+        color: "#6366f1"
+      },
+      {
+        name: "youtube",
+        url: "https://youtube.com",
+        iconType: "youtube",
+        color: "#f43f5e"
+      },
+      {
+        name: "studio",
+        url: "https://www.reddit.com/",
+        iconType: "reddit",
+        color: "#f97316"
+      },
+      {
+        name: "lh3000",
+        url: "http://localhost:3000",
+        iconType: "world",
+        color: "#14b8a6"
+      }
+    ]
+  }
 };
 
 export type UIStyle = "solid" | "glass";
@@ -92,6 +95,7 @@ export type WallpaperType = "url" | "fileUpload";
 export type BookmarkTiming = "left" | "right" | "uniform";
 export type SearchEngine = "duckduckgo" | "google" | "bing" | "yahoo";
 export type MessageType = "afternoon-morning" | "date" | "time-12" | "time-24" | "custom";
+export type BookmarksType = "user-defined" | "default" | "none";
 export type Bookmark = {
   name: string;
   url: string;
@@ -146,5 +150,8 @@ export interface Config {
     activationKey: " ";
     closePageKey: "x";
   };
-  bookmarks: Bookmark[];
+  bookmarks: {
+    type: BookmarksType;
+    userDefined: Bookmark[];
+  };
 }

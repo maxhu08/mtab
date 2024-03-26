@@ -23,5 +23,5 @@ export const saveBookmarksSettingsToDraft = (draft: Config) => {
     bookmarksArrToSave.push(bookmarkObjToSave);
   }
 
-  draft.bookmarks = bookmarksArrToSave;
+  draft.bookmarks.userDefined = bookmarksArrToSave;
 };

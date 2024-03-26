@@ -16,6 +16,13 @@ import { setSearchStuff } from "src/newtab/scripts/utils/set-search-font";
 import { setUISyle } from "src/newtab/scripts/utils/set-ui-style";
 
 export const loadPage = () => {
+  const manifest = chrome.runtime.getManifest();
+
+  document.documentElement.setAttribute("extension-id", chrome.runtime.id);
+  document.documentElement.setAttribute("extension-version", manifest.version);
+  // @ts-expect-error
+  document.documentElement.setAttribute("made-by", manifest.author);
+
   getConfig(({ config }) => {
     setTitle(config.title.defaultTitle);
     setUISyle(config.ui);

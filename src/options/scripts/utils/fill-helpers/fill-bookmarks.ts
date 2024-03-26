@@ -3,7 +3,7 @@ import { focusInput, unfocusInput } from "src/options/scripts/inputs";
 import { Input, bookmarksOptionsContainerEl } from "src/options/scripts/ui";
 
 export const fillBookmarksInputs = (config: Config) => {
-  config.bookmarks.forEach((bookmark, index) => {
+  config.bookmarks.userDefined.forEach((bookmark, index) => {
     bookmarksOptionsContainerEl.innerHTML += `
     <div class="bg-neutral-800 p-2 rounded-md grid grid-flow-row gap-4">
       <span class="text-white text-base">bookmark ${index}</span>
@@ -52,7 +52,7 @@ export const fillBookmarksInputs = (config: Config) => {
     `;
   });
 
-  config.bookmarks.forEach((bookmark, index) => {
+  config.bookmarks.userDefined.forEach((bookmark, index) => {
     handleBookmarkSettings(bookmark, index);
   });
 };

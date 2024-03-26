@@ -16,12 +16,14 @@ export const setMessage = (type: MessageType, customText: string, username: stri
       break;
     }
     case "time-12": {
+      setTimeMessage("12hr");
       setInterval(() => {
         setTimeMessage("12hr");
       }, 1000);
       break;
     }
     case "time-24": {
+      setTimeMessage("24hr");
       setInterval(() => {
         setTimeMessage("24hr");
       }, 1000);
