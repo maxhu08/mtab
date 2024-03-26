@@ -72,6 +72,10 @@ export const searchFocusedBorderColorInputEl = document.getElementById("search-f
 
 export const hotkeysEnabledCheckboxEl = document.getElementById("hotkeys-enabled-checkbox") as HTMLInputElement;
 
+export const bookmarksTypeDefaultButtonEl = document.getElementById("bookmarks-type-default-button") as HTMLButtonElement;
+export const bookmarksTypeUserDefinedButtonEl = document.getElementById("bookmarks-type-user-defined-button") as HTMLButtonElement;
+export const bookmarksTypeNoneButtonEl = document.getElementById("bookmarks-type-none-button") as HTMLButtonElement;
+
 export const bookmarksOptionsContainerEl = document.getElementById("bookmarks-options-container") as HTMLDivElement;
 
 export const inputs: Input[] = [
@@ -174,7 +178,15 @@ export const buttonSwitches: ButtonSwitch[] = [
       searchEngineYahooButtonEl
     ],
     attr: "search-engine"
-  }
+  },
+  {
+    buttons: [
+      bookmarksTypeDefaultButtonEl,
+      bookmarksTypeUserDefinedButtonEl,
+      bookmarksTypeNoneButtonEl
+    ],
+    attr: "bookmarks-type"
+  },
 ];
 
 interface ButtonSwitch {

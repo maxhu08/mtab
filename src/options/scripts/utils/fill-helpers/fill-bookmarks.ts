@@ -1,8 +1,30 @@
 import { Bookmark, Config } from "src/newtab/scripts/config";
 import { focusInput, unfocusInput } from "src/options/scripts/inputs";
-import { Input, bookmarksOptionsContainerEl } from "src/options/scripts/ui";
+import {
+  Input,
+  bookmarksOptionsContainerEl,
+  bookmarksTypeDefaultButtonEl,
+  bookmarksTypeNoneButtonEl,
+  bookmarksTypeUserDefinedButtonEl
+} from "src/options/scripts/ui";
 
 export const fillBookmarksInputs = (config: Config) => {
+  switch (config.bookmarks.type) {
+    case "default": {
+      bookmarksTypeDefaultButtonEl.click();
+      break;
+    }
+    case "user-defined": {
+      bookmarksTypeUserDefinedButtonEl.click();
+      break;
+    }
+    case "none": {
+      bookmarksTypeNoneButtonEl.click();
+      break;
+    }
+  }
+
+  // user-defined bookmarks
   config.bookmarks.userDefined.forEach((bookmark, index) => {
     bookmarksOptionsContainerEl.innerHTML += `
     <div class="bg-neutral-800 p-2 rounded-md grid grid-flow-row gap-4">

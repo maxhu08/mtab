@@ -2,6 +2,29 @@ import { Bookmark, Config } from "src/newtab/scripts/config";
 import { bookmarksOptionsContainerEl } from "src/options/scripts/ui";
 
 export const saveBookmarksSettingsToDraft = (draft: Config) => {
+  const selectedEl = document.querySelector(
+    `button[btn-option-type="bookmarks-type"][selected="yes"]`
+  ) as HTMLButtonElement;
+
+  switch (selectedEl.id) {
+    case "bookmarks-type-default-button": {
+      draft.bookmarks.type = "default";
+      break;
+    }
+    case "bookmarks-type-user-defined-button": {
+      draft.bookmarks.type = "user-defined";
+      break;
+    }
+    case "bookmarks-type-none-button": {
+      draft.bookmarks.type = "none";
+      break;
+    }
+  }
+
+  saveUserDefinedBookmarkSettingsToDraft(draft);
+};
+
+export const saveUserDefinedBookmarkSettingsToDraft = (draft: Config) => {
   const totalBookmarks = bookmarksOptionsContainerEl.children.length;
 
   const bookmarksArrToSave: Bookmark[] = [];
