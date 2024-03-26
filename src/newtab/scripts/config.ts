@@ -49,7 +49,7 @@ export const defaultConfig: Config = {
     type: "animate-up-bouncy"
   },
   search: {
-    font: "Fira Code",
+    font: `"Fira Code"`,
     placeholderText: "search...",
     engine: "duckduckgo",
     focusedBorderColor: "red"

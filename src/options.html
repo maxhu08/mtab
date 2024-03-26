@@ -399,14 +399,24 @@
             </button>
           </div>
         </div>
-        <div id="bookmarks-options-container" class="grid grid-flow-row gap-4"></div>
+        <div class="grid gap-2 text-base">
+          <p class="text-white">bookmarks.userDefined</p>
+          <p class="text-white">
+            needs bookmarks.type to be user-defined, valid iconTypes can be found here:
+            <a href="./icon-types.html" target="_blank"
+              class="cursor-pointer text-blue-500 hover:text-blue-600 transition">
+              icon-types
+            </a>
+          </p>
+          <div id="bookmarks-options-container" class="grid grid-flow-row gap-4"></div>
+        </div>
     </main>
     <!-- save buttons and more -->
     <div class="py-4 grid grid-flow-row gap-4 place-items-center mt-20 mb-12">
       <div class="w-full grid grid-flow-row gap-4 place-items-center">
         <div class="w-full grid grid-flow-row lg:grid-cols-3 gap-2">
           <button id="save-button" class="bg-emerald-500 hover:bg-emerald-600 transition p-2 rounded-md cursor-pointer">
-            <span class="text-white text-base">save(ctrl+s)</span>
+            <span class="text-white text-base">save (ctrl+s)</span>
           </button>
           <button id="export-button" class="bg-indigo-500 hover:bg-indigo-600 transition p-2 rounded-md cursor-pointer">
             <span class="text-white text-base">save & export</span>
