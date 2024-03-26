@@ -7,6 +7,8 @@ import { getConfig } from "src/newtab/scripts/config";
 getConfig(({ config }) => {
   fillInputs(config);
 });
+(document.getElementById("version-number-text") as HTMLSpanElement).textContent +=
+  chrome.runtime.getManifest().version;
 listenToInputs();
 listenToKeys();
 handleWallpaperFileUpload();
