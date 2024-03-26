@@ -1,6 +1,7 @@
 import { exportConfig } from "src/options/scripts/utils/export-config";
 import { importConfig } from "src/options/scripts/utils/import-config";
 import { saveConfig } from "src/options/scripts/utils/save-config";
+import { setDefaultConfig } from "src/options/scripts/utils/set-default-config";
 
 export const usernameContainerEl = document.getElementById("username-container") as HTMLDivElement;
 export const usernameInputEl = document.getElementById("username-input") as HTMLInputElement;
@@ -209,3 +210,8 @@ const importBtn = document.getElementById("import-button") as HTMLButtonElement;
 importBtn.onclick = () => {
   importConfig();
 };
+
+const resetToDefaultBtn = document.getElementById("reset-to-default-button") as HTMLButtonElement;
+resetToDefaultBtn.onclick = () => {
+  setDefaultConfig()
+}

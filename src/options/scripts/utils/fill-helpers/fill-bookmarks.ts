@@ -25,6 +25,7 @@ export const fillBookmarksInputs = (config: Config) => {
   }
 
   // user-defined bookmarks
+  bookmarksOptionsContainerEl.innerHTML = "";
   config.bookmarks.userDefined.forEach((bookmark, index) => {
     bookmarksOptionsContainerEl.innerHTML += `
     <div class="bg-neutral-800 p-2 rounded-md grid grid-flow-row gap-4">

@@ -19,7 +19,7 @@ export const getConfig = (f: ({ config }: { config: Config }) => void) => {
 
 export const defaultConfig: Config = {
   user: {
-    name: "Default"
+    name: "user"
   },
   title: {
     defaultTitle: "mtab",
@@ -30,7 +30,7 @@ export const defaultConfig: Config = {
   message: {
     font: `"Fira Code"`,
     type: "afternoon-morning",
-    customText: "custom text test"
+    customText: "your custom text"
   },
   wallpaper: {
     type: "url",
@@ -52,7 +52,7 @@ export const defaultConfig: Config = {
     font: `"Fira Code"`,
     placeholderText: "search...",
     engine: "duckduckgo",
-    focusedBorderColor: "red"
+    focusedBorderColor: "#0ea5e9"
   },
   hotkeys: {
     enabled: true,
