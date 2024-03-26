@@ -11,14 +11,77 @@ export const renderBookmarks = (config: Config) => {
       break;
     }
     case "default": {
-      alert("using default bookmarks");
+      renderDefaultBookmarks(config);
       break;
     }
   }
 };
 
+const renderDefaultBookmarks = (config: Config) => {
+  switch (config.ui.style) {
+    case "glass": {
+      bookmarksContainerEl.classList.add("glass-effect");
+      break;
+    }
+    case "solid": {
+      bookmarksContainerEl.classList.add("bg-foreground");
+      break;
+    }
+  }
+
+  bookmarksContainerEl.innerHTML += `<div id="inner-bookmark-container"></div>`;
+  // prettier-ignore
+  const innerBookmarkContainer = document.getElementById("inner-bookmark-container") as HTMLDivElement;
+
+  bookmarksContainerEl.classList.add(
+    "p-2",
+    "rounded-md",
+    "overflow-hidden",
+    "w-full",
+    config.animations.enabled ? config.animations.type : "_ignore",
+    config.animations.enabled ? "opacity-0" : "_ignore"
+  );
+
+  innerBookmarkContainer.classList.add(
+    "grid",
+    "grid-flow-col",
+    "gap-2",
+    "w-full",
+    "overflow-scroll",
+    "scrollbar-hidden"
+  );
+
+  chrome.bookmarks.search({}, (chromeBookmarks) => {
+    chromeBookmarks.forEach((bookmark) => {
+      innerBookmarkContainer.innerHTML += `
+      <div class="overflow-hidden w-20 aspect-square grid grid-rows-[max-content_max-content] place-items-center">
+        <img class="h-12" src="${`chrome-extension://${
+          chrome.runtime.id
+        }/_favicon/?pageUrl=${encodeURIComponent(bookmark.url as string)}&size=${32}`}" />
+        <span class="text-white text-base w-full text-center text-ellipsis overflow-hidden whitespace-nowrap">
+          ${bookmark.title.toString()}
+        </span>
+      </div>
+      `;
+    });
+  });
+
+  config.animations &&
+    bookmarksContainerEl.addEventListener(
+      "animationend",
+      () => {
+        bookmarksContainerEl.classList.remove("opacity-0");
+      },
+      {
+        once: true
+      }
+    );
+};
+
 // animations handled separately
 const renderUserDefinedBookmarks = (config: Config) => {
+  bookmarksContainerEl.classList.add("grid", "grid-cols-2", "md:grid-cols-4", "w-full", "gap-2");
+
   config.bookmarks.userDefined.forEach((bookmark, index) => {
     let delay = 0;
 

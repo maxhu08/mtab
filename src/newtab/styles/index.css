@@ -10,3 +10,7 @@
 
   backdrop-filter: blur(32px);
 }
+
+.scrollbar-hidden::-webkit-scrollbar {
+  display: none;
+}
