@@ -54,14 +54,16 @@ const renderDefaultBookmarks = (config: Config) => {
   chrome.bookmarks.search({}, (chromeBookmarks) => {
     chromeBookmarks.forEach((bookmark) => {
       innerBookmarkContainer.innerHTML += `
-      <div class="overflow-hidden w-20 aspect-square grid grid-rows-[auto_max-content] place-items-center">
-        <img class="h-[80%]" src="${`chrome-extension://${
-          chrome.runtime.id
-        }/_favicon/?pageUrl=${encodeURIComponent(bookmark.url as string)}&size=${32}`}" />
-        <span class="text-white text-base w-full text-center text-ellipsis overflow-hidden whitespace-nowrap">
-          ${bookmark.title.toString()}
-        </span>
-      </div>
+      <a href="${bookmark.url}" rel="noopener noreferrer">
+        <div class="overflow-hidden w-20 aspect-square grid grid-rows-[auto_max-content] place-items-center">
+          <img class="h-[80%]" src="${`chrome-extension://${
+            chrome.runtime.id
+          }/_favicon/?pageUrl=${encodeURIComponent(bookmark.url as string)}&size=${32}`}" />
+          <span class="text-white text-base w-full text-center text-ellipsis overflow-hidden whitespace-nowrap">
+            ${bookmark.title.toString()}
+          </span>
+        </div>
+      </a>
       `;
     });
   });
