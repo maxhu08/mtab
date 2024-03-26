@@ -2,15 +2,31 @@ import { icons } from "src/newtab/scripts/icons";
 import { Config } from "../config";
 import { bookmarksContainerEl } from "../ui";
 
-// animations handled separately
 export const renderBookmarks = (config: Config) => {
-  config.bookmarks.forEach((bookmark, index) => {
+  switch (config.bookmarks.type) {
+    case "none": {
+      return;
+    }
+    case "user-defined": {
+      renderUserDefinedBookmarks(config);
+      break;
+    }
+    case "default": {
+      alert("using default bookmarks");
+      break;
+    }
+  }
+};
+
+// animations handled separately
+const renderUserDefinedBookmarks = (config: Config) => {
+  config.bookmarks.userDefined.forEach((bookmark, index) => {
     let delay = 0;
 
     if (config.animations.bookmarkTiming === "uniform") delay = 150;
     else if (config.animations.bookmarkTiming === "left") delay = (index + 2) * 50;
     else if (config.animations.bookmarkTiming === "right")
-      delay = (config.bookmarks.length + 2 - index) * 50;
+      delay = (config.bookmarks.userDefined.length + 2 - index) * 50;
 
     bookmarksContainerEl.innerHTML += `
   <a href="${bookmark.url}" rel="noopener noreferrer">
@@ -33,7 +49,7 @@ export const renderBookmarks = (config: Config) => {
   });
 
   config.animations &&
-    config.bookmarks.forEach((bookmark, index) => {
+    config.bookmarks.userDefined.forEach((bookmark, index) => {
       const bookmarkEl = document.getElementById(`bookmark-${bookmark.name}-${index}`);
       if (bookmarkEl && config.animations) {
         bookmarkEl.addEventListener(
