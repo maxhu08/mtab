@@ -1,21 +1,21 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="./newtab/styles/tailwind.css">
-  <link rel="stylesheet" href="options/options.css">
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="./newtab/styles/tailwind.css" />
+  <link rel="stylesheet" href="options/options.css" />
   <script src="options/scripts/init.ts" type="module" defer></script>
-  <link rel="icon" href="./assets/icon.svg" type="image/x-icon">
+  <link rel="icon" href="./assets/icon.svg" type="image/x-icon" />
   <title>options ヽ(・ω・*)</title>
 </head>
 
 <body dir="ltr" class="bg-neutral-900 min-h-screen">
   <div class="grid grid-flow-row w-[95%] sm:w-[80%] md:w-[60%] lg:w-[40%] mx-auto">
     <div class="grid place-items-center gap-4 p-4">
-      <img src="./assets/icon.png" class="w-40 aspect-square animate-float" alt="logo">
+      <img src="./assets/icon.png" class="w-40 aspect-square animate-float" alt="logo" />
       <h1 class="text-white w-max text-2xl md:text-4xl font-semibold">
         <span class="text-emerald-500">mtab</span><span class="text-neutral-500">/</span><span>options</span>
       </h1>
@@ -42,7 +42,7 @@
             class="grid grid-cols-[max-content_auto] text-base bg-neutral-800 w-full p-1 rounded-md border-2 border-transparent">
             <span class="text-pink-500 font-semibold select-none">>&nbsp;</span>
             <input id="username-input" type="text" autocomplete="off"
-              class="outline-none bg-transparent text-white placeholder-neutral-500" placeholder="input name...">
+              class="outline-none bg-transparent text-white placeholder-neutral-500" placeholder="input name..." />
           </div>
         </div>
       </section>
@@ -59,7 +59,7 @@
             class="grid grid-cols-[max-content_auto] text-base bg-neutral-800 w-full p-1 rounded-md border-2 border-transparent">
             <span class="text-pink-500 font-semibold select-none">>&nbsp;</span>
             <input id="title-default-title-input" type="text" autocomplete="off"
-              class="outline-none bg-transparent text-white placeholder-neutral-500" placeholder="input title...">
+              class="outline-none bg-transparent text-white placeholder-neutral-500" placeholder="input title..." />
           </div>
         </div>
         <div class="grid grid-cols-[max-content_auto] w-full place-items-center">
@@ -87,7 +87,7 @@
             class="grid grid-cols-[max-content_auto] text-base bg-neutral-800 w-full p-1 rounded-md border-2 border-transparent">
             <span class="text-pink-500 font-semibold select-none">>&nbsp;</span>
             <input id="message-font-input" type="text" autocomplete="off"
-              class="outline-none bg-transparent text-white placeholder-neutral-500" placeholder="input font...">
+              class="outline-none bg-transparent text-white placeholder-neutral-500" placeholder="input font..." />
           </div>
         </div>
         <div class="grid gap-2 text-base">
@@ -121,7 +121,7 @@
             class="grid grid-cols-[max-content_auto] text-base bg-neutral-800 w-full p-1 rounded-md border-2 border-transparent">
             <span class="text-pink-500 font-semibold select-none">>&nbsp;</span>
             <input id="message-custom-text-input" type="text" autocomplete="off"
-              class="outline-none bg-transparent text-white placeholder-neutral-500" placeholder="input text...">
+              class="outline-none bg-transparent text-white placeholder-neutral-500" placeholder="input text..." />
           </div>
         </div>
       </section>
@@ -157,19 +157,23 @@
           </div>
         </div>
         <div class="grid gap-2">
-          <p class="text-white text-base">wallpaper.url (needs wallpaper.type to be url)</p>
-          <div id="wallpaper-url-container"
-            class="grid grid-cols-[max-content_auto] text-base bg-neutral-800 w-full p-1 rounded-md border-2 border-transparent">
-            <span class="text-pink-500 font-semibold select-none">>&nbsp;</span>
-            <input id="wallpaper-url-input" type="text" autocomplete="off"
-              class="outline-none bg-transparent text-white placeholder-neutral-500" placeholder="input url...">
+          <div id="wallpaper-url-section">
+            <p class="text-white text-base">wallpaper.url</p>
+            <div id="wallpaper-url-container"
+              class="grid grid-cols-[max-content_auto] text-base bg-neutral-800 w-full p-1 rounded-md border-2 border-transparent">
+              <span class="text-pink-500 font-semibold select-none">>&nbsp;</span>
+              <input id="wallpaper-url-input" type="text" autocomplete="off"
+                class="outline-none bg-transparent text-white placeholder-neutral-500" placeholder="input url..." />
+            </div>
           </div>
         </div>
         <div class="grid gap-2">
-          <p class="text-white text-base">wallpaper.fileUpload (needs wallpaper.type to be fileUpload)</p>
-          <div>
-            <input type="file" id="wallpaper-file-upload" accept="image/*"
-              class="bg-cyan-500 hover:bg-cyan-600 transition w-max p-2 rounded-md text-white text-base cursor-pointer">
+          <div id="wallpaper-file-upload-section">
+            <p class="text-white text-base">wallpaper.fileUpload</p>
+            <div>
+              <input type="file" id="wallpaper-file-upload" accept="image/*"
+                class="bg-cyan-500 hover:bg-cyan-600 transition w-max p-2 rounded-md text-white text-base cursor-pointer" />
+            </div>
           </div>
         </div>
       </section>
@@ -197,7 +201,7 @@
             class="grid grid-cols-[max-content_auto] text-base bg-neutral-800 w-full p-1 rounded-md border-2 border-transparent">
             <span class="text-pink-500 font-semibold select-none">>&nbsp;</span>
             <input id="ui-foreground-color-input" type="text" autocomplete="off"
-              class="outline-none bg-transparent text-white placeholder-neutral-500" placeholder="input color...">
+              class="outline-none bg-transparent text-white placeholder-neutral-500" placeholder="input color..." />
           </div>
         </div>
         <div class="grid gap-2">
@@ -206,7 +210,7 @@
             class="grid grid-cols-[max-content_auto] text-base bg-neutral-800 w-full p-1 rounded-md border-2 border-transparent">
             <span class="text-pink-500 font-semibold select-none">>&nbsp;</span>
             <input id="ui-background-color-input" type="text" autocomplete="off"
-              class="outline-none bg-transparent text-white placeholder-neutral-500" placeholder="input color...">
+              class="outline-none bg-transparent text-white placeholder-neutral-500" placeholder="input color..." />
           </div>
         </div>
         <div class="grid gap-2">
@@ -215,7 +219,7 @@
             class="grid grid-cols-[max-content_auto] text-base bg-neutral-800 w-full p-1 rounded-md border-2 border-transparent">
             <span class="text-pink-500 font-semibold select-none">>&nbsp;</span>
             <input id="ui-highlight-color-input" type="text" autocomplete="off"
-              class="outline-none bg-transparent text-white placeholder-neutral-500" placeholder="input color...">
+              class="outline-none bg-transparent text-white placeholder-neutral-500" placeholder="input color..." />
           </div>
         </div>
       </section>
@@ -293,7 +297,7 @@
             class="grid grid-cols-[max-content_auto] text-base bg-neutral-800 w-full p-1 rounded-md border-2 border-transparent">
             <span class="text-pink-500 font-semibold select-none">>&nbsp;</span>
             <input id="search-font-input" type="text" autocomplete="off"
-              class="outline-none bg-transparent text-white placeholder-neutral-500" placeholder="input font...">
+              class="outline-none bg-transparent text-white placeholder-neutral-500" placeholder="input font..." />
           </div>
         </div>
         <div class="grid gap-2">
@@ -302,7 +306,8 @@
             class="grid grid-cols-[max-content_auto] text-base bg-neutral-800 w-full p-1 rounded-md border-2 border-transparent">
             <span class="text-pink-500 font-semibold select-none">>&nbsp;</span>
             <input id="search-placeholder-text-input" type="text" autocomplete="off"
-              class="outline-none bg-transparent text-white placeholder-neutral-500" placeholder="input placeholder...">
+              class="outline-none bg-transparent text-white placeholder-neutral-500"
+              placeholder="input placeholder..." />
           </div>
         </div>
         <div class="grid gap-2 text-base">
@@ -311,28 +316,28 @@
             <button id="search-engine-duckduckgo-button"
               class="bg-neutral-800 hover:bg-neutral-700 py-2 rounded-md outline-none grid place-items-center">
               <div class="grid grid-cols-[24px_max-content] gap-2">
-                <img src="assets/search-engines/duckduckgo.svg" alt="duckduckgo">
+                <img src="assets/search-engines/duckduckgo.svg" alt="duckduckgo" />
                 <span class="text-white">duckduckgo</span>
               </div>
             </button>
             <button id="search-engine-google-button"
               class="bg-neutral-800 hover:bg-neutral-700 py-2 rounded-md outline-none grid place-items-center">
               <div class="grid grid-cols-[24px_max-content] gap-2">
-                <img src="assets/search-engines/google.png" alt="google">
+                <img src="assets/search-engines/google.png" alt="google" />
                 <span class="text-white">google</span>
               </div>
             </button>
             <button id="search-engine-bing-button"
               class="bg-neutral-800 hover:bg-neutral-700 py-2 rounded-md outline-none grid place-items-center">
               <div class="grid grid-cols-[24px_max-content] gap-2">
-                <img src="assets/search-engines/bing.png" alt="bing">
+                <img src="assets/search-engines/bing.png" alt="bing" />
                 <span class="text-white">bing</span>
               </div>
             </button>
             <button id="search-engine-yahoo-button"
               class="bg-neutral-800 hover:bg-neutral-700 py-2 rounded-md outline-none grid place-items-center">
               <div class="grid grid-cols-[24px_max-content] gap-2">
-                <img src="assets/search-engines/yahoo.png" alt="yahoo">
+                <img src="assets/search-engines/yahoo.png" alt="yahoo" />
                 <span class="text-white">yahoo</span>
               </div>
             </button>
@@ -344,7 +349,7 @@
             class="grid grid-cols-[max-content_auto] text-base bg-neutral-800 w-full p-1 rounded-md border-2 border-transparent">
             <span class="text-pink-500 font-semibold select-none">>&nbsp;</span>
             <input id="search-focused-border-color-input" type="text" autocomplete="off"
-              class="outline-none bg-transparent text-white placeholder-neutral-500" placeholder="input color...">
+              class="outline-none bg-transparent text-white placeholder-neutral-500" placeholder="input color..." />
           </div>
         </div>
       </section>
@@ -406,7 +411,8 @@
             <a href="https://remixicon.com/" target="_blank"
               class="cursor-pointer text-blue-500 hover:text-blue-600 transition">
               remixicon.com
-            </a> <span class="text-indigo-500">(using version v4.2.0)</span>
+            </a>
+            <span class="text-indigo-500">(using version v4.2.0)</span>
           </p>
           <div id="bookmarks-options-container" class="grid grid-flow-row gap-4"></div>
         </div>

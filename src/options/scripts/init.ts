@@ -3,12 +3,16 @@ import { listenToKeys } from "src/options/scripts/keybinds";
 import { listenToInputs } from "src/options/scripts/inputs";
 import { handleWallpaperFileUpload } from "src/options/scripts/utils/file-upload";
 import { getConfig } from "src/newtab/scripts/config";
+import { handleWallpaperSwitch } from "src/options/scripts/ui";
 
 getConfig(({ config }) => {
   fillInputs(config);
 });
+
 (document.getElementById("version-number-text") as HTMLSpanElement).textContent +=
   chrome.runtime.getManifest().version;
+
 listenToInputs();
 listenToKeys();
 handleWallpaperFileUpload();
+handleWallpaperSwitch();

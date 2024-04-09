@@ -215,3 +215,20 @@ const resetToDefaultBtn = document.getElementById("reset-to-default-button") as 
 resetToDefaultBtn.onclick = () => {
   setDefaultConfig()
 }
+
+export const handleWallpaperSwitch = () => {
+  const wallpaperUrlSection = document.getElementById("wallpaper-url-section") as HTMLDivElement;
+  const wallpaperFileUploadSection = document.getElementById(
+    "wallpaper-file-upload-section"
+  ) as HTMLDivElement;
+
+  (document.getElementById("wallpaper-type-url-button") as HTMLButtonElement).onclick = () => {
+    wallpaperUrlSection.style.display = "none";
+    wallpaperFileUploadSection.style.display = "block";
+  };
+
+  (document.getElementById("wallpaper-type-file-upload-button") as HTMLButtonElement).onclick = () => {
+    wallpaperFileUploadSection.style.display = "none";
+    wallpaperUrlSection.style.display = "block";
+  };
+}
