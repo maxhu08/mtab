@@ -222,13 +222,13 @@ export const handleWallpaperSwitch = () => {
     "wallpaper-file-upload-section"
   ) as HTMLDivElement;
 
-  (document.getElementById("wallpaper-type-url-button") as HTMLButtonElement).onclick = () => {
+  (document.getElementById("wallpaper-type-url-button") as HTMLButtonElement).addEventListener("click", () => {
     wallpaperUrlSection.style.display = "none";
     wallpaperFileUploadSection.style.display = "block";
-  };
+  });
 
-  (document.getElementById("wallpaper-type-file-upload-button") as HTMLButtonElement).onclick = () => {
+  (document.getElementById("wallpaper-type-file-upload-button") as HTMLButtonElement).addEventListener("click", ( ) => {
     wallpaperFileUploadSection.style.display = "none";
     wallpaperUrlSection.style.display = "block";
-  };
+  });
 }
