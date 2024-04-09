@@ -9,9 +9,11 @@ export const listenToKeys = (config: Config) => {
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape") unfocusSearch();
 
+    const searchFocused = document.activeElement === searchInputEl;
+
     if (config.hotkeys.enabled) {
       if (e.key === config.hotkeys.activationKey) tryFocusSearch(config, e);
-      if (e.key === config.hotkeys.closePageKey) window.close();
+      if (e.key === config.hotkeys.closePageKey && !searchFocused) window.close();
     }
   });
 
