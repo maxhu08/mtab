@@ -44,7 +44,7 @@ chmod +x ./scripts/create_manifest_firefox.sh
 build for firefox
 
 ```
-pnpm build-firefix
+pnpm build-firefox
 ```
 
 the build output will be in dist/
