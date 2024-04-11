@@ -29,7 +29,9 @@ manifest_content='{
     "default_title": "mtab",
     "default_popup": "popup.html"
   },
-  "options_page": "options.html"
+  "options_ui": {
+    "page" : "options.html"
+  }
 }'
 
 # write the content to manifest.json in the dist folder

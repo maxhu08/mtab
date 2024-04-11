@@ -1,7 +1,7 @@
 document.getElementById("options-button")!.addEventListener("click", () => {
-  console.log("test");
-
-  if (typeof chrome === "undefined") return;
+  if (browser.runtime.openOptionsPage) {
+    browser.runtime.openOptionsPage();
+  }
 
   if (chrome.runtime.openOptionsPage) {
     chrome.runtime.openOptionsPage();
