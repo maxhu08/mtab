@@ -1,13 +1,14 @@
 {
   "name": "mtab",
   "author": "Max Hu",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "a simple configurable new tab extension",
   "keywords": [],
   "scripts": {
     "dev-chrome": "mkdir -p dist && parcel src/**/*.html & ./scripts/create_manifest_chrome.sh && ./scripts/copy_assets.sh",
     "dev-firefox": "mkdir -p dist && parcel src/**/*.html & ./scripts/create_manifest_firefox.sh && ./scripts/copy_assets.sh",
-    "build": "mkdir -p dist && parcel build src/**/*.html --no-scope-hoist & ./scripts/create_manifest.sh && ./scripts/copy_assets.sh",
+    "build-chrome": "mkdir -p dist && parcel build src/**/*.html --no-scope-hoist & ./scripts/create_manifest_chrome.sh && ./scripts/copy_assets.sh",
+    "build-firefox": "mkdir -p dist && parcel build src/**/*.html --no-scope-hoist & ./scripts/create_manifest_firefox.sh && ./scripts/copy_assets.sh",
     "prettier": "prettier --write \"./**/*.{js,jsx,mjs,cjs,ts,tsx,json}\""
   },
   "dependencies": {

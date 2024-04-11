@@ -3,7 +3,7 @@
 # define the content of the manifest.json
 manifest_content='{
   "manifest_version": 3,
-  "version": "1.0.1",
+  "version": "1.0.2",
   "name": "mtab",
   "author": "Max Hu",
   "description": "a simple configurable new tab extension",
@@ -31,8 +31,15 @@ manifest_content='{
   },
   "options_ui": {
     "page" : "options.html"
+  },
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "mtab-firefox-id"
+    }
   }
 }'
 
 # write the content to manifest.json in the dist folder
 echo "$manifest_content" > ./dist/manifest.json
+
+# zip -r -FS ../my-extension.zip * --exclude '*.git*'

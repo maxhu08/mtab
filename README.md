@@ -10,6 +10,10 @@ mtab is an extension that offers a modern new tab page, prioritizing customizabi
 
 Download here -> https://chromewebstore.google.com/detail/mtab/fdaphilojaklgkoocegabckfanjoacjg
 
+### setup
+
+find how to setup in SETUP.md
+
 ![demo-1](./assets/demo-1.png)
 ![demo-2](./assets/demo-2.png)
 ![demo-3](./assets/demo-3.png)
