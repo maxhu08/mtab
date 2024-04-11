@@ -9,6 +9,8 @@ requirements:
 
 OS: (Windows/macOS/Linux)
 
+### installing required programs
+
 if on windows:
 
 - install nodejs from website: https://nodejs.org/en/download
@@ -17,6 +19,15 @@ if on windows:
 if on linux (arch):
 
 `pacman -S nodejs npm pnpm`
+
+### setting up and building
+
+clone repo
+
+```
+git clone https://github.com/maxhu08/mtab
+cd mtab
+```
 
 install dependencies
 
