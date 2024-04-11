@@ -12,7 +12,7 @@ Download here -> https://chromewebstore.google.com/detail/mtab/fdaphilojaklgkooc
 
 ### setup
 
-find how to setup in SETUP.md
+find how to setup here -> https://github.com/maxhu08/mtab/blob/master/SETUP.md
 
 ![demo-1](./assets/demo-1.png)
 ![demo-2](./assets/demo-2.png)
