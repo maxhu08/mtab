@@ -66,7 +66,9 @@ export const searchPlaceholderTextInputEl = document.getElementById("search-plac
 export const searchEngineDuckduckgoButtonEl = document.getElementById("search-engine-duckduckgo-button") as HTMLButtonElement
 export const searchEngineGoogleButtonEl = document.getElementById("search-engine-google-button") as HTMLButtonElement
 export const searchEngineBingButtonEl = document.getElementById("search-engine-bing-button") as HTMLButtonElement
+export const searchEngineBraveButtonEl = document.getElementById("search-engine-brave-button") as HTMLButtonElement
 export const searchEngineYahooButtonEl = document.getElementById("search-engine-yahoo-button") as HTMLButtonElement
+export const searchEngineYandexButtonEl = document.getElementById("search-engine-yandex-button") as HTMLButtonElement
 
 export const searchFocusedBorderColorContainerEl = document.getElementById("search-focused-border-color-container") as HTMLDivElement;
 export const searchFocusedBorderColorInputEl = document.getElementById("search-focused-border-color-input") as HTMLInputElement;
@@ -176,7 +178,9 @@ export const buttonSwitches: ButtonSwitch[] = [
       searchEngineDuckduckgoButtonEl,
       searchEngineGoogleButtonEl,
       searchEngineBingButtonEl,
-      searchEngineYahooButtonEl
+      searchEngineBraveButtonEl,
+      searchEngineYahooButtonEl,
+      searchEngineYandexButtonEl,
     ],
     attr: "search-engine"
   },

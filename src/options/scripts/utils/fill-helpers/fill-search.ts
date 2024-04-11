@@ -1,9 +1,11 @@
 import { Config } from "src/newtab/scripts/config";
 import {
-  searchEngineBingButtonEl,
   searchEngineDuckduckgoButtonEl,
+  searchEngineBingButtonEl,
+  searchEngineBraveButtonEl,
   searchEngineGoogleButtonEl,
   searchEngineYahooButtonEl,
+  searchEngineYandexButtonEl,
   searchFocusedBorderColorInputEl,
   searchFontInputEl,
   searchPlaceholderTextInputEl
@@ -26,8 +28,16 @@ export const fillSearchInputs = (config: Config) => {
       searchEngineBingButtonEl.click();
       break;
     }
+    case "brave": {
+      searchEngineBraveButtonEl.click();
+      break;
+    }
     case "yahoo": {
       searchEngineYahooButtonEl.click();
+      break;
+    }
+    case "yandex": {
+      searchEngineYandexButtonEl.click();
       break;
     }
   }

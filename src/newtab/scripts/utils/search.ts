@@ -11,11 +11,17 @@ export const search = (config: Config, value: string) => {
     case "bing":
       searchUrl = `https://www.bing.com/search?q=${encodeURIComponent(value)}`;
       break;
+    case "brave":
+      searchUrl = `https://search.brave.com/search?q=${encodeURIComponent(value)}`;
+      break;
     case "duckduckgo":
       searchUrl = `https://duckduckgo.com/?q=${encodeURIComponent(value)}`;
       break;
     case "yahoo":
       searchUrl = `https://search.yahoo.com/search?q=${encodeURIComponent(value)}`;
+      break;
+    case "yandex":
+      searchUrl = `https://yandex.com/search/?text=${encodeURIComponent(value)}`;
       break;
   }
 

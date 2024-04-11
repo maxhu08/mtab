@@ -26,8 +26,16 @@ export const saveSearchSettingsToDraft = (draft: Config) => {
       draft.search.engine = "bing";
       break;
     }
+    case "search-engine-brave-button": {
+      draft.search.engine = "brave";
+      break;
+    }
     case "search-engine-yahoo-button": {
       draft.search.engine = "yahoo";
+      break;
+    }
+    case "search-engine-yandex-button": {
+      draft.search.engine = "yandex";
       break;
     }
   }
