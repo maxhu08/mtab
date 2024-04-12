@@ -6,7 +6,7 @@
     "baseUrl": "./",
     "esModuleInterop": true,
     "moduleResolution": "Node",
-    "outDir": "./dist",
+    "outDir": "mtab-v1.0.2-firefox-dist",
     "noEmitOnError": true,
     "lib": ["ES2015", "DOM"]
   },

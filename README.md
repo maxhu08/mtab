@@ -8,7 +8,10 @@ a simple configurable new tab extension
 
 mtab is an extension that offers a modern new tab page, prioritizing customizability such as choosing wallpapers, bookmarks, and more. Additionally, it emphasizes a smooth user experience through its animations on the new page.
 
-Download here -> https://chromewebstore.google.com/detail/mtab/fdaphilojaklgkoocegabckfanjoacjg
+downloads here:
+
+- chromium (chrome, brave) => https://chromewebstore.google.com/detail/mtab/fdaphilojaklgkoocegabckfanjoacjg
+- firefox => https://addons.mozilla.org/en-US/firefox/addon/mtab/
 
 ### setup
 
