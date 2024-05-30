@@ -16,3 +16,9 @@
 .scrollbar-hidden::-webkit-scrollbar {
   display: none;
 }
+
+@media (min-height: 400px) {
+  .m-padding-bottom {
+    padding-bottom: 10rem;
+  }
+}
