@@ -4,17 +4,23 @@ import { searchInputEl } from "./ui";
 
 // utils
 import { focusSearch, search, tryFocusSearch, unfocusSearch } from "./utils/search";
+import { navigateTab } from "src/newtab/scripts/utils/navigate-tab";
 
 export const listenToKeys = (config: Config) => {
   document.addEventListener("keydown", (e) => {
+    if (!config.hotkeys.enabled) return;
+
+    // keybinds stuff
+
+    // search
     if (e.key === "Escape") unfocusSearch();
-
     const searchFocused = document.activeElement === searchInputEl;
+    if (e.key === config.hotkeys.activationKey) tryFocusSearch(config, e);
+    if (e.key === config.hotkeys.closePageKey && !searchFocused) window.close();
 
-    if (config.hotkeys.enabled) {
-      if (e.key === config.hotkeys.activationKey) tryFocusSearch(config, e);
-      if (e.key === config.hotkeys.closePageKey && !searchFocused) window.close();
-    }
+    // nav stuff
+    if (e.key === "J") navigateTab("left");
+    if (e.key === "K") navigateTab("right");
   });
 
   searchInputEl.addEventListener("blur", () => unfocusSearch());
