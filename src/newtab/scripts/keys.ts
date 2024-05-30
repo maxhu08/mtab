@@ -19,8 +19,8 @@ export const listenToKeys = (config: Config) => {
     if (e.key === config.hotkeys.closePageKey && !searchFocused) window.close();
 
     // nav stuff
-    if (e.key === "J") navigateTab("left");
-    if (e.key === "K") navigateTab("right");
+    // if (e.key === "J") navigateTab("left");
+    // if (e.key === "K") navigateTab("right");
   });
 
   searchInputEl.addEventListener("blur", () => unfocusSearch());
