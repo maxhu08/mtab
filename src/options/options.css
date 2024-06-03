@@ -1,5 +1,6 @@
 * {
-  font-family: "Fira Code", monospace;
+  /* font-family: "Fira Code", monospace; */
+  font-family: "Jetbrains Mono", monospace;
   transition-duration: 250ms;
 }
 
