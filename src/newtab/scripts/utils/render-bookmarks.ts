@@ -98,7 +98,7 @@ const renderUserDefinedBookmarks = (config: Config) => {
       bookmark.name
     }-${index}" class="relative duration-[250ms] ease-out bg-foreground cursor-pointer ${
       config.ui.style === "glass" ? "glass-effect" : ""
-    } rounded-md h-20 md:h-32 overflow-hidden ${
+    } rounded-md h-bookmark overflow-hidden ${
       config.animations.enabled ? `${config.animations.type} opacity-0` : ""
     }" ${config.animations ? `style="animation-delay: ${delay}ms;"` : ""}>
       <div class="h-1" style="background-color: ${bookmark.color}"></div>

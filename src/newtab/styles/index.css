@@ -17,8 +17,24 @@
   display: none;
 }
 
-@media (min-height: 400px) {
+@media (min-height: 600px) {
   .m-padding-bottom {
     padding-bottom: 10rem;
+  }
+}
+
+.h-bookmark {
+  height: 8rem;
+}
+
+@media (max-width: 768px) {
+  .h-bookmark {
+    height: 5rem !important;
+  }
+}
+
+@media (max-height: 400px) {
+  .h-bookmark {
+    height: 5rem !important;
   }
 }
