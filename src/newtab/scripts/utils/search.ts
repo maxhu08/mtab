@@ -31,19 +31,23 @@ export const search = (config: Config, value: string) => {
       break;
   }
 
-  const content = document.getElementById("content") as HTMLDivElement;
-  content.classList.add("animate-page-shrink");
+  if (config.animations.enabled) {
+    const content = document.getElementById("content") as HTMLDivElement;
 
-  const animationDuration = 350;
+    const animationDuration = 350;
 
-  setTimeout(() => {
-    content.classList.remove("animate-page-shrink");
-    content.style.opacity = "0%";
-  }, animationDuration * 0.75);
+    content.classList.add("animate-page-shrink");
+    setTimeout(() => {
+      content.classList.remove("animate-page-shrink");
+      content.style.opacity = "0%";
+    }, animationDuration * 0.75);
 
-  setTimeout(() => {
+    setTimeout(() => {
+      window.location.href = searchUrl;
+    }, animationDuration);
+  } else {
     window.location.href = searchUrl;
-  }, animationDuration);
+  }
 };
 
 export const tryFocusSearch = (config: Config, e: KeyboardEvent) => {
