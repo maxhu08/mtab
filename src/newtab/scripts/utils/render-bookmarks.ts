@@ -93,9 +93,6 @@ const renderUserDefinedBookmarks = (config: Config) => {
       delay = (config.bookmarks.userDefined.length + 2 - index) * 50;
 
     bookmarksContainerEl.innerHTML += `
-  <a href="${
-    bookmark.url
-  }" rel="noopener noreferrer" class="focus:outline-none border-transparent focus:border-[#0ea5e9] border-2 rounded-lg duration-200">
     <div id="bookmark-${
       bookmark.name
     }-${index}" class="relative duration-[250ms] ease-out bg-foreground cursor-pointer ${
@@ -111,12 +108,13 @@ const renderUserDefinedBookmarks = (config: Config) => {
         </div>
       </div>
     </div>
-  </a>`;
+    `;
   });
 
   config.animations &&
     config.bookmarks.userDefined.forEach((bookmark, index) => {
       const bookmarkEl = document.getElementById(`bookmark-${bookmark.name}-${index}`);
+
       if (bookmarkEl && config.animations) {
         bookmarkEl.addEventListener(
           "animationend",
@@ -128,5 +126,25 @@ const renderUserDefinedBookmarks = (config: Config) => {
           }
         );
       }
+
+      bookmarkEl!.onclick = () => {
+        if (config.animations.enabled) {
+          const content = document.getElementById("content") as HTMLDivElement;
+
+          const animationDuration = 350;
+
+          content.classList.add("animate-page-up");
+          setTimeout(() => {
+            content.classList.remove("animate-page-up");
+            content.style.opacity = "0%";
+          }, animationDuration * 0.75);
+
+          setTimeout(() => {
+            window.location.href = bookmark.url;
+          }, animationDuration);
+        } else {
+          window.location.href = bookmark.url;
+        }
+      };
     });
 };

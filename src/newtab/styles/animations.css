@@ -147,3 +147,22 @@
     opacity: 0;
   }
 }
+
+.animate-page-up {
+  animation: animatePageUp 200ms forwards ease-in-out;
+}
+
+@keyframes animatePageUp {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  25% {
+    transform: translateY(4rem);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(calc(-100vh + 20rem));
+    opacity: 0;
+  }
+}
