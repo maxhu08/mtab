@@ -93,7 +93,9 @@ const renderUserDefinedBookmarks = (config: Config) => {
       delay = (config.bookmarks.userDefined.length + 2 - index) * 50;
 
     bookmarksContainerEl.innerHTML += `
-  <a href="${bookmark.url}" rel="noopener noreferrer">
+  <a href="${
+    bookmark.url
+  }" rel="noopener noreferrer" class="focus:outline-none border-transparent focus:border-[#0ea5e9] border-2 rounded-lg duration-200">
     <div id="bookmark-${
       bookmark.name
     }-${index}" class="relative duration-[250ms] ease-out bg-foreground cursor-pointer ${
