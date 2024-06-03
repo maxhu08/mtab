@@ -1,9 +1,10 @@
-#!/bin/bash
+#!/bin/sh
 
-# define the content of the manifest.json
+EXTENSION_VERSION="1.0.3" 
+
 manifest_content='{
   "manifest_version": 3,
-  "version": "1.0.3",
+  "version": "'$EXTENSION_VERSION'",
   "name": "mtab",
   "author": "Max Hu",
   "description": "a simple configurable new tab extension",
@@ -30,11 +31,11 @@ manifest_content='{
     "default_popup": "popup.html"
   },
   "options_ui": {
-    "page" : "options.html"
+    "page": "options.html"
   },
   "browser_specific_settings": {
     "gecko": {
-      "id": "mtab-firefox-id"
+      "id": "contact@maxhu.dev"
     }
   }
 }'

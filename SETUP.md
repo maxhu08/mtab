@@ -5,7 +5,7 @@ How to setup (for firefox):
 requirements:
 
 - nodejs (using v21.7.2)
-- pnpm (using v8.15.2)
+- bun (using v1.1.9)
 
 OS: (Windows/macOS/Linux)
 
@@ -14,11 +14,11 @@ OS: (Windows/macOS/Linux)
 if on windows:
 
 - install nodejs from website: https://nodejs.org/en/download
-- install pnpm here: https://pnpm.io/installation
+- install bun here: https://bun.sh/docs/installation
 
 if on linux (arch):
 
-`pacman -S nodejs npm pnpm`
+`pacman -S nodejs bun`
 
 ### setting up and building
 
@@ -32,7 +32,7 @@ cd mtab
 install dependencies
 
 ```
-pnpm i
+bun i
 ```
 
 make create_manifest_firefox.sh executable
@@ -44,7 +44,7 @@ chmod +x ./scripts/create_manifest_firefox.sh
 build for firefox
 
 ```
-pnpm build-firefox
+bun build-firefox
 ```
 
 the build output will be in dist/

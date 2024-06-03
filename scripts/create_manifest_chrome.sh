@@ -1,9 +1,11 @@
-#!/bin/bash
+#!/bin/sh
+
+EXTENSION_VERSION="1.0.3" 
 
 # define the content of the manifest.json
 manifest_content='{
   "manifest_version": 3,
-  "version": "1.0.3",
+  "version": "'$EXTENSION_VERSION'",
   "name": "mtab",
   "author": "Max Hu",
   "description": "a simple configurable new tab extension",
