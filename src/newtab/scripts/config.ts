@@ -28,7 +28,8 @@ export const defaultConfig: Config = {
     }
   },
   message: {
-    font: `"Fira Code"`,
+    // font: `"Fira Code"`,
+    font: `"Jetbrains Mono"`,
     type: "afternoon-morning",
     customText: "your custom text"
   },
@@ -50,7 +51,8 @@ export const defaultConfig: Config = {
     type: "animate-up-bouncy"
   },
   search: {
-    font: `"Fira Code"`,
+    // font: `"Fira Code"`,
+    font: `"Jetbrains Mono"`,
     placeholderText: "search...",
     engine: "duckduckgo",
     focusedBorderColor: "#0ea5e9"
