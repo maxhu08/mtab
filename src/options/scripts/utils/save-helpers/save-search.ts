@@ -38,6 +38,14 @@ export const saveSearchSettingsToDraft = (draft: Config) => {
       draft.search.engine = "yandex";
       break;
     }
+    case "search-engine-startpage-button": {
+      draft.search.engine = "startpage";
+      break;
+    }
+    case "search-engine-ecosia-button": {
+      draft.search.engine = "ecosia";
+      break;
+    }
   }
 
   draft.search.focusedBorderColor = searchFocusedBorderColorInputEl.value;

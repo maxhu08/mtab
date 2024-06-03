@@ -69,6 +69,8 @@ export const searchEngineBingButtonEl = document.getElementById("search-engine-b
 export const searchEngineBraveButtonEl = document.getElementById("search-engine-brave-button") as HTMLButtonElement
 export const searchEngineYahooButtonEl = document.getElementById("search-engine-yahoo-button") as HTMLButtonElement
 export const searchEngineYandexButtonEl = document.getElementById("search-engine-yandex-button") as HTMLButtonElement
+export const searchEngineStartpageButtonEl = document.getElementById("search-engine-startpage-button") as HTMLButtonElement
+export const searchEngineEcosiaButtonEl = document.getElementById("search-engine-ecosia-button") as HTMLButtonElement
 
 export const searchFocusedBorderColorContainerEl = document.getElementById("search-focused-border-color-container") as HTMLDivElement;
 export const searchFocusedBorderColorInputEl = document.getElementById("search-focused-border-color-input") as HTMLInputElement;
@@ -181,6 +183,8 @@ export const buttonSwitches: ButtonSwitch[] = [
       searchEngineBraveButtonEl,
       searchEngineYahooButtonEl,
       searchEngineYandexButtonEl,
+      searchEngineStartpageButtonEl,
+      searchEngineEcosiaButtonEl,
     ],
     attr: "search-engine"
   },

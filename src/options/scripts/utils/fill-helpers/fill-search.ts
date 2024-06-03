@@ -8,7 +8,9 @@ import {
   searchEngineYandexButtonEl,
   searchFocusedBorderColorInputEl,
   searchFontInputEl,
-  searchPlaceholderTextInputEl
+  searchPlaceholderTextInputEl,
+  searchEngineStartpageButtonEl,
+  searchEngineEcosiaButtonEl
 } from "src/options/scripts/ui";
 
 export const fillSearchInputs = (config: Config) => {
@@ -38,6 +40,14 @@ export const fillSearchInputs = (config: Config) => {
     }
     case "yandex": {
       searchEngineYandexButtonEl.click();
+      break;
+    }
+    case "startpage": {
+      searchEngineStartpageButtonEl.click();
+      break;
+    }
+    case "ecosia": {
+      searchEngineEcosiaButtonEl.click();
       break;
     }
   }

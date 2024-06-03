@@ -1,638 +1,481 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./newtab/styles/tailwind.css" />
-    <link rel="stylesheet" href="options/options.css" />
-    <script src="options/scripts/init.ts" type="module" defer></script>
-    <link rel="icon" href="./assets/icon.svg" type="image/x-icon" />
-    <title>options ヽ(・ω・*)</title>
-  </head>
 
-  <body dir="ltr" class="bg-neutral-900 min-h-screen">
-    <div class="grid grid-flow-row w-[95%] sm:w-[80%] md:w-[60%] lg:w-[40%] mx-auto">
-      <div class="grid place-items-center gap-4 p-4">
-        <img src="./assets/icon.png" class="w-40 aspect-square animate-float" alt="logo" />
-        <h1 class="text-white w-max text-2xl md:text-4xl font-semibold">
-          <span class="text-emerald-500">mtab</span><span class="text-neutral-500">/</span
-          ><span>options</span>
-        </h1>
-      </div>
-      <div>
-        <p class="text-center text-sm md:text-base">
-          <a
-            href="https://github.com/maxhu08/mtab"
-            target="_blank"
-            class="cursor-pointer text-blue-500 hover:text-blue-600 transition"
-            >github</a
-          >
-          <span class="text-neutral-500"> | </span>
-          <span id="version-number-text" class="text-indigo-500">version </span>
-          <span class="text-neutral-500"> | </span>
-          <span id="user-agent-text" class="text-orange-500"></span>
-        </p>
-      </div>
-      <main class="grid grid-flow-row gap-20 pt-16">
-        <!-- user -->
-        <section class="grid grid-flow-row gap-4">
-          <div class="grid grid-cols-[1fr_max-content_1fr] gap-2">
-            <div class="bg-neutral-500 h-[1px] rounded-md my-auto"></div>
-            <span class="text-neutral-500 text-base">user</span>
-            <div class="bg-neutral-500 h-[1px] rounded-md my-auto"></div>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="./newtab/styles/tailwind.css" />
+  <link rel="stylesheet" href="options/options.css" />
+  <script src="options/scripts/init.ts" type="module" defer></script>
+  <link rel="icon" href="./assets/icon.svg" type="image/x-icon" />
+  <title>options ヽ(・ω・*)</title>
+</head>
+
+<body dir="ltr" class="bg-neutral-900 min-h-screen">
+  <div class="grid grid-flow-row w-[95%] sm:w-[80%] md:w-[60%] lg:w-[40%] mx-auto">
+    <div class="grid place-items-center gap-4 p-4">
+      <img src="./assets/icon.png" class="w-40 aspect-square animate-float" alt="logo" />
+      <h1 class="text-white w-max text-2xl md:text-4xl font-semibold">
+        <span class="text-emerald-500">mtab</span><span class="text-neutral-500">/</span><span>options</span>
+      </h1>
+    </div>
+    <div>
+      <p class="text-center text-sm md:text-base">
+        <a href="https://github.com/maxhu08/mtab" target="_blank"
+          class="cursor-pointer text-blue-500 hover:text-blue-600 transition">github</a>
+        <span class="text-neutral-500"> | </span>
+        <span id="version-number-text" class="text-indigo-500">version </span>
+        <span class="text-neutral-500"> | </span>
+        <span id="user-agent-text" class="text-orange-500"></span>
+      </p>
+    </div>
+    <main class="grid grid-flow-row gap-20 pt-16">
+      <!-- user -->
+      <section class="grid grid-flow-row gap-4">
+        <div class="grid grid-cols-[1fr_max-content_1fr] gap-2">
+          <div class="bg-neutral-500 h-[1px] rounded-md my-auto"></div>
+          <span class="text-neutral-500 text-base">user</span>
+          <div class="bg-neutral-500 h-[1px] rounded-md my-auto"></div>
+        </div>
+        <div class="grid gap-2">
+          <p class="text-white text-base">user.name</p>
+          <div id="username-container"
+            class="grid grid-cols-[max-content_auto] text-base bg-neutral-800 w-full p-1 rounded-md border-2 border-transparent">
+            <span class="text-pink-500 font-semibold select-none">>&nbsp;</span>
+            <input id="username-input" type="text" autocomplete="off"
+              class="outline-none bg-transparent text-white placeholder-neutral-500" placeholder="input name..." />
           </div>
-          <div class="grid gap-2">
-            <p class="text-white text-base">user.name</p>
-            <div
-              id="username-container"
-              class="grid grid-cols-[max-content_auto] text-base bg-neutral-800 w-full p-1 rounded-md border-2 border-transparent"
-            >
-              <span class="text-pink-500 font-semibold select-none">>&nbsp;</span>
-              <input
-                id="username-input"
-                type="text"
-                autocomplete="off"
-                class="outline-none bg-transparent text-white placeholder-neutral-500"
-                placeholder="input name..."
-              />
-            </div>
+        </div>
+      </section>
+      <!-- title -->
+      <section class="grid grid-flow-row gap-4">
+        <div class="grid grid-cols-[1fr_max-content_1fr] gap-2">
+          <div class="bg-neutral-500 h-[1px] rounded-md my-auto"></div>
+          <span class="text-neutral-500 text-base">title</span>
+          <div class="bg-neutral-500 h-[1px] rounded-md my-auto"></div>
+        </div>
+        <div class="grid gap-2">
+          <p class="text-white text-base">title.defaultTitle</p>
+          <div id="title-default-title-container"
+            class="grid grid-cols-[max-content_auto] text-base bg-neutral-800 w-full p-1 rounded-md border-2 border-transparent">
+            <span class="text-pink-500 font-semibold select-none">>&nbsp;</span>
+            <input id="title-default-title-input" type="text" autocomplete="off"
+              class="outline-none bg-transparent text-white placeholder-neutral-500" placeholder="input title..." />
           </div>
-        </section>
-        <!-- title -->
-        <section class="grid grid-flow-row gap-4">
-          <div class="grid grid-cols-[1fr_max-content_1fr] gap-2">
-            <div class="bg-neutral-500 h-[1px] rounded-md my-auto"></div>
-            <span class="text-neutral-500 text-base">title</span>
-            <div class="bg-neutral-500 h-[1px] rounded-md my-auto"></div>
-          </div>
-          <div class="grid gap-2">
-            <p class="text-white text-base">title.defaultTitle</p>
-            <div
-              id="title-default-title-container"
-              class="grid grid-cols-[max-content_auto] text-base bg-neutral-800 w-full p-1 rounded-md border-2 border-transparent"
-            >
-              <span class="text-pink-500 font-semibold select-none">>&nbsp;</span>
-              <input
-                id="title-default-title-input"
-                type="text"
-                autocomplete="off"
-                class="outline-none bg-transparent text-white placeholder-neutral-500"
-                placeholder="input title..."
-              />
-            </div>
-          </div>
-          <div class="grid grid-cols-[max-content_auto] w-full place-items-center">
-            <p class="text-white text-base">title.dynamic.enabled</p>
-            <div class="ml-auto">
-              <label class="relative inline-flex items-center cursor-pointer">
-                <input
-                  id="title-dynamic-enabled-checkbox"
-                  type="checkbox"
-                  value=""
-                  class="sr-only peer"
-                />
-                <div
-                  class="w-11 h-6 peer bg-neutral-800 outline-none rounded-full peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[3px] after:left-[3px] after:bg-neutral-700 after:border-none after:rounded-full after:h-[1.15rem] after:aspect-square after:transition-all peer-checked:bg-emerald-500 peer-checked:after:bg-white"
-                ></div>
-              </label>
-            </div>
-          </div>
-        </section>
-        <!-- message -->
-        <section class="grid grid-flow-row gap-4">
-          <div class="grid grid-cols-[1fr_max-content_1fr] gap-2">
-            <div class="bg-neutral-500 h-[1px] rounded-md my-auto"></div>
-            <span class="text-neutral-500 text-base">message</span>
-            <div class="bg-neutral-500 h-[1px] rounded-md my-auto"></div>
-          </div>
-          <div class="grid gap-2">
-            <p class="text-white text-base">message.font</p>
-            <div
-              id="message-font-container"
-              class="grid grid-cols-[max-content_auto] text-base bg-neutral-800 w-full p-1 rounded-md border-2 border-transparent"
-            >
-              <span class="text-pink-500 font-semibold select-none">>&nbsp;</span>
-              <input
-                id="message-font-input"
-                type="text"
-                autocomplete="off"
-                class="outline-none bg-transparent text-white placeholder-neutral-500"
-                placeholder="input font..."
-              />
-            </div>
-          </div>
-          <div class="grid gap-2 text-base">
-            <p class="text-white">message.type</p>
-            <div class="grid grid-cols-2 gap-2">
-              <button
-                id="message-type-afternoon-morning-button"
-                class="bg-neutral-800 hover:bg-neutral-700 py-2 rounded-md outline-none"
-              >
-                <span class="text-white">afternoon-morning</span>
-              </button>
-              <button
-                id="message-type-date-button"
-                class="bg-neutral-800 hover:bg-neutral-700 py-2 rounded-md outline-none"
-              >
-                <span class="text-white">date</span>
-              </button>
-              <button
-                id="message-type-time-12-button"
-                class="bg-neutral-800 hover:bg-neutral-700 py-2 rounded-md outline-none"
-              >
-                <span class="text-white">time-12</span>
-              </button>
-              <button
-                id="message-type-time-24-button"
-                class="bg-neutral-800 hover:bg-neutral-700 py-2 rounded-md outline-none"
-              >
-                <span class="text-white">time-24</span>
-              </button>
-              <button
-                id="message-type-custom-button"
-                class="bg-neutral-800 hover:bg-neutral-700 py-2 rounded-md outline-none"
-              >
-                <span class="text-white">custom</span>
-              </button>
-            </div>
-          </div>
-          <div class="grid gap-2">
-            <p class="text-white text-base">message.customText (needs message.type to be custom)</p>
-            <div
-              id="message-custom-text-container"
-              class="grid grid-cols-[max-content_auto] text-base bg-neutral-800 w-full p-1 rounded-md border-2 border-transparent"
-            >
-              <span class="text-pink-500 font-semibold select-none">>&nbsp;</span>
-              <input
-                id="message-custom-text-input"
-                type="text"
-                autocomplete="off"
-                class="outline-none bg-transparent text-white placeholder-neutral-500"
-                placeholder="input text..."
-              />
-            </div>
-          </div>
-        </section>
-        <!-- wallpaper -->
-        <section class="grid grid-flow-row gap-4">
-          <div class="grid grid-cols-[1fr_max-content_1fr] gap-2">
-            <div class="bg-neutral-500 h-[1px] rounded-md my-auto"></div>
-            <span class="text-neutral-500 text-base">wallpaper</span>
-            <div class="bg-neutral-500 h-[1px] rounded-md my-auto"></div>
-          </div>
-          <div class="grid grid-cols-[max-content_auto] w-full place-items-center">
-            <p class="text-white text-base">wallpaper.enabled</p>
-            <div class="ml-auto">
-              <label class="relative inline-flex items-center cursor-pointer">
-                <input
-                  id="wallpaper-enabled-checkbox"
-                  type="checkbox"
-                  value=""
-                  class="sr-only peer"
-                />
-                <div
-                  class="w-11 h-6 peer bg-neutral-800 outline-none rounded-full peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[3px] after:left-[3px] after:bg-neutral-700 after:border-none after:rounded-full after:h-[1.15rem] after:aspect-square after:transition-all peer-checked:bg-emerald-500 peer-checked:after:bg-white"
-                ></div>
-              </label>
-            </div>
-          </div>
-          <div class="grid gap-2 text-base">
-            <p class="text-white">wallpaper.type</p>
-            <div class="grid grid-cols-2 gap-2">
-              <button
-                id="wallpaper-type-url-button"
-                class="bg-neutral-800 hover:bg-neutral-700 py-2 rounded-md outline-none"
-              >
-                <span class="text-white">url</span>
-              </button>
-              <button
-                id="wallpaper-type-file-upload-button"
-                class="bg-neutral-800 hover:bg-neutral-700 py-2 rounded-md outline-none"
-              >
-                <span class="text-white">fileUpload</span>
-              </button>
-            </div>
-          </div>
-          <div class="grid gap-2">
-            <div id="wallpaper-url-section">
-              <p class="text-white text-base">wallpaper.url</p>
+        </div>
+        <div class="grid grid-cols-[max-content_auto] w-full place-items-center">
+          <p class="text-white text-base">title.dynamic.enabled</p>
+          <div class="ml-auto">
+            <label class="relative inline-flex items-center cursor-pointer">
+              <input id="title-dynamic-enabled-checkbox" type="checkbox" value="" class="sr-only peer" />
               <div
-                id="wallpaper-url-container"
-                class="grid grid-cols-[max-content_auto] text-base bg-neutral-800 w-full p-1 rounded-md border-2 border-transparent"
-              >
-                <span class="text-pink-500 font-semibold select-none">>&nbsp;</span>
-                <input
-                  id="wallpaper-url-input"
-                  type="text"
-                  autocomplete="off"
-                  class="outline-none bg-transparent text-white placeholder-neutral-500"
-                  placeholder="input url..."
-                />
+                class="w-11 h-6 peer bg-neutral-800 outline-none rounded-full peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[3px] after:left-[3px] after:bg-neutral-700 after:border-none after:rounded-full after:h-[1.15rem] after:aspect-square after:transition-all peer-checked:bg-emerald-500 peer-checked:after:bg-white">
               </div>
-            </div>
+            </label>
           </div>
-          <div class="grid gap-2">
-            <div id="wallpaper-file-upload-section">
-              <p class="text-white text-base">wallpaper.fileUpload</p>
-              <div>
-                <input
-                  type="file"
-                  id="wallpaper-file-upload"
-                  accept="image/*"
-                  class="bg-cyan-500 hover:bg-cyan-600 transition w-max p-2 rounded-md text-white text-base cursor-pointer"
-                />
-              </div>
-            </div>
+        </div>
+      </section>
+      <!-- message -->
+      <section class="grid grid-flow-row gap-4">
+        <div class="grid grid-cols-[1fr_max-content_1fr] gap-2">
+          <div class="bg-neutral-500 h-[1px] rounded-md my-auto"></div>
+          <span class="text-neutral-500 text-base">message</span>
+          <div class="bg-neutral-500 h-[1px] rounded-md my-auto"></div>
+        </div>
+        <div class="grid gap-2">
+          <p class="text-white text-base">message.font</p>
+          <div id="message-font-container"
+            class="grid grid-cols-[max-content_auto] text-base bg-neutral-800 w-full p-1 rounded-md border-2 border-transparent">
+            <span class="text-pink-500 font-semibold select-none">>&nbsp;</span>
+            <input id="message-font-input" type="text" autocomplete="off"
+              class="outline-none bg-transparent text-white placeholder-neutral-500" placeholder="input font..." />
           </div>
-        </section>
-        <!-- ui -->
-        <section class="grid grid-flow-row gap-4">
-          <div class="grid grid-cols-[1fr_max-content_1fr] gap-2">
-            <div class="bg-neutral-500 h-[1px] rounded-md my-auto"></div>
-            <span class="text-neutral-500 text-base">ui</span>
-            <div class="bg-neutral-500 h-[1px] rounded-md my-auto"></div>
-          </div>
-          <div class="grid gap-2 text-base">
-            <p class="text-white">ui.style</p>
-            <div class="grid grid-cols-2 gap-2">
-              <button
-                id="ui-style-solid-button"
-                class="bg-neutral-800 hover:bg-neutral-700 py-2 rounded-md outline-none"
-              >
-                <span class="text-white">solid</span>
-              </button>
-              <button
-                id="ui-style-glass-button"
-                class="bg-neutral-800 hover:bg-neutral-700 py-2 rounded-md outline-none"
-              >
-                <span class="text-white">glass</span>
-              </button>
-            </div>
-          </div>
-          <div class="grid gap-2">
-            <p class="text-white text-base">ui.foregroundColor</p>
-            <div
-              id="ui-foreground-color-container"
-              class="grid grid-cols-[max-content_auto] text-base bg-neutral-800 w-full p-1 rounded-md border-2 border-transparent"
-            >
-              <span class="text-pink-500 font-semibold select-none">>&nbsp;</span>
-              <input
-                id="ui-foreground-color-input"
-                type="text"
-                autocomplete="off"
-                class="outline-none bg-transparent text-white placeholder-neutral-500"
-                placeholder="input color..."
-              />
-            </div>
-          </div>
-          <div class="grid gap-2">
-            <p class="text-white text-base">ui.backgroundColor</p>
-            <div
-              id="ui-background-color-container"
-              class="grid grid-cols-[max-content_auto] text-base bg-neutral-800 w-full p-1 rounded-md border-2 border-transparent"
-            >
-              <span class="text-pink-500 font-semibold select-none">>&nbsp;</span>
-              <input
-                id="ui-background-color-input"
-                type="text"
-                autocomplete="off"
-                class="outline-none bg-transparent text-white placeholder-neutral-500"
-                placeholder="input color..."
-              />
-            </div>
-          </div>
-          <div class="grid gap-2">
-            <p class="text-white text-base">ui.highlightColor</p>
-            <div
-              id="ui-highlight-color-container"
-              class="grid grid-cols-[max-content_auto] text-base bg-neutral-800 w-full p-1 rounded-md border-2 border-transparent"
-            >
-              <span class="text-pink-500 font-semibold select-none">>&nbsp;</span>
-              <input
-                id="ui-highlight-color-input"
-                type="text"
-                autocomplete="off"
-                class="outline-none bg-transparent text-white placeholder-neutral-500"
-                placeholder="input color..."
-              />
-            </div>
-          </div>
-        </section>
-        <!-- animations -->
-        <section class="grid grid-flow-row gap-4">
-          <div class="grid grid-cols-[1fr_max-content_1fr] gap-2">
-            <div class="bg-neutral-500 h-[1px] rounded-md my-auto"></div>
-            <span class="text-neutral-500 text-base">animations</span>
-            <div class="bg-neutral-500 h-[1px] rounded-md my-auto"></div>
-          </div>
-          <div class="grid grid-cols-[max-content_auto] w-full place-items-center">
-            <p class="text-white text-base">animations.enabled</p>
-            <div class="ml-auto">
-              <label class="relative inline-flex items-center cursor-pointer">
-                <input
-                  id="animations-enabled-checkbox"
-                  type="checkbox"
-                  value=""
-                  class="sr-only peer"
-                />
-                <div
-                  class="w-11 h-6 peer bg-neutral-800 outline-none rounded-full peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[3px] after:left-[3px] after:bg-neutral-700 after:border-none after:rounded-full after:h-[1.15rem] after:aspect-square after:transition-all peer-checked:bg-emerald-500 peer-checked:after:bg-white"
-                ></div>
-              </label>
-            </div>
-          </div>
-          <div class="grid gap-2 text-base">
-            <p class="text-white">animations.bookmarkTiming</p>
-            <div class="grid grid-cols-2 gap-2">
-              <button
-                id="animations-bookmark-timing-left-button"
-                class="bg-neutral-800 hover:bg-neutral-700 py-2 rounded-md outline-none"
-              >
-                <span class="text-white">left</span>
-              </button>
-              <button
-                id="animations-bookmark-timing-right-button"
-                class="bg-neutral-800 hover:bg-neutral-700 py-2 rounded-md outline-none"
-              >
-                <span class="text-white">right</span>
-              </button>
-              <button
-                id="animations-bookmark-timing-uniform-button"
-                class="bg-neutral-800 hover:bg-neutral-700 py-2 rounded-md outline-none"
-              >
-                <span class="text-white">uniform</span>
-              </button>
-            </div>
-          </div>
-          <div class="grid gap-2 text-base">
-            <p class="text-white">animations.type</p>
-            <div class="grid grid-cols-2 gap-2">
-              <button
-                id="animations-type-down-bouncy-button"
-                class="bg-neutral-800 hover:bg-neutral-700 py-2 rounded-md outline-none"
-              >
-                <span class="text-white">down-bouncy</span>
-              </button>
-              <button
-                id="animations-type-down-smooth-button"
-                class="bg-neutral-800 hover:bg-neutral-700 py-2 rounded-md outline-none"
-              >
-                <span class="text-white">down-smooth</span>
-              </button>
-              <button
-                id="animations-type-down-fall-button"
-                class="bg-neutral-800 hover:bg-neutral-700 py-2 rounded-md outline-none"
-              >
-                <span class="text-white">down-fall</span>
-              </button>
-              <button
-                id="animations-type-up-bouncy-button"
-                class="bg-neutral-800 hover:bg-neutral-700 py-2 rounded-md outline-none"
-              >
-                <span class="text-white">up-bouncy</span>
-              </button>
-              <button
-                id="animations-type-up-smooth-button"
-                class="bg-neutral-800 hover:bg-neutral-700 py-2 rounded-md outline-none"
-              >
-                <span class="text-white">up-smooth</span>
-              </button>
-            </div>
-          </div>
-        </section>
-        <!-- search -->
-        <section class="grid grid-flow-row gap-4">
-          <div class="grid grid-cols-[1fr_max-content_1fr] gap-2">
-            <div class="bg-neutral-500 h-[1px] rounded-md my-auto"></div>
-            <span class="text-neutral-500 text-base">search</span>
-            <div class="bg-neutral-500 h-[1px] rounded-md my-auto"></div>
-          </div>
-          <div class="grid gap-2">
-            <p class="text-white text-base">search.font</p>
-            <div
-              id="search-font-container"
-              class="grid grid-cols-[max-content_auto] text-base bg-neutral-800 w-full p-1 rounded-md border-2 border-transparent"
-            >
-              <span class="text-pink-500 font-semibold select-none">>&nbsp;</span>
-              <input
-                id="search-font-input"
-                type="text"
-                autocomplete="off"
-                class="outline-none bg-transparent text-white placeholder-neutral-500"
-                placeholder="input font..."
-              />
-            </div>
-          </div>
-          <div class="grid gap-2">
-            <p class="text-white text-base">search.placeholderText</p>
-            <div
-              id="search-placeholder-text-container"
-              class="grid grid-cols-[max-content_auto] text-base bg-neutral-800 w-full p-1 rounded-md border-2 border-transparent"
-            >
-              <span class="text-pink-500 font-semibold select-none">>&nbsp;</span>
-              <input
-                id="search-placeholder-text-input"
-                type="text"
-                autocomplete="off"
-                class="outline-none bg-transparent text-white placeholder-neutral-500"
-                placeholder="input placeholder..."
-              />
-            </div>
-          </div>
-          <div class="grid gap-2 text-base">
-            <p class="text-white">search.engine</p>
-            <div class="grid grid-cols-2 gap-2">
-              <button
-                id="search-engine-duckduckgo-button"
-                class="bg-neutral-800 hover:bg-neutral-700 py-2 rounded-md outline-none grid place-items-center"
-              >
-                <div class="grid grid-cols-[24px_max-content] gap-2">
-                  <img src="assets/search-engines/duckduckgo.svg" alt="duckduckgo" />
-                  <span class="text-white">duckduckgo</span>
-                </div>
-              </button>
-              <button
-                id="search-engine-google-button"
-                class="bg-neutral-800 hover:bg-neutral-700 py-2 rounded-md outline-none grid place-items-center"
-              >
-                <div class="grid grid-cols-[24px_max-content] gap-2">
-                  <img src="assets/search-engines/google.png" alt="google" />
-                  <span class="text-white">google</span>
-                </div>
-              </button>
-              <button
-                id="search-engine-bing-button"
-                class="bg-neutral-800 hover:bg-neutral-700 py-2 rounded-md outline-none grid place-items-center"
-              >
-                <div class="grid grid-cols-[24px_max-content] gap-2">
-                  <img src="assets/search-engines/bing.png" alt="bing" />
-                  <span class="text-white">bing</span>
-                </div>
-              </button>
-              <button
-                id="search-engine-brave-button"
-                class="bg-neutral-800 hover:bg-neutral-700 py-2 rounded-md outline-none grid place-items-center"
-              >
-                <div class="grid grid-cols-[24px_max-content] gap-2">
-                  <img src="assets/search-engines/brave.png" alt="brave" />
-                  <span class="text-white">brave</span>
-                </div>
-              </button>
-              <button
-                id="search-engine-yahoo-button"
-                class="bg-neutral-800 hover:bg-neutral-700 py-2 rounded-md outline-none grid place-items-center"
-              >
-                <div class="grid grid-cols-[24px_max-content] gap-2">
-                  <img src="assets/search-engines/yahoo.png" alt="yahoo" />
-                  <span class="text-white">yahoo</span>
-                </div>
-              </button>
-              <button
-                id="search-engine-yandex-button"
-                class="bg-neutral-800 hover:bg-neutral-700 py-2 rounded-md outline-none grid place-items-center"
-              >
-                <div class="grid grid-cols-[24px_max-content] gap-2">
-                  <img src="assets/search-engines/yandex.png" alt="yandex" />
-                  <span class="text-white">yandex</span>
-                </div>
-              </button>
-            </div>
-          </div>
-          <div class="grid gap-2">
-            <p class="text-white text-base">search.focusedBorderColor (use #00000000 for none)</p>
-            <div
-              id="search-focused-border-color-container"
-              class="grid grid-cols-[max-content_auto] text-base bg-neutral-800 w-full p-1 rounded-md border-2 border-transparent"
-            >
-              <span class="text-pink-500 font-semibold select-none">>&nbsp;</span>
-              <input
-                id="search-focused-border-color-input"
-                type="text"
-                autocomplete="off"
-                class="outline-none bg-transparent text-white placeholder-neutral-500"
-                placeholder="input color..."
-              />
-            </div>
-          </div>
-        </section>
-        <!-- hotkeys -->
-        <section class="grid grid-flow-row gap-4">
-          <div class="grid grid-cols-[1fr_max-content_1fr] gap-2">
-            <div class="bg-neutral-500 h-[1px] rounded-md my-auto"></div>
-            <span class="text-neutral-500 text-base">hotkeys</span>
-            <div class="bg-neutral-500 h-[1px] rounded-md my-auto"></div>
-          </div>
-          <div class="grid grid-cols-[max-content_auto] w-full place-items-center">
-            <p class="text-white text-base">hotkeys.enabled</p>
-            <div class="ml-auto">
-              <label class="relative inline-flex items-center cursor-pointer">
-                <input
-                  id="hotkeys-enabled-checkbox"
-                  type="checkbox"
-                  value=""
-                  class="sr-only peer"
-                />
-                <div
-                  class="w-11 h-6 peer bg-neutral-800 outline-none rounded-full peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[3px] after:left-[3px] after:bg-neutral-700 after:border-none after:rounded-full after:h-[1.15rem] after:aspect-square after:transition-all peer-checked:bg-emerald-500 peer-checked:after:bg-white"
-                ></div>
-              </label>
-            </div>
-          </div>
-          <div class="grid grid-cols-[auto_max-content]">
-            <span class="text-white text-base">activationKey</span>
-            <kbd class="bg-neutral-800 rounded-md p-1 text-neutral-500 text-sm">SPC</kbd>
-          </div>
-          <div class="grid grid-cols-[auto_max-content]">
-            <span class="text-white text-base">closePageKey</span>
-            <kbd class="bg-neutral-800 rounded-md p-1 text-neutral-500 text-sm">x</kbd>
-          </div>
-        </section>
-        <!-- bookmarks -->
-        <section class="grid grid-flow-row gap-4">
-          <div class="grid grid-cols-[1fr_max-content_1fr] gap-2">
-            <div class="bg-neutral-500 h-[1px] rounded-md my-auto"></div>
-            <span class="text-neutral-500 text-base">bookmarks</span>
-            <div class="bg-neutral-500 h-[1px] rounded-md my-auto"></div>
-          </div>
-          <div class="grid gap-2 text-base">
-            <p class="text-white">bookmarks.type</p>
-            <div class="grid grid-cols-2 gap-2">
-              <button
-                id="bookmarks-type-default-button"
-                class="bg-neutral-800 hover:bg-neutral-700 py-2 rounded-md outline-none"
-              >
-                <span class="text-white">default</span>
-              </button>
-              <button
-                id="bookmarks-type-user-defined-button"
-                class="bg-neutral-800 hover:bg-neutral-700 py-2 rounded-md outline-none"
-              >
-                <span class="text-white">user-defined</span>
-              </button>
-              <button
-                id="bookmarks-type-none-button"
-                class="bg-neutral-800 hover:bg-neutral-700 py-2 rounded-md outline-none"
-              >
-                <span class="text-white">none</span>
-              </button>
-            </div>
-          </div>
-          <div class="grid gap-2 text-base">
-            <p class="text-white">bookmarks.userDefined</p>
-            <p class="text-white">
-              needs bookmarks.type to be user-defined, valid iconTypes can be found here:
-              <a
-                href="https://remixicon.com/"
-                target="_blank"
-                class="cursor-pointer text-blue-500 hover:text-blue-600 transition"
-              >
-                remixicon.com
-              </a>
-              <span class="text-indigo-500">(using version v4.2.0)</span>
-            </p>
-            <div id="bookmarks-options-container" class="grid grid-flow-row gap-4"></div>
-          </div>
-        </section>
-      </main>
-      <!-- save buttons and more -->
-      <div class="py-4 grid grid-flow-row gap-4 place-items-center mt-20 mb-12">
-        <div class="w-full grid grid-flow-row gap-4 place-items-center">
-          <div class="w-full grid grid-flow-row lg:grid-cols-3 gap-2">
-            <button
-              id="save-button"
-              class="bg-emerald-500 hover:bg-emerald-600 transition p-2 rounded-md cursor-pointer"
-            >
-              <span class="text-white text-base">save (ctrl+s)</span>
+        </div>
+        <div class="grid gap-2 text-base">
+          <p class="text-white">message.type</p>
+          <div class="grid grid-cols-2 gap-2">
+            <button id="message-type-afternoon-morning-button"
+              class="bg-neutral-800 hover:bg-neutral-700 py-2 rounded-md outline-none">
+              <span class="text-white">afternoon-morning</span>
             </button>
-            <button
-              id="export-button"
-              class="bg-indigo-500 hover:bg-indigo-600 transition p-2 rounded-md cursor-pointer"
-            >
-              <span class="text-white text-base">save & export</span>
+            <button id="message-type-date-button"
+              class="bg-neutral-800 hover:bg-neutral-700 py-2 rounded-md outline-none">
+              <span class="text-white">date</span>
             </button>
-            <button
-              id="import-button"
-              class="bg-indigo-500 hover:bg-indigo-600 transition p-2 rounded-md cursor-pointer"
-            >
-              <span class="text-white text-base">import</span>
+            <button id="message-type-time-12-button"
+              class="bg-neutral-800 hover:bg-neutral-700 py-2 rounded-md outline-none">
+              <span class="text-white">time-12</span>
             </button>
-          </div>
-          <div class="w-full grid grid-flow-row gap-4 place-items-center">
-            <div class="w-full grid grid-cols-[1fr_max-content_1fr] gap-2">
-              <div class="bg-neutral-500 h-[1px] rounded-md my-auto"></div>
-              <span class="text-neutral-500 text-base">danger</span>
-              <div class="bg-neutral-500 h-[1px] rounded-md my-auto"></div>
-            </div>
-            <button
-              id="reset-to-default-button"
-              class="w-full lg:w-max bg-rose-500 hover:bg-rose-600 transition p-2 rounded-md cursor-pointer"
-            >
-              <span class="text-white text-base">reset to default</span>
+            <button id="message-type-time-24-button"
+              class="bg-neutral-800 hover:bg-neutral-700 py-2 rounded-md outline-none">
+              <span class="text-white">time-24</span>
+            </button>
+            <button id="message-type-custom-button"
+              class="bg-neutral-800 hover:bg-neutral-700 py-2 rounded-md outline-none">
+              <span class="text-white">custom</span>
             </button>
           </div>
         </div>
+        <div class="grid gap-2">
+          <p class="text-white text-base">message.customText (needs message.type to be custom)</p>
+          <div id="message-custom-text-container"
+            class="grid grid-cols-[max-content_auto] text-base bg-neutral-800 w-full p-1 rounded-md border-2 border-transparent">
+            <span class="text-pink-500 font-semibold select-none">>&nbsp;</span>
+            <input id="message-custom-text-input" type="text" autocomplete="off"
+              class="outline-none bg-transparent text-white placeholder-neutral-500" placeholder="input text..." />
+          </div>
+        </div>
+      </section>
+      <!-- wallpaper -->
+      <section class="grid grid-flow-row gap-4">
+        <div class="grid grid-cols-[1fr_max-content_1fr] gap-2">
+          <div class="bg-neutral-500 h-[1px] rounded-md my-auto"></div>
+          <span class="text-neutral-500 text-base">wallpaper</span>
+          <div class="bg-neutral-500 h-[1px] rounded-md my-auto"></div>
+        </div>
+        <div class="grid grid-cols-[max-content_auto] w-full place-items-center">
+          <p class="text-white text-base">wallpaper.enabled</p>
+          <div class="ml-auto">
+            <label class="relative inline-flex items-center cursor-pointer">
+              <input id="wallpaper-enabled-checkbox" type="checkbox" value="" class="sr-only peer" />
+              <div
+                class="w-11 h-6 peer bg-neutral-800 outline-none rounded-full peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[3px] after:left-[3px] after:bg-neutral-700 after:border-none after:rounded-full after:h-[1.15rem] after:aspect-square after:transition-all peer-checked:bg-emerald-500 peer-checked:after:bg-white">
+              </div>
+            </label>
+          </div>
+        </div>
+        <div class="grid gap-2 text-base">
+          <p class="text-white">wallpaper.type</p>
+          <div class="grid grid-cols-2 gap-2">
+            <button id="wallpaper-type-url-button"
+              class="bg-neutral-800 hover:bg-neutral-700 py-2 rounded-md outline-none">
+              <span class="text-white">url</span>
+            </button>
+            <button id="wallpaper-type-file-upload-button"
+              class="bg-neutral-800 hover:bg-neutral-700 py-2 rounded-md outline-none">
+              <span class="text-white">fileUpload</span>
+            </button>
+          </div>
+        </div>
+        <div class="grid gap-2">
+          <div id="wallpaper-url-section">
+            <p class="text-white text-base">wallpaper.url</p>
+            <div id="wallpaper-url-container"
+              class="grid grid-cols-[max-content_auto] text-base bg-neutral-800 w-full p-1 rounded-md border-2 border-transparent">
+              <span class="text-pink-500 font-semibold select-none">>&nbsp;</span>
+              <input id="wallpaper-url-input" type="text" autocomplete="off"
+                class="outline-none bg-transparent text-white placeholder-neutral-500" placeholder="input url..." />
+            </div>
+          </div>
+        </div>
+        <div class="grid gap-2">
+          <div id="wallpaper-file-upload-section">
+            <p class="text-white text-base">wallpaper.fileUpload</p>
+            <div>
+              <input type="file" id="wallpaper-file-upload" accept="image/*"
+                class="bg-cyan-500 hover:bg-cyan-600 transition w-max p-2 rounded-md text-white text-base cursor-pointer" />
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- ui -->
+      <section class="grid grid-flow-row gap-4">
+        <div class="grid grid-cols-[1fr_max-content_1fr] gap-2">
+          <div class="bg-neutral-500 h-[1px] rounded-md my-auto"></div>
+          <span class="text-neutral-500 text-base">ui</span>
+          <div class="bg-neutral-500 h-[1px] rounded-md my-auto"></div>
+        </div>
+        <div class="grid gap-2 text-base">
+          <p class="text-white">ui.style</p>
+          <div class="grid grid-cols-2 gap-2">
+            <button id="ui-style-solid-button" class="bg-neutral-800 hover:bg-neutral-700 py-2 rounded-md outline-none">
+              <span class="text-white">solid</span>
+            </button>
+            <button id="ui-style-glass-button" class="bg-neutral-800 hover:bg-neutral-700 py-2 rounded-md outline-none">
+              <span class="text-white">glass</span>
+            </button>
+          </div>
+        </div>
+        <div class="grid gap-2">
+          <p class="text-white text-base">ui.foregroundColor</p>
+          <div id="ui-foreground-color-container"
+            class="grid grid-cols-[max-content_auto] text-base bg-neutral-800 w-full p-1 rounded-md border-2 border-transparent">
+            <span class="text-pink-500 font-semibold select-none">>&nbsp;</span>
+            <input id="ui-foreground-color-input" type="text" autocomplete="off"
+              class="outline-none bg-transparent text-white placeholder-neutral-500" placeholder="input color..." />
+          </div>
+        </div>
+        <div class="grid gap-2">
+          <p class="text-white text-base">ui.backgroundColor</p>
+          <div id="ui-background-color-container"
+            class="grid grid-cols-[max-content_auto] text-base bg-neutral-800 w-full p-1 rounded-md border-2 border-transparent">
+            <span class="text-pink-500 font-semibold select-none">>&nbsp;</span>
+            <input id="ui-background-color-input" type="text" autocomplete="off"
+              class="outline-none bg-transparent text-white placeholder-neutral-500" placeholder="input color..." />
+          </div>
+        </div>
+        <div class="grid gap-2">
+          <p class="text-white text-base">ui.highlightColor</p>
+          <div id="ui-highlight-color-container"
+            class="grid grid-cols-[max-content_auto] text-base bg-neutral-800 w-full p-1 rounded-md border-2 border-transparent">
+            <span class="text-pink-500 font-semibold select-none">>&nbsp;</span>
+            <input id="ui-highlight-color-input" type="text" autocomplete="off"
+              class="outline-none bg-transparent text-white placeholder-neutral-500" placeholder="input color..." />
+          </div>
+        </div>
+      </section>
+      <!-- animations -->
+      <section class="grid grid-flow-row gap-4">
+        <div class="grid grid-cols-[1fr_max-content_1fr] gap-2">
+          <div class="bg-neutral-500 h-[1px] rounded-md my-auto"></div>
+          <span class="text-neutral-500 text-base">animations</span>
+          <div class="bg-neutral-500 h-[1px] rounded-md my-auto"></div>
+        </div>
+        <div class="grid grid-cols-[max-content_auto] w-full place-items-center">
+          <p class="text-white text-base">animations.enabled</p>
+          <div class="ml-auto">
+            <label class="relative inline-flex items-center cursor-pointer">
+              <input id="animations-enabled-checkbox" type="checkbox" value="" class="sr-only peer" />
+              <div
+                class="w-11 h-6 peer bg-neutral-800 outline-none rounded-full peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[3px] after:left-[3px] after:bg-neutral-700 after:border-none after:rounded-full after:h-[1.15rem] after:aspect-square after:transition-all peer-checked:bg-emerald-500 peer-checked:after:bg-white">
+              </div>
+            </label>
+          </div>
+        </div>
+        <div class="grid gap-2 text-base">
+          <p class="text-white">animations.bookmarkTiming</p>
+          <div class="grid grid-cols-2 gap-2">
+            <button id="animations-bookmark-timing-left-button"
+              class="bg-neutral-800 hover:bg-neutral-700 py-2 rounded-md outline-none">
+              <span class="text-white">left</span>
+            </button>
+            <button id="animations-bookmark-timing-right-button"
+              class="bg-neutral-800 hover:bg-neutral-700 py-2 rounded-md outline-none">
+              <span class="text-white">right</span>
+            </button>
+            <button id="animations-bookmark-timing-uniform-button"
+              class="bg-neutral-800 hover:bg-neutral-700 py-2 rounded-md outline-none">
+              <span class="text-white">uniform</span>
+            </button>
+          </div>
+        </div>
+        <div class="grid gap-2 text-base">
+          <p class="text-white">animations.type</p>
+          <div class="grid grid-cols-2 gap-2">
+            <button id="animations-type-down-bouncy-button"
+              class="bg-neutral-800 hover:bg-neutral-700 py-2 rounded-md outline-none">
+              <span class="text-white">down-bouncy</span>
+            </button>
+            <button id="animations-type-down-smooth-button"
+              class="bg-neutral-800 hover:bg-neutral-700 py-2 rounded-md outline-none">
+              <span class="text-white">down-smooth</span>
+            </button>
+            <button id="animations-type-down-fall-button"
+              class="bg-neutral-800 hover:bg-neutral-700 py-2 rounded-md outline-none">
+              <span class="text-white">down-fall</span>
+            </button>
+            <button id="animations-type-up-bouncy-button"
+              class="bg-neutral-800 hover:bg-neutral-700 py-2 rounded-md outline-none">
+              <span class="text-white">up-bouncy</span>
+            </button>
+            <button id="animations-type-up-smooth-button"
+              class="bg-neutral-800 hover:bg-neutral-700 py-2 rounded-md outline-none">
+              <span class="text-white">up-smooth</span>
+            </button>
+          </div>
+        </div>
+      </section>
+      <!-- search -->
+      <section class="grid grid-flow-row gap-4">
+        <div class="grid grid-cols-[1fr_max-content_1fr] gap-2">
+          <div class="bg-neutral-500 h-[1px] rounded-md my-auto"></div>
+          <span class="text-neutral-500 text-base">search</span>
+          <div class="bg-neutral-500 h-[1px] rounded-md my-auto"></div>
+        </div>
+        <div class="grid gap-2">
+          <p class="text-white text-base">search.font</p>
+          <div id="search-font-container"
+            class="grid grid-cols-[max-content_auto] text-base bg-neutral-800 w-full p-1 rounded-md border-2 border-transparent">
+            <span class="text-pink-500 font-semibold select-none">>&nbsp;</span>
+            <input id="search-font-input" type="text" autocomplete="off"
+              class="outline-none bg-transparent text-white placeholder-neutral-500" placeholder="input font..." />
+          </div>
+        </div>
+        <div class="grid gap-2">
+          <p class="text-white text-base">search.placeholderText</p>
+          <div id="search-placeholder-text-container"
+            class="grid grid-cols-[max-content_auto] text-base bg-neutral-800 w-full p-1 rounded-md border-2 border-transparent">
+            <span class="text-pink-500 font-semibold select-none">>&nbsp;</span>
+            <input id="search-placeholder-text-input" type="text" autocomplete="off"
+              class="outline-none bg-transparent text-white placeholder-neutral-500"
+              placeholder="input placeholder..." />
+          </div>
+        </div>
+        <div class="grid gap-2 text-base">
+          <p class="text-white">search.engine</p>
+          <div class="grid grid-cols-2 gap-2">
+            <button id="search-engine-duckduckgo-button"
+              class="bg-neutral-800 hover:bg-neutral-700 py-2 rounded-md outline-none grid place-items-center">
+              <div class="grid grid-cols-[24px_max-content] gap-2">
+                <img src="assets/search-engines/duckduckgo.svg" alt="duckduckgo" />
+                <span class="text-white">duckduckgo</span>
+              </div>
+            </button>
+            <button id="search-engine-google-button"
+              class="bg-neutral-800 hover:bg-neutral-700 py-2 rounded-md outline-none grid place-items-center">
+              <div class="grid grid-cols-[24px_max-content] gap-2">
+                <img src="assets/search-engines/google.png" alt="google" />
+                <span class="text-white">google</span>
+              </div>
+            </button>
+            <button id="search-engine-bing-button"
+              class="bg-neutral-800 hover:bg-neutral-700 py-2 rounded-md outline-none grid place-items-center">
+              <div class="grid grid-cols-[24px_max-content] gap-2">
+                <img src="assets/search-engines/bing.png" alt="bing" />
+                <span class="text-white">bing</span>
+              </div>
+            </button>
+            <button id="search-engine-brave-button"
+              class="bg-neutral-800 hover:bg-neutral-700 py-2 rounded-md outline-none grid place-items-center">
+              <div class="grid grid-cols-[24px_max-content] gap-2">
+                <img src="assets/search-engines/brave.png" alt="brave" />
+                <span class="text-white">brave</span>
+              </div>
+            </button>
+            <button id="search-engine-yahoo-button"
+              class="bg-neutral-800 hover:bg-neutral-700 py-2 rounded-md outline-none grid place-items-center">
+              <div class="grid grid-cols-[24px_max-content] gap-2">
+                <img src="assets/search-engines/yahoo.png" alt="yahoo" />
+                <span class="text-white">yahoo</span>
+              </div>
+            </button>
+            <button id="search-engine-yandex-button"
+              class="bg-neutral-800 hover:bg-neutral-700 py-2 rounded-md outline-none grid place-items-center">
+              <div class="grid grid-cols-[24px_max-content] gap-2">
+                <img src="assets/search-engines/yandex.png" alt="yandex" />
+                <span class="text-white">yandex</span>
+              </div>
+            </button>
+            <button id="search-engine-startpage-button"
+              class="bg-neutral-800 hover:bg-neutral-700 py-2 rounded-md outline-none grid place-items-center">
+              <div class="grid grid-cols-[24px_max-content] gap-2">
+                <img src="assets/search-engines/startpage.png" alt="startpage" />
+                <span class="text-white">startpage</span>
+              </div>
+            </button>
+            <button id="search-engine-ecosia-button"
+              class="bg-neutral-800 hover:bg-neutral-700 py-2 rounded-md outline-none grid place-items-center">
+              <div class="grid grid-cols-[24px_max-content] gap-2">
+                <img src="assets/search-engines/ecosia.png" alt="ecosia" />
+                <span class="text-white">ecosia</span>
+              </div>
+            </button>
+          </div>
+        </div>
+        <div class="grid gap-2">
+          <p class="text-white text-base">search.focusedBorderColor (use #00000000 for none)</p>
+          <div id="search-focused-border-color-container"
+            class="grid grid-cols-[max-content_auto] text-base bg-neutral-800 w-full p-1 rounded-md border-2 border-transparent">
+            <span class="text-pink-500 font-semibold select-none">>&nbsp;</span>
+            <input id="search-focused-border-color-input" type="text" autocomplete="off"
+              class="outline-none bg-transparent text-white placeholder-neutral-500" placeholder="input color..." />
+          </div>
+        </div>
+      </section>
+      <!-- hotkeys -->
+      <section class="grid grid-flow-row gap-4">
+        <div class="grid grid-cols-[1fr_max-content_1fr] gap-2">
+          <div class="bg-neutral-500 h-[1px] rounded-md my-auto"></div>
+          <span class="text-neutral-500 text-base">hotkeys</span>
+          <div class="bg-neutral-500 h-[1px] rounded-md my-auto"></div>
+        </div>
+        <div class="grid grid-cols-[max-content_auto] w-full place-items-center">
+          <p class="text-white text-base">hotkeys.enabled</p>
+          <div class="ml-auto">
+            <label class="relative inline-flex items-center cursor-pointer">
+              <input id="hotkeys-enabled-checkbox" type="checkbox" value="" class="sr-only peer" />
+              <div
+                class="w-11 h-6 peer bg-neutral-800 outline-none rounded-full peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[3px] after:left-[3px] after:bg-neutral-700 after:border-none after:rounded-full after:h-[1.15rem] after:aspect-square after:transition-all peer-checked:bg-emerald-500 peer-checked:after:bg-white">
+              </div>
+            </label>
+          </div>
+        </div>
+        <div class="grid grid-cols-[auto_max-content]">
+          <span class="text-white text-base">activationKey</span>
+          <kbd class="bg-neutral-800 rounded-md p-1 text-neutral-500 text-sm">SPC</kbd>
+        </div>
+        <div class="grid grid-cols-[auto_max-content]">
+          <span class="text-white text-base">closePageKey</span>
+          <kbd class="bg-neutral-800 rounded-md p-1 text-neutral-500 text-sm">x</kbd>
+        </div>
+      </section>
+      <!-- bookmarks -->
+      <section class="grid grid-flow-row gap-4">
+        <div class="grid grid-cols-[1fr_max-content_1fr] gap-2">
+          <div class="bg-neutral-500 h-[1px] rounded-md my-auto"></div>
+          <span class="text-neutral-500 text-base">bookmarks</span>
+          <div class="bg-neutral-500 h-[1px] rounded-md my-auto"></div>
+        </div>
+        <div class="grid gap-2 text-base">
+          <p class="text-white">bookmarks.type</p>
+          <div class="grid grid-cols-2 gap-2">
+            <button id="bookmarks-type-default-button"
+              class="bg-neutral-800 hover:bg-neutral-700 py-2 rounded-md outline-none">
+              <span class="text-white">default</span>
+            </button>
+            <button id="bookmarks-type-user-defined-button"
+              class="bg-neutral-800 hover:bg-neutral-700 py-2 rounded-md outline-none">
+              <span class="text-white">user-defined</span>
+            </button>
+            <button id="bookmarks-type-none-button"
+              class="bg-neutral-800 hover:bg-neutral-700 py-2 rounded-md outline-none">
+              <span class="text-white">none</span>
+            </button>
+          </div>
+        </div>
+        <div class="grid gap-2 text-base">
+          <p class="text-white">bookmarks.userDefined</p>
+          <p class="text-white">
+            needs bookmarks.type to be user-defined, valid iconTypes can be found here:
+            <a href="https://remixicon.com/" target="_blank"
+              class="cursor-pointer text-blue-500 hover:text-blue-600 transition">
+              remixicon.com
+            </a>
+            <span class="text-indigo-500">(using version v4.2.0)</span>
+          </p>
+          <div id="bookmarks-options-container" class="grid grid-flow-row gap-4"></div>
+        </div>
+      </section>
+    </main>
+    <!-- save buttons and more -->
+    <div class="py-4 grid grid-flow-row gap-4 place-items-center mt-20 mb-12">
+      <div class="w-full grid grid-flow-row gap-4 place-items-center">
+        <div class="w-full grid grid-flow-row lg:grid-cols-3 gap-2">
+          <button id="save-button" class="bg-emerald-500 hover:bg-emerald-600 transition p-2 rounded-md cursor-pointer">
+            <span class="text-white text-base">save (ctrl+s)</span>
+          </button>
+          <button id="export-button" class="bg-indigo-500 hover:bg-indigo-600 transition p-2 rounded-md cursor-pointer">
+            <span class="text-white text-base">save & export</span>
+          </button>
+          <button id="import-button" class="bg-indigo-500 hover:bg-indigo-600 transition p-2 rounded-md cursor-pointer">
+            <span class="text-white text-base">import</span>
+          </button>
+        </div>
+        <div class="w-full grid grid-flow-row gap-4 place-items-center">
+          <div class="w-full grid grid-cols-[1fr_max-content_1fr] gap-2">
+            <div class="bg-neutral-500 h-[1px] rounded-md my-auto"></div>
+            <span class="text-neutral-500 text-base">danger</span>
+            <div class="bg-neutral-500 h-[1px] rounded-md my-auto"></div>
+          </div>
+          <button id="reset-to-default-button"
+            class="w-full lg:w-max bg-rose-500 hover:bg-rose-600 transition p-2 rounded-md cursor-pointer">
+            <span class="text-white text-base">reset to default</span>
+          </button>
+        </div>
       </div>
     </div>
-  </body>
+  </div>
+</body>
+
 </html>

@@ -23,6 +23,12 @@ export const search = (config: Config, value: string) => {
     case "yandex":
       searchUrl = `https://yandex.com/search/?text=${encodeURIComponent(value)}`;
       break;
+    case "startpage":
+      searchUrl = `https://www.startpage.com/sp/search?query=${encodeURIComponent(value)}`;
+      break;
+    case "ecosia":
+      searchUrl = `https://www.ecosia.org/search?q=${encodeURIComponent(value)}`;
+      break;
   }
 
   const content = document.getElementById("content") as HTMLDivElement;

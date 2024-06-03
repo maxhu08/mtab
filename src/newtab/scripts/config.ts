@@ -96,7 +96,15 @@ export const defaultConfig: Config = {
 export type UIStyle = "solid" | "glass";
 export type WallpaperType = "url" | "fileUpload";
 export type BookmarkTiming = "left" | "right" | "uniform";
-export type SearchEngine = "duckduckgo" | "google" | "bing" | "brave" | "yahoo" | "yandex";
+export type SearchEngine =
+  | "duckduckgo"
+  | "google"
+  | "bing"
+  | "brave"
+  | "yahoo"
+  | "yandex"
+  | "startpage"
+  | "ecosia";
 export type MessageType = "afternoon-morning" | "date" | "time-12" | "time-24" | "custom";
 export type BookmarksType = "user-defined" | "default" | "none";
 export type Bookmark = {
