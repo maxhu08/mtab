@@ -3,7 +3,7 @@
 # define the content of the manifest.json
 manifest_content='{
   "manifest_version": 3,
-  "version": "1.0.2",
+  "version": "1.0.3",
   "name": "mtab",
   "author": "Max Hu",
   "description": "a simple configurable new tab extension",
