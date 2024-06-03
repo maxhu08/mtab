@@ -4,7 +4,7 @@ import { searchInputEl } from "./ui";
 
 // utils
 import { focusSearch, search, tryFocusSearch, unfocusSearch } from "./utils/search";
-import { navigateTab } from "src/newtab/scripts/utils/navigate-tab";
+// import { navigateTab } from "src/newtab/scripts/utils/navigate-tab";
 
 export const listenToKeys = (config: Config) => {
   document.addEventListener("keydown", (e) => {
