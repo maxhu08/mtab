@@ -1,7 +1,7 @@
 {
   "name": "mtab",
   "author": "Max Hu",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "a simple configurable new tab extension",
   "keywords": [],
   "scripts": {

@@ -1,3 +1,9 @@
+@font-face {
+  font-family: "Jetbrains-Mono-Regular-Fixed";
+  src: url("../../assets/fonts/JetBrainsMono-Regular.woff2") format("woff2"),
+    url("../../assets/fonts/JetBrainsMono-Regular.ttf") format("ttf");
+}
+
 .bookmark-icon svg {
   height: 100%;
   width: auto;
