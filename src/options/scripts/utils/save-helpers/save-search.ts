@@ -2,12 +2,14 @@ import { Config } from "src/newtab/scripts/config";
 import {
   searchFocusedBorderColorInputEl,
   searchFontInputEl,
-  searchPlaceholderTextInputEl
+  searchPlaceholderTextInputEl,
+  searchTextColorInputEl
 } from "src/options/scripts/ui";
 
 export const saveSearchSettingsToDraft = (draft: Config) => {
   draft.search.font = searchFontInputEl.value;
   draft.search.placeholderText = searchPlaceholderTextInputEl.value;
+  draft.search.textColor = searchTextColorInputEl.value;
 
   const selectedEl = document.querySelector(
     `button[btn-option-type="search-engine"][selected="yes"]`

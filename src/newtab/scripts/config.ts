@@ -30,6 +30,7 @@ export const defaultConfig: Config = {
   message: {
     // font: `"Fira Code"`,
     font: `"Jetbrains-Mono-Regular-Fixed"`,
+    textColor: "#ff0000",
     type: "afternoon-morning",
     customText: "your custom text"
   },
@@ -53,6 +54,7 @@ export const defaultConfig: Config = {
   search: {
     font: `"Jetbrains-Mono-Regular-Fixed"`,
     placeholderText: "search...",
+    textColor: "#0000ff",
     engine: "duckduckgo",
     focusedBorderColor: "#0ea5e9"
   },
@@ -125,6 +127,7 @@ export interface Config {
   };
   message: {
     font: string;
+    textColor: string;
     type: MessageType;
     customText: string;
   };
@@ -152,6 +155,7 @@ export interface Config {
   search: {
     font: string;
     placeholderText: string;
+    textColor: string;
     engine: SearchEngine;
     focusedBorderColor: string;
   };

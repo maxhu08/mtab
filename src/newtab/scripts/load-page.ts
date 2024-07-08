@@ -11,9 +11,9 @@ import { renderBookmarks } from "./utils/render-bookmarks";
 import { addAnimations } from "./utils/animations";
 import { loadWallpaper } from "src/newtab/scripts/utils/load-wallpaper";
 import { styleSearch } from "src/newtab/scripts/utils/style-search";
-import { setMessageFont } from "src/newtab/scripts/utils/set-message-font";
 import { setSearchStuff } from "src/newtab/scripts/utils/set-search-font";
 import { setUISyle } from "src/newtab/scripts/utils/set-ui-style";
+import { styleMessage } from "src/newtab/scripts/utils/style-message";
 
 export const loadPage = () => {
   const manifest = chrome.runtime.getManifest();
@@ -30,9 +30,9 @@ export const loadPage = () => {
     loadWallpaper(config);
 
     setSearchStuff(config.search.font, config.search.placeholderText);
-    styleSearch(config.ui.style, config.ui.foregroundColor);
+    styleSearch(config.ui.style, config.search.textColor, config.ui.foregroundColor);
 
-    setMessageFont(config.message.font);
+    styleMessage(config.message.textColor, config.message.font);
     setMessage(config.message.type, config.message.customText, config.user.name);
 
     renderBookmarks(config);

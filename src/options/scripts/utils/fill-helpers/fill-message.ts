@@ -2,6 +2,7 @@ import { Config } from "src/newtab/scripts/config";
 import {
   messageCustomTextInputEl,
   messageFontInputEl,
+  messageTextColorInputEl,
   messageTypeAfternoonMorningButtonEl,
   messageTypeCustomButtonEl,
   messageTypeDateButtonEl,
@@ -11,6 +12,7 @@ import {
 
 export const fillMessageInputs = (config: Config) => {
   messageFontInputEl.value = config.message.font;
+  messageTextColorInputEl.value = config.message.textColor;
 
   switch (config.message.type) {
     case "afternoon-morning": {

@@ -14,6 +14,9 @@ export const titleDynamicEnabledCheckboxEl = document.getElementById("title-dyna
 export const messageFontContainerEl = document.getElementById("message-font-container") as HTMLInputElement;
 export const messageFontInputEl = document.getElementById("message-font-input") as HTMLInputElement;
 
+export const messageTextColorContainerEl = document.getElementById("message-text-color-container") as HTMLDivElement;
+export const messageTextColorInputEl = document.getElementById("message-text-color-input") as HTMLInputElement;
+
 export const messageTypeAfternoonMorningButtonEl = document.getElementById("message-type-afternoon-morning-button") as HTMLButtonElement;
 export const messageTypeDateButtonEl = document.getElementById("message-type-date-button") as HTMLButtonElement;
 export const messageTypeTime12ButtonEl = document.getElementById("message-type-time-12-button") as HTMLButtonElement;
@@ -62,6 +65,9 @@ export const searchFontInputEl = document.getElementById("search-font-input") as
 
 export const searchPlaceholderTextContainerEl = document.getElementById("search-placeholder-text-container") as HTMLDivElement;
 export const searchPlaceholderTextInputEl = document.getElementById("search-placeholder-text-input") as HTMLInputElement;
+
+export const searchTextColorContainerEl = document.getElementById("search-text-color-container") as HTMLDivElement;
+export const searchTextColorInputEl = document.getElementById("search-text-color-input") as HTMLInputElement;
 
 export const searchEngineDuckduckgoButtonEl = document.getElementById("search-engine-duckduckgo-button") as HTMLButtonElement
 export const searchEngineGoogleButtonEl = document.getElementById("search-engine-google-button") as HTMLButtonElement

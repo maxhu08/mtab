@@ -1,4 +1,8 @@
-export const setMessageFont = (font: string) => {
+import { messageEl } from "src/newtab/scripts/ui";
+
+export const styleMessage = (textColor: string, font: string) => {
+  messageEl.style.color = textColor;
+
   const messageFontCss = `
 .font-message {
   font-family: ${font};

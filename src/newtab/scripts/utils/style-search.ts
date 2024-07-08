@@ -1,7 +1,9 @@
 import { UIStyle } from "src/newtab/scripts/config";
 import { searchContainerEl, searchInputEl } from "src/newtab/scripts/ui";
 
-export const styleSearch = (style: UIStyle, foregroundColor: string) => {
+export const styleSearch = (style: UIStyle, textColor: string, foregroundColor: string) => {
+  searchInputEl.style.color = textColor;
+
   if (style === "solid") {
     searchContainerEl.classList.add("bg-neutral-900");
 

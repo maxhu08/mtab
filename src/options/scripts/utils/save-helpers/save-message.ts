@@ -1,9 +1,14 @@
 import { Config } from "src/newtab/scripts/config";
-import { messageCustomTextInputEl, messageFontInputEl } from "src/options/scripts/ui";
+import {
+  messageCustomTextInputEl,
+  messageFontInputEl,
+  messageTextColorInputEl
+} from "src/options/scripts/ui";
 
 export const saveMessageSettingsToDraft = (draft: Config) => {
   // font
   draft.message.font = messageFontInputEl.value;
+  draft.message.textColor = messageTextColorInputEl.value;
 
   // type
   const selectedEl = document.querySelector(
