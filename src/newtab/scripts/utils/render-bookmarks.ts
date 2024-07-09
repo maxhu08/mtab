@@ -38,18 +38,13 @@ const renderDefaultBookmarks = (config: Config) => {
     "rounded-md",
     "overflow-hidden",
     "w-full",
+    "overflow-scroll",
+    "scrollbar-hidden",
     config.animations.enabled ? config.animations.type : "_ignore",
     config.animations.enabled ? "opacity-0" : "_ignore"
   );
 
-  innerBookmarkContainer.classList.add(
-    "grid",
-    "grid-flow-col",
-    "gap-2",
-    "w-full",
-    "overflow-scroll",
-    "scrollbar-hidden"
-  );
+  innerBookmarkContainer.classList.add("grid", "grid-flow-col", "gap-2", "w-max");
 
   chrome.bookmarks.search({}, (chromeBookmarks) => {
     if (chromeBookmarks.length === 0) {
