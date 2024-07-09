@@ -53,8 +53,9 @@ export const defaultConfig: Config = {
   },
   search: {
     font: `"Jetbrains-Mono-Regular-Fixed"`,
-    placeholderText: "search...",
     textColor: "#0000ff",
+    placeholderText: "search...",
+    placeholderTextColor: "#ffffff",
     engine: "duckduckgo",
     focusedBorderColor: "#0ea5e9"
   },
@@ -154,8 +155,9 @@ export interface Config {
   };
   search: {
     font: string;
-    placeholderText: string;
     textColor: string;
+    placeholderText: string;
+    placeholderTextColor: string;
     engine: SearchEngine;
     focusedBorderColor: string;
   };

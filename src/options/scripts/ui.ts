@@ -63,11 +63,14 @@ export const animationsTypeUpSmoothEl = document.getElementById("animations-type
 export const searchFontContainerEl = document.getElementById("search-font-container") as HTMLDivElement;
 export const searchFontInputEl = document.getElementById("search-font-input") as HTMLInputElement;
 
+export const searchTextColorContainerEl = document.getElementById("search-text-color-container") as HTMLDivElement;
+export const searchTextColorInputEl = document.getElementById("search-text-color-input") as HTMLInputElement;
+
 export const searchPlaceholderTextContainerEl = document.getElementById("search-placeholder-text-container") as HTMLDivElement;
 export const searchPlaceholderTextInputEl = document.getElementById("search-placeholder-text-input") as HTMLInputElement;
 
-export const searchTextColorContainerEl = document.getElementById("search-text-color-container") as HTMLDivElement;
-export const searchTextColorInputEl = document.getElementById("search-text-color-input") as HTMLInputElement;
+export const searchPlaceholderTextColorContainerEl = document.getElementById("search-placeholder-text-color-container") as HTMLDivElement;
+export const searchPlaceholderTextColorInputEl = document.getElementById("search-placeholder-text-color-input") as HTMLInputElement;
 
 export const searchEngineDuckduckgoButtonEl = document.getElementById("search-engine-duckduckgo-button") as HTMLButtonElement
 export const searchEngineGoogleButtonEl = document.getElementById("search-engine-google-button") as HTMLButtonElement

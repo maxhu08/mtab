@@ -11,13 +11,15 @@ import {
   searchPlaceholderTextInputEl,
   searchEngineStartpageButtonEl,
   searchEngineEcosiaButtonEl,
-  searchTextColorInputEl
+  searchTextColorInputEl,
+  searchPlaceholderTextColorInputEl
 } from "src/options/scripts/ui";
 
 export const fillSearchInputs = (config: Config) => {
   searchFontInputEl.value = config.search.font;
-  searchPlaceholderTextInputEl.value = config.search.placeholderText;
   searchTextColorInputEl.value = config.search.textColor;
+  searchPlaceholderTextInputEl.value = config.search.placeholderText;
+  searchPlaceholderTextColorInputEl.value = config.search.placeholderTextColor;
 
   switch (config.search.engine) {
     case "duckduckgo": {

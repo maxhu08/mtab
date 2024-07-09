@@ -30,7 +30,12 @@ export const loadPage = () => {
     loadWallpaper(config);
 
     setSearchStuff(config.search.font, config.search.placeholderText);
-    styleSearch(config.ui.style, config.search.textColor, config.ui.foregroundColor);
+    styleSearch(
+      config.ui.style,
+      config.search.textColor,
+      config.search.placeholderTextColor,
+      config.ui.foregroundColor
+    );
 
     styleMessage(config.message.textColor, config.message.font);
     setMessage(config.message.type, config.message.customText, config.user.name);
