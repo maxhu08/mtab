@@ -1,4 +1,4 @@
-import { Bookmark, Config } from "src/newtab/scripts/config";
+import { Config } from "src/newtab/scripts/config";
 import { focusInput, unfocusInput } from "src/options/scripts/inputs";
 import {
   Input,
@@ -29,7 +29,12 @@ export const fillBookmarksInputs = (config: Config) => {
   config.bookmarks.userDefined.forEach((bookmark, index) => {
     bookmarksUserDefinedList.innerHTML += `
     <div class="bg-neutral-800 p-2 rounded-md grid grid-flow-row gap-4">
-      <span class="text-white text-base">bookmarks.userDefined[${index}]</span>
+      <div class="grid grid-cols-[auto_max-content]">
+        <span class="text-white text-base">bookmarks.userDefined[${index}]</span>
+        <button id="bookmark-${index}-delete-button" class="bg-rose-500 hover:bg-rose-600 transition aspect-square rounded-md cursor-pointer">
+          <span class="text-white text-base font-semibold">-</span
+        </button>
+      </div>
       <div class="bg-neutral-500 h-[1px] rounded-md my-auto"></div>
       <div class="grid gap-2">
         <p class="text-white text-base">bookmark.name</p>
@@ -75,13 +80,14 @@ export const fillBookmarksInputs = (config: Config) => {
     `;
   });
 
-  config.bookmarks.userDefined.forEach((bookmark, index) => {
-    handleBookmarkSettings(bookmark, index);
+  config.bookmarks.userDefined.forEach((_, index) => {
+    handleBookmarkSettings(index);
   });
 };
 
 // prettier-ignore
-const handleBookmarkSettings = (bookmark: Bookmark, index: number) => {
+const handleBookmarkSettings = (index: number) => {
+  // * handle focus stuff start
   const bookmarkInputBorderClass = "border-sky-500";
 
   const inputs: Input[] = [
@@ -123,4 +129,11 @@ const handleBookmarkSettings = (bookmark: Bookmark, index: number) => {
       })
     );
   });
+  // * handle focus stuff end
+
+  const deleteBookmarkButtonEl = document.getElementById(`bookmark-${index}-delete-button`) as HTMLButtonElement
+
+  deleteBookmarkButtonEl.addEventListener("click", () => {
+    console.log("try delete bookmark", index)
+  })
 };

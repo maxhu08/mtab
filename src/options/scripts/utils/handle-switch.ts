@@ -50,8 +50,6 @@ export const handleBookmarksTypeSwitch = () => {
     "bookmarks-user-defined-section"
   ) as HTMLDivElement;
 
-  console.log(bookmarksUserDefinedSection);
-
   const hideButtons = ["bookmarks-type-default-button", "bookmarks-type-none-button"];
 
   (
