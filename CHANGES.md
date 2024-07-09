@@ -1,7 +1,6 @@
-# Changes in 1.0.5
+# Changes in 1.0.6
 
 in this release:
 
-- allowed ability to change message.textColor, search.textColor, search.placeholderTextColor
-- improved options page
-- added ability to have more than 4 bookmarks
+- add option to enable/disable search bar
+- fix issue with user-defined bookmarks being able to save sometimes
