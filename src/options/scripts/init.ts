@@ -3,7 +3,7 @@ import { listenToKeys } from "src/options/scripts/keybinds";
 import { listenToInputs } from "src/options/scripts/inputs";
 import { handleWallpaperFileUpload } from "src/options/scripts/utils/file-upload";
 import { getConfig } from "src/newtab/scripts/config";
-import { handleWallpaperSwitch } from "src/options/scripts/ui";
+import { handleMessageTypeSwitch, handleWallpaperTypeSwitch } from "src/options/scripts/ui";
 import { getUserAgent } from "src/util-scripts/user-agent";
 
 getConfig(({ config }) => {
@@ -18,4 +18,6 @@ getConfig(({ config }) => {
 listenToInputs();
 listenToKeys();
 handleWallpaperFileUpload();
-handleWallpaperSwitch();
+
+handleMessageTypeSwitch();
+handleWallpaperTypeSwitch();
