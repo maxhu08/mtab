@@ -90,6 +90,12 @@ export const defaultConfig: Config = {
         url: "http://localhost:3000",
         iconType: "ri-global-fill",
         color: "#14b8a6"
+      },
+      {
+        name: "github",
+        url: "https://github.com",
+        iconType: "ri-github-fill",
+        color: "#6366f1"
       }
     ]
   }
