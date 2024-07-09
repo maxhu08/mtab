@@ -26,11 +26,8 @@ downloads here:
 - change bookmarks
 - hotkeys
 
-![demo-1](./assets/demo-1.png)
-![demo-2](./assets/demo-2.png)
-![demo-3](./assets/demo-3.png)
-![demo-4](./assets/demo-4.png)
-![demo-5](./assets/demo-5.png)
+![showcase](./assets/mtab-showcase.png)
+![demo-5](./assets/5.png)
 
 ## setup
 
