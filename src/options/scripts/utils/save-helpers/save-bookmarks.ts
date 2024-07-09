@@ -25,7 +25,8 @@ export const saveBookmarksSettingsToDraft = (draft: Config) => {
 };
 
 export const saveUserDefinedBookmarkSettingsToDraft = (draft: Config) => {
-  const totalBookmarks = bookmarksUserDefinedList.children.length;
+  const totalBookmarks = (document.getElementById("bookmarks-user-defined-list") as HTMLDivElement)
+    .children.length;
 
   const bookmarksArrToSave: Bookmark[] = [];
 

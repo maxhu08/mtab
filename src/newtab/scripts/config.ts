@@ -148,11 +148,11 @@ export interface Config {
     enabled: boolean;
     bookmarkTiming: BookmarkTiming;
     type:
-    | "animate-down-bouncy"
-    | "animate-down-smooth"
-    | "animate-down-fall"
-    | "animate-up-bouncy"
-    | "animate-up-smooth";
+      | "animate-down-bouncy"
+      | "animate-down-smooth"
+      | "animate-down-fall"
+      | "animate-up-bouncy"
+      | "animate-up-smooth";
   };
   search: {
     enabled: boolean;

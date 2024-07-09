@@ -84,7 +84,39 @@ const handleBookmarkSettings = (index: number) => {
   const deleteBookmarkButtonEl = document.getElementById(`bookmark-${index}-delete-button`) as HTMLButtonElement
 
   deleteBookmarkButtonEl.addEventListener("click", () => {
+
+
     const bookmarkToDelete = document.getElementById(`bookmark-user-defined-item-${index}`) as HTMLDivElement;
+    const totalBookmarks = bookmarksUserDefinedList.children.length;
+
+    // fix to make saving work normally
+    for (let i = index + 1; i < totalBookmarks; i++)  {
+      console.log(i);
+
+      const oldUselessTitle = document.getElementById(`bookmark-${i}-user-defined-useless-title`) as HTMLSpanElement;
+
+      const oldNameInputEl = document.getElementById(`bookmark-${i}-name-input`) as HTMLInputElement;
+      const oldUrlInputEl = document.getElementById(`bookmark-${i}-url-input`) as HTMLInputElement;
+      const oldIconTypeInputEl = document.getElementById(`bookmark-${i}-icon-type-input`) as HTMLInputElement;
+      const oldColorInputEl = document.getElementById(`bookmark-${i}-color-input`) as HTMLInputElement;
+
+      const oldNameContainerEl = document.getElementById(`bookmark-${i}-name-container`) as HTMLInputElement;
+      const oldUrlContainerEl = document.getElementById(`bookmark-${i}-url-container`) as HTMLInputElement;
+      const oldIconTypeContainerEl = document.getElementById(`bookmark-${i}-icon-type-container`) as HTMLInputElement;
+      const oldColorContainerEl = document.getElementById(`bookmark-${i}-color-container`) as HTMLInputElement;     
+
+      oldUselessTitle.textContent = `bookmarks.userDefined[${i - 1}]`
+
+      oldNameInputEl.id = `bookmark-${i - 1}-name-input`;
+      oldUrlInputEl.id = `bookmark-${i - 1}-url-input`;
+      oldIconTypeInputEl.id = `bookmark-${i - 1}-icon-type-input`;
+      oldColorInputEl.id = `bookmark-${i - 1}-color-input`;
+
+      oldNameContainerEl.id = `bookmark-${i - 1}-name-container`;
+      oldUrlContainerEl.id = `bookmark-${i - 1}-url-container`;
+      oldIconTypeContainerEl.id = `bookmark-${i - 1}-icon-type-container`;
+      oldColorContainerEl.id = `bookmark-${i - 1}-color-container`;
+    }
 
     bookmarkToDelete.parentNode!.removeChild(bookmarkToDelete);
   })
@@ -119,7 +151,7 @@ const addUserDefinedBookmark = (params: {
   bookmarksUserDefinedList.innerHTML += `
     <div id="bookmark-user-defined-item-${index}" class="bg-neutral-800 p-2 rounded-md grid grid-flow-row gap-4">
       <div class="grid grid-cols-[auto_max-content]">
-        <span class="text-white text-base">bookmarks.userDefined[${index}]</span>
+        <span id="bookmark-${index}-user-defined-useless-title" class="text-white text-base">bookmarks.userDefined[${index}]</span>
         <button id="bookmark-${index}-delete-button" class="bg-rose-500 hover:bg-rose-600 transition aspect-square rounded-md cursor-pointer">
           <span class="text-white text-base font-semibold">-</span
         </button>
