@@ -84,6 +84,8 @@ export const searchEngineEcosiaButtonEl = document.getElementById("search-engine
 export const searchFocusedBorderColorContainerEl = document.getElementById("search-focused-border-color-container") as HTMLDivElement;
 export const searchFocusedBorderColorInputEl = document.getElementById("search-focused-border-color-input") as HTMLInputElement;
 
+export const searchEnabledCheckboxEl = document.getElementById("search-enabled-checkbox") as HTMLInputElement;
+
 export const hotkeysEnabledCheckboxEl = document.getElementById("hotkeys-enabled-checkbox") as HTMLInputElement;
 
 export const bookmarksTypeDefaultButtonEl = document.getElementById("bookmarks-type-default-button") as HTMLButtonElement;
@@ -127,15 +129,15 @@ export const inputs: Input[] = [
   },
   {
     container: searchFontContainerEl,
-    input: searchFontInputEl 
+    input: searchFontInputEl
   },
   {
     container: searchPlaceholderTextContainerEl,
-    input: searchPlaceholderTextInputEl 
+    input: searchPlaceholderTextInputEl
   },
   {
     container: searchFocusedBorderColorContainerEl,
-    input: searchFocusedBorderColorInputEl 
+    input: searchFocusedBorderColorInputEl
   }
 ];
 
@@ -157,7 +159,7 @@ export const buttonSwitches: ButtonSwitch[] = [
       messageTypeTime24ButtonEl,
       messageTypeCustomButtonEl
     ],
-    attr: "message-type" 
+    attr: "message-type"
   },
   {
     buttons: [

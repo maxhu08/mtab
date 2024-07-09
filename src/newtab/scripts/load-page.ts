@@ -31,6 +31,7 @@ export const loadPage = () => {
 
     setSearchStuff(config.search.font, config.search.placeholderText);
     styleSearch(
+      config.search.enabled,
       config.ui.style,
       config.search.textColor,
       config.search.placeholderTextColor,

@@ -2,11 +2,16 @@ import { UIStyle } from "src/newtab/scripts/config";
 import { searchContainerEl, searchInputEl } from "src/newtab/scripts/ui";
 
 export const styleSearch = (
+  enabled: boolean,
   style: UIStyle,
   textColor: string,
   placeholderTextColor: string,
   foregroundColor: string
 ) => {
+  if (!enabled) {
+    searchContainerEl.classList.add("hidden");
+  }
+
   searchInputEl.style.color = textColor;
 
   const placeholderTextColorCss = `
