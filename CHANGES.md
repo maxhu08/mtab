@@ -4,3 +4,4 @@ in this release:
 
 - allowed ability to change message.textColor, search.textColor, search.placeholderTextColor
 - improved options page
+- added ability to have more than 4 bookmarks
