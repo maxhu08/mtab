@@ -1,5 +1,5 @@
 import { Bookmark, Config } from "src/newtab/scripts/config";
-import { bookmarksOptionsContainerEl } from "src/options/scripts/ui";
+import { bookmarksUserDefinedList } from "src/options/scripts/ui";
 
 export const saveBookmarksSettingsToDraft = (draft: Config) => {
   const selectedEl = document.querySelector(
@@ -25,7 +25,7 @@ export const saveBookmarksSettingsToDraft = (draft: Config) => {
 };
 
 export const saveUserDefinedBookmarkSettingsToDraft = (draft: Config) => {
-  const totalBookmarks = bookmarksOptionsContainerEl.children.length;
+  const totalBookmarks = bookmarksUserDefinedList.children.length;
 
   const bookmarksArrToSave: Bookmark[] = [];
 
