@@ -29,7 +29,7 @@ export const fillBookmarksInputs = (config: Config) => {
   config.bookmarks.userDefined.forEach((bookmark, index) => {
     bookmarksOptionsContainerEl.innerHTML += `
     <div class="bg-neutral-800 p-2 rounded-md grid grid-flow-row gap-4">
-      <span class="text-white text-base">bookmark ${index}</span>
+      <span class="text-white text-base">bookmarks[${index}]</span>
       <div class="bg-neutral-500 h-[1px] rounded-md my-auto"></div>
       <div class="grid gap-2">
         <p class="text-white text-base">bookmark.name</p>

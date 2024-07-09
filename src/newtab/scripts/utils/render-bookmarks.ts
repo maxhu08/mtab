@@ -52,6 +52,17 @@ const renderDefaultBookmarks = (config: Config) => {
   );
 
   chrome.bookmarks.search({}, (chromeBookmarks) => {
+    if (chromeBookmarks.length === 0) {
+      innerBookmarkContainer.innerHTML += `
+        <div class="overflow-hidden h-16 md:h-20 grid grid-rows-[auto_max-content] place-items-center">
+          <span class="text-white text-base md:text-2xl font-message w-full text-center text-ellipsis overflow-hidden whitespace-nowrap">
+            No bookmarks yet
+          </span>
+        </div>
+      </a>
+      `;
+    }
+
     chromeBookmarks.forEach((bookmark) => {
       innerBookmarkContainer.innerHTML += `
       <a href="${bookmark.url}" rel="noopener noreferrer">
