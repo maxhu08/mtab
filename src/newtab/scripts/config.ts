@@ -30,7 +30,7 @@ export const defaultConfig: Config = {
   message: {
     // font: `"Fira Code"`,
     font: `"Jetbrains-Mono-Regular-Fixed"`,
-    textColor: "#ff0000",
+    textColor: "#ffffff",
     type: "afternoon-morning",
     customText: "your custom text"
   },
@@ -53,9 +53,9 @@ export const defaultConfig: Config = {
   },
   search: {
     font: `"Jetbrains-Mono-Regular-Fixed"`,
-    textColor: "#0000ff",
+    textColor: "#ffffff",
     placeholderText: "search...",
-    placeholderTextColor: "#ffffff",
+    placeholderTextColor: "#a1a1aa",
     engine: "duckduckgo",
     focusedBorderColor: "#0ea5e9"
   },
