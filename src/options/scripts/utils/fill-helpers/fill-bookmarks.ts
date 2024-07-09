@@ -28,7 +28,7 @@ export const fillBookmarksInputs = (config: Config) => {
   bookmarksUserDefinedList.innerHTML = "";
   config.bookmarks.userDefined.forEach((bookmark, index) => {
     bookmarksUserDefinedList.innerHTML += `
-    <div class="bg-neutral-800 p-2 rounded-md grid grid-flow-row gap-4">
+    <div id="bookmark-user-defined-item-${index}" class="bg-neutral-800 p-2 rounded-md grid grid-flow-row gap-4">
       <div class="grid grid-cols-[auto_max-content]">
         <span class="text-white text-base">bookmarks.userDefined[${index}]</span>
         <button id="bookmark-${index}-delete-button" class="bg-rose-500 hover:bg-rose-600 transition aspect-square rounded-md cursor-pointer">
@@ -134,6 +134,8 @@ const handleBookmarkSettings = (index: number) => {
   const deleteBookmarkButtonEl = document.getElementById(`bookmark-${index}-delete-button`) as HTMLButtonElement
 
   deleteBookmarkButtonEl.addEventListener("click", () => {
-    console.log("try delete bookmark", index)
+    const bookmarkToDelete = document.getElementById(`bookmark-user-defined-item-${index}`) as HTMLDivElement;
+
+    bookmarkToDelete.parentNode!.removeChild(bookmarkToDelete);
   })
 };
