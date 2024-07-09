@@ -12,7 +12,8 @@ import {
   searchEngineStartpageButtonEl,
   searchEngineEcosiaButtonEl,
   searchTextColorInputEl,
-  searchPlaceholderTextColorInputEl
+  searchPlaceholderTextColorInputEl,
+  searchEnabledCheckboxEl
 } from "src/options/scripts/ui";
 
 export const fillSearchInputs = (config: Config) => {
@@ -57,4 +58,5 @@ export const fillSearchInputs = (config: Config) => {
   }
 
   searchFocusedBorderColorInputEl.value = config.search.focusedBorderColor;
+  searchEnabledCheckboxEl.checked = config.search.enabled;
 };

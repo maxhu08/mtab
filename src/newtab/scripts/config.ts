@@ -52,6 +52,7 @@ export const defaultConfig: Config = {
     type: "animate-up-bouncy"
   },
   search: {
+    enabled: true,
     font: `"Jetbrains-Mono-Regular-Fixed"`,
     textColor: "#ffffff",
     placeholderText: "search...",
@@ -147,13 +148,14 @@ export interface Config {
     enabled: boolean;
     bookmarkTiming: BookmarkTiming;
     type:
-      | "animate-down-bouncy"
-      | "animate-down-smooth"
-      | "animate-down-fall"
-      | "animate-up-bouncy"
-      | "animate-up-smooth";
+    | "animate-down-bouncy"
+    | "animate-down-smooth"
+    | "animate-down-fall"
+    | "animate-up-bouncy"
+    | "animate-up-smooth";
   };
   search: {
+    enabled: boolean;
     font: string;
     textColor: string;
     placeholderText: string;
