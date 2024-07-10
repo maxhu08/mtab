@@ -43,4 +43,4 @@ manifest_content='{
 # write the content to manifest.json in the dist folder
 echo "$manifest_content" > ./dist/manifest.json
 
-# zip -r -FS ../my-extension.zip * --exclude '*.git*'
+# zip -r -FS ../extension.zip * --exclude '*.git*'
