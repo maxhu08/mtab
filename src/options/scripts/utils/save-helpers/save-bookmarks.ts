@@ -1,4 +1,4 @@
-import { Bookmark, Config } from "src/newtab/scripts/config";
+import { UserDefinedBookmark, Config } from "src/newtab/scripts/config";
 import { bookmarksUserDefinedList } from "src/options/scripts/ui";
 
 export const saveBookmarksSettingsToDraft = (draft: Config) => {
@@ -28,20 +28,23 @@ export const saveUserDefinedBookmarkSettingsToDraft = (draft: Config) => {
   const totalBookmarks = (document.getElementById("bookmarks-user-defined-list") as HTMLDivElement)
     .children.length;
 
-  const bookmarksArrToSave: Bookmark[] = [];
+  const bookmarksArrToSave: UserDefinedBookmark[] = [];
 
   for (let i = 0; i < totalBookmarks; i++) {
     const nameInputEl = document.getElementById(`bookmark-${i}-name-input`) as HTMLInputElement;
     const urlInputEl = document.getElementById(`bookmark-${i}-url-input`) as HTMLInputElement;
+    const colorInputEl = document.getElementById(`bookmark-${i}-color-input`) as HTMLInputElement;
     // prettier-ignore
     const iconTypeInputEl = document.getElementById(`bookmark-${i}-icon-type-input`) as HTMLInputElement;
-    const colorInputEl = document.getElementById(`bookmark-${i}-color-input`) as HTMLInputElement;
+    // prettier-ignore
+    const iconColorInputEl = document.getElementById(`bookmark-${i}-icon-color-input`) as HTMLInputElement;
 
-    const bookmarkObjToSave: Bookmark = {
+    const bookmarkObjToSave: UserDefinedBookmark = {
       name: nameInputEl.value,
       url: urlInputEl.value,
+      color: colorInputEl.value,
       iconType: iconTypeInputEl.value,
-      color: colorInputEl.value
+      iconColor: iconColorInputEl.value
     };
 
     bookmarksArrToSave.push(bookmarkObjToSave);

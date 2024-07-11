@@ -71,26 +71,30 @@ export const defaultConfig: Config = {
       {
         name: "github",
         url: "https://github.com",
+        color: "#6366f1",
         iconType: "ri-github-fill",
-        color: "#6366f1"
+        iconColor: "#ffffff"
       },
       {
         name: "youtube",
         url: "https://youtube.com",
+        color: "#f43f5e",
         iconType: "ri-youtube-fill",
-        color: "#f43f5e"
+        iconColor: "#ffffff"
       },
       {
         name: "studio",
         url: "https://www.reddit.com/",
+        color: "#f97316",
         iconType: "ri-reddit-fill",
-        color: "#f97316"
+        iconColor: "#ffffff"
       },
       {
         name: "lh3000",
         url: "http://localhost:3000",
+        color: "#14b8a6",
         iconType: "ri-global-fill",
-        color: "#14b8a6"
+        iconColor: "#ffffff"
       }
     ]
   }
@@ -110,11 +114,12 @@ export type SearchEngine =
   | "ecosia";
 export type MessageType = "afternoon-morning" | "date" | "time-12" | "time-24" | "custom";
 export type BookmarksType = "user-defined" | "default" | "none";
-export type Bookmark = {
+export type UserDefinedBookmark = {
   name: string;
   url: string;
-  iconType: string;
   color: string;
+  iconType: string;
+  iconColor: string;
 };
 
 export interface Config {
@@ -170,6 +175,6 @@ export interface Config {
   };
   bookmarks: {
     type: BookmarksType;
-    userDefined: Bookmark[];
+    userDefined: UserDefinedBookmark[];
   };
 }

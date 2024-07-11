@@ -121,7 +121,7 @@ const renderUserDefinedBookmarks = (config: Config) => {
       <div class="h-1" style="background-color: ${bookmark.color}"></div>
       <div class="absolute w-full h-full hover:bg-white/20"></div>
       <div class="p-1 md:p-2 grid place-items-center h-full">
-        <div class="bookmark-icon text-white text-4xl md:text-6xl">
+        <div class="bookmark-icon text-4xl md:text-6xl" style="color: ${bookmark.iconColor};">
           <i class="${bookmark.iconType}"></i>
         </div>
       </div>
