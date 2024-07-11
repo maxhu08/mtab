@@ -9,10 +9,24 @@ import {
   handleWallpaperTypeSwitch,
   handleBookmarksTypeSwitch
 } from "src/options/scripts/utils/handle-switch";
-import { listenToggleCheckboxSection } from "src/options/scripts/utils/toggle-checkbox";
+import {
+  checkToggleCheckboxSection,
+  listenToggleCheckboxSection
+} from "src/options/scripts/utils/toggle-checkbox";
+
+const checkboxSections = [
+  ["wallpaper-enabled-checkbox", "wallpaper-enabled-section"],
+  ["animations-enabled-checkbox", "animations-enabled-section"],
+  ["search-enabled-checkbox", "search-enabled-section"],
+  ["hotkeys-enabled-checkbox", "hotkeys-enabled-section"]
+];
 
 getConfig(({ config }) => {
   fillInputs(config);
+
+  for (let i = 0; i < checkboxSections.length; i++) {
+    checkToggleCheckboxSection(checkboxSections[i][0], checkboxSections[i][1]);
+  }
 });
 
 (document.getElementById("version-number-text") as HTMLSpanElement).textContent +=
@@ -28,7 +42,6 @@ handleMessageTypeSwitch();
 handleWallpaperTypeSwitch();
 handleBookmarksTypeSwitch();
 
-listenToggleCheckboxSection("wallpaper-enabled-checkbox", "wallpaper-enabled-section");
-listenToggleCheckboxSection("animations-enabled-checkbox", "animations-enabled-section");
-listenToggleCheckboxSection("search-enabled-checkbox", "search-enabled-section");
-listenToggleCheckboxSection("hotkeys-enabled-checkbox", "hotkeys-enabled-section");
+for (let i = 0; i < checkboxSections.length; i++) {
+  listenToggleCheckboxSection(checkboxSections[i][0], checkboxSections[i][1]);
+}
