@@ -10,23 +10,14 @@ import {
   handleBookmarksTypeSwitch
 } from "src/options/scripts/utils/handle-switch";
 import {
-  checkToggleCheckboxSection,
-  listenToggleCheckboxSection
+  fixAllToggleCheckboxSections,
+  listenAllToggleCheckboxSections
 } from "src/options/scripts/utils/toggle-checkbox";
-
-const checkboxSections = [
-  ["wallpaper-enabled-checkbox", "wallpaper-enabled-section"],
-  ["animations-enabled-checkbox", "animations-enabled-section"],
-  ["search-enabled-checkbox", "search-enabled-section"],
-  ["hotkeys-enabled-checkbox", "hotkeys-enabled-section"]
-];
 
 getConfig(({ config }) => {
   fillInputs(config);
 
-  for (let i = 0; i < checkboxSections.length; i++) {
-    checkToggleCheckboxSection(checkboxSections[i][0], checkboxSections[i][1]);
-  }
+  fixAllToggleCheckboxSections();
 });
 
 (document.getElementById("version-number-text") as HTMLSpanElement).textContent +=
@@ -42,6 +33,4 @@ handleMessageTypeSwitch();
 handleWallpaperTypeSwitch();
 handleBookmarksTypeSwitch();
 
-for (let i = 0; i < checkboxSections.length; i++) {
-  listenToggleCheckboxSection(checkboxSections[i][0], checkboxSections[i][1]);
-}
+listenAllToggleCheckboxSections();

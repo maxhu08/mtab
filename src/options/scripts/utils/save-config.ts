@@ -11,6 +11,7 @@ import { saveUISettingsToDraft } from "src/options/scripts/utils/save-helpers/sa
 import { saveSearchSettingsToDraft } from "src/options/scripts/utils/save-helpers/save-search";
 import { saveHotkeysSettingsToDraft } from "src/options/scripts/utils/save-helpers/save-hotkeys";
 import { saveBookmarksSettingsToDraft } from "src/options/scripts/utils/save-helpers/save-bookmarks";
+import { fixAllToggleCheckboxSections } from "src/options/scripts/utils/toggle-checkbox";
 
 export const saveConfig = () => {
   getConfig(({ config }) => {
@@ -49,5 +50,7 @@ export const saveConfig = () => {
     chrome.storage.local.set({
       config: draft
     });
+
+    fixAllToggleCheckboxSections();
   });
 };
