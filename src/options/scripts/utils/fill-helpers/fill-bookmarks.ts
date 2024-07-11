@@ -82,17 +82,13 @@ const handleBookmarkSettings = (index: number) => {
   // * handle focus stuff end
 
   const deleteBookmarkButtonEl = document.getElementById(`bookmark-${index}-delete-button`) as HTMLButtonElement
-
-  console.log(deleteBookmarkButtonEl, index)
-
   deleteBookmarkButtonEl.addEventListener("click", () => {
     const bookmarkToDelete = document.getElementById(`bookmark-user-defined-item-${index}`) as HTMLDivElement;
     const totalBookmarks = bookmarksUserDefinedList.children.length;
 
+    
     // fix to make saving work normally
     for (let i = index + 1; i < totalBookmarks; i++)  {
-      console.log(i);
-
       const oldUselessTitle = document.getElementById(`bookmark-${i}-user-defined-useless-title`) as HTMLSpanElement;
 
       const oldNameInputEl = document.getElementById(`bookmark-${i}-name-input`) as HTMLInputElement;
@@ -105,6 +101,8 @@ const handleBookmarkSettings = (index: number) => {
       const oldIconTypeContainerEl = document.getElementById(`bookmark-${i}-icon-type-container`) as HTMLInputElement;
       const oldColorContainerEl = document.getElementById(`bookmark-${i}-color-container`) as HTMLInputElement;     
 
+
+      oldUselessTitle.id = `bookmark-${i - 1}-user-defined-useless-title`
       oldUselessTitle.textContent = `bookmarks.userDefined[${i - 1}]`
 
       oldNameInputEl.id = `bookmark-${i - 1}-name-input`;
@@ -136,7 +134,9 @@ const handleBookmarkSettings = (index: number) => {
       }
     });
 
-    handleBookmarkSettings(totalBookmarks);
+    for (let i = 0; i <= totalBookmarks; i++) {
+      handleBookmarkSettings(i);
+    }
   };
 
 const addUserDefinedBookmark = (params: {
