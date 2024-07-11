@@ -1,6 +1,6 @@
-# Changes in 1.0.6
+# Changes in 1.0.7
 
 in this release:
 
-- add option to enable/disable search bar
-- fix issue with user-defined bookmarks not being able to save sometimes
+- added ability to change user-defined bookmark icon color
+- fixed issue with not being able to delete user-defined bookmarks

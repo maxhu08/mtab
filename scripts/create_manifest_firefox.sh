@@ -1,6 +1,6 @@
 #!/bin/sh
 
-EXTENSION_VERSION="1.0.6" 
+EXTENSION_VERSION="1.0.7"
 
 manifest_content='{
   "manifest_version": 3,
