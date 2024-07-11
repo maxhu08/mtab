@@ -2,7 +2,7 @@
 setlocal enabledelayedexpansion
 
 REM Set the extension version
-set EXTENSION_VERSION=1.0.7
+set EXTENSION_VERSION=1.0.8
 
 REM Create the dist directory if it doesn't exist
 if not exist dist mkdir dist

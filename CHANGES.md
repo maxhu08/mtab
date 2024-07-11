@@ -1,6 +1,8 @@
-# Changes in 1.0.7
+# Changes in 1.0.8
 
 in this release:
 
-- added ability to change user-defined bookmark icon color
-- fixed issue with not being able to delete user-defined bookmarks
+- make options page more intuitive
+- add ability to enable/disable message
+- fixed icon not loading sometimes
+- bug fixes

@@ -1,6 +1,6 @@
 #!/bin/sh
 
-EXTENSION_VERSION="1.0.7"
+EXTENSION_VERSION="1.0.8"
 
 # define the content of the manifest.json
 manifest_content='{
