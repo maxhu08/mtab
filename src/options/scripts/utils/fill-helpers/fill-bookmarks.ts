@@ -83,9 +83,9 @@ const handleBookmarkSettings = (index: number) => {
 
   const deleteBookmarkButtonEl = document.getElementById(`bookmark-${index}-delete-button`) as HTMLButtonElement
 
+  console.log(deleteBookmarkButtonEl, index)
+
   deleteBookmarkButtonEl.addEventListener("click", () => {
-
-
     const bookmarkToDelete = document.getElementById(`bookmark-user-defined-item-${index}`) as HTMLDivElement;
     const totalBookmarks = bookmarksUserDefinedList.children.length;
 
@@ -135,6 +135,8 @@ const handleBookmarkSettings = (index: number) => {
         color: "#84cc16"
       }
     });
+
+    handleBookmarkSettings(totalBookmarks);
   };
 
 const addUserDefinedBookmark = (params: {
