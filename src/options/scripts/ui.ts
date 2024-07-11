@@ -11,6 +11,8 @@ export const titleDefaultTitleInputEl = document.getElementById("title-default-t
 
 export const titleDynamicEnabledCheckboxEl = document.getElementById("title-dynamic-enabled-checkbox") as HTMLInputElement;
 
+export const messageEnabledCheckboxEl = document.getElementById("message-enabled-checkbox") as HTMLInputElement;
+
 export const messageFontContainerEl = document.getElementById("message-font-container") as HTMLInputElement;
 export const messageFontInputEl = document.getElementById("message-font-input") as HTMLInputElement;
 

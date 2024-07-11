@@ -1,7 +1,16 @@
 import { MessageType } from "../config";
 import { messageEl } from "../ui";
 
-export const setMessage = (type: MessageType, customText: string, username: string) => {
+export const setMessage = (
+  enabled: boolean,
+  type: MessageType,
+  customText: string,
+  username: string
+) => {
+  if (!enabled) {
+    messageEl.classList.add("hidden");
+  }
+
   switch (type) {
     case "custom": {
       messageEl.textContent = customText;

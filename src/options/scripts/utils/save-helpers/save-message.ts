@@ -1,11 +1,14 @@
 import { Config } from "src/newtab/scripts/config";
 import {
-  messageCustomTextInputEl,
+  messageEnabledCheckboxEl,
   messageFontInputEl,
-  messageTextColorInputEl
+  messageTextColorInputEl,
+  messageCustomTextInputEl
 } from "src/options/scripts/ui";
 
 export const saveMessageSettingsToDraft = (draft: Config) => {
+  draft.message.enabled = messageEnabledCheckboxEl.checked;
+
   // font
   draft.message.font = messageFontInputEl.value;
   draft.message.textColor = messageTextColorInputEl.value;

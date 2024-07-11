@@ -39,7 +39,12 @@ export const loadPage = () => {
     );
 
     styleMessage(config.message.textColor, config.message.font);
-    setMessage(config.message.type, config.message.customText, config.user.name);
+    setMessage(
+      config.message.enabled,
+      config.message.type,
+      config.message.customText,
+      config.user.name
+    );
 
     renderBookmarks(config);
 

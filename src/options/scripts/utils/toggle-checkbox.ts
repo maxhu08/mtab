@@ -1,4 +1,5 @@
 const checkboxSections = [
+  ["message-enabled-checkbox", "message-enabled-section"],
   ["wallpaper-enabled-checkbox", "wallpaper-enabled-section"],
   ["animations-enabled-checkbox", "animations-enabled-section"],
   ["search-enabled-checkbox", "search-enabled-section"],

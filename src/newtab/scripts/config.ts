@@ -28,7 +28,7 @@ export const defaultConfig: Config = {
     }
   },
   message: {
-    // font: `"Fira Code"`,
+    enabled: true,
     font: `"Jetbrains-Mono-Regular-Fixed"`,
     textColor: "#ffffff",
     type: "afternoon-morning",
@@ -133,6 +133,7 @@ export interface Config {
     };
   };
   message: {
+    enabled: boolean;
     font: string;
     textColor: string;
     type: MessageType;

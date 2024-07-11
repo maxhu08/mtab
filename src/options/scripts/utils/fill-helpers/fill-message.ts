@@ -1,6 +1,7 @@
 import { Config } from "src/newtab/scripts/config";
 import {
   messageCustomTextInputEl,
+  messageEnabledCheckboxEl,
   messageFontInputEl,
   messageTextColorInputEl,
   messageTypeAfternoonMorningButtonEl,
@@ -11,6 +12,7 @@ import {
 } from "src/options/scripts/ui";
 
 export const fillMessageInputs = (config: Config) => {
+  messageEnabledCheckboxEl.checked = config.message.enabled;
   messageFontInputEl.value = config.message.font;
   messageTextColorInputEl.value = config.message.textColor;
 
