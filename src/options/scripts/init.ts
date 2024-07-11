@@ -9,6 +9,7 @@ import {
   handleWallpaperTypeSwitch,
   handleBookmarksTypeSwitch
 } from "src/options/scripts/utils/handle-switch";
+import { listenToggleCheckboxSection } from "src/options/scripts/utils/toggle-checkbox";
 
 getConfig(({ config }) => {
   fillInputs(config);
@@ -26,3 +27,8 @@ handleWallpaperFileUpload();
 handleMessageTypeSwitch();
 handleWallpaperTypeSwitch();
 handleBookmarksTypeSwitch();
+
+listenToggleCheckboxSection("wallpaper-enabled-checkbox", "wallpaper-enabled-section");
+listenToggleCheckboxSection("animations-enabled-checkbox", "animations-enabled-section");
+listenToggleCheckboxSection("search-enabled-checkbox", "search-enabled-section");
+listenToggleCheckboxSection("hotkeys-enabled-checkbox", "hotkeys-enabled-section");

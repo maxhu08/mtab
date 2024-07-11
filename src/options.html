@@ -156,37 +156,39 @@
             </label>
           </div>
         </div>
-        <div class="grid gap-2 text-base">
-          <p class="text-white">wallpaper.type</p>
-          <div class="grid grid-cols-2 gap-2">
-            <button id="wallpaper-type-url-button"
-              class="bg-neutral-800 hover:bg-neutral-700 py-2 rounded-md outline-none">
-              <span class="text-white">url</span>
-            </button>
-            <button id="wallpaper-type-file-upload-button"
-              class="bg-neutral-800 hover:bg-neutral-700 py-2 rounded-md outline-none">
-              <span class="text-white">fileUpload</span>
-            </button>
-          </div>
-        </div>
-        <div class="grid">
-          <div class="grid gap-2">
-            <div id="wallpaper-url-section">
-              <p class="text-white text-base">wallpaper.url</p>
-              <div id="wallpaper-url-container"
-                class="grid grid-cols-[max-content_auto] text-base bg-neutral-800 w-full p-1 rounded-md border-2 border-transparent">
-                <span class="text-pink-500 font-semibold select-none">>&nbsp;</span>
-                <input id="wallpaper-url-input" type="text" autocomplete="off"
-                  class="outline-none bg-transparent text-white placeholder-neutral-500" placeholder="input url..." />
-              </div>
+        <div id="wallpaper-enabled-section" class="grid grid-flow-row gap-4">
+          <div class="grid gap-2 text-base">
+            <p class="text-white">wallpaper.type</p>
+            <div class="grid grid-cols-2 gap-2">
+              <button id="wallpaper-type-url-button"
+                class="bg-neutral-800 hover:bg-neutral-700 py-2 rounded-md outline-none">
+                <span class="text-white">url</span>
+              </button>
+              <button id="wallpaper-type-file-upload-button"
+                class="bg-neutral-800 hover:bg-neutral-700 py-2 rounded-md outline-none">
+                <span class="text-white">fileUpload</span>
+              </button>
             </div>
           </div>
-          <div class="grid gap-2">
-            <div id="wallpaper-file-upload-section">
-              <p class="text-white text-base">wallpaper.fileUpload</p>
-              <div>
-                <input type="file" id="wallpaper-file-upload" accept="image/*"
-                  class="bg-cyan-500 hover:bg-cyan-600 transition w-max p-2 rounded-md text-white text-base cursor-pointer" />
+          <div class="grid">
+            <div class="grid gap-2">
+              <div id="wallpaper-url-section">
+                <p class="text-white text-base">wallpaper.url</p>
+                <div id="wallpaper-url-container"
+                  class="grid grid-cols-[max-content_auto] text-base bg-neutral-800 w-full p-1 rounded-md border-2 border-transparent">
+                  <span class="text-pink-500 font-semibold select-none">>&nbsp;</span>
+                  <input id="wallpaper-url-input" type="text" autocomplete="off"
+                    class="outline-none bg-transparent text-white placeholder-neutral-500" placeholder="input url..." />
+                </div>
+              </div>
+            </div>
+            <div class="grid gap-2">
+              <div id="wallpaper-file-upload-section">
+                <p class="text-white text-base">wallpaper.fileUpload</p>
+                <div>
+                  <input type="file" id="wallpaper-file-upload" accept="image/*"
+                    class="bg-cyan-500 hover:bg-cyan-600 transition w-max p-2 rounded-md text-white text-base cursor-pointer" />
+                </div>
               </div>
             </div>
           </div>
@@ -256,46 +258,48 @@
             </label>
           </div>
         </div>
-        <div class="grid gap-2 text-base">
-          <p class="text-white">animations.bookmarkTiming</p>
-          <div class="grid grid-cols-2 gap-2">
-            <button id="animations-bookmark-timing-left-button"
-              class="bg-neutral-800 hover:bg-neutral-700 py-2 rounded-md outline-none">
-              <span class="text-white">left</span>
-            </button>
-            <button id="animations-bookmark-timing-right-button"
-              class="bg-neutral-800 hover:bg-neutral-700 py-2 rounded-md outline-none">
-              <span class="text-white">right</span>
-            </button>
-            <button id="animations-bookmark-timing-uniform-button"
-              class="bg-neutral-800 hover:bg-neutral-700 py-2 rounded-md outline-none">
-              <span class="text-white">uniform</span>
-            </button>
+        <div id="animations-enabled-section" class="grid grid-flow-row gap-4">
+          <div class="grid gap-2 text-base">
+            <p class="text-white">animations.bookmarkTiming</p>
+            <div class="grid grid-cols-2 gap-2">
+              <button id="animations-bookmark-timing-left-button"
+                class="bg-neutral-800 hover:bg-neutral-700 py-2 rounded-md outline-none">
+                <span class="text-white">left</span>
+              </button>
+              <button id="animations-bookmark-timing-right-button"
+                class="bg-neutral-800 hover:bg-neutral-700 py-2 rounded-md outline-none">
+                <span class="text-white">right</span>
+              </button>
+              <button id="animations-bookmark-timing-uniform-button"
+                class="bg-neutral-800 hover:bg-neutral-700 py-2 rounded-md outline-none">
+                <span class="text-white">uniform</span>
+              </button>
+            </div>
           </div>
-        </div>
-        <div class="grid gap-2 text-base">
-          <p class="text-white">animations.type</p>
-          <div class="grid grid-cols-2 gap-2">
-            <button id="animations-type-down-bouncy-button"
-              class="bg-neutral-800 hover:bg-neutral-700 py-2 rounded-md outline-none">
-              <span class="text-white">down-bouncy</span>
-            </button>
-            <button id="animations-type-down-smooth-button"
-              class="bg-neutral-800 hover:bg-neutral-700 py-2 rounded-md outline-none">
-              <span class="text-white">down-smooth</span>
-            </button>
-            <button id="animations-type-down-fall-button"
-              class="bg-neutral-800 hover:bg-neutral-700 py-2 rounded-md outline-none">
-              <span class="text-white">down-fall</span>
-            </button>
-            <button id="animations-type-up-bouncy-button"
-              class="bg-neutral-800 hover:bg-neutral-700 py-2 rounded-md outline-none">
-              <span class="text-white">up-bouncy</span>
-            </button>
-            <button id="animations-type-up-smooth-button"
-              class="bg-neutral-800 hover:bg-neutral-700 py-2 rounded-md outline-none">
-              <span class="text-white">up-smooth</span>
-            </button>
+          <div class="grid gap-2 text-base">
+            <p class="text-white">animations.type</p>
+            <div class="grid grid-cols-2 gap-2">
+              <button id="animations-type-down-bouncy-button"
+                class="bg-neutral-800 hover:bg-neutral-700 py-2 rounded-md outline-none">
+                <span class="text-white">down-bouncy</span>
+              </button>
+              <button id="animations-type-down-smooth-button"
+                class="bg-neutral-800 hover:bg-neutral-700 py-2 rounded-md outline-none">
+                <span class="text-white">down-smooth</span>
+              </button>
+              <button id="animations-type-down-fall-button"
+                class="bg-neutral-800 hover:bg-neutral-700 py-2 rounded-md outline-none">
+                <span class="text-white">down-fall</span>
+              </button>
+              <button id="animations-type-up-bouncy-button"
+                class="bg-neutral-800 hover:bg-neutral-700 py-2 rounded-md outline-none">
+                <span class="text-white">up-bouncy</span>
+              </button>
+              <button id="animations-type-up-smooth-button"
+                class="bg-neutral-800 hover:bg-neutral-700 py-2 rounded-md outline-none">
+                <span class="text-white">up-smooth</span>
+              </button>
+            </div>
           </div>
         </div>
       </section>
@@ -317,111 +321,113 @@
             </label>
           </div>
         </div>
-        <div class="grid gap-2">
-          <p class="text-white text-base">search.font</p>
-          <div id="search-font-container"
-            class="grid grid-cols-[max-content_auto] text-base bg-neutral-800 w-full p-1 rounded-md border-2 border-transparent">
-            <span class="text-pink-500 font-semibold select-none">>&nbsp;</span>
-            <input id="search-font-input" type="text" autocomplete="off"
-              class="outline-none bg-transparent text-white placeholder-neutral-500" placeholder="input font..." />
+        <div id="search-enabled-section" class="grid grid-flow-row gap-4">
+          <div class="grid gap-2">
+            <p class="text-white text-base">search.font</p>
+            <div id="search-font-container"
+              class="grid grid-cols-[max-content_auto] text-base bg-neutral-800 w-full p-1 rounded-md border-2 border-transparent">
+              <span class="text-pink-500 font-semibold select-none">>&nbsp;</span>
+              <input id="search-font-input" type="text" autocomplete="off"
+                class="outline-none bg-transparent text-white placeholder-neutral-500" placeholder="input font..." />
+            </div>
           </div>
-        </div>
-        <div class="grid gap-2">
-          <p class="text-white text-base">search.textColor</p>
-          <div id="search-text-color-container"
-            class="grid grid-cols-[max-content_auto] text-base bg-neutral-800 w-full p-1 rounded-md border-2 border-transparent">
-            <span class="text-pink-500 font-semibold select-none">>&nbsp;</span>
-            <input id="search-text-color-input" type="text" autocomplete="off"
-              class="outline-none bg-transparent text-white placeholder-neutral-500" placeholder="input color..." />
+          <div class="grid gap-2">
+            <p class="text-white text-base">search.textColor</p>
+            <div id="search-text-color-container"
+              class="grid grid-cols-[max-content_auto] text-base bg-neutral-800 w-full p-1 rounded-md border-2 border-transparent">
+              <span class="text-pink-500 font-semibold select-none">>&nbsp;</span>
+              <input id="search-text-color-input" type="text" autocomplete="off"
+                class="outline-none bg-transparent text-white placeholder-neutral-500" placeholder="input color..." />
+            </div>
           </div>
-        </div>
-        <div class="grid gap-2">
-          <p class="text-white text-base">search.placeholderText</p>
-          <div id="search-placeholder-text-container"
-            class="grid grid-cols-[max-content_auto] text-base bg-neutral-800 w-full p-1 rounded-md border-2 border-transparent">
-            <span class="text-pink-500 font-semibold select-none">>&nbsp;</span>
-            <input id="search-placeholder-text-input" type="text" autocomplete="off"
-              class="outline-none bg-transparent text-white placeholder-neutral-500"
-              placeholder="input placeholder..." />
+          <div class="grid gap-2">
+            <p class="text-white text-base">search.placeholderText</p>
+            <div id="search-placeholder-text-container"
+              class="grid grid-cols-[max-content_auto] text-base bg-neutral-800 w-full p-1 rounded-md border-2 border-transparent">
+              <span class="text-pink-500 font-semibold select-none">>&nbsp;</span>
+              <input id="search-placeholder-text-input" type="text" autocomplete="off"
+                class="outline-none bg-transparent text-white placeholder-neutral-500"
+                placeholder="input placeholder..." />
+            </div>
           </div>
-        </div>
-        <div class="grid gap-2">
-          <p class="text-white text-base">search.placeholderTextColor</p>
-          <div id="search-placeholder-text-color-container"
-            class="grid grid-cols-[max-content_auto] text-base bg-neutral-800 w-full p-1 rounded-md border-2 border-transparent">
-            <span class="text-pink-500 font-semibold select-none">>&nbsp;</span>
-            <input id="search-placeholder-text-color-input" type="text" autocomplete="off"
-              class="outline-none bg-transparent text-white placeholder-neutral-500" placeholder="input color..." />
+          <div class="grid gap-2">
+            <p class="text-white text-base">search.placeholderTextColor</p>
+            <div id="search-placeholder-text-color-container"
+              class="grid grid-cols-[max-content_auto] text-base bg-neutral-800 w-full p-1 rounded-md border-2 border-transparent">
+              <span class="text-pink-500 font-semibold select-none">>&nbsp;</span>
+              <input id="search-placeholder-text-color-input" type="text" autocomplete="off"
+                class="outline-none bg-transparent text-white placeholder-neutral-500" placeholder="input color..." />
+            </div>
           </div>
-        </div>
-        <div class="grid gap-2 text-base">
-          <p class="text-white">search.engine</p>
-          <div class="grid grid-cols-2 gap-2">
-            <button id="search-engine-duckduckgo-button"
-              class="bg-neutral-800 hover:bg-neutral-700 py-2 rounded-md outline-none grid place-items-center">
-              <div class="grid grid-cols-[24px_max-content] gap-2">
-                <img src="assets/search-engines/duckduckgo.svg" alt="duckduckgo" />
-                <span class="text-white">duckduckgo</span>
-              </div>
-            </button>
-            <button id="search-engine-google-button"
-              class="bg-neutral-800 hover:bg-neutral-700 py-2 rounded-md outline-none grid place-items-center">
-              <div class="grid grid-cols-[24px_max-content] gap-2">
-                <img src="assets/search-engines/google.png" alt="google" />
-                <span class="text-white">google</span>
-              </div>
-            </button>
-            <button id="search-engine-bing-button"
-              class="bg-neutral-800 hover:bg-neutral-700 py-2 rounded-md outline-none grid place-items-center">
-              <div class="grid grid-cols-[24px_max-content] gap-2">
-                <img src="assets/search-engines/bing.png" alt="bing" />
-                <span class="text-white">bing</span>
-              </div>
-            </button>
-            <button id="search-engine-brave-button"
-              class="bg-neutral-800 hover:bg-neutral-700 py-2 rounded-md outline-none grid place-items-center">
-              <div class="grid grid-cols-[24px_max-content] gap-2">
-                <img src="assets/search-engines/brave.png" alt="brave" />
-                <span class="text-white">brave</span>
-              </div>
-            </button>
-            <button id="search-engine-yahoo-button"
-              class="bg-neutral-800 hover:bg-neutral-700 py-2 rounded-md outline-none grid place-items-center">
-              <div class="grid grid-cols-[24px_max-content] gap-2">
-                <img src="assets/search-engines/yahoo.png" alt="yahoo" />
-                <span class="text-white">yahoo</span>
-              </div>
-            </button>
-            <button id="search-engine-yandex-button"
-              class="bg-neutral-800 hover:bg-neutral-700 py-2 rounded-md outline-none grid place-items-center">
-              <div class="grid grid-cols-[24px_max-content] gap-2">
-                <img src="assets/search-engines/yandex.png" alt="yandex" />
-                <span class="text-white">yandex</span>
-              </div>
-            </button>
-            <button id="search-engine-startpage-button"
-              class="bg-neutral-800 hover:bg-neutral-700 py-2 rounded-md outline-none grid place-items-center">
-              <div class="grid grid-cols-[24px_max-content] gap-2">
-                <img src="assets/search-engines/startpage.png" alt="startpage" />
-                <span class="text-white">startpage</span>
-              </div>
-            </button>
-            <button id="search-engine-ecosia-button"
-              class="bg-neutral-800 hover:bg-neutral-700 py-2 rounded-md outline-none grid place-items-center">
-              <div class="grid grid-cols-[24px_max-content] gap-2">
-                <img src="assets/search-engines/ecosia.png" alt="ecosia" />
-                <span class="text-white">ecosia</span>
-              </div>
-            </button>
+          <div class="grid gap-2 text-base">
+            <p class="text-white">search.engine</p>
+            <div class="grid grid-cols-2 gap-2">
+              <button id="search-engine-duckduckgo-button"
+                class="bg-neutral-800 hover:bg-neutral-700 py-2 rounded-md outline-none grid place-items-center">
+                <div class="grid grid-cols-[24px_max-content] gap-2">
+                  <img src="assets/search-engines/duckduckgo.svg" alt="duckduckgo" />
+                  <span class="text-white">duckduckgo</span>
+                </div>
+              </button>
+              <button id="search-engine-google-button"
+                class="bg-neutral-800 hover:bg-neutral-700 py-2 rounded-md outline-none grid place-items-center">
+                <div class="grid grid-cols-[24px_max-content] gap-2">
+                  <img src="assets/search-engines/google.png" alt="google" />
+                  <span class="text-white">google</span>
+                </div>
+              </button>
+              <button id="search-engine-bing-button"
+                class="bg-neutral-800 hover:bg-neutral-700 py-2 rounded-md outline-none grid place-items-center">
+                <div class="grid grid-cols-[24px_max-content] gap-2">
+                  <img src="assets/search-engines/bing.png" alt="bing" />
+                  <span class="text-white">bing</span>
+                </div>
+              </button>
+              <button id="search-engine-brave-button"
+                class="bg-neutral-800 hover:bg-neutral-700 py-2 rounded-md outline-none grid place-items-center">
+                <div class="grid grid-cols-[24px_max-content] gap-2">
+                  <img src="assets/search-engines/brave.png" alt="brave" />
+                  <span class="text-white">brave</span>
+                </div>
+              </button>
+              <button id="search-engine-yahoo-button"
+                class="bg-neutral-800 hover:bg-neutral-700 py-2 rounded-md outline-none grid place-items-center">
+                <div class="grid grid-cols-[24px_max-content] gap-2">
+                  <img src="assets/search-engines/yahoo.png" alt="yahoo" />
+                  <span class="text-white">yahoo</span>
+                </div>
+              </button>
+              <button id="search-engine-yandex-button"
+                class="bg-neutral-800 hover:bg-neutral-700 py-2 rounded-md outline-none grid place-items-center">
+                <div class="grid grid-cols-[24px_max-content] gap-2">
+                  <img src="assets/search-engines/yandex.png" alt="yandex" />
+                  <span class="text-white">yandex</span>
+                </div>
+              </button>
+              <button id="search-engine-startpage-button"
+                class="bg-neutral-800 hover:bg-neutral-700 py-2 rounded-md outline-none grid place-items-center">
+                <div class="grid grid-cols-[24px_max-content] gap-2">
+                  <img src="assets/search-engines/startpage.png" alt="startpage" />
+                  <span class="text-white">startpage</span>
+                </div>
+              </button>
+              <button id="search-engine-ecosia-button"
+                class="bg-neutral-800 hover:bg-neutral-700 py-2 rounded-md outline-none grid place-items-center">
+                <div class="grid grid-cols-[24px_max-content] gap-2">
+                  <img src="assets/search-engines/ecosia.png" alt="ecosia" />
+                  <span class="text-white">ecosia</span>
+                </div>
+              </button>
+            </div>
           </div>
-        </div>
-        <div class="grid gap-2">
-          <p class="text-white text-base">search.focusedBorderColor (use #00000000 for none)</p>
-          <div id="search-focused-border-color-container"
-            class="grid grid-cols-[max-content_auto] text-base bg-neutral-800 w-full p-1 rounded-md border-2 border-transparent">
-            <span class="text-pink-500 font-semibold select-none">>&nbsp;</span>
-            <input id="search-focused-border-color-input" type="text" autocomplete="off"
-              class="outline-none bg-transparent text-white placeholder-neutral-500" placeholder="input color..." />
+          <div class="grid gap-2">
+            <p class="text-white text-base">search.focusedBorderColor (use #00000000 for none)</p>
+            <div id="search-focused-border-color-container"
+              class="grid grid-cols-[max-content_auto] text-base bg-neutral-800 w-full p-1 rounded-md border-2 border-transparent">
+              <span class="text-pink-500 font-semibold select-none">>&nbsp;</span>
+              <input id="search-focused-border-color-input" type="text" autocomplete="off"
+                class="outline-none bg-transparent text-white placeholder-neutral-500" placeholder="input color..." />
+            </div>
           </div>
         </div>
       </section>
@@ -443,15 +449,17 @@
             </label>
           </div>
         </div>
-        <div class="grid grid-flow-row gap-2 bg-neutral-800 rounded-md p-2">
-          <div class="grid grid-cols-[auto_max-content]">
-            <span class="text-white text-base">activationKey</span>
-            <kbd class="bg-neutral-900 rounded-md p-1 text-neutral-500 text-sm">SPC</kbd>
-          </div>
-          <div class="bg-neutral-500 h-[1px] rounded-md my-auto"></div>
-          <div class="grid grid-cols-[auto_max-content]">
-            <span class="text-white text-base">closePageKey</span>
-            <kbd class="bg-neutral-900 rounded-md p-1 text-neutral-500 text-sm">x</kbd>
+        <div id="hotkeys-enabled-section">
+          <div class="grid grid-flow-row gap-2 bg-neutral-800 rounded-md p-2">
+            <div class="grid grid-cols-[auto_max-content]">
+              <span class="text-white text-base">activationKey</span>
+              <kbd class="bg-neutral-900 rounded-md p-1 text-neutral-500 text-sm">SPC</kbd>
+            </div>
+            <div class="bg-neutral-500 h-[1px] rounded-md my-auto"></div>
+            <div class="grid grid-cols-[auto_max-content]">
+              <span class="text-white text-base">closePageKey</span>
+              <kbd class="bg-neutral-900 rounded-md p-1 text-neutral-500 text-sm">x</kbd>
+            </div>
           </div>
         </div>
       </section>
