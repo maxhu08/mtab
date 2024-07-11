@@ -138,7 +138,7 @@ const handleBookmarkSettings = (index: number) => {
         url: "about:blank",
         color: "#84cc16",
         iconType: "ri-box-3-line",
-        iconColor: "#ff0000"
+        iconColor: "#ffffff"
       }
     });
 
