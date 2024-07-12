@@ -86,6 +86,9 @@ export const searchEngineEcosiaButtonEl = document.getElementById("search-engine
 export const searchFocusedBorderColorContainerEl = document.getElementById("search-focused-border-color-container") as HTMLDivElement;
 export const searchFocusedBorderColorInputEl = document.getElementById("search-focused-border-color-input") as HTMLInputElement;
 
+export const searchCustomEnabledCheckboxEl = document.getElementById("search-custom-enabled-checkbox") as HTMLInputElement;
+export const searchCustomEngineInputEl = document.getElementById("search-custom-engine-input") as HTMLInputElement;
+
 export const searchEnabledCheckboxEl = document.getElementById("search-enabled-checkbox") as HTMLInputElement;
 
 export const hotkeysEnabledCheckboxEl = document.getElementById("hotkeys-enabled-checkbox") as HTMLInputElement;

@@ -13,7 +13,19 @@ import { saveHotkeysSettingsToDraft } from "src/options/scripts/utils/save-helpe
 import { saveBookmarksSettingsToDraft } from "src/options/scripts/utils/save-helpers/save-bookmarks";
 import { fixAllToggleCheckboxSections } from "src/options/scripts/utils/toggle-checkbox";
 
+import {
+  searchCustomEnabledCheckboxEl,
+  searchCustomEngineInputEl,
+} from "src/options/scripts/ui";
+
 export const saveConfig = () => {
+  if (searchCustomEnabledCheckboxEl.checked) {
+    if (!searchCustomEngineInputEl.value.includes("{}")) {
+      alert("custom search engine URL must contain {}");
+      return;
+    }
+  }
+
   getConfig(({ config }) => {
     const draft = modifyNestedObject(config, (draft) => {
       // *** user ***
