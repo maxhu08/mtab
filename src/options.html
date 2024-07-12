@@ -445,24 +445,24 @@
           </div>
 
           <div class="grid grid-cols-[max-content_auto] w-full place-items-center">
-            <p class="text-white text-base">search.customSearchEngineURL</p>
+            <p class="text-white text-base">search.useCustomEngine</p>
             <div class="ml-auto">
               <label class="relative inline-flex items-center cursor-pointer">
-                <input id="search-custom-enabled-checkbox" type="checkbox" value="" class="sr-only peer" />
+                <input id="search-use-custom-engine-enabled-checkbox" type="checkbox" value="" class="sr-only peer" />
                 <div
                   class="w-11 h-6 peer bg-neutral-800 outline-none rounded-full peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[3px] after:left-[3px] after:bg-neutral-700 after:border-none after:rounded-full after:h-[1.15rem] after:aspect-square after:transition-all peer-checked:bg-emerald-500 peer-checked:after:bg-white">
                 </div>
               </label>
             </div>
           </div>
-          <div id="search-custom-enabled-section" class="grid gap-2">
-            <p class="text-white text-base">Custom search engine</p>
+          <div id="search-use-custom-engine-enabled-section" class="grid gap-2">
+            <p class="text-white text-base">search.customEngineURL</p>
             <span class="text-neutral-500 text-base">Use {} to represent the search query<br>Example:
               https://www.google.com/search?q={}</span>
-            <div id="search-custom-engine-container"
+            <div id="search-custom-engine-url-container"
               class="grid grid-cols-[max-content_auto] text-base bg-neutral-800 w-full p-1 rounded-md border-2 border-transparent">
               <span class="text-pink-500 font-semibold select-none">>&nbsp;</span>
-              <input id="search-custom-engine-input" type="text" autocomplete="off"
+              <input id="search-custom-engine-url-input" type="text" autocomplete="off"
                 class="outline-none bg-transparent text-white placeholder-neutral-500"
                 placeholder="E.g https://www.google.com/search?q={}" />
             </div>
@@ -528,7 +528,7 @@
         <div id="bookmarks-user-defined-section">
           <div class="grid gap-2 text-base">
             <p class="text-white">bookmarks.userDefined</p>
-            <p class="text-white">
+            <p class="text-neutral-500">
               needs bookmarks.type to be user-defined, valid iconTypes can be found here:
               <a href="https://remixicon.com/" target="_blank"
                 class="cursor-pointer text-blue-500 hover:text-blue-600 transition">

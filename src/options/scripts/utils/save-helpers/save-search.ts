@@ -1,13 +1,13 @@
 import { Config } from "src/newtab/scripts/config";
 import {
   searchEnabledCheckboxEl,
-  searchCustomEnabledCheckboxEl,
-  searchCustomEngineInputEl,
   searchFocusedBorderColorInputEl,
   searchFontInputEl,
   searchPlaceholderTextColorInputEl,
   searchPlaceholderTextInputEl,
-  searchTextColorInputEl
+  searchTextColorInputEl,
+  searchUseCustomEngineEnabledCheckboxEl,
+  searchCustomEngineURLInputEl
 } from "src/options/scripts/ui";
 
 export const saveSearchSettingsToDraft = (draft: Config) => {
@@ -17,10 +17,10 @@ export const saveSearchSettingsToDraft = (draft: Config) => {
   draft.search.placeholderText = searchPlaceholderTextInputEl.value;
   draft.search.placeholderTextColor = searchPlaceholderTextColorInputEl.value;
 
-  draft.search.usingCustomSearchEngine = searchCustomEnabledCheckboxEl.checked;
-  draft.search.customSearchEngineURL = searchCustomEngineInputEl.value;
+  draft.search.useCustomEngine = searchUseCustomEngineEnabledCheckboxEl.checked;
+  draft.search.customEngineURL = searchCustomEngineURLInputEl.value;
 
-  if (!searchCustomEnabledCheckboxEl.checked) {
+  if (!searchUseCustomEngineEnabledCheckboxEl.checked) {
     const selectedEl = document.querySelector(
       `button[btn-option-type="search-engine"][selected="yes"]`
     ) as HTMLButtonElement;

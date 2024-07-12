@@ -58,8 +58,8 @@ export const defaultConfig: Config = {
     placeholderText: "search...",
     placeholderTextColor: "#a1a1aa",
     engine: "duckduckgo",
-    usingCustomSearchEngine: false,
-    customSearchEngineURL: "",
+    useCustomEngine: false,
+    customEngineURL: "",
     focusedBorderColor: "#0ea5e9"
   },
   hotkeys: {
@@ -169,8 +169,8 @@ export interface Config {
     placeholderText: string;
     placeholderTextColor: string;
     engine: SearchEngine;
-    usingCustomSearchEngine: boolean;
-    customSearchEngineURL: string;
+    useCustomEngine: boolean;
+    customEngineURL: string;
     focusedBorderColor: string;
   };
   hotkeys: {

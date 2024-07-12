@@ -14,8 +14,8 @@ import {
   searchTextColorInputEl,
   searchPlaceholderTextColorInputEl,
   searchEnabledCheckboxEl,
-  searchCustomEnabledCheckboxEl,
-  searchCustomEngineInputEl
+  searchUseCustomEngineEnabledCheckboxEl,
+  searchCustomEngineURLInputEl
 } from "src/options/scripts/ui";
 
 export const fillSearchInputs = (config: Config) => {
@@ -24,7 +24,7 @@ export const fillSearchInputs = (config: Config) => {
   searchPlaceholderTextInputEl.value = config.search.placeholderText;
   searchPlaceholderTextColorInputEl.value = config.search.placeholderTextColor;
 
-  if (!config.search.usingCustomSearchEngine) {
+  if (!config.search.useCustomEngine) {
     switch (config.search.engine) {
       case "duckduckgo": {
         searchEngineDuckduckgoButtonEl.click();
@@ -64,6 +64,6 @@ export const fillSearchInputs = (config: Config) => {
   searchFocusedBorderColorInputEl.value = config.search.focusedBorderColor;
   searchEnabledCheckboxEl.checked = config.search.enabled;
 
-  searchCustomEnabledCheckboxEl.checked = config.search.usingCustomSearchEngine;
-  searchCustomEngineInputEl.value = config.search.customSearchEngineURL;
+  searchUseCustomEngineEnabledCheckboxEl.checked = config.search.useCustomEngine;
+  searchCustomEngineURLInputEl.value = config.search.customEngineURL;
 };

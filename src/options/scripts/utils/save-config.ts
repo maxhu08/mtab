@@ -12,12 +12,14 @@ import { saveSearchSettingsToDraft } from "src/options/scripts/utils/save-helper
 import { saveHotkeysSettingsToDraft } from "src/options/scripts/utils/save-helpers/save-hotkeys";
 import { saveBookmarksSettingsToDraft } from "src/options/scripts/utils/save-helpers/save-bookmarks";
 import { fixAllToggleCheckboxSections } from "src/options/scripts/utils/toggle-checkbox";
-
-import { searchCustomEnabledCheckboxEl, searchCustomEngineInputEl } from "src/options/scripts/ui";
+import {
+  searchUseCustomEngineEnabledCheckboxEl,
+  searchCustomEngineURLInputEl
+} from "src/options/scripts/ui";
 
 export const saveConfig = () => {
-  if (searchCustomEnabledCheckboxEl.checked) {
-    if (!searchCustomEngineInputEl.value.includes("{}")) {
+  if (searchUseCustomEngineEnabledCheckboxEl.checked) {
+    if (!searchCustomEngineURLInputEl.value.includes("{}")) {
       alert("custom search engine URL must contain {}");
       return;
     }

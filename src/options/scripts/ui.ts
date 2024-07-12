@@ -88,10 +88,10 @@ export const searchEngineEcosiaButtonEl = document.getElementById("search-engine
 export const searchFocusedBorderColorContainerEl = document.getElementById("search-focused-border-color-container") as HTMLDivElement;
 export const searchFocusedBorderColorInputEl = document.getElementById("search-focused-border-color-input") as HTMLInputElement;
 
-export const searchCustomEnabledCheckboxEl = document.getElementById("search-custom-enabled-checkbox") as HTMLInputElement;
+export const searchUseCustomEngineEnabledCheckboxEl = document.getElementById("search-use-custom-engine-enabled-checkbox") as HTMLInputElement;
 
-export const searchCustomEngineContainerEl = document.getElementById("search-custom-engine-container") as HTMLDivElement;
-export const searchCustomEngineInputEl = document.getElementById("search-custom-engine-input") as HTMLInputElement;
+export const searchCustomEngineURLContainerEl = document.getElementById("search-custom-engine-url-container") as HTMLDivElement;
+export const searchCustomEngineURLInputEl = document.getElementById("search-custom-engine-url-input") as HTMLInputElement;
 
 export const hotkeysEnabledCheckboxEl = document.getElementById("hotkeys-enabled-checkbox") as HTMLInputElement;
 
@@ -158,9 +158,9 @@ export const inputs: Input[] = [
     container: searchFocusedBorderColorContainerEl,
     input: searchFocusedBorderColorInputEl
   },
-{
-    container: searchCustomEngineContainerEl,
-    input: searchCustomEngineInputEl
+  {
+    container: searchCustomEngineURLContainerEl,
+    input: searchCustomEngineURLInputEl
   }
 ];
 

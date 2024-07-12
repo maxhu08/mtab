@@ -11,7 +11,7 @@ import {
   searchEngineYandexButtonEl,
   searchEngineStartpageButtonEl,
   searchEngineEcosiaButtonEl,
-  searchCustomEnabledCheckboxEl
+  searchUseCustomEngineEnabledCheckboxEl
 } from "src/options/scripts/ui";
 
 export const listenToInputs = () => {
@@ -55,8 +55,8 @@ export const listenToInputs = () => {
 
   arrayOfSearchEngines.forEach((searchEngine) => {
     searchEngine.addEventListener("click", () => {
-      if (searchCustomEnabledCheckboxEl.checked) {
-        searchCustomEnabledCheckboxEl.click();
+      if (searchUseCustomEngineEnabledCheckboxEl.checked) {
+        searchUseCustomEngineEnabledCheckboxEl.click();
       }
     });
   });

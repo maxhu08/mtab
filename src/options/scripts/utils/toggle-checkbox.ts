@@ -6,7 +6,8 @@ import {
   searchEngineYahooButtonEl,
   searchEngineYandexButtonEl,
   searchEngineStartpageButtonEl,
-  searchEngineEcosiaButtonEl
+  searchEngineEcosiaButtonEl,
+  searchUseCustomEngineEnabledCheckboxEl
 } from "src/options/scripts/ui";
 
 const checkboxSections = [
@@ -14,7 +15,7 @@ const checkboxSections = [
   ["wallpaper-enabled-checkbox", "wallpaper-enabled-section"],
   ["animations-enabled-checkbox", "animations-enabled-section"],
   ["search-enabled-checkbox", "search-enabled-section"],
-  ["search-custom-enabled-checkbox", "search-custom-enabled-section"],
+  ["search-use-custom-engine-enabled-checkbox", "search-use-custom-engine-enabled-section"],
   ["hotkeys-enabled-checkbox", "hotkeys-enabled-section"]
 ];
 
@@ -24,15 +25,12 @@ export const listenAllToggleCheckboxSections = () => {
     listenToggleCheckboxSection(checkboxSections[i][0], checkboxSections[i][1]);
   }
 
-  //Special case for using a custom search engine
-  //when the checkbox is checked, I want the currently selected search engine to be unselected
+  // Special case for using a custom search engine
+  // when the checkbox is checked, I want the currently selected search engine to be unselected
 
-  const searchCustomEnabledCheckboxEl = document.getElementById(
-    "search-custom-enabled-checkbox"
-  ) as HTMLInputElement;
-  searchCustomEnabledCheckboxEl.addEventListener("change", () => {
-    if (searchCustomEnabledCheckboxEl.checked) {
-      //if the checkbox is checked, the previously selected search engine should be unselected (visually)
+  searchUseCustomEngineEnabledCheckboxEl.addEventListener("change", () => {
+    if (searchUseCustomEngineEnabledCheckboxEl.checked) {
+      // if the checkbox is checked, the previously selected search engine should be unselected (visually)
       const selectedSearchEngineEl = document.querySelector(
         `button[btn-option-type="search-engine"][selected="yes"]`
       ) as HTMLButtonElement;
@@ -77,7 +75,7 @@ export const listenAllToggleCheckboxSections = () => {
   });
 };
 
-//sets the intial state of the section the checkbox controls (hide the section if the checkbox is off, and show the section is the checkbox is on)
+// sets the intial state of the section the checkbox controls (hide the section if the checkbox is off, and show the section is the checkbox is on)
 export const fixAllToggleCheckboxSections = () => {
   for (let i = 0; i < checkboxSections.length; i++) {
     fixToggleCheckboxSection(checkboxSections[i][0], checkboxSections[i][1]);
