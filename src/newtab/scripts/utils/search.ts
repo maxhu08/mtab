@@ -4,31 +4,35 @@ import { searchContainerEl, searchInputEl } from "../ui";
 export const search = (config: Config, value: string) => {
   let searchUrl = "";
 
-  switch (config.search.engine) {
-    case "google":
-      searchUrl = `https://www.google.com/search?q=${encodeURIComponent(value)}`;
-      break;
-    case "bing":
-      searchUrl = `https://www.bing.com/search?q=${encodeURIComponent(value)}`;
-      break;
-    case "brave":
-      searchUrl = `https://search.brave.com/search?q=${encodeURIComponent(value)}`;
-      break;
-    case "duckduckgo":
-      searchUrl = `https://duckduckgo.com/?q=${encodeURIComponent(value)}`;
-      break;
-    case "yahoo":
-      searchUrl = `https://search.yahoo.com/search?q=${encodeURIComponent(value)}`;
-      break;
-    case "yandex":
-      searchUrl = `https://yandex.com/search/?text=${encodeURIComponent(value)}`;
-      break;
-    case "startpage":
-      searchUrl = `https://www.startpage.com/sp/search?query=${encodeURIComponent(value)}`;
-      break;
-    case "ecosia":
-      searchUrl = `https://www.ecosia.org/search?q=${encodeURIComponent(value)}`;
-      break;
+  if (config.search.usingCustomSearchEngine) {
+    searchUrl = config.search.customSearchEngineURL.replace("{}", encodeURIComponent(value));
+  } else {
+    switch (config.search.engine) {
+      case "google":
+        searchUrl = `https://www.google.com/search?q=${encodeURIComponent(value)}`;
+        break;
+      case "bing":
+        searchUrl = `https://www.bing.com/search?q=${encodeURIComponent(value)}`;
+        break;
+      case "brave":
+        searchUrl = `https://search.brave.com/search?q=${encodeURIComponent(value)}`;
+        break;
+      case "duckduckgo":
+        searchUrl = `https://duckduckgo.com/?q=${encodeURIComponent(value)}`;
+        break;
+      case "yahoo":
+        searchUrl = `https://search.yahoo.com/search?q=${encodeURIComponent(value)}`;
+        break;
+      case "yandex":
+        searchUrl = `https://yandex.com/search/?text=${encodeURIComponent(value)}`;
+        break;
+      case "startpage":
+        searchUrl = `https://www.startpage.com/sp/search?query=${encodeURIComponent(value)}`;
+        break;
+      case "ecosia":
+        searchUrl = `https://www.ecosia.org/search?q=${encodeURIComponent(value)}`;
+        break;
+    }
   }
 
   if (config.animations.enabled) {
