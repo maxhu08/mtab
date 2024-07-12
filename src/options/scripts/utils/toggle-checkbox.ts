@@ -27,7 +27,45 @@ export const listenAllToggleCheckboxSections = () => {
 
   // Special case for using a custom search engine
   // when the checkbox is checked, I want the currently selected search engine to be unselected
+  handleUseCustomEngineChecked();
+};
 
+// sets the intial state of the section the checkbox controls (hide the section if the checkbox is off, and show the section is the checkbox is on)
+export const fixAllToggleCheckboxSections = () => {
+  for (let i = 0; i < checkboxSections.length; i++) {
+    fixToggleCheckboxSection(checkboxSections[i][0], checkboxSections[i][1]);
+  }
+};
+
+const listenToggleCheckboxSection = (checkboxId: string, sectionId: string) => {
+  const checkboxEl = document.getElementById(checkboxId) as HTMLInputElement;
+  const sectionEl = document.getElementById(sectionId) as HTMLDivElement;
+
+  checkboxEl.addEventListener("change", () => {
+    if (checkboxEl.checked) {
+      sectionEl.classList.remove("hidden");
+      sectionEl.classList.add("block");
+    } else {
+      sectionEl.classList.remove("black");
+      sectionEl.classList.add("hidden");
+    }
+  });
+};
+
+const fixToggleCheckboxSection = (checkboxId: string, sectionId: string) => {
+  const checkboxEl = document.getElementById(checkboxId) as HTMLInputElement;
+  const sectionEl = document.getElementById(sectionId) as HTMLDivElement;
+
+  if (checkboxEl.checked) {
+    sectionEl.classList.remove("hidden");
+    sectionEl.classList.add("block");
+  } else {
+    sectionEl.classList.remove("black");
+    sectionEl.classList.add("hidden");
+  }
+};
+
+const handleUseCustomEngineChecked = () => {
   searchUseCustomEngineEnabledCheckboxEl.addEventListener("change", () => {
     if (searchUseCustomEngineEnabledCheckboxEl.checked) {
       // if the checkbox is checked, the previously selected search engine should be unselected (visually)
@@ -73,39 +111,4 @@ export const listenAllToggleCheckboxSections = () => {
       searchEngineDuckduckgoButtonEl.click();
     }
   });
-};
-
-// sets the intial state of the section the checkbox controls (hide the section if the checkbox is off, and show the section is the checkbox is on)
-export const fixAllToggleCheckboxSections = () => {
-  for (let i = 0; i < checkboxSections.length; i++) {
-    fixToggleCheckboxSection(checkboxSections[i][0], checkboxSections[i][1]);
-  }
-};
-
-const listenToggleCheckboxSection = (checkboxId: string, sectionId: string) => {
-  const checkboxEl = document.getElementById(checkboxId) as HTMLInputElement;
-  const sectionEl = document.getElementById(sectionId) as HTMLDivElement;
-
-  checkboxEl.addEventListener("change", () => {
-    if (checkboxEl.checked) {
-      sectionEl.classList.remove("hidden");
-      sectionEl.classList.add("block");
-    } else {
-      sectionEl.classList.remove("black");
-      sectionEl.classList.add("hidden");
-    }
-  });
-};
-
-const fixToggleCheckboxSection = (checkboxId: string, sectionId: string) => {
-  const checkboxEl = document.getElementById(checkboxId) as HTMLInputElement;
-  const sectionEl = document.getElementById(sectionId) as HTMLDivElement;
-
-  if (checkboxEl.checked) {
-    sectionEl.classList.remove("hidden");
-    sectionEl.classList.add("block");
-  } else {
-    sectionEl.classList.remove("black");
-    sectionEl.classList.add("hidden");
-  }
 };

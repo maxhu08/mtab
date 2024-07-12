@@ -20,7 +20,7 @@ import {
 export const saveConfig = () => {
   if (searchUseCustomEngineEnabledCheckboxEl.checked) {
     if (!searchCustomEngineURLInputEl.value.includes("{}")) {
-      alert("custom search engine URL must contain {}");
+      alert("search.customEngineURL must contain {}, aborting save");
       return;
     }
   }
