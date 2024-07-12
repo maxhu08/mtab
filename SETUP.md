@@ -1,50 +1,53 @@
 # setup
 
-How to setup (for firefox):
+How to setup:
+
+## requirements
 
 requirements:
 
-- nodejs (using v21.7.2)
-- bun (using v1.1.9)
+- nodejs >= v21.7.2
+- bun >= v1.1.9
 
 OS: (Windows/macOS/Linux)
 
-### installing required programs
-
-if on windows:
+### windows
 
 - install nodejs from website: https://nodejs.org/en/download
 - install bun here: https://bun.sh/docs/installation
 
-if on linux (arch):
+### linux (arch)
 
-`pacman -S nodejs bun`
+```shell
+pacman -S nodejs npm
+npm i -g bun
+```
 
-### setting up and building
+## building
 
 clone repo
 
-```
+```shell
 git clone https://github.com/maxhu08/mtab
 cd mtab
 ```
 
 install dependencies
 
-```
+```shell
 bun i
 ```
 
-make create_manifest_firefox.sh executable
+to build
 
-```
-chmod +x ./scripts/create_manifest_firefox.sh
-```
-
-build for firefox
-
-```
+```shell
+bun build-chrome
 bun build-firefox
 ```
 
-the build output will be in dist/
+to package
+
+```shell
+bun package-chrome
+bun package-firefox
+```
