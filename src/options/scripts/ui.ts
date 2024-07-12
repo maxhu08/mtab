@@ -62,6 +62,8 @@ export const animationsTypeDownFallButtonEl = document.getElementById("animation
 export const animationsTypeUpBouncyButtonEl = document.getElementById("animations-type-up-bouncy-button") as HTMLButtonElement;
 export const animationsTypeUpSmoothEl = document.getElementById("animations-type-up-smooth-button") as HTMLButtonElement;
 
+export const searchEnabledCheckboxEl = document.getElementById("search-enabled-checkbox") as HTMLInputElement;
+
 export const searchFontContainerEl = document.getElementById("search-font-container") as HTMLDivElement;
 export const searchFontInputEl = document.getElementById("search-font-input") as HTMLInputElement;
 
@@ -87,9 +89,9 @@ export const searchFocusedBorderColorContainerEl = document.getElementById("sear
 export const searchFocusedBorderColorInputEl = document.getElementById("search-focused-border-color-input") as HTMLInputElement;
 
 export const searchCustomEnabledCheckboxEl = document.getElementById("search-custom-enabled-checkbox") as HTMLInputElement;
-export const searchCustomEngineInputEl = document.getElementById("search-custom-engine-input") as HTMLInputElement;
 
-export const searchEnabledCheckboxEl = document.getElementById("search-enabled-checkbox") as HTMLInputElement;
+export const searchCustomEngineContainerEl = document.getElementById("search-custom-engine-container") as HTMLDivElement;
+export const searchCustomEngineInputEl = document.getElementById("search-custom-engine-input") as HTMLInputElement;
 
 export const hotkeysEnabledCheckboxEl = document.getElementById("hotkeys-enabled-checkbox") as HTMLInputElement;
 
@@ -111,6 +113,10 @@ export const inputs: Input[] = [
   {
     container: messageFontContainerEl,
     input: messageFontInputEl
+  },
+  {
+    container: messageTextColorContainerEl,
+    input: messageTextColorInputEl
   },
   {
     container: messageCustomTextContainerEl,
@@ -137,12 +143,24 @@ export const inputs: Input[] = [
     input: searchFontInputEl
   },
   {
+    container: searchTextColorContainerEl,
+    input: searchTextColorInputEl,
+  },
+  {
     container: searchPlaceholderTextContainerEl,
     input: searchPlaceholderTextInputEl
   },
   {
+    container: searchPlaceholderTextColorContainerEl,
+    input: searchPlaceholderTextColorInputEl
+  },
+  {
     container: searchFocusedBorderColorContainerEl,
     input: searchFocusedBorderColorInputEl
+  },
+{
+    container: searchCustomEngineContainerEl,
+    input: searchCustomEngineInputEl
   }
 ];
 
