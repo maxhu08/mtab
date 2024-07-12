@@ -6,7 +6,7 @@ import {
   searchEngineYahooButtonEl,
   searchEngineYandexButtonEl,
   searchEngineStartpageButtonEl,
-  searchEngineEcosiaButtonEl,
+  searchEngineEcosiaButtonEl
 } from "src/options/scripts/ui";
 
 const checkboxSections = [
@@ -27,7 +27,9 @@ export const listenAllToggleCheckboxSections = () => {
   //Special case for using a custom search engine
   //when the checkbox is checked, I want the currently selected search engine to be unselected
 
-  const searchCustomEnabledCheckboxEl = document.getElementById("search-custom-enabled-checkbox") as HTMLInputElement;
+  const searchCustomEnabledCheckboxEl = document.getElementById(
+    "search-custom-enabled-checkbox"
+  ) as HTMLInputElement;
   searchCustomEnabledCheckboxEl.addEventListener("change", () => {
     if (searchCustomEnabledCheckboxEl.checked) {
       //if the checkbox is checked, the previously selected search engine should be unselected (visually)

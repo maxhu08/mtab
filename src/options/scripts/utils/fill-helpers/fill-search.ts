@@ -8,14 +8,12 @@ import {
   searchEngineYandexButtonEl,
   searchEngineStartpageButtonEl,
   searchEngineEcosiaButtonEl,
-
   searchFocusedBorderColorInputEl,
   searchFontInputEl,
   searchPlaceholderTextInputEl,
   searchTextColorInputEl,
   searchPlaceholderTextColorInputEl,
   searchEnabledCheckboxEl,
-
   searchCustomEnabledCheckboxEl,
   searchCustomEngineInputEl
 } from "src/options/scripts/ui";
