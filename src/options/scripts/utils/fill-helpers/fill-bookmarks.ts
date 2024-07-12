@@ -82,6 +82,11 @@ const handleBookmarkSettings = (index: number) => {
         e
       })
     );
+
+    input.input.addEventListener("input", () => {
+      // fix bug where if you edit a bookmark and then add one it resets the previous one
+      input.input.setAttribute("value", input.input.value);
+    })
   });
   // * handle focus stuff end
 
@@ -91,7 +96,7 @@ const handleBookmarkSettings = (index: number) => {
     const totalBookmarks = bookmarksUserDefinedList.children.length;
     
     // fix to make saving work normally
-    for (let i = index + 1; i < totalBookmarks; i++)  {
+    for (let i = index + 1; i < totalBookmarks; i++) {
       const oldUselessTitle = document.getElementById(`bookmark-${i}-user-defined-useless-title`) as HTMLSpanElement;
 
       const oldNameInputEl = document.getElementById(`bookmark-${i}-name-input`) as HTMLInputElement;
