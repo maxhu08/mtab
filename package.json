@@ -9,6 +9,9 @@
     "build-chrome": "mkdir -p dist && parcel build src/**/*.html --no-scope-hoist & ./scripts/create_manifest_chrome.sh && ./scripts/copy_assets.sh",
     "build-firefox": "mkdir -p dist && parcel build src/**/*.html --no-scope-hoist & ./scripts/create_manifest_firefox.sh && ./scripts/copy_assets.sh",
     "build-firefox-windows": "mkdir -p dist && parcel build src/**/*.html --no-scope-hoist && ./scripts/create_manifest_firefox.bat && ./scripts/copy_assets.bat",
+    "package-chrome": "bun build-chrome && ./scripts/package_chrome.sh",
+    "package-firefox": "bun build-firefox && ./scripts/package_firefox.sh",
+    "clean": "rm -rf .parcel-cache && rm -rf dist",
     "prettier": "prettier --write \"./**/*.{js,jsx,mjs,cjs,ts,tsx,json}\"",
     "prepare": "husky"
   },

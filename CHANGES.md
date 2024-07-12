@@ -1,8 +1,6 @@
-# Changes in 1.0.8
+# Changes in 1.0.9
 
 in this release:
 
-- make options page more intuitive
-- add ability to enable/disable message
-- fixed icon not loading sometimes
+- add ability to specify custom search engine url
 - bug fixes

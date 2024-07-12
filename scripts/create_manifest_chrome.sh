@@ -1,8 +1,7 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
-EXTENSION_VERSION="1.0.8"
+EXTENSION_VERSION=$(cat EXTENSION_VERSION.txt)
 
-# define the content of the manifest.json
 manifest_content='{
   "manifest_version": 3,
   "version": "'$EXTENSION_VERSION'",
@@ -35,4 +34,4 @@ manifest_content='{
 }'
 
 # write the content to manifest.json in the dist folder
-echo "$manifest_content" > ./dist/manifest.json
+echo "$manifest_content" > ./dist/manifest.json 
