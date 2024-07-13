@@ -1,7 +1,7 @@
 import { Config } from "src/newtab/scripts/config";
 import { searchContainerEl, searchInputEl } from "../ui";
 
-export const search = (config: Config, value: string) => {
+export const search = (config: Config, value: string, openInNewTab: boolean = false) => {
   let searchUrl = "";
 
   if (config.search.useCustomEngine) {
@@ -33,6 +33,13 @@ export const search = (config: Config, value: string) => {
         searchUrl = `https://www.ecosia.org/search?q=${encodeURIComponent(value)}`;
         break;
     }
+  }
+
+  if (openInNewTab) {
+    window.open(searchUrl, "_blank");
+    searchInputEl.value = "";
+
+    return;
   }
 
   if (config.animations.enabled) {

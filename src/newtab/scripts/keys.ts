@@ -30,6 +30,13 @@ export const listenToKeys = (config: Config) => {
   searchInputEl.addEventListener("keyup", (e) => {
     if (e.key === "Enter") {
       e.preventDefault();
+
+      // open in new tab if ctrl
+      if (e.ctrlKey) {
+        search(config, searchInputEl.value, true);
+        return;
+      }
+
       search(config, searchInputEl.value);
     }
   });
