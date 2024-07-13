@@ -8,6 +8,7 @@ requirements:
 
 - nodejs >= v21.7.2
 - bun >= v1.1.9
+- zip >= v3.0
 
 OS: (Windows/macOS/Linux)
 
@@ -19,7 +20,7 @@ OS: (Windows/macOS/Linux)
 ### linux (arch)
 
 ```shell
-pacman -S nodejs npm
+pacman -S nodejs npm zip
 npm i -g bun
 ```
 
