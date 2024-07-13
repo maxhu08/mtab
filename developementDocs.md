@@ -8,7 +8,7 @@
 3. [Project Structure](#project-structure)
 
 ## Coding Style
-TODO: talk about how many spaces in an indeent, how to write comments, how to set up prettier, etc
+TODO: talk about how many spaces in an indent, how to write comments, how to set up prettier, etc
 
 **Naming variables**
 - Variables are in camelCase
@@ -16,7 +16,7 @@ TODO: talk about how many spaces in an indeent, how to write comments, how to se
 **Naming keys in objects**
 - Use present tense (e.g., `search.useCustomEngine` instead of `search.usingCustomEngine`)
 - Keys must be in camelCase
-- For nested keys, avoid using the prent key in the child key's name
+- For nested keys, avoid using the parent key in the child key's name
   - Wrong: `{ search: { useCustomSearchEngine: true } }`
   - Right: `{ search: { useCustomEngine: true } }`
   - If you are still confused, you can see many examples of this in `src/newtab/scripts/config.ts`
