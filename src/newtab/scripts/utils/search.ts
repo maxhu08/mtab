@@ -4,8 +4,8 @@ import { searchContainerEl, searchInputEl } from "../ui";
 export const search = (config: Config, value: string) => {
   let searchUrl = "";
 
-  if (config.search.usingCustomSearchEngine) {
-    searchUrl = config.search.customSearchEngineURL.replace("{}", encodeURIComponent(value));
+  if (config.search.useCustomEngine) {
+    searchUrl = config.search.customEngineURL.replace("{}", encodeURIComponent(value));
   } else {
     switch (config.search.engine) {
       case "google":
