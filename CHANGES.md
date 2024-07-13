@@ -1,4 +1,4 @@
-# Changes in 1.0.10
+# Changes in 1.2.0
 
 in this release:
 
