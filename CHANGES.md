@@ -1,6 +1,5 @@
-# Changes in 1.0.9
+# Changes in 1.1.0
 
 in this release:
 
-- add ability to specify custom search engine url
-- bug fixes
+- fix bug with bookmarks resetting changes after creating new one
