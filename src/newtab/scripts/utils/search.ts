@@ -1,5 +1,6 @@
 import { Config } from "src/newtab/scripts/config";
 import { searchContainerEl, searchInputEl } from "../ui";
+import { setTitle } from "src/newtab/scripts/utils/set-title";
 
 export const search = (config: Config, value: string, openInNewTab: boolean = false) => {
   let searchUrl = "";
@@ -38,6 +39,8 @@ export const search = (config: Config, value: string, openInNewTab: boolean = fa
   if (openInNewTab) {
     window.open(searchUrl, "_blank");
     searchInputEl.value = "";
+
+    setTitle(config.title.defaultTitle);
 
     return;
   }
