@@ -31,7 +31,8 @@ manifest_content='{
     "default_popup": "popup.html"
   },
   "options_ui": {
-    "page": "options.html"
+    "page": "options.html",
+    "open_in_tab": true
   },
   "browser_specific_settings": {
     "gecko": {
