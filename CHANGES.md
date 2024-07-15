@@ -1,6 +1,6 @@
-# Changes in 1.2.1
+# Changes in 1.2.2
 
 in this release:
 
-- add ability to open search result in new tab by pressing Ctrl+Enter
-- fix issue with custom search engine search not working
+- make it so options open in a separate tab (firefox)
+- fix issue with options not being saved until pressing `OK` on the alert (firefox)

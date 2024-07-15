@@ -17,13 +17,6 @@ document.getElementById("options-button")!.addEventListener("click", () => {
     chrome.runtime.openOptionsPage();
     return;
   } else {
-    // @ts-expect-error
-    if (browser.runtime.openOptionsPage) {
-      // @ts-expect-error
-      browser.runtime.openOptionsPage();
-      return;
-    }
-
     window.open(chrome.runtime.getURL("options.html"));
     return;
   }

@@ -56,11 +56,12 @@ export const saveConfig = () => {
     });
 
     console.log("[CONFIG_DEBUG]", draft);
-    alert("changes saved ☜(･ω･　)");
 
-    chrome.storage.local.set({
-      config: draft
-    });
+    chrome.storage.local
+      .set({
+        config: draft
+      })
+      .then(() => alert("changes saved ☜(･ω･　)"));
 
     fixAllToggleCheckboxSections();
   });
