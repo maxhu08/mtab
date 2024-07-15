@@ -2,18 +2,16 @@
 import { getConfig } from "./config";
 
 // utils
-import { setMessage } from "./utils/set-message";
 import { setTitle } from "./utils/set-title";
-
-// Key Events
-import { listenToKeys } from "./keys";
+import { setUISyle } from "src/newtab/scripts/utils/set-ui-style";
+import { loadWallpaper } from "src/newtab/scripts/utils/load-wallpaper";
+import { setSearchStuff } from "src/newtab/scripts/utils/set-search-font";
+import { styleSearch } from "src/newtab/scripts/utils/style-search";
+import { styleMessage } from "src/newtab/scripts/utils/style-message";
+import { setMessage } from "./utils/set-message";
 import { renderBookmarks } from "./utils/render-bookmarks";
 import { addAnimations } from "./utils/animations";
-import { loadWallpaper } from "src/newtab/scripts/utils/load-wallpaper";
-import { styleSearch } from "src/newtab/scripts/utils/style-search";
-import { setSearchStuff } from "src/newtab/scripts/utils/set-search-font";
-import { setUISyle } from "src/newtab/scripts/utils/set-ui-style";
-import { styleMessage } from "src/newtab/scripts/utils/style-message";
+import { listenToKeys } from "./keys";
 
 export const loadPage = () => {
   const manifest = chrome.runtime.getManifest();
