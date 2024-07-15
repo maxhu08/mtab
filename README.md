@@ -29,6 +29,10 @@ downloads here:
 ![showcase](./assets/mtab-showcase.png)
 ![demo-5](./assets/5.png)
 
+# star-history
+
+[![Star History Chart](https://api.star-history.com/svg?repos=maxhu08/mtab&type=Date)](https://star-history.com/#maxhu08/mtab&Date)
+
 ## setup
 
 find how to setup here -> https://github.com/maxhu08/mtab/blob/master/SETUP.md
