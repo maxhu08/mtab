@@ -86,14 +86,14 @@ export const defaultConfig: Config = {
         iconColor: "#ffffff"
       },
       {
-        name: "studio",
-        url: "https://www.reddit.com/",
+        name: "reddit",
+        url: "https://www.reddit.com",
         color: "#f97316",
         iconType: "ri-reddit-fill",
         iconColor: "#ffffff"
       },
       {
-        name: "lh3000",
+        name: "localhost",
         url: "http://localhost:3000",
         color: "#14b8a6",
         iconType: "ri-global-fill",
