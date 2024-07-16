@@ -39,7 +39,7 @@ export const styleSearch = (
   if (style === "solid") {
     searchContainerEl.style.backgroundColor = foregroundColor;
     bookmarkSearchContainerEl.style.backgroundColor = foregroundColor;
-    bookmarkSearchResultsContainerEl.style.backgroundClip = foregroundColor;
+    bookmarkSearchResultsContainerEl.style.backgroundColor = foregroundColor;
 
     return;
   }
