@@ -1,9 +1,15 @@
 // ui
 import { Config } from "src/newtab/scripts/config";
-import { searchInputEl } from "./ui";
+import { bookmarkSearchInputEl, bookmarkSearchSectionEl, searchInputEl } from "./ui";
 
 // utils
 import { focusSearch, search, tryFocusSearch, unfocusSearch } from "./utils/search";
+import { searchBookmark } from "src/newtab/scripts/utils/search-bookmark";
+import {
+  focusBookmarkSearch,
+  tryFocusBookmarkSearch,
+  unfocusBookmarkSearch
+} from "src/newtab/scripts/utils/bookmark-search";
 // import { navigateTab } from "src/newtab/scripts/utils/navigate-tab";
 
 export const listenToKeys = (config: Config) => {
@@ -17,6 +23,22 @@ export const listenToKeys = (config: Config) => {
     const searchFocused = document.activeElement === searchInputEl;
     if (e.key === config.hotkeys.activationKey) tryFocusSearch(config, e);
     if (e.key === config.hotkeys.closePageKey && !searchFocused) window.close();
+
+    // bookmarks stuff
+    if (config.bookmarks.type === "user-defined") {
+      // if search bookmark is on already (grid)
+      if (bookmarkSearchSectionEl.classList.contains("grid")) {
+        if (e.key === "Escape") {
+          unfocusBookmarkSearch();
+          searchBookmark("off");
+        }
+      }
+
+      if (e.key === "b") {
+        searchBookmark("on");
+        tryFocusBookmarkSearch(config, e);
+      }
+    }
 
     // nav stuff
     // if (e.key === "J") navigateTab("left");
@@ -48,5 +70,15 @@ export const listenToKeys = (config: Config) => {
     if (searchInputEl.value !== "" && !/^\s*$/.test(searchInputEl.value))
       document.title = searchInputEl.value;
     else document.title = config.title.defaultTitle;
+  });
+
+  bookmarkSearchInputEl.addEventListener("blur", () => unfocusBookmarkSearch());
+
+  bookmarkSearchInputEl.addEventListener("focus", (e) => focusBookmarkSearch(config, e));
+
+  bookmarkSearchInputEl.addEventListener("keyup", (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+    }
   });
 };

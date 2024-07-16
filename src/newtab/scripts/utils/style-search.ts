@@ -1,5 +1,5 @@
 import { UIStyle } from "src/newtab/scripts/config";
-import { searchContainerEl, searchInputEl } from "src/newtab/scripts/ui";
+import { bookmarkSearchContainerEl, searchContainerEl, searchInputEl } from "src/newtab/scripts/ui";
 
 export const styleSearch = (
   enabled: boolean,
@@ -17,7 +17,11 @@ export const styleSearch = (
   const placeholderTextColorCss = `
 .placeholder-color-search::placeholder {
   color: ${placeholderTextColor};
-}`;
+}
+.placeholder-color-bookmark-search::placeholder {
+  color: ${placeholderTextColor};
+} 
+`;
 
   const styleElement = document.createElement("style");
   styleElement.type = "text/css";
@@ -25,15 +29,19 @@ export const styleSearch = (
   document.head.appendChild(styleElement);
 
   if (style === "solid") {
-    searchContainerEl.classList.add("bg-neutral-900");
-
     searchContainerEl.style.backgroundColor = foregroundColor;
-
+    bookmarkSearchContainerEl.style.backgroundColor = foregroundColor;
     return;
   }
   if (style === "glass") {
     searchContainerEl.classList.add("glass-effect");
     searchInputEl.classList.replace("placeholder-neutral-500", "placeholder-neutral-400");
+
+    bookmarkSearchContainerEl.classList.add("glass-effect");
+    bookmarkSearchContainerEl.classList.replace(
+      "placeholder-neutral-500",
+      "placeholder-neutral-400"
+    );
     return;
   }
 };

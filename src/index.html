@@ -16,16 +16,27 @@
 <body dir="ltr" class="bg-neutral-500 min-h-screen grid place-items-center">
   <div id="wallpaper" class="w-screen h-screen fixed z-[-1]"></div>
   <div id="content" class="grid place-items-center gap-2 m-padding-bottom w-[95%] md:w-[80%] max-w-[50rem]">
-    <div class="grid w-full place-items-center gap-2 md:gap-4">
+    <div class="grid grid-flow-row w-full place-items-center gap-2 md:gap-4">
       <p id="message" class="font-message text-white text-center text-2xl md:text-4xl lg:text-6xl font-semibold"></p>
-      <div id="search-container"
-        class="font-search grid grid-cols-[max-content_auto] text-base md:text-2xl w-full p-1 md:p-2 rounded-md border-2 border-transparent">
-        <span class="text-teal-500 font-semibold select-none">->&nbsp;</span>
-        <input id="search-input" type="text" autocomplete="off"
-          class="font-search outline-none bg-transparent placeholder-color-search">
-      </div>
+      <section id="search-section" class="grid grid-flow-row w-full place-items-center gap-2">
+        <div id="search-container"
+          class="font-search grid grid-cols-[max-content_auto] text-base md:text-2xl w-full p-1 md:p-2 rounded-md border-2 border-transparent">
+          <span class="text-teal-500 font-semibold select-none">->&nbsp;</span>
+          <input id="search-input" type="text" autocomplete="off"
+            class="font-search outline-none bg-transparent placeholder-color-search">
+        </div>
+        <div id="bookmarks-container"></div>
+      </section>
+      <section id="bookmark-search-section" class="grid grid-flow-row w-full place-items-center gap-2 hidden">
+        <div id="bookmark-search-container"
+          class="font-search grid grid-cols-[max-content_auto] text-base md:text-2xl w-full p-1 md:p-2 rounded-md border-2 border-transparent">
+          <span class="text-blue-500 font-semibold select-none">//&nbsp;</span>
+          <input id="bookmark-search-input" type="text" autocomplete="off"
+            class="font-search outline-none bg-transparent placeholder-color-bookmark-search">
+        </div>
+        <div id="bookmarks-search-container"></div>
+      </section>
     </div>
-    <div id="bookmarks-container"></div>
   </div>
 </body>
 
