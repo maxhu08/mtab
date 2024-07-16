@@ -11,4 +11,6 @@ export const searchInputEl = document.getElementById("search-input") as HTMLInpu
 export const bookmarkSearchContainerEl = document.getElementById("bookmark-search-container") as HTMLInputElement;
 export const bookmarkSearchInputEl = document.getElementById("bookmark-search-input") as HTMLInputElement;
 
+export const bookmarkSearchResultsContainerEl = document.getElementById("bookmarks-search-results-container") as HTMLDivElement;
+
 export const bookmarksContainerEl = document.getElementById("bookmarks-container") as HTMLDivElement;

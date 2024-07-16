@@ -4,7 +4,10 @@ import { bookmarkSearchInputEl, bookmarkSearchSectionEl, searchInputEl } from ".
 
 // utils
 import { focusSearch, search, tryFocusSearch, unfocusSearch } from "./utils/search";
-import { searchBookmark } from "src/newtab/scripts/utils/search-bookmark";
+import {
+  enableSearchBookmark,
+  disableSearchBookmark
+} from "src/newtab/scripts/utils/search-bookmark";
 import {
   focusBookmarkSearch,
   tryFocusBookmarkSearch,
@@ -30,12 +33,13 @@ export const listenToKeys = (config: Config) => {
       if (bookmarkSearchSectionEl.classList.contains("grid")) {
         if (e.key === "Escape") {
           unfocusBookmarkSearch(config.animations.type);
-          searchBookmark("off");
+          disableSearchBookmark();
+          bookmarkSearchInputEl.value = "";
         }
       }
 
       if (e.key === "b" && !searchFocused) {
-        searchBookmark("on");
+        enableSearchBookmark(config.bookmarks.userDefined);
         tryFocusBookmarkSearch(config, e);
       }
     }
