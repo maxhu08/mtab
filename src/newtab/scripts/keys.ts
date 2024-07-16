@@ -54,7 +54,7 @@ export const listenToKeys = (config: Config) => {
       }
 
       if (
-        e.key === "b" &&
+        e.key === config.hotkeys.searchBookmarksKey &&
         !searchFocused &&
         !bookmarkSearchFocused &&
         !bookmarkSearchSectionEl.classList.contains("grid")

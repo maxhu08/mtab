@@ -66,7 +66,8 @@ export const defaultConfig: Config = {
   hotkeys: {
     enabled: true,
     activationKey: " ",
-    closePageKey: "x"
+    closePageKey: "x",
+    searchBookmarksKey: "b"
   },
   bookmarks: {
     type: "user-defined",
@@ -179,6 +180,7 @@ export interface Config {
     enabled: boolean;
     activationKey: " ";
     closePageKey: "x";
+    searchBookmarksKey: "b";
   };
   bookmarks: {
     type: BookmarksType;
