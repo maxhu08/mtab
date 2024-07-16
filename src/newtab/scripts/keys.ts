@@ -72,7 +72,9 @@ export const listenToKeys = (config: Config) => {
     else document.title = config.title.defaultTitle;
   });
 
-  bookmarkSearchInputEl.addEventListener("blur", () => unfocusBookmarkSearch());
+  bookmarkSearchInputEl.addEventListener("blur", () =>
+    unfocusBookmarkSearch(config.animations.type)
+  );
 
   bookmarkSearchInputEl.addEventListener("focus", (e) => focusBookmarkSearch(config, e));
 
