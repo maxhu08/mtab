@@ -1,7 +1,6 @@
-# Changes in 1.2.3
+# Changes in 1.2.4
 
 in this release:
 
-- added way to search user-defined bookmarks by pressing `b`
-- add ability to add custom css
+- improve bookmarks search menu
 - bug fixes
