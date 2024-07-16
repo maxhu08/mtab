@@ -32,10 +32,13 @@ export const unfocusBookmarkSearch = (animationType: string) => {
   const bookmarkSubcontainerEls = bookmarksContainerEl.children;
 
   for (let i = 0; i < bookmarkSubcontainerEls.length; i++) {
-    const bookmarkEls = bookmarkSubcontainerEls[i].children;
+    const bookmarkSubcontainerEl = bookmarkSubcontainerEls[i];
+    const bookmarkEls = bookmarkSubcontainerEl.children;
+
     for (let i = 0; i < bookmarkEls.length; i++) {
       const bookmarkEl = bookmarkEls[i];
       bookmarkEl.classList.remove(animationType);
+      bookmarkEl.classList.remove("opacity-0");
     }
   }
 };
