@@ -45,7 +45,7 @@ export const defaultConfig: Config = {
     foregroundColor: "#262626",
     backgroundColor: "#171717",
     highlightColor: "#ffffff20",
-    customCSS: ""
+    customCSS: "/* input custom css... */"
   },
   animations: {
     enabled: true,
