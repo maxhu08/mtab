@@ -6,4 +6,4 @@ mkdir -p package &&
 cd dist &&
 # messy but need it in case zip command runs before parcel is done buildling
 sleep 5 &&
-zip -r -FS ../package/mtab-v$EXTENSION_VERSION-firefox.zip * --exclude '*.git*'
+zip -r -FS ../package/mtab-v$EXTENSION_VERSION-firefox.zip * --exclude "*.git*"
