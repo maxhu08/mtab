@@ -4,7 +4,8 @@ import {
   uiForegroundColorInputEl,
   uiHighlightColorInputEl,
   uiStyleGlassButtonEl,
-  uiStyleSolidButtonEl
+  uiStyleSolidButtonEl,
+  uiCustomCSSTextareaEl
 } from "src/options/scripts/ui";
 
 export const fillUIInputs = (config: Config) => {
@@ -22,4 +23,5 @@ export const fillUIInputs = (config: Config) => {
   uiForegroundColorInputEl.value = config.ui.foregroundColor;
   uiBackgroundColorInputEl.value = config.ui.backgroundColor;
   uiHighlightColorInputEl.value = config.ui.highlightColor;
+  uiCustomCSSTextareaEl.value = config.ui.customCSS;
 };

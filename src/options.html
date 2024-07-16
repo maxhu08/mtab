@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="options/options.css" />
   <script src="options/scripts/init.ts" type="module" defer></script>
   <link rel="icon" href="./assets/icon.svg" type="image/x-icon" />
-  <link rel="icon" href="./assets/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="./assets/favicon.ico" type="image/x-icon" />
   <title>options ヽ(・ω・*)</title>
 </head>
 
@@ -253,6 +253,14 @@
               class="outline-none bg-transparent text-white placeholder-neutral-500" placeholder="input color..." />
           </div>
         </div>
+        <div class="grid gap-2">
+          <p class="text-white text-base">ui.customCSS</p>
+          <div id="ui-custom-css-container"
+            class="text-base bg-neutral-800 w-full p-1 rounded-md border-2 border-transparent">
+            <textarea id="ui-custom-css-textarea" type="text" autocomplete="off" rows="16"
+              class="w-full outline-none bg-transparent text-white placeholder-neutral-500 resize-none"></textarea>
+          </div>
+        </div>
       </section>
       <!-- animations -->
       <section class="grid grid-flow-row gap-4">
@@ -457,7 +465,7 @@
           </div>
           <div id="search-use-custom-engine-enabled-section" class="grid gap-2">
             <p class="text-white text-base">search.customEngineURL</p>
-            <span class="text-neutral-500 text-base">Use {} to represent the search query<br>Example:
+            <span class="text-neutral-500 text-base">Use {} to represent the search query<br />Example:
               https://www.google.com/search?q={}</span>
             <div id="search-custom-engine-url-container"
               class="grid grid-cols-[max-content_auto] text-base bg-neutral-800 w-full p-1 rounded-md border-2 border-transparent">
@@ -534,8 +542,8 @@
                 class="cursor-pointer text-blue-500 hover:text-blue-600 transition">
                 remixicon.com
               </a>
-              <span class="text-indigo-500">(using version v4.2.0)</span>.
-              iconTypes should be classes beginning with `ri-`
+              <span class="text-indigo-500">(using version v4.2.0)</span>. iconTypes should be
+              classes beginning with `ri-`
             </p>
             <div id="bookmarks-user-defined-list" class="grid grid-flow-row gap-4"></div>
             <div class="pt-2">

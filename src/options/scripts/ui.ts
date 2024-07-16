@@ -50,6 +50,9 @@ export const uiBackgroundColorInputEl = document.getElementById("ui-background-c
 export const uiHighlightColorContainerEl = document.getElementById("ui-highlight-color-container") as HTMLDivElement;
 export const uiHighlightColorInputEl = document.getElementById("ui-highlight-color-input") as HTMLInputElement;
 
+export const uiCustomCSSContainerEl = document.getElementById("ui-custom-css-container") as HTMLInputElement;
+export const uiCustomCSSTextareaEl = document.getElementById("ui-custom-css-textarea") as HTMLInputElement;
+
 export const animationsEnabledCheckboxEl = document.getElementById("animations-enabled-checkbox") as HTMLInputElement;
 
 export const animationsBookmarkTimingLeftButtonEl = document.getElementById("animations-bookmark-timing-left-button") as HTMLButtonElement;
@@ -137,6 +140,10 @@ export const inputs: Input[] = [
   {
     container: uiHighlightColorContainerEl,
     input: uiHighlightColorInputEl
+  },
+  {
+    container: uiCustomCSSContainerEl,
+    input: uiCustomCSSTextareaEl
   },
   {
     container: searchFontContainerEl,

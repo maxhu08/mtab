@@ -1,6 +1,14 @@
 import { Config } from "src/newtab/scripts/config";
 
 export const setUISyle = (ui: Config["ui"]) => {
+  // custom css
+  const customCss = `${ui.customCSS}`;
+
+  const customCssStyleElement = document.createElement("style");
+  customCssStyleElement.type = "text/css";
+  customCssStyleElement.appendChild(document.createTextNode(customCss));
+  document.head.appendChild(customCssStyleElement);
+
   const highlightSyleCss = `
 ::selection {
   background-color: ${ui.highlightColor};
@@ -21,10 +29,10 @@ export const setUISyle = (ui: Config["ui"]) => {
   background-color: ${ui.backgroundColor};
 }`;
 
-  const styleElement = document.createElement("style");
-  styleElement.type = "text/css";
-  styleElement.appendChild(document.createTextNode(uiStyleCss));
-  document.head.appendChild(styleElement);
+  const uiStyleElement = document.createElement("style");
+  uiStyleElement.type = "text/css";
+  uiStyleElement.appendChild(document.createTextNode(uiStyleCss));
+  document.head.appendChild(uiStyleElement);
 
   document.body.style.transitionDuration = "0ms";
   document.body.classList.add("bg-background");

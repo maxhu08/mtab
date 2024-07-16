@@ -44,7 +44,8 @@ export const defaultConfig: Config = {
     style: "glass",
     foregroundColor: "#262626",
     backgroundColor: "#171717",
-    highlightColor: "#ffffff20"
+    highlightColor: "#ffffff20",
+    customCSS: ""
   },
   animations: {
     enabled: true,
@@ -151,6 +152,7 @@ export interface Config {
     foregroundColor: string;
     backgroundColor: string;
     highlightColor: string;
+    customCSS: string;
   };
   animations: {
     enabled: boolean;
