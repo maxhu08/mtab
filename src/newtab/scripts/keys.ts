@@ -136,6 +136,7 @@ export const listenToKeys = (config: Config) => {
       const resultIndex = parseInt(bookmarkSearchResultsContainerEl.getAttribute("selected-index") as string);
       // prettier-ignore
       const bookmarkUrl = bookmarkSearchResultsContainerEl.children[resultIndex].getAttribute("bookmark-result-url") as string;
+      if (!bookmarkUrl) return;
 
       openUserDefinedBookmark(bookmarkUrl, config.animations.enabled);
     }
