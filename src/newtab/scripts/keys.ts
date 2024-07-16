@@ -29,7 +29,7 @@ export const listenToKeys = (config: Config) => {
       // if search bookmark is on already (grid)
       if (bookmarkSearchSectionEl.classList.contains("grid")) {
         if (e.key === "Escape") {
-          unfocusBookmarkSearch();
+          unfocusBookmarkSearch(config.animations.type);
           searchBookmark("off");
         }
       }
