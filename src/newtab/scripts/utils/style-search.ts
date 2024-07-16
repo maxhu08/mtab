@@ -45,15 +45,9 @@ export const styleSearch = (
   }
   if (style === "glass") {
     searchContainerEl.classList.add("glass-effect");
-    searchInputEl.classList.replace("placeholder-neutral-500", "placeholder-neutral-400");
-
     bookmarkSearchContainerEl.classList.add("glass-effect");
-    bookmarkSearchContainerEl.classList.replace(
-      "placeholder-neutral-500",
-      "placeholder-neutral-400"
-    );
-
     bookmarkSearchResultsContainerEl.classList.add("glass-effect");
+
     return;
   }
 };
