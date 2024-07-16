@@ -1,6 +1,7 @@
-# Changes in 1.2.2
+# Changes in 1.2.3
 
 in this release:
 
-- make it so options open in a separate tab (firefox)
-- fix issue with options not being saved until pressing `OK` on the alert (firefox)
+- added way to search user-defined bookmarks by pressing `b`
+- add ability to add custom css
+- bug fixes
