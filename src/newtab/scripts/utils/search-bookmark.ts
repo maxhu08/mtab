@@ -41,4 +41,10 @@ export const refreshBookmarkSearchResults = (bookmarks: UserDefinedBookmark[]) =
       `;
     }
   });
+
+  if (filteredBookmarks.length === 0) {
+    bookmarkSearchResultsContainerEl.innerHTML += `
+      <p class="text-center">No results!</p>
+    `;
+  }
 };
