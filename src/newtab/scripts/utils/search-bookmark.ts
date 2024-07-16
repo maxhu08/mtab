@@ -6,11 +6,14 @@ import {
   bookmarkSearchInputEl
 } from "src/newtab/scripts/ui";
 
-export const enableSearchBookmark = (bookmarks: UserDefinedBookmark[]) => {
+export const enableSearchBookmark = (
+  bookmarks: UserDefinedBookmark[],
+  placeholderTextColor: string
+) => {
   searchSectionEl.classList.replace("grid", "hidden");
   bookmarkSearchSectionEl.classList.replace("hidden", "grid");
 
-  refreshBookmarkSearchResults(bookmarks);
+  refreshBookmarkSearchResults(bookmarks, placeholderTextColor);
 };
 
 export const disableSearchBookmark = () => {
@@ -20,7 +23,10 @@ export const disableSearchBookmark = () => {
   bookmarkSearchResultsContainerEl.innerHTML = "";
 };
 
-export const refreshBookmarkSearchResults = (bookmarks: UserDefinedBookmark[]) => {
+export const refreshBookmarkSearchResults = (
+  bookmarks: UserDefinedBookmark[],
+  placeholderTextColor: string
+) => {
   bookmarkSearchResultsContainerEl.innerHTML = "";
 
   const filteredBookmarks = bookmarks.filter((bookmark) =>
@@ -30,14 +36,14 @@ export const refreshBookmarkSearchResults = (bookmarks: UserDefinedBookmark[]) =
   filteredBookmarks.forEach((bookmark, index) => {
     if (index === 0) {
       bookmarkSearchResultsContainerEl.innerHTML += `
-        <div>
-          <span>></span>
+        <div bookmark-result-url="${bookmark.url}">
+          <span class="text-amber-500 font-semibold">&nbsp;></span>
           ${bookmark.name}
         </div>
       `;
     } else {
       bookmarkSearchResultsContainerEl.innerHTML += `
-        <div>${bookmark.name}</div>
+        <div bookmark-result-url="${bookmark.url}" style="color: ${placeholderTextColor};">&nbsp;&nbsp;&nbsp;${bookmark.name}</div>
       `;
     }
   });

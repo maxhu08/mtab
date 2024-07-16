@@ -1,6 +1,11 @@
 // ui
 import { Config } from "src/newtab/scripts/config";
-import { bookmarkSearchInputEl, bookmarkSearchSectionEl, searchInputEl } from "./ui";
+import {
+  bookmarkSearchInputEl,
+  bookmarkSearchResultsContainerEl,
+  bookmarkSearchSectionEl,
+  searchInputEl
+} from "./ui";
 
 // utils
 import { focusSearch, search, tryFocusSearch, unfocusSearch } from "./utils/search";
@@ -14,6 +19,7 @@ import {
   tryFocusBookmarkSearch,
   unfocusBookmarkSearch
 } from "src/newtab/scripts/utils/bookmark-search";
+import { openUserDefinedBookmark } from "src/newtab/scripts/utils/render-bookmarks";
 // import { navigateTab } from "src/newtab/scripts/utils/navigate-tab";
 
 export const listenToKeys = (config: Config) => {
@@ -53,7 +59,7 @@ export const listenToKeys = (config: Config) => {
         !bookmarkSearchFocused &&
         !bookmarkSearchSectionEl.classList.contains("grid")
       ) {
-        enableSearchBookmark(config.bookmarks.userDefined);
+        enableSearchBookmark(config.bookmarks.userDefined, config.search.placeholderTextColor);
         tryFocusBookmarkSearch(config, e);
       }
     }
@@ -97,10 +103,15 @@ export const listenToKeys = (config: Config) => {
   bookmarkSearchInputEl.addEventListener("focus", (e) => focusBookmarkSearch(config, e));
 
   bookmarkSearchInputEl.addEventListener("keyup", (e) => {
-    refreshBookmarkSearchResults(config.bookmarks.userDefined);
+    refreshBookmarkSearchResults(config.bookmarks.userDefined, config.search.placeholderTextColor);
 
     if (e.key === "Enter") {
       e.preventDefault();
+
+      // prettier-ignore
+      const bookmarkUrl = bookmarkSearchResultsContainerEl.children[0].getAttribute("bookmark-result-url") as string;
+
+      openUserDefinedBookmark(bookmarkUrl, config.animations.enabled);
     }
   });
 };

@@ -145,24 +145,26 @@ const renderUserDefinedBookmarks = (config: Config) => {
         );
       }
 
-      bookmarkEl!.onclick = () => {
-        if (config.animations.enabled) {
-          const content = document.getElementById("content") as HTMLDivElement;
-
-          const animationDuration = 350;
-
-          content.classList.add("animate-page-up");
-          setTimeout(() => {
-            content.classList.remove("animate-page-up");
-            content.style.opacity = "0%";
-          }, animationDuration * 0.75);
-
-          setTimeout(() => {
-            window.location.href = bookmark.url;
-          }, animationDuration);
-        } else {
-          window.location.href = bookmark.url;
-        }
-      };
+      bookmarkEl!.onclick = () => openUserDefinedBookmark(bookmark.url, config.animations.enabled);
     });
+};
+
+export const openUserDefinedBookmark = (bookmarkUrl: string, animtionsEnabled: boolean) => {
+  if (animtionsEnabled) {
+    const content = document.getElementById("content") as HTMLDivElement;
+
+    const animationDuration = 350;
+
+    content.classList.add("animate-page-up");
+    setTimeout(() => {
+      content.classList.remove("animate-page-up");
+      content.style.opacity = "0%";
+    }, animationDuration * 0.75);
+
+    setTimeout(() => {
+      window.location.href = bookmarkUrl;
+    }, animationDuration);
+  } else {
+    window.location.href = bookmarkUrl;
+  }
 };
