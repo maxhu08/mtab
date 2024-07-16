@@ -50,6 +50,30 @@ export const listenToKeys = (config: Config) => {
           unfocusBookmarkSearch(config.animations.type);
           disableSearchBookmark();
           bookmarkSearchInputEl.value = "";
+        } else if (e.key === "ArrowDown") {
+          // prettier-ignore
+          const prevIndex = parseInt(bookmarkSearchResultsContainerEl.getAttribute("selected-index") as string);
+          // prettier-ignore
+          if (prevIndex < config.bookmarks.userDefined.length - 1) {
+            bookmarkSearchResultsContainerEl.setAttribute("selected-index", ((prevIndex) + 1).toString());
+          }
+
+          refreshBookmarkSearchResults(
+            config.bookmarks.userDefined,
+            config.search.placeholderTextColor
+          );
+        } else if (e.key === "ArrowUp") {
+          // prettier-ignore
+          const prevIndex = parseInt(bookmarkSearchResultsContainerEl.getAttribute("selected-index") as string);
+          // prettier-ignore
+          if (prevIndex > 0) {
+            bookmarkSearchResultsContainerEl.setAttribute("selected-index", ((prevIndex) - 1).toString());
+          }
+
+          refreshBookmarkSearchResults(
+            config.bookmarks.userDefined,
+            config.search.placeholderTextColor
+          );
         }
       }
 

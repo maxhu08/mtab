@@ -29,6 +29,9 @@ export const refreshBookmarkSearchResults = (
 ) => {
   bookmarkSearchResultsContainerEl.innerHTML = "";
 
+  // prettier-ignore
+  const selectedIndex = parseInt(bookmarkSearchResultsContainerEl.getAttribute("selected-index") as string);
+
   const bookmarkSearchValue = bookmarkSearchInputEl.value.toLowerCase();
 
   const filteredBookmarks = bookmarks
@@ -40,7 +43,7 @@ export const refreshBookmarkSearchResults = (
     });
 
   filteredBookmarks.forEach((bookmark, index) => {
-    if (index === 0) {
+    if (index === selectedIndex) {
       bookmarkSearchResultsContainerEl.innerHTML += `
         <div bookmark-result-url="${bookmark.url}">
           <span class="text-amber-500 font-semibold">&nbsp;></span>
