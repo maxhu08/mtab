@@ -10,11 +10,15 @@ export const enableSearchBookmark = (bookmarks: UserDefinedBookmark[]) => {
   bookmarkSearchSectionEl.classList.replace("hidden", "grid");
 
   bookmarks.forEach((bookmark) => {
-    bookmarkSearchResultsContainerEl.innerHTML += `${bookmark.name}<br/>`;
+    bookmarkSearchResultsContainerEl.innerHTML += `
+      <div>${bookmark.name}</div>
+    `;
   });
 };
 
 export const disableSearchBookmark = () => {
   bookmarkSearchSectionEl.classList.replace("grid", "hidden");
   searchSectionEl.classList.replace("hidden", "grid");
+
+  bookmarkSearchResultsContainerEl.innerHTML = "";
 };

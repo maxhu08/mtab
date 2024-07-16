@@ -8,6 +8,9 @@ export const setSearchStuff = (font: string, placeholderText: string) => {
 .font-bookmark-search {
   font-family: ${font};
 } 
+.font-bookmark-search-results {
+  font-family: ${font};
+} 
 `;
 
   const styleElement = document.createElement("style");

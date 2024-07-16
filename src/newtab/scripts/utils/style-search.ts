@@ -2,6 +2,7 @@ import { UIStyle } from "src/newtab/scripts/config";
 import {
   bookmarkSearchContainerEl,
   bookmarkSearchInputEl,
+  bookmarkSearchResultsContainerEl,
   searchContainerEl,
   searchInputEl
 } from "src/newtab/scripts/ui";
@@ -19,6 +20,7 @@ export const styleSearch = (
 
   searchInputEl.style.color = textColor;
   bookmarkSearchInputEl.style.color = textColor;
+  bookmarkSearchResultsContainerEl.style.color = textColor;
 
   const placeholderTextColorCss = `
 .placeholder-color-search::placeholder {
@@ -37,6 +39,8 @@ export const styleSearch = (
   if (style === "solid") {
     searchContainerEl.style.backgroundColor = foregroundColor;
     bookmarkSearchContainerEl.style.backgroundColor = foregroundColor;
+    bookmarkSearchResultsContainerEl.style.backgroundClip = foregroundColor;
+
     return;
   }
   if (style === "glass") {
@@ -48,6 +52,8 @@ export const styleSearch = (
       "placeholder-neutral-500",
       "placeholder-neutral-400"
     );
+
+    bookmarkSearchResultsContainerEl.classList.add("glass-effect");
     return;
   }
 };

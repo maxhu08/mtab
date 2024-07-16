@@ -24,6 +24,8 @@ export const listenToKeys = (config: Config) => {
     // search
     if (e.key === "Escape") unfocusSearch();
     const searchFocused = document.activeElement === searchInputEl;
+    const bookmarkSearchFocused = document.activeElement === bookmarkSearchInputEl;
+
     if (e.key === config.hotkeys.activationKey) tryFocusSearch(config, e);
     if (e.key === config.hotkeys.closePageKey && !searchFocused) window.close();
 
@@ -38,7 +40,7 @@ export const listenToKeys = (config: Config) => {
         }
       }
 
-      if (e.key === "b" && !searchFocused) {
+      if (e.key === "b" && !searchFocused && !bookmarkSearchFocused) {
         enableSearchBookmark(config.bookmarks.userDefined);
         tryFocusBookmarkSearch(config, e);
       }
