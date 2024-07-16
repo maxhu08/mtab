@@ -29,9 +29,15 @@ export const refreshBookmarkSearchResults = (
 ) => {
   bookmarkSearchResultsContainerEl.innerHTML = "";
 
-  const filteredBookmarks = bookmarks.filter((bookmark) =>
-    bookmark.name.includes(bookmarkSearchInputEl.value)
-  );
+  const bookmarkSearchValue = bookmarkSearchInputEl.value.toLowerCase();
+
+  const filteredBookmarks = bookmarks
+    .filter((bookmark) => bookmark.name.toLowerCase().includes(bookmarkSearchValue))
+    .sort((a, b) => {
+      const aContains = a.name.toLowerCase().startsWith(bookmarkSearchValue);
+      const bContains = b.name.toLowerCase().startsWith(bookmarkSearchValue);
+      return aContains === bContains ? 0 : aContains ? -1 : 1;
+    });
 
   filteredBookmarks.forEach((bookmark, index) => {
     if (index === 0) {
