@@ -1,5 +1,10 @@
 import { UIStyle } from "src/newtab/scripts/config";
-import { bookmarkSearchContainerEl, searchContainerEl, searchInputEl } from "src/newtab/scripts/ui";
+import {
+  bookmarkSearchContainerEl,
+  bookmarkSearchInputEl,
+  searchContainerEl,
+  searchInputEl
+} from "src/newtab/scripts/ui";
 
 export const styleSearch = (
   enabled: boolean,
@@ -13,6 +18,7 @@ export const styleSearch = (
   }
 
   searchInputEl.style.color = textColor;
+  bookmarkSearchInputEl.style.color = textColor;
 
   const placeholderTextColorCss = `
 .placeholder-color-search::placeholder {

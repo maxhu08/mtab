@@ -4,7 +4,11 @@ export const setSearchStuff = (font: string, placeholderText: string) => {
   const searchFontCss = `
 .font-search {
   font-family: ${font};
-}`;
+}
+.font-bookmark-search {
+  font-family: ${font};
+} 
+`;
 
   const styleElement = document.createElement("style");
   styleElement.type = "text/css";

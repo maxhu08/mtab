@@ -34,7 +34,7 @@ export const listenToKeys = (config: Config) => {
         }
       }
 
-      if (e.key === "b") {
+      if (e.key === "b" && !searchFocused) {
         searchBookmark("on");
         tryFocusBookmarkSearch(config, e);
       }
