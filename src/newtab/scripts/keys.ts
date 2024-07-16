@@ -6,7 +6,8 @@ import { bookmarkSearchInputEl, bookmarkSearchSectionEl, searchInputEl } from ".
 import { focusSearch, search, tryFocusSearch, unfocusSearch } from "./utils/search";
 import {
   enableSearchBookmark,
-  disableSearchBookmark
+  disableSearchBookmark,
+  refreshBookmarkSearchResults
 } from "src/newtab/scripts/utils/search-bookmark";
 import {
   focusBookmarkSearch,
@@ -26,7 +27,13 @@ export const listenToKeys = (config: Config) => {
     const searchFocused = document.activeElement === searchInputEl;
     const bookmarkSearchFocused = document.activeElement === bookmarkSearchInputEl;
 
-    if (e.key === config.hotkeys.activationKey) tryFocusSearch(config, e);
+    if (e.key === config.hotkeys.activationKey) {
+      if (bookmarkSearchSectionEl.classList.contains("grid")) {
+        tryFocusBookmarkSearch(config, e);
+      } else {
+        tryFocusSearch(config, e);
+      }
+    }
     if (e.key === config.hotkeys.closePageKey && !searchFocused) window.close();
 
     // bookmarks stuff
@@ -40,7 +47,12 @@ export const listenToKeys = (config: Config) => {
         }
       }
 
-      if (e.key === "b" && !searchFocused && !bookmarkSearchFocused) {
+      if (
+        e.key === "b" &&
+        !searchFocused &&
+        !bookmarkSearchFocused &&
+        !bookmarkSearchSectionEl.classList.contains("grid")
+      ) {
         enableSearchBookmark(config.bookmarks.userDefined);
         tryFocusBookmarkSearch(config, e);
       }
@@ -85,6 +97,8 @@ export const listenToKeys = (config: Config) => {
   bookmarkSearchInputEl.addEventListener("focus", (e) => focusBookmarkSearch(config, e));
 
   bookmarkSearchInputEl.addEventListener("keyup", (e) => {
+    refreshBookmarkSearchResults(config.bookmarks.userDefined);
+
     if (e.key === "Enter") {
       e.preventDefault();
     }
