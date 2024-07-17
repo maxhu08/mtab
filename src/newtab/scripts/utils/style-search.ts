@@ -12,7 +12,10 @@ export const styleSearch = (
   style: UIStyle,
   textColor: string,
   placeholderTextColor: string,
-  foregroundColor: string
+  foregroundColor: string,
+  searchIconColor: string,
+  bookmarkIconColor: string,
+  selectIconColor: string
 ) => {
   if (!enabled) {
     searchContainerEl.classList.add("hidden");
@@ -28,6 +31,15 @@ export const styleSearch = (
 }
 .placeholder-color-bookmark-search::placeholder {
   color: ${placeholderTextColor};
+} 
+.search-search-icon-color {
+  color: ${searchIconColor};
+} 
+.search-bookmark-icon-color {
+  color: ${bookmarkIconColor};
+} 
+.search-select-icon-color {
+  color: ${selectIconColor};
 } 
 `;
 

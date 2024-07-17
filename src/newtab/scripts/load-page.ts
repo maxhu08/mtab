@@ -5,7 +5,7 @@ import { getConfig } from "./config";
 import { setTitle } from "./utils/set-title";
 import { setUISyle } from "src/newtab/scripts/utils/set-ui-style";
 import { loadWallpaper } from "src/newtab/scripts/utils/load-wallpaper";
-import { setSearchStuff } from "src/newtab/scripts/utils/set-search-font";
+import { setSearchStuff } from "src/newtab/scripts/utils/set-search-stuff";
 import { styleSearch } from "src/newtab/scripts/utils/style-search";
 import { styleMessage } from "src/newtab/scripts/utils/style-message";
 import { setMessage } from "./utils/set-message";
@@ -27,13 +27,20 @@ export const loadPage = () => {
 
     loadWallpaper(config);
 
-    setSearchStuff(config.search.font, config.search.placeholderText);
+    setSearchStuff(
+      config.search.font,
+      config.search.placeholderText,
+      config.search.bookmarkPlaceholderText
+    );
     styleSearch(
       config.search.enabled,
       config.ui.style,
       config.search.textColor,
       config.search.placeholderTextColor,
-      config.ui.foregroundColor
+      config.ui.foregroundColor,
+      config.search.searchIconColor,
+      config.search.bookmarkIconColor,
+      config.search.selectIconColor
     );
 
     styleMessage(config.message.textColor, config.message.font);

@@ -46,7 +46,7 @@ export const refreshBookmarkSearchResults = (
     if (index === selectedIndex) {
       bookmarkSearchResultsContainerEl.innerHTML += `
         <div bookmark-result-url="${bookmark.url}">
-          <span class="text-amber-500 font-semibold">&nbsp;></span>
+          <span class="search-select-icon-color font-semibold">&nbsp;></span>
           ${bookmark.name}
         </div>
       `;

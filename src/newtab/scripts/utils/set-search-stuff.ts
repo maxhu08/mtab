@@ -1,6 +1,10 @@
-import { searchInputEl } from "src/newtab/scripts/ui";
+import { bookmarkSearchInputEl, searchInputEl } from "src/newtab/scripts/ui";
 
-export const setSearchStuff = (font: string, placeholderText: string) => {
+export const setSearchStuff = (
+  font: string,
+  placeholderText: string,
+  bookmarkPlaceholderText: string
+) => {
   const searchFontCss = `
 .font-search {
   font-family: ${font};
@@ -19,4 +23,5 @@ export const setSearchStuff = (font: string, placeholderText: string) => {
   document.head.appendChild(styleElement);
 
   searchInputEl.placeholder = placeholderText;
+  bookmarkSearchInputEl.placeholder = bookmarkPlaceholderText;
 };
