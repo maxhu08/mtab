@@ -7,7 +7,11 @@ import {
   searchPlaceholderTextInputEl,
   searchTextColorInputEl,
   searchUseCustomEngineEnabledCheckboxEl,
-  searchCustomEngineURLInputEl
+  searchCustomEngineURLInputEl,
+  searchBookmarkPlaceholderTextInputEl,
+  searchSearchIconColorInputEl,
+  searchBookmarkIconColorInputEl,
+  searchSelectIconColorInputEl
 } from "src/options/scripts/ui";
 
 export const saveSearchSettingsToDraft = (draft: Config) => {
@@ -16,6 +20,11 @@ export const saveSearchSettingsToDraft = (draft: Config) => {
   draft.search.textColor = searchTextColorInputEl.value;
   draft.search.placeholderText = searchPlaceholderTextInputEl.value;
   draft.search.placeholderTextColor = searchPlaceholderTextColorInputEl.value;
+  draft.search.bookmarkIconColor = searchBookmarkPlaceholderTextInputEl.value;
+
+  draft.search.searchIconColor = searchSearchIconColorInputEl.value;
+  draft.search.bookmarkIconColor = searchBookmarkIconColorInputEl.value;
+  draft.search.selectIconColor = searchSelectIconColorInputEl.value;
 
   draft.search.useCustomEngine = searchUseCustomEngineEnabledCheckboxEl.checked;
   draft.search.customEngineURL = searchCustomEngineURLInputEl.value;

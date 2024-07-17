@@ -76,8 +76,20 @@ export const searchTextColorInputEl = document.getElementById("search-text-color
 export const searchPlaceholderTextContainerEl = document.getElementById("search-placeholder-text-container") as HTMLDivElement;
 export const searchPlaceholderTextInputEl = document.getElementById("search-placeholder-text-input") as HTMLInputElement;
 
+export const searchBookmarkPlaceholderTextContainerEl = document.getElementById("search-bookmark-placeholder-text-container") as HTMLDivElement;
+export const searchBookmarkPlaceholderTextInputEl = document.getElementById("search-bookmark-placeholder-text-input") as HTMLInputElement;
+
 export const searchPlaceholderTextColorContainerEl = document.getElementById("search-placeholder-text-color-container") as HTMLDivElement;
 export const searchPlaceholderTextColorInputEl = document.getElementById("search-placeholder-text-color-input") as HTMLInputElement;
+
+export const searchSearchIconColorContainerEl = document.getElementById("search-search-icon-color-container") as HTMLDivElement;
+export const searchSearchIconColorInputEl = document.getElementById("search-search-icon-color-input") as HTMLInputElement;
+
+export const searchBookmarkIconColorContainerEl = document.getElementById("search-bookmark-icon-color-container") as HTMLDivElement;
+export const searchBookmarkIconColorInputEl = document.getElementById("search-bookmark-icon-color-input") as HTMLInputElement;
+
+export const searchSelectIconColorContainerEl = document.getElementById("search-select-icon-color-container") as HTMLDivElement;
+export const searchSelectIconColorInputEl = document.getElementById("search-select-icon-color-input") as HTMLInputElement;
 
 export const searchEngineDuckduckgoButtonEl = document.getElementById("search-engine-duckduckgo-button") as HTMLButtonElement
 export const searchEngineGoogleButtonEl = document.getElementById("search-engine-google-button") as HTMLButtonElement
@@ -158,8 +170,24 @@ export const inputs: Input[] = [
     input: searchPlaceholderTextInputEl
   },
   {
+    container: searchBookmarkPlaceholderTextContainerEl,
+    input: searchBookmarkPlaceholderTextInputEl
+  },
+  {
     container: searchPlaceholderTextColorContainerEl,
     input: searchPlaceholderTextColorInputEl
+  },
+  {
+    container: searchSearchIconColorContainerEl,
+    input: searchSearchIconColorInputEl
+  },
+  {
+    container: searchBookmarkIconColorContainerEl,
+    input: searchBookmarkIconColorInputEl
+  },
+  {
+    container: searchSelectIconColorContainerEl,
+    input: searchSelectIconColorInputEl
   },
   {
     container: searchFocusedBorderColorContainerEl,

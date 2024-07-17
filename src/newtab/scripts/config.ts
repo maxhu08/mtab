@@ -57,7 +57,11 @@ export const defaultConfig: Config = {
     font: `"Jetbrains-Mono-Regular-Fixed"`,
     textColor: "#ffffff",
     placeholderText: "search...",
+    bookmarkPlaceholderText: "find bookmark...",
     placeholderTextColor: "#a1a1aa",
+    searchIconColor: "#a1a1aa",
+    bookmarkIconColor: "#a1a1aa",
+    selectIconColor: "#a1a1aa",
     engine: "duckduckgo",
     useCustomEngine: false,
     customEngineURL: "",
@@ -170,7 +174,11 @@ export interface Config {
     font: string;
     textColor: string;
     placeholderText: string;
+    bookmarkPlaceholderText: string;
     placeholderTextColor: string;
+    searchIconColor: string;
+    bookmarkIconColor: string;
+    selectIconColor: string;
     engine: SearchEngine;
     useCustomEngine: boolean;
     customEngineURL: string;

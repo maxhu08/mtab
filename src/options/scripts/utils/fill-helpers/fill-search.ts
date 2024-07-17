@@ -15,14 +15,22 @@ import {
   searchPlaceholderTextColorInputEl,
   searchEnabledCheckboxEl,
   searchUseCustomEngineEnabledCheckboxEl,
-  searchCustomEngineURLInputEl
+  searchCustomEngineURLInputEl,
+  searchBookmarkPlaceholderTextInputEl,
+  searchSearchIconColorInputEl,
+  searchBookmarkIconColorInputEl,
+  searchSelectIconColorInputEl
 } from "src/options/scripts/ui";
 
 export const fillSearchInputs = (config: Config) => {
   searchFontInputEl.value = config.search.font;
   searchTextColorInputEl.value = config.search.textColor;
   searchPlaceholderTextInputEl.value = config.search.placeholderText;
+  searchBookmarkPlaceholderTextInputEl.value = config.search.bookmarkPlaceholderText;
   searchPlaceholderTextColorInputEl.value = config.search.placeholderTextColor;
+  searchSearchIconColorInputEl.value = config.search.searchIconColor;
+  searchBookmarkIconColorInputEl.value = config.search.bookmarkIconColor;
+  searchSelectIconColorInputEl.value = config.search.selectIconColor;
 
   if (!config.search.useCustomEngine) {
     switch (config.search.engine) {
