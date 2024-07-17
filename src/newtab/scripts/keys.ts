@@ -51,10 +51,13 @@ export const listenToKeys = (config: Config) => {
           disableSearchBookmark();
           bookmarkSearchInputEl.value = "";
         } else if (e.key === "ArrowDown") {
+          e.preventDefault();
+          const results = bookmarkSearchResultsContainerEl.children.length;
+
           // prettier-ignore
           const prevIndex = parseInt(bookmarkSearchResultsContainerEl.getAttribute("selected-index") as string);
           // prettier-ignore
-          if (prevIndex < config.bookmarks.userDefined.length - 1) {
+          if (prevIndex < results - 1) {
             bookmarkSearchResultsContainerEl.setAttribute("selected-index", ((prevIndex) + 1).toString());
           }
 
@@ -63,6 +66,8 @@ export const listenToKeys = (config: Config) => {
             config.search.placeholderTextColor
           );
         } else if (e.key === "ArrowUp") {
+          e.preventDefault();
+
           // prettier-ignore
           const prevIndex = parseInt(bookmarkSearchResultsContainerEl.getAttribute("selected-index") as string);
           // prettier-ignore

@@ -1,5 +1,4 @@
 import { UserDefinedBookmark, Config } from "src/newtab/scripts/config";
-import { bookmarksUserDefinedList } from "src/options/scripts/ui";
 
 export const saveBookmarksSettingsToDraft = (draft: Config) => {
   const selectedEl = document.querySelector(
