@@ -1,10 +1,7 @@
-# Changes in 1.2.5
+# Changes in 1.2.6
 
 in this release:
 
-- added ability to change search bookmarks placeholder
-- added ability to change search icon color
-- added ability to change search bookmarks icon color
-- added ability to change search select icon color
-- fix issue where you can select non existent bookmarks in search bookmark menu
-- prevent opening bookmark if there are no results
+- make bookmark search like fuzzy find
+- fix issue with bookmark placeholder text not saving
+- add support for new window in firefox
