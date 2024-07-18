@@ -12,6 +12,9 @@ manifest_content='{
   "chrome_url_overrides": {
     "newtab": "index.html"
   },
+  "chrome_settings_overrides": {
+    "homepage": "index.html"
+  },
   "icons": {
     "16": "16.png",
     "32": "32.png",
