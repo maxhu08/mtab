@@ -19,6 +19,7 @@ export const saveSearchSettingsToDraft = (draft: Config) => {
   draft.search.font = searchFontInputEl.value;
   draft.search.textColor = searchTextColorInputEl.value;
   draft.search.placeholderText = searchPlaceholderTextInputEl.value;
+  draft.search.bookmarkPlaceholderText = searchBookmarkPlaceholderTextInputEl.value;
   draft.search.placeholderTextColor = searchPlaceholderTextColorInputEl.value;
   draft.search.bookmarkIconColor = searchBookmarkPlaceholderTextInputEl.value;
 
