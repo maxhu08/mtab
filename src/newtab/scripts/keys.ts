@@ -40,7 +40,8 @@ export const listenToKeys = (config: Config) => {
         tryFocusSearch(config, e);
       }
     }
-    if (e.key === config.hotkeys.closePageKey && !searchFocused) window.close();
+    if (e.key === config.hotkeys.closePageKey && !searchFocused && !bookmarkSearchFocused)
+      window.close();
 
     // bookmarks stuff
     if (config.bookmarks.type === "user-defined") {
