@@ -33,6 +33,12 @@ downloads here:
 
 [![Star History Chart](https://api.star-history.com/svg?repos=maxhu08/mtab&type=Date)](https://star-history.com/#maxhu08/mtab&Date)
 
-## setup
+## extra
 
-find how to setup here -> https://github.com/maxhu08/mtab/blob/master/SETUP.md
+<div align="center">
+
+Find how to setup [here](./docs/SETUP.md)
+
+Want to [contribute](./docs/CONTRIBUTING.md)?
+
+</div>

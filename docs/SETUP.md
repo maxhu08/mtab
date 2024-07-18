@@ -52,3 +52,5 @@ to package
 bun package-chrome
 bun package-firefox
 ```
+
+Want to [contribute](./CONTRIBUTING.md)?
