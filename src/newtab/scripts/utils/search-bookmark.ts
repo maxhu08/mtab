@@ -8,12 +8,13 @@ import {
 
 export const enableSearchBookmark = (
   bookmarks: UserDefinedBookmark[],
+  textColor: string,
   placeholderTextColor: string
 ) => {
   searchSectionEl.classList.replace("grid", "hidden");
   bookmarkSearchSectionEl.classList.replace("hidden", "grid");
 
-  refreshBookmarkSearchResults(bookmarks, placeholderTextColor);
+  refreshBookmarkSearchResults(bookmarks, textColor, placeholderTextColor);
 };
 
 export const disableSearchBookmark = () => {
@@ -25,6 +26,7 @@ export const disableSearchBookmark = () => {
 
 export const refreshBookmarkSearchResults = (
   bookmarks: UserDefinedBookmark[],
+  textColor: string,
   placeholderTextColor: string
 ) => {
   bookmarkSearchResultsContainerEl.innerHTML = "";
@@ -34,25 +36,30 @@ export const refreshBookmarkSearchResults = (
 
   const bookmarkSearchValue = bookmarkSearchInputEl.value.toLowerCase();
 
-  const filteredBookmarks = bookmarks
-    .filter((bookmark) => bookmark.name.toLowerCase().includes(bookmarkSearchValue))
-    .sort((a, b) => {
-      const aContains = a.name.toLowerCase().startsWith(bookmarkSearchValue);
-      const bContains = b.name.toLowerCase().startsWith(bookmarkSearchValue);
-      return aContains === bContains ? 0 : aContains ? -1 : 1;
-    });
+  const filteredBookmarks = fuzzySearchBookmark(bookmarkSearchValue, bookmarks).sort((a, b) => {
+    const aContains = a.name.toLowerCase().startsWith(bookmarkSearchValue);
+    const bContains = b.name.toLowerCase().startsWith(bookmarkSearchValue);
+    return aContains === bContains ? 0 : aContains ? -1 : 1;
+  });
 
   filteredBookmarks.forEach((bookmark, index) => {
+    const matchedNameHtml = getMatchedNameHtml(
+      bookmark.name,
+      bookmarkSearchValue,
+      textColor,
+      placeholderTextColor
+    );
+
     if (index === selectedIndex) {
       bookmarkSearchResultsContainerEl.innerHTML += `
         <div bookmark-result-url="${bookmark.url}">
           <span class="search-select-icon-color font-semibold">&nbsp;></span>
-          ${bookmark.name}
+          ${matchedNameHtml}
         </div>
       `;
     } else {
       bookmarkSearchResultsContainerEl.innerHTML += `
-        <div bookmark-result-url="${bookmark.url}" style="color: ${placeholderTextColor};">&nbsp;&nbsp;&nbsp;${bookmark.name}</div>
+        <div bookmark-result-url="${bookmark.url}">&nbsp;&nbsp;&nbsp;${matchedNameHtml}</div>
       `;
     }
   });
@@ -62,4 +69,53 @@ export const refreshBookmarkSearchResults = (
       <p class="text-center">No results!</p>
     `;
   }
+};
+
+const getMatchedNameHtml = (
+  name: string,
+  searchValue: string,
+  textColor: string,
+  placeholderTextColor: string
+) => {
+  let result = "";
+  let searchIndex = 0;
+
+  for (let i = 0; i < name.length; i++) {
+    if (
+      searchIndex < searchValue.length &&
+      name[i].toLowerCase() === searchValue[searchIndex].toLowerCase()
+    ) {
+      result += `<span style="color: ${textColor};">${name[i]}</span>`;
+      searchIndex++;
+    } else {
+      result += `<span style="color: ${placeholderTextColor};">${name[i]}</span>`;
+    }
+  }
+
+  return result;
+};
+
+const fuzzySearchBookmark = (search: string, bookmarks: UserDefinedBookmark[]) => {
+  console.log(search);
+  if (search === "") {
+    const results = bookmarks;
+    return results;
+  }
+
+  const results = bookmarks.filter((bookmark) => {
+    let searchIndex = 0;
+
+    for (let i = 0; i < bookmark.name.length; i++) {
+      if (bookmark.name[i].toLowerCase() === search[searchIndex].toLowerCase()) {
+        searchIndex++;
+      }
+      if (searchIndex === search.length) {
+        return true;
+      }
+    }
+
+    return false;
+  });
+
+  return results;
 };

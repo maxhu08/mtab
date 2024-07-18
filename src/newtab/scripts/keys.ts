@@ -64,6 +64,7 @@ export const listenToKeys = (config: Config) => {
 
           refreshBookmarkSearchResults(
             config.bookmarks.userDefined,
+            config.search.textColor,
             config.search.placeholderTextColor
           );
         } else if (e.key === "ArrowUp") {
@@ -78,6 +79,7 @@ export const listenToKeys = (config: Config) => {
 
           refreshBookmarkSearchResults(
             config.bookmarks.userDefined,
+            config.search.textColor,
             config.search.placeholderTextColor
           );
         }
@@ -89,7 +91,11 @@ export const listenToKeys = (config: Config) => {
         !bookmarkSearchFocused &&
         !bookmarkSearchSectionEl.classList.contains("grid")
       ) {
-        enableSearchBookmark(config.bookmarks.userDefined, config.search.placeholderTextColor);
+        enableSearchBookmark(
+          config.bookmarks.userDefined,
+          config.search.textColor,
+          config.search.placeholderTextColor
+        );
         tryFocusBookmarkSearch(config, e);
       }
     }
@@ -133,7 +139,11 @@ export const listenToKeys = (config: Config) => {
   bookmarkSearchInputEl.addEventListener("focus", (e) => focusBookmarkSearch(config, e));
 
   bookmarkSearchInputEl.addEventListener("keyup", (e) => {
-    refreshBookmarkSearchResults(config.bookmarks.userDefined, config.search.placeholderTextColor);
+    enableSearchBookmark(
+      config.bookmarks.userDefined,
+      config.search.textColor,
+      config.search.placeholderTextColor
+    );
 
     if (e.key === "Enter") {
       e.preventDefault();
