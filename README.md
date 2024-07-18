@@ -1,8 +1,8 @@
 <div align="center">
 
-# mtab
+<img src="./assets/logo-full.png">
 
-a simple configurable new tab extension
+## a simple configurable new tab extension
 
 </div>
 
@@ -29,7 +29,7 @@ downloads here:
 ![showcase](./assets/mtab-showcase.png)
 ![demo-5](./assets/5.png)
 
-# star-history
+## star-history
 
 [![Star History Chart](https://api.star-history.com/svg?repos=maxhu08/mtab&type=Date)](https://star-history.com/#maxhu08/mtab&Date)
 
