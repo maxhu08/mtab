@@ -113,6 +113,8 @@ export const listenToKeys = (config: Config) => {
     if (e.key === "Enter") {
       e.preventDefault();
 
+      if (searchInputEl.value === "") return;
+
       // open in new tab if ctrl
       if (e.ctrlKey) {
         search(config, searchInputEl.value, true);
