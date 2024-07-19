@@ -1,5 +1,7 @@
-# Changes in 1.2.7
+# Changes in 1.2.8
 
 in this release:
 
-- add ability to set hotkeys
+- make bookmark open in new tab if holding ctrl key
+- don't search if search input is empty
+- fix issue with selector disappearing in search bookmarks menu
