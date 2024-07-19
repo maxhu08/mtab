@@ -23,5 +23,17 @@ export const listenToHotkeyInputs = (hotkeyInputs: HotkeyInput[]) => {
         e
       })
     );
+
+    input.input.addEventListener("input", () => {
+      const val = input.input.value;
+
+      if (val === "") {
+        input.status.textContent = ` (none)`;
+      } else if (val === " ") {
+        input.status.textContent = ` (SPC)`;
+      } else {
+        input.status.textContent = ` (${input.input.value})`;
+      }
+    });
   });
 };

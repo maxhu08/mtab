@@ -186,9 +186,9 @@ export interface Config {
   };
   hotkeys: {
     enabled: boolean;
-    activationKey: " ";
-    closePageKey: "x";
-    searchBookmarksKey: "b";
+    activationKey: string;
+    closePageKey: string;
+    searchBookmarksKey: string;
   };
   bookmarks: {
     type: BookmarksType;

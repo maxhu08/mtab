@@ -109,6 +109,13 @@ export const hotkeysActivationKeyContainerEl = document.getElementById("hotkeys-
 export const hotkeysActivationKeyInputEl = document.getElementById("hotkeys-activation-key-input") as HTMLInputElement;
 export const hotkeysActivationKeyStatusEl = document.getElementById("hotkeys-activation-key-status") as HTMLSpanElement;
 
+export const hotkeysClosePageKeyContainerEl = document.getElementById("hotkeys-close-page-key-container") as HTMLDivElement;
+export const hotkeysClosePageKeyInputEl = document.getElementById("hotkeys-close-page-key-input") as HTMLInputElement;
+export const hotkeysClosePageKeyStatusEl = document.getElementById("hotkeys-close-page-key-status") as HTMLSpanElement;
+
+export const hotkeysSearchBookmarksKeyContainerEl = document.getElementById("hotkeys-search-bookmarks-key-container") as HTMLDivElement;
+export const hotkeysSearchBookmarksKeyInputEl = document.getElementById("hotkeys-search-bookmarks-key-input") as HTMLInputElement;
+export const hotkeysSearchBookmarksKeyStatusEl = document.getElementById("hotkeys-search-bookmarks-key-status") as HTMLSpanElement;
 
 export const bookmarksTypeDefaultButtonEl = document.getElementById("bookmarks-type-default-button") as HTMLButtonElement;
 export const bookmarksTypeUserDefinedButtonEl = document.getElementById("bookmarks-type-user-defined-button") as HTMLButtonElement;
@@ -277,6 +284,16 @@ export const hotkeyInputs: HotkeyInput[] = [
     container: hotkeysActivationKeyContainerEl,
     input: hotkeysActivationKeyInputEl,
     status: hotkeysActivationKeyStatusEl,
+  }, 
+  {
+    container: hotkeysClosePageKeyContainerEl,
+    input: hotkeysClosePageKeyInputEl,
+    status: hotkeysClosePageKeyStatusEl,
+  },
+  {
+    container: hotkeysSearchBookmarksKeyContainerEl,
+    input: hotkeysSearchBookmarksKeyInputEl,
+    status: hotkeysSearchBookmarksKeyStatusEl,
   }
 ]
 
