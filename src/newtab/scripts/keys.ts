@@ -5,7 +5,7 @@ import {
   bookmarkSearchResultsContainerEl,
   bookmarkSearchSectionEl,
   searchInputEl
-} from "./ui";
+} from "src/newtab/scripts/ui";
 
 // utils
 import { focusSearch, search, tryFocusSearch, unfocusSearch } from "./utils/search";
@@ -153,6 +153,12 @@ export const listenToKeys = (config: Config) => {
       // prettier-ignore
       const bookmarkUrl = bookmarkSearchResultsContainerEl.children[resultIndex].getAttribute("bookmark-result-url") as string;
       if (!bookmarkUrl) return;
+
+      // open in new tab if ctrl
+      if (e.ctrlKey) {
+        openUserDefinedBookmark(bookmarkUrl, config.animations.enabled, true);
+        return;
+      }
 
       openUserDefinedBookmark(bookmarkUrl, config.animations.enabled);
     }

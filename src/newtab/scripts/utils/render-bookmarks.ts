@@ -1,5 +1,5 @@
 import { Config } from "../config";
-import { bookmarksContainerEl } from "../ui";
+import { bookmarksContainerEl, bookmarkSearchInputEl } from "../ui";
 
 export const renderBookmarks = (config: Config) => {
   switch (config.bookmarks.type) {
@@ -149,7 +149,18 @@ const renderUserDefinedBookmarks = (config: Config) => {
     });
 };
 
-export const openUserDefinedBookmark = (bookmarkUrl: string, animtionsEnabled: boolean) => {
+export const openUserDefinedBookmark = (
+  bookmarkUrl: string,
+  animtionsEnabled: boolean,
+  openInNewTab: boolean = false
+) => {
+  if (openInNewTab) {
+    window.open(bookmarkUrl, "_blank");
+    bookmarkSearchInputEl.value = "";
+
+    return;
+  }
+
   if (animtionsEnabled) {
     const content = document.getElementById("content") as HTMLDivElement;
 
