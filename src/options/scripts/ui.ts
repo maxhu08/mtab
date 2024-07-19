@@ -1,8 +1,3 @@
-import { exportConfig } from "src/options/scripts/utils/export-config";
-import { importConfig } from "src/options/scripts/utils/import-config";
-import { saveConfig } from "src/options/scripts/utils/save-config";
-import { setDefaultConfig } from "src/options/scripts/utils/set-default-config";
-
 export const usernameContainerEl = document.getElementById("username-container") as HTMLDivElement;
 export const usernameInputEl = document.getElementById("username-input") as HTMLInputElement;
 
@@ -109,6 +104,11 @@ export const searchCustomEngineURLContainerEl = document.getElementById("search-
 export const searchCustomEngineURLInputEl = document.getElementById("search-custom-engine-url-input") as HTMLInputElement;
 
 export const hotkeysEnabledCheckboxEl = document.getElementById("hotkeys-enabled-checkbox") as HTMLInputElement;
+
+export const hotkeysActivationKeyContainerEl = document.getElementById("hotkeys-activation-key-container") as HTMLDivElement;
+export const hotkeysActivationKeyInputEl = document.getElementById("hotkeys-activation-key-input") as HTMLInputElement;
+export const hotkeysActivationKeyStatusEl = document.getElementById("hotkeys-activation-key-status") as HTMLSpanElement;
+
 
 export const bookmarksTypeDefaultButtonEl = document.getElementById("bookmarks-type-default-button") as HTMLButtonElement;
 export const bookmarksTypeUserDefinedButtonEl = document.getElementById("bookmarks-type-user-defined-button") as HTMLButtonElement;
@@ -272,24 +272,16 @@ interface ButtonSwitch {
   attr: string;
 }
 
-const saveBtn = document.getElementById("save-button") as HTMLButtonElement;
-saveBtn.onclick = () => {
-  saveConfig();
-};
+export const hotkeyInputs: HotkeyInput[] = [
+  {
+    container: hotkeysActivationKeyContainerEl,
+    input: hotkeysActivationKeyInputEl,
+    status: hotkeysActivationKeyStatusEl,
+  }
+]
 
-const exportBtn = document.getElementById("export-button") as HTMLButtonElement;
-exportBtn.onclick = () => {
-  saveConfig()
-  exportConfig();
-};
-
-const importBtn = document.getElementById("import-button") as HTMLButtonElement;
-importBtn.onclick = () => {
-  importConfig();
-};
-
-const resetToDefaultBtn = document.getElementById("reset-to-default-button") as HTMLButtonElement;
-resetToDefaultBtn.onclick = () => {
-  setDefaultConfig()
+export interface HotkeyInput {
+  container: HTMLDivElement;
+  input: HTMLInputElement;
+  status: HTMLSpanElement;
 }
-

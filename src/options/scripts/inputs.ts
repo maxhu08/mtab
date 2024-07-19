@@ -1,5 +1,5 @@
 import { oconfig } from "src/options/scripts/oconfig";
-import { buttonSwitches, inputs } from "./ui";
+import { buttonSwitches, hotkeyInputs, inputs } from "./ui";
 import { switchButtons } from "src/options/scripts/utils/switch-buttons";
 
 import {
@@ -13,6 +13,11 @@ import {
   searchEngineEcosiaButtonEl,
   searchUseCustomEngineEnabledCheckboxEl
 } from "src/options/scripts/ui";
+import { listenToHotkeyInputs } from "src/options/scripts/utils/hotkey-inputs";
+import { saveConfig } from "src/options/scripts/utils/save-config";
+import { exportConfig } from "src/options/scripts/utils/export-config";
+import { importConfig } from "src/options/scripts/utils/import-config";
+import { setDefaultConfig } from "src/options/scripts/utils/set-default-config";
 
 export const listenToInputs = () => {
   inputs.forEach((input) => {
@@ -40,6 +45,8 @@ export const listenToInputs = () => {
     switchButtons(btnSwitch.buttons, btnSwitch.attr);
   });
 
+  listenToHotkeyInputs(hotkeyInputs);
+
   //Special case for using a custom search engine
   // if custom search engine is enabled, then disable it
   const arrayOfSearchEngines = [
@@ -60,6 +67,27 @@ export const listenToInputs = () => {
       }
     });
   });
+
+  const saveBtn = document.getElementById("save-button") as HTMLButtonElement;
+  saveBtn.onclick = () => {
+    saveConfig();
+  };
+
+  const exportBtn = document.getElementById("export-button") as HTMLButtonElement;
+  exportBtn.onclick = () => {
+    saveConfig();
+    exportConfig();
+  };
+
+  const importBtn = document.getElementById("import-button") as HTMLButtonElement;
+  importBtn.onclick = () => {
+    importConfig();
+  };
+
+  const resetToDefaultBtn = document.getElementById("reset-to-default-button") as HTMLButtonElement;
+  resetToDefaultBtn.onclick = () => {
+    setDefaultConfig();
+  };
 };
 
 export const unfocusInput = ({
