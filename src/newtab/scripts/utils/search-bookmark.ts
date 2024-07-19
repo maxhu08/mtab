@@ -32,7 +32,7 @@ export const refreshBookmarkSearchResults = (
   bookmarkSearchResultsContainerEl.innerHTML = "";
 
   // prettier-ignore
-  const selectedIndex = parseInt(bookmarkSearchResultsContainerEl.getAttribute("selected-index") as string);
+  let selectedIndex = parseInt(bookmarkSearchResultsContainerEl.getAttribute("selected-index") as string);
 
   const bookmarkSearchValue = bookmarkSearchInputEl.value.toLowerCase();
 
@@ -41,6 +41,9 @@ export const refreshBookmarkSearchResults = (
     const bContains = b.name.toLowerCase().startsWith(bookmarkSearchValue);
     return aContains === bContains ? 0 : aContains ? -1 : 1;
   });
+
+  // make sure selectedIndex is within filterbookmarks amount
+  if (selectedIndex > filteredBookmarks.length - 1) selectedIndex = filteredBookmarks.length - 1;
 
   filteredBookmarks.forEach((bookmark, index) => {
     const matchedNameHtml = getMatchedNameHtml(
@@ -96,7 +99,6 @@ const getMatchedNameHtml = (
 };
 
 const fuzzySearchBookmark = (search: string, bookmarks: UserDefinedBookmark[]) => {
-  console.log(search);
   if (search === "") {
     const results = bookmarks;
     return results;
