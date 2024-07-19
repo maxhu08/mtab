@@ -145,7 +145,13 @@ const renderUserDefinedBookmarks = (config: Config) => {
         );
       }
 
-      bookmarkEl!.onclick = () => openUserDefinedBookmark(bookmark.url, config.animations.enabled);
+      bookmarkEl!.onclick = (e) => {
+        if (e.ctrlKey) {
+          openUserDefinedBookmark(bookmark.url, config.animations.enabled, true);
+        } else {
+          openUserDefinedBookmark(bookmark.url, config.animations.enabled);
+        }
+      };
     });
 };
 
