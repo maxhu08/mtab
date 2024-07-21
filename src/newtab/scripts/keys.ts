@@ -60,6 +60,8 @@ export const listenToKeys = (config: Config) => {
           // prettier-ignore
           if (prevIndex < results - 1) {
             bookmarkSearchResultsContainerEl.setAttribute("selected-index", ((prevIndex) + 1).toString());
+          } else {
+            bookmarkSearchResultsContainerEl.setAttribute("selected-index", (0).toString());
           }
 
           refreshBookmarkSearchResults(
@@ -69,12 +71,15 @@ export const listenToKeys = (config: Config) => {
           );
         } else if (e.key === "ArrowUp") {
           e.preventDefault();
+          const results = bookmarkSearchResultsContainerEl.children.length;
 
           // prettier-ignore
           const prevIndex = parseInt(bookmarkSearchResultsContainerEl.getAttribute("selected-index") as string);
           // prettier-ignore
           if (prevIndex > 0) {
             bookmarkSearchResultsContainerEl.setAttribute("selected-index", ((prevIndex) - 1).toString());
+          } else {
+            bookmarkSearchResultsContainerEl.setAttribute("selected-index", (results - 1).toString());
           }
 
           refreshBookmarkSearchResults(
