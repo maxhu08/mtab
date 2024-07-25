@@ -1,6 +1,6 @@
-# Changes in 1.2.9
+# Changes in 1.3.0
 
 in this release:
 
-- make it so that bookmark search menu loops around when at bottom or top
-- fix fileUpload wallpapers not working
+- add grow-scale animation option
+- fix issue with flickering when animations are enabled on firefox
