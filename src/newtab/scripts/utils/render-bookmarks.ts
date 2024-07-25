@@ -134,10 +134,15 @@ const renderUserDefinedBookmarks = (config: Config) => {
       const bookmarkEl = document.getElementById(`bookmark-${bookmark.name}-${index}`);
 
       if (bookmarkEl && config.animations) {
+        const computedStyle = window.getComputedStyle(bookmarkEl);
+        const animationDuration = parseFloat(computedStyle.animationDuration) * 1000;
         bookmarkEl.addEventListener(
-          "animationend",
+          "animationstart",
           () => {
-            bookmarkEl.classList.remove("opacity-0");
+            // Fix weird flickering issue on firefox
+            setTimeout(() => {
+              bookmarkEl.classList.remove("opacity-0");
+            }, animationDuration - 100);
           },
           {
             once: true
