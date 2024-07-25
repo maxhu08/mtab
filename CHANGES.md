@@ -1,7 +1,6 @@
-# Changes in 1.2.8
+# Changes in 1.2.9
 
 in this release:
 
-- make bookmark open in new tab if holding ctrl key
-- don't search if search input is empty
-- fix issue with selector disappearing in search bookmarks menu
+- make it so that bookmark search menu loops around when at bottom or top
+- fix fileUpload wallpapers not working
