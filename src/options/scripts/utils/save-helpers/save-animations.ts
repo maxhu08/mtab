@@ -48,5 +48,9 @@ export const saveAnimationsToDraft = (draft: Config) => {
       draft.animations.type = "animate-up-smooth";
       break;
     }
+    case "animations-type-grow-scale-button": {
+      draft.animations.type = "animate-grow-scale";
+      break;
+    }
   }
 };

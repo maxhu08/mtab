@@ -142,7 +142,7 @@ const renderUserDefinedBookmarks = (config: Config) => {
             // Fix weird flickering issue on firefox
             setTimeout(() => {
               bookmarkEl.classList.remove("opacity-0");
-            }, animationDuration - 100);
+            }, animationDuration - 500);
           },
           {
             once: true

@@ -50,7 +50,7 @@ export const defaultConfig: Config = {
   animations: {
     enabled: true,
     bookmarkTiming: "left",
-    type: "animate-up-bouncy"
+    type: "animate-grow-scale"
   },
   search: {
     enabled: true,
@@ -111,6 +111,13 @@ export const defaultConfig: Config = {
 export type UIStyle = "solid" | "glass";
 export type WallpaperType = "url" | "fileUpload";
 export type BookmarkTiming = "left" | "right" | "uniform";
+export type AnimationType =
+  | "animate-down-bouncy"
+  | "animate-down-smooth"
+  | "animate-down-fall"
+  | "animate-up-bouncy"
+  | "animate-up-smooth"
+  | "animate-grow-scale";
 export type SearchEngine =
   | "duckduckgo"
   | "google"
@@ -162,12 +169,7 @@ export interface Config {
   animations: {
     enabled: boolean;
     bookmarkTiming: BookmarkTiming;
-    type:
-      | "animate-down-bouncy"
-      | "animate-down-smooth"
-      | "animate-down-fall"
-      | "animate-up-bouncy"
-      | "animate-up-smooth";
+    type: AnimationType;
   };
   search: {
     enabled: boolean;

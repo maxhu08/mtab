@@ -133,6 +133,22 @@
   }
 }
 
+.animate-grow-scale {
+  animation: animateGrowScale 500ms ease-in-out;
+}
+
+@keyframes animateGrowScale {
+  0% {
+    transform: scale(0);
+  }
+  80% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
 .animate-page-shrink {
   animation: animatePageShrink 350ms forwards ease-in-out;
 }

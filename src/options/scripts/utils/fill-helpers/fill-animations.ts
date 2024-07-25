@@ -7,6 +7,7 @@ import {
   animationsTypeDownBouncyButtonEl,
   animationsTypeDownFallButtonEl,
   animationsTypeDownSmoothButtonEl,
+  animationsTypeGrowScaleEl,
   animationsTypeUpBouncyButtonEl,
   animationsTypeUpSmoothEl
 } from "src/options/scripts/ui";
@@ -48,6 +49,10 @@ export const fillAnimationsInputs = (config: Config) => {
     }
     case "animate-up-smooth": {
       animationsTypeUpSmoothEl.click();
+      break;
+    }
+    case "animate-grow-scale": {
+      animationsTypeGrowScaleEl.click();
       break;
     }
   }

@@ -59,6 +59,7 @@ export const animationsTypeDownSmoothButtonEl = document.getElementById("animati
 export const animationsTypeDownFallButtonEl = document.getElementById("animations-type-down-fall-button") as HTMLButtonElement;
 export const animationsTypeUpBouncyButtonEl = document.getElementById("animations-type-up-bouncy-button") as HTMLButtonElement;
 export const animationsTypeUpSmoothEl = document.getElementById("animations-type-up-smooth-button") as HTMLButtonElement;
+export const animationsTypeGrowScaleEl = document.getElementById("animations-type-grow-scale-button") as HTMLButtonElement;
 
 export const searchEnabledCheckboxEl = document.getElementById("search-enabled-checkbox") as HTMLInputElement;
 
@@ -247,7 +248,8 @@ export const buttonSwitches: ButtonSwitch[] = [
       animationsTypeDownSmoothButtonEl,
       animationsTypeDownFallButtonEl,
       animationsTypeUpBouncyButtonEl,
-      animationsTypeUpSmoothEl
+      animationsTypeUpSmoothEl,
+      animationsTypeGrowScaleEl
     ],
     attr: "animations-type"
   },
