@@ -1,6 +1,7 @@
-# Changes in 1.3.0
+# Changes in 1.3.1
 
 in this release:
 
-- add grow-scale animation option
-- fix issue with flickering when animations are enabled on firefox
+- add community-configs
+- remove unused wallpapers
+- fix issue with bookmarks disappearing when switching tabs too quickly
