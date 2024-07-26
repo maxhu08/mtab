@@ -1,4 +1,4 @@
-import { Config, AnimationType } from "src/newtab/scripts/config";
+import { Config, AnimationType, BookmarkTiming } from "src/newtab/scripts/config";
 import {
   animationsEnabledCheckboxEl,
   animationsBookmarkTimingLeftButtonEl,
@@ -17,20 +17,13 @@ import {
 export const fillAnimationsInputs = (config: Config) => {
   animationsEnabledCheckboxEl.checked = config.animations.enabled;
 
-  switch (config.animations.bookmarkTiming) {
-    case "left": {
-      animationsBookmarkTimingLeftButtonEl.click();
-      break;
-    }
-    case "right": {
-      animationsBookmarkTimingRightButtonEl.click();
-      break;
-    }
-    case "uniform": {
-      animationsBookmarkTimingUniformButtonEl.click();
-      break;
-    }
-  }
+  const bookmarkTimingPairs: Record<BookmarkTiming, HTMLButtonElement> = {
+    left: animationsBookmarkTimingLeftButtonEl,
+    right: animationsBookmarkTimingRightButtonEl,
+    uniform: animationsBookmarkTimingUniformButtonEl
+  };
+
+  bookmarkTimingPairs[config.animations.bookmarkTiming].click();
 
   const animationsTypePairs: Record<AnimationType, HTMLButtonElement> = {
     "animate-down-bouncy": animationsTypeDownBouncyButtonEl,

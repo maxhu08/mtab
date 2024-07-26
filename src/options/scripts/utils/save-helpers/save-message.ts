@@ -1,4 +1,4 @@
-import { Config } from "src/newtab/scripts/config";
+import { Config, MessageType } from "src/newtab/scripts/config";
 import {
   messageEnabledCheckboxEl,
   messageFontInputEl,
@@ -18,28 +18,15 @@ export const saveMessageSettingsToDraft = (draft: Config) => {
     `button[btn-option-type="message-type"][selected="yes"]`
   ) as HTMLButtonElement;
 
-  switch (selectedEl.id) {
-    case "message-type-afternoon-morning-button": {
-      draft.message.type = "afternoon-morning";
-      break;
-    }
-    case "message-type-date-button": {
-      draft.message.type = "date";
-      break;
-    }
-    case "message-type-time-12-button": {
-      draft.message.type = "time-12";
-      break;
-    }
-    case "message-type-time-24-button": {
-      draft.message.type = "time-24";
-      break;
-    }
-    case "message-type-custom-button": {
-      draft.message.type = "custom";
-      break;
-    }
-  }
+  const messageTypePairs: Record<string, MessageType> = {
+    "message-type-afternoon-morning-button": "afternoon-morning",
+    "message-type-date-button": "date",
+    "message-type-time-12-button": "time-12",
+    "message-type-time-24-button": "time-24",
+    "message-type-custom-button": "custom"
+  };
+
+  draft.message.type = messageTypePairs[selectedEl.id];
 
   draft.message.customText = messageCustomTextInputEl.value;
 };

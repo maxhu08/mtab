@@ -1,4 +1,4 @@
-import { Config } from "src/newtab/scripts/config";
+import { Config, SearchEngine } from "src/newtab/scripts/config";
 import {
   searchEngineDuckduckgoButtonEl,
   searchEngineBingButtonEl,
@@ -32,41 +32,19 @@ export const fillSearchInputs = (config: Config) => {
   searchBookmarkIconColorInputEl.value = config.search.bookmarkIconColor;
   searchSelectIconColorInputEl.value = config.search.selectIconColor;
 
+  const searchEnginePairs: Record<SearchEngine, HTMLButtonElement> = {
+    duckduckgo: searchEngineDuckduckgoButtonEl,
+    google: searchEngineGoogleButtonEl,
+    bing: searchEngineBingButtonEl,
+    brave: searchEngineBraveButtonEl,
+    yahoo: searchEngineYahooButtonEl,
+    yandex: searchEngineYandexButtonEl,
+    startpage: searchEngineStartpageButtonEl,
+    ecosia: searchEngineEcosiaButtonEl
+  };
+
   if (!config.search.useCustomEngine) {
-    switch (config.search.engine) {
-      case "duckduckgo": {
-        searchEngineDuckduckgoButtonEl.click();
-        break;
-      }
-      case "google": {
-        searchEngineGoogleButtonEl.click();
-        break;
-      }
-      case "bing": {
-        searchEngineBingButtonEl.click();
-        break;
-      }
-      case "brave": {
-        searchEngineBraveButtonEl.click();
-        break;
-      }
-      case "yahoo": {
-        searchEngineYahooButtonEl.click();
-        break;
-      }
-      case "yandex": {
-        searchEngineYandexButtonEl.click();
-        break;
-      }
-      case "startpage": {
-        searchEngineStartpageButtonEl.click();
-        break;
-      }
-      case "ecosia": {
-        searchEngineEcosiaButtonEl.click();
-        break;
-      }
-    }
+    searchEnginePairs[config.search.engine].click();
   }
 
   searchFocusedBorderColorInputEl.value = config.search.focusedBorderColor;
