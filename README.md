@@ -25,6 +25,13 @@ downloads here:
 - change animations
 - change bookmarks
 - hotkeys
+- much more !
+
+## community-configs
+
+Check out community configs here:
+
+[community-configs](./COMMUNITY_CONFIGS.md)
 
 ![showcase](./assets/mtab-showcase.png)
 ![demo-5](./assets/5.png)
