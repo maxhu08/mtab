@@ -1,12 +1,12 @@
-import { Config } from "src/newtab/scripts/config";
+import { Config, AnimationType } from "src/newtab/scripts/config";
 import {
+  animationsEnabledCheckboxEl,
   animationsBookmarkTimingLeftButtonEl,
   animationsBookmarkTimingRightButtonEl,
   animationsBookmarkTimingUniformButtonEl,
-  animationsEnabledCheckboxEl,
   animationsTypeDownBouncyButtonEl,
-  animationsTypeDownFallButtonEl,
   animationsTypeDownSmoothButtonEl,
+  animationsTypeDownFallButtonEl,
   animationsTypeUpBouncyButtonEl,
   animationsTypeUpSmoothEl,
   animationsTypeGrowScaleEl,
@@ -32,38 +32,16 @@ export const fillAnimationsInputs = (config: Config) => {
     }
   }
 
-  switch (config.animations.type) {
-    case "animate-down-bouncy": {
-      animationsTypeDownBouncyButtonEl.click();
-      break;
-    }
-    case "animate-down-fall": {
-      animationsTypeDownFallButtonEl.click();
-      break;
-    }
-    case "animate-down-smooth": {
-      animationsTypeDownSmoothButtonEl.click();
-      break;
-    }
-    case "animate-up-bouncy": {
-      animationsTypeUpBouncyButtonEl.click();
-      break;
-    }
-    case "animate-up-smooth": {
-      animationsTypeUpSmoothEl.click();
-      break;
-    }
-    case "animate-grow-scale": {
-      animationsTypeGrowScaleEl.click();
-      break;
-    }
-    case "animate-fly-left": {
-      animationsTypeFlyLeftEl.click();
-      break;
-    }
-    case "animate-fly-right": {
-      animationsTypeFlyRightEl.click();
-      break;
-    }
-  }
+  const animationsTypePairs: Record<AnimationType, HTMLButtonElement> = {
+    "animate-down-bouncy": animationsTypeDownBouncyButtonEl,
+    "animate-down-smooth": animationsTypeDownSmoothButtonEl,
+    "animate-down-fall": animationsTypeDownFallButtonEl,
+    "animate-up-bouncy": animationsTypeUpBouncyButtonEl,
+    "animate-up-smooth": animationsTypeUpSmoothEl,
+    "animate-grow-scale": animationsTypeGrowScaleEl,
+    "animate-fly-left": animationsTypeFlyLeftEl,
+    "animate-fly-right": animationsTypeFlyRightEl
+  };
+
+  animationsTypePairs[config.animations.type].click();
 };

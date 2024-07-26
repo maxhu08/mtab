@@ -1,4 +1,4 @@
-import { Config } from "src/newtab/scripts/config";
+import { AnimationType, Config } from "src/newtab/scripts/config";
 import { animationsEnabledCheckboxEl } from "src/options/scripts/ui";
 
 export const saveAnimationsToDraft = (draft: Config) => {
@@ -27,38 +27,16 @@ export const saveAnimationsToDraft = (draft: Config) => {
     `button[btn-option-type="animations-type"][selected="yes"]`
   ) as HTMLButtonElement;
 
-  switch (selectedTypeEl.id) {
-    case "animations-type-down-bouncy-button": {
-      draft.animations.type = "animate-down-bouncy";
-      break;
-    }
-    case "animations-type-down-smooth-button": {
-      draft.animations.type = "animate-down-smooth";
-      break;
-    }
-    case "animations-type-down-fall-button": {
-      draft.animations.type = "animate-down-fall";
-      break;
-    }
-    case "animations-type-up-bouncy-button": {
-      draft.animations.type = "animate-up-bouncy";
-      break;
-    }
-    case "animations-type-up-smooth-button": {
-      draft.animations.type = "animate-up-smooth";
-      break;
-    }
-    case "animations-type-grow-scale-button": {
-      draft.animations.type = "animate-grow-scale";
-      break;
-    }
-    case "animations-type-fly-left-button": {
-      draft.animations.type = "animate-fly-left";
-      break;
-    }
-    case "animations-type-fly-right-button": {
-      draft.animations.type = "animate-fly-right";
-      break;
-    }
-  }
+  const animationsTypePairs: Record<string, AnimationType> = {
+    "animations-type-down-bouncy-button": "animate-down-bouncy",
+    "animations-type-down-smooth-button": "animate-down-smooth",
+    "animations-type-down-fall-button": "animate-down-fall",
+    "animations-type-up-bouncy-button": "animate-up-bouncy",
+    "animations-type-up-smooth-button": "animate-up-smooth",
+    "animations-type-grow-scale-button": "animate-grow-scale",
+    "animations-type-fly-left-button": "animate-fly-left",
+    "animations-type-fly-right-button": "animate-fly-right"
+  };
+
+  draft.animations.type = animationsTypePairs[selectedTypeEl.id];
 };
