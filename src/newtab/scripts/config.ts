@@ -50,7 +50,7 @@ export const defaultConfig: Config = {
   animations: {
     enabled: true,
     bookmarkTiming: "left",
-    type: "animate-grow-scale"
+    type: "animate-up-bouncy"
   },
   search: {
     enabled: true,
