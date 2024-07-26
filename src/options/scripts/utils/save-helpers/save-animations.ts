@@ -52,5 +52,13 @@ export const saveAnimationsToDraft = (draft: Config) => {
       draft.animations.type = "animate-grow-scale";
       break;
     }
+    case "animations-type-fly-left-button": {
+      draft.animations.type = "animate-fly-left";
+      break;
+    }
+    case "animations-type-fly-right-button": {
+      draft.animations.type = "animate-fly-right";
+      break;
+    }
   }
 };

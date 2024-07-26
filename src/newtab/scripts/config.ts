@@ -117,7 +117,9 @@ export type AnimationType =
   | "animate-down-fall"
   | "animate-up-bouncy"
   | "animate-up-smooth"
-  | "animate-grow-scale";
+  | "animate-grow-scale"
+  | "animate-fly-left"
+  | "animate-fly-right";
 export type SearchEngine =
   | "duckduckgo"
   | "google"

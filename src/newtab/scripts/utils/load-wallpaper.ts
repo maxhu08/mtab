@@ -6,8 +6,6 @@ export const loadWallpaper = (config: Config) => {
 
   if (config.wallpaper.type === "fileUpload") {
     chrome.storage.local.get(["userUploadedWallpaper"], (data) => {
-      console.log(data);
-
       wallpaperEl.setAttribute(
         "style",
         `background: url("${data.userUploadedWallpaper}") center center / cover no-repeat fixed; transition-duration: 0ms;`
