@@ -1,7 +1,7 @@
-# Changes in 1.3.1
+# Changes in 1.3.2
 
 in this release:
 
-- add community-configs
-- remove unused wallpapers
-- fix issue with bookmarks disappearing when switching tabs too quickly
+- add fly-left and fly-right animation
+- organize code
+- bug fixes
