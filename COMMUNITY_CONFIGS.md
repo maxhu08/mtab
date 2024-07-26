@@ -18,3 +18,7 @@ Here is a collection of configs you can try. Just the copy the config and paste 
 `gruvbox` - [config](https://raw.githubusercontent.com/maxhu08/mtab/master/community-configs/configs/gruvbox.txt)
 
 ![gruvbox](./community-configs/images/gruvbox.png)
+
+`solarized` - [config](https://raw.githubusercontent.com/maxhu08/mtab/master/community-configs/configs/solarized.txt)
+
+![solarized](./community-configs/images/solarized.png)
