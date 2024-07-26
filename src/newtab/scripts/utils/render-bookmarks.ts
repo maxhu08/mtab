@@ -148,6 +148,11 @@ const renderUserDefinedBookmarks = (config: Config) => {
             once: true
           }
         );
+
+        // Fix bookmarks disappearing if user leaves tab too quickly
+        document.addEventListener("visibilitychange", () => {
+          bookmarkEl.classList.remove("opacity-0");
+        });
       }
 
       bookmarkEl!.onclick = (e) => {
