@@ -135,23 +135,36 @@ const handleBookmarkSettings = (index: number) => {
     const collapsibleContentEl = document.getElementById(`bookmark-${index}-collapsible-content`) as HTMLDivElement
     // prettier-ignore
     const toggleCollapseBookmarkButtonEl = document.getElementById(`bookmark-${index}-toggle-collapse-button`) as HTMLButtonElement
-    toggleCollapseBookmarkButtonEl.onclick = () => toggleCollapseBookmark(collapsibleContentEl, toggleCollapseBookmarkButtonEl);
+    toggleCollapseBookmarkButtonEl.onclick = () => toggleCollapseBookmark(collapsibleContentEl, toggleCollapseBookmarkButtonEl, "toggle");
 };
 
 const toggleCollapseBookmark = (
   collapsibleContentEl: HTMLDivElement,
-  toggleCollapseBookmarkButtonEl: HTMLButtonElement
+  toggleCollapseBookmarkButtonEl: HTMLButtonElement,
+  mode: "toggle" | "collapse"
 ) => {
-  if (collapsibleContentEl.getAttribute("state") === "expanded") {
-    collapsibleContentEl.setAttribute("state", "collapsed");
-    collapsibleContentEl.classList.replace("grid", "hidden");
+  switch (mode) {
+    case "toggle": {
+      if (collapsibleContentEl.getAttribute("state") === "expanded") {
+        collapsibleContentEl.setAttribute("state", "collapsed");
+        collapsibleContentEl.classList.replace("grid", "hidden");
 
-    toggleCollapseBookmarkButtonEl.innerHTML = `<i class="text-white ri-expand-horizontal-s-line"></i>`;
-  } else if (collapsibleContentEl.getAttribute("state") === "collapsed") {
-    collapsibleContentEl.setAttribute("state", "expanded");
-    collapsibleContentEl.classList.replace("hidden", "grid");
+        toggleCollapseBookmarkButtonEl.innerHTML = `<i class="text-white ri-expand-horizontal-s-line"></i>`;
+      } else if (collapsibleContentEl.getAttribute("state") === "collapsed") {
+        collapsibleContentEl.setAttribute("state", "expanded");
+        collapsibleContentEl.classList.replace("hidden", "grid");
 
-    toggleCollapseBookmarkButtonEl.innerHTML = `<i class="text-white ri-collapse-horizontal-line"></i>`;
+        toggleCollapseBookmarkButtonEl.innerHTML = `<i class="text-white ri-collapse-horizontal-line"></i>`;
+      }
+      break;
+    }
+    case "collapse": {
+      collapsibleContentEl.setAttribute("state", "collapsed");
+      collapsibleContentEl.classList.replace("grid", "hidden");
+
+      toggleCollapseBookmarkButtonEl.innerHTML = `<i class="text-white ri-expand-horizontal-s-line"></i>`;
+      break;
+    }
   }
 };
 
@@ -160,12 +173,12 @@ const toggleCollapseBookmark = (
 ).onclick = () => {
   const totalBookmarks = bookmarksUserDefinedList.children.length;
 
-  for (let i = 0; i <= totalBookmarks; i++) {
+  for (let i = 0; i < totalBookmarks; i++) {
     // prettier-ignore
     const collapsibleContentEl = document.getElementById(`bookmark-${i}-collapsible-content`) as HTMLDivElement
     // prettier-ignore
     const toggleCollapseBookmarkButtonEl = document.getElementById(`bookmark-${i}-toggle-collapse-button`) as HTMLButtonElement
-    toggleCollapseBookmark(collapsibleContentEl, toggleCollapseBookmarkButtonEl);
+    toggleCollapseBookmark(collapsibleContentEl, toggleCollapseBookmarkButtonEl, "collapse");
   }
 };
 
