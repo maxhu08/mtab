@@ -157,11 +157,16 @@ const addUserDefinedBookmark = (params: { index: number; bookmark: UserDefinedBo
 
   bookmarksUserDefinedList.innerHTML += `
     <div id="bookmark-user-defined-item-${index}" class="bg-neutral-800 p-2 rounded-md grid grid-flow-row gap-4">
-      <div class="grid grid-cols-[auto_max-content]">
+      <div class="grid grid-cols-[auto_max-content_max-content]">
         <span id="bookmark-${index}-user-defined-useless-title" class="text-white text-base">bookmarks.userDefined[${index}]</span>
-        <button id="bookmark-${index}-delete-button" class="bg-rose-500 hover:bg-rose-600 transition aspect-square rounded-md cursor-pointer">
-          <i class="text-white ri-delete-bin-6-line"></i>
-        </button>
+        <div class="grid grid-cols-2 gap-2">
+          <button id="bookmark-${index}-toggle-collapse-button" class="bg-neutral-500 hover:bg-neutral-600 transition aspect-square rounded-md cursor-pointer">
+            <i class="text-white ri-collapse-horizontal-line"></i>
+          </button>
+          <button id="bookmark-${index}-delete-button" class="bg-rose-500 hover:bg-rose-600 transition aspect-square rounded-md cursor-pointer">
+            <i class="text-white ri-delete-bin-6-line"></i>
+          </button>
+        </div>
       </div>
       <div class="bg-neutral-500 h-[1px] rounded-md my-auto"></div>
       <div class="grid gap-2">
