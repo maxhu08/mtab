@@ -193,10 +193,12 @@ toggleCollapseAllBookmarksButtonEl.onclick = () => {
       case "expand":
         toggleCollapseBookmark(collapsibleContentEl, toggleCollapseBookmarkButtonEl, "collapse");
         toggleCollapseAllBookmarksButtonEl.setAttribute("last-action", "collapse");
+        toggleCollapseAllBookmarksButtonEl.innerHTML = `<span class="text-white text-base">expand all</span>`;
         break;
       case "collapse":
         toggleCollapseBookmark(collapsibleContentEl, toggleCollapseBookmarkButtonEl, "expand");
         toggleCollapseAllBookmarksButtonEl.setAttribute("last-action", "expand");
+        toggleCollapseAllBookmarksButtonEl.innerHTML = `<span class="text-white text-base">collapse all</span>`;
         break;
     }
   }
