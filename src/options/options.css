@@ -33,37 +33,46 @@
   background-color: #ffffff20;
 }
 
-.animate-float {
-  -webkit-animation: float 2.5s !important;
-  animation: float 2.5s !important;
-  animation-iteration-count: infinite !important;
+.animate-up-bouncy {
+  animation: animateUpBouncy 2500ms ease-in-out;
 }
 
-@-webkit-keyframes float {
+@keyframes animateUpBouncy {
   0% {
-    -webkit-transform: translateY(0px);
+    transform: translateY(20px);
+    opacity: 0;
+    filter: blur(4px);
   }
-
+  25% {
+    transform: translateY(-10px);
+    opacity: 0.7;
+    filter: blur(2px);
+  }
   50% {
-    -webkit-transform: translateY(5px);
+    transform: translateY(5px);
+    opacity: 1;
+    filter: blur(0);
   }
-
   100% {
-    -webkit-transform: translateY(0px);
+    transform: translateY(0);
   }
+}
+
+.animate-float {
+  -webkit-animation: float 2000ms ease-in-out !important;
+  animation: float 2000ms ease-in-out !important;
+  animation-iteration-count: infinite !important;
 }
 
 @keyframes float {
   0% {
-    transform: translateY(0px);
+    transform: translateY(0);
   }
-
   50% {
     transform: translateY(5px);
   }
-
   100% {
-    transform: translateY(0px);
+    transform: translateY(0);
   }
 }
 
