@@ -160,7 +160,7 @@ const addUserDefinedBookmark = (params: { index: number; bookmark: UserDefinedBo
       <div class="grid grid-cols-[auto_max-content]">
         <span id="bookmark-${index}-user-defined-useless-title" class="text-white text-base">bookmarks.userDefined[${index}]</span>
         <button id="bookmark-${index}-delete-button" class="bg-rose-500 hover:bg-rose-600 transition aspect-square rounded-md cursor-pointer">
-          <span class="text-white text-base font-semibold">-</span
+          <i class="text-white ri-delete-bin-6-line"></i>
         </button>
       </div>
       <div class="bg-neutral-500 h-[1px] rounded-md my-auto"></div>
