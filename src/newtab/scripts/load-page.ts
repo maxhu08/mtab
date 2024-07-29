@@ -12,6 +12,7 @@ import { setMessage } from "./utils/set-message";
 import { renderBookmarks } from "./utils/render-bookmarks";
 import { addAnimations } from "./utils/animations";
 import { listenToKeys } from "./keys";
+import { loadFavicon } from "src/newtab/scripts/utils/load-favicon";
 
 export const loadPage = () => {
   const manifest = chrome.runtime.getManifest();
@@ -23,6 +24,8 @@ export const loadPage = () => {
 
   getConfig(({ config }) => {
     setTitle(config.title.defaultTitle);
+    loadFavicon(config);
+
     setUISyle(config.ui);
 
     loadWallpaper(config);

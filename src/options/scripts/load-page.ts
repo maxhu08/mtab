@@ -13,6 +13,7 @@ import {
   fixAllToggleCheckboxSections,
   listenAllToggleCheckboxSections
 } from "src/options/scripts/utils/toggle-checkbox";
+import { handleCustomFaviconUpload } from "src/options/scripts/utils/upload-favicon";
 
 export const loadPage = () => {
   const logo = document.getElementById("mtab-logo") as HTMLImageElement;
@@ -41,6 +42,8 @@ export const loadPage = () => {
 
   listenToInputs();
   listenToKeys();
+
+  handleCustomFaviconUpload();
   handleWallpaperFileUpload();
 
   handleMessageTypeSwitch();

@@ -25,7 +25,8 @@ export const defaultConfig: Config = {
     defaultTitle: "mtab",
     dynamic: {
       enabled: true
-    }
+    },
+    faviconType: "custom"
   },
   message: {
     enabled: true,
@@ -108,6 +109,7 @@ export const defaultConfig: Config = {
   }
 };
 
+export type FaviconType = "default" | "custom";
 export type UIStyle = "solid" | "glass";
 export type WallpaperType = "url" | "fileUpload";
 export type BookmarkTiming = "left" | "right" | "uniform";
@@ -148,6 +150,7 @@ export interface Config {
     dynamic: {
       enabled: boolean;
     };
+    faviconType: FaviconType;
   };
   message: {
     enabled: boolean;
