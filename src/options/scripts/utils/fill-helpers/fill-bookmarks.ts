@@ -141,7 +141,7 @@ const handleBookmarkSettings = (index: number) => {
 const toggleCollapseBookmark = (
   collapsibleContentEl: HTMLDivElement,
   toggleCollapseBookmarkButtonEl: HTMLButtonElement,
-  mode: "toggle" | "collapse"
+  mode: "toggle" | "collapse" | "expand"
 ) => {
   switch (mode) {
     case "toggle": {
@@ -165,20 +165,40 @@ const toggleCollapseBookmark = (
       toggleCollapseBookmarkButtonEl.innerHTML = `<i class="text-white ri-expand-horizontal-s-line"></i>`;
       break;
     }
+    case "expand": {
+      collapsibleContentEl.setAttribute("state", "expanded");
+      collapsibleContentEl.classList.replace("hidden", "grid");
+
+      toggleCollapseBookmarkButtonEl.innerHTML = `<i class="text-white ri-collapse-horizontal-line"></i>`;
+      break;
+    }
   }
 };
 
-(
-  document.getElementById("bookmarks-user-defined-collapse-all-button") as HTMLButtonElement
-).onclick = () => {
+// prettier-ignore
+const toggleCollapseAllBookmarksButtonEl = document.getElementById("bookmarks-user-defined-toggle-collapse-all-button") as HTMLButtonElement;
+
+toggleCollapseAllBookmarksButtonEl.onclick = () => {
   const totalBookmarks = bookmarksUserDefinedList.children.length;
+
+  const lastAction = toggleCollapseAllBookmarksButtonEl.getAttribute("last-action");
 
   for (let i = 0; i < totalBookmarks; i++) {
     // prettier-ignore
     const collapsibleContentEl = document.getElementById(`bookmark-${i}-collapsible-content`) as HTMLDivElement
     // prettier-ignore
     const toggleCollapseBookmarkButtonEl = document.getElementById(`bookmark-${i}-toggle-collapse-button`) as HTMLButtonElement
-    toggleCollapseBookmark(collapsibleContentEl, toggleCollapseBookmarkButtonEl, "collapse");
+
+    switch (lastAction) {
+      case "expand":
+        toggleCollapseBookmark(collapsibleContentEl, toggleCollapseBookmarkButtonEl, "collapse");
+        toggleCollapseAllBookmarksButtonEl.setAttribute("last-action", "collapse");
+        break;
+      case "collapse":
+        toggleCollapseBookmark(collapsibleContentEl, toggleCollapseBookmarkButtonEl, "expand");
+        toggleCollapseAllBookmarksButtonEl.setAttribute("last-action", "expand");
+        break;
+    }
   }
 };
 
