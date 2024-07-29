@@ -130,6 +130,22 @@ const handleBookmarkSettings = (index: number) => {
 
     bookmarkToDelete.parentNode!.removeChild(bookmarkToDelete);
   })
+
+  const toggleCollapseBookmarkButtonEl = document.getElementById(`bookmark-${index}-toggle-collapse-button`) as HTMLButtonElement
+  const collapsibleContentEl = document.getElementById(`bookmark-${index}-collapsible-content`) as HTMLDivElement
+  toggleCollapseBookmarkButtonEl.onclick = () => {
+    if (collapsibleContentEl.getAttribute("state") === "expanded") {
+      collapsibleContentEl.setAttribute("state", "collapsed")
+      collapsibleContentEl.classList.replace("grid", "hidden") 
+
+      toggleCollapseBookmarkButtonEl.innerHTML = `<i class="text-white ri-expand-horizontal-s-line"></i>`
+    } else if (collapsibleContentEl.getAttribute("state") === "collapsed") {
+      collapsibleContentEl.setAttribute("state", "expanded")
+      collapsibleContentEl.classList.replace("hidden", "grid")
+      
+      toggleCollapseBookmarkButtonEl.innerHTML = `<i class="text-white ri-collapse-horizontal-line"></i>`
+    }
+  }
 };
 
 (document.getElementById("bookmarks-user-defined-add-button") as HTMLButtonElement).onclick =
@@ -168,55 +184,57 @@ const addUserDefinedBookmark = (params: { index: number; bookmark: UserDefinedBo
           </button>
         </div>
       </div>
-      <div class="bg-neutral-500 h-[1px] rounded-md my-auto"></div>
-      <div class="grid gap-2">
-        <p class="text-white text-base">bookmark.name</p>
-        <div
-          id="bookmark-${index}-name-container"
-          class="grid grid-cols-[max-content_auto] text-base bg-neutral-900 w-full p-1 rounded-md border-2 border-transparent">
-          <span class="text-sky-500 font-semibold select-none">>&nbsp;</span>
-          <input id="bookmark-${index}-name-input" type="text" autocomplete="off"
-            class="outline-none bg-transparent text-white placeholder-neutral-500" placeholder="input name..." value="${bookmark.name}">
+      <div id="bookmark-${index}-collapsible-content" state="expanded" class="grid grid-flow-row gap-4">
+        <div class="bg-neutral-500 h-[1px] rounded-md my-auto"></div>
+        <div class="grid gap-2">
+          <p class="text-white text-base">bookmark.name</p>
+          <div
+            id="bookmark-${index}-name-container"
+            class="grid grid-cols-[max-content_auto] text-base bg-neutral-900 w-full p-1 rounded-md border-2 border-transparent">
+            <span class="text-sky-500 font-semibold select-none">>&nbsp;</span>
+            <input id="bookmark-${index}-name-input" type="text" autocomplete="off"
+              class="outline-none bg-transparent text-white placeholder-neutral-500" placeholder="input name..." value="${bookmark.name}">
+          </div>
         </div>
-      </div>
-      <div class="grid gap-2">
-        <p class="text-white text-base">bookmark.url</p>
-        <div
-          id="bookmark-${index}-url-container"
-          class="grid grid-cols-[max-content_auto] text-base bg-neutral-900 w-full p-1 rounded-md border-2 border-transparent">
-          <span class="text-sky-500 font-semibold select-none">>&nbsp;</span>
-          <input id="bookmark-${index}-url-input" type="text" autocomplete="off"
-            class="outline-none bg-transparent text-white placeholder-neutral-500" placeholder="input url..." value="${bookmark.url}">
+        <div class="grid gap-2">
+          <p class="text-white text-base">bookmark.url</p>
+          <div
+            id="bookmark-${index}-url-container"
+            class="grid grid-cols-[max-content_auto] text-base bg-neutral-900 w-full p-1 rounded-md border-2 border-transparent">
+            <span class="text-sky-500 font-semibold select-none">>&nbsp;</span>
+            <input id="bookmark-${index}-url-input" type="text" autocomplete="off"
+              class="outline-none bg-transparent text-white placeholder-neutral-500" placeholder="input url..." value="${bookmark.url}">
+          </div>
         </div>
-      </div>
-      <div class="grid gap-2">
-        <p class="text-white text-base">bookmark.color</p>
-        <div
-          id="bookmark-${index}-color-container"
-          class="grid grid-cols-[max-content_auto] text-base bg-neutral-900 w-full p-1 rounded-md border-2 border-transparent">
-          <span class="text-sky-500 font-semibold select-none">>&nbsp;</span>
-          <input id="bookmark-${index}-color-input" type="text" autocomplete="off"
-            class="outline-none bg-transparent text-white placeholder-neutral-500" placeholder="input color..." value="${bookmark.color}">
+        <div class="grid gap-2">
+          <p class="text-white text-base">bookmark.color</p>
+          <div
+            id="bookmark-${index}-color-container"
+            class="grid grid-cols-[max-content_auto] text-base bg-neutral-900 w-full p-1 rounded-md border-2 border-transparent">
+            <span class="text-sky-500 font-semibold select-none">>&nbsp;</span>
+            <input id="bookmark-${index}-color-input" type="text" autocomplete="off"
+              class="outline-none bg-transparent text-white placeholder-neutral-500" placeholder="input color..." value="${bookmark.color}">
+          </div>
         </div>
-      </div>
-      <div class="grid gap-2">
-        <p class="text-white text-base">bookmark.iconType</p>
-        <div
-          id="bookmark-${index}-icon-type-container"
-          class="grid grid-cols-[max-content_auto] text-base bg-neutral-900 w-full p-1 rounded-md border-2 border-transparent">
-          <span class="text-sky-500 font-semibold select-none">>&nbsp;</span>
-          <input id="bookmark-${index}-icon-type-input" type="text" autocomplete="off"
-            class="outline-none bg-transparent text-white placeholder-neutral-500" placeholder="input icon type..." value="${bookmark.iconType}">
+        <div class="grid gap-2">
+          <p class="text-white text-base">bookmark.iconType</p>
+          <div
+            id="bookmark-${index}-icon-type-container"
+            class="grid grid-cols-[max-content_auto] text-base bg-neutral-900 w-full p-1 rounded-md border-2 border-transparent">
+            <span class="text-sky-500 font-semibold select-none">>&nbsp;</span>
+            <input id="bookmark-${index}-icon-type-input" type="text" autocomplete="off"
+              class="outline-none bg-transparent text-white placeholder-neutral-500" placeholder="input icon type..." value="${bookmark.iconType}">
+          </div>
         </div>
-      </div>
-      <div class="grid gap-2">
-        <p class="text-white text-base">bookmark.iconColor</p>
-        <div
-          id="bookmark-${index}-icon-color-container"
-          class="grid grid-cols-[max-content_auto] text-base bg-neutral-900 w-full p-1 rounded-md border-2 border-transparent">
-          <span class="text-sky-500 font-semibold select-none">>&nbsp;</span>
-          <input id="bookmark-${index}-icon-color-input" type="text" autocomplete="off"
-            class="outline-none bg-transparent text-white placeholder-neutral-500" placeholder="input icon type..." value="${bookmark.iconColor}">
+        <div class="grid gap-2">
+          <p class="text-white text-base">bookmark.iconColor</p>
+          <div
+            id="bookmark-${index}-icon-color-container"
+            class="grid grid-cols-[max-content_auto] text-base bg-neutral-900 w-full p-1 rounded-md border-2 border-transparent">
+            <span class="text-sky-500 font-semibold select-none">>&nbsp;</span>
+            <input id="bookmark-${index}-icon-color-input" type="text" autocomplete="off"
+              class="outline-none bg-transparent text-white placeholder-neutral-500" placeholder="input icon type..." value="${bookmark.iconColor}">
+          </div>
         </div>
       </div>
     </div>
