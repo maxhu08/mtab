@@ -44,18 +44,22 @@ const renderDefaultBookmarks = (config: Config) => {
     config.animations.enabled ? "opacity-0" : "_ignore"
   );
 
-  innerBookmarkContainer.classList.add("grid", "grid-flow-col", "gap-2", "w-max");
-
   chrome.bookmarks.search({}, (chromeBookmarks) => {
     if (chromeBookmarks.length === 0) {
       innerBookmarkContainer.innerHTML += `
         <div class="overflow-hidden h-16 md:h-20 grid grid-rows-[auto_max-content] place-items-center">
-          <span class="text-white text-base md:text-2xl font-message w-full text-center text-ellipsis overflow-hidden whitespace-nowrap">
+          <span class="text-search text-base md:text-2xl font-message w-full text-center text-ellipsis overflow-hidden whitespace-nowrap"
+                style="color: ${config.search.textColor}"
+          >
             No bookmarks yet
           </span>
         </div>
       </a>
       `;
+    }
+
+    if (chromeBookmarks.length > 0) {
+      innerBookmarkContainer.classList.add("grid", "grid-flow-col", "gap-2", "w-max");
     }
 
     chromeBookmarks.forEach((bookmark) => {
@@ -65,7 +69,9 @@ const renderDefaultBookmarks = (config: Config) => {
           <img class="h-[80%]" src="${`chrome-extension://${
             chrome.runtime.id
           }/_favicon/?pageUrl=${encodeURIComponent(bookmark.url as string)}&size=${32}`}" />
-          <span class="text-white text-base w-full font-search text-center text-ellipsis overflow-hidden whitespace-nowrap">
+          <span class="text-base w-full font-search text-center text-ellipsis overflow-hidden whitespace-nowrap"
+                style="color: ${config.search.textColor}"
+          >
             ${bookmark.title.toString()}
           </span>
         </div>
