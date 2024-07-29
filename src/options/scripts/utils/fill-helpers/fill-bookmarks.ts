@@ -111,6 +111,8 @@ const handleBookmarkSettings = (index: number) => {
       const oldIconTypeContainerEl = document.getElementById(`bookmark-${i}-icon-type-container`) as HTMLInputElement;
       const oldIconColorContainerEl = document.getElementById(`bookmark-${i}-icon-color-container`) as HTMLInputElement;
 
+      const oldCollapsibleContentEl = document.getElementById(`bookmark-${i}-collapsible-content`) as HTMLDivElement
+      const oldToggleCollapseBookmarkButtonEl = document.getElementById(`bookmark-${i}-toggle-collapse-button`) as HTMLButtonElement
 
       oldUselessTitle.id = `bookmark-${i - 1}-user-defined-useless-title`
       oldUselessTitle.textContent = `bookmarks.userDefined[${i - 1}]`
@@ -126,6 +128,9 @@ const handleBookmarkSettings = (index: number) => {
       oldColorContainerEl.id = `bookmark-${i - 1}-color-container`;
       oldIconTypeContainerEl.id = `bookmark-${i - 1}-icon-type-container`;
       oldIconColorContainerEl.id = `bookmark-${i - 1}-icon-color-container`;
+
+      oldCollapsibleContentEl.id = `bookmark-${i - 1}-collapsible-content`;
+      oldToggleCollapseBookmarkButtonEl.id  = `bookmark-${i - 1}-toggle-collapse-button`;
     }
 
     bookmarkToDelete.parentNode!.removeChild(bookmarkToDelete);
