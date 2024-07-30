@@ -2,7 +2,10 @@ import { Config } from "../config";
 import { messageEl, searchContainerEl } from "../ui";
 
 export const addAnimations = (animations: Config["animations"]) => {
-  if (!animations.enabled) return;
+  if (!animations.enabled) {
+    searchContainerEl.classList.remove("opacity-0");
+    return;
+  }
 
   const animationCss = `
 * {
