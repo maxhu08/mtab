@@ -1,0 +1,34 @@
+@font-face {
+  font-family: "Jetbrains-Mono-Regular-Fixed";
+  src: url("../assets/fonts/JetBrainsMono-Regular.woff2") format("woff2"),
+    url("../assets/fonts/JetBrainsMono-Regular.ttf") format("ttf");
+}
+
+* {
+  font-family: "Jetbrains-Mono-Regular-Fixed", monospace;
+  transition-duration: 250ms;
+}
+
+@media screen and (max-width: 400px) {
+  .text-base {
+    font-size: 0.875rem !important;
+    line-height: 1.25rem !important;
+  }
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #00000000;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 2008px;
+  background: #10b981;
+}
+
+::selection {
+  background-color: #ffffff20;
+}
