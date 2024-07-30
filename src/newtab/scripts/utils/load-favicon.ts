@@ -1,7 +1,7 @@
-import { Config } from "src/newtab/scripts/config";
+import { FaviconType } from "src/newtab/scripts/config";
 
-export const loadFavicon = (config: Config) => {
-  if (config.title.faviconType !== "custom") return;
+export const loadFavicon = (faviconType: FaviconType) => {
+  if (faviconType !== "custom") return;
 
   chrome.storage.local.get(["userUploadedFavicon"], (data) => {
     const favicon = document.getElementById("favicon") as HTMLLinkElement;

@@ -1,10 +1,10 @@
 import { Config } from "src/newtab/scripts/config";
 import { wallpaperEl } from "src/newtab/scripts/ui";
 
-export const loadWallpaper = (config: Config) => {
-  if (!config.wallpaper.enabled) return;
+export const loadWallpaper = (wallpaper: Config["wallpaper"]) => {
+  if (!wallpaper.enabled) return;
 
-  if (config.wallpaper.type === "fileUpload") {
+  if (wallpaper.type === "fileUpload") {
     chrome.storage.local.get(["userUploadedWallpaper"], (data) => {
       wallpaperEl.setAttribute(
         "style",
@@ -16,6 +16,6 @@ export const loadWallpaper = (config: Config) => {
 
   wallpaperEl.setAttribute(
     "style",
-    `background: url("${config.wallpaper.url}") center center / cover no-repeat fixed; transition-duration: 0ms;`
+    `background: url("${wallpaper.url}") center center / cover no-repeat fixed; transition-duration: 0ms;`
   );
 };

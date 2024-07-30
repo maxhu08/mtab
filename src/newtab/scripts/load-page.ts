@@ -24,11 +24,11 @@ export const loadPage = () => {
 
   getConfig(({ config }) => {
     setTitle(config.title.defaultTitle);
-    loadFavicon(config);
+    loadFavicon(config.title.faviconType);
 
     setUISyle(config.ui);
 
-    loadWallpaper(config);
+    loadWallpaper(config.wallpaper);
 
     setSearchStuff(
       config.search.font,
