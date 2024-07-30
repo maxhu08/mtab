@@ -1,3 +1,21 @@
+export const handleFaviconTypeSwitch = () => {
+  const faviconCustomSection = document.getElementById(
+    "title-custom-favicon-upload-section"
+  ) as HTMLDivElement;
+
+  (
+    document.getElementById("title-favicon-type-default-button") as HTMLButtonElement
+  ).addEventListener("click", () => {
+    faviconCustomSection.style.display = "none";
+  });
+
+  (
+    document.getElementById("title-favicon-type-custom-button") as HTMLButtonElement
+  ).addEventListener("click", () => {
+    faviconCustomSection.style.display = "block";
+  });
+};
+
 export const handleMessageTypeSwitch = () => {
   const messageCustomTextSection = document.getElementById(
     "message-custom-text-section"

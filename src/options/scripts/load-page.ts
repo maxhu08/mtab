@@ -7,7 +7,8 @@ import { getUserAgent } from "src/util-scripts/user-agent";
 import {
   handleMessageTypeSwitch,
   handleWallpaperTypeSwitch,
-  handleBookmarksTypeSwitch
+  handleBookmarksTypeSwitch,
+  handleFaviconTypeSwitch
 } from "src/options/scripts/utils/handle-switch";
 import {
   fixAllToggleCheckboxSections,
@@ -46,6 +47,7 @@ export const loadPage = () => {
   handleCustomFaviconUpload();
   handleWallpaperFileUpload();
 
+  handleFaviconTypeSwitch();
   handleMessageTypeSwitch();
   handleWallpaperTypeSwitch();
   handleBookmarksTypeSwitch();
