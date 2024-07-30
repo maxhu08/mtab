@@ -5,6 +5,7 @@ import {
   titleFaviconTypeCustomButtonEl,
   titleFaviconTypeDefaultButtonEl
 } from "src/options/scripts/ui";
+import { previewFavicon } from "src/options/scripts/utils/preview";
 
 export const fillTitleInputs = (config: Config) => {
   titleDefaultTitleInputEl.value = config.title.defaultTitle;
@@ -20,4 +21,8 @@ export const fillTitleInputs = (config: Config) => {
       break;
     }
   }
+
+  chrome.storage.local.get(["userUploadedFavicon"], (data) => {
+    previewFavicon(data.userUploadedFavicon);
+  });
 };

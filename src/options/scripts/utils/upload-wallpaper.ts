@@ -1,4 +1,5 @@
 import { wallpaperFileInputEl } from "src/options/scripts/ui";
+import { previewWallpaper } from "src/options/scripts/utils/preview";
 
 export const handleWallpaperFileUpload = () => {
   wallpaperFileInputEl.addEventListener("change", (e: any) => {
@@ -10,6 +11,7 @@ export const handleWallpaperFileUpload = () => {
         // resize image to 1920x1080 because chrome can't store really large images
         resizeImage(e.target.result, 1920, 1080, (resizedDataUrl) => {
           chrome.storage.local.set({ userUploadedWallpaper: resizedDataUrl });
+          previewWallpaper(resizedDataUrl);
         });
       };
       reader.readAsDataURL(file);

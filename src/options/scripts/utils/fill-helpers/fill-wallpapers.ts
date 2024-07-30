@@ -5,6 +5,7 @@ import {
   wallpaperTypeUrlButtonEl,
   wallpaperUrlInputEl
 } from "src/options/scripts/ui";
+import { previewWallpaper } from "src/options/scripts/utils/preview";
 
 export const fillWallpapersInputs = (config: Config) => {
   switch (config.wallpaper.type) {
@@ -20,4 +21,8 @@ export const fillWallpapersInputs = (config: Config) => {
 
   wallpaperEnabledCheckboxEl.checked = config.wallpaper.enabled;
   wallpaperUrlInputEl.value = config.wallpaper.url;
+
+  chrome.storage.local.get(["userUploadedWallpaper"], (data) => {
+    previewWallpaper(data.userUploadedWallpaper);
+  });
 };
