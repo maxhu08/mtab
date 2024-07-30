@@ -26,7 +26,7 @@ export const defaultConfig: Config = {
     dynamic: {
       enabled: true
     },
-    faviconType: "custom"
+    faviconType: "default"
   },
   message: {
     enabled: true,
