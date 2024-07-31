@@ -1,4 +1,10 @@
-import { buttonSwitches, inputs, modeMTJButtonEl } from "src/config-utils/scripts/ui";
+import {
+  buttonSwitches,
+  convertSaveButtonEl,
+  inputs,
+  convertMTJButtonEl
+} from "src/config-utils/scripts/ui";
+import { convertSave } from "src/config-utils/scripts/utils/convert";
 import { switchButtons } from "src/config-utils/scripts/utils/switch-buttons";
 
 export const handle = () => {
@@ -6,11 +12,11 @@ export const handle = () => {
     switchButtons(btnSwitch.buttons, btnSwitch.attr);
   });
 
+  convertSaveButtonEl.onclick = () => convertSave();
+
   const borderClass = "border-blue-500";
 
   inputs.forEach((input) => {
-    console.log(input, "DSFSDF");
-
     input.input.addEventListener("blur", () =>
       unfocusInput({
         container: input.container,
@@ -31,7 +37,7 @@ export const handle = () => {
     );
   });
 
-  modeMTJButtonEl.click();
+  convertMTJButtonEl.click();
 };
 
 export const unfocusInput = ({

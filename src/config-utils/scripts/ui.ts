@@ -1,16 +1,18 @@
-export const modeMTJButtonEl = document.getElementById("mode-mtj-button") as HTMLButtonElement;
-export const modeJTMButtonEl = document.getElementById("mode-jtm-button") as HTMLButtonElement;
+export const convertMTJButtonEl = document.getElementById("convert-mtj-button") as HTMLButtonElement;
+export const convertJTMButtonEl = document.getElementById("convert-jtm-button") as HTMLButtonElement;
 
-export const modeInContainerEl = document.getElementById("mode-in-container") as HTMLDivElement;
-export const modeInTextareaEl = document.getElementById("mode-in-textarea") as HTMLTextAreaElement;
+export const convertInContainerEl = document.getElementById("convert-in-container") as HTMLDivElement;
+export const convertInTextareaEl = document.getElementById("convert-in-textarea") as HTMLTextAreaElement;
 
-export const modeOutContainerEl = document.getElementById("mode-out-container") as HTMLDivElement;
-export const modeOutTextareaEl = document.getElementById("mode-out-textarea") as HTMLTextAreaElement;
+export const convertOutContainerEl = document.getElementById("convert-out-container") as HTMLDivElement;
+export const convertOutTextareaEl = document.getElementById("convert-out-textarea") as HTMLTextAreaElement;
+
+export const convertSaveButtonEl = document.getElementById("convert-save-button") as HTMLButtonElement;
 
 export const buttonSwitches: ButtonSwitch[] = [
   {
-    buttons: [modeMTJButtonEl, modeJTMButtonEl],
-    attr: "ui-style"
+    buttons: [convertMTJButtonEl, convertJTMButtonEl],
+    attr: "convert-mode"
   }
 ];
 
@@ -21,12 +23,12 @@ export interface ButtonSwitch {
 
 export const inputs: Input[] = [
   {
-    container: modeInContainerEl,
-    input: modeInTextareaEl,
+    container: convertInContainerEl,
+    input: convertInTextareaEl,
   },
   {
-    container: modeOutContainerEl,
-    input: modeOutTextareaEl,
+    container: convertOutContainerEl,
+    input: convertOutTextareaEl,
   }
 ];
 
