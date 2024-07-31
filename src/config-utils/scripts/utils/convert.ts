@@ -15,9 +15,8 @@ export const convertSave = () => {
     return;
   }
 
+  const prefix = "MTAB_SAVE_FORMAT_";
   if (selectedMode === "mtj") {
-    const prefix = "MTAB_SAVE_FORMAT_";
-
     if (!inputVal.startsWith(prefix)) {
       alert("incorrect save format, should be MTAB_SAVE_FORMAT");
       return;
@@ -26,5 +25,16 @@ export const convertSave = () => {
     const saveAsJson = JSON.parse(decodeURIComponent(window.atob(inputVal.replace(prefix, ""))));
 
     convertOutTextareaEl.value = JSON.stringify(JSON.parse(saveAsJson), null, 2);
+  } else if (selectedMode === "jtm") {
+    if (inputVal.startsWith(prefix)) {
+      alert("incorrect save format, should be json");
+      return;
+    }
+
+    const saveAsMtabFormat = `MTAB_SAVE_FORMAT_${window.btoa(
+      encodeURIComponent(JSON.stringify(inputVal))
+    )}`;
+
+    convertOutTextareaEl.value = saveAsMtabFormat;
   }
 };
