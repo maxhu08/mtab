@@ -16,7 +16,38 @@
 
 <body dir="ltr" class="bg-neutral-900 min-h-screen">
   <div class="grid grid-flow-row w-[95%] sm:w-[80%] md:w-[60%] lg:w-[40%] mx-auto">
-    <p class="text-base text-white text-center py-4">This page is under construction.</p>
+    <div class="grid place-items-center gap-4 p-4">
+      <img id="mtab-logo" src="./assets/icon.png" class="w-40 aspect-square animate-up-bouncy" alt="logo" />
+      <h1 class="text-white w-max text-2xl md:text-4xl font-semibold">
+        <span class="text-emerald-500">mtab</span><span class="text-neutral-500">/</span><span>config-utils</span>
+      </h1>
+    </div>
+    <main class="grid grid-flow-row gap-20 py-16">
+      <div class="grid gap-2 text-base">
+        <div class="grid grid-cols-2 gap-2">
+          <button id="mode-mtj-button" class="bg-neutral-800 hover:bg-neutral-700 py-2 rounded-md outline-none">
+            <span class="text-white">MTAB_SAVE_FORMAT -> json</span>
+          </button>
+          <button id="mode-jtm-button" class="bg-neutral-800 hover:bg-neutral-700 py-2 rounded-md outline-none">
+            <span class="text-white">json -> MTAB_SAVE_FORMAT</span>
+          </button>
+        </div>
+        <div id="mode-section" class="grid gap-2">
+          <p class="text-white text-base">input</p>
+          <div id="mode-in-container"
+            class="text-base bg-neutral-800 w-full p-1 rounded-md border-2 border-transparent">
+            <textarea id="mode-in-textarea" type="text" autocomplete="off" rows="16"
+              class="w-full outline-none bg-transparent text-white placeholder-neutral-500 resize-none"></textarea>
+          </div>
+          <p class="text-white text-base">output</p>
+          <div id="mode-out-container"
+            class="text-base bg-neutral-800 w-full p-1 rounded-md border-2 border-transparent">
+            <textarea id="mode-out-textarea" type="text" autocomplete="off" rows="16"
+              class="w-full outline-none bg-transparent text-white placeholder-neutral-500 resize-none"></textarea>
+          </div>
+        </div>
+      </div>
+    </main>
   </div>
 </body>
 

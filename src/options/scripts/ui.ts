@@ -292,7 +292,7 @@ export const buttonSwitches: ButtonSwitch[] = [
   },
 ];
 
-interface ButtonSwitch {
+export interface ButtonSwitch {
   buttons: HTMLButtonElement[];
   attr: string;
 }
