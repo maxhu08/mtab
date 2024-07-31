@@ -97,7 +97,7 @@ export const unfocusInput = ({
   borderClassNew
 }: {
   container: HTMLDivElement;
-  input: HTMLInputElement;
+  input: HTMLInputElement | HTMLTextAreaElement;
   borderClassOld: string;
   borderClassNew: string;
 }) => {
@@ -114,7 +114,7 @@ export const focusInput = ({
   e
 }: {
   container: HTMLDivElement;
-  input: HTMLInputElement;
+  input: HTMLInputElement | HTMLTextAreaElement;
   borderClassOld: string;
   borderClassNew: string;
   e: Event;

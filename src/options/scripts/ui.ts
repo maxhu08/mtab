@@ -51,7 +51,7 @@ export const uiHighlightColorContainerEl = document.getElementById("ui-highlight
 export const uiHighlightColorInputEl = document.getElementById("ui-highlight-color-input") as HTMLInputElement;
 
 export const uiCustomCSSContainerEl = document.getElementById("ui-custom-css-container") as HTMLInputElement;
-export const uiCustomCSSTextareaEl = document.getElementById("ui-custom-css-textarea") as HTMLInputElement;
+export const uiCustomCSSTextareaEl = document.getElementById("ui-custom-css-textarea") as HTMLTextAreaElement;
 
 export const animationsEnabledCheckboxEl = document.getElementById("animations-enabled-checkbox") as HTMLInputElement;
 
@@ -216,7 +216,7 @@ export const inputs: Input[] = [
 
 export interface Input {
   container: HTMLDivElement;
-  input: HTMLInputElement;
+  input: HTMLInputElement | HTMLTextAreaElement;
 }
 
 export const buttonSwitches: ButtonSwitch[] = [
