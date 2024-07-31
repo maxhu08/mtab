@@ -141,6 +141,12 @@ const handleBookmarkSettings = (index: number) => {
     // prettier-ignore
     const toggleCollapseBookmarkButtonEl = document.getElementById(`bookmark-${index}-toggle-collapse-button`) as HTMLButtonElement
     toggleCollapseBookmarkButtonEl.onclick = () => toggleCollapseBookmark(collapsibleContentEl, toggleCollapseBookmarkButtonEl, "toggle");
+
+    const pushBookmarkUpButtenEl = document.getElementById(`bookmark-${index}-push-up-button`) as HTMLButtonElement
+    const pushBookmarkDownButtenEl = document.getElementById(`bookmark-${index}-push-down-button`) as HTMLButtonElement
+
+    pushBookmarkUpButtenEl.onclick = () => pushBookmark(index, "up");
+    pushBookmarkDownButtenEl.onclick = () => pushBookmark(index, "down");
 };
 
 const toggleCollapseBookmark = (
@@ -178,6 +184,77 @@ const toggleCollapseBookmark = (
       break;
     }
   }
+};
+
+// prettier-ignore
+const pushBookmark = (index: number, direction: "up" | "down") => {
+  const totalBookmarks = bookmarksUserDefinedList.children.length;
+
+  if (index === 0 && direction === "up") return;
+  else if (index === totalBookmarks - 1 && direction === "down") return;
+
+  const currBookmarkNameInputEl = document.getElementById(`bookmark-${index}-name-input`) as HTMLInputElement;
+  const currBookmarkUrlInputEl = document.getElementById(`bookmark-${index}-url-input`) as HTMLInputElement;
+  const currBookmarkColorInputEl = document.getElementById(`bookmark-${index}-color-input`) as HTMLInputElement;
+  const currBookmarkIconTypeInputEl = document.getElementById(`bookmark-${index}-icon-type-input`) as HTMLInputElement;
+  const currBookmarkIconColorInputEl = document.getElementById(`bookmark-${index}-icon-color-input`) as HTMLInputElement;
+
+  const currBookmarkData: UserDefinedBookmark = {
+    name: currBookmarkNameInputEl.value,
+    url: currBookmarkUrlInputEl.value,
+    color: currBookmarkColorInputEl.value,
+    iconType: currBookmarkIconTypeInputEl.value,
+    iconColor: currBookmarkIconColorInputEl.value
+  };
+
+  let swapBookmarkData: UserDefinedBookmark = { name: "N/A", url: "N/A", color: "N/A", iconType: "N/A", iconColor: "N/A" };
+  let swapBookmarkNameInputEl: HTMLInputElement;
+  let swapBookmarkUrlInputEl: HTMLInputElement;
+  let swapBookmarkColorInputEl: HTMLInputElement;
+  let swapBookmarkIconTypeInputEl: HTMLInputElement;
+  let swapBookmarkIconColorInputEl: HTMLInputElement;
+
+  if (direction === "up") {
+    swapBookmarkNameInputEl = document.getElementById(`bookmark-${index - 1}-name-input`) as HTMLInputElement;
+    swapBookmarkUrlInputEl = document.getElementById(`bookmark-${index - 1}-url-input`) as HTMLInputElement;
+    swapBookmarkColorInputEl = document.getElementById(`bookmark-${index - 1}-color-input`) as HTMLInputElement;
+    swapBookmarkIconTypeInputEl = document.getElementById(`bookmark-${index - 1}-icon-type-input`) as HTMLInputElement;
+    swapBookmarkIconColorInputEl = document.getElementById(`bookmark-${index - 1}-icon-color-input`) as HTMLInputElement;
+
+    swapBookmarkData = {
+      name: swapBookmarkNameInputEl.value,
+      url: swapBookmarkUrlInputEl.value,
+      color: swapBookmarkColorInputEl.value,
+      iconType: swapBookmarkIconTypeInputEl.value,
+      iconColor: swapBookmarkIconColorInputEl.value
+    };
+  } else if (direction === "down") {
+    swapBookmarkNameInputEl = document.getElementById(`bookmark-${index + 1}-name-input`) as HTMLInputElement;
+    swapBookmarkUrlInputEl = document.getElementById(`bookmark-${index + 1}-url-input`) as HTMLInputElement;
+    swapBookmarkColorInputEl = document.getElementById(`bookmark-${index + 1}-color-input`) as HTMLInputElement;
+    swapBookmarkIconTypeInputEl = document.getElementById(`bookmark-${index + 1}-icon-type-input`) as HTMLInputElement;
+    swapBookmarkIconColorInputEl = document.getElementById(`bookmark-${index + 1}-icon-color-input`) as HTMLInputElement;
+
+    swapBookmarkData = {
+      name: swapBookmarkNameInputEl.value,
+      url: swapBookmarkUrlInputEl.value,
+      color: swapBookmarkColorInputEl.value,
+      iconType: swapBookmarkIconTypeInputEl.value,
+      iconColor: swapBookmarkIconColorInputEl.value
+    };
+  }
+
+  currBookmarkNameInputEl.value = swapBookmarkData.name;
+  currBookmarkUrlInputEl.value = swapBookmarkData.url;
+  currBookmarkColorInputEl.value = swapBookmarkData.color;
+  currBookmarkIconTypeInputEl.value = swapBookmarkData.iconType;
+  currBookmarkIconColorInputEl.value = swapBookmarkData.iconColor;
+
+  swapBookmarkNameInputEl!.value = currBookmarkData.name;
+  swapBookmarkUrlInputEl!.value = currBookmarkData.url;
+  swapBookmarkColorInputEl!.value = currBookmarkData.color;
+  swapBookmarkIconTypeInputEl!.value = currBookmarkData.iconType;
+  swapBookmarkIconColorInputEl!.value = currBookmarkData.iconColor;
 };
 
 // prettier-ignore
@@ -236,9 +313,15 @@ const addUserDefinedBookmark = (params: { index: number; bookmark: UserDefinedBo
     <div id="bookmark-user-defined-item-${index}" class="bg-neutral-800 p-2 rounded-md grid grid-flow-row gap-4">
       <div class="grid grid-cols-[auto_max-content_max-content]">
         <span id="bookmark-${index}-user-defined-useless-title" class="text-white text-base">bookmarks.userDefined[${index}]</span>
-        <div class="grid grid-cols-2 gap-2">
+        <div class="grid grid-cols-4 gap-2">
           <button id="bookmark-${index}-toggle-collapse-button" class="bg-neutral-500 hover:bg-neutral-600 transition aspect-square rounded-md cursor-pointer">
             <i class="text-white ri-collapse-horizontal-line"></i>
+          </button>
+          <button id="bookmark-${index}-push-up-button" class="bg-cyan-500 hover:bg-cyan-600 transition aspect-square rounded-md cursor-pointer">
+            <i class="text-white ri-arrow-up-line"></i>
+          </button>
+          <button id="bookmark-${index}-push-down-button" class="bg-cyan-500 hover:bg-cyan-600 transition aspect-square rounded-md cursor-pointer">
+            <i class="text-white ri-arrow-down-line"></i>
           </button>
           <button id="bookmark-${index}-delete-button" class="bg-rose-500 hover:bg-rose-600 transition aspect-square rounded-md cursor-pointer">
             <i class="text-white ri-delete-bin-6-line"></i>
