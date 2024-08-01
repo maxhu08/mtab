@@ -1,6 +1,7 @@
-# Changes in 1.3.4
+# Changes in 1.3.5
 
 in this release:
 
-- change default config
-- show icon indicator if no wallpaper/favicon is uploaded
+- add config-utils page
+- add ability to move bookmarks up and down in options page
+- bug fixes
