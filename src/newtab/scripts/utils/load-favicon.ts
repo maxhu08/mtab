@@ -2,11 +2,21 @@ import { FaviconType } from "src/newtab/scripts/config";
 
 export const loadFavicon = (faviconType: FaviconType) => {
   if (faviconType !== "custom") {
-    document.head.innerHTML += `<link id="favicon" rel="icon" href="favicon.ico" type="image/x-icon">`;
+    const defaultFavicon = document.createElement("link");
+    defaultFavicon.id = "favicon";
+    defaultFavicon.rel = "icon";
+    defaultFavicon.href = "favicon.ico";
+    defaultFavicon.type = "image/x-icon";
+    document.head.appendChild(defaultFavicon);
     return;
   }
 
   chrome.storage.local.get(["userUploadedFavicon"], (data) => {
-    document.head.innerHTML += `<link id="favicon" rel="icon" href="${data.userUploadedFavicon}" type="image/x-icon">`;
+    const customFavicon = document.createElement("link");
+    customFavicon.id = "favicon";
+    customFavicon.rel = "icon";
+    customFavicon.href = data.userUploadedFavicon;
+    customFavicon.type = "image/x-icon";
+    document.head.appendChild(customFavicon);
   });
 };

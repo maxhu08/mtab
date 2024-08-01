@@ -15,3 +15,8 @@ export const handleCustomFaviconUpload = () => {
     }
   });
 };
+
+export const handleCustomFaviconReset = () => {
+  chrome.storage.local.set({ userUploadedFavicon: null });
+  previewFavicon("");
+};

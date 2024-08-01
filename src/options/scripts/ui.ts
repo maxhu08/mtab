@@ -36,7 +36,8 @@ export const wallpaperTypeFileUploadButtonEl = document.getElementById("wallpape
 export const wallpaperUrlContainerEl = document.getElementById("wallpaper-url-container") as HTMLInputElement;
 export const wallpaperUrlInputEl = document.getElementById("wallpaper-url-input") as HTMLInputElement;
 
-export const wallpaperFileInputEl = document.getElementById("wallpaper-file-upload") as HTMLInputElement;
+export const wallpaperFileUploadInputEl = document.getElementById("wallpaper-file-upload-input") as HTMLInputElement;
+export const wallpaperFileResetButtonEl = document.getElementById("wallpaper-file-upload-reset-button") as HTMLInputElement;
 
 export const uiStyleSolidButtonEl = document.getElementById("ui-style-solid-button") as HTMLButtonElement;
 export const uiStyleGlassButtonEl = document.getElementById("ui-style-glass-button") as HTMLButtonElement;

@@ -1,8 +1,8 @@
-import { wallpaperFileInputEl } from "src/options/scripts/ui";
+import { wallpaperFileUploadInputEl } from "src/options/scripts/ui";
 import { previewWallpaper } from "src/options/scripts/utils/preview";
 
 export const handleWallpaperFileUpload = () => {
-  wallpaperFileInputEl.addEventListener("change", (e: any) => {
+  wallpaperFileUploadInputEl.addEventListener("change", (e: any) => {
     const file = e.target.files[0];
 
     if (file) {
@@ -17,6 +17,11 @@ export const handleWallpaperFileUpload = () => {
       reader.readAsDataURL(file);
     }
   });
+};
+
+export const handWallpaperFileReset = () => {
+  chrome.storage.local.set({ userUploadedWallpaper: null });
+  previewWallpaper("");
 };
 
 const resizeImage = (

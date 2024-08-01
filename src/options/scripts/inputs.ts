@@ -18,6 +18,8 @@ import { saveConfig } from "src/options/scripts/utils/save-config";
 import { exportConfig } from "src/options/scripts/utils/export-config";
 import { importConfig } from "src/options/scripts/utils/import-config";
 import { setDefaultConfig } from "src/options/scripts/utils/set-default-config";
+import { handleCustomFaviconReset } from "src/options/scripts/utils/upload-favicon";
+import { handWallpaperFileReset } from "src/options/scripts/utils/upload-wallpaper";
 
 export const listenToInputs = () => {
   inputs.forEach((input) => {
@@ -68,15 +70,19 @@ export const listenToInputs = () => {
     });
   });
 
+  // prettier-ignore
+  const resetFaviconBtn = document.getElementById("title-custom-favicon-reset-button") as HTMLButtonElement;
+  resetFaviconBtn.onclick = () => handleCustomFaviconReset();
+
+  // prettier-ignore
+  const resetWallpaperBtn = document.getElementById("wallpaper-file-upload-reset-button") as HTMLButtonElement;
+  resetWallpaperBtn.onclick = () => handWallpaperFileReset();
+
   const saveBtn = document.getElementById("save-button") as HTMLButtonElement;
-  saveBtn.onclick = () => {
-    saveConfig();
-  };
+  saveBtn.onclick = () => saveConfig();
 
   const configUtilsBtn = document.getElementById("config-utils-button") as HTMLButtonElement;
-  configUtilsBtn.onclick = () => {
-    window.open("./config-utils.html", "_blank");
-  };
+  configUtilsBtn.onclick = () => window.open("./config-utils.html", "_blank");
 
   const exportBtn = document.getElementById("export-button") as HTMLButtonElement;
   exportBtn.onclick = () => {
@@ -85,14 +91,10 @@ export const listenToInputs = () => {
   };
 
   const importBtn = document.getElementById("import-button") as HTMLButtonElement;
-  importBtn.onclick = () => {
-    importConfig();
-  };
+  importBtn.onclick = () => importConfig();
 
   const resetToDefaultBtn = document.getElementById("reset-to-default-button") as HTMLButtonElement;
-  resetToDefaultBtn.onclick = () => {
-    setDefaultConfig();
-  };
+  resetToDefaultBtn.onclick = () => setDefaultConfig();
 };
 
 export const unfocusInput = ({
