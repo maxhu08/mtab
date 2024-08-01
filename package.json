@@ -6,9 +6,9 @@
   "scripts": {
     "dev-chrome": "mkdir -p dist && parcel src/**/*.html & ./scripts/linux/create_manifest_chrome.sh && ./scripts/linux/copy_assets.sh",
     "dev-firefox": "mkdir -p dist && parcel src/**/*.html & ./scripts/linux/create_manifest_firefox.sh && ./scripts/linux/copy_assets.sh",
-    "build-chrome": "mkdir -p dist && parcel build src/**/*.html --no-scope-hoist & ./scripts/linux/create_manifest_chrome.sh && ./scripts/linux/copy_assets.sh",
-    "build-firefox": "mkdir -p dist && parcel build src/**/*.html --no-scope-hoist & ./scripts/linux/create_manifest_firefox.sh && ./scripts/linux/copy_assets.sh",
-    "build-firefox-windows": "mkdir -p dist && parcel build src/**/*.html --no-scope-hoist && ./scripts/win/create_manifest_firefox.bat && ./scripts/win/copy_assets.bat",
+    "build-chrome": "mkdir -p dist && parcel build src/**/*.html --no-source-maps --no-scope-hoist & ./scripts/linux/create_manifest_chrome.sh && ./scripts/linux/copy_assets.sh",
+    "build-firefox": "mkdir -p dist && parcel build src/**/*.html --no-source-maps --no-scope-hoist & ./scripts/linux/create_manifest_firefox.sh && ./scripts/linux/copy_assets.sh",
+    "build-firefox-windows": "mkdir -p dist && parcel build src/**/*.html --no-source-maps --no-scope-hoist && ./scripts/win/create_manifest_firefox.bat && ./scripts/win/copy_assets.bat",
     "package-chrome": "bun build-chrome && ./scripts/linux/package_chrome.sh",
     "package-firefox": "bun build-firefox && ./scripts/linux/package_firefox.sh",
     "zip-source": "./scripts/linux/zip_source.sh",
