@@ -1,17 +1,17 @@
-import { Config, AnimationType, BookmarkTiming } from "src/newtab/scripts/config";
+import { Config, AnimationInitialType, BookmarkTiming } from "src/newtab/scripts/config";
 import {
   animationsEnabledCheckboxEl,
   animationsBookmarkTimingLeftButtonEl,
   animationsBookmarkTimingRightButtonEl,
   animationsBookmarkTimingUniformButtonEl,
-  animationsTypeDownBouncyButtonEl,
-  animationsTypeDownSmoothButtonEl,
-  animationsTypeDownFallButtonEl,
-  animationsTypeUpBouncyButtonEl,
-  animationsTypeUpSmoothEl,
-  animationsTypeGrowScaleEl,
-  animationsTypeFlyLeftEl,
-  animationsTypeFlyRightEl
+  animationsInitialTypeDownBouncyButtonEl,
+  animationsInitialTypeDownSmoothButtonEl,
+  animationsInitialTypeDownFallButtonEl,
+  animationsInitialTypeUpBouncyButtonEl,
+  animationsInitialTypeUpSmoothEl,
+  animationsInitialTypeGrowScaleEl,
+  animationsInitialTypeFlyLeftEl,
+  animationsInitialTypeFlyRightEl
 } from "src/options/scripts/ui";
 
 export const fillAnimationsInputs = (config: Config) => {
@@ -25,16 +25,16 @@ export const fillAnimationsInputs = (config: Config) => {
 
   bookmarkTimingPairs[config.animations.bookmarkTiming].click();
 
-  const animationsTypePairs: Record<AnimationType, HTMLButtonElement> = {
-    "animate-down-bouncy": animationsTypeDownBouncyButtonEl,
-    "animate-down-smooth": animationsTypeDownSmoothButtonEl,
-    "animate-down-fall": animationsTypeDownFallButtonEl,
-    "animate-up-bouncy": animationsTypeUpBouncyButtonEl,
-    "animate-up-smooth": animationsTypeUpSmoothEl,
-    "animate-grow-scale": animationsTypeGrowScaleEl,
-    "animate-fly-left": animationsTypeFlyLeftEl,
-    "animate-fly-right": animationsTypeFlyRightEl
+  const animationsInitialTypePairs: Record<AnimationInitialType, HTMLButtonElement> = {
+    "animate-down-bouncy": animationsInitialTypeDownBouncyButtonEl,
+    "animate-down-smooth": animationsInitialTypeDownSmoothButtonEl,
+    "animate-down-fall": animationsInitialTypeDownFallButtonEl,
+    "animate-up-bouncy": animationsInitialTypeUpBouncyButtonEl,
+    "animate-up-smooth": animationsInitialTypeUpSmoothEl,
+    "animate-grow-scale": animationsInitialTypeGrowScaleEl,
+    "animate-fly-left": animationsInitialTypeFlyLeftEl,
+    "animate-fly-right": animationsInitialTypeFlyRightEl
   };
 
-  animationsTypePairs[config.animations.type].click();
+  animationsInitialTypePairs[config.animations.initialType].click();
 };

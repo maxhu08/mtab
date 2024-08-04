@@ -1,4 +1,4 @@
-import { AnimationType, BookmarkTiming, Config } from "src/newtab/scripts/config";
+import { AnimationInitialType, BookmarkTiming, Config } from "src/newtab/scripts/config";
 import { animationsEnabledCheckboxEl } from "src/options/scripts/ui";
 
 export const saveAnimationsToDraft = (draft: Config) => {
@@ -16,20 +16,20 @@ export const saveAnimationsToDraft = (draft: Config) => {
 
   draft.animations.bookmarkTiming = bookmarkTimingPairs[selectedBookmarkTimingEl.id];
 
-  const selectedTypeEl = document.querySelector(
-    `button[btn-option-type="animations-type"][selected="yes"]`
+  const selectedInitialTypeEl = document.querySelector(
+    `button[btn-option-type="animations-initial-type"][selected="yes"]`
   ) as HTMLButtonElement;
 
-  const animationsTypePairs: Record<string, AnimationType> = {
-    "animations-type-down-bouncy-button": "animate-down-bouncy",
-    "animations-type-down-smooth-button": "animate-down-smooth",
-    "animations-type-down-fall-button": "animate-down-fall",
-    "animations-type-up-bouncy-button": "animate-up-bouncy",
-    "animations-type-up-smooth-button": "animate-up-smooth",
-    "animations-type-grow-scale-button": "animate-grow-scale",
-    "animations-type-fly-left-button": "animate-fly-left",
-    "animations-type-fly-right-button": "animate-fly-right"
+  const animationsInitialTypePairs: Record<string, AnimationInitialType> = {
+    "animations-initial-type-down-bouncy-button": "animate-down-bouncy",
+    "animations-initial-type-down-smooth-button": "animate-down-smooth",
+    "animations-initial-type-down-fall-button": "animate-down-fall",
+    "animations-initial-type-up-bouncy-button": "animate-up-bouncy",
+    "animations-initial-type-up-smooth-button": "animate-up-smooth",
+    "animations-initial-type-grow-scale-button": "animate-grow-scale",
+    "animations-initial-type-fly-left-button": "animate-fly-left",
+    "animations-initial-type-fly-right-button": "animate-fly-right"
   };
 
-  draft.animations.type = animationsTypePairs[selectedTypeEl.id];
+  draft.animations.initialType = animationsInitialTypePairs[selectedInitialTypeEl.id];
 };

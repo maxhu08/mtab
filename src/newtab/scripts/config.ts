@@ -51,7 +51,7 @@ export const defaultConfig: Config = {
   animations: {
     enabled: true,
     bookmarkTiming: "left",
-    type: "animate-up-bouncy"
+    initialType: "animate-up-bouncy"
   },
   search: {
     enabled: true,
@@ -113,7 +113,7 @@ export type FaviconType = "default" | "custom";
 export type UIStyle = "solid" | "glass";
 export type WallpaperType = "url" | "fileUpload";
 export type BookmarkTiming = "left" | "right" | "uniform";
-export type AnimationType =
+export type AnimationInitialType =
   | "animate-down-bouncy"
   | "animate-down-smooth"
   | "animate-down-fall"
@@ -174,7 +174,7 @@ export interface Config {
   animations: {
     enabled: boolean;
     bookmarkTiming: BookmarkTiming;
-    type: AnimationType;
+    initialType: AnimationInitialType;
   };
   search: {
     enabled: boolean;

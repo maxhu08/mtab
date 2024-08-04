@@ -60,14 +60,14 @@ export const animationsBookmarkTimingLeftButtonEl = document.getElementById("ani
 export const animationsBookmarkTimingRightButtonEl = document.getElementById("animations-bookmark-timing-right-button") as HTMLButtonElement;
 export const animationsBookmarkTimingUniformButtonEl = document.getElementById("animations-bookmark-timing-uniform-button") as HTMLButtonElement;
 
-export const animationsTypeDownBouncyButtonEl = document.getElementById("animations-type-down-bouncy-button") as HTMLButtonElement;
-export const animationsTypeDownSmoothButtonEl = document.getElementById("animations-type-down-smooth-button") as HTMLButtonElement;
-export const animationsTypeDownFallButtonEl = document.getElementById("animations-type-down-fall-button") as HTMLButtonElement;
-export const animationsTypeUpBouncyButtonEl = document.getElementById("animations-type-up-bouncy-button") as HTMLButtonElement;
-export const animationsTypeUpSmoothEl = document.getElementById("animations-type-up-smooth-button") as HTMLButtonElement;
-export const animationsTypeGrowScaleEl = document.getElementById("animations-type-grow-scale-button") as HTMLButtonElement;
-export const animationsTypeFlyLeftEl = document.getElementById("animations-type-fly-left-button") as HTMLButtonElement;
-export const animationsTypeFlyRightEl = document.getElementById("animations-type-fly-right-button") as HTMLButtonElement;
+export const animationsInitialTypeDownBouncyButtonEl = document.getElementById("animations-initial-type-down-bouncy-button") as HTMLButtonElement;
+export const animationsInitialTypeDownSmoothButtonEl = document.getElementById("animations-initial-type-down-smooth-button") as HTMLButtonElement;
+export const animationsInitialTypeDownFallButtonEl = document.getElementById("animations-initial-type-down-fall-button") as HTMLButtonElement;
+export const animationsInitialTypeUpBouncyButtonEl = document.getElementById("animations-initial-type-up-bouncy-button") as HTMLButtonElement;
+export const animationsInitialTypeUpSmoothEl = document.getElementById("animations-initial-type-up-smooth-button") as HTMLButtonElement;
+export const animationsInitialTypeGrowScaleEl = document.getElementById("animations-initial-type-grow-scale-button") as HTMLButtonElement;
+export const animationsInitialTypeFlyLeftEl = document.getElementById("animations-initial-type-fly-left-button") as HTMLButtonElement;
+export const animationsInitialTypeFlyRightEl = document.getElementById("animations-initial-type-fly-right-button") as HTMLButtonElement;
 
 export const searchEnabledCheckboxEl = document.getElementById("search-enabled-checkbox") as HTMLInputElement;
 
@@ -259,16 +259,16 @@ export const buttonSwitches: ButtonSwitch[] = [
   },
   {
     buttons: [
-      animationsTypeDownBouncyButtonEl,
-      animationsTypeDownSmoothButtonEl,
-      animationsTypeDownFallButtonEl,
-      animationsTypeUpBouncyButtonEl,
-      animationsTypeUpSmoothEl,
-      animationsTypeGrowScaleEl,
-      animationsTypeFlyLeftEl,
-      animationsTypeFlyRightEl
+      animationsInitialTypeDownBouncyButtonEl,
+      animationsInitialTypeDownSmoothButtonEl,
+      animationsInitialTypeDownFallButtonEl,
+      animationsInitialTypeUpBouncyButtonEl,
+      animationsInitialTypeUpSmoothEl,
+      animationsInitialTypeGrowScaleEl,
+      animationsInitialTypeFlyLeftEl,
+      animationsInitialTypeFlyRightEl
     ],
-    attr: "animations-type"
+    attr: "animations-initial-type"
   },
   {
     buttons: [
