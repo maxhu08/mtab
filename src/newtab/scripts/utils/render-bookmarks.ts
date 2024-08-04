@@ -63,6 +63,8 @@ const renderDefaultBookmarks = (config: Config) => {
     }
 
     chromeBookmarks.forEach((bookmark) => {
+      if (!!bookmark.dateGroupModified) return;
+
       innerBookmarkContainer.innerHTML += `
       <a href="${bookmark.url}" rel="noopener noreferrer">
         <div class="overflow-hidden w-16 md:w-20 aspect-square grid grid-rows-[auto_max-content] place-items-center">
