@@ -48,9 +48,10 @@ export const search = (config: Config, value: string, openInNewTab: boolean = fa
   if (config.animations.enabled) {
     const content = document.getElementById("content") as HTMLDivElement;
 
-    const animationDuration = 350;
-
     content.classList.add("animate-page-shrink");
+    const computedStyle = getComputedStyle(content);
+    const animationDuration = parseFloat(computedStyle.animationDuration) * 1000;
+
     setTimeout(() => {
       content.classList.remove("animate-page-shrink");
       content.style.opacity = "0%";

@@ -48,7 +48,7 @@ export const listenToKeys = (config: Config) => {
       // if search bookmark is on already (grid)
       if (bookmarkSearchSectionEl.classList.contains("grid")) {
         if (e.key === "Escape") {
-          unfocusBookmarkSearch(config.animations.type);
+          unfocusBookmarkSearch(config.animations.initialType);
           disableSearchBookmark();
           bookmarkSearchInputEl.value = "";
         } else if (e.key === "ArrowDown") {
@@ -140,7 +140,7 @@ export const listenToKeys = (config: Config) => {
   });
 
   bookmarkSearchInputEl.addEventListener("blur", () =>
-    unfocusBookmarkSearch(config.animations.type)
+    unfocusBookmarkSearch(config.animations.initialType)
   );
 
   bookmarkSearchInputEl.addEventListener("focus", (e) => focusBookmarkSearch(config, e));
