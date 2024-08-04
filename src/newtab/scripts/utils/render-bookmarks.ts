@@ -40,7 +40,7 @@ const renderDefaultBookmarks = (config: Config) => {
     "w-full",
     "overflow-scroll",
     "scrollbar-hidden",
-    config.animations.enabled ? config.animations.type : "_ignore",
+    config.animations.enabled ? config.animations.initialType : "_ignore",
     config.animations.enabled ? "opacity-0" : "_ignore"
   );
 
@@ -124,7 +124,7 @@ const renderUserDefinedBookmarks = (config: Config) => {
     }-${index}" class="relative duration-[250ms] ease-out bg-foreground cursor-pointer ${
       config.ui.style === "glass" ? "glass-effect" : ""
     } rounded-md h-bookmark overflow-hidden ${
-      config.animations.enabled ? `${config.animations.type} opacity-0` : ""
+      config.animations.enabled ? `${config.animations.initialType} opacity-0` : ""
     }" ${config.animations ? `style="animation-delay: ${delay}ms;"` : ""}>
       <div class="h-1" style="background-color: ${bookmark.color}"></div>
       <div class="absolute w-full h-full hover:bg-white/20"></div>

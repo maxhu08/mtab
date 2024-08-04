@@ -18,10 +18,10 @@ export const addAnimations = (animations: Config["animations"]) => {
   document.head.appendChild(styleElement);
 
   messageEl.style.animationDelay = "0ms";
-  messageEl.classList.add(animations.type);
+  messageEl.classList.add(animations.initialType);
 
   searchContainerEl.style.animationDelay = "50ms";
-  searchContainerEl.classList.add(animations.type);
+  searchContainerEl.classList.add(animations.initialType);
 
   if (animations.enabled) {
     const computedStyle = window.getComputedStyle(searchContainerEl);
