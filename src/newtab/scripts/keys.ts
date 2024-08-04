@@ -19,7 +19,7 @@ import {
   tryFocusBookmarkSearch,
   unfocusBookmarkSearch
 } from "src/newtab/scripts/utils/bookmark-search";
-import { openUserDefinedBookmark } from "src/newtab/scripts/utils/render-bookmarks";
+import { openBookmark } from "src/newtab/scripts/utils/render-bookmarks";
 // import { navigateTab } from "src/newtab/scripts/utils/navigate-tab";
 
 export const listenToKeys = (config: Config) => {
@@ -163,11 +163,11 @@ export const listenToKeys = (config: Config) => {
 
       // open in new tab if ctrl
       if (e.ctrlKey) {
-        openUserDefinedBookmark(bookmarkUrl, config.animations.enabled, true);
+        openBookmark(bookmarkUrl, config.animations.enabled, true);
         return;
       }
 
-      openUserDefinedBookmark(bookmarkUrl, config.animations.enabled);
+      openBookmark(bookmarkUrl, config.animations.enabled);
     }
   });
 };

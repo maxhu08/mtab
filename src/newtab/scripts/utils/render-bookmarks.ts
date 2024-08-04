@@ -66,19 +66,34 @@ const renderDefaultBookmarks = (config: Config) => {
       if (!!bookmark.dateGroupModified) return;
 
       innerBookmarkContainer.innerHTML += `
-      <a href="${bookmark.url}" rel="noopener noreferrer">
-        <div class="overflow-hidden w-16 md:w-20 aspect-square grid grid-rows-[auto_max-content] place-items-center">
-          <img class="h-[80%]" src="${`chrome-extension://${
-            chrome.runtime.id
-          }/_favicon/?pageUrl=${encodeURIComponent(bookmark.url as string)}&size=${32}`}" />
-          <span class="text-base w-full font-search text-center text-ellipsis overflow-hidden whitespace-nowrap"
-                style="color: ${config.search.textColor}"
-          >
-            ${bookmark.title.toString()}
-          </span>
-        </div>
-      </a>
+      <button id="bookmark-default-${
+        bookmark.id
+      }" class="overflow-hidden w-16 md:w-20 aspect-square grid grid-rows-[auto_max-content] place-items-center cursor-pointer">
+        <img class="h-[80%]" src="${`chrome-extension://${
+          chrome.runtime.id
+        }/_favicon/?pageUrl=${encodeURIComponent(bookmark.url as string)}&size=${32}`}" />
+        <span class="text-base w-full font-search text-center text-ellipsis overflow-hidden whitespace-nowrap"
+              style="color: ${config.search.textColor}"
+        >
+          ${bookmark.title.toString()}
+        </span>
+      </button>
       `;
+    });
+
+    chromeBookmarks.forEach((bookmark) => {
+      if (!!bookmark.dateGroupModified) return;
+
+      // prettier-ignore
+      const bookmarkEl = document.getElementById(`bookmark-default-${bookmark.id}`) as HTMLDivElement;
+      console.log(bookmarkEl, bookmark);
+      bookmarkEl.onclick = (e) => {
+        if (e.ctrlKey) {
+          openBookmark(bookmark.url!, config.animations.enabled, true);
+        } else {
+          openBookmark(bookmark.url!, config.animations.enabled);
+        }
+      };
     });
   });
 
@@ -114,12 +129,11 @@ const renderUserDefinedBookmarks = (config: Config) => {
     else if (config.animations.bookmarkTiming === "right")
       delay = (config.bookmarks.userDefined.length + 2 - index) * 50;
 
-    const bookmarksSubcontainerEl = document.getElementById(
-      `bookmarks-subcontainer-${Math.floor(index / 4)}`
-    ) as HTMLDivElement;
+    // prettier-ignore
+    const bookmarksSubcontainerEl = document.getElementById(`bookmarks-subcontainer-${Math.floor(index / 4)}`) as HTMLDivElement;
 
     bookmarksSubcontainerEl.innerHTML += `
-    <div id="bookmark-${
+    <button id="bookmark-${
       bookmark.name
     }-${index}" class="relative duration-[250ms] ease-out bg-foreground cursor-pointer ${
       config.ui.style === "glass" ? "glass-effect" : ""
@@ -133,13 +147,14 @@ const renderUserDefinedBookmarks = (config: Config) => {
           <i class="${bookmark.iconType}"></i>
         </div>
       </div>
-    </div>
+    </button>
     `;
   });
 
   config.animations &&
     config.bookmarks.userDefined.forEach((bookmark, index) => {
-      const bookmarkEl = document.getElementById(`bookmark-${bookmark.name}-${index}`);
+      // prettier-ignore
+      const bookmarkEl = document.getElementById(`bookmark-${bookmark.name}-${index}`) as HTMLButtonElement;
 
       if (bookmarkEl && config.animations) {
         const computedStyle = window.getComputedStyle(bookmarkEl);
@@ -163,17 +178,17 @@ const renderUserDefinedBookmarks = (config: Config) => {
         });
       }
 
-      bookmarkEl!.onclick = (e) => {
+      bookmarkEl.onclick = (e) => {
         if (e.ctrlKey) {
-          openUserDefinedBookmark(bookmark.url, config.animations.enabled, true);
+          openBookmark(bookmark.url, config.animations.enabled, true);
         } else {
-          openUserDefinedBookmark(bookmark.url, config.animations.enabled);
+          openBookmark(bookmark.url, config.animations.enabled);
         }
       };
     });
 };
 
-export const openUserDefinedBookmark = (
+export const openBookmark = (
   bookmarkUrl: string,
   animtionsEnabled: boolean,
   openInNewTab: boolean = false
