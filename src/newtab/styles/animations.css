@@ -238,6 +238,21 @@
   }
 }
 
+.animate-page-scale {
+  animation: animatePageScale 350ms forwards ease-in-out;
+}
+
+@keyframes animatePageScale {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+
 .animate-page-up {
   animation: animatePageUp 200ms forwards ease-in-out;
 }
