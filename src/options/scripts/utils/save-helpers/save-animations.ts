@@ -1,12 +1,17 @@
-import { AnimationInitialType, BookmarkTiming, Config } from "src/newtab/scripts/config";
+import {
+  AnimationBookmarkType,
+  AnimationInitialType,
+  AnimationSearchType,
+  BookmarkTiming,
+  Config
+} from "src/newtab/scripts/config";
 import { animationsEnabledCheckboxEl } from "src/options/scripts/ui";
 
 export const saveAnimationsToDraft = (draft: Config) => {
   draft.animations.enabled = animationsEnabledCheckboxEl.checked;
 
-  const selectedBookmarkTimingEl = document.querySelector(
-    `button[btn-option-type="animations-bookmark-timing"][selected="yes"]`
-  ) as HTMLButtonElement;
+  // prettier-ignore
+  const selectedBookmarkTimingEl = document.querySelector(`button[btn-option-type="animations-bookmark-timing"][selected="yes"]`) as HTMLButtonElement;
 
   const bookmarkTimingPairs: Record<string, BookmarkTiming> = {
     "animations-bookmark-timing-left-button": "left",
@@ -16,9 +21,8 @@ export const saveAnimationsToDraft = (draft: Config) => {
 
   draft.animations.bookmarkTiming = bookmarkTimingPairs[selectedBookmarkTimingEl.id];
 
-  const selectedInitialTypeEl = document.querySelector(
-    `button[btn-option-type="animations-initial-type"][selected="yes"]`
-  ) as HTMLButtonElement;
+  // prettier-ignore
+  const selectedInitialTypeEl = document.querySelector(`button[btn-option-type="animations-initial-type"][selected="yes"]`) as HTMLButtonElement;
 
   const animationsInitialTypePairs: Record<string, AnimationInitialType> = {
     "animations-initial-type-down-bouncy-button": "animate-down-bouncy",
@@ -32,4 +36,28 @@ export const saveAnimationsToDraft = (draft: Config) => {
   };
 
   draft.animations.initialType = animationsInitialTypePairs[selectedInitialTypeEl.id];
+
+  // prettier-ignore
+  const selectedSearchTypeEl = document.querySelector(`button[btn-option-type="animations-search-type"][selected="yes"]`) as HTMLButtonElement;
+
+  const animationsSearchTypePairs: Record<string, AnimationSearchType> = {
+    "animations-search-type-page-shrink-button": "animate-page-shrink",
+    "animations-search-type-page-scale-button": "animate-page-scale",
+    "animations-search-type-page-up-button": "animate-page-up",
+    "animations-search-type-page-down-button": "animate-page-down"
+  };
+
+  draft.animations.searchType = animationsSearchTypePairs[selectedSearchTypeEl.id];
+
+  // prettier-ignore
+  const selectedBookmarkTypeEl = document.querySelector(`button[btn-option-type="animations-bookmark-type"][selected="yes"]`) as HTMLButtonElement;
+
+  const animationsBookmarkTypePairs: Record<string, AnimationBookmarkType> = {
+    "animations-bookmark-type-page-shrink-button": "animate-page-shrink",
+    "animations-bookmark-type-page-scale-button": "animate-page-scale",
+    "animations-bookmark-type-page-up-button": "animate-page-up",
+    "animations-bookmark-type-page-down-button": "animate-page-down"
+  };
+
+  draft.animations.bookmarkType = animationsBookmarkTypePairs[selectedBookmarkTypeEl.id];
 };

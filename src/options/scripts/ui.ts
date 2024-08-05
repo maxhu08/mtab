@@ -64,10 +64,20 @@ export const animationsInitialTypeDownBouncyButtonEl = document.getElementById("
 export const animationsInitialTypeDownSmoothButtonEl = document.getElementById("animations-initial-type-down-smooth-button") as HTMLButtonElement;
 export const animationsInitialTypeDownFallButtonEl = document.getElementById("animations-initial-type-down-fall-button") as HTMLButtonElement;
 export const animationsInitialTypeUpBouncyButtonEl = document.getElementById("animations-initial-type-up-bouncy-button") as HTMLButtonElement;
-export const animationsInitialTypeUpSmoothEl = document.getElementById("animations-initial-type-up-smooth-button") as HTMLButtonElement;
-export const animationsInitialTypeGrowScaleEl = document.getElementById("animations-initial-type-grow-scale-button") as HTMLButtonElement;
-export const animationsInitialTypeFlyLeftEl = document.getElementById("animations-initial-type-fly-left-button") as HTMLButtonElement;
-export const animationsInitialTypeFlyRightEl = document.getElementById("animations-initial-type-fly-right-button") as HTMLButtonElement;
+export const animationsInitialTypeUpSmoothButtonEl = document.getElementById("animations-initial-type-up-smooth-button") as HTMLButtonElement;
+export const animationsInitialTypeGrowScaleButtonEl = document.getElementById("animations-initial-type-grow-scale-button") as HTMLButtonElement;
+export const animationsInitialTypeFlyLeftButtonEl = document.getElementById("animations-initial-type-fly-left-button") as HTMLButtonElement;
+export const animationsInitialTypeFlyRightButtonEl = document.getElementById("animations-initial-type-fly-right-button") as HTMLButtonElement;
+
+export const animationsSearchTypePageShrinkButtonEl = document.getElementById("animations-search-type-page-shrink-button") as HTMLButtonElement;
+export const animationsSearchTypePageScaleButtonEl = document.getElementById("animations-search-type-page-scale-button") as HTMLButtonElement;
+export const animationsSearchTypePageUpButtonEl = document.getElementById("animations-search-type-page-up-button") as HTMLButtonElement;
+export const animationsSearchTypePageDownButtonEl = document.getElementById("animations-search-type-page-down-button") as HTMLButtonElement;
+
+export const animationsBookmarkTypePageShrinkButtonEl = document.getElementById("animations-bookmark-type-page-shrink-button") as HTMLButtonElement;
+export const animationsBookmarkTypePageScaleButtonEl = document.getElementById("animations-bookmark-type-page-scale-button") as HTMLButtonElement;
+export const animationsBookmarkTypePageUpButtonEl = document.getElementById("animations-bookmark-type-page-up-button") as HTMLButtonElement;
+export const animationsBookmarkTypePageDownButtonEl = document.getElementById("animations-bookmark-type-page-down-button") as HTMLButtonElement;
 
 export const searchEnabledCheckboxEl = document.getElementById("search-enabled-checkbox") as HTMLInputElement;
 
@@ -263,12 +273,30 @@ export const buttonSwitches: ButtonSwitch[] = [
       animationsInitialTypeDownSmoothButtonEl,
       animationsInitialTypeDownFallButtonEl,
       animationsInitialTypeUpBouncyButtonEl,
-      animationsInitialTypeUpSmoothEl,
-      animationsInitialTypeGrowScaleEl,
-      animationsInitialTypeFlyLeftEl,
-      animationsInitialTypeFlyRightEl
+      animationsInitialTypeUpSmoothButtonEl,
+      animationsInitialTypeGrowScaleButtonEl,
+      animationsInitialTypeFlyLeftButtonEl,
+      animationsInitialTypeFlyRightButtonEl
     ],
     attr: "animations-initial-type"
+  },
+  {
+    buttons: [
+      animationsSearchTypePageShrinkButtonEl,
+      animationsSearchTypePageScaleButtonEl,
+      animationsSearchTypePageUpButtonEl,
+      animationsSearchTypePageDownButtonEl
+    ],
+    attr: "animations-search-type"
+  },
+  {
+    buttons: [
+      animationsBookmarkTypePageShrinkButtonEl,
+      animationsBookmarkTypePageScaleButtonEl,
+      animationsBookmarkTypePageUpButtonEl,
+      animationsBookmarkTypePageDownButtonEl
+    ],
+    attr: "animations-bookmark-type"
   },
   {
     buttons: [
