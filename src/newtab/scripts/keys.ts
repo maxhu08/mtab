@@ -163,11 +163,11 @@ export const listenToKeys = (config: Config) => {
 
       // open in new tab if ctrl
       if (e.ctrlKey) {
-        openBookmark(bookmarkUrl, config.animations.enabled, true);
+        openBookmark(bookmarkUrl, config.animations.enabled, config.animations.bookmarkType, true);
         return;
       }
 
-      openBookmark(bookmarkUrl, config.animations.enabled);
+      openBookmark(bookmarkUrl, config.animations.enabled, config.animations.bookmarkType);
     }
   });
 };

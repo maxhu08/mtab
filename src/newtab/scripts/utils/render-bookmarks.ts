@@ -1,4 +1,4 @@
-import { Config } from "../config";
+import { AnimationBookmarkType, Config } from "../config";
 import { bookmarksContainerEl, bookmarkSearchInputEl } from "../ui";
 
 export const renderBookmarks = (config: Config) => {
@@ -89,9 +89,14 @@ const renderDefaultBookmarks = (config: Config) => {
       console.log(bookmarkEl, bookmark);
       bookmarkEl.onclick = (e) => {
         if (e.ctrlKey) {
-          openBookmark(bookmark.url!, config.animations.enabled, true);
+          openBookmark(
+            bookmark.url!,
+            config.animations.enabled,
+            config.animations.bookmarkType,
+            true
+          );
         } else {
-          openBookmark(bookmark.url!, config.animations.enabled);
+          openBookmark(bookmark.url!, config.animations.enabled, config.animations.bookmarkType);
         }
       };
     });
@@ -180,9 +185,14 @@ const renderUserDefinedBookmarks = (config: Config) => {
 
       bookmarkEl.onclick = (e) => {
         if (e.ctrlKey) {
-          openBookmark(bookmark.url, config.animations.enabled, true);
+          openBookmark(
+            bookmark.url,
+            config.animations.enabled,
+            config.animations.bookmarkType,
+            true
+          );
         } else {
-          openBookmark(bookmark.url, config.animations.enabled);
+          openBookmark(bookmark.url, config.animations.enabled, config.animations.bookmarkType);
         }
       };
     });
@@ -190,7 +200,8 @@ const renderUserDefinedBookmarks = (config: Config) => {
 
 export const openBookmark = (
   bookmarkUrl: string,
-  animtionsEnabled: boolean,
+  animationsEnabled: boolean,
+  animationsType: AnimationBookmarkType,
   openInNewTab: boolean = false
 ) => {
   if (openInNewTab) {
@@ -200,14 +211,15 @@ export const openBookmark = (
     return;
   }
 
-  if (animtionsEnabled) {
+  if (animationsEnabled) {
     const content = document.getElementById("content") as HTMLDivElement;
 
-    const animationDuration = 350;
+    content.classList.add(animationsType);
+    const computedStyle = getComputedStyle(content);
+    const animationDuration = parseFloat(computedStyle.animationDuration) * 1000;
 
-    content.classList.add("animate-page-up");
     setTimeout(() => {
-      content.classList.remove("animate-page-up");
+      content.classList.remove(animationsType);
       content.style.opacity = "0%";
     }, animationDuration * 0.75);
 

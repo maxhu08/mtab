@@ -256,3 +256,22 @@
     opacity: 0;
   }
 }
+
+.animate-page-down {
+  animation: animatePageDown 200ms forwards ease-in-out;
+}
+
+@keyframes animatePageDown {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  25% {
+    transform: translateY(-4rem);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(calc(100vh - 20rem));
+    opacity: 0;
+  }
+}

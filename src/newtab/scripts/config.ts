@@ -51,7 +51,9 @@ export const defaultConfig: Config = {
   animations: {
     enabled: true,
     bookmarkTiming: "left",
-    initialType: "animate-up-bouncy"
+    initialType: "animate-up-bouncy",
+    searchType: "animate-page-down",
+    bookmarkType: "animate-page-down"
   },
   search: {
     enabled: true,
@@ -122,6 +124,16 @@ export type AnimationInitialType =
   | "animate-grow-scale"
   | "animate-fly-left"
   | "animate-fly-right";
+export type AnimationSearchType =
+  | "animate-page-shrink"
+  | "animate-page-scale"
+  | "animate-page-up"
+  | "animate-page-down";
+export type AnimationBookmarkType =
+  | "animate-page-shrink"
+  | "animate-page-scale"
+  | "animate-page-up"
+  | "animate-page-down";
 export type SearchEngine =
   | "duckduckgo"
   | "google"
@@ -175,6 +187,8 @@ export interface Config {
     enabled: boolean;
     bookmarkTiming: BookmarkTiming;
     initialType: AnimationInitialType;
+    searchType: AnimationSearchType;
+    bookmarkType: AnimationBookmarkType;
   };
   search: {
     enabled: boolean;
