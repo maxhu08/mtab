@@ -78,7 +78,7 @@ export const defaultConfig: Config = {
     enabled: true,
     bookmarkTiming: "left",
     initialType: "animate-up-bouncy",
-    searchType: "animate-page-down",
+    searchType: "animate-page-shrink",
     bookmarkType: "animate-page-down"
   },
   search: {
