@@ -137,6 +137,14 @@ const renderUserDefinedBookmarks = (config: Config) => {
     // prettier-ignore
     const bookmarksSubcontainerEl = document.getElementById(`bookmarks-subcontainer-${Math.floor(index / 4)}`) as HTMLDivElement;
 
+    let iconHTML = "";
+
+    if (bookmark.iconType.startsWith("ri-")) {
+      iconHTML = `<i class="${bookmark.iconType}"></i>`;
+    } else if (bookmark.iconType.startsWith("nf-")) {
+      iconHTML = `<i class="nf ${bookmark.iconType}"></i>`;
+    }
+
     bookmarksSubcontainerEl.innerHTML += `
     <button id="bookmark-${
       bookmark.name
@@ -149,7 +157,7 @@ const renderUserDefinedBookmarks = (config: Config) => {
       <div class="absolute w-full h-full hover:bg-white/20"></div>
       <div class="p-1 md:p-2 grid place-items-center h-full">
         <div class="bookmark-icon text-4xl md:text-6xl" style="color: ${bookmark.iconColor};">
-          <i class="${bookmark.iconType}"></i>
+          ${iconHTML}
         </div>
       </div>
     </button>
