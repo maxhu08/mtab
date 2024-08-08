@@ -138,11 +138,14 @@ const renderUserDefinedBookmarks = (config: Config) => {
     const bookmarksSubcontainerEl = document.getElementById(`bookmarks-subcontainer-${Math.floor(index / 4)}`) as HTMLDivElement;
 
     let iconHTML = "";
+    let iconSizeClass = "";
 
     if (bookmark.iconType.startsWith("ri-")) {
       iconHTML = `<i class="${bookmark.iconType}"></i>`;
+      iconSizeClass = "text-4xl md:text-6xl";
     } else if (bookmark.iconType.startsWith("nf-")) {
       iconHTML = `<i class="nf ${bookmark.iconType}"></i>`;
+      iconSizeClass = "text-3xl md:text-5xl";
     }
 
     bookmarksSubcontainerEl.innerHTML += `
@@ -156,7 +159,7 @@ const renderUserDefinedBookmarks = (config: Config) => {
       <div class="h-1" style="background-color: ${bookmark.color}"></div>
       <div class="absolute w-full h-full hover:bg-white/20"></div>
       <div class="p-1 md:p-2 grid place-items-center h-full">
-        <div class="bookmark-icon text-4xl md:text-6xl" style="color: ${bookmark.iconColor};">
+        <div class="bookmark-icon ${iconSizeClass}" style="color: ${bookmark.iconColor};">
           ${iconHTML}
         </div>
       </div>
