@@ -1,5 +1,5 @@
 import { AnimationBookmarkType, Config } from "../config";
-import { bookmarksContainerEl, bookmarkSearchInputEl } from "../ui";
+import { bookmarksContainerEl, bookmarkSearchInputEl, contentEl } from "../ui";
 
 export const renderBookmarks = (config: Config) => {
   switch (config.bookmarks.type) {
@@ -223,20 +223,18 @@ export const openBookmark = (
   }
 
   if (animationsEnabled) {
-    const content = document.getElementById("content") as HTMLDivElement;
-
-    content.classList.add(animationsType);
-    const computedStyle = getComputedStyle(content);
+    contentEl.classList.add(animationsType);
+    const computedStyle = getComputedStyle(contentEl);
     const animationDuration = parseFloat(computedStyle.animationDuration) * 1000;
 
     setTimeout(() => {
-      content.classList.remove(animationsType);
-      content.style.opacity = "0%";
+      contentEl.classList.remove(animationsType);
+      contentEl.style.opacity = "0%";
     }, animationDuration * 0.75);
 
     setTimeout(() => {
       window.location.href = bookmarkUrl;
-    }, animationDuration);
+    }, animationDuration + 20);
   } else {
     window.location.href = bookmarkUrl;
   }

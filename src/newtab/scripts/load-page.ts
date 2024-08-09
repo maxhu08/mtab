@@ -13,6 +13,7 @@ import { renderBookmarks } from "./utils/render-bookmarks";
 import { addAnimations } from "./utils/animations";
 import { listenToKeys } from "./keys";
 import { loadFavicon } from "src/newtab/scripts/utils/load-favicon";
+import { fixDisappearingUI } from "src/newtab/scripts/utils/fix-disappearing-ui";
 
 export const loadPage = () => {
   const manifest = chrome.runtime.getManifest();
@@ -55,6 +56,7 @@ export const loadPage = () => {
     );
 
     renderBookmarks(config);
+    fixDisappearingUI();
 
     addAnimations(config.animations);
 

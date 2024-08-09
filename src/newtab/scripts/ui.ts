@@ -1,5 +1,7 @@
 export const wallpaperEl = document.getElementById("wallpaper") as HTMLDivElement;
 
+export const contentEl = document.getElementById("content") as HTMLDivElement;
+
 export const messageEl = document.getElementById("message") as HTMLParagraphElement;
 
 export const searchSectionEl = document.getElementById("search-section") as HTMLDivElement;
