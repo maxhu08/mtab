@@ -2,17 +2,17 @@ export const getConfig = (f: ({ config }: { config: Config }) => void) => {
   chrome.storage.local.get(["config"], (data) => {
     if (Object.keys(data).length === 0) {
       chrome.storage.local.set({
-        config: defaultConfig
+        config: structuredClone(defaultConfig)
       });
 
       f({
-        config: defaultConfig
+        config: structuredClone(defaultConfig)
       });
       return;
     }
 
     // fill empty properties
-    const mergedConfig = deepMerge(defaultConfig, data.config);
+    const mergedConfig = deepMerge(structuredClone(defaultConfig), data.config);
 
     f({
       config: mergedConfig

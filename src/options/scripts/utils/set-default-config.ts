@@ -6,9 +6,10 @@ export const setDefaultConfig = () => {
   const confirmReset = window.confirm("do you want to reset your options to default?");
 
   if (confirmReset) {
-    console.log("[RESET_DEBUG]", defaultConfig);
+    const clonedDefaultConfig = structuredClone(defaultConfig);
+    console.log("[RESET_DEBUG]", clonedDefaultConfig);
+    fillInputs(clonedDefaultConfig);
     saveConfig();
-    fillInputs(defaultConfig);
     alert("options reset to default");
   } else {
     alert("you selected no, options did not reset");
