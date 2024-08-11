@@ -146,6 +146,9 @@ const renderUserDefinedBookmarks = (config: Config) => {
     } else if (bookmark.iconType.startsWith("nf-")) {
       iconHTML = `<i class="nf ${bookmark.iconType}"></i>`;
       iconSizeClass = "text-3xl md:text-5xl";
+    } else if (bookmark.iconType.startsWith("url-")) {
+      const src = bookmark.iconType.split("url-")[1];
+      iconHTML = `<img class="w-10 md:w-14" src="${src}" />`;
     }
 
     bookmarksSubcontainerEl.innerHTML += `
