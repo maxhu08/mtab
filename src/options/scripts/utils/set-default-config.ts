@@ -7,9 +7,9 @@ export const setDefaultConfig = () => {
 
   if (confirmReset) {
     console.log("[RESET_DEBUG]", defaultConfig);
-    alert("options reset to default");
-    fillInputs(defaultConfig);
     saveConfig();
+    fillInputs(defaultConfig);
+    alert("options reset to default");
   } else {
     alert("you selected no, options did not reset");
   }
