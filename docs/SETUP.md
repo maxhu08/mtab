@@ -14,10 +14,24 @@ OS: (Windows/macOS/Linux)
 
 ### windows
 
-- install nodejs from website: https://nodejs.org/en/download
+- install nodejs here: https://nodejs.org/en/download
 - install bun here: https://bun.sh/docs/installation
 
-### linux (arch)
+### macOS (Homebrew)
+
+```shell
+#updates homebrew
+brew update
+
+#installs nodejs and zip via homebrew
+brew install node@20
+brew install zip
+
+#installs bun via npm
+npm i -g bun
+```
+
+### linux (Arch)
 
 ```shell
 pacman -S nodejs npm zip
