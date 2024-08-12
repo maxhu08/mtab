@@ -116,26 +116,16 @@ const renderDefaultBookmarks = (config: Config) => {
 
 // animations handled separately
 const renderUserDefinedBookmarks = (config: Config) => {
-  bookmarksContainerEl.classList.add("w-full", "grid", "grid-flow-row", "gap-2");
+  bookmarksContainerEl.classList.add("w-full", "grid", "gap-2");
+  bookmarksContainerEl.style.gridTemplateColumns = `repeat(${5}, minmax(0, 1fr))`;
 
   config.bookmarks.userDefined.forEach((bookmark, index) => {
-    if (index === 0) {
-      bookmarksContainerEl.innerHTML += `<div id="bookmarks-subcontainer-${index}" class="grid grid-cols-2 md:grid-cols-4 w-full gap-2"></div>`;
-    } else if (index % 4 === 0) {
-      bookmarksContainerEl.innerHTML += `<div id="bookmarks-subcontainer-${
-        index / 4
-      }" class="grid grid-cols-2 md:grid-cols-4 w-full gap-2"></div>`;
-    }
-
     let delay = 0;
 
     if (config.animations.bookmarkTiming === "uniform") delay = 150;
     else if (config.animations.bookmarkTiming === "left") delay = (index + 2) * 50;
     else if (config.animations.bookmarkTiming === "right")
       delay = (config.bookmarks.userDefined.length + 2 - index) * 50;
-
-    // prettier-ignore
-    const bookmarksSubcontainerEl = document.getElementById(`bookmarks-subcontainer-${Math.floor(index / 4)}`) as HTMLDivElement;
 
     let iconHTML = "";
     let iconSizeClass = "";
@@ -151,7 +141,7 @@ const renderUserDefinedBookmarks = (config: Config) => {
       iconHTML = `<img class="w-10 md:w-14" src="${src}" />`;
     }
 
-    bookmarksSubcontainerEl.innerHTML += `
+    bookmarksContainerEl.innerHTML += `
     <button id="bookmark-${
       bookmark.name
     }-${index}" class="relative duration-[250ms] ease-out bg-foreground cursor-pointer ${
