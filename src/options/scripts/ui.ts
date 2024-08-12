@@ -140,6 +140,10 @@ export const bookmarksTypeDefaultButtonEl = document.getElementById("bookmarks-t
 export const bookmarksTypeUserDefinedButtonEl = document.getElementById("bookmarks-type-user-defined-button") as HTMLButtonElement;
 export const bookmarksTypeNoneButtonEl = document.getElementById("bookmarks-type-none-button") as HTMLButtonElement;
 
+
+export const bookmarksUserDefinedColsContainerEl = document.getElementById("bookmarks-user-defined-cols-container") as HTMLDivElement;
+export const bookmarksUserDefinedColsInputEl = document.getElementById("bookmarks-user-defined-cols-input") as HTMLInputElement;
+
 export const bookmarksUserDefinedList = document.getElementById("bookmarks-user-defined-list") as HTMLDivElement;
 
 export const inputs: Input[] = [
@@ -222,6 +226,10 @@ export const inputs: Input[] = [
   {
     container: searchCustomEngineURLContainerEl,
     input: searchCustomEngineURLInputEl
+  },
+  {
+    container: bookmarksUserDefinedColsContainerEl,
+    input: bookmarksUserDefinedColsInputEl
   }
 ];
 

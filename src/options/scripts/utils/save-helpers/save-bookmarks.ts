@@ -1,4 +1,5 @@
 import { UserDefinedBookmark, Config } from "src/newtab/scripts/config";
+import { bookmarksUserDefinedColsInputEl } from "src/options/scripts/ui";
 
 export const saveBookmarksSettingsToDraft = (draft: Config) => {
   const selectedEl = document.querySelector(
@@ -24,6 +25,9 @@ export const saveBookmarksSettingsToDraft = (draft: Config) => {
 };
 
 export const saveUserDefinedBookmarkSettingsToDraft = (draft: Config) => {
+  draft.bookmarks.userDefinedCols = parseInt(bookmarksUserDefinedColsInputEl.value);
+
+  // user defined list stuff
   const totalBookmarks = (document.getElementById("bookmarks-user-defined-list") as HTMLDivElement)
     .children.length;
 

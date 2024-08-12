@@ -5,7 +5,8 @@ import {
   bookmarksUserDefinedList,
   bookmarksTypeDefaultButtonEl,
   bookmarksTypeNoneButtonEl,
-  bookmarksTypeUserDefinedButtonEl
+  bookmarksTypeUserDefinedButtonEl,
+  bookmarksUserDefinedColsInputEl
 } from "src/options/scripts/ui";
 
 export const fillBookmarksInputs = (config: Config) => {
@@ -15,6 +16,8 @@ export const fillBookmarksInputs = (config: Config) => {
       break;
     }
     case "user-defined": {
+      bookmarksUserDefinedColsInputEl.value = config.bookmarks.userDefinedCols.toString();
+
       bookmarksTypeUserDefinedButtonEl.click();
       break;
     }

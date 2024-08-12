@@ -104,6 +104,7 @@ export const defaultConfig: Config = {
   },
   bookmarks: {
     type: "user-defined",
+    userDefinedCols: 4,
     userDefined: [
       {
         name: "github",
@@ -239,6 +240,7 @@ export interface Config {
   };
   bookmarks: {
     type: BookmarksType;
+    userDefinedCols: number;
     userDefined: UserDefinedBookmark[];
   };
 }
