@@ -157,8 +157,11 @@ const renderUserDefinedBookmarks = (config: Config) => {
     }-${index}" class="relative duration-[250ms] ease-out bg-foreground cursor-pointer ${
       config.ui.style === "glass" ? "glass-effect" : ""
     } rounded-md h-bookmark overflow-hidden ${
-      config.animations.enabled ? `${config.animations.initialType} opacity-0` : ""
+      config.animations.enabled ? `${config.animations.initialType} opacity-0 outline-none` : ""
     }" ${config.animations ? `style="animation-delay: ${delay}ms;"` : ""}>
+      <div id="bookmark-${
+        bookmark.name
+      }-${index}-border" class="absolute w-full h-full border-2 border-transparent rounded-md"></div>
       <div class="h-1" style="background-color: ${bookmark.color}"></div>
       <div class="absolute w-full h-full hover:bg-white/20"></div>
       <div class="p-1 md:p-2 grid place-items-center h-full">
@@ -168,6 +171,16 @@ const renderUserDefinedBookmarks = (config: Config) => {
       </div>
     </button>
     `;
+  });
+
+  config.bookmarks.userDefined.forEach((bookmark, index) => {
+    // prettier-ignore
+    const bookmarkEl = document.getElementById(`bookmark-${bookmark.name}-${index}`) as HTMLDivElement;
+    // prettier-ignore
+    const bookmarkBorderEl = document.getElementById(`bookmark-${bookmark.name}-${index}-border`) as HTMLDivElement;
+
+    bookmarkEl.addEventListener("blur", () => unfocusBookmark(bookmarkBorderEl));
+    bookmarkEl.addEventListener("focus", (e) => focusBookmark(bookmarkBorderEl, config, e));
   });
 
   config.animations &&
@@ -210,6 +223,21 @@ const renderUserDefinedBookmarks = (config: Config) => {
         }
       };
     });
+};
+
+export const focusBookmark = (bookmarkBorderEl: HTMLDivElement, config: Config, e: Event) => {
+  bookmarkBorderEl.classList.remove("border-transparent");
+  bookmarkBorderEl.style.borderColor = config.search.focusedBorderColor;
+
+  bookmarkBorderEl.focus();
+  e.preventDefault();
+};
+
+export const unfocusBookmark = (bookmarkBorderEl: HTMLDivElement) => {
+  bookmarkBorderEl.blur();
+
+  bookmarkBorderEl.style.borderColor = "#00000000";
+  bookmarkBorderEl.classList.add("border-transparent");
 };
 
 export const openBookmark = (
