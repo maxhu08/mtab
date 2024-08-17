@@ -1,5 +1,5 @@
-# Changes in 1.3.9
+# Changes in 1.4.0
 
 in this release:
 
-- fix bugs with animations
+- bug fixes
