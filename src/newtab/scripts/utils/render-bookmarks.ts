@@ -205,6 +205,8 @@ const renderUserDefinedBookmarks = (config: Config) => {
             // Fix weird flickering issue on firefox
             setTimeout(() => {
               bookmarkEl.classList.remove("opacity-0");
+              // fix bookmarks animations replaying after bookmark search esc
+              bookmarkEl.classList.remove(config.animations.initialType);
             }, animationDuration - 500);
           },
           {
