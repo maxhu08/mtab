@@ -269,7 +269,6 @@ export const openBookmark = (
     const animationDuration = parseFloat(computedStyle.animationDuration) * 1000;
 
     setTimeout(() => {
-      contentEl.classList.remove(animationsType);
       contentEl.style.opacity = "0%";
     }, animationDuration * 0.75);
 

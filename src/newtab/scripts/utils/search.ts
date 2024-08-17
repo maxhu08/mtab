@@ -53,7 +53,6 @@ export const search = (config: Config, value: string, openInNewTab: boolean = fa
     const animationDuration = parseFloat(computedStyle.animationDuration) * 1000;
 
     setTimeout(() => {
-      content.classList.remove(config.animations.searchType);
       content.style.opacity = "0%";
     }, animationDuration * 0.75);
 
