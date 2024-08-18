@@ -1,47 +1,29 @@
-import { Config } from "src/newtab/scripts/config";
+import { Config, SearchEngine } from "src/newtab/scripts/config";
 import { searchContainerEl, searchInputEl } from "../ui";
 import { setTitle } from "src/newtab/scripts/utils/set-title";
 
 export const search = (config: Config, value: string, openInNewTab: boolean = false) => {
+  const searchUrlMap: Record<SearchEngine, string> = {
+    google: `https://www.google.com/search?q=`,
+    bing: `https://www.bing.com/search?q=`,
+    brave: `https://search.brave.com/search?q=`,
+    duckduckgo: `https://duckduckgo.com/?q=`,
+    yahoo: `https://search.yahoo.com/search?q=`,
+    yandex: `https://yandex.com/search/?text=`,
+    startpage: `https://www.startpage.com/sp/search?query=`,
+    ecosia: `https://www.ecosia.org/search?q=`
+  };
+
   let searchUrl = "";
 
   if (config.search.useCustomEngine) {
     searchUrl = config.search.customEngineURL.replace("{}", encodeURIComponent(value));
-  } else {
-    switch (config.search.engine) {
-      case "google":
-        searchUrl = `https://www.google.com/search?q=${encodeURIComponent(value)}`;
-        break;
-      case "bing":
-        searchUrl = `https://www.bing.com/search?q=${encodeURIComponent(value)}`;
-        break;
-      case "brave":
-        searchUrl = `https://search.brave.com/search?q=${encodeURIComponent(value)}`;
-        break;
-      case "duckduckgo":
-        searchUrl = `https://duckduckgo.com/?q=${encodeURIComponent(value)}`;
-        break;
-      case "yahoo":
-        searchUrl = `https://search.yahoo.com/search?q=${encodeURIComponent(value)}`;
-        break;
-      case "yandex":
-        searchUrl = `https://yandex.com/search/?text=${encodeURIComponent(value)}`;
-        break;
-      case "startpage":
-        searchUrl = `https://www.startpage.com/sp/search?query=${encodeURIComponent(value)}`;
-        break;
-      case "ecosia":
-        searchUrl = `https://www.ecosia.org/search?q=${encodeURIComponent(value)}`;
-        break;
-    }
-  }
+  } else searchUrl = searchUrlMap[config.search.engine] + encodeURIComponent(value);
 
   if (openInNewTab) {
     window.open(searchUrl, "_blank");
     searchInputEl.value = "";
-
     setTitle(config.title.defaultTitle);
-
     return;
   }
 
