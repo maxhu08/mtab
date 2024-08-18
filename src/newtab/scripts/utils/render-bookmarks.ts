@@ -207,7 +207,7 @@ const renderUserDefinedBookmarks = (config: Config) => {
               bookmarkEl.classList.remove("opacity-0");
               // fix bookmarks animations replaying after bookmark search esc
               bookmarkEl.classList.remove(config.animations.initialType);
-            }, animationDuration * 0.75);
+            }, animationDuration - 10);
           },
           {
             once: true
@@ -270,7 +270,7 @@ export const openBookmark = (
 
     setTimeout(() => {
       contentEl.style.opacity = "0%";
-    }, animationDuration * 0.75);
+    }, animationDuration - 10);
 
     setTimeout(() => {
       window.location.href = bookmarkUrl;

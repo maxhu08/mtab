@@ -54,7 +54,7 @@ export const search = (config: Config, value: string, openInNewTab: boolean = fa
 
     setTimeout(() => {
       content.style.opacity = "0%";
-    }, animationDuration * 0.75);
+    }, animationDuration - 10);
 
     setTimeout(() => {
       window.location.href = searchUrl;
