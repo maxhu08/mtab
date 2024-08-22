@@ -207,7 +207,7 @@ const renderUserDefinedBookmarks = (config: Config) => {
               bookmarkEl.classList.remove("opacity-0");
               // fix bookmarks animations replaying after bookmark search esc
               bookmarkEl.classList.remove(config.animations.initialType);
-            }, animationDuration - 10);
+            }, animationDuration * 0.75); // needs to be less than 1
           },
           {
             once: true
