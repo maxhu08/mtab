@@ -1,21 +1,22 @@
 import { Config } from "src/newtab/scripts/config";
 import { wallpaperEl } from "src/newtab/scripts/ui";
 
+const applyWallpaper = (url: string) => {
+  wallpaperEl.style.background = `url("${url}") center center / cover no-repeat fixed`;
+  wallpaperEl.style.transitionDuration = "0ms"; // Ensure transition is instantaneous
+};
+
 export const loadWallpaper = (wallpaper: Config["wallpaper"]) => {
   if (!wallpaper.enabled) return;
 
   if (wallpaper.type === "fileUpload") {
     chrome.storage.local.get(["userUploadedWallpaper"], (data) => {
-      wallpaperEl.setAttribute(
-        "style",
-        `background: url("${data.userUploadedWallpaper}") center center / cover no-repeat fixed; transition-duration: 0ms;`
-      );
+      const userUploadedWallpaper = data.userUploadedWallpaper;
+      if (userUploadedWallpaper) {
+        applyWallpaper(userUploadedWallpaper);
+      }
     });
-    return;
+  } else {
+    applyWallpaper(wallpaper.url);
   }
-
-  wallpaperEl.setAttribute(
-    "style",
-    `background: url("${wallpaper.url}") center center / cover no-repeat fixed; transition-duration: 0ms;`
-  );
 };
