@@ -1,18 +1,28 @@
 import { Config } from "src/newtab/scripts/config";
 import { wallpaperEl } from "src/newtab/scripts/ui";
 
+const cacheUserUploadedWallpaper = (wallpaper: string) => {
+  localStorage.setItem("userUploadedWallpaperCache", wallpaper);
+};
+
 const applyWallpaper = (url: string) => {
   wallpaperEl.style.background = `url("${url}") center center / cover no-repeat fixed`;
-  wallpaperEl.style.transitionDuration = "0ms"; // Ensure transition is instantaneous
+  wallpaperEl.style.transitionDuration = "0ms";
 };
 
 export const loadWallpaper = (wallpaper: Config["wallpaper"]) => {
   if (!wallpaper.enabled) return;
 
   if (wallpaper.type === "fileUpload") {
+    const cachedWallpaper = localStorage.getItem("userUploadedWallpaperCache");
+
+    // use wallpaper from local storage, loads ~10ms faster
+    if (cachedWallpaper) applyWallpaper(cachedWallpaper);
+
     chrome.storage.local.get(["userUploadedWallpaper"], (data) => {
       const userUploadedWallpaper = data.userUploadedWallpaper;
       if (userUploadedWallpaper) {
+        cacheUserUploadedWallpaper(userUploadedWallpaper);
         applyWallpaper(userUploadedWallpaper);
       }
     });
