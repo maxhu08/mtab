@@ -27,12 +27,6 @@ downloads here:
 - hotkeys
 - much more !
 
-## community-configs
-
-Check out community configs here:
-
-[community-configs](./COMMUNITY_CONFIGS.md)
-
 ## showcase
 
 ![showcase](./assets/mtab-showcase.png)
@@ -42,12 +36,12 @@ Check out community configs here:
 
 [![Star History Chart](https://api.star-history.com/svg?repos=maxhu08/mtab&type=Date)](https://star-history.com/#maxhu08/mtab&Date)
 
-## extra
+## contributing
 
-<div align="center">
+See [CONTRIBUTING.md](./docs/CONTRIBUTING.md).
 
-Find how to setup [here](./docs/SETUP.md)
+## setup
 
-Want to [contribute](./docs/CONTRIBUTING.md)?
+Find how to setup [here](./docs/SETUP.md).
 
 </div>
