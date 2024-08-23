@@ -1,7 +1,6 @@
-# Changes in 1.4.1
+# Changes in 1.4.2
 
 in this release:
 
-- remove scrollbar on new tab page
-- fix buttons in user defined bookmark section that being too small on firefox
+- performance improvements
 - bug fixes
