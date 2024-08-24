@@ -1,6 +1,7 @@
 import {
   AnimationBookmarkType,
   AnimationInitialType,
+  BookmarksType,
   BookmarkTiming,
   Config,
   UIStyle
@@ -94,7 +95,7 @@ export const renderBlockBookmark = (
   } rounded-md h-bookmark overflow-hidden ${
     animationsEnabled ? `${animationsInitialType} opacity-0 outline-none` : ""
   }" ${animationsEnabled ? `style="animation-delay: ${delay}ms;"` : ""}>
-      <div id="bookmark-${bookmarkName}-${bookmarkName}-border" class="absolute w-full h-full border-2 border-transparent rounded-md"></div>
+      <div id="bookmark-${bookmarkName}-${bookmarkIndex}-border" class="absolute w-full h-full border-2 border-transparent rounded-md"></div>
       <div class="h-1" style="background-color: ${bookmarkColor}"></div>
       <div class="absolute w-full h-full hover:bg-white/20"></div>
       <div class="p-1 md:p-2 grid place-items-center h-full">
@@ -104,4 +105,49 @@ export const renderBlockBookmark = (
       </div>
     </button>
     `;
+};
+
+export const bindActionsToBlockBookmark = (
+  bookmarkId: string,
+  bookmarkIndex: number,
+  bookmarkUrl: string,
+  animationsEnabled: boolean,
+  animationsInitialType: AnimationInitialType,
+  animationsBookmarkType: AnimationBookmarkType
+) => {
+  // prettier-ignore
+  const bookmarkEl = document.getElementById(`bookmark-${bookmarkId}-${bookmarkIndex}`) as HTMLButtonElement;
+  console.log("UTILB", `bookmark-${bookmarkId}-${bookmarkIndex}`, bookmarkEl);
+
+  if (bookmarkEl && animationsEnabled) {
+    const computedStyle = window.getComputedStyle(bookmarkEl);
+    const animationDuration = parseFloat(computedStyle.animationDuration) * 1000;
+    bookmarkEl.addEventListener(
+      "animationstart",
+      () => {
+        // Fix weird flickering issue on firefox
+        setTimeout(() => {
+          bookmarkEl.classList.remove("opacity-0");
+          // fix bookmarks animations replaying after bookmark search esc
+          bookmarkEl.classList.remove(animationsInitialType);
+        }, animationDuration * 0.75); // needs to be less than 1
+      },
+      {
+        once: true
+      }
+    );
+
+    // Fix bookmarks disappearing if user leaves tab too quickly
+    document.addEventListener("visibilitychange", () => {
+      bookmarkEl.classList.remove("opacity-0");
+    });
+  }
+
+  bookmarkEl.onclick = (e) => {
+    if (e.ctrlKey) {
+      openBookmark(bookmarkUrl, animationsEnabled, animationsBookmarkType, true);
+    } else {
+      openBookmark(bookmarkUrl!, animationsEnabled, animationsBookmarkType);
+    }
+  };
 };

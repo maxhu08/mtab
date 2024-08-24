@@ -1,8 +1,8 @@
 import { Config } from "src/newtab/scripts/config";
 import { bookmarksContainerEl } from "src/newtab/scripts/ui";
 import {
+  bindActionsToBlockBookmark,
   focusBookmark,
-  openBookmark,
   renderBlockBookmark,
   unfocusBookmark
 } from "src/newtab/scripts/utils/bookmark-utils";
@@ -56,44 +56,14 @@ export const renderUserDefinedBookmarks = (config: Config) => {
 
   config.animations &&
     config.bookmarks.userDefined.forEach((bookmark, index) => {
-      // prettier-ignore
-      const bookmarkEl = document.getElementById(`bookmark-${bookmark.name}-${index}`) as HTMLButtonElement;
-
-      if (bookmarkEl && config.animations) {
-        const computedStyle = window.getComputedStyle(bookmarkEl);
-        const animationDuration = parseFloat(computedStyle.animationDuration) * 1000;
-        bookmarkEl.addEventListener(
-          "animationstart",
-          () => {
-            // Fix weird flickering issue on firefox
-            setTimeout(() => {
-              bookmarkEl.classList.remove("opacity-0");
-              // fix bookmarks animations replaying after bookmark search esc
-              bookmarkEl.classList.remove(config.animations.initialType);
-            }, animationDuration * 0.75); // needs to be less than 1
-          },
-          {
-            once: true
-          }
-        );
-
-        // Fix bookmarks disappearing if user leaves tab too quickly
-        document.addEventListener("visibilitychange", () => {
-          bookmarkEl.classList.remove("opacity-0");
-        });
-      }
-
-      bookmarkEl.onclick = (e) => {
-        if (e.ctrlKey) {
-          openBookmark(
-            bookmark.url,
-            config.animations.enabled,
-            config.animations.bookmarkType,
-            true
-          );
-        } else {
-          openBookmark(bookmark.url, config.animations.enabled, config.animations.bookmarkType);
-        }
-      };
+      console.log("SOmething", index);
+      bindActionsToBlockBookmark(
+        bookmark.name,
+        index,
+        bookmark.url!,
+        config.animations.enabled,
+        config.animations.initialType,
+        config.animations.bookmarkType
+      );
     });
 };
