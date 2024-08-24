@@ -10,24 +10,22 @@ import {
 export const renderDefaultBlockyBookmarks = (config: Config) => {
   bookmarksContainerEl.classList.add("w-full", "grid", "gap-2", "default-blocky-bookmarks-cols");
 
-  const userDefinedBookmarkCss = `
+  const defaultBlockyBookmarkCss = `
 .default-blocky-bookmarks-cols {
   grid-template-columns: 1fr 1fr;
 }
 
 @media (min-width: 768px) {
   .default-blocky-bookmarks-cols {
-    grid-template-columns: repeat(${config.bookmarks.userDefinedCols}, minmax(0, 1fr));
+    grid-template-columns: repeat(${config.bookmarks.defaultBlockyCols}, minmax(0, 1fr));
   }
 }
 `;
 
   const styleElement = document.createElement("style");
   styleElement.type = "text/css";
-  styleElement.appendChild(document.createTextNode(userDefinedBookmarkCss));
+  styleElement.appendChild(document.createTextNode(defaultBlockyBookmarkCss));
   document.head.appendChild(styleElement);
-
-  bookmarksContainerEl.style.gridTemplateColumns = ``;
 
   chrome.bookmarks.search({}, (chromeBookmarks) => {
     chromeBookmarks.forEach((bookmark, index) => {
@@ -45,17 +43,17 @@ export const renderDefaultBlockyBookmarks = (config: Config) => {
     <button id="bookmark-${
       bookmark.id
     }-${index}" class="relative duration-[250ms] ease-out bg-foreground cursor-pointer ${
-      config.ui.style === "glass" ? "glass-effect" : ""
-    } rounded-md h-bookmark overflow-hidden ${
-      config.animations.enabled ? `${config.animations.initialType} opacity-0 outline-none` : ""
-    }" ${config.animations ? `style="animation-delay: ${delay}ms;"` : ""}>
+        config.ui.style === "glass" ? "glass-effect" : ""
+      } rounded-md h-bookmark overflow-hidden ${
+        config.animations.enabled ? `${config.animations.initialType} opacity-0 outline-none` : ""
+      }" ${config.animations ? `style="animation-delay: ${delay}ms;"` : ""}>
       <div id="bookmark-${
         bookmark.id
       }-${index}-border" class="absolute w-full h-full border-2 border-transparent rounded-md"></div>
-      <div class="h-1" style="background-color: ${"#fff"}"></div>
+      <div class="h-1" style="background-color: ${config.bookmarks.defaultBlockyColor}"></div>
       <div class="absolute w-full h-full hover:bg-white/20"></div>
       <div class="p-1 md:p-2 grid place-items-center h-full">
-        <div class="bookmark-icon" style="color: ${"#ff0000"};">
+        <div class="bookmark-icon">
           ${iconHTML}
         </div>
       </div>

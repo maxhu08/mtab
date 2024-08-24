@@ -6,6 +6,9 @@ import {
 } from "src/options/scripts/ui";
 
 export const saveBookmarksSettingsToDraft = (draft: Config) => {
+  draft.bookmarks.defaultBlockyCols = parseInt(bookmarksDefaultBlockyColsInputEl.value);
+  draft.bookmarks.defaultBlockyColor = bookmarksDefaultBlockyColorInputEl.value;
+
   const selectedEl = document.querySelector(
     `button[btn-option-type="bookmarks-type"][selected="yes"]`
   ) as HTMLButtonElement;

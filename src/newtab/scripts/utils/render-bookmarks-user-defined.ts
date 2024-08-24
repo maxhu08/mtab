@@ -27,8 +27,6 @@ export const renderUserDefinedBookmarks = (config: Config) => {
   styleElement.appendChild(document.createTextNode(userDefinedBookmarkCss));
   document.head.appendChild(styleElement);
 
-  bookmarksContainerEl.style.gridTemplateColumns = ``;
-
   config.bookmarks.userDefined.forEach((bookmark, index) => {
     let delay = 0;
 
