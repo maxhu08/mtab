@@ -56,7 +56,7 @@ export const renderDefaultBookmarks = (config: Config) => {
       }" class="overflow-hidden w-16 md:w-20 aspect-square grid grid-rows-[auto_max-content] place-items-center cursor-pointer">
         <img class="h-[80%]" src="${`chrome-extension://${
           chrome.runtime.id
-        }/_favicon/?pageUrl=${encodeURIComponent(bookmark.url as string)}&size=${32}`}" />
+        }/_favicon/?pageUrl=${encodeURIComponent(bookmark.url as string)}&size=${64}`}" />
         <span class="text-base w-full font-search text-center text-ellipsis overflow-hidden whitespace-nowrap"
               style="color: ${config.search.textColor}"
         >

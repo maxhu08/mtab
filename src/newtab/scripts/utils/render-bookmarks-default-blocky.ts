@@ -39,16 +39,16 @@ export const renderDefaultBlockyBookmarks = (config: Config) => {
         delay = (config.bookmarks.userDefined.length + 2 - index) * 50;
 
       // prettier-ignore
-      let iconHTML = `<img class="w-10 md:w-14" src="${`chrome-extension://${chrome.runtime.id}/_favicon/?pageUrl=${encodeURIComponent(bookmark.url as string)}&size=${32}`}" />`;
+      let iconHTML = `<img class="w-10 md:w-14" src="${`chrome-extension://${chrome.runtime.id}/_favicon/?pageUrl=${encodeURIComponent(bookmark.url as string)}&size=${64}`}" />`;
 
       bookmarksContainerEl.innerHTML += `
     <button id="bookmark-${
       bookmark.id
     }-${index}" class="relative duration-[250ms] ease-out bg-foreground cursor-pointer ${
-      config.ui.style === "glass" ? "glass-effect" : ""
-    } rounded-md h-bookmark overflow-hidden ${
-      config.animations.enabled ? `${config.animations.initialType} opacity-0 outline-none` : ""
-    }" ${config.animations ? `style="animation-delay: ${delay}ms;"` : ""}>
+        config.ui.style === "glass" ? "glass-effect" : ""
+      } rounded-md h-bookmark overflow-hidden ${
+        config.animations.enabled ? `${config.animations.initialType} opacity-0 outline-none` : ""
+      }" ${config.animations ? `style="animation-delay: ${delay}ms;"` : ""}>
       <div id="bookmark-${
         bookmark.id
       }-${index}-border" class="absolute w-full h-full border-2 border-transparent rounded-md"></div>
