@@ -1,7 +1,6 @@
 import {
   AnimationBookmarkType,
   AnimationInitialType,
-  BookmarksType,
   BookmarkTiming,
   Config,
   UIStyle
@@ -116,9 +115,12 @@ export const bindActionsToBlockBookmark = (
   bookmarkIndex: number,
   bookmarkUrl: string,
   bookmarkFocusedBorderColor: string,
+  isFolder: boolean,
+  folderItems: chrome.bookmarks.BookmarkTreeNode[],
   animationsEnabled: boolean,
   animationsInitialType: AnimationInitialType,
-  animationsBookmarkType: AnimationBookmarkType
+  animationsBookmarkType: AnimationBookmarkType,
+  config: Config
 ) => {
   // prettier-ignore
   const bookmarkEl = document.getElementById(`bookmark-${bookmarkId}-${bookmarkIndex}`) as HTMLButtonElement;
@@ -133,7 +135,6 @@ export const bindActionsToBlockBookmark = (
       () => {
         // Fix weird flickering issue on firefox
         setTimeout(() => {
-          console.log("WORK", bookmarkIndex);
           bookmarkEl.classList.remove("opacity-0");
           // fix bookmarks animations replaying after bookmark search esc
           bookmarkEl.classList.remove(animationsInitialType);
@@ -150,13 +151,22 @@ export const bindActionsToBlockBookmark = (
     });
   }
 
-  bookmarkEl.onclick = (e) => {
-    if (e.ctrlKey) {
-      openBookmark(bookmarkUrl, animationsEnabled, animationsBookmarkType, true);
-    } else {
-      openBookmark(bookmarkUrl!, animationsEnabled, animationsBookmarkType);
-    }
-  };
+  if (isFolder) {
+    bookmarkEl.onclick = () => {
+      console.log("IS FOLDER");
+      bookmarksContainerEl.innerHTML = "";
+      console.log(folderItems);
+      renderDefaultBlockyBookmarksNodes(folderItems, config);
+    };
+  } else {
+    bookmarkEl.onclick = (e) => {
+      if (e.ctrlKey) {
+        openBookmark(bookmarkUrl, animationsEnabled, animationsBookmarkType, true);
+      } else {
+        openBookmark(bookmarkUrl!, animationsEnabled, animationsBookmarkType);
+      }
+    };
+  }
 
   bookmarkEl.addEventListener("blur", () => unfocusBookmark(bookmarkBorderEl));
   bookmarkEl.addEventListener("focus", (e) =>
@@ -239,4 +249,82 @@ export const buildChromeBookmarksTree = (chromeBookmarks: chrome.bookmarks.Bookm
   });
 
   return rootNodes;
+};
+
+export const renderDefaultBlockyBookmarksNodes = (
+  nodes: chrome.bookmarks.BookmarkTreeNode[],
+  config: Config
+) => {
+  nodes.forEach((node, index) => {
+    // if has children item is a folder
+    const isFolder = node.children!.length > 0;
+    console.log(node, isFolder);
+
+    if (isFolder) {
+      const folder = node;
+
+      renderBlockBookmarkFolder(
+        config.animations.bookmarkTiming,
+        nodes.length,
+        index,
+        folder.id,
+        config.bookmarks.defaultBlockyColor,
+        config.bookmarks.defaultBlockyColor,
+        "ri-folder-fill",
+        "",
+        config.ui.style,
+        config.animations.enabled,
+        config.animations.initialType
+      );
+    } else {
+      renderBlockBookmark(
+        config.animations.bookmarkTiming,
+        nodes.length,
+        index,
+        node.id,
+        config.bookmarks.defaultBlockyColor,
+        null,
+        null,
+        // prettier-ignore
+        `<img class="w-10 md:w-14" src="${`chrome-extension://${chrome.runtime.id}/_favicon/?pageUrl=${encodeURIComponent(node.url as string)}&size=${64}`}" />`,
+        config.ui.style,
+        config.animations.enabled,
+        config.animations.initialType
+      );
+    }
+  });
+
+  config.animations &&
+    nodes.forEach((item, index) => {
+      const isFolder = item.children!.length > 0;
+
+      if (isFolder) {
+        const folder = item;
+        bindActionsToBlockBookmark(
+          folder.id,
+          index,
+          folder.url!,
+          config.search.focusedBorderColor,
+          true,
+          item.children!,
+          config.animations.enabled,
+          config.animations.initialType,
+          config.animations.bookmarkType,
+          config
+        );
+      } else {
+        bindActionsToBlockBookmark(
+          item.id,
+          index,
+          item.url!,
+          config.search.focusedBorderColor,
+          false,
+          [],
+          config.animations.enabled,
+          config.animations.initialType,
+          config.animations.bookmarkType,
+          config
+        );
+      }
+    });
 };

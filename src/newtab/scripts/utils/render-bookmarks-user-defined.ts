@@ -49,9 +49,12 @@ export const renderUserDefinedBookmarks = (config: Config) => {
         index,
         bookmark.url!,
         config.search.focusedBorderColor,
+        false,
+        [],
         config.animations.enabled,
         config.animations.initialType,
-        config.animations.bookmarkType
+        config.animations.bookmarkType,
+        config
       );
     });
 };
