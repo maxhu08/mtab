@@ -147,10 +147,10 @@ export const bookmarksUserDefinedColsInputEl = document.getElementById("bookmark
 export const bookmarksUserDefinedList = document.getElementById("bookmarks-user-defined-list") as HTMLDivElement;
 
 export const bookmarksDefaultBlockyColsContainerEl = document.getElementById("bookmarks-default-blocky-cols-container") as HTMLDivElement;
-export const bookmarksDefaultBLockyColsInputEl = document.getElementById("bookmarks-default-blocky-cols-input") as HTMLInputElement;
+export const bookmarksDefaultBlockyColsInputEl = document.getElementById("bookmarks-default-blocky-cols-input") as HTMLInputElement;
 
 export const bookmarksDefaultBlockyColorContainerEl = document.getElementById("bookmarks-default-blocky-color-container") as HTMLDivElement;
-export const bookmarksDefaultBLockyColorInputEl = document.getElementById("bookmarks-default-blocky-color-input") as HTMLInputElement;
+export const bookmarksDefaultBlockyColorInputEl = document.getElementById("bookmarks-default-blocky-color-input") as HTMLInputElement;
 
 export const inputs: Input[] = [
   {
@@ -239,11 +239,11 @@ export const inputs: Input[] = [
   },
   {
     container: bookmarksDefaultBlockyColsContainerEl,
-    input: bookmarksDefaultBLockyColsInputEl
+    input: bookmarksDefaultBlockyColsInputEl
   },
   {
     container: bookmarksDefaultBlockyColorContainerEl,
-    input: bookmarksDefaultBLockyColorInputEl
+    input: bookmarksDefaultBlockyColorInputEl
   }
 ];
 

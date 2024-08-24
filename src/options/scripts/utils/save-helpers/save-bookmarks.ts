@@ -1,5 +1,9 @@
 import { UserDefinedBookmark, Config, BookmarksType } from "src/newtab/scripts/config";
-import { bookmarksUserDefinedColsInputEl } from "src/options/scripts/ui";
+import {
+  bookmarksDefaultBlockyColorInputEl,
+  bookmarksDefaultBlockyColsInputEl,
+  bookmarksUserDefinedColsInputEl
+} from "src/options/scripts/ui";
 
 export const saveBookmarksSettingsToDraft = (draft: Config) => {
   const selectedEl = document.querySelector(
@@ -48,4 +52,9 @@ export const saveUserDefinedBookmarkSettingsToDraft = (draft: Config) => {
   }
 
   draft.bookmarks.userDefined = bookmarksArrToSave;
+};
+
+export const saveDefaultBlockyBookmarkSettingsToDraft = (draft: Config) => {
+  draft.bookmarks.defaultBlockyCols = parseInt(bookmarksDefaultBlockyColsInputEl.value);
+  draft.message.textColor = bookmarksDefaultBlockyColorInputEl.value;
 };

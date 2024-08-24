@@ -7,10 +7,15 @@ import {
   bookmarksTypeDefaultButtonEl,
   bookmarksTypeDefaultBlockyButtonEl,
   bookmarksTypeNoneButtonEl,
-  bookmarksUserDefinedColsInputEl
+  bookmarksUserDefinedColsInputEl,
+  bookmarksDefaultBlockyColsInputEl,
+  bookmarksDefaultBlockyColorInputEl
 } from "src/options/scripts/ui";
 
 export const fillBookmarksInputs = (config: Config) => {
+  bookmarksDefaultBlockyColsInputEl.value = config.bookmarks.defaultBlockyCols.toString();
+  bookmarksDefaultBlockyColorInputEl.value = config.bookmarks.defaultBlockyColor;
+
   // prettier-ignore
   const bookmarksTypePairs: Record<BookmarksType, () => void> = {
     "user-defined": () => {
