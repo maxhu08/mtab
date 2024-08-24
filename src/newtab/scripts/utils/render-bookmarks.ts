@@ -1,5 +1,6 @@
 import { Config } from "src/newtab/scripts/config";
 import { renderDefaultBookmarks } from "src/newtab/scripts/utils/render-bookmarks-default";
+import { renderDefaultBlockyBookmarks } from "src/newtab/scripts/utils/render-bookmarks-default-blocky";
 import { renderUserDefinedBookmarks } from "src/newtab/scripts/utils/render-bookmarks-user-defined";
 
 export const renderBookmarks = (config: Config) => {
@@ -13,6 +14,10 @@ export const renderBookmarks = (config: Config) => {
     }
     case "default": {
       renderDefaultBookmarks(config);
+      break;
+    }
+    case "default-blocky": {
+      renderDefaultBlockyBookmarks(config);
       break;
     }
   }
