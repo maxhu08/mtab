@@ -125,8 +125,6 @@ export const bindActionsToBlockBookmark = (
   // prettier-ignore
   const bookmarkBorderEl = document.getElementById(`bookmark-${bookmarkId}-${bookmarkIndex}-border`) as HTMLDivElement;
 
-  console.log(bookmarkEl);
-
   if (bookmarkEl && animationsEnabled) {
     const computedStyle = window.getComputedStyle(bookmarkEl);
     const animationDuration = parseFloat(computedStyle.animationDuration) * 1000;
@@ -135,6 +133,7 @@ export const bindActionsToBlockBookmark = (
       () => {
         // Fix weird flickering issue on firefox
         setTimeout(() => {
+          console.log("WORK", bookmarkIndex);
           bookmarkEl.classList.remove("opacity-0");
           // fix bookmarks animations replaying after bookmark search esc
           bookmarkEl.classList.remove(animationsInitialType);

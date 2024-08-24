@@ -33,14 +33,12 @@ export const renderDefaultBlockyBookmarks = (config: Config) => {
     console.log(chromeBookmarksTree);
 
     chromeBookmarksTree.forEach((item, index) => {
-      const isFolder = !item.url;
+      // if has children item is a folder
+      const isFolder = item.children!.length > 0;
+      console.log(item, index);
+
       if (isFolder) {
         const folder = item;
-        const folderChildren = chromeBookmarks.filter(
-          (bookmark) => bookmark.parentId === folder.id
-        );
-
-        console.log(item.title, folderChildren);
 
         renderBlockBookmarkFolder(
           config.animations.bookmarkTiming,
@@ -101,4 +99,27 @@ export const renderDefaultBlockyBookmarks = (config: Config) => {
       // });
     });
   });
+
+  config.animations &&
+    chrome.bookmarks.search({}, (chromeBookmarks) => {
+      const chromeBookmarksTree = buildChromeBookmarksTree(chromeBookmarks);
+
+      chromeBookmarksTree.forEach((item, index) => {
+        const isFolder = item.children!.length > 0;
+
+        if (isFolder) {
+          const folder = item;
+          console.log(folder.id);
+          bindActionsToBlockBookmark(
+            folder.id,
+            index,
+            folder.url!,
+            config.search.focusedBorderColor,
+            config.animations.enabled,
+            config.animations.initialType,
+            config.animations.bookmarkType
+          );
+        }
+      });
+    });
 };

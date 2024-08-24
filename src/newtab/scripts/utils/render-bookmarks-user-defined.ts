@@ -42,11 +42,8 @@ export const renderUserDefinedBookmarks = (config: Config) => {
     );
   });
 
-  config.bookmarks.userDefined.forEach((bookmark, index) => {});
-
   config.animations &&
     config.bookmarks.userDefined.forEach((bookmark, index) => {
-      console.log("SOmething", index);
       bindActionsToBlockBookmark(
         bookmark.name,
         index,
