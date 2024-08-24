@@ -17,7 +17,6 @@
     "prepare": "husky"
   },
   "dependencies": {
-    "@parcel/runtime-browser-hmr": "^2.12.0",
     "parcel": "^2.12.0"
   },
   "devDependencies": {

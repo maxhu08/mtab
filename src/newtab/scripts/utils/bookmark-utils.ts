@@ -125,6 +125,8 @@ export const bindActionsToBlockBookmark = (
   // prettier-ignore
   const bookmarkBorderEl = document.getElementById(`bookmark-${bookmarkId}-${bookmarkIndex}-border`) as HTMLDivElement;
 
+  console.log(bookmarkEl);
+
   if (bookmarkEl && animationsEnabled) {
     const computedStyle = window.getComputedStyle(bookmarkEl);
     const animationDuration = parseFloat(computedStyle.animationDuration) * 1000;
@@ -161,4 +163,81 @@ export const bindActionsToBlockBookmark = (
   bookmarkEl.addEventListener("focus", (e) =>
     focusBookmark(bookmarkBorderEl, bookmarkFocusedBorderColor, e)
   );
+};
+
+export const renderBlockBookmarkFolder = (
+  bookmarkTiming: BookmarkTiming,
+  bookmarksLength: number,
+  bookmarkIndex: number,
+  bookmarkName: string,
+  bookmarkColor: string,
+  bookmarkIconColor: string | null,
+  bookmarkIconType: string | null,
+  bookmarkIconHTML: string,
+  uiStyle: UIStyle,
+  animationsEnabled: boolean,
+  animationsInitialType: AnimationInitialType
+) => {
+  let delay = 0;
+
+  if (bookmarkTiming === "uniform") delay = 150;
+  else if (bookmarkTiming === "left") delay = (bookmarkIndex + 2) * 50;
+  else if (bookmarkTiming === "right") delay = (bookmarksLength + 2 - bookmarkIndex) * 50;
+
+  let iconHTML = bookmarkIconHTML;
+  let iconSizeClass = "";
+
+  if (bookmarkIconType) {
+    if (bookmarkIconType.startsWith("ri-")) {
+      iconHTML = `<i class="${bookmarkIconType}"></i>`;
+      iconSizeClass = "text-4xl md:text-6xl";
+    } else if (bookmarkIconType.startsWith("nf-")) {
+      iconHTML = `<i class="nf ${bookmarkIconType}"></i>`;
+      iconSizeClass = "text-5xl md:text-7xl";
+    } else if (bookmarkIconType.startsWith("url-")) {
+      const src = bookmarkIconType.split("url-")[1];
+      iconHTML = `<img class="w-10 md:w-14" src="${src}" />`;
+    }
+  }
+
+  // prettier-ignore
+  bookmarksContainerEl.innerHTML += `
+    <button id="bookmark-${bookmarkName}-${bookmarkIndex}" class="relative duration-[250ms] ease-out bg-foreground cursor-pointer ${
+    uiStyle === "glass" ? "glass-effect" : ""
+  } rounded-md h-bookmark overflow-hidden ${
+    animationsEnabled ? `${animationsInitialType} opacity-0 outline-none` : ""
+  }" ${animationsEnabled ? `style="animation-delay: ${delay}ms;"` : ""}>
+      <div id="bookmark-${bookmarkName}-${bookmarkIndex}-border" class="absolute w-full h-full border-2 border-transparent rounded-md"></div>
+      <div class="h-1" style="background-color: ${bookmarkColor}"></div>
+      <div class="absolute w-full h-full hover:bg-white/20"></div>
+      <div class="p-1 md:p-2 grid place-items-center h-full">
+        <div class="bookmark-icon${iconSizeClass && " " + iconSizeClass}"${bookmarkIconColor && ` style="color: ${bookmarkIconColor};"`}>
+          ${iconHTML}
+        </div>
+      </div>
+    </button>
+    `;
+};
+
+export const buildChromeBookmarksTree = (chromeBookmarks: chrome.bookmarks.BookmarkTreeNode[]) => {
+  const bookmarksMap = new Map();
+  const rootNodes: typeof chromeBookmarks = [];
+
+  chromeBookmarks.forEach((item) => {
+    item.children = [];
+    bookmarksMap.set(item.id, item);
+  });
+
+  chromeBookmarks.forEach((item) => {
+    if (item.parentId === "2") {
+      rootNodes.push(item);
+    } else {
+      const parent = bookmarksMap.get(item.parentId);
+      if (parent) {
+        parent.children.push(item);
+      }
+    }
+  });
+
+  return rootNodes;
 };

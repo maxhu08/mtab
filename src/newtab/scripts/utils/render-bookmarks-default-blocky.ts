@@ -2,10 +2,9 @@ import { Config } from "src/newtab/scripts/config";
 import { bookmarksContainerEl } from "src/newtab/scripts/ui";
 import {
   bindActionsToBlockBookmark,
-  focusBookmark,
-  openBookmark,
+  buildChromeBookmarksTree,
   renderBlockBookmark,
-  unfocusBookmark
+  renderBlockBookmarkFolder
 } from "src/newtab/scripts/utils/bookmark-utils";
 
 // animations handled separately
@@ -30,46 +29,76 @@ export const renderDefaultBlockyBookmarks = (config: Config) => {
   document.head.appendChild(styleElement);
 
   chrome.bookmarks.search({}, (chromeBookmarks) => {
-    console.log(chromeBookmarks);
-    chromeBookmarks.forEach((bookmark, index) => {
-      const isFolder = !bookmark.url;
-      if (!isFolder) return;
+    const chromeBookmarksTree = buildChromeBookmarksTree(chromeBookmarks);
+    console.log(chromeBookmarksTree);
 
-      const folderId = bookmark.id;
-      const folderChildren = chromeBookmarks.filter((bookmark) => bookmark.parentId === folderId);
+    chromeBookmarksTree.forEach((item, index) => {
+      const isFolder = !item.url;
+      if (isFolder) {
+        const folder = item;
+        const folderChildren = chromeBookmarks.filter(
+          (bookmark) => bookmark.parentId === folder.id
+        );
 
-      console.log(bookmark.title, folderChildren);
+        console.log(item.title, folderChildren);
 
-      folderChildren.forEach((bookmark, index) => {
-        renderBlockBookmark(
+        renderBlockBookmarkFolder(
           config.animations.bookmarkTiming,
-          config.bookmarks.userDefined.length,
+          chromeBookmarks.length,
           index,
-          bookmark.id,
+          folder.id,
           config.bookmarks.defaultBlockyColor,
-          null,
-          null,
-          // prettier-ignore
-          `<img class="w-10 md:w-14" src="${`chrome-extension://${chrome.runtime.id}/_favicon/?pageUrl=${encodeURIComponent(bookmark.url as string)}&size=${64}`}" />`,
+          config.bookmarks.defaultBlockyColor,
+          "ri-folder-fill",
+          "",
           config.ui.style,
           config.animations.enabled,
           config.animations.initialType
         );
-      });
 
-      config.animations &&
-        folderChildren.forEach((bookmark, index) => {
-          console.log("SOmething", index);
+        config.animations &&
           bindActionsToBlockBookmark(
-            bookmark.id,
+            folder.id,
             index,
-            bookmark.url!,
+            folder.url!,
             config.search.focusedBorderColor,
             config.animations.enabled,
             config.animations.initialType,
             config.animations.bookmarkType
           );
-        });
+      }
+
+      //   folderChildren.forEach((bookmark, index) => {
+      //     renderBlockBookmark(
+      //       config.animations.bookmarkTiming,
+      //       config.bookmarks.userDefined.length,
+      //       index,
+      //       bookmark.id,
+      //       config.bookmarks.defaultBlockyColor,
+      //       null,
+      //       null,
+      //       // prettier-ignore
+      //       `<img class="w-10 md:w-14" src="${`chrome-extension://${chrome.runtime.id}/_favicon/?pageUrl=${encodeURIComponent(bookmark.url as string)}&size=${64}`}" />`,
+      //       config.ui.style,
+      //       config.animations.enabled,
+      //       config.animations.initialType
+      //     );
+      //   });
+
+      //   config.animations &&
+      //     folderChildren.forEach((bookmark, index) => {
+      //       console.log("SOmething", index);
+      //       bindActionsToBlockBookmark(
+      //         bookmark.id,
+      //         index,
+      //         bookmark.url!,
+      //         config.search.focusedBorderColor,
+      //         config.animations.enabled,
+      //         config.animations.initialType,
+      //         config.animations.bookmarkType
+      //       );
+      //     });
+      // });
     });
   });
 };

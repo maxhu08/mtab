@@ -2,9 +2,7 @@ import { Config } from "src/newtab/scripts/config";
 import { bookmarksContainerEl } from "src/newtab/scripts/ui";
 import {
   bindActionsToBlockBookmark,
-  focusBookmark,
-  renderBlockBookmark,
-  unfocusBookmark
+  renderBlockBookmark
 } from "src/newtab/scripts/utils/bookmark-utils";
 
 // animations handled separately
