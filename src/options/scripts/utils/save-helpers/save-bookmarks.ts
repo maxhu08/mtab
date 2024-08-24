@@ -1,4 +1,4 @@
-import { UserDefinedBookmark, Config } from "src/newtab/scripts/config";
+import { UserDefinedBookmark, Config, BookmarksType } from "src/newtab/scripts/config";
 import { bookmarksUserDefinedColsInputEl } from "src/options/scripts/ui";
 
 export const saveBookmarksSettingsToDraft = (draft: Config) => {
@@ -6,20 +6,14 @@ export const saveBookmarksSettingsToDraft = (draft: Config) => {
     `button[btn-option-type="bookmarks-type"][selected="yes"]`
   ) as HTMLButtonElement;
 
-  switch (selectedEl.id) {
-    case "bookmarks-type-default-button": {
-      draft.bookmarks.type = "default";
-      break;
-    }
-    case "bookmarks-type-user-defined-button": {
-      draft.bookmarks.type = "user-defined";
-      break;
-    }
-    case "bookmarks-type-none-button": {
-      draft.bookmarks.type = "none";
-      break;
-    }
-  }
+  const bookmarksTypePairs: Record<string, BookmarksType> = {
+    "bookmarks-type-user-defined-button": "user-defined",
+    "bookmarks-type-default-button": "default",
+    "bookmarks-type-default-blocky-button": "default-blocky",
+    "bookmarks-type-none-button": "none"
+  };
+
+  draft.bookmarks.type = bookmarksTypePairs[selectedEl.id];
 
   saveUserDefinedBookmarkSettingsToDraft(draft);
 };

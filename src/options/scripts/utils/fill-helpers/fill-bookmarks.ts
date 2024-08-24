@@ -1,31 +1,28 @@
-import { Config, UserDefinedBookmark } from "src/newtab/scripts/config";
+import { BookmarksType, Config, UserDefinedBookmark } from "src/newtab/scripts/config";
 import { focusInput, unfocusInput } from "src/options/scripts/inputs";
 import {
   Input,
   bookmarksUserDefinedList,
-  bookmarksTypeDefaultButtonEl,
-  bookmarksTypeNoneButtonEl,
   bookmarksTypeUserDefinedButtonEl,
+  bookmarksTypeDefaultButtonEl,
+  bookmarksTypeDefaultBlockyButtonEl,
+  bookmarksTypeNoneButtonEl,
   bookmarksUserDefinedColsInputEl
 } from "src/options/scripts/ui";
 
 export const fillBookmarksInputs = (config: Config) => {
-  switch (config.bookmarks.type) {
-    case "default": {
-      bookmarksTypeDefaultButtonEl.click();
-      break;
-    }
-    case "user-defined": {
+  // prettier-ignore
+  const bookmarksTypePairs: Record<BookmarksType, () => void> = {
+    "user-defined": () => {
       bookmarksUserDefinedColsInputEl.value = config.bookmarks.userDefinedCols.toString();
-
       bookmarksTypeUserDefinedButtonEl.click();
-      break;
-    }
-    case "none": {
-      bookmarksTypeNoneButtonEl.click();
-      break;
-    }
-  }
+    },
+    "default": () => bookmarksTypeDefaultButtonEl.click(),
+    "default-blocky": () => bookmarksTypeDefaultBlockyButtonEl.click(),
+    "none": () => bookmarksTypeNoneButtonEl.click()
+  };
+
+  bookmarksTypePairs[config.bookmarks.type]();
 
   // user-defined bookmarks
   bookmarksUserDefinedList.innerHTML = "";

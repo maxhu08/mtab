@@ -171,7 +171,7 @@ export type SearchEngine =
   | "startpage"
   | "ecosia";
 export type MessageType = "afternoon-morning" | "date" | "time-12" | "time-24" | "custom";
-export type BookmarksType = "user-defined" | "default" | "none";
+export type BookmarksType = "user-defined" | "default" | "default-blocky" | "none";
 export type UserDefinedBookmark = {
   name: string;
   url: string;

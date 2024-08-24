@@ -136,8 +136,9 @@ export const hotkeysSearchBookmarksKeyContainerEl = document.getElementById("hot
 export const hotkeysSearchBookmarksKeyInputEl = document.getElementById("hotkeys-search-bookmarks-key-input") as HTMLInputElement;
 export const hotkeysSearchBookmarksKeyStatusEl = document.getElementById("hotkeys-search-bookmarks-key-status") as HTMLSpanElement;
 
-export const bookmarksTypeDefaultButtonEl = document.getElementById("bookmarks-type-default-button") as HTMLButtonElement;
 export const bookmarksTypeUserDefinedButtonEl = document.getElementById("bookmarks-type-user-defined-button") as HTMLButtonElement;
+export const bookmarksTypeDefaultButtonEl = document.getElementById("bookmarks-type-default-button") as HTMLButtonElement;
+export const bookmarksTypeDefaultBlockyButtonEl = document.getElementById("bookmarks-type-default-blocky-button") as HTMLButtonElement;
 export const bookmarksTypeNoneButtonEl = document.getElementById("bookmarks-type-none-button") as HTMLButtonElement;
 
 
@@ -321,8 +322,9 @@ export const buttonSwitches: ButtonSwitch[] = [
   },
   {
     buttons: [
-      bookmarksTypeDefaultButtonEl,
       bookmarksTypeUserDefinedButtonEl,
+      bookmarksTypeDefaultButtonEl,
+      bookmarksTypeDefaultBlockyButtonEl,
       bookmarksTypeNoneButtonEl
     ],
     attr: "bookmarks-type"
