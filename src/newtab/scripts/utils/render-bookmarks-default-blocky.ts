@@ -3,8 +3,9 @@ import { bookmarksContainerEl } from "src/newtab/scripts/ui";
 import {
   focusBookmark,
   openBookmark,
+  renderBlockBookmark,
   unfocusBookmark
-} from "src/newtab/scripts/utils/bookmarks-utils";
+} from "src/newtab/scripts/utils/bookmark-utils";
 
 // animations handled separately
 export const renderDefaultBlockyBookmarks = (config: Config) => {
@@ -28,37 +29,34 @@ export const renderDefaultBlockyBookmarks = (config: Config) => {
   document.head.appendChild(styleElement);
 
   chrome.bookmarks.search({}, (chromeBookmarks) => {
+    console.log(chromeBookmarks);
     chromeBookmarks.forEach((bookmark, index) => {
-      let delay = 0;
+      const isFolder = !bookmark.url;
+      if (!isFolder) return;
 
-      if (config.animations.bookmarkTiming === "uniform") delay = 150;
-      else if (config.animations.bookmarkTiming === "left") delay = (index + 2) * 50;
-      else if (config.animations.bookmarkTiming === "right")
-        delay = (config.bookmarks.userDefined.length + 2 - index) * 50;
+      const folderId = bookmark.id;
+      const folderChildren = chromeBookmarks.filter((bookmark) => bookmark.parentId === folderId);
 
       // prettier-ignore
       let iconHTML = `<img class="w-10 md:w-14" src="${`chrome-extension://${chrome.runtime.id}/_favicon/?pageUrl=${encodeURIComponent(bookmark.url as string)}&size=${64}`}" />`;
 
-      bookmarksContainerEl.innerHTML += `
-    <button id="bookmark-${
-      bookmark.id
-    }-${index}" class="relative duration-[250ms] ease-out bg-foreground cursor-pointer ${
-        config.ui.style === "glass" ? "glass-effect" : ""
-      } rounded-md h-bookmark overflow-hidden ${
-        config.animations.enabled ? `${config.animations.initialType} opacity-0 outline-none` : ""
-      }" ${config.animations ? `style="animation-delay: ${delay}ms;"` : ""}>
-      <div id="bookmark-${
-        bookmark.id
-      }-${index}-border" class="absolute w-full h-full border-2 border-transparent rounded-md"></div>
-      <div class="h-1" style="background-color: ${config.bookmarks.defaultBlockyColor}"></div>
-      <div class="absolute w-full h-full hover:bg-white/20"></div>
-      <div class="p-1 md:p-2 grid place-items-center h-full">
-        <div class="bookmark-icon">
-          ${iconHTML}
-        </div>
-      </div>
-    </button>
-    `;
+      console.log(bookmark.title, folderChildren);
+
+      folderChildren.forEach((bookmark) => {
+        renderBlockBookmark(
+          config.animations.bookmarkTiming,
+          config.bookmarks.userDefined.length,
+          index,
+          bookmark.title,
+          config.bookmarks.defaultBlockyColor,
+          null,
+          null,
+          iconHTML,
+          config.ui.style,
+          config.animations.enabled,
+          config.animations.initialType
+        );
+      });
     });
 
     chromeBookmarks.forEach((bookmark, index) => {

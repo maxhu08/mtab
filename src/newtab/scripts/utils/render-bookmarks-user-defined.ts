@@ -3,8 +3,9 @@ import { bookmarksContainerEl } from "src/newtab/scripts/ui";
 import {
   focusBookmark,
   openBookmark,
+  renderBlockBookmark,
   unfocusBookmark
-} from "src/newtab/scripts/utils/bookmarks-utils";
+} from "src/newtab/scripts/utils/bookmark-utils";
 
 // animations handled separately
 export const renderUserDefinedBookmarks = (config: Config) => {
@@ -28,47 +29,19 @@ export const renderUserDefinedBookmarks = (config: Config) => {
   document.head.appendChild(styleElement);
 
   config.bookmarks.userDefined.forEach((bookmark, index) => {
-    let delay = 0;
-
-    if (config.animations.bookmarkTiming === "uniform") delay = 150;
-    else if (config.animations.bookmarkTiming === "left") delay = (index + 2) * 50;
-    else if (config.animations.bookmarkTiming === "right")
-      delay = (config.bookmarks.userDefined.length + 2 - index) * 50;
-
-    let iconHTML = "";
-    let iconSizeClass = "";
-
-    if (bookmark.iconType.startsWith("ri-")) {
-      iconHTML = `<i class="${bookmark.iconType}"></i>`;
-      iconSizeClass = "text-4xl md:text-6xl";
-    } else if (bookmark.iconType.startsWith("nf-")) {
-      iconHTML = `<i class="nf ${bookmark.iconType}"></i>`;
-      iconSizeClass = "text-5xl md:text-7xl";
-    } else if (bookmark.iconType.startsWith("url-")) {
-      const src = bookmark.iconType.split("url-")[1];
-      iconHTML = `<img class="w-10 md:w-14" src="${src}" />`;
-    }
-
-    bookmarksContainerEl.innerHTML += `
-    <button id="bookmark-${
-      bookmark.name
-    }-${index}" class="relative duration-[250ms] ease-out bg-foreground cursor-pointer ${
-      config.ui.style === "glass" ? "glass-effect" : ""
-    } rounded-md h-bookmark overflow-hidden ${
-      config.animations.enabled ? `${config.animations.initialType} opacity-0 outline-none` : ""
-    }" ${config.animations ? `style="animation-delay: ${delay}ms;"` : ""}>
-      <div id="bookmark-${
-        bookmark.name
-      }-${index}-border" class="absolute w-full h-full border-2 border-transparent rounded-md"></div>
-      <div class="h-1" style="background-color: ${bookmark.color}"></div>
-      <div class="absolute w-full h-full hover:bg-white/20"></div>
-      <div class="p-1 md:p-2 grid place-items-center h-full">
-        <div class="bookmark-icon ${iconSizeClass}" style="color: ${bookmark.iconColor};">
-          ${iconHTML}
-        </div>
-      </div>
-    </button>
-    `;
+    renderBlockBookmark(
+      config.animations.bookmarkTiming,
+      config.bookmarks.userDefined.length,
+      index,
+      bookmark.name,
+      bookmark.color,
+      bookmark.iconColor,
+      bookmark.iconType,
+      "",
+      config.ui.style,
+      config.animations.enabled,
+      config.animations.initialType
+    );
   });
 
   config.bookmarks.userDefined.forEach((bookmark, index) => {

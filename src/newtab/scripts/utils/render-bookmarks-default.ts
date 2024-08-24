@@ -1,6 +1,6 @@
 import { Config } from "src/newtab/scripts/config";
 import { bookmarksContainerEl } from "src/newtab/scripts/ui";
-import { openBookmark } from "src/newtab/scripts/utils/bookmarks-utils";
+import { openBookmark } from "src/newtab/scripts/utils/bookmark-utils";
 
 export const renderDefaultBookmarks = (config: Config) => {
   switch (config.ui.style) {
