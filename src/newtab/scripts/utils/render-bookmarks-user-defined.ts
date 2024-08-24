@@ -44,15 +44,7 @@ export const renderUserDefinedBookmarks = (config: Config) => {
     );
   });
 
-  config.bookmarks.userDefined.forEach((bookmark, index) => {
-    // prettier-ignore
-    const bookmarkEl = document.getElementById(`bookmark-${bookmark.name}-${index}`) as HTMLDivElement;
-    // prettier-ignore
-    const bookmarkBorderEl = document.getElementById(`bookmark-${bookmark.name}-${index}-border`) as HTMLDivElement;
-
-    bookmarkEl.addEventListener("blur", () => unfocusBookmark(bookmarkBorderEl));
-    bookmarkEl.addEventListener("focus", (e) => focusBookmark(bookmarkBorderEl, config, e));
-  });
+  config.bookmarks.userDefined.forEach((bookmark, index) => {});
 
   config.animations &&
     config.bookmarks.userDefined.forEach((bookmark, index) => {
@@ -61,6 +53,7 @@ export const renderUserDefinedBookmarks = (config: Config) => {
         bookmark.name,
         index,
         bookmark.url!,
+        config.search.focusedBorderColor,
         config.animations.enabled,
         config.animations.initialType,
         config.animations.bookmarkType

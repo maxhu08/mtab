@@ -8,9 +8,13 @@ import {
 } from "src/newtab/scripts/config";
 import { bookmarksContainerEl, bookmarkSearchInputEl, contentEl } from "src/newtab/scripts/ui";
 
-export const focusBookmark = (bookmarkBorderEl: HTMLDivElement, config: Config, e: Event) => {
+export const focusBookmark = (
+  bookmarkBorderEl: HTMLDivElement,
+  focusedBorderColor: string,
+  e: Event
+) => {
   bookmarkBorderEl.classList.remove("border-transparent");
-  bookmarkBorderEl.style.borderColor = config.search.focusedBorderColor;
+  bookmarkBorderEl.style.borderColor = focusedBorderColor;
 
   bookmarkBorderEl.focus();
   e.preventDefault();
@@ -111,13 +115,15 @@ export const bindActionsToBlockBookmark = (
   bookmarkId: string,
   bookmarkIndex: number,
   bookmarkUrl: string,
+  bookmarkFocusedBorderColor: string,
   animationsEnabled: boolean,
   animationsInitialType: AnimationInitialType,
   animationsBookmarkType: AnimationBookmarkType
 ) => {
   // prettier-ignore
   const bookmarkEl = document.getElementById(`bookmark-${bookmarkId}-${bookmarkIndex}`) as HTMLButtonElement;
-  console.log("UTILB", `bookmark-${bookmarkId}-${bookmarkIndex}`, bookmarkEl);
+  // prettier-ignore
+  const bookmarkBorderEl = document.getElementById(`bookmark-${bookmarkId}-${bookmarkIndex}-border`) as HTMLDivElement;
 
   if (bookmarkEl && animationsEnabled) {
     const computedStyle = window.getComputedStyle(bookmarkEl);
@@ -150,4 +156,9 @@ export const bindActionsToBlockBookmark = (
       openBookmark(bookmarkUrl!, animationsEnabled, animationsBookmarkType);
     }
   };
+
+  bookmarkEl.addEventListener("blur", () => unfocusBookmark(bookmarkBorderEl));
+  bookmarkEl.addEventListener("focus", (e) =>
+    focusBookmark(bookmarkBorderEl, bookmarkFocusedBorderColor, e)
+  );
 };

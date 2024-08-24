@@ -64,21 +64,12 @@ export const renderDefaultBlockyBookmarks = (config: Config) => {
             bookmark.id,
             index,
             bookmark.url!,
+            config.search.focusedBorderColor,
             config.animations.enabled,
             config.animations.initialType,
             config.animations.bookmarkType
           );
         });
     });
-
-    // chromeBookmarks.forEach((bookmark, index) => {
-    //   // prettier-ignore
-    //   const bookmarkEl = document.getElementById(`bookmark-${bookmark.id}-${index}`) as HTMLDivElement;
-    //   // prettier-ignore
-    //   const bookmarkBorderEl = document.getElementById(`bookmark-${bookmark.id}-${index}-border`) as HTMLDivElement;
-
-    //   bookmarkEl.addEventListener("blur", () => unfocusBookmark(bookmarkBorderEl));
-    //   bookmarkEl.addEventListener("focus", (e) => focusBookmark(bookmarkBorderEl, config, e));
-    // });
   });
 };
