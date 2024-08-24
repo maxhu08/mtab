@@ -1,10 +1,7 @@
 import { Config } from "src/newtab/scripts/config";
 import { bookmarksContainerEl } from "src/newtab/scripts/ui";
 import {
-  bindActionsToBlockBookmark,
   buildChromeBookmarksTree,
-  renderBlockBookmark,
-  renderBlockBookmarkFolder,
   renderDefaultBlockyBookmarksNodes
 } from "src/newtab/scripts/utils/bookmark-utils";
 
