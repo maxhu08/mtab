@@ -134,7 +134,9 @@ export const defaultConfig: Config = {
         iconType: "ri-global-fill",
         iconColor: "#ffffff"
       }
-    ]
+    ],
+    defaultBlockyCols: 4,
+    defaultBlockyColor: "#ffffff"
   }
 };
 
@@ -242,5 +244,7 @@ export interface Config {
     type: BookmarksType;
     userDefinedCols: number;
     userDefined: UserDefinedBookmark[];
+    defaultBlockyCols: number;
+    defaultBlockyColor: string;
   };
 }

@@ -1,3 +1,8 @@
+import {
+  bookmarksTypeDefaultBlockyButtonEl,
+  bookmarksTypeUserDefinedButtonEl
+} from "src/options/scripts/ui";
+
 export const handleFaviconTypeSwitch = () => {
   const faviconCustomSection = document.getElementById(
     "title-custom-favicon-upload-section"
@@ -64,22 +69,27 @@ export const handleWallpaperTypeSwitch = () => {
 };
 
 export const handleBookmarksTypeSwitch = () => {
-  const bookmarksUserDefinedSection = document.getElementById(
-    "bookmarks-user-defined-section"
-  ) as HTMLDivElement;
+  // prettier-ignore
+  const bookmarksUserDefinedSection = document.getElementById("bookmarks-user-defined-section") as HTMLDivElement;
+  // prettier-ignore
+  const bookmarksDefaultBlockySection = document.getElementById("bookmarks-default-blocky-section") as HTMLDivElement;
 
   const hideButtons = ["bookmarks-type-default-button", "bookmarks-type-none-button"];
 
-  (
-    document.getElementById("bookmarks-type-user-defined-button") as HTMLButtonElement
-  ).addEventListener("click", () => {
+  bookmarksTypeUserDefinedButtonEl.addEventListener("click", () => {
+    bookmarksDefaultBlockySection.style.display = "none";
     bookmarksUserDefinedSection.style.display = "block";
+  });
+
+  bookmarksTypeDefaultBlockyButtonEl.addEventListener("click", () => {
+    bookmarksUserDefinedSection.style.display = "none";
+    bookmarksDefaultBlockySection.style.display = "block";
   });
 
   hideButtons.forEach((id) => {
     (document.getElementById(id) as HTMLButtonElement).addEventListener("click", () => {
-      console.log("something", bookmarksUserDefinedSection);
       bookmarksUserDefinedSection.style.display = "none";
+      bookmarksDefaultBlockySection.style.display = "none";
     });
   });
 };
