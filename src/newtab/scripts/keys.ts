@@ -10,16 +10,14 @@ import {
 // utils
 import { focusSearch, search, tryFocusSearch, unfocusSearch } from "./utils/search";
 import {
-  enableSearchBookmark,
   disableSearchBookmark,
-  refreshBookmarkSearchResults
-} from "src/newtab/scripts/utils/search-bookmark";
-import {
+  enableSearchBookmark,
   focusBookmarkSearch,
+  refreshBookmarkSearchResults,
   tryFocusBookmarkSearch,
   unfocusBookmarkSearch
-} from "src/newtab/scripts/utils/bookmark-search";
-import { openBookmark } from "src/newtab/scripts/utils/render-bookmarks";
+} from "src/newtab/scripts/utils/bookmark-search-utils";
+import { openBookmark } from "src/newtab/scripts/utils/bookmarks-utils";
 // import { navigateTab } from "src/newtab/scripts/utils/navigate-tab";
 
 export const listenToKeys = (config: Config) => {
