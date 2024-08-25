@@ -28,6 +28,11 @@ export const renderDefaultBlockyBookmarks = (config: Config) => {
 
   chrome.bookmarks.search({}, (chromeBookmarks) => {
     const chromeBookmarksTree = buildChromeBookmarksTree(chromeBookmarks);
-    renderDefaultBlockyBookmarksNodes("0", chromeBookmarksTree, config);
+
+    renderDefaultBlockyBookmarksNodes(
+      chromeBookmarksTree[0].parentId!,
+      chromeBookmarksTree,
+      config
+    );
   });
 };

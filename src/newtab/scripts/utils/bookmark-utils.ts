@@ -63,21 +63,25 @@ export const openBookmarkFolder = (
   animationsType: AnimationBookmarkType,
   config: Config
 ) => {
+  console.log(`bookmark-folder-container-${folder.id}`);
+  // prettier-ignore
+  const oldContainerEl = document.getElementById(`bookmark-folder-container-${folder.parentId}`) as HTMLDivElement;
+
   if (animationsEnabled) {
-    bookmarksContainerEl.classList.add(animationsType);
+    oldContainerEl.classList.add(animationsType);
     const computedStyle = getComputedStyle(contentEl);
     const animationDuration = parseFloat(computedStyle.animationDuration) * 1000;
 
     setTimeout(() => {
-      bookmarksContainerEl.style.opacity = "0%";
+      oldContainerEl.style.opacity = "0%";
     }, animationDuration - 10);
 
     setTimeout(() => {
-      bookmarksContainerEl.innerHTML = "";
+      oldContainerEl.innerHTML = "";
       renderDefaultBlockyBookmarksNodes(folder.id, folder.children!, config);
     }, animationDuration + 20);
   } else {
-    bookmarksContainerEl.innerHTML = "";
+    oldContainerEl.innerHTML = "";
     renderDefaultBlockyBookmarksNodes(folder.id, folder.children!, config);
   }
 };
@@ -274,13 +278,13 @@ export const buildChromeBookmarksTree = (chromeBookmarks: chrome.bookmarks.Bookm
 };
 
 export const renderDefaultBlockyBookmarksNodes = (
-  nodeId: string,
+  folderId: string,
   nodes: chrome.bookmarks.BookmarkTreeNode[],
   config: Config
 ) => {
-  bookmarksContainerEl.innerHTML += `<div id="bookmark-folder-container-${nodeId}" class="w-full grid gap-2 default-blocky-bookmarks-cols"></div>`;
+  bookmarksContainerEl.innerHTML += `<div id="bookmark-folder-container-${folderId}" class="w-full grid gap-2 default-blocky-bookmarks-cols"></div>`;
   // prettier-ignore
-  const container = document.getElementById(`bookmark-folder-container-${nodeId}`) as HTMLDivElement;
+  const container = document.getElementById(`bookmark-folder-container-${folderId}`) as HTMLDivElement;
 
   nodes.forEach((node, index) => {
     // if has children item is a folder
