@@ -63,13 +63,12 @@ export const openBookmarkFolder = (
   animationsType: AnimationBookmarkType,
   config: Config
 ) => {
-  console.log(`bookmark-folder-container-${folder.id}`);
   // prettier-ignore
   const oldContainerEl = document.getElementById(`bookmark-folder-container-${folder.parentId}`) as HTMLDivElement;
 
   if (animationsEnabled) {
     oldContainerEl.classList.add(animationsType);
-    const computedStyle = getComputedStyle(contentEl);
+    const computedStyle = getComputedStyle(oldContainerEl);
     const animationDuration = parseFloat(computedStyle.animationDuration) * 1000;
 
     setTimeout(() => {
@@ -77,7 +76,7 @@ export const openBookmarkFolder = (
     }, animationDuration - 10);
 
     setTimeout(() => {
-      oldContainerEl.innerHTML = "";
+      oldContainerEl.remove();
       renderDefaultBlockyBookmarksNodes(folder.id, folder.children!, config);
     }, animationDuration + 20);
   } else {

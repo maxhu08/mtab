@@ -4,6 +4,7 @@
   "description": "a simple configurable new tab extension",
   "keywords": [],
   "scripts": {
+    "d": "bun clean && bun dev-chrome",
     "dev-chrome": "mkdir -p dist && parcel src/**/*.html --log-level verbose & ./scripts/linux/create_manifest_chrome.sh && ./scripts/linux/copy_assets.sh",
     "dev-firefox": "mkdir -p dist && parcel src/**/*.html --log-level verbose & ./scripts/linux/create_manifest_firefox.sh && ./scripts/linux/copy_assets.sh",
     "build-chrome": "mkdir -p dist && parcel build src/**/*.html --no-source-maps --no-scope-hoist & ./scripts/linux/create_manifest_chrome.sh && ./scripts/linux/copy_assets.sh",
