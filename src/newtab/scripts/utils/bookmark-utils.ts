@@ -56,7 +56,34 @@ export const openBookmark = (
   }
 };
 
+export const openBookmarkFolder = (
+  parentFolderItems: chrome.bookmarks.BookmarkTreeNode[],
+  folder: chrome.bookmarks.BookmarkTreeNode,
+  animationsEnabled: boolean,
+  animationsType: AnimationBookmarkType,
+  config: Config
+) => {
+  if (animationsEnabled) {
+    bookmarksContainerEl.classList.add(animationsType);
+    const computedStyle = getComputedStyle(contentEl);
+    const animationDuration = parseFloat(computedStyle.animationDuration) * 1000;
+
+    setTimeout(() => {
+      bookmarksContainerEl.style.opacity = "0%";
+    }, animationDuration - 10);
+
+    setTimeout(() => {
+      bookmarksContainerEl.innerHTML = "";
+      renderDefaultBlockyBookmarksNodes(folder.id, folder.children!, config);
+    }, animationDuration + 20);
+  } else {
+    bookmarksContainerEl.innerHTML = "";
+    renderDefaultBlockyBookmarksNodes(folder.id, folder.children!, config);
+  }
+};
+
 export const renderBlockBookmark = (
+  containerEl: HTMLDivElement,
   bookmarkTiming: BookmarkTiming,
   bookmarksLength: number,
   bookmarkIndex: number,
@@ -92,7 +119,7 @@ export const renderBlockBookmark = (
   }
 
   // prettier-ignore
-  bookmarksContainerEl.innerHTML += `
+  containerEl.innerHTML += `
     <button id="bookmark-${bookmarkName}-${bookmarkIndex}" class="relative duration-[250ms] ease-out bg-foreground cursor-pointer ${
     uiStyle === "glass" ? "glass-effect" : ""
   } rounded-md h-bookmark overflow-hidden ${
@@ -110,22 +137,18 @@ export const renderBlockBookmark = (
     `;
 };
 
-export const bindActionsToBlockBookmark = (
-  bookmarkId: string,
-  bookmarkIndex: number,
-  bookmarkUrl: string,
-  bookmarkFocusedBorderColor: string,
-  isFolder: boolean,
-  folderItems: chrome.bookmarks.BookmarkTreeNode[],
+export const bindActionsToBlockNode = (
+  node: chrome.bookmarks.BookmarkTreeNode,
+  index: number,
   animationsEnabled: boolean,
   animationsInitialType: AnimationInitialType,
   animationsBookmarkType: AnimationBookmarkType,
   config: Config
 ) => {
   // prettier-ignore
-  const bookmarkEl = document.getElementById(`bookmark-${bookmarkId}-${bookmarkIndex}`) as HTMLButtonElement;
+  const bookmarkEl = document.getElementById(`bookmark-${node.id}-${index}`) as HTMLButtonElement;
   // prettier-ignore
-  const bookmarkBorderEl = document.getElementById(`bookmark-${bookmarkId}-${bookmarkIndex}-border`) as HTMLDivElement;
+  const bookmarkBorderEl = document.getElementById(`bookmark-${node.id}-${index}-border`) as HTMLDivElement;
 
   if (bookmarkEl && animationsEnabled) {
     const computedStyle = window.getComputedStyle(bookmarkEl);
@@ -151,30 +174,29 @@ export const bindActionsToBlockBookmark = (
     });
   }
 
+  const isFolder = node.children!.length > 0;
   if (isFolder) {
     bookmarkEl.onclick = () => {
-      console.log("IS FOLDER");
-      bookmarksContainerEl.innerHTML = "";
-      console.log(folderItems);
-      renderDefaultBlockyBookmarksNodes(folderItems, config);
+      openBookmarkFolder([], node, animationsEnabled, animationsBookmarkType, config);
     };
   } else {
     bookmarkEl.onclick = (e) => {
       if (e.ctrlKey) {
-        openBookmark(bookmarkUrl, animationsEnabled, animationsBookmarkType, true);
+        openBookmark(node.url!, animationsEnabled, animationsBookmarkType, true);
       } else {
-        openBookmark(bookmarkUrl!, animationsEnabled, animationsBookmarkType);
+        openBookmark(node.url!, animationsEnabled, animationsBookmarkType);
       }
     };
   }
 
   bookmarkEl.addEventListener("blur", () => unfocusBookmark(bookmarkBorderEl));
   bookmarkEl.addEventListener("focus", (e) =>
-    focusBookmark(bookmarkBorderEl, bookmarkFocusedBorderColor, e)
+    focusBookmark(bookmarkBorderEl, config.search.focusedBorderColor, e)
   );
 };
 
 export const renderBlockBookmarkFolder = (
+  containerEl: HTMLDivElement,
   bookmarkTiming: BookmarkTiming,
   bookmarksLength: number,
   bookmarkIndex: number,
@@ -210,7 +232,7 @@ export const renderBlockBookmarkFolder = (
   }
 
   // prettier-ignore
-  bookmarksContainerEl.innerHTML += `
+  containerEl.innerHTML += `
     <button id="bookmark-${bookmarkName}-${bookmarkIndex}" class="relative duration-[250ms] ease-out bg-foreground cursor-pointer ${
     uiStyle === "glass" ? "glass-effect" : ""
   } rounded-md h-bookmark overflow-hidden ${
@@ -252,9 +274,14 @@ export const buildChromeBookmarksTree = (chromeBookmarks: chrome.bookmarks.Bookm
 };
 
 export const renderDefaultBlockyBookmarksNodes = (
+  nodeId: string,
   nodes: chrome.bookmarks.BookmarkTreeNode[],
   config: Config
 ) => {
+  bookmarksContainerEl.innerHTML += `<div id="bookmark-folder-container-${nodeId}" class="w-full grid gap-2 default-blocky-bookmarks-cols"></div>`;
+  // prettier-ignore
+  const container = document.getElementById(`bookmark-folder-container-${nodeId}`) as HTMLDivElement;
+
   nodes.forEach((node, index) => {
     // if has children item is a folder
     const isFolder = node.children!.length > 0;
@@ -264,6 +291,7 @@ export const renderDefaultBlockyBookmarksNodes = (
       const folder = node;
 
       renderBlockBookmarkFolder(
+        container,
         config.animations.bookmarkTiming,
         nodes.length,
         index,
@@ -278,6 +306,7 @@ export const renderDefaultBlockyBookmarksNodes = (
       );
     } else {
       renderBlockBookmark(
+        container,
         config.animations.bookmarkTiming,
         nodes.length,
         index,
@@ -295,31 +324,23 @@ export const renderDefaultBlockyBookmarksNodes = (
   });
 
   config.animations &&
-    nodes.forEach((item, index) => {
-      const isFolder = item.children!.length > 0;
+    nodes.forEach((node, index) => {
+      const isFolder = node.children!.length > 0;
 
       if (isFolder) {
-        const folder = item;
-        bindActionsToBlockBookmark(
-          folder.id,
+        const folder = node;
+        bindActionsToBlockNode(
+          folder,
           index,
-          folder.url!,
-          config.search.focusedBorderColor,
-          true,
-          item.children!,
           config.animations.enabled,
           config.animations.initialType,
           config.animations.bookmarkType,
           config
         );
       } else {
-        bindActionsToBlockBookmark(
-          item.id,
+        bindActionsToBlockNode(
+          node,
           index,
-          item.url!,
-          config.search.focusedBorderColor,
-          false,
-          [],
           config.animations.enabled,
           config.animations.initialType,
           config.animations.bookmarkType,

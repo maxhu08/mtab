@@ -1,7 +1,7 @@
 import { Config } from "src/newtab/scripts/config";
 import { bookmarksContainerEl } from "src/newtab/scripts/ui";
 import {
-  bindActionsToBlockBookmark,
+  bindActionsToBlockNode,
   renderBlockBookmark
 } from "src/newtab/scripts/utils/bookmark-utils";
 
@@ -28,6 +28,7 @@ export const renderUserDefinedBookmarks = (config: Config) => {
 
   config.bookmarks.userDefined.forEach((bookmark, index) => {
     renderBlockBookmark(
+      bookmarksContainerEl,
       config.animations.bookmarkTiming,
       config.bookmarks.userDefined.length,
       index,
@@ -44,13 +45,10 @@ export const renderUserDefinedBookmarks = (config: Config) => {
 
   config.animations &&
     config.bookmarks.userDefined.forEach((bookmark, index) => {
-      bindActionsToBlockBookmark(
-        bookmark.name,
+      bindActionsToBlockNode(
+        // @ts-expect-error
+        bookmark,
         index,
-        bookmark.url!,
-        config.search.focusedBorderColor,
-        false,
-        [],
         config.animations.enabled,
         config.animations.initialType,
         config.animations.bookmarkType,

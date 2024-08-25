@@ -7,7 +7,7 @@ import {
 
 // animations handled separately
 export const renderDefaultBlockyBookmarks = (config: Config) => {
-  bookmarksContainerEl.classList.add("w-full", "grid", "gap-2", "default-blocky-bookmarks-cols");
+  bookmarksContainerEl.classList.add("w-full", "grid", "gap-2", "grid-flow-row");
 
   const defaultBlockyBookmarkCss = `
 .default-blocky-bookmarks-cols {
@@ -28,6 +28,6 @@ export const renderDefaultBlockyBookmarks = (config: Config) => {
 
   chrome.bookmarks.search({}, (chromeBookmarks) => {
     const chromeBookmarksTree = buildChromeBookmarksTree(chromeBookmarks);
-    renderDefaultBlockyBookmarksNodes(chromeBookmarksTree, config);
+    renderDefaultBlockyBookmarksNodes("0", chromeBookmarksTree, config);
   });
 };
