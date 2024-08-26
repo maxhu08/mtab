@@ -191,7 +191,6 @@ export const bindActionsToBlockNode = (
     };
   }
 
-  console.log("TESTTESTS");
   bookmarkEl.addEventListener("blur", () => unfocusBookmark(bookmarkBorderEl));
   bookmarkEl.addEventListener("focus", (e) =>
     focusBookmark(bookmarkBorderEl, config.search.focusedBorderColor, e)
@@ -277,9 +276,37 @@ export const renderDefaultBlockyBookmarksNodes = (
   nodes: chrome.bookmarks.BookmarkTreeNode[],
   config: Config
 ) => {
-  bookmarksContainerEl.innerHTML += `<div id="bookmark-folder-container-${folderId}" class="w-full grid gap-2 default-blocky-bookmarks-cols"></div>`;
+  let delay = 0;
+  if (config.animations.bookmarkTiming === "uniform") delay = 150;
+  else delay = (nodes.length + 3) * 50;
+
+  bookmarksContainerEl.innerHTML += `<div id="bookmark-folder-container-${folderId}" class="w-full grid gap-2 grid-rows-[auto_max-content]"></div>`;
   // prettier-ignore
-  const container = document.getElementById(`bookmark-folder-container-${folderId}`) as HTMLDivElement;
+  const containerEl = document.getElementById(`bookmark-folder-container-${folderId}`) as HTMLDivElement;
+
+  containerEl.innerHTML += `<div id="bookmark-folder-nodes-container-${folderId}" class="w-full grid gap-2 default-blocky-bookmarks-cols"></div>`;
+  containerEl.innerHTML += `<div id="bookmark-folder-actions-container-${folderId}" class="w-full grid place-items-center"></div>`;
+  // prettier-ignore
+  const nodesContainerEl = document.getElementById(`bookmark-folder-nodes-container-${folderId}`) as HTMLDivElement;
+  // prettier-ignore
+  const actionsContainerEl = document.getElementById(`bookmark-folder-actions-container-${folderId}`) as HTMLDivElement;
+  actionsContainerEl.innerHTML += `
+  <button
+    class="relative duration-[250ms] ease-out bg-foreground cursor-pointer ${
+      config.ui.style === "glass" ? "glass-effect" : ""
+    } rounded-md h-max p-1 md:p-2 overflow-hidden ${
+      config.animations.enabled ? `${config.animations.initialType} //opacity-0 outline-none` : ""
+    }"
+    ${config.animations.enabled ? `style="animation-delay: ${delay}ms;"` : ""}
+  >
+    <div class="grid grid-cols-[max-content_auto] gap-2 font-message text-base md:text-2xl w-full" style="color: ${
+      config.message.textColor
+    };">
+      <i class="ri-arrow-left-line"></i>
+      <span>Back</span>
+    </div>
+  </button>
+`;
 
   nodes.forEach((node, index) => {
     // if has children item is a folder
@@ -289,7 +316,7 @@ export const renderDefaultBlockyBookmarksNodes = (
       const folder = node;
 
       renderBlockBookmarkFolder(
-        container,
+        nodesContainerEl,
         config.animations.bookmarkTiming,
         nodes.length,
         index,
@@ -304,7 +331,7 @@ export const renderDefaultBlockyBookmarksNodes = (
       );
     } else {
       renderBlockBookmark(
-        container,
+        nodesContainerEl,
         config.animations.bookmarkTiming,
         nodes.length,
         index,
