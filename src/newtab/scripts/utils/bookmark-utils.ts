@@ -123,10 +123,10 @@ export const renderBlockBookmark = (
   // prettier-ignore
   containerEl.innerHTML += `
     <button id="bookmark-${bookmarkName}-${bookmarkIndex}" class="relative duration-[250ms] ease-out bg-foreground cursor-pointer ${
-    uiStyle === "glass" ? "glass-effect" : ""
-  } rounded-md h-bookmark overflow-hidden ${
-    animationsEnabled ? `${animationsInitialType} opacity-0 outline-none` : ""
-  }" ${animationsEnabled ? `style="animation-delay: ${delay}ms;"` : ""}>
+      uiStyle === "glass" ? "glass-effect" : ""
+    } rounded-md h-bookmark overflow-hidden ${
+      animationsEnabled ? `${animationsInitialType} opacity-0 outline-none` : ""
+    }" ${animationsEnabled ? `style="animation-delay: ${delay}ms;"` : ""}>
       <div id="bookmark-${bookmarkName}-${bookmarkIndex}-border" class="absolute w-full h-full border-2 border-transparent rounded-md"></div>
       <div class="h-1" style="background-color: ${bookmarkColor}"></div>
       <div class="absolute w-full h-full hover:bg-white/20"></div>
@@ -136,7 +136,7 @@ export const renderBlockBookmark = (
         </div>
       </div>
     </button>
-    `;
+  `;
 };
 
 export const bindActionsToBlockNode = (
@@ -236,11 +236,7 @@ export const renderBlockBookmarkFolder = (
 
   // prettier-ignore
   containerEl.innerHTML += `
-    <button id="bookmark-${bookmarkName}-${bookmarkIndex}" class="relative duration-[250ms] ease-out bg-foreground cursor-pointer ${
-    uiStyle === "glass" ? "glass-effect" : ""
-  } rounded-md h-bookmark overflow-hidden ${
-    animationsEnabled ? `${animationsInitialType} opacity-0 outline-none` : ""
-  }" ${animationsEnabled ? `style="animation-delay: ${delay}ms;"` : ""}>
+    <button id="bookmark-${bookmarkName}-${bookmarkIndex}" class="relative duration-[250ms] ease-out bg-foreground cursor-pointer ${uiStyle === "glass" ? "glass-effect" : ""} rounded-md h-bookmark overflow-hidden ${animationsEnabled ? `${animationsInitialType} opacity-0 outline-none` : ""}" ${animationsEnabled ? `style="animation-delay: ${delay}ms;"` : ""}>
       <div id="bookmark-${bookmarkName}-${bookmarkIndex}-border" class="absolute w-full h-full border-2 border-transparent rounded-md"></div>
       <div class="h-1" style="background-color: ${bookmarkColor}"></div>
       <div class="absolute w-full h-full hover:bg-white/20"></div>
@@ -250,7 +246,7 @@ export const renderBlockBookmarkFolder = (
         </div>
       </div>
     </button>
-    `;
+  `;
 };
 
 export const buildChromeBookmarksTree = (chromeBookmarks: chrome.bookmarks.BookmarkTreeNode[]) => {
