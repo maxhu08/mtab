@@ -254,8 +254,8 @@ export const renderBlockBookmarkFolder = (
 };
 
 export const buildChromeBookmarksTree = (chromeBookmarks: chrome.bookmarks.BookmarkTreeNode[]) => {
-  const bookmarksMap = new Map();
-  const rootNodes: typeof chromeBookmarks = [];
+  const bookmarksMap = new Map<string, chrome.bookmarks.BookmarkTreeNode>();
+  const rootNodes: chrome.bookmarks.BookmarkTreeNode[] = [];
 
   chromeBookmarks.forEach((item) => {
     item.children = [];
@@ -263,12 +263,12 @@ export const buildChromeBookmarksTree = (chromeBookmarks: chrome.bookmarks.Bookm
   });
 
   chromeBookmarks.forEach((item) => {
-    if (item.parentId === "2") {
+    if (!bookmarksMap.has(item.parentId!)) {
       rootNodes.push(item);
     } else {
-      const parent = bookmarksMap.get(item.parentId);
+      const parent = bookmarksMap.get(item.parentId!);
       if (parent) {
-        parent.children.push(item);
+        parent.children!.push(item);
       }
     }
   });
