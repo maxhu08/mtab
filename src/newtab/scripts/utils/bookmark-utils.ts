@@ -3,7 +3,8 @@ import {
   AnimationInitialType,
   BookmarkTiming,
   Config,
-  UIStyle
+  UIStyle,
+  UserDefinedBookmark
 } from "src/newtab/scripts/config";
 import { bookmarksContainerEl, bookmarkSearchInputEl, contentEl } from "src/newtab/scripts/ui";
 
@@ -143,10 +144,13 @@ export const bindActionsToBlockNode = (
   index: number,
   config: Config
 ) => {
+  // if default-blocky or user-defined
+  const identifier = node.id ? node.id : (node as unknown as UserDefinedBookmark).name;
+
   // prettier-ignore
-  const bookmarkEl = document.getElementById(`bookmark-${node.id}-${index}`) as HTMLButtonElement;
+  const bookmarkEl = document.getElementById(`bookmark-${identifier}-${index}`) as HTMLButtonElement;
   // prettier-ignore
-  const bookmarkBorderEl = document.getElementById(`bookmark-${node.id}-${index}-border`) as HTMLDivElement;
+  const bookmarkBorderEl = document.getElementById(`bookmark-${identifier}-${index}-border`) as HTMLDivElement;
 
   if (bookmarkEl && config.animations.enabled) {
     const computedStyle = window.getComputedStyle(bookmarkEl);
@@ -172,7 +176,7 @@ export const bindActionsToBlockNode = (
     });
   }
 
-  const isFolder = node.children!.length > 0;
+  const isFolder = node.children && node.children!.length > 0;
   if (isFolder) {
     bookmarkEl.onclick = () => {
       openBookmarkFolder([], node, config);
@@ -187,6 +191,7 @@ export const bindActionsToBlockNode = (
     };
   }
 
+  console.log("TESTTESTS");
   bookmarkEl.addEventListener("blur", () => unfocusBookmark(bookmarkBorderEl));
   bookmarkEl.addEventListener("focus", (e) =>
     focusBookmark(bookmarkBorderEl, config.search.focusedBorderColor, e)
@@ -283,7 +288,6 @@ export const renderDefaultBlockyBookmarksNodes = (
   nodes.forEach((node, index) => {
     // if has children item is a folder
     const isFolder = node.children!.length > 0;
-    console.log(node, isFolder);
 
     if (isFolder) {
       const folder = node;
