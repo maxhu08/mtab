@@ -49,9 +49,6 @@ export const renderUserDefinedBookmarks = (config: Config) => {
         // @ts-expect-error
         bookmark,
         index,
-        config.animations.enabled,
-        config.animations.initialType,
-        config.animations.bookmarkType,
         config
       );
     });

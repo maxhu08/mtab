@@ -59,15 +59,13 @@ export const openBookmark = (
 export const openBookmarkFolder = (
   parentFolderItems: chrome.bookmarks.BookmarkTreeNode[],
   folder: chrome.bookmarks.BookmarkTreeNode,
-  animationsEnabled: boolean,
-  animationsType: AnimationBookmarkType,
   config: Config
 ) => {
   // prettier-ignore
   const oldContainerEl = document.getElementById(`bookmark-folder-container-${folder.parentId}`) as HTMLDivElement;
 
-  if (animationsEnabled) {
-    oldContainerEl.classList.add(animationsType);
+  if (config.animations.enabled) {
+    oldContainerEl.classList.add(config.animations.bookmarkType);
     const computedStyle = getComputedStyle(oldContainerEl);
     const animationDuration = parseFloat(computedStyle.animationDuration) * 1000;
 
@@ -143,9 +141,6 @@ export const renderBlockBookmark = (
 export const bindActionsToBlockNode = (
   node: chrome.bookmarks.BookmarkTreeNode,
   index: number,
-  animationsEnabled: boolean,
-  animationsInitialType: AnimationInitialType,
-  animationsBookmarkType: AnimationBookmarkType,
   config: Config
 ) => {
   // prettier-ignore
@@ -153,7 +148,7 @@ export const bindActionsToBlockNode = (
   // prettier-ignore
   const bookmarkBorderEl = document.getElementById(`bookmark-${node.id}-${index}-border`) as HTMLDivElement;
 
-  if (bookmarkEl && animationsEnabled) {
+  if (bookmarkEl && config.animations.enabled) {
     const computedStyle = window.getComputedStyle(bookmarkEl);
     const animationDuration = parseFloat(computedStyle.animationDuration) * 1000;
     bookmarkEl.addEventListener(
@@ -163,7 +158,7 @@ export const bindActionsToBlockNode = (
         setTimeout(() => {
           bookmarkEl.classList.remove("opacity-0");
           // fix bookmarks animations replaying after bookmark search esc
-          bookmarkEl.classList.remove(animationsInitialType);
+          bookmarkEl.classList.remove(config.animations.initialType);
         }, animationDuration * 0.75); // needs to be less than 1
       },
       {
@@ -180,14 +175,14 @@ export const bindActionsToBlockNode = (
   const isFolder = node.children!.length > 0;
   if (isFolder) {
     bookmarkEl.onclick = () => {
-      openBookmarkFolder([], node, animationsEnabled, animationsBookmarkType, config);
+      openBookmarkFolder([], node, config);
     };
   } else {
     bookmarkEl.onclick = (e) => {
       if (e.ctrlKey) {
-        openBookmark(node.url!, animationsEnabled, animationsBookmarkType, true);
+        openBookmark(node.url!, config.animations.enabled, config.animations.bookmarkType, true);
       } else {
-        openBookmark(node.url!, animationsEnabled, animationsBookmarkType);
+        openBookmark(node.url!, config.animations.enabled, config.animations.bookmarkType);
       }
     };
   }
@@ -332,23 +327,9 @@ export const renderDefaultBlockyBookmarksNodes = (
 
       if (isFolder) {
         const folder = node;
-        bindActionsToBlockNode(
-          folder,
-          index,
-          config.animations.enabled,
-          config.animations.initialType,
-          config.animations.bookmarkType,
-          config
-        );
+        bindActionsToBlockNode(folder, index, config);
       } else {
-        bindActionsToBlockNode(
-          node,
-          index,
-          config.animations.enabled,
-          config.animations.initialType,
-          config.animations.bookmarkType,
-          config
-        );
+        bindActionsToBlockNode(node, index, config);
       }
     });
 };
