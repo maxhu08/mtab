@@ -32,6 +32,7 @@ export const renderDefaultBlockyBookmarks = (config: Config) => {
     renderDefaultBlockyBookmarksNodes(
       chromeBookmarksTree[0].parentId!,
       chromeBookmarksTree,
+      chromeBookmarks,
       config
     );
   });
