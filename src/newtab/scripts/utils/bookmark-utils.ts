@@ -197,14 +197,11 @@ export const bindActionsToBlockNode = (
   );
 };
 
-export const bindActionsToBackButton = (
-  parentNode: chrome.bookmarks.BookmarkTreeNode,
-  config: Config
-) => {
+export const bindActionsToBackButton = (parentNodeId: string, config: Config) => {
   // prettier-ignore
-  const backButtonEl = document.getElementById(`bookmark-${parentNode.id}-back-button`) as HTMLButtonElement;
+  const backButtonEl = document.getElementById(`bookmark-folder-${parentNodeId}-back-button`) as HTMLButtonElement;
   // prettier-ignore
-  const backButtonBorderEl = document.getElementById(`bookmark-folder-${parentNode.id}-border`) as HTMLDivElement;
+  const backButtonBorderEl = document.getElementById(`bookmark-folder-${parentNodeId}-border`) as HTMLDivElement;
 
   if (backButtonEl && config.animations.enabled) {
     const computedStyle = window.getComputedStyle(backButtonEl);
@@ -331,10 +328,11 @@ export const renderDefaultBlockyBookmarksNodes = (
   const actionsContainerEl = document.getElementById(`bookmark-folder-actions-container-${folderId}`) as HTMLDivElement;
   actionsContainerEl.innerHTML += `
   <button
+    id="bookmark-folder-${folderId}-back-button"
     class="relative duration-[250ms] ease-out bg-foreground cursor-pointer ${
       config.ui.style === "glass" ? "glass-effect" : ""
     } rounded-md h-9 md:h-12 px-1 md:px-2 overflow-hidden ${
-    config.animations.enabled ? `${config.animations.initialType} //opacity-0 outline-none` : ""
+    config.animations.enabled ? `${config.animations.initialType} opacity-0 outline-none` : ""
   }"
     ${config.animations.enabled ? `style="animation-delay: ${delay}ms;"` : ""}
   >
@@ -400,4 +398,6 @@ export const renderDefaultBlockyBookmarksNodes = (
         bindActionsToBlockNode(node, index, config);
       }
     });
+
+  bindActionsToBackButton(nodes[0].parentId!, config);
 };
