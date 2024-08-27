@@ -197,6 +197,45 @@ export const bindActionsToBlockNode = (
   );
 };
 
+export const bindActionsToBackButton = (
+  parentNode: chrome.bookmarks.BookmarkTreeNode,
+  config: Config
+) => {
+  // prettier-ignore
+  const backButtonEl = document.getElementById(`bookmark-${parentNode.id}-back-button`) as HTMLButtonElement;
+  // prettier-ignore
+  const backButtonBorderEl = document.getElementById(`bookmark-folder-${parentNode.id}-border`) as HTMLDivElement;
+
+  if (backButtonEl && config.animations.enabled) {
+    const computedStyle = window.getComputedStyle(backButtonEl);
+    const animationDuration = parseFloat(computedStyle.animationDuration) * 1000;
+    backButtonEl.addEventListener(
+      "animationstart",
+      () => {
+        // Fix weird flickering issue on firefox
+        setTimeout(() => {
+          backButtonEl.classList.remove("opacity-0");
+          // fix bookmarks animations replaying after bookmark search esc
+          backButtonEl.classList.remove(config.animations.initialType);
+        }, animationDuration * 0.75); // needs to be less than 1
+      },
+      {
+        once: true
+      }
+    );
+
+    // Fix bookmarks disappearing if user leaves tab too quickly
+    document.addEventListener("visibilitychange", () => {
+      backButtonEl.classList.remove("opacity-0");
+    });
+  }
+
+  backButtonEl.addEventListener("blur", () => unfocusBookmark(backButtonBorderEl));
+  backButtonEl.addEventListener("focus", (e) =>
+    focusBookmark(backButtonBorderEl, config.search.focusedBorderColor, e)
+  );
+};
+
 export const renderBlockBookmarkFolder = (
   containerEl: HTMLDivElement,
   bookmarkTiming: BookmarkTiming,
@@ -294,11 +333,13 @@ export const renderDefaultBlockyBookmarksNodes = (
   <button
     class="relative duration-[250ms] ease-out bg-foreground cursor-pointer ${
       config.ui.style === "glass" ? "glass-effect" : ""
-    } rounded-md h-max p-1 md:p-2 overflow-hidden ${
-      config.animations.enabled ? `${config.animations.initialType} //opacity-0 outline-none` : ""
-    }"
+    } rounded-md h-9 md:h-12 px-1 md:px-2 overflow-hidden ${
+    config.animations.enabled ? `${config.animations.initialType} //opacity-0 outline-none` : ""
+  }"
     ${config.animations.enabled ? `style="animation-delay: ${delay}ms;"` : ""}
   >
+    <div id="bookmark-folder-${folderId}-border" class="absolute top-0 left-0 w-full h-9 md:h-12 border-2 border-transparent rounded-md"></div>
+    <div class="absolute top-0 left-0 w-full h-9 md:h-12 hover:bg-white/20"></div>
     <div class="grid grid-cols-[max-content_auto] gap-2 font-message text-base md:text-2xl w-full" style="color: ${
       config.message.textColor
     };">
