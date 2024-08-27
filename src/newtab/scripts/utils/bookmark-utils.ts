@@ -324,6 +324,8 @@ export const renderDefaultBlockyBookmarksNodes = (
   const nodesContainerEl = document.getElementById(`bookmark-folder-nodes-container-${folderId}`) as HTMLDivElement;
   // prettier-ignore
   const actionsContainerEl = document.getElementById(`bookmark-folder-actions-container-${folderId}`) as HTMLDivElement;
+
+  // prettier-ignore
   actionsContainerEl.innerHTML += `
   <button
     id="bookmark-folder-${folderId}-back-button"
