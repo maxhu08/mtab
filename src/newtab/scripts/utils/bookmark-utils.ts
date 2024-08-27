@@ -7,25 +7,7 @@ import {
   UserDefinedBookmark
 } from "src/newtab/scripts/config";
 import { bookmarksContainerEl, bookmarkSearchInputEl, contentEl } from "src/newtab/scripts/ui";
-
-export const focusBookmark = (
-  bookmarkBorderEl: HTMLDivElement,
-  focusedBorderColor: string,
-  e: Event
-) => {
-  bookmarkBorderEl.classList.remove("border-transparent");
-  bookmarkBorderEl.style.borderColor = focusedBorderColor;
-
-  bookmarkBorderEl.focus();
-  e.preventDefault();
-};
-
-export const unfocusBookmark = (bookmarkBorderEl: HTMLDivElement) => {
-  bookmarkBorderEl.blur();
-
-  bookmarkBorderEl.style.borderColor = "#00000000";
-  bookmarkBorderEl.classList.add("border-transparent");
-};
+import { focusElementBorder, unfocusElementBorder } from "src/newtab/scripts/utils/focus-utils";
 
 export const openBookmark = (
   bookmarkUrl: string,
@@ -191,9 +173,9 @@ export const bindActionsToBlockNode = (
     };
   }
 
-  bookmarkEl.addEventListener("blur", () => unfocusBookmark(bookmarkBorderEl));
+  bookmarkEl.addEventListener("blur", () => unfocusElementBorder(bookmarkBorderEl));
   bookmarkEl.addEventListener("focus", (e) =>
-    focusBookmark(bookmarkBorderEl, config.search.focusedBorderColor, e)
+    focusElementBorder(bookmarkBorderEl, config.search.focusedBorderColor, e)
   );
 };
 
@@ -209,10 +191,8 @@ export const bindActionsToBackButton = (parentNodeId: string, config: Config) =>
     backButtonEl.addEventListener(
       "animationstart",
       () => {
-        // Fix weird flickering issue on firefox
         setTimeout(() => {
           backButtonEl.classList.remove("opacity-0");
-          // fix bookmarks animations replaying after bookmark search esc
           backButtonEl.classList.remove(config.animations.initialType);
         }, animationDuration * 0.75); // needs to be less than 1
       },
@@ -221,15 +201,14 @@ export const bindActionsToBackButton = (parentNodeId: string, config: Config) =>
       }
     );
 
-    // Fix bookmarks disappearing if user leaves tab too quickly
     document.addEventListener("visibilitychange", () => {
       backButtonEl.classList.remove("opacity-0");
     });
   }
 
-  backButtonEl.addEventListener("blur", () => unfocusBookmark(backButtonBorderEl));
+  backButtonEl.addEventListener("blur", () => unfocusElementBorder(backButtonBorderEl));
   backButtonEl.addEventListener("focus", (e) =>
-    focusBookmark(backButtonBorderEl, config.search.focusedBorderColor, e)
+    focusElementBorder(backButtonBorderEl, config.search.focusedBorderColor, e)
   );
 };
 
@@ -332,8 +311,8 @@ export const renderDefaultBlockyBookmarksNodes = (
     class="relative duration-[250ms] ease-out bg-foreground cursor-pointer ${
       config.ui.style === "glass" ? "glass-effect" : ""
     } rounded-md h-9 md:h-12 px-1 md:px-2 overflow-hidden ${
-    config.animations.enabled ? `${config.animations.initialType} opacity-0 outline-none` : ""
-  }"
+      config.animations.enabled ? `${config.animations.initialType} opacity-0 outline-none` : ""
+    }"
     ${config.animations.enabled ? `style="animation-delay: ${delay}ms;"` : ""}
   >
     <div id="bookmark-folder-${folderId}-border" class="absolute top-0 left-0 w-full h-9 md:h-12 border-2 border-transparent rounded-md"></div>
