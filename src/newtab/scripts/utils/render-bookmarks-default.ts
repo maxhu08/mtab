@@ -71,7 +71,6 @@ export const renderDefaultBookmarks = (config: Config) => {
 
       // prettier-ignore
       const bookmarkEl = document.getElementById(`bookmark-default-${bookmark.id}`) as HTMLDivElement;
-      console.log(bookmarkEl, bookmark);
       bookmarkEl.onclick = (e) => {
         if (e.ctrlKey) {
           openBookmark(

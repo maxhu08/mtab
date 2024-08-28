@@ -93,7 +93,6 @@ const handleBookmarkSettings = (index: number) => {
       input.input.setAttribute("value", input.input.value);
     })
   });
-  // * handle focus stuff end
 
   const deleteBookmarkButtonEl = document.getElementById(`bookmark-${index}-delete-button`) as HTMLButtonElement
   deleteBookmarkButtonEl.onclick = () => deleteBookmark(index);
@@ -116,8 +115,6 @@ const deleteBookmark = (index: number) => {
   const bookmarkToDelete = document.getElementById(`bookmark-user-defined-item-${index}`) as HTMLDivElement;
 
   const totalBookmarks = bookmarksUserDefinedList.children.length;
-
-  console.log("TRY TO DEL", index)
   
   // fix to make saving work normally
   for (let i = index + 1; i < totalBookmarks; i++) {
@@ -170,7 +167,6 @@ const deleteBookmark = (index: number) => {
     oldPushUpButtonEl.onclick = () => pushBookmark(index - 1, "up");
     oldPushDownButtonEl.onclick = () => pushBookmark(index - 1, "down");
     oldDeleteButtonEl.onclick = () => deleteBookmark(index - 1);
-    console.log("BIND NEW", oldDeleteButtonEl.onclick)
   }
 
   bookmarkToDelete.parentNode!.removeChild(bookmarkToDelete);
