@@ -49,6 +49,7 @@ export const renderUserDefinedBookmarks = (config: Config) => {
         // @ts-expect-error
         bookmark,
         index,
+        [],
         config
       );
     });
