@@ -102,6 +102,8 @@ const handleBookmarkSettings = (index: number) => {
     
     // fix to make saving work normally
     for (let i = index + 1; i < totalBookmarks; i++) {
+      console.log("BMK", i)
+      const userDefinedItemEl = document.getElementById(`bookmark-user-defined-item-${i}`) as HTMLDivElement;
       const oldUselessTitle = document.getElementById(`bookmark-${i}-user-defined-useless-title`) as HTMLSpanElement;
 
       const oldNameInputEl = document.getElementById(`bookmark-${i}-name-input`) as HTMLInputElement;
@@ -118,6 +120,8 @@ const handleBookmarkSettings = (index: number) => {
 
       const oldCollapsibleContentEl = document.getElementById(`bookmark-${i}-collapsible-content`) as HTMLDivElement
       const oldToggleCollapseBookmarkButtonEl = document.getElementById(`bookmark-${i}-toggle-collapse-button`) as HTMLButtonElement
+
+      userDefinedItemEl.id = `bookmark-user-defined-item-${i - 1}`
 
       oldUselessTitle.id = `bookmark-${i - 1}-user-defined-useless-title`
       oldUselessTitle.textContent = `bookmarks.userDefined[${i - 1}]`
