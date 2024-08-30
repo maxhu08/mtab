@@ -43,7 +43,8 @@ export const openBookmarkFolder = (
   chromeBookmarks: chrome.bookmarks.BookmarkTreeNode[],
   folderToLeaveId: string,
   newFolderId: string,
-  config: Config
+  config: Config,
+  showBackButton: boolean
 ) => {
   // prettier-ignore
   const oldContainerEl = document.getElementById(`bookmark-folder-container-${folderToLeaveId}`) as HTMLDivElement;
@@ -66,7 +67,7 @@ export const openBookmarkFolder = (
         newFolderChildren,
         chromeBookmarks,
         config,
-        true
+        showBackButton
       );
     }, animationDuration + 20);
   } else {
@@ -76,7 +77,7 @@ export const openBookmarkFolder = (
       newFolderChildren,
       chromeBookmarks,
       config,
-      true
+      showBackButton
     );
   }
 };
@@ -177,7 +178,7 @@ export const bindActionsToBlockNode = (
   const isFolder = node.children && node.children!.length > 0;
   if (isFolder) {
     bookmarkEl.onclick = () => {
-      openBookmarkFolder(chromeBookmarks, node.parentId!, node.id, config);
+      openBookmarkFolder(chromeBookmarks, node.parentId!, node.id, config, true);
     };
   } else {
     bookmarkEl.onclick = (e) => {
@@ -228,11 +229,14 @@ export const bindActionsToBackButton = (
 
   backButtonEl.onclick = () => {
     const folderNode = chromeBookmarks.find((bookmark) => bookmark.id === folderId)!;
+    // prettier-ignore
+    const parentFolderNode = chromeBookmarks.find((bookmark) => bookmark.id === folderNode.parentId)!;
 
     const isTopLevel = typeof folderNode === "undefined";
+    const isParentTopLevel = typeof parentFolderNode === "undefined";
     if (isTopLevel) return;
 
-    openBookmarkFolder(chromeBookmarks, folderId, folderNode.parentId!, config);
+    openBookmarkFolder(chromeBookmarks, folderId, folderNode.parentId!, config, !isParentTopLevel);
   };
 
   backButtonEl.addEventListener("blur", () => unfocusElementBorder(backButtonBorderEl));
