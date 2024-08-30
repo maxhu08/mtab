@@ -38,6 +38,8 @@ export const fillBookmarksInputs = (config: Config) => {
   config.bookmarks.userDefined.forEach((_, index) => {
     handleBookmarkSettings(index);
   });
+
+  toggleCollapseAllBookmarksButtonEl.click();
 };
 
 // prettier-ignore
