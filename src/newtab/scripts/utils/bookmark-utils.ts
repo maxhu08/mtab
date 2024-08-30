@@ -47,10 +47,8 @@ export const openBookmarkFolder = (
 ) => {
   // prettier-ignore
   const oldContainerEl = document.getElementById(`bookmark-folder-container-${folderToLeaveId}`) as HTMLDivElement;
-  console.log(oldContainerEl, `bookmark-folder-container-${folderToLeaveId}`);
 
   const newFolderChildren = chromeBookmarks.filter((bookmark) => bookmark.parentId === newFolderId);
-  console.log("newfolderchildren", newFolderChildren);
 
   if (config.animations.enabled) {
     oldContainerEl.classList.add(config.animations.bookmarkType);
@@ -63,11 +61,23 @@ export const openBookmarkFolder = (
 
     setTimeout(() => {
       oldContainerEl.parentNode!.removeChild(oldContainerEl);
-      renderDefaultBlockyBookmarksNodes(newFolderId, newFolderChildren, chromeBookmarks, config);
+      renderDefaultBlockyBookmarksNodes(
+        newFolderId,
+        newFolderChildren,
+        chromeBookmarks,
+        config,
+        true
+      );
     }, animationDuration + 20);
   } else {
     oldContainerEl.parentNode!.removeChild(oldContainerEl);
-    renderDefaultBlockyBookmarksNodes(newFolderId, newFolderChildren, chromeBookmarks, config);
+    renderDefaultBlockyBookmarksNodes(
+      newFolderId,
+      newFolderChildren,
+      chromeBookmarks,
+      config,
+      true
+    );
   }
 };
 
@@ -167,7 +177,6 @@ export const bindActionsToBlockNode = (
   const isFolder = node.children && node.children!.length > 0;
   if (isFolder) {
     bookmarkEl.onclick = () => {
-      console.log(node.id, node.parentId);
       openBookmarkFolder(chromeBookmarks, node.parentId!, node.id, config);
     };
   } else {
@@ -219,7 +228,6 @@ export const bindActionsToBackButton = (
 
   backButtonEl.onclick = () => {
     const folderNode = chromeBookmarks.find((bookmark) => bookmark.id === folderId)!;
-    console.log(folderNode, folderId);
 
     const isTopLevel = typeof folderNode === "undefined";
     if (isTopLevel) return;
@@ -311,7 +319,8 @@ export const renderDefaultBlockyBookmarksNodes = (
   folderId: string,
   nodes: chrome.bookmarks.BookmarkTreeNode[],
   chromeBookmarks: chrome.bookmarks.BookmarkTreeNode[],
-  config: Config
+  config: Config,
+  showBackButton: boolean
 ) => {
   let delay = 0;
   if (config.animations.bookmarkTiming === "uniform") delay = 150;
@@ -329,25 +338,15 @@ export const renderDefaultBlockyBookmarksNodes = (
   const actionsContainerEl = document.getElementById(`bookmark-folder-actions-container-${folderId}`) as HTMLDivElement;
 
   // prettier-ignore
-  actionsContainerEl.innerHTML += `
-  <button
-    id="bookmark-folder-${folderId}-back-button"
-    class="relative duration-[250ms] ease-out bg-foreground cursor-pointer ${
-      config.ui.style === "glass" ? "glass-effect" : ""
-    } rounded-md h-9 md:h-12 px-1 md:px-2 overflow-hidden ${
-      config.animations.enabled ? `${config.animations.initialType} opacity-0 outline-none` : ""
-    }"
-    ${config.animations.enabled ? `style="animation-delay: ${delay}ms;"` : ""}
-  >
-    <div id="bookmark-folder-${folderId}-border" class="absolute top-0 left-0 w-full h-9 md:h-12 border-2 border-transparent rounded-md"></div>
-    <div class="absolute top-0 left-0 w-full h-9 md:h-12 hover:bg-white/20"></div>
-    <div class="grid grid-cols-[max-content_auto] gap-2 font-message text-base md:text-2xl w-full" style="color: ${
-      config.message.textColor
-    };">
-      <i class="ri-arrow-left-line"></i>
-      <span>Back</span>
-    </div>
-  </button>
+  if (showBackButton) actionsContainerEl.innerHTML += `
+    <button id="bookmark-folder-${folderId}-back-button" class="relative duration-[250ms] ease-out bg-foreground cursor-pointer ${config.ui.style === "glass" ? "glass-effect" : ""} rounded-md h-9 md:h-12 px-1 md:px-2 overflow-hidden ${config.animations.enabled ? `${config.animations.initialType} opacity-0 outline-none` : ""}" ${config.animations.enabled ? `style="animation-delay: ${delay}ms;"` : ""}>
+      <div id="bookmark-folder-${folderId}-border" class="absolute top-0 left-0 w-full h-9 md:h-12 border-2 border-transparent rounded-md"></div>
+      <div class="absolute top-0 left-0 w-full h-9 md:h-12 hover:bg-white/20"></div>
+      <div class="grid grid-cols-[max-content_auto] gap-2 font-message text-base md:text-2xl w-full" style="color: ${config.message.textColor};">
+        <i class="ri-arrow-left-line"></i>
+        <span>Back</span>
+      </div>
+    </button>
 `;
 
   nodes.forEach((node, index) => {
@@ -402,7 +401,5 @@ export const renderDefaultBlockyBookmarksNodes = (
       }
     });
 
-  console.log(nodes);
-  console.log(nodes[0].parentId);
   bindActionsToBackButton(nodes[0].parentId!, chromeBookmarks, config);
 };

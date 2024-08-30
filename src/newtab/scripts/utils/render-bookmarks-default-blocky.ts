@@ -33,7 +33,8 @@ export const renderDefaultBlockyBookmarks = (config: Config) => {
       chromeBookmarksTree[0].parentId!,
       chromeBookmarksTree,
       chromeBookmarks,
-      config
+      config,
+      false
     );
   });
 };
