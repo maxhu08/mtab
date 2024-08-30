@@ -338,8 +338,6 @@ export const renderDefaultBlockyBookmarksNodes = (
   if (config.animations.bookmarkTiming === "uniform") delay = 150;
   else delay = (nodes.length + 3) * 50;
 
-  console.log({ nodes });
-
   bookmarksContainerEl.innerHTML += `<div id="bookmark-folder-container-${folderId}" class="w-full grid gap-2 grid-rows-[auto_max-content]"></div>`;
   // prettier-ignore
   const containerEl = document.getElementById(`bookmark-folder-container-${folderId}`) as HTMLDivElement;
