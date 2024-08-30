@@ -337,17 +337,22 @@ export const renderDefaultBlockyBookmarksNodes = (
   // prettier-ignore
   const actionsContainerEl = document.getElementById(`bookmark-folder-actions-container-${folderId}`) as HTMLDivElement;
 
-  // prettier-ignore
-  if (showBackButton) actionsContainerEl.innerHTML += `
-    <button id="bookmark-folder-${folderId}-back-button" class="relative duration-[250ms] ease-out bg-foreground cursor-pointer ${config.ui.style === "glass" ? "glass-effect" : ""} rounded-md h-9 md:h-12 px-1 md:px-2 overflow-hidden ${config.animations.enabled ? `${config.animations.initialType} opacity-0 outline-none` : ""}" ${config.animations.enabled ? `style="animation-delay: ${delay}ms;"` : ""}>
-      <div id="bookmark-folder-${folderId}-border" class="absolute top-0 left-0 w-full h-9 md:h-12 border-2 border-transparent rounded-md"></div>
-      <div class="absolute top-0 left-0 w-full h-9 md:h-12 hover:bg-white/20"></div>
-      <div class="grid grid-cols-[max-content_auto] gap-2 font-message text-base md:text-2xl w-full" style="color: ${config.message.textColor};">
-        <i class="ri-arrow-left-line"></i>
-        <span>Back</span>
-      </div>
-    </button>
-`;
+  if (showBackButton) {
+    // prettier-ignore
+    actionsContainerEl.innerHTML += `
+      <button id="bookmark-folder-${folderId}-back-button" class="relative duration-[250ms] ease-out bg-foreground cursor-pointer ${config.ui.style === "glass" ? "glass-effect" : ""} rounded-md h-9 md:h-12 px-1 md:px-2 overflow-hidden ${config.animations.enabled ? `${config.animations.initialType} opacity-0 outline-none` : ""}" ${config.animations.enabled ? `style="animation-delay: ${delay}ms;"` : ""}>
+        <div id="bookmark-folder-${folderId}-border" class="absolute top-0 left-0 w-full h-9 md:h-12 border-2 border-transparent rounded-md"></div>
+        <div class="absolute top-0 left-0 w-full h-9 md:h-12 hover:bg-white/20"></div>
+        <div class="grid grid-cols-[max-content_auto] gap-2 font-message text-base md:text-2xl w-full" style="color: ${config.message.textColor};">
+          <i class="ri-arrow-left-line"></i>
+          <span>Back</span>
+        </div>
+      </button>
+    `
+  } else {
+    // prettier-ignore
+    actionsContainerEl.innerHTML += `<div class="relative rounded-md h-9 md:h-12 px-1 md:px-2 overflow-hidden opacity-0 outline-none"></div>`
+  }
 
   nodes.forEach((node, index) => {
     // if has children item is a folder
@@ -401,5 +406,5 @@ export const renderDefaultBlockyBookmarksNodes = (
       }
     });
 
-  bindActionsToBackButton(nodes[0].parentId!, chromeBookmarks, config);
+  if (showBackButton) bindActionsToBackButton(nodes[0].parentId!, chromeBookmarks, config);
 };
