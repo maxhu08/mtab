@@ -49,7 +49,15 @@ export const openBookmarkFolder = (
   // prettier-ignore
   const oldContainerEl = document.getElementById(`bookmark-folder-container-${folderToLeaveId}`) as HTMLDivElement;
 
-  const newFolderChildren = chromeBookmarks.filter((bookmark) => bookmark.parentId === newFolderId);
+  // prettier-ignore
+  let newFolderChildren: chrome.bookmarks.BookmarkTreeNode[] = [];
+
+  if (showBackButton) {
+    newFolderChildren = chromeBookmarks.filter((bookmark) => bookmark.parentId === newFolderId);
+  } else {
+    const chromeBookmarksTree = buildChromeBookmarksTree(chromeBookmarks);
+    newFolderChildren = chromeBookmarksTree;
+  }
 
   if (config.animations.enabled) {
     oldContainerEl.classList.add(config.animations.bookmarkType);
@@ -329,6 +337,8 @@ export const renderDefaultBlockyBookmarksNodes = (
   let delay = 0;
   if (config.animations.bookmarkTiming === "uniform") delay = 150;
   else delay = (nodes.length + 3) * 50;
+
+  console.log({ nodes });
 
   bookmarksContainerEl.innerHTML += `<div id="bookmark-folder-container-${folderId}" class="w-full grid gap-2 grid-rows-[auto_max-content]"></div>`;
   // prettier-ignore
