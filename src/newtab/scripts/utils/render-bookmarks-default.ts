@@ -34,13 +34,10 @@ export const renderDefaultBookmarks = (config: Config) => {
     if (chromeBookmarks.length === 0) {
       innerBookmarkContainer.innerHTML += `
         <div class="overflow-hidden h-16 md:h-20 grid grid-rows-[auto_max-content] place-items-center">
-          <span class="text-search text-base md:text-2xl font-message w-full text-center text-ellipsis overflow-hidden whitespace-nowrap"
-                style="color: ${config.search.textColor}"
-          >
+          <span class="text-search text-base md:text-2xl font-message w-full text-center text-ellipsis overflow-hidden whitespace-nowrap" style="color: ${config.search.textColor}">
             No bookmarks yet
           </span>
         </div>
-      </a>
       `;
     }
 
@@ -55,16 +52,12 @@ export const renderDefaultBookmarks = (config: Config) => {
 
       // prettier-ignore
       innerBookmarkContainer.innerHTML += `
-      <button id="bookmark-default-${
-        bookmark.id
-      }" class="overflow-hidden w-16 md:w-20 aspect-square grid grid-rows-[auto_max-content] place-items-center cursor-pointer">
-        <img class="w-10 md:w-14" src="${userAgent === "firefox" ? `${new URL(bookmark.url!).origin}/favicon.ico` : `chrome-extension://${chrome.runtime.id}/_favicon/?pageUrl=${encodeURIComponent(bookmark.url as string)}&size=${64}`}" />
-        <span class="text-base w-full font-search text-center text-ellipsis overflow-hidden whitespace-nowrap"
-              style="color: ${config.search.textColor}"
-        >
-          ${bookmark.title.toString()}
-        </span>
-      </button>
+        <button id="bookmark-default-${bookmark.id}" class="overflow-hidden w-16 md:w-20 aspect-square grid grid-rows-[auto_max-content] place-items-center cursor-pointer">
+          <img class="w-10 md:w-14" src="${userAgent === 'firefox' ? `${new URL(bookmark.url!).origin}/favicon.ico` : `chrome-extension://${chrome.runtime.id}/_favicon/?pageUrl=${encodeURIComponent(bookmark.url as string)}&size=${64}`}" />
+          <span class="text-base w-full font-search text-center text-ellipsis overflow-hidden whitespace-nowrap" style="color: ${config.search.textColor}">
+            ${bookmark.title.toString()}
+          </span>
+        </button>
       `;
     });
 
