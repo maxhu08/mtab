@@ -4,6 +4,7 @@ import {
   buildChromeBookmarksTree,
   renderDefaultBlockyBookmarksNodes
 } from "src/newtab/scripts/utils/bookmark-utils";
+import { getUserAgent } from "src/util-scripts/user-agent";
 
 // animations handled separately
 export const renderDefaultBlockyBookmarks = (config: Config) => {
@@ -27,7 +28,13 @@ export const renderDefaultBlockyBookmarks = (config: Config) => {
   document.head.appendChild(styleElement);
 
   chrome.bookmarks.search({}, (chromeBookmarks) => {
-    const chromeBookmarksTree = buildChromeBookmarksTree(chromeBookmarks);
+    let chromeBookmarksTree = buildChromeBookmarksTree(chromeBookmarks);
+
+    const userAgent = getUserAgent();
+    if (userAgent === "firefox") {
+      // prettier-ignore
+      chromeBookmarksTree = chromeBookmarksTree.find((cb) => cb.id === "toolbar_____")!.children as unknown as chrome.bookmarks.BookmarkTreeNode[];
+    }
 
     renderDefaultBlockyBookmarksNodes(
       chromeBookmarksTree[0].parentId!,
