@@ -1,11 +1,6 @@
-# Changes in 1.4.3
+# Changes in 1.4.4
 
 in this release:
 
-- add default-blocky bookmarks type
-- restructure code
-- remove presets
-- fix bug with wallpaper still being displayed after being removed
-- fix bugs with user-defined bookmarks section in options page
-- performance improvements
-- bug fixes
+- fix issue with bookmark favicons not showing up on firefox
+- fix unexpected issue with default-blocky bookmark type on firefox
