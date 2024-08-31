@@ -8,6 +8,7 @@ import {
 } from "src/newtab/scripts/config";
 import { bookmarksContainerEl, bookmarkSearchInputEl, contentEl } from "src/newtab/scripts/ui";
 import { focusElementBorder, unfocusElementBorder } from "src/newtab/scripts/utils/focus-utils";
+import { getUserAgent } from "src/util-scripts/user-agent";
 
 export const openBookmark = (
   bookmarkUrl: string,
@@ -366,6 +367,8 @@ export const renderDefaultBlockyBookmarksNodes = (
     actionsContainerEl.innerHTML += `<div class="relative rounded-md h-9 md:h-12 px-1 md:px-2 overflow-hidden opacity-0 outline-none"></div>`
   }
 
+  const userAgent = getUserAgent();
+
   nodes.forEach((node, index) => {
     // if has children item is a folder
     const isFolder = node.children!.length > 0;
@@ -398,7 +401,7 @@ export const renderDefaultBlockyBookmarksNodes = (
         null,
         null,
         // prettier-ignore
-        `<img class="w-10 md:w-14" src="${`chrome-extension://${chrome.runtime.id}/_favicon/?pageUrl=${encodeURIComponent(node.url as string)}&size=${64}`}" />`,
+        `<img class="w-10 md:w-14" src="${userAgent === "firefox" ? `${new URL(node.url!).origin}/favicon.ico` : `chrome-extension://${chrome.runtime.id}/_favicon/?pageUrl=${encodeURIComponent(node.url as string)}&size=${64}`}" />`,
         config.ui.style,
         config.animations.enabled,
         config.animations.initialType

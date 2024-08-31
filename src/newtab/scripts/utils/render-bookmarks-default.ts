@@ -1,6 +1,7 @@
 import { Config } from "src/newtab/scripts/config";
 import { bookmarksContainerEl } from "src/newtab/scripts/ui";
 import { openBookmark } from "src/newtab/scripts/utils/bookmark-utils";
+import { getUserAgent } from "src/util-scripts/user-agent";
 
 export const renderDefaultBookmarks = (config: Config) => {
   switch (config.ui.style) {
@@ -47,16 +48,17 @@ export const renderDefaultBookmarks = (config: Config) => {
       innerBookmarkContainer.classList.add("grid", "grid-flow-col", "gap-2", "w-max");
     }
 
+    const userAgent = getUserAgent();
+
     chromeBookmarks.forEach((bookmark) => {
       if (!!bookmark.dateGroupModified) return;
 
+      // prettier-ignore
       innerBookmarkContainer.innerHTML += `
       <button id="bookmark-default-${
         bookmark.id
       }" class="overflow-hidden w-16 md:w-20 aspect-square grid grid-rows-[auto_max-content] place-items-center cursor-pointer">
-        <img class="h-[80%]" src="${`chrome-extension://${
-          chrome.runtime.id
-        }/_favicon/?pageUrl=${encodeURIComponent(bookmark.url as string)}&size=${64}`}" />
+        <img class="w-10 md:w-14" src="${userAgent === "firefox" ? `${new URL(bookmark.url!).origin}/favicon.ico` : `chrome-extension://${chrome.runtime.id}/_favicon/?pageUrl=${encodeURIComponent(bookmark.url as string)}&size=${64}`}" />
         <span class="text-base w-full font-search text-center text-ellipsis overflow-hidden whitespace-nowrap"
               style="color: ${config.search.textColor}"
         >
