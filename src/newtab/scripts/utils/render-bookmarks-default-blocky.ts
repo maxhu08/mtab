@@ -29,7 +29,7 @@ export const renderDefaultBlockyBookmarks = (config: Config) => {
 
   chrome.bookmarks.search({}, (chromeBookmarks) => {
     let chromeBookmarksTree = buildChromeBookmarksTree(chromeBookmarks);
-
+    console.log(chromeBookmarksTree);
     const userAgent = getUserAgent();
     if (userAgent === "firefox") {
       // prettier-ignore
