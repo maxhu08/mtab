@@ -42,4 +42,12 @@
   .h-bookmark {
     height: 5rem !important;
   }
+
+  .visibilty-bookmark-name {
+    display: none !important;
+  }
+}
+
+.visibilty-bookmark-name {
+  display: block;
 }
