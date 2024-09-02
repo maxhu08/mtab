@@ -9,10 +9,13 @@ import {
   bookmarksTypeNoneButtonEl,
   bookmarksUserDefinedColsInputEl,
   bookmarksDefaultBlockyColsInputEl,
-  bookmarksDefaultBlockyColorInputEl
+  bookmarksDefaultBlockyColorInputEl,
+  bookmarksShowBookmarkNamesCheckboxEl
 } from "src/options/scripts/ui";
 
 export const fillBookmarksInputs = (config: Config) => {
+  bookmarksShowBookmarkNamesCheckboxEl.checked = config.bookmarks.showBookmarkNames;
+
   bookmarksDefaultBlockyColsInputEl.value = config.bookmarks.defaultBlockyCols.toString();
   bookmarksDefaultBlockyColorInputEl.value = config.bookmarks.defaultBlockyColor;
 

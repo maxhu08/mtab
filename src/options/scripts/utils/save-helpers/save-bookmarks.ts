@@ -2,10 +2,13 @@ import { UserDefinedBookmark, Config, BookmarksType } from "src/newtab/scripts/c
 import {
   bookmarksDefaultBlockyColorInputEl,
   bookmarksDefaultBlockyColsInputEl,
+  bookmarksShowBookmarkNamesCheckboxEl,
   bookmarksUserDefinedColsInputEl
 } from "src/options/scripts/ui";
 
 export const saveBookmarksSettingsToDraft = (draft: Config) => {
+  draft.bookmarks.showBookmarkNames = bookmarksShowBookmarkNamesCheckboxEl.checked;
+
   draft.bookmarks.defaultBlockyCols = parseInt(bookmarksDefaultBlockyColsInputEl.value);
   draft.bookmarks.defaultBlockyColor = bookmarksDefaultBlockyColorInputEl.value;
 
