@@ -144,7 +144,7 @@ export const renderBlockBookmark = (
         <div class="bookmark-icon${iconSizeClass && " " + iconSizeClass}"${bookmarkIconColor && ` style="color: ${bookmarkIconColor};"`}>
           ${iconHTML}
         </div>
-        ${showName && `<span class="w-full font-message font-semibold text-base text-ellipsis overflow-hidden whitespace-nowrap" style="color: ${nameTextColor}">${bookmarkVanityName}</span>`}
+        ${showName ? `<span class="w-full font-message font-semibold text-base text-ellipsis overflow-hidden whitespace-nowrap" style="color: ${nameTextColor}">${bookmarkVanityName}</span>` : ""}
       </div>
     </button>
   `;
@@ -307,7 +307,7 @@ export const renderBlockBookmarkFolder = (
         <div class="bookmark-icon${iconSizeClass && " " + iconSizeClass}"${bookmarkIconColor && ` style="color: ${bookmarkIconColor};"`}>
           ${iconHTML}
         </div>
-        ${showName && `<span class="w-full font-message font-semibold text-base text-ellipsis overflow-hidden whitespace-nowrap" style="color: ${nameTextColor}">${bookmarkVanityName}</span>`}
+        ${showName ? `<span class="w-full font-message font-semibold text-base text-ellipsis overflow-hidden whitespace-nowrap" style="color: ${nameTextColor}">${bookmarkVanityName}</span>`: ""}
       </div>
     </button>
   `;
