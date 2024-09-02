@@ -102,6 +102,8 @@ export const renderBlockBookmark = (
   bookmarkIconType: string | null,
   bookmarkIconHTML: string,
   uiStyle: UIStyle,
+  showName: boolean,
+  nameTextColor: string,
   animationsEnabled: boolean,
   animationsInitialType: AnimationInitialType
 ) => {
@@ -141,6 +143,7 @@ export const renderBlockBookmark = (
         <div class="bookmark-icon${iconSizeClass && " " + iconSizeClass}"${bookmarkIconColor && ` style="color: ${bookmarkIconColor};"`}>
           ${iconHTML}
         </div>
+        ${showName && `<span class="font-message text-base md:text-2xl" style="color: ${nameTextColor}">${bookmarkName}</span>`}
       </div>
     </button>
   `;
@@ -403,6 +406,8 @@ export const renderDefaultBlockyBookmarksNodes = (
         // prettier-ignore
         `<img class="w-10 md:w-14" src="${userAgent === "firefox" ? `${new URL(node.url!).origin}/favicon.ico` : `chrome-extension://${chrome.runtime.id}/_favicon/?pageUrl=${encodeURIComponent(node.url as string)}&size=${64}`}" />`,
         config.ui.style,
+        config.bookmarks.showBookmarkNames,
+        config.message.textColor,
         config.animations.enabled,
         config.animations.initialType
       );
