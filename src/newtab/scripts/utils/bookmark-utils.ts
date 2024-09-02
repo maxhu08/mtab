@@ -7,6 +7,7 @@ import {
   UserDefinedBookmark
 } from "src/newtab/scripts/config";
 import { bookmarksContainerEl, bookmarkSearchInputEl, contentEl } from "src/newtab/scripts/ui";
+import { getFaviconURL } from "src/newtab/scripts/utils/favicon-url";
 import { focusElementBorder, unfocusElementBorder } from "src/newtab/scripts/utils/focus-utils";
 import { getUserAgent } from "src/util-scripts/user-agent";
 
@@ -417,7 +418,7 @@ export const renderDefaultBlockyBookmarksNodes = (
         null,
         null,
         // prettier-ignore
-        `<img class="w-10 md:w-14" src="${userAgent === "firefox" ? `${new URL(node.url!).origin}/favicon.ico` : `chrome-extension://${chrome.runtime.id}/_favicon/?pageUrl=${encodeURIComponent(node.url as string)}&size=${64}`}" />`,
+        `<img class="w-10 md:w-14" src="${getFaviconURL(node.url!, userAgent)}" />`,
         config.ui.style,
         config.bookmarks.showBookmarkNames,
         node.title,
