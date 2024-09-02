@@ -5,17 +5,18 @@ export const setSearchStuff = (
   placeholderText: string,
   bookmarkPlaceholderText: string
 ) => {
-  const searchFontCss = `
-.font-search {
-  font-family: ${font};
-}
-.font-bookmark-search {
-  font-family: ${font};
-} 
-.font-bookmark-search-results {
-  font-family: ${font};
-} 
-`;
+  // const searchFontCss = `
+  // .font-search {
+  //   font-family: ${font};
+  // }
+  // .font-bookmark-search {
+  //   font-family: ${font};
+  // }
+  // .font-bookmark-search-results {
+  //   font-family: ${font};
+  // }`;
+
+  const searchFontCss = `.font-search{font-family:${font};}.font-bookmark-search{font-family:${font};}.font-bookmark-search-results{font-family:${font};}`;
 
   const styleElement = document.createElement("style");
   styleElement.type = "text/css";

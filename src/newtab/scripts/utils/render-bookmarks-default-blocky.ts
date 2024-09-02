@@ -10,17 +10,18 @@ import { getUserAgent } from "src/util-scripts/user-agent";
 export const renderDefaultBlockyBookmarks = (config: Config) => {
   bookmarksContainerEl.classList.add("w-full", "grid", "gap-2", "grid-flow-row");
 
-  const defaultBlockyBookmarkCss = `
-.default-blocky-bookmarks-cols {
-  grid-template-columns: 1fr 1fr;
-}
+  // const defaultBlockyBookmarkCss = `
+  // .default-blocky-bookmarks-cols {
+  //   grid-template-columns: 1fr 1fr;
+  // }
 
-@media (min-width: 768px) {
-  .default-blocky-bookmarks-cols {
-    grid-template-columns: repeat(${config.bookmarks.defaultBlockyCols}, minmax(0, 1fr));
-  }
-}
-`;
+  // @media (min-width: 768px) {
+  //   .default-blocky-bookmarks-cols {
+  //     grid-template-columns: repeat(${config.bookmarks.defaultBlockyCols}, minmax(0, 1fr));
+  //   }
+  // }`;
+
+  const defaultBlockyBookmarkCss = `.default-blocky-bookmarks-cols{grid-template-columns:1fr 1fr;}@media (min-width: 768px){.default-blocky-bookmarks-cols{grid-template-columns:repeat(${config.bookmarks.defaultBlockyCols}, minmax(0, 1fr));}}`;
 
   const styleElement = document.createElement("style");
   styleElement.type = "text/css";

@@ -9,17 +9,18 @@ import {
 export const renderUserDefinedBookmarks = (config: Config) => {
   bookmarksContainerEl.classList.add("w-full", "grid", "gap-2", "user-defined-bookmarks-cols");
 
-  const userDefinedBookmarkCss = `
-.user-defined-bookmarks-cols {
-  grid-template-columns: 1fr 1fr;
-}
+  // const userDefinedBookmarkCss = `
+  // .user-defined-bookmarks-cols {
+  //   grid-template-columns: 1fr 1fr;
+  // }
 
-@media (min-width: 768px) {
-  .user-defined-bookmarks-cols {
-    grid-template-columns: repeat(${config.bookmarks.userDefinedCols}, minmax(0, 1fr));
-  }
-}
-`;
+  // @media (min-width: 768px) {
+  //   .user-defined-bookmarks-cols {
+  //     grid-template-columns: repeat(${config.bookmarks.userDefinedCols}, minmax(0, 1fr));
+  //   }
+  // }`;
+
+  const userDefinedBookmarkCss = `.user-defined-bookmarks-cols{grid-template-columns:1fr 1fr;}@media (min-width: 768px){.user-defined-bookmarks-cols{grid-template-columns:repeat(${config.bookmarks.userDefinedCols}, minmax(0, 1fr));}}`;
 
   const styleElement = document.createElement("style");
   styleElement.type = "text/css";

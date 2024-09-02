@@ -7,10 +7,12 @@ export const addAnimations = (animations: Config["animations"]) => {
     return;
   }
 
-  const animationCss = `
-* {
-  transition-duration: 250ms;
-}`;
+  // const animationCss = `
+  // * {
+  //   transition-duration: 250ms;
+  // }`;
+
+  const animationCss = `*{transition-duration:250ms;}`;
 
   const styleElement = document.createElement("style");
   styleElement.type = "text/css";

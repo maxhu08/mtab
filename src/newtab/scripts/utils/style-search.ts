@@ -25,23 +25,25 @@ export const styleSearch = (
   bookmarkSearchInputEl.style.color = textColor;
   bookmarkSearchResultsContainerEl.style.color = textColor;
 
-  const placeholderTextColorCss = `
-.placeholder-color-search::placeholder {
-  color: ${placeholderTextColor};
-}
-.placeholder-color-bookmark-search::placeholder {
-  color: ${placeholderTextColor};
-} 
-.search-search-icon-color {
-  color: ${searchIconColor};
-} 
-.search-bookmark-icon-color {
-  color: ${bookmarkIconColor};
-} 
-.search-select-icon-color {
-  color: ${selectIconColor};
-} 
-`;
+  // const placeholderTextColorCss = `
+  // .placeholder-color-search::placeholder {
+  //   color: ${placeholderTextColor};
+  // }
+  // .placeholder-color-bookmark-search::placeholder {
+  //   color: ${placeholderTextColor};
+  // }
+  // .search-search-icon-color {
+  //   color: ${searchIconColor};
+  // }
+  // .search-bookmark-icon-color {
+  //   color: ${bookmarkIconColor};
+  // }
+  // .search-select-icon-color {
+  //   color: ${selectIconColor};
+  // }
+  // `;
+
+  const placeholderTextColorCss = `.placeholder-color-search::placeholder{color:${placeholderTextColor};}.placeholder-color-bookmark-search::placeholder{color:${placeholderTextColor};}.search-search-icon-color{color:${searchIconColor};}.search-bookmark-icon-color{color:${bookmarkIconColor};}.search-select-icon-color{color:${selectIconColor};}`;
 
   const styleElement = document.createElement("style");
   styleElement.type = "text/css";

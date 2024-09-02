@@ -9,10 +9,12 @@ export const setUISyle = (ui: Config["ui"]) => {
   customCssStyleElement.appendChild(document.createTextNode(customCss));
   document.head.appendChild(customCssStyleElement);
 
-  const highlightSyleCss = `
-::selection {
-  background-color: ${ui.highlightColor};
-}`;
+  // const highlightSyleCss = `
+  // ::selection {
+  //   background-color: ${ui.highlightColor};
+  // }`;
+
+  const highlightSyleCss = `::selection{background-color:${ui.highlightColor};}`;
 
   const highlightStyleElement = document.createElement("style");
   highlightStyleElement.type = "text/css";
@@ -21,13 +23,15 @@ export const setUISyle = (ui: Config["ui"]) => {
 
   if (ui.style !== "solid") return;
 
-  const uiStyleCss = `
-.bg-foreground {
-  background-color: ${ui.foregroundColor};
-}
-.bg-background {
-  background-color: ${ui.backgroundColor};
-}`;
+  // const uiStyleCss = `
+  // .bg-foreground {
+  //   background-color: ${ui.foregroundColor};
+  // }
+  // .bg-background {
+  //   background-color: ${ui.backgroundColor};
+  // }`;
+
+  const uiStyleCss = `.bg-foreground{background-color:${ui.foregroundColor};}.bg-background{background-color:${ui.backgroundColor};}`;
 
   const uiStyleElement = document.createElement("style");
   uiStyleElement.type = "text/css";
