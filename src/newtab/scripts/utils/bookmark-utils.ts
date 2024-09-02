@@ -103,6 +103,7 @@ export const renderBlockBookmark = (
   bookmarkIconHTML: string,
   uiStyle: UIStyle,
   showName: boolean,
+  bookmarkVanityName: string,
   nameTextColor: string,
   animationsEnabled: boolean,
   animationsInitialType: AnimationInitialType
@@ -143,7 +144,7 @@ export const renderBlockBookmark = (
         <div class="bookmark-icon${iconSizeClass && " " + iconSizeClass}"${bookmarkIconColor && ` style="color: ${bookmarkIconColor};"`}>
           ${iconHTML}
         </div>
-        ${showName && `<span class="font-message text-base md:text-2xl" style="color: ${nameTextColor}">${bookmarkName}</span>`}
+        ${showName && `<span class="w-full font-message font-semibold text-base text-ellipsis overflow-hidden whitespace-nowrap" style="color: ${nameTextColor}">${bookmarkVanityName}</span>`}
       </div>
     </button>
   `;
@@ -268,6 +269,9 @@ export const renderBlockBookmarkFolder = (
   bookmarkIconType: string | null,
   bookmarkIconHTML: string,
   uiStyle: UIStyle,
+  showName: boolean,
+  bookmarkVanityName: string,
+  nameTextColor: string,
   animationsEnabled: boolean,
   animationsInitialType: AnimationInitialType
 ) => {
@@ -303,6 +307,7 @@ export const renderBlockBookmarkFolder = (
         <div class="bookmark-icon${iconSizeClass && " " + iconSizeClass}"${bookmarkIconColor && ` style="color: ${bookmarkIconColor};"`}>
           ${iconHTML}
         </div>
+        ${showName && `<span class="w-full font-message font-semibold text-base text-ellipsis overflow-hidden whitespace-nowrap" style="color: ${nameTextColor}">${bookmarkVanityName}</span>`}
       </div>
     </button>
   `;
@@ -390,6 +395,9 @@ export const renderDefaultBlockyBookmarksNodes = (
         "ri-folder-fill",
         "",
         config.ui.style,
+        config.bookmarks.showBookmarkNames,
+        node.title,
+        config.message.textColor,
         config.animations.enabled,
         config.animations.initialType
       );
@@ -407,6 +415,7 @@ export const renderDefaultBlockyBookmarksNodes = (
         `<img class="w-10 md:w-14" src="${userAgent === "firefox" ? `${new URL(node.url!).origin}/favicon.ico` : `chrome-extension://${chrome.runtime.id}/_favicon/?pageUrl=${encodeURIComponent(node.url as string)}&size=${64}`}" />`,
         config.ui.style,
         config.bookmarks.showBookmarkNames,
+        node.title,
         config.message.textColor,
         config.animations.enabled,
         config.animations.initialType
