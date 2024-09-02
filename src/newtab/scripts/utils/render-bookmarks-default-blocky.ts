@@ -30,11 +30,14 @@ export const renderDefaultBlockyBookmarks = (config: Config) => {
   chrome.bookmarks.search({}, (chromeBookmarks) => {
     let chromeBookmarksTree = buildChromeBookmarksTree(chromeBookmarks);
     console.log(chromeBookmarksTree);
+
     const userAgent = getUserAgent();
     if (userAgent === "firefox") {
       // prettier-ignore
       chromeBookmarksTree = chromeBookmarksTree.find((cb) => cb.id === "toolbar_____")!.children as unknown as chrome.bookmarks.BookmarkTreeNode[];
     }
+
+    console.log("LL", chromeBookmarksTree);
 
     renderDefaultBlockyBookmarksNodes(
       chromeBookmarksTree[0].parentId!,

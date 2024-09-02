@@ -189,10 +189,10 @@ export const bindActionsToBlockNode = (
   }
 
   const isFolder = node.children && node.children!.length > 0;
+
   if (isFolder) {
-    bookmarkEl.onclick = () => {
+    bookmarkEl.onclick = () =>
       openBookmarkFolder(chromeBookmarks, node.parentId!, node.id, config, true);
-    };
   } else {
     bookmarkEl.onclick = (e) => {
       if (e.ctrlKey) {
@@ -357,6 +357,11 @@ export const renderDefaultBlockyBookmarksNodes = (
   const nodesContainerEl = document.getElementById(`bookmark-folder-nodes-container-${folderId}`) as HTMLDivElement;
   // prettier-ignore
   const actionsContainerEl = document.getElementById(`bookmark-folder-actions-container-${folderId}`) as HTMLDivElement;
+
+  // prevent firefox bookmark categories from counting as folders
+  // prettier-ignore
+  const isParentFirefoxBookmarkCategory = folderId === "menu________" || folderId === "toolbar_____" || folderId === "unfiled_____";
+  if (isParentFirefoxBookmarkCategory) showBackButton = false;
 
   if (showBackButton) {
     // prettier-ignore
