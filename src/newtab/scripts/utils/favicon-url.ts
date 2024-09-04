@@ -1,4 +1,6 @@
 export const getFaviconURL = (url: string, userAgent: string) => {
+  if (!url) return "";
+
   if (userAgent === "chrome") {
     // prettier-ignore
     return `chrome-extension://${chrome.runtime.id}/_favicon/?pageUrl=${encodeURIComponent(url)}&size=${64}`;
