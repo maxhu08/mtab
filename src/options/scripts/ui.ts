@@ -154,6 +154,10 @@ export const bookmarksDefaultBlockyColsInputEl = document.getElementById("bookma
 export const bookmarksDefaultBlockyColorContainerEl = document.getElementById("bookmarks-default-blocky-color-container") as HTMLDivElement;
 export const bookmarksDefaultBlockyColorInputEl = document.getElementById("bookmarks-default-blocky-color-input") as HTMLInputElement;
 
+export const bookmarksLocationFirefoxMenuButtonEl = document.getElementById("bookmarks-location-firefox-menu-button") as HTMLButtonElement;
+export const bookmarksLocationFirefoxToolbarButtonEl = document.getElementById("bookmarks-location-firefox-toolbar-button") as HTMLButtonElement;
+export const bookmarksLocationFirefoxOtherButtonEl = document.getElementById("bookmarks-location-firefox-other-button") as HTMLButtonElement;
+
 export const inputs: Input[] = [
   {
     container: usernameContainerEl,
@@ -343,6 +347,14 @@ export const buttonSwitches: ButtonSwitch[] = [
       bookmarksTypeNoneButtonEl
     ],
     attr: "bookmarks-type"
+  },
+  {
+    buttons: [
+      bookmarksLocationFirefoxMenuButtonEl,
+      bookmarksLocationFirefoxToolbarButtonEl,
+      bookmarksLocationFirefoxOtherButtonEl
+    ],
+    attr: "bookmarks-location-firefox"
   },
 ];
 

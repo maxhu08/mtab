@@ -1,4 +1,9 @@
-import { BookmarksType, Config, UserDefinedBookmark } from "src/newtab/scripts/config";
+import {
+  BookmarksLocationFirefox,
+  BookmarksType,
+  Config,
+  UserDefinedBookmark
+} from "src/newtab/scripts/config";
 import { focusInput, unfocusInput } from "src/options/scripts/inputs";
 import {
   Input,
@@ -10,7 +15,10 @@ import {
   bookmarksUserDefinedColsInputEl,
   bookmarksDefaultBlockyColsInputEl,
   bookmarksDefaultBlockyColorInputEl,
-  bookmarksShowBookmarkNamesCheckboxEl
+  bookmarksShowBookmarkNamesCheckboxEl,
+  bookmarksLocationFirefoxMenuButtonEl,
+  bookmarksLocationFirefoxToolbarButtonEl,
+  bookmarksLocationFirefoxOtherButtonEl
 } from "src/options/scripts/ui";
 
 export const fillBookmarksInputs = (config: Config) => {
@@ -43,6 +51,15 @@ export const fillBookmarksInputs = (config: Config) => {
   });
 
   toggleCollapseAllBookmarksButtonEl.click();
+
+  // prettier-ignore
+  const bookmarksLocationFirefoxPairs: Record<BookmarksLocationFirefox, () => void> = {
+    "menu": () => bookmarksLocationFirefoxMenuButtonEl.click(),
+    "toolbar": () => bookmarksLocationFirefoxToolbarButtonEl.click(),
+    "other": () => bookmarksLocationFirefoxOtherButtonEl.click()
+  };
+
+  bookmarksLocationFirefoxPairs[config.bookmarks.bookmarksLocationFirefox]();
 };
 
 // prettier-ignore

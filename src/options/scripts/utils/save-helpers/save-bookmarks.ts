@@ -1,4 +1,9 @@
-import { UserDefinedBookmark, Config, BookmarksType } from "src/newtab/scripts/config";
+import {
+  UserDefinedBookmark,
+  Config,
+  BookmarksType,
+  BookmarksLocationFirefox
+} from "src/newtab/scripts/config";
 import {
   bookmarksDefaultBlockyColorInputEl,
   bookmarksDefaultBlockyColsInputEl,
@@ -12,7 +17,7 @@ export const saveBookmarksSettingsToDraft = (draft: Config) => {
   draft.bookmarks.defaultBlockyCols = parseInt(bookmarksDefaultBlockyColsInputEl.value);
   draft.bookmarks.defaultBlockyColor = bookmarksDefaultBlockyColorInputEl.value;
 
-  const selectedEl = document.querySelector(
+  const selectedTypeEl = document.querySelector(
     `button[btn-option-type="bookmarks-type"][selected="yes"]`
   ) as HTMLButtonElement;
 
@@ -23,7 +28,20 @@ export const saveBookmarksSettingsToDraft = (draft: Config) => {
     "bookmarks-type-none-button": "none"
   };
 
-  draft.bookmarks.type = bookmarksTypePairs[selectedEl.id];
+  draft.bookmarks.type = bookmarksTypePairs[selectedTypeEl.id];
+
+  const selectedLocationFirefoxEl = document.querySelector(
+    `button[btn-option-type="bookmarks-location-firefox"][selected="yes"]`
+  ) as HTMLButtonElement;
+
+  const bookmarksLocationFirefoxPairs: Record<string, BookmarksLocationFirefox> = {
+    "bookmarks-location-firefox-menu-button": "menu",
+    "bookmarks-location-firefox-toolbar-button": "toolbar",
+    "bookmarks-location-firefox-other-button": "other"
+  };
+
+  // prettier-ignore
+  draft.bookmarks.bookmarksLocationFirefox = bookmarksLocationFirefoxPairs[selectedLocationFirefoxEl.id];
 
   saveUserDefinedBookmarkSettingsToDraft(draft);
 };
