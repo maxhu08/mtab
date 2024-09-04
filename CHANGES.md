@@ -1,6 +1,9 @@
-# Changes in 1.4.4
+# Changes in 1.4.5
 
 in this release:
 
-- fix issue with bookmark favicons not showing up on firefox
-- fix unexpected issue with default-blocky bookmark type on firefox
+- add ability to show bookmark name
+- add ability to choose bookmarks location (firefox)
+- fix issue with some bookmark favicons not showing up on firefox
+- organize code
+- bug fixes
