@@ -31,10 +31,16 @@ export const renderDefaultBlockyBookmarks = (config: Config) => {
   chrome.bookmarks.search({}, (chromeBookmarks) => {
     let chromeBookmarksTree = buildChromeBookmarksTree(chromeBookmarks);
 
+    let location = "";
+
+    if (config.bookmarks.bookmarksLocationFirefox === "menu") location = "menu________";
+    else if (config.bookmarks.bookmarksLocationFirefox === "toolbar") location = "toolbar_____";
+    else if (config.bookmarks.bookmarksLocationFirefox === "other") location = "unfiled_____";
+
     const userAgent = getUserAgent();
     if (userAgent === "firefox") {
       // prettier-ignore
-      chromeBookmarksTree = chromeBookmarksTree.find((cb) => cb.id === "toolbar_____")!.children as unknown as chrome.bookmarks.BookmarkTreeNode[];
+      chromeBookmarksTree = chromeBookmarksTree.find((cb) => cb.id === location)!.children as unknown as chrome.bookmarks.BookmarkTreeNode[];
     }
 
     renderDefaultBlockyBookmarksNodes(
