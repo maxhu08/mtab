@@ -142,7 +142,7 @@ export const renderBlockBookmark = (
       <div class="h-1" style="background-color: ${bookmarkColor}"></div>
       <div class="absolute w-full h-full hover:bg-white/20"></div>
       <div class="p-1 md:p-2 grid place-items-center h-full">
-        <div class="bookmark-icon${iconSizeClass && " " + iconSizeClass}"${bookmarkIconColor && ` style="color: ${bookmarkIconColor};"`}>
+        <div class="bookmark-icon${iconSizeClass && " " + iconSizeClass}"${bookmarkIconColor ? ` style="color: ${bookmarkIconColor};"` : ""}>
           ${iconHTML}
         </div>
         ${showName ? `<span class="visibilty-bookmark-name w-full font-message font-semibold text-base text-ellipsis overflow-hidden whitespace-nowrap" style="color: ${nameTextColor}">${bookmarkVanityName}</span>` : ""}
