@@ -192,13 +192,15 @@ export const bindActionsToBlockNode = (
   const isFolder = node.children && node.children!.length > 0;
 
   if (isFolder) {
-    bookmarkEl.onclick = () =>
+    bookmarkEl.onmouseup = () =>
       openBookmarkFolder(chromeBookmarks, node.parentId!, node.id, config, true);
   } else {
-    bookmarkEl.onclick = (e) => {
-      if (e.ctrlKey) {
+    // can't be onclick in order to register middle click and can't be onmousedown because open in new tab fails
+    bookmarkEl.onmouseup = (e) => {
+      // open in new tab when holding ctrl or middle click
+      if (e.ctrlKey || e.button === 1) {
         openBookmark(node.url!, config.animations.enabled, config.animations.bookmarkType, true);
-      } else {
+      } else if (e.button === 0) {
         openBookmark(node.url!, config.animations.enabled, config.animations.bookmarkType);
       }
     };
