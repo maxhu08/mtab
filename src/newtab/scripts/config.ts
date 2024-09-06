@@ -72,6 +72,7 @@ export const defaultConfig: Config = {
     foregroundColor: "#262626",
     backgroundColor: "#171717",
     highlightColor: "#ffffff20",
+    cornerStyle: "round",
     customCSS: "/* input custom css... */"
   },
   animations: {
@@ -144,6 +145,7 @@ export const defaultConfig: Config = {
 
 export type FaviconType = "default" | "custom";
 export type UIStyle = "solid" | "glass";
+export type UICornerStyle = "sharp" | "round";
 export type WallpaperType = "url" | "fileUpload";
 export type BookmarkTiming = "left" | "right" | "uniform";
 export type AnimationInitialType =
@@ -213,6 +215,7 @@ export interface Config {
     foregroundColor: string;
     backgroundColor: string;
     highlightColor: string;
+    cornerStyle: UICornerStyle;
     customCSS: string;
   };
   animations: {
