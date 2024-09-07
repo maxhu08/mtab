@@ -1,3 +1,4 @@
+import { insertCss } from "src/newtab/scripts/utils/insert-css";
 import { Config } from "../config";
 import { messageEl, searchContainerEl } from "../ui";
 
@@ -12,12 +13,7 @@ export const addAnimations = (animations: Config["animations"]) => {
   //   transition-duration: 250ms;
   // }`;
 
-  const animationCss = `*{transition-duration:250ms;}`;
-
-  const styleElement = document.createElement("style");
-  styleElement.type = "text/css";
-  styleElement.appendChild(document.createTextNode(animationCss));
-  document.head.appendChild(styleElement);
+  insertCss(`*{transition-duration:250ms;}`);
 
   messageEl.style.animationDelay = "0ms";
   messageEl.classList.add(animations.initialType);

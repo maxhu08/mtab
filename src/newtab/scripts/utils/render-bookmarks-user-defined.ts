@@ -4,6 +4,7 @@ import {
   bindActionsToBlockNode,
   renderBlockBookmark
 } from "src/newtab/scripts/utils/bookmark-utils";
+import { insertCss } from "src/newtab/scripts/utils/insert-css";
 
 // animations handled separately
 export const renderUserDefinedBookmarks = (config: Config) => {
@@ -20,12 +21,9 @@ export const renderUserDefinedBookmarks = (config: Config) => {
   //   }
   // }`;
 
-  const userDefinedBookmarkCss = `.user-defined-bookmarks-cols{grid-template-columns:1fr 1fr;}@media (min-width: 768px){.user-defined-bookmarks-cols{grid-template-columns:repeat(${config.bookmarks.userDefinedCols}, minmax(0, 1fr));}}`;
-
-  const styleElement = document.createElement("style");
-  styleElement.type = "text/css";
-  styleElement.appendChild(document.createTextNode(userDefinedBookmarkCss));
-  document.head.appendChild(styleElement);
+  insertCss(
+    `.user-defined-bookmarks-cols{grid-template-columns:1fr 1fr;}@media (min-width: 768px){.user-defined-bookmarks-cols{grid-template-columns:repeat(${config.bookmarks.userDefinedCols}, minmax(0, 1fr));}}`
+  );
 
   config.bookmarks.userDefined.forEach((bookmark, index) => {
     renderBlockBookmark(
