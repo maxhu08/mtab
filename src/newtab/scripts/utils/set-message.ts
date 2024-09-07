@@ -48,7 +48,9 @@ export const setMorningAfternoonMessage = (name: string) => {
   let greeting;
 
   if (currentHour < 12) greeting = "Good morning";
-  else greeting = "Good afternoon";
+  if (currentHour > 12) greeting = "Good afternoon";
+  if (currentHour > 18) greeting = "Good evening";
+  if (currentHour > 24) greeting = "Good night";
 
   messageEl.textContent = `${greeting}, ${name}`;
 };
