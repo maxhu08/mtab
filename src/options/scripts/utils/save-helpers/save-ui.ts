@@ -7,11 +7,11 @@ import {
 } from "src/options/scripts/ui";
 
 export const saveUISettingsToDraft = (draft: Config) => {
-  const selectedEl = document.querySelector(
+  const selectedStyleEl = document.querySelector(
     `button[btn-option-type="ui-style"][selected="yes"]`
   ) as HTMLButtonElement;
 
-  switch (selectedEl.id) {
+  switch (selectedStyleEl.id) {
     case "ui-style-solid-button": {
       draft.ui.style = "solid";
       break;
@@ -25,5 +25,21 @@ export const saveUISettingsToDraft = (draft: Config) => {
   draft.ui.foregroundColor = uiForegroundColorInputEl.value;
   draft.ui.backgroundColor = uiBackgroundColorInputEl.value;
   draft.ui.highlightColor = uiHighlightColorInputEl.value;
+
+  const selectedCornerStyleEl = document.querySelector(
+    `button[btn-option-type="ui-corner-style"][selected="yes"]`
+  ) as HTMLButtonElement;
+
+  switch (selectedCornerStyleEl.id) {
+    case "ui-corner-style-sharp-button": {
+      draft.ui.cornerStyle = "sharp";
+      break;
+    }
+    case "ui-corner-style-round-button": {
+      draft.ui.cornerStyle = "round";
+      break;
+    }
+  }
+
   draft.ui.customCSS = uiCustomCSSTextareaEl.value;
 };

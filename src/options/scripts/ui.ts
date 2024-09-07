@@ -51,6 +51,9 @@ export const uiBackgroundColorInputEl = document.getElementById("ui-background-c
 export const uiHighlightColorContainerEl = document.getElementById("ui-highlight-color-container") as HTMLDivElement;
 export const uiHighlightColorInputEl = document.getElementById("ui-highlight-color-input") as HTMLInputElement;
 
+export const uiCornerStyleSharpButtonEl = document.getElementById("ui-corner-style-sharp-button") as HTMLButtonElement;
+export const uiCornerStyleRoundButtonEl = document.getElementById("ui-corner-style-round-button") as HTMLButtonElement;
+
 export const uiCustomCSSContainerEl = document.getElementById("ui-custom-css-container") as HTMLInputElement;
 export const uiCustomCSSTextareaEl = document.getElementById("ui-custom-css-textarea") as HTMLTextAreaElement;
 
@@ -262,6 +265,10 @@ export const buttonSwitches: ButtonSwitch[] = [
   {
     buttons: [uiStyleSolidButtonEl, uiStyleGlassButtonEl],
     attr: "ui-style"
+  },
+  {
+    buttons: [uiCornerStyleSharpButtonEl, uiCornerStyleRoundButtonEl],
+    attr: "ui-corner-style"
   },
   {
     buttons: [
