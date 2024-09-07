@@ -22,7 +22,7 @@ export const renderDefaultBookmarks = (config: Config) => {
 
   bookmarksContainerEl.classList.add(
     "p-2",
-    "rounded-md",
+    "corner-style",
     "overflow-hidden",
     "w-full",
     "overflow-scroll",

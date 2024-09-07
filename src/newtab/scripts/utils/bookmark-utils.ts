@@ -135,10 +135,10 @@ export const renderBlockBookmark = (
   containerEl.innerHTML += `
     <button id="bookmark-${bookmarkName}-${bookmarkIndex}" class="relative duration-[250ms] ease-out bg-foreground cursor-pointer ${
       uiStyle === "glass" ? "glass-effect" : ""
-    } rounded-md h-bookmark overflow-hidden ${
+    } corner-style h-bookmark overflow-hidden ${
       animationsEnabled ? `${animationsInitialType} opacity-0 outline-none` : ""
     }" ${animationsEnabled ? `style="animation-delay: ${delay}ms;"` : ""}>
-      <div id="bookmark-${bookmarkName}-${bookmarkIndex}-border" class="absolute w-full h-full border-2 border-transparent rounded-md"></div>
+      <div id="bookmark-${bookmarkName}-${bookmarkIndex}-border" class="absolute w-full h-full border-2 border-transparent corner-style"></div>
       <div class="h-1" style="background-color: ${bookmarkColor}"></div>
       <div class="absolute w-full h-full hover:bg-white/20"></div>
       <div class="p-1 md:p-2 grid place-items-center h-full">
@@ -302,8 +302,8 @@ export const renderBlockBookmarkFolder = (
 
   // prettier-ignore
   containerEl.innerHTML += `
-    <button id="bookmark-${bookmarkName}-${bookmarkIndex}" class="relative duration-[250ms] ease-out bg-foreground cursor-pointer ${uiStyle === "glass" ? "glass-effect" : ""} rounded-md h-bookmark overflow-hidden ${animationsEnabled ? `${animationsInitialType} opacity-0 outline-none` : ""}" ${animationsEnabled ? `style="animation-delay: ${delay}ms;"` : ""}>
-      <div id="bookmark-${bookmarkName}-${bookmarkIndex}-border" class="absolute w-full h-full border-2 border-transparent rounded-md"></div>
+    <button id="bookmark-${bookmarkName}-${bookmarkIndex}" class="relative duration-[250ms] ease-out bg-foreground cursor-pointer ${uiStyle === "glass" ? "glass-effect" : ""} corner-style h-bookmark overflow-hidden ${animationsEnabled ? `${animationsInitialType} opacity-0 outline-none` : ""}" ${animationsEnabled ? `style="animation-delay: ${delay}ms;"` : ""}>
+      <div id="bookmark-${bookmarkName}-${bookmarkIndex}-border" class="absolute w-full h-full border-2 border-transparent corner-style"></div>
       <div class="h-1" style="background-color: ${bookmarkColor}"></div>
       <div class="absolute w-full h-full hover:bg-white/20"></div>
       <div class="p-1 md:p-2 grid place-items-center h-full">
@@ -369,8 +369,8 @@ export const renderDefaultBlockyBookmarksNodes = (
   if (showBackButton) {
     // prettier-ignore
     actionsContainerEl.innerHTML += `
-      <button id="bookmark-folder-${folderId}-back-button" class="relative duration-[250ms] ease-out bg-foreground cursor-pointer ${config.ui.style === "glass" ? "glass-effect" : ""} rounded-md h-9 md:h-12 px-1 md:px-2 overflow-hidden ${config.animations.enabled ? `${config.animations.initialType} opacity-0 outline-none` : ""}" ${config.animations.enabled ? `style="animation-delay: ${delay}ms;"` : ""}>
-        <div id="bookmark-folder-${folderId}-border" class="absolute top-0 left-0 w-full h-9 md:h-12 border-2 border-transparent rounded-md"></div>
+      <button id="bookmark-folder-${folderId}-back-button" class="relative duration-[250ms] ease-out bg-foreground cursor-pointer ${config.ui.style === "glass" ? "glass-effect" : ""} corner-style h-9 md:h-12 px-1 md:px-2 overflow-hidden ${config.animations.enabled ? `${config.animations.initialType} opacity-0 outline-none` : ""}" ${config.animations.enabled ? `style="animation-delay: ${delay}ms;"` : ""}>
+        <div id="bookmark-folder-${folderId}-border" class="absolute top-0 left-0 w-full h-9 md:h-12 border-2 border-transparent corner-style"></div>
         <div class="absolute top-0 left-0 w-full h-9 md:h-12 hover:bg-white/20"></div>
         <div class="grid grid-cols-[max-content_auto] gap-2 font-message text-base md:text-2xl w-full" style="color: ${config.message.textColor};">
           <i class="ri-arrow-left-line"></i>
@@ -380,7 +380,7 @@ export const renderDefaultBlockyBookmarksNodes = (
     `
   } else {
     // prettier-ignore
-    actionsContainerEl.innerHTML += `<div class="relative rounded-md h-9 md:h-12 px-1 md:px-2 overflow-hidden opacity-0 outline-none"></div>`
+    actionsContainerEl.innerHTML += `<div class="relative corner-style h-9 md:h-12 px-1 md:px-2 overflow-hidden opacity-0 outline-none"></div>`
   }
 
   const userAgent = getUserAgent();

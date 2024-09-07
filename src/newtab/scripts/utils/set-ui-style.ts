@@ -21,8 +21,6 @@ export const setUISyle = (ui: Config["ui"]) => {
   highlightStyleElement.appendChild(document.createTextNode(highlightSyleCss));
   document.head.appendChild(highlightStyleElement);
 
-  if (ui.style !== "solid") return;
-
   // const uiStyleCss = `
   // .bg-foreground {
   //   background-color: ${ui.foregroundColor};
@@ -31,12 +29,29 @@ export const setUISyle = (ui: Config["ui"]) => {
   //   background-color: ${ui.backgroundColor};
   // }`;
 
-  const uiStyleCss = `.bg-foreground{background-color:${ui.foregroundColor};}.bg-background{background-color:${ui.backgroundColor};}`;
+  if (ui.style === "solid") {
+    const uiStyleCss = `.bg-foreground{background-color:${ui.foregroundColor};}.bg-background{background-color:${ui.backgroundColor};}`;
 
-  const uiStyleElement = document.createElement("style");
-  uiStyleElement.type = "text/css";
-  uiStyleElement.appendChild(document.createTextNode(uiStyleCss));
-  document.head.appendChild(uiStyleElement);
+    const uiStyleElement = document.createElement("style");
+    uiStyleElement.type = "text/css";
+    uiStyleElement.appendChild(document.createTextNode(uiStyleCss));
+    document.head.appendChild(uiStyleElement);
+  }
+
+  let borderRadius = "0";
+  if (ui.cornerStyle === "round") borderRadius = "0.375rem";
+
+  const uiCornerStyleCss = `
+  .corner-style {
+    border-radius: ${borderRadius} !important;
+  }`;
+
+  console.log("TETSET");
+
+  const uiCornerStyleElement = document.createElement("style");
+  uiCornerStyleElement.type = "text/css";
+  uiCornerStyleElement.appendChild(document.createTextNode(uiCornerStyleCss));
+  document.head.appendChild(uiCornerStyleElement);
 
   document.body.style.transitionDuration = "0ms";
   document.body.classList.add("bg-background");
