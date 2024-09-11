@@ -27,25 +27,18 @@ export const saveConfig = () => {
 
   getConfig(({ config }) => {
     const draft = modifyNestedObject(config, (draft) => {
-      // *** user ***
       saveNameToDraft(draft);
 
-      // *** title ***
       saveTitleSettingsToDraft(draft);
 
-      // *** message ***
       saveMessageSettingsToDraft(draft);
 
-      // *** wallpaper ***
       saveWallpaperSettingsToDraft(draft);
 
-      // *** animations ***
       saveAnimationsToDraft(draft);
 
-      // *** ui ***
       saveUISettingsToDraft(draft);
 
-      // *** search **
       saveSearchSettingsToDraft(draft);
 
       saveHotkeysSettingsToDraft(draft);

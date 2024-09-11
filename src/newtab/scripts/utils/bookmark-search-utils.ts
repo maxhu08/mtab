@@ -1,4 +1,4 @@
-import { Config, UserDefinedBookmark } from "src/newtab/scripts/config";
+import { BookmarksType, Config } from "src/newtab/scripts/config";
 import {
   bookmarksContainerEl,
   bookmarkSearchContainerEl,
@@ -41,14 +41,15 @@ export const unfocusBookmarkSearch = (animationType: string) => {
 };
 
 export const enableSearchBookmark = (
-  bookmarks: UserDefinedBookmark[],
+  bookmarks: any[],
+  bookmarksType: BookmarksType,
   textColor: string,
   placeholderTextColor: string
 ) => {
   searchSectionEl.classList.replace("grid", "hidden");
   bookmarkSearchSectionEl.classList.replace("hidden", "grid");
 
-  refreshBookmarkSearchResults(bookmarks, textColor, placeholderTextColor);
+  refreshBookmarkSearchResults(bookmarks, bookmarksType, textColor, placeholderTextColor);
 };
 
 export const disableSearchBookmark = () => {
@@ -59,7 +60,8 @@ export const disableSearchBookmark = () => {
 };
 
 export const refreshBookmarkSearchResults = (
-  bookmarks: UserDefinedBookmark[],
+  bookmarks: any[],
+  bookmarksType: BookmarksType,
   textColor: string,
   placeholderTextColor: string
 ) => {
@@ -70,11 +72,15 @@ export const refreshBookmarkSearchResults = (
 
   const bookmarkSearchValue = bookmarkSearchInputEl.value.toLowerCase();
 
-  const filteredBookmarks = fuzzySearchBookmark(bookmarkSearchValue, bookmarks).sort((a, b) => {
-    const aContains = a.name.toLowerCase().startsWith(bookmarkSearchValue);
-    const bContains = b.name.toLowerCase().startsWith(bookmarkSearchValue);
-    return aContains === bContains ? 0 : aContains ? -1 : 1;
-  });
+  let filteredBookmarks = [];
+
+  if (bookmarksType === "user-defined") {
+    filteredBookmarks = fuzzySearchBookmark(bookmarkSearchValue, bookmarks).sort((a, b) => {
+      const aContains = a.name.toLowerCase().startsWith(bookmarkSearchValue);
+      const bContains = b.name.toLowerCase().startsWith(bookmarkSearchValue);
+      return aContains === bContains ? 0 : aContains ? -1 : 1;
+    });
+  }
 
   // make sure selectedIndex is within filterbookmarks amount
   if (selectedIndex > filteredBookmarks.length - 1) selectedIndex = filteredBookmarks.length - 1;
@@ -145,7 +151,7 @@ const getMatchedNameHtml = (
   return result;
 };
 
-const fuzzySearchBookmark = (search: string, bookmarks: UserDefinedBookmark[]) => {
+const fuzzySearchBookmark = (search: string, bookmarks: any[]) => {
   if (search === "") {
     const results = bookmarks;
     return results;

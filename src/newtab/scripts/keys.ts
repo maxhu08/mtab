@@ -21,6 +21,15 @@ import { openBookmark } from "src/newtab/scripts/utils/bookmark-utils";
 // import { navigateTab } from "src/newtab/scripts/utils/navigate-tab";
 
 export const listenToKeys = (config: Config) => {
+  let bookmarks: any[] = [];
+
+  if (config.bookmarks.type === "user-defined") bookmarks = config.bookmarks.userDefined;
+  else {
+    chrome.bookmarks.search({}, (chromeBookmarks) => {
+      bookmarks = chromeBookmarks;
+    });
+  }
+
   document.addEventListener("keydown", (e) => {
     if (!config.hotkeys.enabled) return;
 
@@ -42,7 +51,11 @@ export const listenToKeys = (config: Config) => {
       window.close();
 
     // bookmarks stuff
-    if (config.bookmarks.type === "user-defined") {
+    if (
+      config.bookmarks.type === "user-defined" ||
+      config.bookmarks.type === "default" ||
+      config.bookmarks.type === "default-blocky"
+    ) {
       // if search bookmark is on already (grid)
       if (bookmarkSearchSectionEl.classList.contains("grid")) {
         if (e.key === "Escape") {
@@ -63,7 +76,8 @@ export const listenToKeys = (config: Config) => {
           }
 
           refreshBookmarkSearchResults(
-            config.bookmarks.userDefined,
+            bookmarks,
+            config.bookmarks.type,
             config.search.textColor,
             config.search.placeholderTextColor
           );
@@ -81,7 +95,8 @@ export const listenToKeys = (config: Config) => {
           }
 
           refreshBookmarkSearchResults(
-            config.bookmarks.userDefined,
+            bookmarks,
+            config.bookmarks.type,
             config.search.textColor,
             config.search.placeholderTextColor
           );
@@ -95,7 +110,8 @@ export const listenToKeys = (config: Config) => {
         !bookmarkSearchSectionEl.classList.contains("grid")
       ) {
         enableSearchBookmark(
-          config.bookmarks.userDefined,
+          bookmarks,
+          config.bookmarks.type,
           config.search.textColor,
           config.search.placeholderTextColor
         );
@@ -145,7 +161,8 @@ export const listenToKeys = (config: Config) => {
 
   bookmarkSearchInputEl.addEventListener("keyup", (e) => {
     enableSearchBookmark(
-      config.bookmarks.userDefined,
+      bookmarks,
+      config.bookmarks.type,
       config.search.textColor,
       config.search.placeholderTextColor
     );
