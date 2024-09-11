@@ -131,24 +131,61 @@ export const renderBlockBookmark = (
     }
   }
 
-  // prettier-ignore
-  containerEl.innerHTML += `
-    <button id="bookmark-${bookmarkName}-${bookmarkIndex}" class="relative duration-[250ms] ease-out bg-foreground cursor-pointer ${
-      uiStyle === "glass" ? "glass-effect" : ""
-    } corner-style h-bookmark overflow-hidden ${
-      animationsEnabled ? `${animationsInitialType} opacity-0 outline-none` : ""
-    }" ${animationsEnabled ? `style="animation-delay: ${delay}ms;"` : ""}>
-      <div id="bookmark-${bookmarkName}-${bookmarkIndex}-border" class="absolute w-full h-full border-2 border-transparent corner-style"></div>
-      <div class="h-1" style="background-color: ${bookmarkColor}"></div>
-      <div class="absolute w-full h-full hover:bg-white/20"></div>
-      <div class="p-1 md:p-2 grid place-items-center h-full">
-        <div class="bookmark-icon${iconSizeClass && " " + iconSizeClass}"${bookmarkIconColor ? ` style="color: ${bookmarkIconColor};"` : ""}>
-          ${iconHTML}
-        </div>
-        ${showName ? `<span class="visibilty-bookmark-name w-full font-message font-semibold text-base text-ellipsis overflow-hidden whitespace-nowrap" style="color: ${nameTextColor}">${bookmarkVanityName}</span>` : ""}
-      </div>
-    </button>
-  `;
+  // <button id="bookmark-${bookmarkName}-${bookmarkIndex}" class="relative duration-[250ms] ease-out bg-foreground cursor-pointer ${uiStyle === "glass" ? "glass-effect" : ""} corner-style h-bookmark overflow-hidden ${animationsEnabled ? `${animationsInitialType} opacity-0 outline-none` : ""}" ${animationsEnabled ? `style="animation-delay: ${delay}ms;"` : ""}>
+  //   <div id="bookmark-${bookmarkName}-${bookmarkIndex}-border" class="absolute w-full h-full border-2 border-transparent corner-style"></div>
+  //   <div class="h-1" style="background-color: ${bookmarkColor}"></div>
+  //   <div class="absolute w-full h-full hover:bg-white/20"></div>
+  //   <div class="p-1 md:p-2 grid place-items-center h-full">
+  //     <div class="bookmark-icon${iconSizeClass && " " + iconSizeClass}"${bookmarkIconColor ? ` style="color: ${bookmarkIconColor};"` : ""}>
+  //       ${iconHTML}
+  //     </div>
+  //     ${showName ? `<span class="visibilty-bookmark-name w-full font-message font-semibold text-base text-ellipsis overflow-hidden whitespace-nowrap" style="color: ${nameTextColor}">${bookmarkVanityName}</span>` : ""}
+  //   </div>
+  // </button>
+
+  const buttonEl = document.createElement("button");
+  buttonEl.id = `bookmark-${bookmarkName}-${bookmarkIndex}`;
+  buttonEl.className = `relative duration-[250ms] ease-out bg-foreground cursor-pointer ${
+    uiStyle === "glass" ? "glass-effect" : ""
+  } corner-style h-bookmark overflow-hidden ${
+    animationsEnabled ? `${animationsInitialType} opacity-0 outline-none` : ""
+  }`;
+  if (animationsEnabled) buttonEl.style.animationDelay = `${delay}ms`;
+
+  const borderDiv = document.createElement("div");
+  borderDiv.id = `bookmark-${bookmarkName}-${bookmarkIndex}-border`;
+  borderDiv.className = "absolute w-full h-full border-2 border-transparent corner-style";
+  buttonEl.appendChild(borderDiv);
+
+  const colorDiv = document.createElement("div");
+  colorDiv.className = "h-1";
+  colorDiv.style.backgroundColor = bookmarkColor;
+  buttonEl.appendChild(colorDiv);
+
+  const hoverDiv = document.createElement("div");
+  hoverDiv.className = "absolute w-full h-full hover:bg-white/20";
+  buttonEl.appendChild(hoverDiv);
+
+  const contentDiv = document.createElement("div");
+  contentDiv.className = "p-1 md:p-2 grid place-items-center h-full";
+
+  const iconDiv = document.createElement("div");
+  iconDiv.className = `bookmark-icon${iconSizeClass ? " " + iconSizeClass : ""}`;
+  if (bookmarkIconColor) iconDiv.style.color = bookmarkIconColor;
+  iconDiv.innerHTML = iconHTML;
+  contentDiv.appendChild(iconDiv);
+
+  if (showName) {
+    const nameSpan = document.createElement("span");
+    nameSpan.className =
+      "visibilty-bookmark-name w-full font-message font-semibold text-base text-ellipsis overflow-hidden whitespace-nowrap";
+    nameSpan.style.color = nameTextColor;
+    nameSpan.textContent = bookmarkVanityName;
+    contentDiv.appendChild(nameSpan);
+  }
+
+  buttonEl.appendChild(contentDiv);
+  containerEl.appendChild(buttonEl);
 };
 
 export const bindActionsToBlockNode = (
@@ -300,20 +337,60 @@ export const renderBlockBookmarkFolder = (
     }
   }
 
-  // prettier-ignore
-  containerEl.innerHTML += `
-    <button id="bookmark-${bookmarkName}-${bookmarkIndex}" class="relative duration-[250ms] ease-out bg-foreground cursor-pointer ${uiStyle === "glass" ? "glass-effect" : ""} corner-style h-bookmark overflow-hidden ${animationsEnabled ? `${animationsInitialType} opacity-0 outline-none` : ""}" ${animationsEnabled ? `style="animation-delay: ${delay}ms;"` : ""}>
-      <div id="bookmark-${bookmarkName}-${bookmarkIndex}-border" class="absolute w-full h-full border-2 border-transparent corner-style"></div>
-      <div class="h-1" style="background-color: ${bookmarkColor}"></div>
-      <div class="absolute w-full h-full hover:bg-white/20"></div>
-      <div class="p-1 md:p-2 grid place-items-center h-full">
-        <div class="bookmark-icon${iconSizeClass && " " + iconSizeClass}"${bookmarkIconColor && ` style="color: ${bookmarkIconColor};"`}>
-          ${iconHTML}
-        </div>
-        ${showName ? `<span class="visibilty-bookmark-name w-full font-message font-semibold text-base text-ellipsis overflow-hidden whitespace-nowrap" style="color: ${nameTextColor}">${bookmarkVanityName}</span>`: ""}
-      </div>
-    </button>
-  `;
+  // <button id="bookmark-${bookmarkName}-${bookmarkIndex}" class="relative duration-[250ms] ease-out bg-foreground cursor-pointer ${uiStyle === "glass" ? "glass-effect" : ""} corner-style h-bookmark overflow-hidden ${animationsEnabled ? `${animationsInitialType} opacity-0 outline-none` : ""}" ${animationsEnabled ? `style="animation-delay: ${delay}ms;"` : ""}>
+  //   <div id="bookmark-${bookmarkName}-${bookmarkIndex}-border" class="absolute w-full h-full border-2 border-transparent corner-style"></div>
+  //   <div class="h-1" style="background-color: ${bookmarkColor}"></div>
+  //   <div class="absolute w-full h-full hover:bg-white/20"></div>
+  //   <div class="p-1 md:p-2 grid place-items-center h-full">
+  //     <div class="bookmark-icon${iconSizeClass && " " + iconSizeClass}"${bookmarkIconColor && ` style="color: ${bookmarkIconColor};"`}>
+  //       ${iconHTML}
+  //     </div>
+  //     ${showName ? `<span class="visibilty-bookmark-name w-full font-message font-semibold text-base text-ellipsis overflow-hidden whitespace-nowrap" style="color: ${nameTextColor}">${bookmarkVanityName}</span>` : ""}
+  //   </div>
+  // </button>
+  const buttonEl = document.createElement("button");
+  buttonEl.id = `bookmark-${bookmarkName}-${bookmarkIndex}`;
+  buttonEl.className = `relative duration-[250ms] ease-out bg-foreground cursor-pointer ${
+    uiStyle === "glass" ? "glass-effect" : ""
+  } corner-style h-bookmark overflow-hidden ${
+    animationsEnabled ? `${animationsInitialType} opacity-0 outline-none` : ""
+  }`;
+  if (animationsEnabled) buttonEl.style.animationDelay = `${delay}ms`;
+
+  const borderDiv = document.createElement("div");
+  borderDiv.id = `bookmark-${bookmarkName}-${bookmarkIndex}-border`;
+  borderDiv.className = "absolute w-full h-full border-2 border-transparent corner-style";
+  buttonEl.appendChild(borderDiv);
+
+  const colorDiv = document.createElement("div");
+  colorDiv.className = "h-1";
+  colorDiv.style.backgroundColor = bookmarkColor;
+  buttonEl.appendChild(colorDiv);
+
+  const hoverDiv = document.createElement("div");
+  hoverDiv.className = "absolute w-full h-full hover:bg-white/20";
+  buttonEl.appendChild(hoverDiv);
+
+  const contentDiv = document.createElement("div");
+  contentDiv.className = "p-1 md:p-2 grid place-items-center h-full";
+
+  const iconDiv = document.createElement("div");
+  iconDiv.className = `bookmark-icon${iconSizeClass ? " " + iconSizeClass : ""}`;
+  if (bookmarkIconColor) iconDiv.style.color = bookmarkIconColor;
+  iconDiv.innerHTML = iconHTML;
+  contentDiv.appendChild(iconDiv);
+
+  if (showName) {
+    const nameSpan = document.createElement("span");
+    nameSpan.className =
+      "visibilty-bookmark-name w-full font-message font-semibold text-base text-ellipsis overflow-hidden whitespace-nowrap";
+    nameSpan.style.color = nameTextColor;
+    nameSpan.textContent = bookmarkVanityName;
+    contentDiv.appendChild(nameSpan);
+  }
+
+  buttonEl.appendChild(contentDiv);
+  containerEl.appendChild(buttonEl);
 };
 
 export const buildChromeBookmarksTree = (chromeBookmarks: chrome.bookmarks.BookmarkTreeNode[]) => {
@@ -350,37 +427,78 @@ export const renderDefaultBlockyBookmarksNodes = (
   if (config.animations.bookmarkTiming === "uniform") delay = 150;
   else delay = (nodes.length + 3) * 50;
 
-  bookmarksContainerEl.innerHTML += `<div id="bookmark-folder-container-${folderId}" class="w-full grid gap-2 grid-rows-[auto_max-content]"></div>`;
-  // prettier-ignore
-  const containerEl = document.getElementById(`bookmark-folder-container-${folderId}`) as HTMLDivElement;
+  // <div id="bookmark-folder-container-${folderId}" class="w-full grid gap-2 grid-rows-[auto_max-content]"></div>
+  const folderContainerEl = document.createElement("div");
+  folderContainerEl.id = `bookmark-folder-container-${folderId}`;
+  folderContainerEl.className = "w-full grid gap-2 grid-rows-[auto_max-content]";
+  bookmarksContainerEl.appendChild(folderContainerEl);
 
-  containerEl.innerHTML += `<div id="bookmark-folder-nodes-container-${folderId}" class="w-full grid gap-2 default-blocky-bookmarks-cols"></div>`;
-  containerEl.innerHTML += `<div id="bookmark-folder-actions-container-${folderId}" class="w-full grid place-items-center"></div>`;
-  // prettier-ignore
-  const nodesContainerEl = document.getElementById(`bookmark-folder-nodes-container-${folderId}`) as HTMLDivElement;
-  // prettier-ignore
-  const actionsContainerEl = document.getElementById(`bookmark-folder-actions-container-${folderId}`) as HTMLDivElement;
+  // <div id="bookmark-folder-nodes-container-${folderId}" class="w-full grid gap-2 default-blocky-bookmarks-cols"></div>
+  const nodesContainerEl = document.createElement("div");
+  nodesContainerEl.id = `bookmark-folder-nodes-container-${folderId}`;
+  nodesContainerEl.className = "w-full grid gap-2 default-blocky-bookmarks-cols";
+  folderContainerEl.appendChild(nodesContainerEl);
 
-  // prevent firefox bookmark categories from counting as folders
-  // prettier-ignore
-  const isParentFirefoxBookmarkCategory = folderId === "menu________" || folderId === "toolbar_____" || folderId === "unfiled_____";
+  // <div id="bookmark-folder-actions-container-${folderId}" class="w-full grid place-items-center"></div>
+  const actionsContainerEl = document.createElement("div");
+  actionsContainerEl.id = `bookmark-folder-actions-container-${folderId}`;
+  actionsContainerEl.className = "w-full grid place-items-center";
+  folderContainerEl.appendChild(actionsContainerEl);
+
+  // Handle Firefox bookmark categories
+  const isParentFirefoxBookmarkCategory =
+    folderId === "menu________" || folderId === "toolbar_____" || folderId === "unfiled_____";
   if (isParentFirefoxBookmarkCategory) showBackButton = false;
 
   if (showBackButton) {
-    // prettier-ignore
-    actionsContainerEl.innerHTML += `
-      <button id="bookmark-folder-${folderId}-back-button" class="relative duration-[250ms] ease-out bg-foreground cursor-pointer ${config.ui.style === "glass" ? "glass-effect" : ""} corner-style h-9 md:h-12 px-1 md:px-2 overflow-hidden ${config.animations.enabled ? `${config.animations.initialType} opacity-0 outline-none` : ""}" ${config.animations.enabled ? `style="animation-delay: ${delay}ms;"` : ""}>
-        <div id="bookmark-folder-${folderId}-border" class="absolute top-0 left-0 w-full h-9 md:h-12 border-2 border-transparent corner-style"></div>
-        <div class="absolute top-0 left-0 w-full h-9 md:h-12 hover:bg-white/20"></div>
-        <div class="grid grid-cols-[max-content_auto] gap-2 font-message text-base md:text-2xl w-full" style="color: ${config.message.textColor};">
-          <i class="ri-arrow-left-line"></i>
-          <span>Back</span>
-        </div>
-      </button>
-    `
+    // <button id="bookmark-folder-${folderId}-back-button" class="relative duration-[250ms] ease-out bg-foreground cursor-pointer ${config.ui.style === "glass" ? "glass-effect" : ""} corner-style h-9 md:h-12 px-1 md:px-2 overflow-hidden ${config.animations.enabled ? `${config.animations.initialType} opacity-0 outline-none` : ""}" ${config.animations.enabled ? `style="animation-delay: ${delay}ms;"` : ""}>
+    //   <div id="bookmark-folder-${folderId}-border" class="absolute top-0 left-0 w-full h-9 md:h-12 border-2 border-transparent corner-style"></div>
+    //   <div class="absolute top-0 left-0 w-full h-9 md:h-12 hover:bg-white/20"></div>
+    //   <div class="grid grid-cols-[max-content_auto] gap-2 font-message text-base md:text-2xl w-full" style="color: ${config.message.textColor};">
+    //     <i class="ri-arrow-left-line"></i>
+    //     <span>Back</span>
+    //   </div>
+    // </button>
+    const backButtonEl = document.createElement("button");
+    backButtonEl.id = `bookmark-folder-${folderId}-back-button`;
+    backButtonEl.className = `relative duration-[250ms] ease-out bg-foreground cursor-pointer ${
+      config.ui.style === "glass" ? "glass-effect" : ""
+    } corner-style h-9 md:h-12 px-1 md:px-2 overflow-hidden ${
+      config.animations.enabled ? `${config.animations.initialType} opacity-0 outline-none` : ""
+    }`;
+    if (config.animations.enabled) backButtonEl.style.animationDelay = `${delay}ms`;
+
+    const borderDivEl = document.createElement("div");
+    borderDivEl.id = `bookmark-folder-${folderId}-border`;
+    borderDivEl.className =
+      "absolute top-0 left-0 w-full h-9 md:h-12 border-2 border-transparent corner-style";
+    backButtonEl.appendChild(borderDivEl);
+
+    const hoverDivEl = document.createElement("div");
+    hoverDivEl.className = "absolute top-0 left-0 w-full h-9 md:h-12 hover:bg-white/20";
+    backButtonEl.appendChild(hoverDivEl);
+
+    const gridDivEl = document.createElement("div");
+    gridDivEl.className =
+      "grid grid-cols-[max-content_auto] gap-2 font-message text-base md:text-2xl w-full";
+    gridDivEl.style.color = config.message.textColor;
+
+    const iconEl = document.createElement("i");
+    iconEl.className = "ri-arrow-left-line";
+    gridDivEl.appendChild(iconEl);
+
+    const textSpanEl = document.createElement("span");
+    textSpanEl.textContent = "Back";
+    gridDivEl.appendChild(textSpanEl);
+
+    backButtonEl.appendChild(gridDivEl);
+    actionsContainerEl.appendChild(backButtonEl);
   } else {
-    // prettier-ignore
-    actionsContainerEl.innerHTML += `<div class="relative corner-style h-9 md:h-12 px-1 md:px-2 overflow-hidden opacity-0 outline-none"></div>`
+    // <div class="relative corner-style h-9 md:h-12 px-1 md:px-2 overflow-hidden opacity-0 outline-none"></div>
+    const emptyDivEl = document.createElement("div");
+    emptyDivEl.className =
+      "relative corner-style h-9 md:h-12 px-1 md:px-2 overflow-hidden opacity-0 outline-none";
+    actionsContainerEl.appendChild(emptyDivEl);
   }
 
   const userAgent = getUserAgent();

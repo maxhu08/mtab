@@ -88,23 +88,36 @@ export const refreshBookmarkSearchResults = (
     );
 
     if (index === selectedIndex) {
-      bookmarkSearchResultsContainerEl.innerHTML += `
-        <div bookmark-result-url="${bookmark.url}">
-          <span class="search-select-icon-color font-semibold">&nbsp;></span>
-          ${matchedNameHtml}
-        </div>
-      `;
+      // <div bookmark-result-url="${bookmark.url}">
+      //   <span class="search-select-icon-color font-semibold">&nbsp;></span>
+      //   ${matchedNameHtml}
+      // </div>
+
+      const divEl = document.createElement("div");
+      divEl.setAttribute("bookmark-result-url", bookmark.url);
+      const spanEl = document.createElement("span");
+      spanEl.className = "search-select-icon-color font-semibold";
+      spanEl.innerHTML = "&nbsp;> ";
+      divEl.appendChild(spanEl);
+      divEl.innerHTML += matchedNameHtml;
+      bookmarkSearchResultsContainerEl.appendChild(divEl);
     } else {
-      bookmarkSearchResultsContainerEl.innerHTML += `
-        <div bookmark-result-url="${bookmark.url}">&nbsp;&nbsp;&nbsp;${matchedNameHtml}</div>
-      `;
+      // <div bookmark-result-url="${bookmark.url}">&nbsp;&nbsp;&nbsp;${matchedNameHtml}</div>
+
+      const divEl = document.createElement("div");
+      divEl.setAttribute("bookmark-result-url", bookmark.url);
+      divEl.innerHTML = "&nbsp;&nbsp;&nbsp;" + matchedNameHtml;
+      bookmarkSearchResultsContainerEl.appendChild(divEl);
     }
   });
 
   if (filteredBookmarks.length === 0) {
-    bookmarkSearchResultsContainerEl.innerHTML += `
-      <p class="text-center">No results!</p>
-    `;
+    // <p class="text-center">No results!</p>
+
+    const pEl = document.createElement("p");
+    pEl.className = "text-center";
+    pEl.textContent = "No results!";
+    bookmarkSearchResultsContainerEl.appendChild(pEl);
   }
 };
 
