@@ -17,16 +17,18 @@ import {
   tryFocusBookmarkSearch,
   unfocusBookmarkSearch
 } from "src/newtab/scripts/utils/bookmark-search-utils";
-import { openBookmark } from "src/newtab/scripts/utils/bookmark-utils";
+import { buildChromeBookmarksTree, openBookmark } from "src/newtab/scripts/utils/bookmark-utils";
 // import { navigateTab } from "src/newtab/scripts/utils/navigate-tab";
 
 export const listenToKeys = (config: Config) => {
   let bookmarks: any[] = [];
+  let chromeBookmarksTree: chrome.bookmarks.BookmarkTreeNode[] = [];
 
   if (config.bookmarks.type === "user-defined") bookmarks = config.bookmarks.userDefined;
   else {
     chrome.bookmarks.search({}, (chromeBookmarks) => {
       bookmarks = chromeBookmarks;
+      chromeBookmarksTree = buildChromeBookmarksTree(chromeBookmarks);
     });
   }
 
@@ -78,6 +80,7 @@ export const listenToKeys = (config: Config) => {
           refreshBookmarkSearchResults(
             bookmarks,
             config.bookmarks.type,
+            chromeBookmarksTree,
             config.search.textColor,
             config.search.placeholderTextColor
           );
@@ -97,6 +100,7 @@ export const listenToKeys = (config: Config) => {
           refreshBookmarkSearchResults(
             bookmarks,
             config.bookmarks.type,
+            chromeBookmarksTree,
             config.search.textColor,
             config.search.placeholderTextColor
           );
@@ -112,6 +116,7 @@ export const listenToKeys = (config: Config) => {
         enableSearchBookmark(
           bookmarks,
           config.bookmarks.type,
+          chromeBookmarksTree,
           config.search.textColor,
           config.search.placeholderTextColor
         );
@@ -163,6 +168,7 @@ export const listenToKeys = (config: Config) => {
     enableSearchBookmark(
       bookmarks,
       config.bookmarks.type,
+      chromeBookmarksTree,
       config.search.textColor,
       config.search.placeholderTextColor
     );

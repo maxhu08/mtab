@@ -43,13 +43,20 @@ export const unfocusBookmarkSearch = (animationType: string) => {
 export const enableSearchBookmark = (
   bookmarks: any[],
   bookmarksType: BookmarksType,
+  chromeBookmarksTree: chrome.bookmarks.BookmarkTreeNode[],
   textColor: string,
   placeholderTextColor: string
 ) => {
   searchSectionEl.classList.replace("grid", "hidden");
   bookmarkSearchSectionEl.classList.replace("hidden", "grid");
 
-  refreshBookmarkSearchResults(bookmarks, bookmarksType, textColor, placeholderTextColor);
+  refreshBookmarkSearchResults(
+    bookmarks,
+    bookmarksType,
+    chromeBookmarksTree,
+    textColor,
+    placeholderTextColor
+  );
 };
 
 export const disableSearchBookmark = () => {
@@ -62,6 +69,7 @@ export const disableSearchBookmark = () => {
 export const refreshBookmarkSearchResults = (
   bookmarks: any[],
   bookmarksType: BookmarksType,
+  chromeBookmarksTree: chrome.bookmarks.BookmarkTreeNode[],
   textColor: string,
   placeholderTextColor: string
 ) => {
@@ -81,11 +89,16 @@ export const refreshBookmarkSearchResults = (
       return aContains === bContains ? 0 : aContains ? -1 : 1;
     });
   } else if (bookmarksType === "default" || bookmarksType === "default-blocky") {
-    filteredBookmarks = fuzzySearchBookmark(bookmarkSearchValue, bookmarks).sort((a, b) => {
-      const aContains = a.title.toLowerCase().startsWith(bookmarkSearchValue);
-      const bContains = b.title.toLowerCase().startsWith(bookmarkSearchValue);
-      return aContains === bContains ? 0 : aContains ? -1 : 1;
-    });
+    filteredBookmarks = fuzzySearchBookmark(bookmarkSearchValue, bookmarks)
+      .filter((bm) => {
+        // filter out folders
+        return !(bm.children && bm.children!.length > 0);
+      })
+      .sort((a, b) => {
+        const aContains = a.title.toLowerCase().startsWith(bookmarkSearchValue);
+        const bContains = b.title.toLowerCase().startsWith(bookmarkSearchValue);
+        return aContains === bContains ? 0 : aContains ? -1 : 1;
+      });
   }
 
   // make sure selectedIndex is within filterbookmarks amount
@@ -114,11 +127,14 @@ export const refreshBookmarkSearchResults = (
       spanEl.innerHTML = "&nbsp;> ";
       divEl.appendChild(spanEl);
       divEl.innerHTML += matchedNameHtml;
+
       bookmarkSearchResultsContainerEl.appendChild(divEl);
     } else {
       // <div bookmark-result-url="${bookmark.url}">&nbsp;&nbsp;&nbsp;${matchedNameHtml}</div>
 
       const divEl = document.createElement("div");
+      divEl.className = "text-ellipsis overflow-hidden whitespace-nowrap w-full";
+      divEl.style.color = placeholderTextColor;
       divEl.setAttribute("bookmark-result-url", bookmark.url);
       divEl.innerHTML = "&nbsp;&nbsp;&nbsp;" + matchedNameHtml;
       bookmarkSearchResultsContainerEl.appendChild(divEl);
