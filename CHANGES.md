@@ -1,7 +1,6 @@
-# Changes in 1.4.6
+# Changes in 1.4.7
 
 in this release:
 
-- add corner style (sharp/round)
-- add middle click to open bookmark in new tab
-- bug fixes
+- add bookmark search for default and default-blocky bookmarks
+- performance improvements
