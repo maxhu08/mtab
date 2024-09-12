@@ -80,14 +80,22 @@ export const refreshBookmarkSearchResults = (
       const bContains = b.name.toLowerCase().startsWith(bookmarkSearchValue);
       return aContains === bContains ? 0 : aContains ? -1 : 1;
     });
+  } else if (bookmarksType === "default" || bookmarksType === "default-blocky") {
+    filteredBookmarks = fuzzySearchBookmark(bookmarkSearchValue, bookmarks).sort((a, b) => {
+      const aContains = a.title.toLowerCase().startsWith(bookmarkSearchValue);
+      const bContains = b.title.toLowerCase().startsWith(bookmarkSearchValue);
+      return aContains === bContains ? 0 : aContains ? -1 : 1;
+    });
   }
 
   // make sure selectedIndex is within filterbookmarks amount
   if (selectedIndex > filteredBookmarks.length - 1) selectedIndex = filteredBookmarks.length - 1;
 
   filteredBookmarks.forEach((bookmark, index) => {
+    let bName = bookmarksType === "user-defined" ? bookmark.name : bookmark.title;
+
     const matchedNameHtml = getMatchedNameHtml(
-      bookmark.name,
+      bName,
       bookmarkSearchValue,
       textColor,
       placeholderTextColor
