@@ -80,7 +80,6 @@ export const listenToKeys = (config: Config) => {
           refreshBookmarkSearchResults(
             bookmarks,
             config.bookmarks.type,
-            chromeBookmarksTree,
             config.search.textColor,
             config.search.placeholderTextColor
           );
@@ -100,7 +99,6 @@ export const listenToKeys = (config: Config) => {
           refreshBookmarkSearchResults(
             bookmarks,
             config.bookmarks.type,
-            chromeBookmarksTree,
             config.search.textColor,
             config.search.placeholderTextColor
           );

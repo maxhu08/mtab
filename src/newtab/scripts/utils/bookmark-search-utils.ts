@@ -50,13 +50,7 @@ export const enableSearchBookmark = (
   searchSectionEl.classList.replace("grid", "hidden");
   bookmarkSearchSectionEl.classList.replace("hidden", "grid");
 
-  refreshBookmarkSearchResults(
-    bookmarks,
-    bookmarksType,
-    chromeBookmarksTree,
-    textColor,
-    placeholderTextColor
-  );
+  refreshBookmarkSearchResults(bookmarks, bookmarksType, textColor, placeholderTextColor);
 };
 
 export const disableSearchBookmark = () => {
@@ -69,7 +63,6 @@ export const disableSearchBookmark = () => {
 export const refreshBookmarkSearchResults = (
   bookmarks: any[],
   bookmarksType: BookmarksType,
-  chromeBookmarksTree: chrome.bookmarks.BookmarkTreeNode[],
   textColor: string,
   placeholderTextColor: string
 ) => {
@@ -97,11 +90,6 @@ export const refreshBookmarkSearchResults = (
         return !(bm.children && bm.children!.length > 0);
       })
       .sort((a, b) => {
-        console.log(
-          a.title.toLowerCase().startsWith(bookmarkSearchValue),
-          b.title.toLowerCase().startsWith(bookmarkSearchValue)
-        );
-
         const aContains = a.title.toLowerCase().startsWith(bookmarkSearchValue);
         const bContains = b.title.toLowerCase().startsWith(bookmarkSearchValue);
 
