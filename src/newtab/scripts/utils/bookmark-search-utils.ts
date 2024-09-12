@@ -83,20 +83,28 @@ export const refreshBookmarkSearchResults = (
   let filteredBookmarks = [];
 
   if (bookmarksType === "user-defined") {
-    filteredBookmarks = fuzzySearchBookmark(bookmarkSearchValue, bookmarks).sort((a, b) => {
-      const aContains = a.name.toLowerCase().startsWith(bookmarkSearchValue);
-      const bContains = b.name.toLowerCase().startsWith(bookmarkSearchValue);
-      return aContains === bContains ? 0 : aContains ? -1 : 1;
-    });
+    filteredBookmarks = fuzzySearchBookmark(bookmarkSearchValue, bookmarks, bookmarksType).sort(
+      (a, b) => {
+        const aContains = a.name.toLowerCase().startsWith(bookmarkSearchValue);
+        const bContains = b.name.toLowerCase().startsWith(bookmarkSearchValue);
+        return aContains === bContains ? 0 : aContains ? -1 : 1;
+      }
+    );
   } else if (bookmarksType === "default" || bookmarksType === "default-blocky") {
-    filteredBookmarks = fuzzySearchBookmark(bookmarkSearchValue, bookmarks)
+    filteredBookmarks = fuzzySearchBookmark(bookmarkSearchValue, bookmarks, bookmarksType)
       .filter((bm) => {
         // filter out folders
         return !(bm.children && bm.children!.length > 0);
       })
       .sort((a, b) => {
+        console.log(
+          a.title.toLowerCase().startsWith(bookmarkSearchValue),
+          b.title.toLowerCase().startsWith(bookmarkSearchValue)
+        );
+
         const aContains = a.title.toLowerCase().startsWith(bookmarkSearchValue);
         const bContains = b.title.toLowerCase().startsWith(bookmarkSearchValue);
+
         return aContains === bContains ? 0 : aContains ? -1 : 1;
       });
   }
@@ -105,7 +113,7 @@ export const refreshBookmarkSearchResults = (
   if (selectedIndex > filteredBookmarks.length - 1) selectedIndex = filteredBookmarks.length - 1;
 
   filteredBookmarks.forEach((bookmark, index) => {
-    let bName = bookmarksType === "user-defined" ? bookmark.name : bookmark.title;
+    const bName = bookmarksType === "user-defined" ? bookmark.name : bookmark.title;
 
     const matchedNameHtml = getMatchedNameHtml(
       bName,
@@ -175,17 +183,15 @@ const getMatchedNameHtml = (
   return result;
 };
 
-const fuzzySearchBookmark = (search: string, bookmarks: any[]) => {
-  if (search === "") {
-    const results = bookmarks;
-    return results;
-  }
+const fuzzySearchBookmark = (search: string, bookmarks: any[], bookmarksType: BookmarksType) => {
+  if (search === "") return bookmarks;
 
   const results = bookmarks.filter((bookmark) => {
     let searchIndex = 0;
+    const bName = bookmarksType === "user-defined" ? bookmark.name : bookmark.title;
 
-    for (let i = 0; i < bookmark.name.length; i++) {
-      if (bookmark.name[i].toLowerCase() === search[searchIndex].toLowerCase()) {
+    for (let i = 0; i < bName.length; i++) {
+      if (bName[i].toLowerCase() === search[searchIndex].toLowerCase()) {
         searchIndex++;
       }
       if (searchIndex === search.length) {
