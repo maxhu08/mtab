@@ -1,7 +1,8 @@
 import { fillInputs } from "src/options/scripts/utils/fill-inputs";
+import { saveConfig } from "src/options/scripts/utils/save-config";
 import { fixAllToggleCheckboxSections } from "src/options/scripts/utils/toggle-checkbox";
 
-export const importConfig = () => {
+export const importConfigAndSave = () => {
   const dataToImport = prompt("input your save (this will overwrite your current config)");
 
   if (dataToImport === null) {
@@ -22,4 +23,6 @@ export const importConfig = () => {
   console.log("[IMPORT_DEBUG]", parsedData);
   fillInputs(parsedData);
   fixAllToggleCheckboxSections();
+
+  saveConfig();
 };

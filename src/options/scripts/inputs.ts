@@ -16,10 +16,10 @@ import {
 import { listenToHotkeyInputs } from "src/options/scripts/utils/hotkey-inputs";
 import { saveConfig } from "src/options/scripts/utils/save-config";
 import { exportConfig } from "src/options/scripts/utils/export-config";
-import { importConfig } from "src/options/scripts/utils/import-config";
 import { setDefaultConfig } from "src/options/scripts/utils/set-default-config";
 import { handleCustomFaviconReset } from "src/options/scripts/utils/upload-favicon";
 import { handWallpaperFileReset } from "src/options/scripts/utils/upload-wallpaper";
+import { importConfigAndSave } from "src/options/scripts/utils/import-config";
 
 export const listenToInputs = () => {
   inputs.forEach((input) => {
@@ -91,7 +91,9 @@ export const listenToInputs = () => {
   };
 
   const importBtn = document.getElementById("import-button") as HTMLButtonElement;
-  importBtn.onclick = () => importConfig();
+  importBtn.onclick = () => {
+    importConfigAndSave();
+  };
 
   const resetToDefaultBtn = document.getElementById("reset-to-default-button") as HTMLButtonElement;
   resetToDefaultBtn.onclick = () => setDefaultConfig();
