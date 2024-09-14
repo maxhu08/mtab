@@ -24,8 +24,8 @@
     "@types/chrome": "^0.0.263",
     "@typescript-eslint/eslint-plugin": "^7.18.0",
     "@typescript-eslint/parser": "^7.18.0",
-    "husky": "^9.1.5",
-    "postcss": "^8.4.41",
-    "tailwindcss": "^3.4.10"
+    "husky": "^9.1.6",
+    "postcss": "^8.4.47",
+    "tailwindcss": "^3.4.11"
   }
 }
