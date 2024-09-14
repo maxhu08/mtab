@@ -1,6 +1,6 @@
-# Changes in 1.4.7
+# Changes in 1.4.8
 
 in this release:
 
-- add bookmark search for default and default-blocky bookmarks
-- performance improvements
+- change import button to import & save button
+- bug fixes
