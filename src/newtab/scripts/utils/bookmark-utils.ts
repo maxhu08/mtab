@@ -213,7 +213,7 @@ export const bindActionsToBlockNode = (
           bookmarkEl.classList.remove("opacity-0");
           // fix bookmarks animations replaying after bookmark search esc
           bookmarkEl.classList.remove(config.animations.initialType);
-        }, animationDuration - 20); // needs to be less than 1
+        }, animationDuration * 0.8); // needs to be less than 1
       },
       {
         once: true
@@ -268,7 +268,7 @@ export const bindActionsToBackButton = (
         setTimeout(() => {
           backButtonEl.classList.remove("opacity-0");
           backButtonEl.classList.remove(config.animations.initialType);
-        }, animationDuration - 20); // needs to be less than 1
+        }, animationDuration * 0.8); // needs to be less than 1
       },
       {
         once: true
