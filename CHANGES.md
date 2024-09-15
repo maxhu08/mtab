@@ -1,6 +1,5 @@
-# Changes in 1.4.8
+# Changes in 1.4.9
 
 in this release:
 
-- change import button to import & save button
 - bug fixes
