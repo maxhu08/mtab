@@ -186,9 +186,9 @@ const deleteBookmark = (index: number) => {
     oldPushDownButtonEl.id = `bookmark-${i - 1}-push-down-button`;
     oldDeleteButtonEl.id = `bookmark-${i - 1}-delete-button`;
 
-    oldPushUpButtonEl.onclick = () => pushBookmark(index - 1, "up");
-    oldPushDownButtonEl.onclick = () => pushBookmark(index - 1, "down");
-    oldDeleteButtonEl.onclick = () => deleteBookmark(index - 1);
+    oldPushUpButtonEl.onclick = () => pushBookmark(index, "up");
+    oldPushDownButtonEl.onclick = () => pushBookmark(index, "down");
+    oldDeleteButtonEl.onclick = () => deleteBookmark(index);
   }
 
   bookmarkToDelete.parentNode!.removeChild(bookmarkToDelete);
