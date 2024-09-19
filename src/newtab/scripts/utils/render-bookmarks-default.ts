@@ -111,14 +111,20 @@ export const renderDefaultBookmarks = (config: Config) => {
     });
   });
 
-  config.animations &&
+  if (config.animations) {
+    const computedStyle = window.getComputedStyle(bookmarksContainerEl);
+    const animationDuration = parseFloat(computedStyle.animationDuration) * 1000;
     bookmarksContainerEl.addEventListener(
-      "animationend",
+      "animationstart",
       () => {
-        bookmarksContainerEl.classList.remove("opacity-0");
+        setTimeout(() => {
+          bookmarksContainerEl.classList.remove("opacity-0");
+          bookmarksContainerEl.classList.remove(config.animations.initialType);
+        }, animationDuration * 0.8); // needs to be less than 1
       },
       {
         once: true
       }
     );
+  }
 };
