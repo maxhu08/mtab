@@ -1,7 +1,7 @@
 import { Config } from "src/newtab/scripts/config";
 import { assistantContainerEl } from "src/newtab/scripts/ui";
 
-type AssistItem = AssistHistoryList | AssistDate;
+type AssistItem = AssistHistoryList | AssistDate | AssistMath;
 
 interface AssistHistoryList {
   type: "history";
@@ -10,6 +10,11 @@ interface AssistHistoryList {
 
 interface AssistDate {
   type: "date";
+}
+
+interface AssistMath {
+  type: "math";
+  result: string;
 }
 
 export const hideAssist = () => {
@@ -42,6 +47,11 @@ export const displayAssist = (items: AssistItem[], config: Config) => {
             day: "numeric",
             weekday: "long"
           }).format(date)}
+        </div>`;
+    } else if (item.type === "math") {
+      assistantContainerEl.innerHTML += `
+        <div class="text-ellipsis overflow-hidden whitespace-nowrap w-full" style="color: ${config.search.placeholderTextColor}">
+          ${item.result}
         </div>`;
     }
   });
