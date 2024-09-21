@@ -10,6 +10,8 @@ export const bookmarkSearchSectionEl = document.getElementById("bookmark-search-
 export const searchContainerEl = document.getElementById("search-container") as HTMLInputElement;
 export const searchInputEl = document.getElementById("search-input") as HTMLInputElement;
 
+export const assistantContainerEl = document.getElementById("assistant-container") as HTMLDivElement;
+
 export const bookmarkSearchContainerEl = document.getElementById("bookmark-search-container") as HTMLInputElement;
 export const bookmarkSearchInputEl = document.getElementById("bookmark-search-input") as HTMLInputElement;
 
