@@ -10,7 +10,6 @@ export const listenToSearch = (config: Config) => {
   //     maxResults: 1
   //   },
   //   (history) => {
-  //     console.log(history);
   //     searchInputEl.oninput = () => {
   //       const val = searchInputEl.value;
   //       if (val === "") {
@@ -55,7 +54,6 @@ const handleMath = (val: string, config: Config) => {
   try {
     const result = evaluate(val);
     if (isNumber(result)) {
-      console.log(result);
       displayAssist([{ type: "math", result: result.toString() }], config);
     }
   } catch {
@@ -73,7 +71,6 @@ const handleDefinition = async (val: string, config: Config) => {
       // const result = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`);
 
       const data = await response.json();
-      console.log(data);
       displayAssist([{ type: "definition", result: data }], config);
     } catch {}
   }
