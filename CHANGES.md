@@ -1,5 +1,8 @@
-# Changes in 1.5.1
+# Changes in 1.5.2
 
 in this release:
 
-- bug fixes
+- add assist box
+- add date assist
+- add math assist
+- add definition assist
