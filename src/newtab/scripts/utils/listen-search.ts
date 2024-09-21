@@ -18,7 +18,7 @@ export const listenToSearch = (config: Config) => {
         if (val === "") {
           hideAssist();
         } else {
-          handleHistory(val, history, config);
+          // handleHistory(val, history, config);
           handleDate(val, config);
           handleMath(val, config);
         }
@@ -48,5 +48,7 @@ const handleMath = (val: string, config: Config) => {
       console.log(result);
       displayAssist([{ type: "math", result: result.toString() }], config);
     }
-  } catch {}
+  } catch {
+    hideAssist();
+  }
 };
