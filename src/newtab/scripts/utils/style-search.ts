@@ -1,5 +1,6 @@
 import { UIStyle } from "src/newtab/scripts/config";
 import {
+  assistantContainerEl,
   bookmarkSearchContainerEl,
   bookmarkSearchInputEl,
   bookmarkSearchResultsContainerEl,
@@ -50,6 +51,7 @@ export const styleSearch = (
 
   if (style === "solid") {
     searchContainerEl.style.backgroundColor = foregroundColor;
+    assistantContainerEl.style.backgroundColor = foregroundColor;
     bookmarkSearchContainerEl.style.backgroundColor = foregroundColor;
     bookmarkSearchResultsContainerEl.style.backgroundColor = foregroundColor;
 
@@ -57,6 +59,7 @@ export const styleSearch = (
   }
   if (style === "glass") {
     searchContainerEl.classList.add("glass-effect");
+    assistantContainerEl.classList.add("glass-effect");
     bookmarkSearchContainerEl.classList.add("glass-effect");
     bookmarkSearchResultsContainerEl.classList.add("glass-effect");
 

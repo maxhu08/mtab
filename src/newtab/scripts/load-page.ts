@@ -62,6 +62,6 @@ export const loadPage = () => {
     addAnimations(config.animations);
 
     listenToKeys(config);
-    listenToSearch();
+    listenToSearch(config);
   });
 };
