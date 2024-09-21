@@ -35,37 +35,39 @@ export const displayAssist = (items: AssistItem[], config: Config) => {
     if (item.type === "history") {
       item.historyItems.forEach((hi) => {
         assistantContainerEl.innerHTML += `
-        <div class="text-ellipsis overflow-hidden whitespace-nowrap w-full" style="color: ${config.search.placeholderTextColor}">
-          ${hi.title}
-        </div>`;
+          <div class="text-ellipsis overflow-hidden whitespace-nowrap w-full" style="color: ${config.search.placeholderTextColor}">${hi.title}</div>`;
       });
     } else if (item.type === "date") {
       const date = new Date();
-
       assistantContainerEl.innerHTML += `
-        <div class="text-ellipsis overflow-hidden whitespace-nowrap w-full" style="color: ${
-          config.search.placeholderTextColor
-        }">
-          ${new Intl.DateTimeFormat("en-US", {
-            year: "numeric",
-            month: "long",
-            day: "numeric",
-            weekday: "long"
-          }).format(date)}
+        <div class="grid grid-cols-[max-content_auto]">
+          <span class="font-semibold" style="color: ${
+            config.search.placeholderTextColor
+          }">&nbsp;=&nbsp;</span>
+          <div class="text-ellipsis overflow-hidden whitespace-nowrap w-full" style="color: ${
+            config.search.textColor
+          }">
+            ${new Intl.DateTimeFormat("en-US", {
+              year: "numeric",
+              month: "long",
+              day: "numeric",
+              weekday: "long"
+            }).format(date)}
+          </div>
         </div>`;
     } else if (item.type === "math") {
       assistantContainerEl.innerHTML += `
-        <div class="text-ellipsis overflow-hidden whitespace-nowrap w-full" style="color: ${config.search.placeholderTextColor}">
-          ${item.result}
+        <div class="grid grid-cols-[max-content_auto]">
+          <span class="font-semibold" style="color: ${config.search.placeholderTextColor}">&nbsp;=&nbsp;</span>
+          <div class="text-ellipsis overflow-hidden whitespace-nowrap w-full" style="color: ${config.search.textColor}">${item.result}</div>
         </div>`;
     } else if (item.type === "definition") {
       item.result.definitions.slice(0, 3).forEach((def: any) => {
-        console.log(def);
-
         assistantContainerEl.innerHTML += `
-        <div class="w-full" style="color: ${config.search.textColor}">
-          ${def.definition} <span style="color: ${config.search.placeholderTextColor}">(${def.pos})</span>
-        </div>`;
+          <div class="grid grid-cols-[max-content_auto]">
+            <span class="font-semibold" style="color: ${config.search.placeholderTextColor}">&nbsp;-&nbsp;</span>
+            <div class="w-full" style="color: ${config.search.textColor}">${def.definition} <span style="color: ${config.search.placeholderTextColor}">(${def.pos})</span></div>
+          </div>`;
       });
     }
   });
