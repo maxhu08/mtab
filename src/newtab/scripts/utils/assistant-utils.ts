@@ -1,7 +1,7 @@
 import { Config } from "src/newtab/scripts/config";
 import { assistantContainerEl } from "src/newtab/scripts/ui";
 
-type AssistItem = AssistHistoryList | AssistDate | AssistMath;
+type AssistItem = AssistHistoryList | AssistDate | AssistMath | AssistDefinition;
 
 interface AssistHistoryList {
   type: "history";
@@ -15,6 +15,11 @@ interface AssistDate {
 interface AssistMath {
   type: "math";
   result: string;
+}
+
+interface AssistDefinition {
+  type: "definition";
+  result: any;
 }
 
 export const hideAssist = () => {
@@ -53,6 +58,15 @@ export const displayAssist = (items: AssistItem[], config: Config) => {
         <div class="text-ellipsis overflow-hidden whitespace-nowrap w-full" style="color: ${config.search.placeholderTextColor}">
           ${item.result}
         </div>`;
+    } else if (item.type === "definition") {
+      item.result.definitions.slice(0, 3).forEach((def: any) => {
+        console.log(def);
+
+        assistantContainerEl.innerHTML += `
+        <div class="w-full" style="color: ${config.search.textColor}">
+          ${def.definition} <span style="color: ${config.search.placeholderTextColor}">(${def.pos})</span>
+        </div>`;
+      });
     }
   });
 };

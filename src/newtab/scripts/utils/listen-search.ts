@@ -21,6 +21,7 @@ export const listenToSearch = (config: Config) => {
           // handleHistory(val, history, config);
           handleDate(val, config);
           handleMath(val, config);
+          handleDefinition(val, config);
         }
       };
     }
@@ -49,6 +50,22 @@ const handleMath = (val: string, config: Config) => {
       displayAssist([{ type: "math", result: result.toString() }], config);
     }
   } catch {
-    hideAssist();
+    if (val !== "date") hideAssist();
+  }
+};
+
+const handleDefinition = async (val: string, config: Config) => {
+  if (val.endsWith(" def") || val.endsWith(" definition")) {
+    const word = val.replace(/ def$/, "").replace(/ definition$/, "");
+
+    try {
+      // prettier-ignore
+      const response = await fetch(`https://raw.githubusercontent.com/open-dictionary/english-dictionary/master/${word[0]}/${word[1]}/${word}/en.json`);
+      // const result = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`);
+
+      const data = await response.json();
+      console.log(data);
+      displayAssist([{ type: "definition", result: data }], config);
+    } catch {}
   }
 };
