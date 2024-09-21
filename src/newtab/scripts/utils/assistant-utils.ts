@@ -1,13 +1,17 @@
 import { Config } from "src/newtab/scripts/config";
 import { assistantContainerEl } from "src/newtab/scripts/ui";
 
-type AssistItem = HistoryList;
+type AssistItem = AssistHistoryList | AssistDate;
 
-interface HistoryList {
+interface AssistHistoryList {
   type: "history";
   historyItems: chrome.history.HistoryItem[];
 }
-4;
+
+interface AssistDate {
+  type: "date";
+}
+
 export const hideAssist = () => {
   assistantContainerEl.innerHTML = "";
   assistantContainerEl.classList.replace("grid", "hidden");
@@ -25,6 +29,20 @@ export const displayAssist = (items: AssistItem[], config: Config) => {
           ${hi.title}
         </div>`;
       });
+    } else if (item.type === "date") {
+      const date = new Date();
+
+      assistantContainerEl.innerHTML += `
+        <div class="text-ellipsis overflow-hidden whitespace-nowrap w-full" style="color: ${
+          config.search.placeholderTextColor
+        }">
+          ${new Intl.DateTimeFormat("en-US", {
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+            weekday: "long"
+          }).format(date)}
+        </div>`;
     }
   });
 };

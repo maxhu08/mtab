@@ -17,16 +17,27 @@ export const listenToSearch = (config: Config) => {
         if (val === "") {
           hideAssist();
         } else {
-          const matchingItems = history
-            .filter((h) => h.title?.toLocaleLowerCase().startsWith(val.toLowerCase()))
-            .slice(0, 6);
-
-          console.log(val, matchingItems);
-          if (matchingItems.length > 0) {
-            displayAssist([{ type: "history", historyItems: matchingItems }], config);
-          } else hideAssist();
+          handleHistory(val, history, config);
+          handleDate(val, config);
         }
       };
     }
   );
+};
+
+const handleHistory = (val: string, history: chrome.history.HistoryItem[], config: Config) => {
+  const matchingItems = history
+    .filter((h) => h.title?.toLocaleLowerCase().startsWith(val.toLowerCase()))
+    .slice(0, 6);
+
+  console.log(val, matchingItems);
+  if (matchingItems.length > 0) {
+    displayAssist([{ type: "history", historyItems: matchingItems }], config);
+  } else hideAssist();
+};
+
+const handleDate = (val: string, config: Config) => {
+  if (val === "date") {
+    displayAssist([{ type: "date" }], config);
+  }
 };
