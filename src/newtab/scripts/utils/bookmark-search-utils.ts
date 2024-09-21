@@ -43,7 +43,6 @@ export const unfocusBookmarkSearch = (animationType: string) => {
 export const enableSearchBookmark = (
   bookmarks: any[],
   bookmarksType: BookmarksType,
-  chromeBookmarksTree: chrome.bookmarks.BookmarkTreeNode[],
   textColor: string,
   placeholderTextColor: string
 ) => {

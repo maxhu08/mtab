@@ -14,6 +14,7 @@ import { addAnimations } from "./utils/animations";
 import { listenToKeys } from "./keys";
 import { loadFavicon } from "src/newtab/scripts/utils/load-favicon";
 import { fixDisappearingUI } from "src/newtab/scripts/utils/fix-disappearing-ui";
+import { listenToSearch } from "src/newtab/scripts/utils/listen-search";
 
 export const loadPage = () => {
   const manifest = chrome.runtime.getManifest();
@@ -61,5 +62,6 @@ export const loadPage = () => {
     addAnimations(config.animations);
 
     listenToKeys(config);
+    listenToSearch();
   });
 };

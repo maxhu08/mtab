@@ -114,7 +114,6 @@ export const listenToKeys = (config: Config) => {
         enableSearchBookmark(
           bookmarks,
           config.bookmarks.type,
-          chromeBookmarksTree,
           config.search.textColor,
           config.search.placeholderTextColor
         );
@@ -166,7 +165,6 @@ export const listenToKeys = (config: Config) => {
     enableSearchBookmark(
       bookmarks,
       config.bookmarks.type,
-      chromeBookmarksTree,
       config.search.textColor,
       config.search.placeholderTextColor
     );
