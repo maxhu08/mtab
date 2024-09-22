@@ -9,7 +9,7 @@
     "moduleResolution": "Node",
     "outDir": "mtab-v1.0.2-firefox-dist",
     "noEmitOnError": true,
-    "lib": ["ES2015", "DOM"]
+    "lib": ["ES2017", "DOM"]
   },
   "include": ["src/**/*.ts"],
   "exclude": ["node_modules"]

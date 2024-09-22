@@ -11,7 +11,15 @@ export const listenToSearch = (config: Config) => {
         maxResults: 100
       },
       (history) => {
-        handleSearch(config, history);
+        const uniqueHistoryMap: Record<string, (typeof history)[number]> = {};
+        for (const h of history) {
+          if (h.title && !uniqueHistoryMap[h.title]) {
+            uniqueHistoryMap[h.title] = h;
+          }
+        }
+        const uniqueHistory = Object.values(uniqueHistoryMap);
+
+        handleSearch(config, uniqueHistory);
       }
     );
   } else handleSearch(config);
