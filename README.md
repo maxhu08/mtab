@@ -32,7 +32,6 @@ downloads here:
 ## showcase
 
 ![showcase](./assets/mtab-zen-showcase.png)
-![demo-5](./assets/5.png)
 
 ## star-history
 
