@@ -35,7 +35,7 @@ const fillHotkeyHelper = (input: HTMLInputElement, status: HTMLSpanElement, val:
   if (val === "") {
     status.textContent = ` (none)`;
   } else if (val === " ") {
-    status.textContent = ` (SPC)`;
+    status.textContent = ` (Space)`;
   } else {
     status.textContent = ` (${val})`;
   }

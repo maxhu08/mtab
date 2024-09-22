@@ -30,7 +30,7 @@ export const listenToHotkeyInputs = (hotkeyInputs: HotkeyInput[]) => {
       if (val === "") {
         input.status.textContent = ` (none)`;
       } else if (val === " ") {
-        input.status.textContent = ` (SPC)`;
+        input.status.textContent = ` (Space)`;
       } else {
         input.status.textContent = ` (${input.input.value})`;
       }
