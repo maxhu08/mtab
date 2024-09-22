@@ -1,8 +1,9 @@
-# Changes in 1.5.2
+# Changes in 1.5.3
 
 in this release:
 
-- add assist box
-- add date assist
-- add math assist
-- add definition assist
+- add option to enable/disable specific search assist features
+- make new tab content absolute to stop ui from shifting
+- add assist history feature (experimental)
+- add keys to open user defined bookmarks
+- bug fixes
