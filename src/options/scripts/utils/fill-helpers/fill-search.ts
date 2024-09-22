@@ -19,7 +19,11 @@ import {
   searchBookmarkPlaceholderTextInputEl,
   searchSearchIconColorInputEl,
   searchBookmarkIconColorInputEl,
-  searchSelectIconColorInputEl
+  searchSelectIconColorInputEl,
+  searchAssistHistoryCheckboxEl,
+  searchAssistDateCheckboxEl,
+  searchAssistMathCheckboxEl,
+  searchAssistDefinitionsCheckboxEl
 } from "src/options/scripts/ui";
 
 export const fillSearchInputs = (config: Config) => {
@@ -52,4 +56,9 @@ export const fillSearchInputs = (config: Config) => {
 
   searchUseCustomEngineEnabledCheckboxEl.checked = config.search.useCustomEngine;
   searchCustomEngineURLInputEl.value = config.search.customEngineURL;
+
+  searchAssistHistoryCheckboxEl.checked = config.search.assist.history;
+  searchAssistDateCheckboxEl.checked = config.search.assist.date;
+  searchAssistMathCheckboxEl.checked = config.search.assist.math;
+  searchAssistDefinitionsCheckboxEl.checked = config.search.assist.definitions;
 };
