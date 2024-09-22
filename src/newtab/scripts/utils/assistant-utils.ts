@@ -1,7 +1,12 @@
 import { Config } from "src/newtab/scripts/config";
 import { assistantContainerEl } from "src/newtab/scripts/ui";
 
-export type AssistItem = AssistHistoryList | AssistDate | AssistMath | AssistDefinition;
+export type AssistItem =
+  | AssistHistoryList
+  | AssistDate
+  | AssistMath
+  | AssistDefinition
+  | AssistConversion;
 
 interface AssistHistoryList {
   type: "history";
@@ -20,6 +25,12 @@ interface AssistMath {
 interface AssistDefinition {
   type: "definition";
   result: any;
+}
+
+interface AssistConversion {
+  type: "conversion";
+  before: string;
+  after: string;
 }
 
 export const hideAssist = () => {
@@ -72,6 +83,15 @@ export const displayAssist = (items: AssistItem[], config: Config) => {
             <div class="w-full" style="color: ${config.search.textColor}">${def.definition} <span style="color: ${config.search.placeholderTextColor}">(${def.pos})</span></div>
           </div>`;
       });
+    } else if (item.type === "conversion") {
+      assistantContainerEl.innerHTML += `
+          <div class="w-full py-4">
+            <div class="w-full grid grid-cols-[1fr_max-content_1fr] place-items-center" style="color: ${config.search.textColor}">
+            <span style="color: ${config.search.textColor}">${item.before}</span>
+            <span style="color: ${config.search.placeholderTextColor}">=></span>
+            <span style="color: ${config.search.textColor}">${item.after}</span>
+            </div>
+          </div>`;
     }
   });
 };

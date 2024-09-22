@@ -37,12 +37,15 @@ const handleSearch = (config: Config, history: chrome.history.HistoryItem[] = []
         const definitionResult = await handleDefinition(val);
         definitionResult !== undefined && assistItems.push(definitionResult);
       }
+      if (true) {
+        const conversionResult = handleConversion(val);
+        conversionResult !== undefined && assistItems.push(conversionResult);
+      }
       if (config.search.assist.history) {
         const historyResult = handleHistory(val, history);
         historyResult !== undefined && assistItems.push(historyResult);
       }
 
-      console.log(assistItems);
       if (assistItems.length > 0) displayAssist(assistItems, config);
       else hideAssist();
     }
@@ -89,4 +92,49 @@ const handleDefinition = async (val: string) => {
       return { type: "definition", result: data } as const;
     } catch {}
   }
+};
+
+const handleConversion = (val: string) => {
+  const regexes = {
+    inches: /^(\d+)\s?in\s*$/,
+    centimeters: /^(\d+)\s?cm\s*$/,
+    pounds: /^(\d+)\s?lbs?\s*$/,
+    kilograms: /^(\d+)\s?kg\s*$/
+  };
+
+  const matchConversion = (regex: RegExp, type: string) => {
+    const match = val.match(regex);
+    if (match) {
+      const value = parseInt(match[1], 10);
+      let converted: string;
+      let unit: string;
+
+      if (type === "in") {
+        converted = (value * 2.54).toFixed(2);
+        unit = "cm";
+      } else if (type === "cm") {
+        converted = (value / 2.54).toFixed(2);
+        unit = "in";
+      } else if (type === "lbs") {
+        converted = (value * 0.453592).toFixed(2);
+        unit = "kg";
+      } else {
+        converted = (value / 0.453592).toFixed(2);
+        unit = "lbs";
+      }
+
+      return {
+        type: "conversion",
+        before: `${value} ${type}`,
+        after: `${converted} ${unit}`
+      } as const;
+    }
+  };
+
+  return (
+    matchConversion(regexes.inches, "in") ||
+    matchConversion(regexes.centimeters, "cm") ||
+    matchConversion(regexes.pounds, "lbs") ||
+    matchConversion(regexes.kilograms, "kg")
+  );
 };
