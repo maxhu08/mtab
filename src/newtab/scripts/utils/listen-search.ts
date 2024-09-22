@@ -29,9 +29,9 @@ export const listenToSearch = (config: Config) => {
     if (val === "") {
       hideAssist();
     } else {
-      handleDate(val, config);
-      handleMath(val, config);
-      handleDefinition(val, config);
+      if (config.search.assist.date) handleDate(val, config);
+      if (config.search.assist.math) handleMath(val, config);
+      if (config.search.assist.definitions) handleDefinition(val, config);
     }
   };
 };
