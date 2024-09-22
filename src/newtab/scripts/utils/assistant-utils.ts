@@ -35,7 +35,10 @@ export const displayAssist = (items: AssistItem[], config: Config) => {
     if (item.type === "history") {
       item.historyItems.forEach((hi) => {
         assistantContainerEl.innerHTML += `
-          <div class="text-ellipsis overflow-hidden whitespace-nowrap w-full" style="color: ${config.search.placeholderTextColor}">${hi.title}</div>`;
+        <div class="grid grid-cols-[max-content_auto]">
+          <span class="font-semibold" style="color: ${config.search.placeholderTextColor}">&nbsp;~&nbsp;</span>
+          <div class="text-ellipsis overflow-hidden whitespace-nowrap w-full" style="color: ${config.search.placeholderTextColor}">${hi.title}</div>
+        </div>`;
       });
     } else if (item.type === "date") {
       const date = new Date();
