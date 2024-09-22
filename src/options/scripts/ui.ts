@@ -154,6 +154,8 @@ export const bookmarksShowBookmarkNamesCheckboxEl = document.getElementById("boo
 export const bookmarksUserDefinedColsContainerEl = document.getElementById("bookmarks-user-defined-cols-container") as HTMLDivElement;
 export const bookmarksUserDefinedColsInputEl = document.getElementById("bookmarks-user-defined-cols-input") as HTMLInputElement;
 
+export const bookmarksUserDefinedKeysCheckboxEl = document.getElementById("bookmarks-user-defined-keys-checkbox") as HTMLInputElement;
+
 export const bookmarksUserDefinedList = document.getElementById("bookmarks-user-defined-list") as HTMLDivElement;
 
 export const bookmarksDefaultBlockyColsContainerEl = document.getElementById("bookmarks-default-blocky-cols-container") as HTMLDivElement;

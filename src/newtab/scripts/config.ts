@@ -112,6 +112,7 @@ export const defaultConfig: Config = {
   bookmarks: {
     type: "user-defined",
     userDefinedCols: 4,
+    userDefinedKeys: false,
     userDefined: [
       {
         name: "github",
@@ -261,6 +262,7 @@ export interface Config {
   bookmarks: {
     type: BookmarksType;
     userDefinedCols: number;
+    userDefinedKeys: boolean;
     userDefined: UserDefinedBookmark[];
     defaultBlockyCols: number;
     defaultBlockyColor: string;

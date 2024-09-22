@@ -8,7 +8,8 @@ import {
   bookmarksDefaultBlockyColorInputEl,
   bookmarksDefaultBlockyColsInputEl,
   bookmarksShowBookmarkNamesCheckboxEl,
-  bookmarksUserDefinedColsInputEl
+  bookmarksUserDefinedColsInputEl,
+  bookmarksUserDefinedKeysCheckboxEl
 } from "src/options/scripts/ui";
 
 export const saveBookmarksSettingsToDraft = (draft: Config) => {
@@ -16,6 +17,8 @@ export const saveBookmarksSettingsToDraft = (draft: Config) => {
 
   draft.bookmarks.defaultBlockyCols = parseInt(bookmarksDefaultBlockyColsInputEl.value);
   draft.bookmarks.defaultBlockyColor = bookmarksDefaultBlockyColorInputEl.value;
+
+  draft.bookmarks.userDefinedKeys = bookmarksUserDefinedKeysCheckboxEl.checked;
 
   const selectedTypeEl = document.querySelector(
     `button[btn-option-type="bookmarks-type"][selected="yes"]`

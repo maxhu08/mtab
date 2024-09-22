@@ -589,7 +589,8 @@
             </div>
           </div>
           <div class="grid gap-2">
-            <p class="text-white text-base">search.focusedBorderColor (use #00000000 for none)</p>
+            <p class="text-white text-base">search.focusedBorderColor <span class="text-neutral-500 text-base">(use
+                #00000000 for none)</span></p>
             <div id="search-focused-border-color-container"
               class="grid grid-cols-[max-content_auto] text-base bg-neutral-800 w-full p-1 rounded-md border-2 border-transparent">
               <span class="text-pink-500 font-semibold select-none">>&nbsp;</span>
@@ -772,6 +773,19 @@
                 <input id="bookmarks-user-defined-cols-input" type="text" autocomplete="off"
                   class="outline-none bg-transparent text-white placeholder-neutral-500"
                   placeholder="input number..." />
+              </div>
+            </div>
+            <div class="grid gap-2 text-base">
+              <div class="grid grid-cols-[max-content_auto] w-full place-items-center">
+                <p class="text-white text-base">bookmarks.userDefinedKeys</p>
+                <div class="ml-auto">
+                  <label class="relative inline-flex items-center cursor-pointer">
+                    <input id="bookmarks-user-defined-keys-checkbox" type="checkbox" value="" class="sr-only peer" />
+                    <div
+                      class="w-11 h-6 peer bg-neutral-800 outline-none rounded-full peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[3px] after:left-[3px] after:bg-neutral-700 after:border-none after:rounded-full after:h-[1.15rem] after:aspect-square after:transition-all peer-checked:bg-emerald-500 peer-checked:after:bg-white">
+                    </div>
+                  </label>
+                </div>
               </div>
             </div>
             <p class="text-white">bookmarks.userDefined</p>

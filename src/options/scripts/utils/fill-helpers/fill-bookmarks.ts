@@ -18,7 +18,8 @@ import {
   bookmarksShowBookmarkNamesCheckboxEl,
   bookmarksLocationFirefoxMenuButtonEl,
   bookmarksLocationFirefoxToolbarButtonEl,
-  bookmarksLocationFirefoxOtherButtonEl
+  bookmarksLocationFirefoxOtherButtonEl,
+  bookmarksUserDefinedKeysCheckboxEl
 } from "src/options/scripts/ui";
 
 export const fillBookmarksInputs = (config: Config) => {
@@ -26,6 +27,8 @@ export const fillBookmarksInputs = (config: Config) => {
 
   bookmarksDefaultBlockyColsInputEl.value = config.bookmarks.defaultBlockyCols.toString();
   bookmarksDefaultBlockyColorInputEl.value = config.bookmarks.defaultBlockyColor;
+
+  bookmarksUserDefinedKeysCheckboxEl.checked = config.bookmarks.userDefinedKeys;
 
   // prettier-ignore
   const bookmarksTypePairs: Record<BookmarksType, () => void> = {
