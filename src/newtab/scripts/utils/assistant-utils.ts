@@ -42,7 +42,7 @@ export const displayAssist = (items: AssistItem[], config: Config) => {
   assistantContainerEl.innerHTML = "";
   assistantContainerEl.classList.replace("hidden", "grid");
 
-  items.forEach((item) => {
+  items.forEach((item, index) => {
     if (item.type === "history") {
       item.historyItems.forEach((hi) => {
         assistantContainerEl.innerHTML += `
@@ -85,13 +85,16 @@ export const displayAssist = (items: AssistItem[], config: Config) => {
       });
     } else if (item.type === "conversion") {
       assistantContainerEl.innerHTML += `
-          <div class="w-full py-4">
-            <div class="w-full grid grid-cols-[1fr_max-content_1fr] place-items-center" style="color: ${config.search.textColor}">
+        <div class="w-full py-4">
+          <div class="w-full grid grid-cols-[1fr_max-content_1fr] place-items-center" style="color: ${config.search.textColor}">
             <span style="color: ${config.search.textColor}">${item.before}</span>
             <span style="color: ${config.search.placeholderTextColor}">=></span>
             <span style="color: ${config.search.textColor}">${item.after}</span>
-            </div>
-          </div>`;
+          </div>
+        </div>`;
     }
+
+    if (index !== items.length - 1)
+      assistantContainerEl.innerHTML += `<div class="w-full h-[1px] rounded-md my-auto" style="background-color: ${config.search.placeholderTextColor}"></div>`;
   });
 };
