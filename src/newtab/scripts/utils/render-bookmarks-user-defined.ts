@@ -1,7 +1,8 @@
 import { Config } from "src/newtab/scripts/config";
-import { bookmarksContainerEl } from "src/newtab/scripts/ui";
+import { bookmarksContainerEl, bookmarkSearchInputEl, searchInputEl } from "src/newtab/scripts/ui";
 import {
   bindActionsToBlockNode,
+  openBookmark,
   renderBlockBookmark
 } from "src/newtab/scripts/utils/bookmark-utils";
 import { insertCss } from "src/newtab/scripts/utils/insert-css";
@@ -43,6 +44,19 @@ export const renderUserDefinedBookmarks = (config: Config) => {
       config.animations.enabled,
       config.animations.initialType
     );
+
+    if (config.bookmarks.userDefinedKeys) {
+      document.addEventListener("keypress", (e) => {
+        const searchFocused = document.activeElement === searchInputEl;
+        const bookmarkSearchFocused = document.activeElement === bookmarkSearchInputEl;
+
+        if (!searchFocused && !bookmarkSearchFocused) {
+          if (e.key === (index + 1).toString()) {
+            openBookmark(bookmark.url, config.animations.enabled, config.animations.bookmarkType);
+          }
+        }
+      });
+    }
   });
 
   config.animations &&
