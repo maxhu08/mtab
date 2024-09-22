@@ -4,31 +4,26 @@ import { hideAssist, displayAssist } from "src/newtab/scripts/utils/assistant-ut
 import { evaluate, isNumber } from "mathjs";
 
 export const listenToSearch = (config: Config) => {
-  // chrome.history.search(
-  //   {
-  //     text: "",
-  //     maxResults: 1
-  //   },
-  //   (history) => {
-  //     searchInputEl.oninput = () => {
-  //       const val = searchInputEl.value;
-  //       if (val === "") {
-  //         hideAssist();
-  //       } else {
-  //         handleHistory(val, history, config);
-  //         handleDate(val, config);
-  //         handleMath(val, config);
-  //         handleDefinition(val, config);
-  //       }
-  //     };
-  //   }
-  // );
+  if (config.search.assist.history) {
+    chrome.history.search(
+      {
+        text: "",
+        maxResults: 100
+      },
+      (history) => {
+        handleSearch(config, history);
+      }
+    );
+  } else handleSearch(config);
+};
 
+const handleSearch = (config: Config, history: chrome.history.HistoryItem[] = []) => {
   searchInputEl.oninput = () => {
     const val = searchInputEl.value;
     if (val === "") {
       hideAssist();
     } else {
+      if (config.search.assist.history) handleHistory(val, history, config);
       if (config.search.assist.date) handleDate(val, config);
       if (config.search.assist.math) handleMath(val, config);
       if (config.search.assist.definitions) handleDefinition(val, config);
