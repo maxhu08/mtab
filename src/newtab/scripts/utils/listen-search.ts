@@ -80,7 +80,7 @@ const handleMath = (val: string) => {
   try {
     const result = evaluate(val);
     if (isNumber(result)) {
-      return { type: "math", result: result.toString() } as const;
+      return { type: "math", result } as const;
     }
   } catch {
     if (val !== "date") hideAssist();

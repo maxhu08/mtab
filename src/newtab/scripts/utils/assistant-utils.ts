@@ -19,7 +19,7 @@ interface AssistDate {
 
 interface AssistMath {
   type: "math";
-  result: string;
+  result: number;
 }
 
 interface AssistDefinition {
@@ -75,6 +75,14 @@ export const displayAssist = (items: AssistItem[], config: Config) => {
           <span class="font-semibold" style="color: ${config.search.placeholderTextColor}">&nbsp;=&nbsp;</span>
           <div class="text-ellipsis overflow-hidden whitespace-nowrap w-full" style="color: ${config.search.textColor}">${item.result}</div>
         </div>`;
+
+      if (item.result >= 9007199254740991) {
+        assistantContainerEl.innerHTML += `
+        <div class="grid grid-cols-[max-content_auto]">
+          <span class="font-semibold" style="color: ${config.search.placeholderTextColor}">&nbsp;*&nbsp;</span>
+          <div class="text-ellipsis overflow-hidden whitespace-nowrap w-full" style="color: ${config.search.placeholderTextColor}">reduced precision</div>
+        </div>`;
+      }
     } else if (item.type === "definition") {
       item.result.definitions.slice(0, 3).forEach((def: any) => {
         assistantContainerEl.innerHTML += `
