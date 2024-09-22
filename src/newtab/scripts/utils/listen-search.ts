@@ -25,10 +25,22 @@ const handleSearch = (config: Config, history: chrome.history.HistoryItem[] = []
     } else {
       let assistItems: AssistItem[] = [];
 
-      if (config.search.assist.date) assistItems = handleDate(val, assistItems);
-      if (config.search.assist.math) assistItems = handleMath(val, assistItems);
-      if (config.search.assist.definitions) assistItems = await handleDefinition(val, assistItems);
-      if (config.search.assist.history) assistItems = handleHistory(val, history, assistItems);
+      if (config.search.assist.date) {
+        const dateResult = handleDate(val);
+        dateResult !== undefined && assistItems.push(dateResult);
+      }
+      if (config.search.assist.math) {
+        const mathResult = handleMath(val);
+        mathResult !== undefined && assistItems.push(mathResult);
+      }
+      if (config.search.assist.definitions) {
+        const definitionResult = await handleDefinition(val);
+        definitionResult !== undefined && assistItems.push(definitionResult);
+      }
+      if (config.search.assist.history) {
+        const historyResult = handleHistory(val, history);
+        historyResult !== undefined && assistItems.push(historyResult);
+      }
 
       console.log(assistItems);
       if (assistItems.length > 0) displayAssist(assistItems, config);
@@ -37,44 +49,34 @@ const handleSearch = (config: Config, history: chrome.history.HistoryItem[] = []
   };
 };
 
-const handleHistory = (
-  val: string,
-  history: chrome.history.HistoryItem[],
-  assistItems: AssistItem[]
-) => {
+const handleHistory = (val: string, history: chrome.history.HistoryItem[]) => {
   const matchingItems = history
     .filter((h) => h.title?.toLocaleLowerCase().startsWith(val.toLowerCase()))
     .slice(0, 6);
 
   if (matchingItems.length > 0) {
-    assistItems.push({ type: "history", historyItems: matchingItems });
+    return { type: "history", historyItems: matchingItems } as const;
   } else hideAssist();
-
-  return assistItems;
 };
 
-const handleDate = (val: string, assistItems: AssistItem[]) => {
+const handleDate = (val: string) => {
   if (val === "date") {
-    assistItems.push({ type: "date" });
+    return { type: "date" } as const;
   }
-
-  return assistItems;
 };
 
-const handleMath = (val: string, assistItems: AssistItem[]) => {
+const handleMath = (val: string) => {
   try {
     const result = evaluate(val);
     if (isNumber(result)) {
-      assistItems.push({ type: "math", result: result.toString() });
+      return { type: "math", result: result.toString() } as const;
     }
   } catch {
     if (val !== "date") hideAssist();
   }
-
-  return assistItems;
 };
 
-const handleDefinition = async (val: string, assistItems: AssistItem[]) => {
+const handleDefinition = async (val: string) => {
   if (val.endsWith(" def") || val.endsWith(" definition")) {
     const word = val.replace(/ def$/, "").replace(/ definition$/, "");
 
@@ -84,9 +86,7 @@ const handleDefinition = async (val: string, assistItems: AssistItem[]) => {
       // const result = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`);
 
       const data = await response.json();
-      assistItems.push({ type: "definition", result: data });
+      return { type: "definition", result: data } as const;
     } catch {}
   }
-
-  return assistItems;
 };
