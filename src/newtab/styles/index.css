@@ -5,6 +5,22 @@
   src: url("../../assets/fonts/JetBrainsMonoNerdFontMono-Regular.ttf") format("truetype");
 }
 
+.top-distance {
+  top: 10vh;
+}
+
+@media (min-height: 400px) {
+  .top-distance {
+    top: 20vh;
+  }
+}
+
+@media (min-height: 600px) {
+  .top-distance {
+    top: 30vh;
+  }
+}
+
 .bookmark-icon svg {
   height: 100%;
   width: auto;
