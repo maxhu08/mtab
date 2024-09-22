@@ -11,7 +11,6 @@ export const listenToSearch = (config: Config) => {
         maxResults: 100
       },
       (history) => {
-        console.log(history);
         handleSearch(config, history);
       }
     );
