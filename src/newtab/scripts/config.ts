@@ -95,7 +95,13 @@ export const defaultConfig: Config = {
     engine: "duckduckgo",
     useCustomEngine: false,
     customEngineURL: "",
-    focusedBorderColor: "#0ea5e9"
+    focusedBorderColor: "#0ea5e9",
+    assist: {
+      history: false,
+      date: true,
+      math: true,
+      definitions: true
+    }
   },
   hotkeys: {
     enabled: true,
@@ -239,6 +245,12 @@ export interface Config {
     useCustomEngine: boolean;
     customEngineURL: string;
     focusedBorderColor: string;
+    assist: {
+      history: boolean;
+      date: boolean;
+      math: boolean;
+      definitions: boolean;
+    };
   };
   hotkeys: {
     enabled: boolean;
