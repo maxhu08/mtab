@@ -1,6 +1,6 @@
 import { Config } from "src/newtab/scripts/config";
 import { searchInputEl } from "src/newtab/scripts/ui";
-import { hideAssist, displayAssist } from "src/newtab/scripts/utils/assistant-utils";
+import { hideAssist, displayAssist, AssistItem } from "src/newtab/scripts/utils/assistant-utils";
 import { evaluate, isNumber } from "mathjs";
 
 export const listenToSearch = (config: Config) => {
@@ -18,45 +18,63 @@ export const listenToSearch = (config: Config) => {
 };
 
 const handleSearch = (config: Config, history: chrome.history.HistoryItem[] = []) => {
-  searchInputEl.oninput = () => {
+  searchInputEl.oninput = async () => {
     const val = searchInputEl.value;
     if (val === "") {
       hideAssist();
     } else {
-      if (config.search.assist.history) handleHistory(val, history, config);
-      if (config.search.assist.date) handleDate(val, config);
-      if (config.search.assist.math) handleMath(val, config);
-      if (config.search.assist.definitions) handleDefinition(val, config);
+      let assistItems: AssistItem[] = [];
+
+      if (config.search.assist.date) assistItems = handleDate(val, assistItems);
+      if (config.search.assist.math) assistItems = handleMath(val, assistItems);
+      if (config.search.assist.definitions) assistItems = await handleDefinition(val, assistItems);
+      if (config.search.assist.history) assistItems = handleHistory(val, history, assistItems);
+
+      console.log(assistItems);
+      if (assistItems.length > 0) displayAssist(assistItems, config);
+      else hideAssist();
     }
   };
 };
 
-const handleHistory = (val: string, history: chrome.history.HistoryItem[], config: Config) => {
+const handleHistory = (
+  val: string,
+  history: chrome.history.HistoryItem[],
+  assistItems: AssistItem[]
+) => {
   const matchingItems = history
     .filter((h) => h.title?.toLocaleLowerCase().startsWith(val.toLowerCase()))
     .slice(0, 6);
 
   if (matchingItems.length > 0) {
-    displayAssist([{ type: "history", historyItems: matchingItems }], config);
+    assistItems.push({ type: "history", historyItems: matchingItems });
   } else hideAssist();
+
+  return assistItems;
 };
 
-const handleDate = (val: string, config: Config) => {
-  if (val === "date") displayAssist([{ type: "date" }], config);
+const handleDate = (val: string, assistItems: AssistItem[]) => {
+  if (val === "date") {
+    assistItems.push({ type: "date" });
+  }
+
+  return assistItems;
 };
 
-const handleMath = (val: string, config: Config) => {
+const handleMath = (val: string, assistItems: AssistItem[]) => {
   try {
     const result = evaluate(val);
     if (isNumber(result)) {
-      displayAssist([{ type: "math", result: result.toString() }], config);
+      assistItems.push({ type: "math", result: result.toString() });
     }
   } catch {
     if (val !== "date") hideAssist();
   }
+
+  return assistItems;
 };
 
-const handleDefinition = async (val: string, config: Config) => {
+const handleDefinition = async (val: string, assistItems: AssistItem[]) => {
   if (val.endsWith(" def") || val.endsWith(" definition")) {
     const word = val.replace(/ def$/, "").replace(/ definition$/, "");
 
@@ -66,7 +84,9 @@ const handleDefinition = async (val: string, config: Config) => {
       // const result = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`);
 
       const data = await response.json();
-      displayAssist([{ type: "definition", result: data }], config);
+      assistItems.push({ type: "definition", result: data });
     } catch {}
   }
+
+  return assistItems;
 };

@@ -1,7 +1,7 @@
 import { Config } from "src/newtab/scripts/config";
 import { assistantContainerEl } from "src/newtab/scripts/ui";
 
-type AssistItem = AssistHistoryList | AssistDate | AssistMath | AssistDefinition;
+export type AssistItem = AssistHistoryList | AssistDate | AssistMath | AssistDefinition;
 
 interface AssistHistoryList {
   type: "history";
