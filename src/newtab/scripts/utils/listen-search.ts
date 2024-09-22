@@ -107,28 +107,59 @@ const handleConversion = (val: string) => {
     inches: /^(\d+)\s?in\s*$/,
     centimeters: /^(\d+)\s?cm\s*$/,
     pounds: /^(\d+)\s?lbs?\s*$/,
-    kilograms: /^(\d+)\s?kg\s*$/
+    kilograms: /^(\d+)\s?kg\s*$/,
+    miles: /^(\d+)\s?mi\s*$/,
+    kilometers: /^(\d+)\s?km\s*$/,
+    fahrenheit: /^(\d+)\s?[fF]\s*$/,
+    celsius: /^(\d+)\s?[cC]\s*$/
   };
 
   const matchConversion = (regex: RegExp, type: string) => {
     const match = val.match(regex);
     if (match) {
-      const value = parseInt(match[1], 10);
+      const value = parseFloat(match[1]);
       let converted: string;
       let unit: string;
 
-      if (type === "in") {
-        converted = (value * 2.54).toFixed(2);
-        unit = "cm";
-      } else if (type === "cm") {
-        converted = (value / 2.54).toFixed(2);
-        unit = "in";
-      } else if (type === "lbs") {
-        converted = (value * 0.453592).toFixed(2);
-        unit = "kg";
-      } else {
-        converted = (value / 0.453592).toFixed(2);
-        unit = "lbs";
+      switch (type) {
+        case "in":
+          converted = (value * 2.54).toFixed(2);
+          unit = "cm";
+          break;
+        case "cm":
+          converted = (value / 2.54).toFixed(2);
+          unit = "in";
+          break;
+        case "lbs":
+          converted = (value * 0.453592).toFixed(2);
+          unit = "kg";
+          break;
+        case "kg":
+          converted = (value / 0.453592).toFixed(2);
+          unit = "lbs";
+          break;
+        case "mi":
+          converted = (value * 1.60934).toFixed(2);
+          unit = "km";
+          break;
+        case "km":
+          converted = (value / 1.60934).toFixed(2);
+          unit = "mi";
+          break;
+        case "f":
+        case "F":
+          converted = (((value - 32) * 5) / 9).toFixed();
+          type = "°F";
+          unit = "°C";
+          break;
+        case "c":
+        case "C":
+          converted = ((value * 9) / 5 + 32).toFixed();
+          type = "°C";
+          unit = "°F";
+          break;
+        default:
+          return;
       }
 
       return {
@@ -143,6 +174,10 @@ const handleConversion = (val: string) => {
     matchConversion(regexes.inches, "in") ||
     matchConversion(regexes.centimeters, "cm") ||
     matchConversion(regexes.pounds, "lbs") ||
-    matchConversion(regexes.kilograms, "kg")
+    matchConversion(regexes.kilograms, "kg") ||
+    matchConversion(regexes.miles, "mi") ||
+    matchConversion(regexes.kilometers, "km") ||
+    matchConversion(regexes.fahrenheit, "f") ||
+    matchConversion(regexes.celsius, "c")
   );
 };
