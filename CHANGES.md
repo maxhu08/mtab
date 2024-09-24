@@ -1,9 +1,7 @@
-# Changes in 1.5.3
+# Changes in 1.5.4
 
 in this release:
 
-- add option to enable/disable specific search assist features
-- make new tab content absolute to stop ui from shifting
-- add assist history feature (experimental)
-- add keys to open user defined bookmarks
-- bug fixes
+- improve search assist to show multiple types of info at once
+- add unit conversion to search assist
+- add precision indicator to search math assist
