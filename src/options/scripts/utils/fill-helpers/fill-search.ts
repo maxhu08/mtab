@@ -23,7 +23,8 @@ import {
   searchAssistHistoryCheckboxEl,
   searchAssistDateCheckboxEl,
   searchAssistMathCheckboxEl,
-  searchAssistDefinitionsCheckboxEl
+  searchAssistDefinitionsCheckboxEl,
+  searchAssistConversionsCheckboxEl
 } from "src/options/scripts/ui";
 
 export const fillSearchInputs = (config: Config) => {
@@ -61,4 +62,5 @@ export const fillSearchInputs = (config: Config) => {
   searchAssistDateCheckboxEl.checked = config.search.assist.date;
   searchAssistMathCheckboxEl.checked = config.search.assist.math;
   searchAssistDefinitionsCheckboxEl.checked = config.search.assist.definitions;
+  searchAssistConversionsCheckboxEl.checked = config.search.assist.conversions;
 };

@@ -15,7 +15,8 @@ import {
   searchAssistHistoryCheckboxEl,
   searchAssistDateCheckboxEl,
   searchAssistMathCheckboxEl,
-  searchAssistDefinitionsCheckboxEl
+  searchAssistDefinitionsCheckboxEl,
+  searchAssistConversionsCheckboxEl
 } from "src/options/scripts/ui";
 
 export const saveSearchSettingsToDraft = (draft: Config) => {
@@ -59,4 +60,5 @@ export const saveSearchSettingsToDraft = (draft: Config) => {
   draft.search.assist.date = searchAssistDateCheckboxEl.checked;
   draft.search.assist.math = searchAssistMathCheckboxEl.checked;
   draft.search.assist.definitions = searchAssistDefinitionsCheckboxEl.checked;
+  draft.search.assist.conversions = searchAssistConversionsCheckboxEl.checked;
 };

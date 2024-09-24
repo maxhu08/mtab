@@ -45,7 +45,7 @@ const handleSearch = (config: Config, history: chrome.history.HistoryItem[] = []
         const definitionResult = await handleDefinition(val);
         definitionResult !== undefined && assistItems.push(definitionResult);
       }
-      if (true) {
+      if (config.search.assist.conversions) {
         const conversionResult = handleConversion(val);
         conversionResult !== undefined && assistItems.push(conversionResult);
       }

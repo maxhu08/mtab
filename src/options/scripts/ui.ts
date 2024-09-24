@@ -129,6 +129,7 @@ export const searchAssistHistoryCheckboxEl = document.getElementById("search-ass
 export const searchAssistDateCheckboxEl = document.getElementById("search-assist-date-checkbox") as HTMLInputElement;
 export const searchAssistMathCheckboxEl = document.getElementById("search-assist-math-checkbox") as HTMLInputElement;
 export const searchAssistDefinitionsCheckboxEl = document.getElementById("search-assist-definitions-checkbox") as HTMLInputElement;
+export const searchAssistConversionsCheckboxEl = document.getElementById("search-assist-conversions-checkbox") as HTMLInputElement;
 
 export const hotkeysEnabledCheckboxEl = document.getElementById("hotkeys-enabled-checkbox") as HTMLInputElement;
 
