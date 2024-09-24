@@ -100,7 +100,8 @@ export const defaultConfig: Config = {
       history: false,
       date: true,
       math: true,
-      definitions: true
+      definitions: true,
+      conversions: true
     }
   },
   hotkeys: {
@@ -251,6 +252,7 @@ export interface Config {
       date: boolean;
       math: boolean;
       definitions: boolean;
+      conversions: boolean;
     };
   };
   hotkeys: {
