@@ -1,3 +1,4 @@
+import { Config, deepMerge, defaultConfig } from "src/newtab/scripts/config";
 import { fillInputs } from "src/options/scripts/utils/fill-inputs";
 import { saveConfig } from "src/options/scripts/utils/save-config";
 import { fixAllToggleCheckboxSections } from "src/options/scripts/utils/toggle-checkbox";
@@ -16,12 +17,14 @@ export const importConfigAndSave = () => {
     return;
   }
 
-  const parsedData = JSON.parse(
+  const importedConfig = JSON.parse(
     JSON.parse(decodeURIComponent(window.atob(dataToImport.replace(pattern, ""))))
   );
 
-  console.log("[IMPORT_DEBUG]", parsedData);
-  fillInputs(parsedData);
+  const mergedConfig = deepMerge(structuredClone(defaultConfig), importedConfig);
+
+  console.log("[IMPORT_DEBUG]", mergedConfig);
+  fillInputs(mergedConfig);
   fixAllToggleCheckboxSections();
 
   saveConfig();

@@ -20,7 +20,7 @@ export const getConfig = (f: ({ config }: { config: Config }) => void) => {
   });
 };
 
-const deepMerge = (target: any, source: any): any => {
+export const deepMerge = (target: any, source: any): any => {
   const isObject = (obj: any) => obj && typeof obj === "object";
 
   if (!isObject(target) || !isObject(source)) {
