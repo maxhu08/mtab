@@ -31,7 +31,9 @@ downloads here:
 
 ## showcase
 
-![showcase](./assets/mtab-showcase.png)
+![showcase](./assets/mtab-showcase-1.png)
+
+![showcase](./assets/mtab-showcase-2.png)
 
 ## star-history
 
