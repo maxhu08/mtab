@@ -54,56 +54,148 @@ export const displayAssist = (items: AssistItem[], config: Config) => {
     // }
     if (item.type === "date") {
       const date = new Date();
-      assistantContainerEl.innerHTML += `
-        <div class="grid grid-cols-[max-content_auto]">
-          <span class="font-semibold" style="color: ${
-            config.search.placeholderTextColor
-          }">&nbsp;=&nbsp;</span>
-          <div class="text-ellipsis overflow-hidden whitespace-nowrap w-full" style="color: ${
-            config.search.textColor
-          }">
-            ${new Intl.DateTimeFormat("en-US", {
-              year: "numeric",
-              month: "long",
-              day: "numeric",
-              weekday: "long"
-            }).format(date)}
-          </div>
-        </div>`;
+      // <div class="grid grid-cols-[max-content_auto]">
+      //   <span class="font-semibold" style="color: ${config.search.placeholderTextColor}">&nbsp;=&nbsp;</span>
+      //   <div class="text-ellipsis overflow-hidden whitespace-nowrap w-full" style="color: ${config.search.textColor}">
+      //     ${new Intl.DateTimeFormat("en-US", { year: "numeric", month: "long", day: "numeric", weekday: "long" }).format(date)}
+      //   </div>
+      // </div>
+
+      const gridContainerEl = document.createElement("div");
+      gridContainerEl.className = "grid grid-cols-[max-content_auto]";
+
+      const spanEl = document.createElement("span");
+      spanEl.className = "font-semibold";
+      spanEl.style.color = config.search.placeholderTextColor;
+      spanEl.innerHTML = "&nbsp;=&nbsp;";
+
+      const dateTextEl = document.createElement("div");
+      dateTextEl.className = "text-ellipsis overflow-hidden whitespace-nowrap w-full";
+      dateTextEl.style.color = config.search.textColor;
+      dateTextEl.textContent = new Intl.DateTimeFormat("en-US", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+        weekday: "long"
+      }).format(date);
+
+      gridContainerEl.appendChild(spanEl);
+      gridContainerEl.appendChild(dateTextEl);
+      assistantContainerEl.appendChild(gridContainerEl);
     } else if (item.type === "math") {
-      assistantContainerEl.innerHTML += `
-        <div class="grid grid-cols-[max-content_auto]">
-          <span class="font-semibold" style="color: ${config.search.placeholderTextColor}">&nbsp;=&nbsp;</span>
-          <div class="text-ellipsis overflow-hidden whitespace-nowrap w-full" style="color: ${config.search.textColor}">${item.result}</div>
-        </div>`;
+      // <div class="grid grid-cols-[max-content_auto]">
+      //   <span class="font-semibold" style="color: ${config.search.placeholderTextColor}">&nbsp;=&nbsp;</span>
+      //   <div class="text-ellipsis overflow-hidden whitespace-nowrap w-full" style="color: ${config.search.textColor}">${item.result}</div>
+      // </div>
+
+      const gridContainerEl = document.createElement("div");
+      gridContainerEl.className = "grid grid-cols-[max-content_auto]";
+
+      const spanEl = document.createElement("span");
+      spanEl.className = "font-semibold";
+      spanEl.style.color = config.search.placeholderTextColor;
+      spanEl.innerHTML = "&nbsp;=&nbsp;";
+
+      const resultTextEl = document.createElement("div");
+      resultTextEl.className = "text-ellipsis overflow-hidden whitespace-nowrap w-full";
+      resultTextEl.style.color = config.search.textColor;
+      resultTextEl.textContent = item.result.toString();
+
+      gridContainerEl.appendChild(spanEl);
+      gridContainerEl.appendChild(resultTextEl);
+      assistantContainerEl.appendChild(gridContainerEl);
 
       if (item.result >= 9007199254740991) {
-        assistantContainerEl.innerHTML += `
-        <div class="grid grid-cols-[max-content_auto]">
-          <span class="font-semibold" style="color: ${config.search.placeholderTextColor}">&nbsp;*&nbsp;</span>
-          <div class="text-ellipsis overflow-hidden whitespace-nowrap w-full" style="color: ${config.search.placeholderTextColor}">reduced precision</div>
-        </div>`;
+        // <div class="grid grid-cols-[max-content_auto]">
+        //   <span class="font-semibold" style="color: ${config.search.placeholderTextColor}">&nbsp;*&nbsp;</span>
+        //   <div class="text-ellipsis overflow-hidden whitespace-nowrap w-full" style="color: ${config.search.placeholderTextColor}">reduced precision</div>
+        // </div>
+
+        const gridContainerEl = document.createElement("div");
+        gridContainerEl.className = "grid grid-cols-[max-content_auto]";
+
+        const spanEl = document.createElement("span");
+        spanEl.className = "font-semibold";
+        spanEl.style.color = config.search.placeholderTextColor;
+        spanEl.innerHTML = "&nbsp;*&nbsp;";
+
+        const precisionTextEl = document.createElement("div");
+        precisionTextEl.className = "text-ellipsis overflow-hidden whitespace-nowrap w-full";
+        precisionTextEl.style.color = config.search.placeholderTextColor;
+        precisionTextEl.textContent = "reduced precision";
+
+        gridContainerEl.appendChild(spanEl);
+        gridContainerEl.appendChild(precisionTextEl);
+        assistantContainerEl.appendChild(gridContainerEl);
       }
     } else if (item.type === "definition") {
       item.result.definitions.slice(0, 3).forEach((def: any) => {
-        assistantContainerEl.innerHTML += `
-          <div class="grid grid-cols-[max-content_auto]">
-            <span class="font-semibold" style="color: ${config.search.placeholderTextColor}">&nbsp;-&nbsp;</span>
-            <div class="w-full" style="color: ${config.search.textColor}">${def.definition} <span style="color: ${config.search.placeholderTextColor}">(${def.pos})</span></div>
-          </div>`;
+        // <div class="grid grid-cols-[max-content_auto]">
+        //   <span class="font-semibold" style="color: ${config.search.placeholderTextColor}">&nbsp;-&nbsp;</span>
+        //   <div class="w-full" style="color: ${config.search.textColor}">${def.definition} <span style="color: ${config.search.placeholderTextColor}">(${def.pos})</span></div>
+        // </div>
+
+        const gridContainerEl = document.createElement("div");
+        gridContainerEl.className = "grid grid-cols-[max-content_auto]";
+
+        const spanEl = document.createElement("span");
+        spanEl.className = "font-semibold";
+        spanEl.style.color = config.search.placeholderTextColor;
+        spanEl.innerHTML = "&nbsp;-&nbsp;";
+
+        const definitionEl = document.createElement("div");
+        definitionEl.className = "w-full";
+        definitionEl.style.color = config.search.textColor;
+        definitionEl.innerHTML = `${def.definition} <span style="color: ${config.search.placeholderTextColor}">(${def.pos})</span>`;
+
+        gridContainerEl.appendChild(spanEl);
+        gridContainerEl.appendChild(definitionEl);
+        assistantContainerEl.appendChild(gridContainerEl);
       });
     } else if (item.type === "conversion") {
-      assistantContainerEl.innerHTML += `
-        <div class="w-full py-4">
-          <div class="w-full grid grid-cols-[1fr_max-content_1fr] place-items-center" style="color: ${config.search.textColor}">
-            <span style="color: ${config.search.textColor}">${item.before}</span>
-            <span style="color: ${config.search.placeholderTextColor}">=></span>
-            <span style="color: ${config.search.textColor}">${item.after}</span>
-          </div>
-        </div>`;
+      // <div class="w-full py-4">
+      //   <div class="w-full grid grid-cols-[1fr_max-content_1fr] place-items-center" style="color: ${config.search.textColor}">
+      //     <span style="color: ${config.search.textColor}">${item.before}</span>
+      //     <span style="color: ${config.search.placeholderTextColor}">=></span>
+      //     <span style="color: ${config.search.textColor}">${item.after}</span>
+      //   </div>
+      // </div>
+
+      const outerContainerEl = document.createElement("div");
+      outerContainerEl.className = "w-full py-4";
+
+      const innerGridEl = document.createElement("div");
+      innerGridEl.className = "w-full grid grid-cols-[1fr_max-content_1fr] place-items-center";
+      innerGridEl.style.color = config.search.textColor;
+
+      const beforeSpanEl = document.createElement("span");
+      beforeSpanEl.style.color = config.search.textColor;
+      beforeSpanEl.textContent = item.before;
+
+      const arrowSpanEl = document.createElement("span");
+      arrowSpanEl.style.color = config.search.placeholderTextColor;
+      arrowSpanEl.textContent = "=>";
+
+      const afterSpanEl = document.createElement("span");
+      afterSpanEl.style.color = config.search.textColor;
+      afterSpanEl.textContent = item.after;
+
+      innerGridEl.appendChild(beforeSpanEl);
+      innerGridEl.appendChild(arrowSpanEl);
+      innerGridEl.appendChild(afterSpanEl);
+
+      outerContainerEl.appendChild(innerGridEl);
+      assistantContainerEl.appendChild(outerContainerEl);
     }
 
-    if (index !== items.length - 1)
-      assistantContainerEl.innerHTML += `<div class="w-full h-[1px] rounded-md my-auto" style="background-color: ${config.search.placeholderTextColor}"></div>`;
+    if (index !== items.length - 1) {
+      // <div class="w-full h-[1px] rounded-md my-auto" style="background-color: ${config.search.placeholderTextColor}"></div>
+
+      const dividerEl = document.createElement("div");
+      dividerEl.className = "w-full h-[1px] rounded-md my-auto";
+      dividerEl.style.backgroundColor = config.search.placeholderTextColor;
+
+      assistantContainerEl.appendChild(dividerEl);
+    }
   });
 };
