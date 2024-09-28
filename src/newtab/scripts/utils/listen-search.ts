@@ -4,25 +4,27 @@ import { hideAssist, displayAssist, AssistItem } from "src/newtab/scripts/utils/
 import { evaluate, isNumber } from "mathjs";
 
 export const listenToSearch = (config: Config) => {
-  if (config.search.assist.history) {
-    chrome.history.search(
-      {
-        text: "",
-        maxResults: 100
-      },
-      (history) => {
-        const uniqueHistoryMap: Record<string, (typeof history)[number]> = {};
-        for (const h of history) {
-          if (h.title && !uniqueHistoryMap[h.title]) {
-            uniqueHistoryMap[h.title] = h;
-          }
-        }
-        const uniqueHistory = Object.values(uniqueHistoryMap);
+  // if (config.search.assist.history) {
+  //   chrome.history.search(
+  //     {
+  //       text: "",
+  //       maxResults: 100
+  //     },
+  //     (history) => {
+  //       const uniqueHistoryMap: Record<string, (typeof history)[number]> = {};
+  //       for (const h of history) {
+  //         if (h.title && !uniqueHistoryMap[h.title]) {
+  //           uniqueHistoryMap[h.title] = h;
+  //         }
+  //       }
+  //       const uniqueHistory = Object.values(uniqueHistoryMap);
 
-        handleSearch(config, uniqueHistory);
-      }
-    );
-  } else handleSearch(config);
+  //       handleSearch(config, uniqueHistory);
+  //     }
+  //   );
+  // } else handleSearch(config);
+
+  handleSearch(config);
 };
 
 const handleSearch = (config: Config, history: chrome.history.HistoryItem[] = []) => {
@@ -49,10 +51,10 @@ const handleSearch = (config: Config, history: chrome.history.HistoryItem[] = []
         const conversionResult = handleConversion(val);
         conversionResult !== undefined && assistItems.push(conversionResult);
       }
-      if (config.search.assist.history) {
-        const historyResult = handleHistory(val, history);
-        historyResult !== undefined && assistItems.push(historyResult);
-      }
+      // if (config.search.assist.history) {
+      //   const historyResult = handleHistory(val, history);
+      //   historyResult !== undefined && assistItems.push(historyResult);
+      // }
 
       if (assistItems.length > 0) displayAssist(assistItems, config);
       else hideAssist();

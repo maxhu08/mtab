@@ -43,15 +43,16 @@ export const displayAssist = (items: AssistItem[], config: Config) => {
   assistantContainerEl.classList.replace("hidden", "grid");
 
   items.forEach((item, index) => {
-    if (item.type === "history") {
-      item.historyItems.forEach((hi) => {
-        assistantContainerEl.innerHTML += `
-        <div class="grid grid-cols-[max-content_auto]">
-          <span class="font-semibold" style="color: ${config.search.placeholderTextColor}">&nbsp;~&nbsp;</span>
-          <div class="text-ellipsis overflow-hidden whitespace-nowrap w-full" style="color: ${config.search.placeholderTextColor}">${hi.title}</div>
-        </div>`;
-      });
-    } else if (item.type === "date") {
+    // if (item.type === "history") {
+    //   item.historyItems.forEach((hi) => {
+    //     assistantContainerEl.innerHTML += `
+    //     <div class="grid grid-cols-[max-content_auto]">
+    //       <span class="font-semibold" style="color: ${config.search.placeholderTextColor}">&nbsp;~&nbsp;</span>
+    //       <div class="text-ellipsis overflow-hidden whitespace-nowrap w-full" style="color: ${config.search.placeholderTextColor}">${hi.title}</div>
+    //     </div>`;
+    //   });
+    // }
+    if (item.type === "date") {
       const date = new Date();
       assistantContainerEl.innerHTML += `
         <div class="grid grid-cols-[max-content_auto]">

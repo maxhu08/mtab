@@ -97,7 +97,7 @@ export const defaultConfig: Config = {
     customEngineURL: "",
     focusedBorderColor: "#0ea5e9",
     assist: {
-      history: false,
+      // history: false,
       date: true,
       math: true,
       definitions: true,
@@ -248,7 +248,7 @@ export interface Config {
     customEngineURL: string;
     focusedBorderColor: string;
     assist: {
-      history: boolean;
+      // history: boolean;
       date: boolean;
       math: boolean;
       definitions: boolean;
