@@ -6,15 +6,27 @@ export const handleWallpaperFileUpload = () => {
     const file = e.target.files[0];
 
     if (file) {
+      const fileType = file.type;
       const reader = new FileReader();
-      reader.onload = (e: any) => {
-        // resize image to 1920x1080 because chrome can't store really large images
-        resizeImage(e.target.result, 1920, 1080, (resizedDataUrl) => {
-          chrome.storage.local.set({ userUploadedWallpaper: resizedDataUrl });
-          previewWallpaper(resizedDataUrl);
-        });
-      };
-      reader.readAsDataURL(file);
+
+      if (fileType.startsWith("image/") && fileType !== "image/gif") {
+        // resize images
+        reader.onload = (e: any) => {
+          resizeImage(e.target.result, 1920, 1080, (resizedDataUrl) => {
+            chrome.storage.local.set({ userUploadedWallpaper: resizedDataUrl });
+            previewWallpaper(resizedDataUrl);
+          });
+        };
+        reader.readAsDataURL(file);
+      } else if (fileType === "image/gif" || fileType.startsWith("video/")) {
+        // don't resize gifs and videos
+        reader.onload = (e: any) => {
+          const fileDataUrl = e.target.result;
+          chrome.storage.local.set({ userUploadedWallpaper: fileDataUrl });
+          previewWallpaper(fileDataUrl);
+        };
+        reader.readAsDataURL(file);
+      }
     }
   });
 };
