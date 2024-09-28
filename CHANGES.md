@@ -1,6 +1,6 @@
-# Changes in 1.5.5
+# Changes in 1.5.6
 
 in this release:
 
-- add support for gifs to be set as wallpaper
-- bug fixes
+- remove history assist feature
+- performance improvements
