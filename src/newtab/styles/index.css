@@ -5,6 +5,10 @@
   src: url("../../assets/fonts/JetBrainsMonoNerdFontMono-Regular.ttf") format("truetype");
 }
 
+::-webkit-scrollbar {
+  display: none;
+}
+
 .top-distance {
   top: 10vh;
 }
