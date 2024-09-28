@@ -20,7 +20,7 @@ import {
   searchSearchIconColorInputEl,
   searchBookmarkIconColorInputEl,
   searchSelectIconColorInputEl,
-  searchAssistHistoryCheckboxEl,
+  // searchAssistHistoryCheckboxEl,
   searchAssistDateCheckboxEl,
   searchAssistMathCheckboxEl,
   searchAssistDefinitionsCheckboxEl,
@@ -58,7 +58,7 @@ export const fillSearchInputs = (config: Config) => {
   searchUseCustomEngineEnabledCheckboxEl.checked = config.search.useCustomEngine;
   searchCustomEngineURLInputEl.value = config.search.customEngineURL;
 
-  searchAssistHistoryCheckboxEl.checked = config.search.assist.history;
+  // searchAssistHistoryCheckboxEl.checked = config.search.assist.history;
   searchAssistDateCheckboxEl.checked = config.search.assist.date;
   searchAssistMathCheckboxEl.checked = config.search.assist.math;
   searchAssistDefinitionsCheckboxEl.checked = config.search.assist.definitions;

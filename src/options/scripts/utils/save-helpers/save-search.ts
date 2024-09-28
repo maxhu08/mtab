@@ -12,7 +12,7 @@ import {
   searchSearchIconColorInputEl,
   searchBookmarkIconColorInputEl,
   searchSelectIconColorInputEl,
-  searchAssistHistoryCheckboxEl,
+  // searchAssistHistoryCheckboxEl,
   searchAssistDateCheckboxEl,
   searchAssistMathCheckboxEl,
   searchAssistDefinitionsCheckboxEl,
@@ -56,7 +56,7 @@ export const saveSearchSettingsToDraft = (draft: Config) => {
 
   draft.search.focusedBorderColor = searchFocusedBorderColorInputEl.value;
 
-  draft.search.assist.history = searchAssistHistoryCheckboxEl.checked;
+  // draft.search.assist.history = searchAssistHistoryCheckboxEl.checked;
   draft.search.assist.date = searchAssistDateCheckboxEl.checked;
   draft.search.assist.math = searchAssistMathCheckboxEl.checked;
   draft.search.assist.definitions = searchAssistDefinitionsCheckboxEl.checked;

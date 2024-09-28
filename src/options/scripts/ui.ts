@@ -125,7 +125,7 @@ export const searchUseCustomEngineEnabledCheckboxEl = document.getElementById("s
 export const searchCustomEngineURLContainerEl = document.getElementById("search-custom-engine-url-container") as HTMLDivElement;
 export const searchCustomEngineURLInputEl = document.getElementById("search-custom-engine-url-input") as HTMLInputElement;
 
-export const searchAssistHistoryCheckboxEl = document.getElementById("search-assist-history-checkbox") as HTMLInputElement;
+// export const searchAssistHistoryCheckboxEl = document.getElementById("search-assist-history-checkbox") as HTMLInputElement;
 export const searchAssistDateCheckboxEl = document.getElementById("search-assist-date-checkbox") as HTMLInputElement;
 export const searchAssistMathCheckboxEl = document.getElementById("search-assist-math-checkbox") as HTMLInputElement;
 export const searchAssistDefinitionsCheckboxEl = document.getElementById("search-assist-definitions-checkbox") as HTMLInputElement;
