@@ -2,7 +2,12 @@ import {
   bookmarksDefaultBlockyColorTypeCustomButtonEl,
   bookmarksDefaultBlockyColorTypeRandomButtonEl,
   bookmarksTypeDefaultBlockyButtonEl,
-  bookmarksTypeUserDefinedButtonEl
+  bookmarksTypeUserDefinedButtonEl,
+  messageTypeCustomButtonEl,
+  titleFaviconTypeCustomButtonEl,
+  titleFaviconTypeDefaultButtonEl,
+  wallpaperTypeFileUploadButtonEl,
+  wallpaperTypeUrlButtonEl
 } from "src/options/scripts/ui";
 
 export const handleFaviconTypeSwitch = () => {
@@ -10,15 +15,11 @@ export const handleFaviconTypeSwitch = () => {
     "title-custom-favicon-upload-section"
   ) as HTMLDivElement;
 
-  (
-    document.getElementById("title-favicon-type-default-button") as HTMLButtonElement
-  ).addEventListener("click", () => {
+  titleFaviconTypeDefaultButtonEl.addEventListener("click", () => {
     faviconCustomSection.style.display = "none";
   });
 
-  (
-    document.getElementById("title-favicon-type-custom-button") as HTMLButtonElement
-  ).addEventListener("click", () => {
+  titleFaviconTypeCustomButtonEl.addEventListener("click", () => {
     faviconCustomSection.style.display = "block";
   });
 };
@@ -34,12 +35,9 @@ export const handleMessageTypeSwitch = () => {
     "message-type-time-24-button"
   ];
 
-  (document.getElementById("message-type-custom-button") as HTMLButtonElement).addEventListener(
-    "click",
-    () => {
-      messageCustomTextSection.style.display = "block";
-    }
-  );
+  messageTypeCustomButtonEl.addEventListener("click", () => {
+    messageCustomTextSection.style.display = "block";
+  });
 
   hideButtons.forEach((id) => {
     (document.getElementById(id) as HTMLButtonElement).addEventListener("click", () => {
@@ -54,17 +52,12 @@ export const handleWallpaperTypeSwitch = () => {
     "wallpaper-file-upload-section"
   ) as HTMLDivElement;
 
-  (document.getElementById("wallpaper-type-url-button") as HTMLButtonElement).addEventListener(
-    "click",
-    () => {
-      wallpaperFileUploadSection.style.display = "none";
-      wallpaperUrlSection.style.display = "block";
-    }
-  );
+  wallpaperTypeUrlButtonEl.addEventListener("click", () => {
+    wallpaperFileUploadSection.style.display = "none";
+    wallpaperUrlSection.style.display = "block";
+  });
 
-  (
-    document.getElementById("wallpaper-type-file-upload-button") as HTMLButtonElement
-  ).addEventListener("click", () => {
+  wallpaperTypeFileUploadButtonEl.addEventListener("click", () => {
     wallpaperUrlSection.style.display = "none";
     wallpaperFileUploadSection.style.display = "block";
   });
