@@ -851,13 +851,29 @@
                   placeholder="input number..." />
               </div>
             </div>
-            <div class="grid gap-2">
-              <p class="text-white text-base">bookmarks.defaultBlockyColor</p>
-              <div id="bookmarks-default-blocky-color-container"
-                class="grid grid-cols-[max-content_auto] text-base bg-neutral-800 w-full p-1 rounded-md border-2 border-transparent">
-                <span class="text-pink-500 font-semibold select-none">>&nbsp;</span>
-                <input id="bookmarks-default-blocky-color-input" type="text" autocomplete="off"
-                  class="outline-none bg-transparent text-white placeholder-neutral-500" placeholder="input color..." />
+            <div class="grid gap-2 text-base">
+              <p class="text-white">bookmarks.defaultBlockyColorType</p>
+              <div class="grid grid-cols-2 gap-2">
+                <button id="bookmarks-default-blocky-color-type-random-button"
+                  class="bg-neutral-800 hover:bg-neutral-700 py-2 rounded-md outline-none">
+                  <span class="text-white">random</span>
+                </button>
+                <button id="bookmarks-default-blocky-color-type-custom-button"
+                  class="bg-neutral-800 hover:bg-neutral-700 py-2 rounded-md outline-none">
+                  <span class="text-white">custom</span>
+                </button>
+              </div>
+            </div>
+            <div id="bookmarks-default-blocky-color-section">
+              <div class="grid gap-2">
+                <p class="text-white text-base">bookmarks.defaultBlockyColor</p>
+                <div id="bookmarks-default-blocky-color-container"
+                  class="grid grid-cols-[max-content_auto] text-base bg-neutral-800 w-full p-1 rounded-md border-2 border-transparent">
+                  <span class="text-pink-500 font-semibold select-none">>&nbsp;</span>
+                  <input id="bookmarks-default-blocky-color-input" type="text" autocomplete="off"
+                    class="outline-none bg-transparent text-white placeholder-neutral-500"
+                    placeholder="input color..." />
+                </div>
               </div>
             </div>
             <div class="grid gap-2 text-base">

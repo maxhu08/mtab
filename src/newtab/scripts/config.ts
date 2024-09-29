@@ -145,6 +145,7 @@ export const defaultConfig: Config = {
       }
     ],
     defaultBlockyCols: 4,
+    defaultBlockyColorType: "custom",
     defaultBlockyColor: "#ffffff",
     showBookmarkNames: false,
     bookmarksLocationFirefox: "toolbar"
@@ -193,6 +194,7 @@ export type UserDefinedBookmark = {
   iconType: string;
   iconColor: string;
 };
+export type DefaultBlockyColorType = "random" | "custom";
 export type BookmarksLocationFirefox = "menu" | "toolbar" | "other";
 
 export interface Config {
@@ -267,6 +269,7 @@ export interface Config {
     userDefinedKeys: boolean;
     userDefined: UserDefinedBookmark[];
     defaultBlockyCols: number;
+    defaultBlockyColorType: DefaultBlockyColorType;
     defaultBlockyColor: string;
     showBookmarkNames: boolean;
     bookmarksLocationFirefox: BookmarksLocationFirefox;

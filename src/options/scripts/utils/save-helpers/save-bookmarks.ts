@@ -2,7 +2,8 @@ import {
   UserDefinedBookmark,
   Config,
   BookmarksType,
-  BookmarksLocationFirefox
+  BookmarksLocationFirefox,
+  DefaultBlockyColorType
 } from "src/newtab/scripts/config";
 import {
   bookmarksDefaultBlockyColorInputEl,
@@ -32,6 +33,18 @@ export const saveBookmarksSettingsToDraft = (draft: Config) => {
   };
 
   draft.bookmarks.type = bookmarksTypePairs[selectedTypeEl.id];
+
+  const selectedDefaultBlockyColorType = document.querySelector(
+    `button[btn-option-type="bookmarks-default-blocky-color-type"][selected="yes"]`
+  ) as HTMLButtonElement;
+
+  const bookmarksDefaultBlockyColorTypePairs: Record<string, DefaultBlockyColorType> = {
+    "bookmarks-default-blocky-color-type-random-button": "random",
+    "bookmarks-default-blocky-color-type-custom-button": "custom"
+  };
+
+  // prettier-ignore
+  draft.bookmarks.defaultBlockyColorType = bookmarksDefaultBlockyColorTypePairs[selectedDefaultBlockyColorType.id];
 
   const selectedLocationFirefoxEl = document.querySelector(
     `button[btn-option-type="bookmarks-location-firefox"][selected="yes"]`

@@ -2,6 +2,7 @@ import {
   BookmarksLocationFirefox,
   BookmarksType,
   Config,
+  DefaultBlockyColorType,
   UserDefinedBookmark
 } from "src/newtab/scripts/config";
 import { focusInput, unfocusInput } from "src/options/scripts/inputs";
@@ -19,7 +20,9 @@ import {
   bookmarksLocationFirefoxMenuButtonEl,
   bookmarksLocationFirefoxToolbarButtonEl,
   bookmarksLocationFirefoxOtherButtonEl,
-  bookmarksUserDefinedKeysCheckboxEl
+  bookmarksUserDefinedKeysCheckboxEl,
+  bookmarksDefaultBlockyColorTypeRandomButtonEl,
+  bookmarksDefaultBlockyColorTypeCustomButtonEl
 } from "src/options/scripts/ui";
 
 export const fillBookmarksInputs = (config: Config) => {
@@ -54,6 +57,14 @@ export const fillBookmarksInputs = (config: Config) => {
   });
 
   toggleCollapseAllBookmarksButtonEl.click();
+
+  // prettier-ignore
+  const bookmarksDefaultBlockyColorTypePairs: Record<DefaultBlockyColorType, () => void> = {
+    "random": () => bookmarksDefaultBlockyColorTypeRandomButtonEl.click(),
+    "custom": () => bookmarksDefaultBlockyColorTypeCustomButtonEl.click(),
+  };
+
+  bookmarksDefaultBlockyColorTypePairs[config.bookmarks.defaultBlockyColorType]();
 
   // prettier-ignore
   const bookmarksLocationFirefoxPairs: Record<BookmarksLocationFirefox, () => void> = {

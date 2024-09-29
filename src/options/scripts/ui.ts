@@ -162,6 +162,9 @@ export const bookmarksUserDefinedList = document.getElementById("bookmarks-user-
 export const bookmarksDefaultBlockyColsContainerEl = document.getElementById("bookmarks-default-blocky-cols-container") as HTMLDivElement;
 export const bookmarksDefaultBlockyColsInputEl = document.getElementById("bookmarks-default-blocky-cols-input") as HTMLInputElement;
 
+export const bookmarksDefaultBlockyColorTypeRandomButtonEl = document.getElementById("bookmarks-default-blocky-color-type-random-button") as HTMLButtonElement;
+export const bookmarksDefaultBlockyColorTypeCustomButtonEl = document.getElementById("bookmarks-default-blocky-color-type-custom-button") as HTMLButtonElement;
+
 export const bookmarksDefaultBlockyColorContainerEl = document.getElementById("bookmarks-default-blocky-color-container") as HTMLDivElement;
 export const bookmarksDefaultBlockyColorInputEl = document.getElementById("bookmarks-default-blocky-color-input") as HTMLInputElement;
 
@@ -359,9 +362,16 @@ export const buttonSwitches: ButtonSwitch[] = [
       bookmarksTypeUserDefinedButtonEl,
       bookmarksTypeDefaultButtonEl,
       bookmarksTypeDefaultBlockyButtonEl,
-      bookmarksTypeNoneButtonEl
+        bookmarksTypeNoneButtonEl
     ],
     attr: "bookmarks-type"
+  },
+  {
+    buttons: [
+      bookmarksDefaultBlockyColorTypeRandomButtonEl,
+      bookmarksDefaultBlockyColorTypeCustomButtonEl,
+    ],
+    attr: "bookmarks-default-blocky-color-type"
   },
   {
     buttons: [
