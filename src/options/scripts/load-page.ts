@@ -8,7 +8,8 @@ import {
   handleMessageTypeSwitch,
   handleWallpaperTypeSwitch,
   handleBookmarksTypeSwitch,
-  handleFaviconTypeSwitch
+  handleFaviconTypeSwitch,
+  handleBookmarksDefaultBlockyColorTypeSwitch
 } from "src/options/scripts/utils/handle-switch";
 import {
   fixAllToggleCheckboxSections,
@@ -51,6 +52,7 @@ export const loadPage = () => {
   handleMessageTypeSwitch();
   handleWallpaperTypeSwitch();
   handleBookmarksTypeSwitch();
+  handleBookmarksDefaultBlockyColorTypeSwitch();
 
   listenAllToggleCheckboxSections();
 };

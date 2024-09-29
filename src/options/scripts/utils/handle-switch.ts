@@ -1,4 +1,6 @@
 import {
+  bookmarksDefaultBlockyColorTypeCustomButtonEl,
+  bookmarksDefaultBlockyColorTypeRandomButtonEl,
   bookmarksTypeDefaultBlockyButtonEl,
   bookmarksTypeUserDefinedButtonEl
 } from "src/options/scripts/ui";
@@ -91,5 +93,18 @@ export const handleBookmarksTypeSwitch = () => {
       bookmarksUserDefinedSection.style.display = "none";
       bookmarksDefaultBlockySection.style.display = "none";
     });
+  });
+};
+
+export const handleBookmarksDefaultBlockyColorTypeSwitch = () => {
+  // prettier-ignore
+  const customColorSection = document.getElementById("bookmarks-default-blocky-color-section") as HTMLDivElement;
+
+  bookmarksDefaultBlockyColorTypeRandomButtonEl.addEventListener("click", () => {
+    customColorSection.style.display = "none";
+  });
+
+  bookmarksDefaultBlockyColorTypeCustomButtonEl.addEventListener("click", () => {
+    customColorSection.style.display = "block";
   });
 };
