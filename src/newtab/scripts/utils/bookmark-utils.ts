@@ -528,13 +528,16 @@ export const renderDefaultBlockyBookmarksNodes = (
       "#f43f5e"
     ];
 
+    // pick random color based on node.title
     if (config.bookmarks.defaultBlockyColorType === "random") {
       let hash = 0;
       for (let i = 0; i < node.title.length; i++) {
-        hash = node.title.charCodeAt(i) + ((hash << 5) - hash);
+        hash = (hash << 5) - hash + node.title.charCodeAt(i);
       }
-      let randomOffset = Math.floor(Math.random() * randomColors.length);
-      color = randomColors[Math.abs(hash + randomOffset) % randomColors.length];
+
+      hash += node.title.length * 31;
+
+      color = randomColors[Math.abs(hash) % randomColors.length];
     }
 
     if (isFolder) {
