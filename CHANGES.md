@@ -1,6 +1,6 @@
-# Changes in 1.5.6
+# Changes in 1.5.7
 
 in this release:
 
-- remove history assist feature
-- performance improvements
+- add ability to set default blocky bookmarks to a random color
+- bug fixes
