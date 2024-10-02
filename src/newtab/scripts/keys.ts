@@ -126,7 +126,10 @@ export const listenToKeys = (config: Config) => {
     // if (e.key === "K") navigateTab("right");
   });
 
-  searchInputEl.addEventListener("blur", () => unfocusSearch());
+  searchInputEl.addEventListener("blur", () => {
+    // prevent getting unfocused on window unfocus
+    if (document.hasFocus()) unfocusSearch();
+  });
 
   searchInputEl.addEventListener("focus", (e) => focusSearch(config, e));
 
@@ -155,9 +158,10 @@ export const listenToKeys = (config: Config) => {
     else document.title = config.title.defaultTitle;
   });
 
-  bookmarkSearchInputEl.addEventListener("blur", () =>
-    unfocusBookmarkSearch(config.animations.initialType)
-  );
+  bookmarkSearchInputEl.addEventListener("blur", () => {
+    // prevent getting unfocused on window unfocus
+    if (document.hasFocus()) unfocusBookmarkSearch(config.animations.initialType);
+  });
 
   bookmarkSearchInputEl.addEventListener("focus", (e) => focusBookmarkSearch(config, e));
 
