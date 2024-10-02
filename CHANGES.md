@@ -2,4 +2,4 @@
 
 in this release:
 
-- fix focus disappearing unexpectdly
+- fix focus disappearing unexpectedly
