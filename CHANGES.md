@@ -1,6 +1,5 @@
-# Changes in 1.5.7
+# Changes in 1.5.8
 
 in this release:
 
-- add ability to set default blocky bookmarks to a random color
-- bug fixes
+- fix focus disappearing unexpectdly
