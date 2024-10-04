@@ -1,7 +1,7 @@
 import { Config } from "src/newtab/scripts/config";
 import { searchInputEl } from "src/newtab/scripts/ui";
 import { hideAssist, displayAssist, AssistItem } from "src/newtab/scripts/utils/assistant-utils";
-import { evaluate, isNumber, format } from "mathjs";
+import { evaluate, isNumber, format, isDenseMatrix } from "mathjs";
 
 export const listenToSearch = (config: Config) => {
   // if (config.search.assist.history) {
@@ -87,7 +87,8 @@ const handleMath = (val: string) => {
     // prevent returning a function val is a function like `atan` or `derivative`
     if (
       (result?.re || result?.im || typeof result === "object" || isNumber(result)) &&
-      typeof result !== "function"
+      typeof result !== "function" &&
+      !isDenseMatrix(result)
     ) {
       return { type: "math", result: format(result) } as const;
     }
