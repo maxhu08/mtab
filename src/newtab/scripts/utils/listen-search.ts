@@ -81,7 +81,10 @@ const handleDate = (val: string) => {
 const handleMath = (val: string) => {
   try {
     const result = evaluate(val);
-    if (isNumber(result)) {
+
+    // allow imaginary numbers
+    // prevent returning a function val is a function like `atan` or `derivative`
+    if ((result?.im || isNumber(result)) && typeof result !== "function") {
       return { type: "math", result } as const;
     }
   } catch {
