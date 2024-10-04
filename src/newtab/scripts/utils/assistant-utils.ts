@@ -19,7 +19,7 @@ interface AssistDate {
 
 interface AssistMath {
   type: "math";
-  result: number;
+  result: number | string;
 }
 
 interface AssistDefinition {
@@ -105,7 +105,7 @@ export const displayAssist = (items: AssistItem[], config: Config) => {
       gridContainerEl.appendChild(resultTextEl);
       assistantContainerEl.appendChild(gridContainerEl);
 
-      if (item.result >= 9007199254740991) {
+      if (typeof item.result === "number" && item.result >= 9007199254740991) {
         // <div class="grid grid-cols-[max-content_auto]">
         //   <span class="font-semibold" style="color: ${config.search.placeholderTextColor}">&nbsp;*&nbsp;</span>
         //   <div class="text-ellipsis overflow-hidden whitespace-nowrap w-full" style="color: ${config.search.placeholderTextColor}">reduced precision</div>

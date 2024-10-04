@@ -1,7 +1,7 @@
 import { Config } from "src/newtab/scripts/config";
 import { searchInputEl } from "src/newtab/scripts/ui";
 import { hideAssist, displayAssist, AssistItem } from "src/newtab/scripts/utils/assistant-utils";
-import { evaluate, isNumber } from "mathjs";
+import { evaluate, isNumber, format } from "mathjs";
 
 export const listenToSearch = (config: Config) => {
   // if (config.search.assist.history) {
@@ -81,11 +81,15 @@ const handleDate = (val: string) => {
 const handleMath = (val: string) => {
   try {
     const result = evaluate(val);
+    console.log(result, format(result));
 
     // allow imaginary numbers
     // prevent returning a function val is a function like `atan` or `derivative`
-    if ((result?.im || isNumber(result)) && typeof result !== "function") {
-      return { type: "math", result } as const;
+    if (
+      (result?.re || result?.im || typeof result === "object" || isNumber(result)) &&
+      typeof result !== "function"
+    ) {
+      return { type: "math", result: format(result) } as const;
     }
   } catch {
     if (val !== "date") hideAssist();
