@@ -1,5 +1,5 @@
-# Changes in 1.5.8
+# Changes in 1.5.9
 
 in this release:
 
-- fix focus disappearing unexpectedly
+- improve search math assist
