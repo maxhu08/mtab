@@ -9,7 +9,6 @@ import {
 import { bookmarksContainerEl, bookmarkSearchInputEl, contentEl } from "src/newtab/scripts/ui";
 import { getFaviconURL } from "src/newtab/scripts/utils/favicon-url";
 import { focusElementBorder, unfocusElementBorder } from "src/newtab/scripts/utils/focus-utils";
-import { getUserAgent } from "src/util-scripts/user-agent";
 
 export const openBookmark = (
   bookmarkUrl: string,
@@ -503,8 +502,6 @@ export const renderDefaultBlockyBookmarksNodes = (
     actionsContainerEl.appendChild(emptyDivEl);
   }
 
-  const userAgent = getUserAgent();
-
   nodes.forEach((node, index) => {
     // if has children item is a folder
     const isFolder = node.children!.length > 0;
@@ -573,7 +570,7 @@ export const renderDefaultBlockyBookmarksNodes = (
         null,
         null,
         // prettier-ignore
-        `<img class="w-10 md:w-14" src="${getFaviconURL(node.url!, userAgent)}" />`,
+        `<img class="w-10 md:w-14" src="${getFaviconURL(node.url!, "google")}" />`,
         config.ui.style,
         config.bookmarks.showBookmarkNames,
         node.title,

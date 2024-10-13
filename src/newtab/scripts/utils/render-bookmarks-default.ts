@@ -2,7 +2,6 @@ import { Config } from "src/newtab/scripts/config";
 import { bookmarksContainerEl } from "src/newtab/scripts/ui";
 import { openBookmark } from "src/newtab/scripts/utils/bookmark-utils";
 import { getFaviconURL } from "src/newtab/scripts/utils/favicon-url";
-import { getUserAgent } from "src/util-scripts/user-agent";
 
 export const renderDefaultBookmarks = (config: Config) => {
   switch (config.ui.style) {
@@ -60,8 +59,6 @@ export const renderDefaultBookmarks = (config: Config) => {
       innerBookmarkContainer.classList.add("grid", "grid-flow-col", "gap-2", "w-max");
     }
 
-    const userAgent = getUserAgent();
-
     chromeBookmarks.forEach((bookmark) => {
       if (!!bookmark.dateGroupModified) return;
 
@@ -78,7 +75,7 @@ export const renderDefaultBookmarks = (config: Config) => {
 
       const imgEl = document.createElement("img");
       imgEl.className = "w-10 md:w-14";
-      imgEl.src = getFaviconURL(bookmark.url!, userAgent);
+      imgEl.src = getFaviconURL(bookmark.url!, "google");
       buttonEl.appendChild(imgEl);
 
       const spanEl = document.createElement("span");
