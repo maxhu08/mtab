@@ -7,12 +7,28 @@ export const showOptionsButton = (
   animationsInitialType: AnimationInitialType,
   textColor: string
 ) => {
-  // prettier-ignore
-  optionsButtonContainerEl.innerHTML += `
-  <button id="options-button" class="${uiStyle === "glass" ? "glass-effect" : ""} ${animationsEnabled ? `${animationsInitialType} opacity-0 outline-none` : ""} bg-foreground cursor-pointer corner-style grid place-items-center w-10 h-10 overflow-hidden" style="color: ${textColor}">
-    <div class="absolute w-full h-full hover:bg-white/20"></div>
-    <i class="ri-equalizer-line text-2xl"></i>
-  </button>`;
+  // <button id="options-button" class="${uiStyle === "glass" ? "glass-effect" : ""} ${animationsEnabled ? `${animationsInitialType} opacity-0 outline-none` : ""} bg-foreground cursor-pointer corner-style grid place-items-center w-10 h-10 overflow-hidden" style="color: ${textColor}">
+  //   <div class="absolute w-full h-full hover:bg-white/20 corner-style overflow-hidden"></div>
+  //   <i class="ri-equalizer-line text-2xl"></i>
+  // </button>
+
+  const buttonEl = document.createElement("button");
+  buttonEl.id = "options-button";
+  buttonEl.className = `${uiStyle === "glass" ? "glass-effect" : ""} ${
+    animationsEnabled ? `${animationsInitialType} opacity-0 outline-none` : ""
+  } bg-foreground cursor-pointer corner-style grid place-items-center w-10 h-10 overflow-hidden`;
+  buttonEl.style.color = textColor;
+
+  const divEl = document.createElement("div");
+  divEl.className = "absolute w-full h-full hover:bg-white/20 corner-style overflow-hidden";
+
+  const iconEl = document.createElement("i");
+  iconEl.className = "ri-equalizer-line text-2xl";
+
+  buttonEl.appendChild(divEl);
+  buttonEl.appendChild(iconEl);
+
+  optionsButtonContainerEl.appendChild(buttonEl);
 
   const optionsButtonEl = document.getElementById("options-button") as HTMLButtonElement;
   optionsButtonEl.onclick = () => {
