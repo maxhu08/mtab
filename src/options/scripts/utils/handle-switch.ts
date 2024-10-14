@@ -2,6 +2,8 @@ import {
   bookmarksDefaultBlockyColorTypeCustomButtonEl,
   bookmarksDefaultBlockyColorTypeRandomButtonEl,
   bookmarksTypeDefaultBlockyButtonEl,
+  bookmarksTypeDefaultButtonEl,
+  bookmarksTypeNoneButtonEl,
   bookmarksTypeUserDefinedButtonEl,
   messageTypeCustomButtonEl,
   titleFaviconTypeCustomButtonEl,
@@ -10,7 +12,16 @@ import {
   wallpaperTypeUrlButtonEl
 } from "src/options/scripts/ui";
 
-export const handleFaviconTypeSwitch = () => {
+export const handleSwitches = () => {
+  handleFaviconTypeSwitch();
+  handleMessageTypeSwitch();
+  handleWallpaperTypeSwitch();
+  handleBookmarksTypeSwitch();
+  handleUserDefinedOrDefaultBlockySwitch();
+  handleBookmarksDefaultBlockyColorTypeSwitch();
+};
+
+const handleFaviconTypeSwitch = () => {
   const faviconCustomSection = document.getElementById(
     "title-custom-favicon-upload-section"
   ) as HTMLDivElement;
@@ -24,7 +35,7 @@ export const handleFaviconTypeSwitch = () => {
   });
 };
 
-export const handleMessageTypeSwitch = () => {
+const handleMessageTypeSwitch = () => {
   const messageCustomTextSection = document.getElementById(
     "message-custom-text-section"
   ) as HTMLDivElement;
@@ -46,7 +57,7 @@ export const handleMessageTypeSwitch = () => {
   });
 };
 
-export const handleWallpaperTypeSwitch = () => {
+const handleWallpaperTypeSwitch = () => {
   const wallpaperUrlSection = document.getElementById("wallpaper-url-section") as HTMLDivElement;
   const wallpaperFileUploadSection = document.getElementById(
     "wallpaper-file-upload-section"
@@ -63,7 +74,7 @@ export const handleWallpaperTypeSwitch = () => {
   });
 };
 
-export const handleBookmarksTypeSwitch = () => {
+const handleBookmarksTypeSwitch = () => {
   // prettier-ignore
   const bookmarksUserDefinedSection = document.getElementById("bookmarks-user-defined-section") as HTMLDivElement;
   // prettier-ignore
@@ -89,7 +100,20 @@ export const handleBookmarksTypeSwitch = () => {
   });
 };
 
-export const handleBookmarksDefaultBlockyColorTypeSwitch = () => {
+const handleUserDefinedOrDefaultBlockySwitch = () => {
+  // prettier-ignore
+  const bookmarksUserDefinedOrDefaultBlockySection = document.getElementById("bookmarks-user-defined-or-default-blocky-section") as HTMLDivElement
+
+  const hide = () => (bookmarksUserDefinedOrDefaultBlockySection.style.display = "none");
+  const show = () => (bookmarksUserDefinedOrDefaultBlockySection.style.display = "block");
+
+  bookmarksTypeUserDefinedButtonEl.addEventListener("click", () => show());
+  bookmarksTypeDefaultButtonEl.addEventListener("click", () => hide());
+  bookmarksTypeDefaultBlockyButtonEl.addEventListener("click", () => show());
+  bookmarksTypeNoneButtonEl.addEventListener("click", () => hide());
+};
+
+const handleBookmarksDefaultBlockyColorTypeSwitch = () => {
   // prettier-ignore
   const customColorSection = document.getElementById("bookmarks-default-blocky-color-section") as HTMLDivElement;
 

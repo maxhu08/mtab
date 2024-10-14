@@ -4,13 +4,7 @@ import { listenToInputs } from "src/options/scripts/inputs";
 import { handleWallpaperFileUpload } from "src/options/scripts/utils/upload-wallpaper";
 import { getConfig } from "src/newtab/scripts/config";
 import { getUserAgent } from "src/util-scripts/user-agent";
-import {
-  handleMessageTypeSwitch,
-  handleWallpaperTypeSwitch,
-  handleBookmarksTypeSwitch,
-  handleFaviconTypeSwitch,
-  handleBookmarksDefaultBlockyColorTypeSwitch
-} from "src/options/scripts/utils/handle-switch";
+import { handleSwitches } from "src/options/scripts/utils/handle-switch";
 import {
   fixAllToggleCheckboxSections,
   listenAllToggleCheckboxSections
@@ -48,11 +42,7 @@ export const loadPage = () => {
   handleCustomFaviconUpload();
   handleWallpaperFileUpload();
 
-  handleFaviconTypeSwitch();
-  handleMessageTypeSwitch();
-  handleWallpaperTypeSwitch();
-  handleBookmarksTypeSwitch();
-  handleBookmarksDefaultBlockyColorTypeSwitch();
+  handleSwitches();
 
   listenAllToggleCheckboxSections();
 };
