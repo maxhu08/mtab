@@ -18,3 +18,5 @@ export const bookmarkSearchInputEl = document.getElementById("bookmark-search-in
 export const bookmarkSearchResultsContainerEl = document.getElementById("bookmarks-search-results-container") as HTMLDivElement;
 
 export const bookmarksContainerEl = document.getElementById("bookmarks-container") as HTMLDivElement;
+
+export const optionsButtonContainerEl = document.getElementById("options-button-container") as HTMLDivElement;

@@ -15,6 +15,7 @@ import { listenToKeys } from "./keys";
 import { loadFavicon } from "src/newtab/scripts/utils/load-favicon";
 import { fixDisappearingUI } from "src/newtab/scripts/utils/fix-disappearing-ui";
 import { listenToSearch } from "src/newtab/scripts/utils/listen-search";
+import { showOptionsButton } from "src/newtab/scripts/utils/show-options-button";
 
 export const loadPage = () => {
   const manifest = chrome.runtime.getManifest();
@@ -57,6 +58,12 @@ export const loadPage = () => {
     );
 
     renderBookmarks(config);
+    showOptionsButton(
+      config.ui.style,
+      config.animations.enabled,
+      config.animations.initialType,
+      config.message.textColor
+    );
     fixDisappearingUI();
 
     addAnimations(config.animations);
