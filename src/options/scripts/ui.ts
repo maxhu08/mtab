@@ -174,6 +174,11 @@ export const bookmarksLocationFirefoxMenuButtonEl = document.getElementById("boo
 export const bookmarksLocationFirefoxToolbarButtonEl = document.getElementById("bookmarks-location-firefox-toolbar-button") as HTMLButtonElement;
 export const bookmarksLocationFirefoxOtherButtonEl = document.getElementById("bookmarks-location-firefox-other-button") as HTMLButtonElement;
 
+// prettier-ignore
+export const bookmarksDefaultFaviconSourceGoogleButton = document.getElementById("bookmarks-default-favicon-source-google-button") as HTMLButtonElement
+// prettier-ignore
+export const bookmarksDefaultFaviconSourceDuckduckgoButton = document.getElementById("bookmarks-default-favicon-source-duckduckgo-button") as HTMLButtonElement
+
 export const inputs: Input[] = [
   {
     container: usernameContainerEl,
@@ -382,6 +387,13 @@ export const buttonSwitches: ButtonSwitch[] = [
       bookmarksLocationFirefoxOtherButtonEl
     ],
     attr: "bookmarks-location-firefox"
+  },
+  {
+    buttons: [
+      bookmarksDefaultFaviconSourceGoogleButton,
+      bookmarksDefaultFaviconSourceDuckduckgoButton
+    ],
+    attr: "bookmarks-default-favicon-source"
   },
 ];
 

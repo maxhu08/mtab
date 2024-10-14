@@ -3,6 +3,7 @@ import {
   BookmarksType,
   Config,
   DefaultBlockyColorType,
+  DefaultFaviconSource,
   UserDefinedBookmark
 } from "src/newtab/scripts/config";
 import { focusInput, unfocusInput } from "src/options/scripts/inputs";
@@ -22,7 +23,9 @@ import {
   bookmarksLocationFirefoxOtherButtonEl,
   bookmarksUserDefinedKeysCheckboxEl,
   bookmarksDefaultBlockyColorTypeRandomButtonEl,
-  bookmarksDefaultBlockyColorTypeCustomButtonEl
+  bookmarksDefaultBlockyColorTypeCustomButtonEl,
+  bookmarksDefaultFaviconSourceGoogleButton,
+  bookmarksDefaultFaviconSourceDuckduckgoButton
 } from "src/options/scripts/ui";
 
 export const fillBookmarksInputs = (config: Config) => {
@@ -74,6 +77,14 @@ export const fillBookmarksInputs = (config: Config) => {
   };
 
   bookmarksLocationFirefoxPairs[config.bookmarks.bookmarksLocationFirefox]();
+
+  // prettier-ignore
+  const bookmarksDefaultFaviconSourcePairs: Record<DefaultFaviconSource, () => void> = {
+    "google": () => bookmarksDefaultFaviconSourceGoogleButton.click(),
+    "duckduckgo": () => bookmarksDefaultFaviconSourceDuckduckgoButton.click(),
+  };
+
+  bookmarksDefaultFaviconSourcePairs[config.bookmarks.defaultFaviconSource]();
 };
 
 // prettier-ignore

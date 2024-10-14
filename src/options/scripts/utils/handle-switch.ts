@@ -19,6 +19,7 @@ export const handleSwitches = () => {
   handleBookmarksTypeSwitch();
   handleUserDefinedOrDefaultBlockySwitch();
   handleBookmarksDefaultBlockyColorTypeSwitch();
+  handleBookmarksDefaultOrDefaultBlockySwitch();
 };
 
 const handleFaviconTypeSwitch = () => {
@@ -124,4 +125,17 @@ const handleBookmarksDefaultBlockyColorTypeSwitch = () => {
   bookmarksDefaultBlockyColorTypeCustomButtonEl.addEventListener("click", () => {
     customColorSection.style.display = "block";
   });
+};
+
+const handleBookmarksDefaultOrDefaultBlockySwitch = () => {
+  // prettier-ignore
+  const bookmarksDefaultOrDefaultBlockySection = document.getElementById("bookmarks-default-or-default-blocky-section") as HTMLDivElement
+
+  const hide = () => (bookmarksDefaultOrDefaultBlockySection.style.display = "none");
+  const show = () => (bookmarksDefaultOrDefaultBlockySection.style.display = "block");
+
+  bookmarksTypeUserDefinedButtonEl.addEventListener("click", () => hide());
+  bookmarksTypeDefaultButtonEl.addEventListener("click", () => show());
+  bookmarksTypeDefaultBlockyButtonEl.addEventListener("click", () => show());
+  bookmarksTypeNoneButtonEl.addEventListener("click", () => hide());
 };

@@ -3,7 +3,8 @@ import {
   Config,
   BookmarksType,
   BookmarksLocationFirefox,
-  DefaultBlockyColorType
+  DefaultBlockyColorType,
+  DefaultFaviconSource
 } from "src/newtab/scripts/config";
 import {
   bookmarksDefaultBlockyColorInputEl,
@@ -56,8 +57,20 @@ export const saveBookmarksSettingsToDraft = (draft: Config) => {
     "bookmarks-location-firefox-other-button": "other"
   };
 
+  const selectedDefaultFaviconSourceEl = document.querySelector(
+    `button[btn-option-type="bookmarks-default-favicon-source"][selected="yes"]`
+  ) as HTMLButtonElement;
+
   // prettier-ignore
   draft.bookmarks.bookmarksLocationFirefox = bookmarksLocationFirefoxPairs[selectedLocationFirefoxEl.id];
+
+  const bookmarksDefaultFaviconSourcePairs: Record<string, DefaultFaviconSource> = {
+    "bookmarks-default-favicon-source-google-button": "google",
+    "bookmarks-default-favicon-source-duckduckgo-button": "duckduckgo"
+  };
+
+  // prettier-ignore
+  draft.bookmarks.defaultFaviconSource = bookmarksDefaultFaviconSourcePairs[selectedDefaultFaviconSourceEl.id];
 
   saveUserDefinedBookmarkSettingsToDraft(draft);
 };
