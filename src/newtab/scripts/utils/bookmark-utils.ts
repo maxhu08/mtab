@@ -570,7 +570,7 @@ export const renderDefaultBlockyBookmarksNodes = (
         null,
         null,
         // prettier-ignore
-        `<img class="w-10 md:w-14" src="${getFaviconURL(node.url!, "google")}" />`,
+        `<img class="w-10 md:w-14" src="${getFaviconURL(node.url!, config.bookmarks.defaultFaviconSource)}" />`,
         config.ui.style,
         config.bookmarks.showBookmarkNames,
         node.title,

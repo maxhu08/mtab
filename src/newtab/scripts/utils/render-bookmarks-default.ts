@@ -75,7 +75,7 @@ export const renderDefaultBookmarks = (config: Config) => {
 
       const imgEl = document.createElement("img");
       imgEl.className = "w-10 md:w-14";
-      imgEl.src = getFaviconURL(bookmark.url!, "google");
+      imgEl.src = getFaviconURL(bookmark.url!, config.bookmarks.defaultFaviconSource);
       buttonEl.appendChild(imgEl);
 
       const spanEl = document.createElement("span");
