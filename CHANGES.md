@@ -1,5 +1,7 @@
-# Changes in 1.5.9
+# Changes in 1.6.0
 
 in this release:
 
-- improve search math assist
+- add options button in new tab page
+- add option to choose bookmark favicon source
+- bug fixes
