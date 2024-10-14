@@ -44,6 +44,9 @@ export const deepMerge = (target: any, source: any): any => {
 };
 
 export const defaultConfig: Config = {
+  options: {
+    showOptionsButton: true
+  },
   user: {
     name: "user"
   },
@@ -147,6 +150,7 @@ export const defaultConfig: Config = {
     defaultBlockyCols: 4,
     defaultBlockyColorType: "custom",
     defaultBlockyColor: "#ffffff",
+    defaultFaviconSource: "duckduckgo",
     showBookmarkNames: false,
     bookmarksLocationFirefox: "toolbar"
   }
@@ -195,9 +199,13 @@ export type UserDefinedBookmark = {
   iconColor: string;
 };
 export type DefaultBlockyColorType = "random" | "custom";
+export type DefaultFaviconSource = "google" | "duckduckgo";
 export type BookmarksLocationFirefox = "menu" | "toolbar" | "other";
 
 export interface Config {
+  options: {
+    showOptionsButton: boolean;
+  };
   user: {
     name: string;
   };
@@ -271,6 +279,7 @@ export interface Config {
     defaultBlockyCols: number;
     defaultBlockyColorType: DefaultBlockyColorType;
     defaultBlockyColor: string;
+    defaultFaviconSource: DefaultFaviconSource;
     showBookmarkNames: boolean;
     bookmarksLocationFirefox: BookmarksLocationFirefox;
   };
