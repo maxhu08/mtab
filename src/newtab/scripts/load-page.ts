@@ -59,6 +59,7 @@ export const loadPage = () => {
 
     renderBookmarks(config);
     showOptionsButton(
+      config.options.showOptionsButton,
       config.ui.style,
       config.animations.enabled,
       config.animations.initialType,

@@ -33,6 +33,27 @@
       </p>
     </div>
     <main class="grid grid-flow-row gap-20 pt-16">
+      <!-- options -->
+      <section class="grid grid-flow-row gap-4">
+        <div class="grid grid-cols-[1fr_max-content_1fr] gap-2">
+          <div class="bg-neutral-500 h-[1px] rounded-md my-auto"></div>
+          <span class="text-neutral-500 text-base">options</span>
+          <div class="bg-neutral-500 h-[1px] rounded-md my-auto"></div>
+        </div>
+        <div class="grid grid-cols-[max-content_auto] w-full place-items-center">
+          <p class="text-white text-base">options.showOptionsButton</p>
+          <div class="ml-auto">
+            <label class="relative inline-flex items-center cursor-pointer">
+              <input id="options-show-options-button-checkbox" type="checkbox" value="" class="sr-only peer" />
+              <div
+                class="w-11 h-6 peer bg-neutral-800 outline-none rounded-full peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[3px] after:left-[3px] after:bg-neutral-700 after:border-none after:rounded-full after:h-[1.15rem] after:aspect-square after:transition-all peer-checked:bg-emerald-500 peer-checked:after:bg-white">
+              </div>
+            </label>
+          </div>
+        </div>
+        <p class="text-neutral-500 text-base">tip: you can still access the options by pressing extensions > mtab >
+          options</p>
+      </section>
       <!-- user -->
       <section class="grid grid-flow-row gap-4">
         <div class="grid grid-cols-[1fr_max-content_1fr] gap-2">

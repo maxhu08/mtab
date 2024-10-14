@@ -1,3 +1,5 @@
+export const optionsShowOptionsButtonCheckboxEl = document.getElementById("options-show-options-button-checkbox") as HTMLInputElement;
+
 export const usernameContainerEl = document.getElementById("username-container") as HTMLDivElement;
 export const usernameInputEl = document.getElementById("username-input") as HTMLInputElement;
 

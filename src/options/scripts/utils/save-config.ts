@@ -16,6 +16,7 @@ import {
   searchUseCustomEngineEnabledCheckboxEl,
   searchCustomEngineURLInputEl
 } from "src/options/scripts/ui";
+import { saveOptionsSettingsToDraft } from "src/options/scripts/utils/save-helpers/save-options";
 
 export const saveConfig = () => {
   if (searchUseCustomEngineEnabledCheckboxEl.checked) {
@@ -27,6 +28,8 @@ export const saveConfig = () => {
 
   getConfig(({ config }) => {
     const draft = modifyNestedObject(config, (draft) => {
+      saveOptionsSettingsToDraft(draft);
+
       saveNameToDraft(draft);
 
       saveTitleSettingsToDraft(draft);
