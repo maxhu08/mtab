@@ -181,14 +181,16 @@ export const listenToKeys = (config: Config) => {
 
   bookmarkSearchInputEl.addEventListener("focus", (e) => focusBookmarkSearch(config, e));
 
-  bookmarkSearchInputEl.addEventListener("keydown", (e) => {
+  bookmarkSearchInputEl.addEventListener("keyup", (e) => {
     enableSearchBookmark(
       bookmarks,
       config.bookmarks.type,
       config.search.textColor,
       config.search.placeholderTextColor
     );
+  });
 
+  bookmarkSearchInputEl.addEventListener("keydown", (e) => {
     if (e.key === "Enter" && !e.repeat) {
       e.preventDefault();
 
