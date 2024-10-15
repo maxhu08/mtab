@@ -149,7 +149,7 @@ export const listenToKeys = (config: Config) => {
   searchInputEl.addEventListener("focus", (e) => focusSearch(config, e));
 
   searchInputEl.addEventListener("keydown", (e) => {
-    if (e.key === "Enter") {
+    if (e.key === "Enter" && !e.repeat) {
       e.preventDefault();
 
       // do not search if composition is still in progress
@@ -189,7 +189,7 @@ export const listenToKeys = (config: Config) => {
       config.search.placeholderTextColor
     );
 
-    if (e.key === "Enter") {
+    if (e.key === "Enter" && !e.repeat) {
       e.preventDefault();
 
       // prettier-ignore
