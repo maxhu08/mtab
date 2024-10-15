@@ -5,8 +5,16 @@
   src: url("../../assets/fonts/JetBrainsMonoNerdFontMono-Regular.ttf") format("truetype");
 }
 
+html {
+  scrollbar-width: none !important;
+}
+
 ::-webkit-scrollbar {
-  display: none;
+  display: none !important;
+}
+
+.scrollbar-hidden::-webkit-scrollbar {
+  display: none !important;
 }
 
 .top-distance {
@@ -36,10 +44,6 @@
   box-sizing: border-box !important;
 
   backdrop-filter: blur(32px);
-}
-
-.scrollbar-hidden::-webkit-scrollbar {
-  display: none;
 }
 
 @media (min-height: 600px) {
