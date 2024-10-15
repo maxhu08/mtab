@@ -126,6 +126,21 @@ export const listenToKeys = (config: Config) => {
     // if (e.key === "K") navigateTab("right");
   });
 
+  let isComposing = false;
+
+  function addCompositionListeners(element: HTMLElement) {
+    element.addEventListener("compositionstart", () => {
+      isComposing = true;
+    });
+
+    element.addEventListener("compositionend", () => {
+      isComposing = false;
+    });
+  }
+
+  addCompositionListeners(searchInputEl);
+  addCompositionListeners(bookmarkSearchInputEl);
+
   searchInputEl.addEventListener("blur", () => {
     // prevent getting unfocused on window unfocus
     if (document.hasFocus()) unfocusSearch();
@@ -133,11 +148,12 @@ export const listenToKeys = (config: Config) => {
 
   searchInputEl.addEventListener("focus", (e) => focusSearch(config, e));
 
-  searchInputEl.addEventListener("keyup", (e) => {
+  searchInputEl.addEventListener("keydown", (e) => {
     if (e.key === "Enter") {
       e.preventDefault();
 
-      if (searchInputEl.value === "") return;
+      // do not search if composition is still in progress
+      if (isComposing || searchInputEl.value === "") return;
 
       // open in new tab if ctrl
       if (e.ctrlKey) {
@@ -165,7 +181,7 @@ export const listenToKeys = (config: Config) => {
 
   bookmarkSearchInputEl.addEventListener("focus", (e) => focusBookmarkSearch(config, e));
 
-  bookmarkSearchInputEl.addEventListener("keyup", (e) => {
+  bookmarkSearchInputEl.addEventListener("keydown", (e) => {
     enableSearchBookmark(
       bookmarks,
       config.bookmarks.type,
@@ -180,7 +196,7 @@ export const listenToKeys = (config: Config) => {
       const resultIndex = parseInt(bookmarkSearchResultsContainerEl.getAttribute("selected-index") as string);
       // prettier-ignore
       const bookmarkUrl = bookmarkSearchResultsContainerEl.children[resultIndex].getAttribute("bookmark-result-url") as string;
-      if (!bookmarkUrl) return;
+      if (isComposing || !bookmarkUrl) return;
 
       // open in new tab if ctrl
       if (e.ctrlKey) {
