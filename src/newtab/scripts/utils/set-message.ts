@@ -13,7 +13,10 @@ export const setMessage = (
 
   switch (type) {
     case "custom": {
-      messageEl.textContent = customText;
+      setCustomMessage(customText);
+      setInterval(() => {
+        setCustomMessage(customText);
+      }, 1000);
       break;
     }
     case "date": {
@@ -39,6 +42,22 @@ export const setMessage = (
       break;
     }
   }
+};
+
+export const setCustomMessage = (customText: string) => {
+  const date = new Date();
+
+  const meridianLower = date.getHours() >= 12 ? "pm" : "am";
+  const meridianUpper = meridianLower.toUpperCase();
+
+  customText = customText
+    .replace(/\\hh/g, date.getHours().toString().padStart(2, "0"))
+    .replace(/\\mm/g, date.getMinutes().toString().padStart(2, "0"))
+    .replace(/\\ss/g, date.getSeconds().toString().padStart(2, "0"))
+    .replace(/\\md/g, meridianLower)
+    .replace(/\\MD/g, meridianUpper);
+
+  messageEl.textContent = customText;
 };
 
 export const setMorningAfternoonMessage = (name: string) => {
