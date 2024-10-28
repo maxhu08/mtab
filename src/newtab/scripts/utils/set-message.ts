@@ -51,10 +51,12 @@ export const setMessage = (
 export const setCustomMessage = (customText: string) => {
   const date = new Date();
 
+  const hours12 = date.getHours() % 12 || 12;
   const meridianLower = date.getHours() >= 12 ? "pm" : "am";
   const meridianUpper = meridianLower.toUpperCase();
 
   customText = customText
+    .replace(/\\h%/g, hours12.toString().padStart(2, "0"))
     .replace(/\\hh/g, date.getHours().toString().padStart(2, "0"))
     .replace(/\\mm/g, date.getMinutes().toString().padStart(2, "0"))
     .replace(/\\ss/g, date.getSeconds().toString().padStart(2, "0"))
@@ -72,6 +74,7 @@ export const setCustomMessage = (customText: string) => {
 
 const containsSlashReplacements = (text: string) => {
   const checkChars = [
+    "\\h%",
     "\\hh",
     "\\mm",
     "\\ss",

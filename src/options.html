@@ -207,9 +207,10 @@
                 - \d -> Abbreviated day of the week (e.g., "Mon")
 
                 - Time components
-                - \hh -> Hours (with zero-padding, e.g., "01")
-                - \mm -> Minutes (with zero-padding, e.g., "02")
-                - \ss -> Seconds (with zero-padding, e.g., "03")
+                - \h% -> Hours (12 hour format, e.g., "01")
+                - \hh -> Hours (with padding, e.g., "01")
+                - \mm -> Minutes (with padding, e.g., "02")
+                - \ss -> Seconds (with padding, e.g., "03")
 
                 - Meridian components
                 - \md -> Lowercase meridian (e.g., "am" or "pm")
