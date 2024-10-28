@@ -14,9 +14,13 @@ export const setMessage = (
   switch (type) {
     case "custom": {
       setCustomMessage(customText);
-      setInterval(() => {
-        setCustomMessage(customText);
-      }, 1000);
+
+      if (containsSlashReplacements(customText)) {
+        setInterval(() => {
+          setCustomMessage(customText);
+        }, 1000);
+      }
+
       break;
     }
     case "date": {
@@ -64,6 +68,24 @@ export const setCustomMessage = (customText: string) => {
     .replace(/\\d/g, date.toLocaleString("default", { weekday: "short" })); // abbreviated day name
 
   messageEl.textContent = customText;
+};
+
+const containsSlashReplacements = (text: string) => {
+  const checkChars = [
+    "\\hh",
+    "\\mm",
+    "\\ss",
+    "\\md",
+    "\\MD",
+    "\\yyyy",
+    "\\yy",
+    "\\M",
+    "\\m",
+    "\\D",
+    "\\d"
+  ];
+
+  return checkChars.some((char) => text.includes(char));
 };
 
 export const setMorningAfternoonMessage = (name: string) => {
