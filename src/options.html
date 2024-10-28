@@ -196,6 +196,25 @@
           <div id="message-custom-text-section">
             <div class="grid gap-2">
               <p class="text-white text-base">message.customText</p>
+              <p class="text-neutral-500 text-base whitespace-pre-line">You can use \ to represent:
+
+                - Date components
+                - \yyyy -> Full year (e.g., "2020")
+                - \yy -> Last two digits of the year (e.g., "20")
+                - \M -> Full month name (e.g., "October")
+                - \m -> Abbreviated month name (e.g., "Oct")
+                - \D -> Full day of the week name (e.g., "Monday")
+                - \d -> Abbreviated day of the week (e.g., "Mon")
+
+                - Time components
+                - \hh -> Hours (with zero-padding, e.g., "01")
+                - \mm -> Minutes (with zero-padding, e.g., "02")
+                - \ss -> Seconds (with zero-padding, e.g., "03")
+
+                - Meridian components
+                - \md -> Lowercase meridian (e.g., "am" or "pm")
+                - \MD -> Uppercase meridian (e.g., "AM" or "PM")
+              </p>
               <div id="message-custom-text-container"
                 class="grid grid-cols-[max-content_auto] text-base bg-neutral-800 w-full p-1 rounded-md border-2 border-transparent">
                 <span class="text-pink-500 font-semibold select-none">>&nbsp;</span>

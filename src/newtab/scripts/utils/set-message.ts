@@ -55,7 +55,13 @@ export const setCustomMessage = (customText: string) => {
     .replace(/\\mm/g, date.getMinutes().toString().padStart(2, "0"))
     .replace(/\\ss/g, date.getSeconds().toString().padStart(2, "0"))
     .replace(/\\md/g, meridianLower)
-    .replace(/\\MD/g, meridianUpper);
+    .replace(/\\MD/g, meridianUpper)
+    .replace(/\\yyyy/g, date.getFullYear().toString())
+    .replace(/\\yy/g, date.getFullYear().toString().slice(-2))
+    .replace(/\\M/g, date.toLocaleString("default", { month: "long" })) // full month name
+    .replace(/\\m/g, date.toLocaleString("default", { month: "short" })) // abbreviated month name
+    .replace(/\\D/g, date.toLocaleString("default", { weekday: "long" })) // full day name
+    .replace(/\\d/g, date.toLocaleString("default", { weekday: "short" })); // abbreviated day name
 
   messageEl.textContent = customText;
 };
