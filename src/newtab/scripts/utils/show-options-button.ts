@@ -20,13 +20,13 @@ export const showOptionsButton = (
   buttonEl.className = `${uiStyle === "glass" ? "glass-effect" : ""} ${
     animationsEnabled ? `${animationsInitialType} opacity-0 outline-none` : ""
   } bg-foreground cursor-pointer corner-style grid place-items-center w-10 h-10 overflow-hidden`;
-  buttonEl.style.color = textColor;
 
   const divEl = document.createElement("div");
   divEl.className = "absolute w-full h-full hover:bg-white/20 corner-style overflow-hidden";
 
   const iconEl = document.createElement("i");
   iconEl.className = "ri-equalizer-line text-2xl";
+  iconEl.style.color = textColor;
 
   buttonEl.appendChild(divEl);
   buttonEl.appendChild(iconEl);
