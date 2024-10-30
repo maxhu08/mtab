@@ -1,5 +1,5 @@
-# Changes in 1.6.1
+# Changes in 1.6.2
 
 in this release:
 
-- bug fixes
+- add more customizability to custom mesage option
