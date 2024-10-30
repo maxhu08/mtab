@@ -2,4 +2,4 @@
 
 in this release:
 
-- add more customizability to custom mesage option
+- add more customizability to custom message option
