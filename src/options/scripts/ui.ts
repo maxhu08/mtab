@@ -1,189 +1,119 @@
-export const optionsShowOptionsButtonCheckboxEl = document.getElementById("options-show-options-button-checkbox") as HTMLInputElement;
+import { getButton, getCheckbox, getContainerAndInput } from "src/options/scripts/utils/ui-helpers";
 
-export const usernameContainerEl = document.getElementById("username-container") as HTMLDivElement;
-export const usernameInputEl = document.getElementById("username-input") as HTMLInputElement;
+export const optionsShowOptionsButtonCheckboxEl = getCheckbox("options-show-options-button");
 
-export const titleDefaultTitleContainerEl = document.getElementById("title-default-title-container") as HTMLDivElement;
-export const titleDefaultTitleInputEl = document.getElementById("title-default-title-input") as HTMLInputElement;
+export const [usernameContainerEl, usernameInputEl] = getContainerAndInput("username");
 
-export const titleDynamicEnabledCheckboxEl = document.getElementById("title-dynamic-enabled-checkbox") as HTMLInputElement;
-
-export const titleFaviconTypeDefaultButtonEl = document.getElementById("title-favicon-type-default-button") as HTMLButtonElement;
-export const titleFaviconTypeCustomButtonEl = document.getElementById("title-favicon-type-custom-button") as HTMLButtonElement;
-
+export const [titleDefaultTitleContainerEl, titleDefaultTitleInputEl] = getContainerAndInput("title-default-title");
+export const titleDynamicEnabledCheckboxEl = getCheckbox("title-dynamic-enabled");
+export const titleFaviconTypeDefaultButtonEl = getButton("title-favicon-type-default");
+export const titleFaviconTypeCustomButtonEl = getButton("title-favicon-type-custom");
 export const titleCustomFaviconInputEl = document.getElementById("title-custom-favicon-upload") as HTMLInputElement;
 
-export const messageEnabledCheckboxEl = document.getElementById("message-enabled-checkbox") as HTMLInputElement;
+export const messageEnabledCheckboxEl = getCheckbox("message-enabled");
+export const [messageFontContainerEl, messageFontInputEl] = getContainerAndInput("message-font");
+export const [messageTextColorContainerEl, messageTextColorInputEl] = getContainerAndInput("message-text-color");
+export const messageTypeAfternoonMorningButtonEl = getButton("message-type-afternoon-morning");
+export const messageTypeDateButtonEl = getButton("message-type-date");
+export const messageTypeTime12ButtonEl = getButton("message-type-time-12");
+export const messageTypeTime24ButtonEl = getButton("message-type-time-24");
+export const messageTypeCustomButtonEl = getButton("message-type-custom");
+export const [messageCustomTextContainerEl, messageCustomTextInputEl] = getContainerAndInput("message-custom-text");
 
-export const messageFontContainerEl = document.getElementById("message-font-container") as HTMLInputElement;
-export const messageFontInputEl = document.getElementById("message-font-input") as HTMLInputElement;
-
-export const messageTextColorContainerEl = document.getElementById("message-text-color-container") as HTMLDivElement;
-export const messageTextColorInputEl = document.getElementById("message-text-color-input") as HTMLInputElement;
-
-export const messageTypeAfternoonMorningButtonEl = document.getElementById("message-type-afternoon-morning-button") as HTMLButtonElement;
-export const messageTypeDateButtonEl = document.getElementById("message-type-date-button") as HTMLButtonElement;
-export const messageTypeTime12ButtonEl = document.getElementById("message-type-time-12-button") as HTMLButtonElement;
-export const messageTypeTime24ButtonEl = document.getElementById("message-type-time-24-button") as HTMLButtonElement;
-export const messageTypeCustomButtonEl = document.getElementById("message-type-custom-button") as HTMLButtonElement;
-
-export const messageCustomTextContainerEl = document.getElementById("message-custom-text-container") as HTMLDivElement;
-export const messageCustomTextInputEl = document.getElementById("message-custom-text-input") as HTMLInputElement;
-
-export const wallpaperEnabledCheckboxEl = document.getElementById("wallpaper-enabled-checkbox") as HTMLInputElement;
-
-export const wallpaperTypeUrlButtonEl = document.getElementById("wallpaper-type-url-button") as HTMLButtonElement;
-export const wallpaperTypeFileUploadButtonEl = document.getElementById("wallpaper-type-file-upload-button") as HTMLButtonElement;
-
-export const wallpaperUrlContainerEl = document.getElementById("wallpaper-url-container") as HTMLInputElement;
-export const wallpaperUrlInputEl = document.getElementById("wallpaper-url-input") as HTMLInputElement;
-
+export const wallpaperEnabledCheckboxEl = getCheckbox("wallpaper-enabled");
+export const wallpaperTypeUrlButtonEl = getButton("wallpaper-type-url");
+export const wallpaperTypeFileUploadButtonEl = getButton("wallpaper-type-file-upload");
+export const [wallpaperUrlContainerEl, wallpaperUrlInputEl] = getContainerAndInput("wallpaper-url");
 export const wallpaperFileUploadInputEl = document.getElementById("wallpaper-file-upload-input") as HTMLInputElement;
-export const wallpaperFileResetButtonEl = document.getElementById("wallpaper-file-upload-reset-button") as HTMLInputElement;
+export const wallpaperFileResetButtonEl = getButton("wallpaper-file-upload-reset");
 
-export const uiStyleSolidButtonEl = document.getElementById("ui-style-solid-button") as HTMLButtonElement;
-export const uiStyleGlassButtonEl = document.getElementById("ui-style-glass-button") as HTMLButtonElement;
-
-export const uiGlassColorContainerEl = document.getElementById("ui-glass-color-container") as HTMLDivElement;
-export const uiGlassColorInputEl = document.getElementById("ui-glass-color-input") as HTMLInputElement;
-
-export const uiBlurStrengthContainerEl = document.getElementById("ui-blur-strength-container") as HTMLDivElement;
-export const uiBlurStrengthInputEl = document.getElementById("ui-blur-strength-input") as HTMLInputElement;
-
-export const uiForegroundColorContainerEl = document.getElementById("ui-foreground-color-container") as HTMLDivElement;
-export const uiForegroundColorInputEl = document.getElementById("ui-foreground-color-input") as HTMLInputElement;
-
-export const uiBackgroundColorContainerEl = document.getElementById("ui-background-color-container") as HTMLDivElement;
-export const uiBackgroundColorInputEl = document.getElementById("ui-background-color-input") as HTMLInputElement;
-
-export const uiHighlightColorContainerEl = document.getElementById("ui-highlight-color-container") as HTMLDivElement;
-export const uiHighlightColorInputEl = document.getElementById("ui-highlight-color-input") as HTMLInputElement;
-
-export const uiCornerStyleSharpButtonEl = document.getElementById("ui-corner-style-sharp-button") as HTMLButtonElement;
-export const uiCornerStyleRoundButtonEl = document.getElementById("ui-corner-style-round-button") as HTMLButtonElement;
-
+export const uiStyleSolidButtonEl = getButton("ui-style-solid");
+export const uiStyleGlassButtonEl = getButton("ui-style-glass");
+export const [uiGlassColorContainerEl, uiGlassColorInputEl] = getContainerAndInput("ui-glass-color");
+export const [uiBlurStrengthContainerEl, uiBlurStrengthInputEl] = getContainerAndInput("ui-blur-strength");
+export const [uiForegroundColorContainerEl, uiForegroundColorInputEl] = getContainerAndInput("ui-foreground-color");
+export const [uiBackgroundColorContainerEl, uiBackgroundColorInputEl] = getContainerAndInput("ui-background-color");
+export const [uiHighlightColorContainerEl, uiHighlightColorInputEl] = getContainerAndInput("ui-highlight-color");
+export const uiCornerStyleSharpButtonEl = getButton("ui-corner-style-sharp");
+export const uiCornerStyleRoundButtonEl = getButton("ui-corner-style-round");
 export const uiCustomCSSContainerEl = document.getElementById("ui-custom-css-container") as HTMLInputElement;
 export const uiCustomCSSTextareaEl = document.getElementById("ui-custom-css-textarea") as HTMLTextAreaElement;
 
-export const animationsEnabledCheckboxEl = document.getElementById("animations-enabled-checkbox") as HTMLInputElement;
+export const animationsEnabledCheckboxEl = getCheckbox("animations-enabled");
+export const animationsBookmarkTimingLeftButtonEl = getButton("animations-bookmark-timing-left");
+export const animationsBookmarkTimingRightButtonEl = getButton("animations-bookmark-timing-right");
+export const animationsBookmarkTimingUniformButtonEl = getButton("animations-bookmark-timing-uniform");
+export const animationsInitialTypeDownBouncyButtonEl = getButton("animations-initial-type-down-bouncy");
+export const animationsInitialTypeDownSmoothButtonEl = getButton("animations-initial-type-down-smooth");
+export const animationsInitialTypeDownFallButtonEl = getButton("animations-initial-type-down-fall");
+export const animationsInitialTypeUpBouncyButtonEl = getButton("animations-initial-type-up-bouncy");
+export const animationsInitialTypeUpSmoothButtonEl = getButton("animations-initial-type-up-smooth");
+export const animationsInitialTypeGrowScaleButtonEl = getButton("animations-initial-type-grow-scale");
+export const animationsInitialTypeFlyLeftButtonEl = getButton("animations-initial-type-fly-left");
+export const animationsInitialTypeFlyRightButtonEl = getButton("animations-initial-type-fly-right");
+export const animationsSearchTypePageShrinkButtonEl = getButton("animations-search-type-page-shrink");
+export const animationsSearchTypePageScaleButtonEl = getButton("animations-search-type-page-scale");
+export const animationsSearchTypePageUpButtonEl = getButton("animations-search-type-page-up");
+export const animationsSearchTypePageDownButtonEl = getButton("animations-search-type-page-down");
+export const animationsBookmarkTypePageShrinkButtonEl = getButton("animations-bookmark-type-page-shrink");
+export const animationsBookmarkTypePageScaleButtonEl = getButton("animations-bookmark-type-page-scale");
+export const animationsBookmarkTypePageUpButtonEl = getButton("animations-bookmark-type-page-up");
+export const animationsBookmarkTypePageDownButtonEl = getButton("animations-bookmark-type-page-down");
 
-export const animationsBookmarkTimingLeftButtonEl = document.getElementById("animations-bookmark-timing-left-button") as HTMLButtonElement;
-export const animationsBookmarkTimingRightButtonEl = document.getElementById("animations-bookmark-timing-right-button") as HTMLButtonElement;
-export const animationsBookmarkTimingUniformButtonEl = document.getElementById("animations-bookmark-timing-uniform-button") as HTMLButtonElement;
-
-export const animationsInitialTypeDownBouncyButtonEl = document.getElementById("animations-initial-type-down-bouncy-button") as HTMLButtonElement;
-export const animationsInitialTypeDownSmoothButtonEl = document.getElementById("animations-initial-type-down-smooth-button") as HTMLButtonElement;
-export const animationsInitialTypeDownFallButtonEl = document.getElementById("animations-initial-type-down-fall-button") as HTMLButtonElement;
-export const animationsInitialTypeUpBouncyButtonEl = document.getElementById("animations-initial-type-up-bouncy-button") as HTMLButtonElement;
-export const animationsInitialTypeUpSmoothButtonEl = document.getElementById("animations-initial-type-up-smooth-button") as HTMLButtonElement;
-export const animationsInitialTypeGrowScaleButtonEl = document.getElementById("animations-initial-type-grow-scale-button") as HTMLButtonElement;
-export const animationsInitialTypeFlyLeftButtonEl = document.getElementById("animations-initial-type-fly-left-button") as HTMLButtonElement;
-export const animationsInitialTypeFlyRightButtonEl = document.getElementById("animations-initial-type-fly-right-button") as HTMLButtonElement;
-
-export const animationsSearchTypePageShrinkButtonEl = document.getElementById("animations-search-type-page-shrink-button") as HTMLButtonElement;
-export const animationsSearchTypePageScaleButtonEl = document.getElementById("animations-search-type-page-scale-button") as HTMLButtonElement;
-export const animationsSearchTypePageUpButtonEl = document.getElementById("animations-search-type-page-up-button") as HTMLButtonElement;
-export const animationsSearchTypePageDownButtonEl = document.getElementById("animations-search-type-page-down-button") as HTMLButtonElement;
-
-export const animationsBookmarkTypePageShrinkButtonEl = document.getElementById("animations-bookmark-type-page-shrink-button") as HTMLButtonElement;
-export const animationsBookmarkTypePageScaleButtonEl = document.getElementById("animations-bookmark-type-page-scale-button") as HTMLButtonElement;
-export const animationsBookmarkTypePageUpButtonEl = document.getElementById("animations-bookmark-type-page-up-button") as HTMLButtonElement;
-export const animationsBookmarkTypePageDownButtonEl = document.getElementById("animations-bookmark-type-page-down-button") as HTMLButtonElement;
-
-export const searchEnabledCheckboxEl = document.getElementById("search-enabled-checkbox") as HTMLInputElement;
-
-export const searchFontContainerEl = document.getElementById("search-font-container") as HTMLDivElement;
-export const searchFontInputEl = document.getElementById("search-font-input") as HTMLInputElement;
-
-export const searchTextColorContainerEl = document.getElementById("search-text-color-container") as HTMLDivElement;
-export const searchTextColorInputEl = document.getElementById("search-text-color-input") as HTMLInputElement;
-
-export const searchPlaceholderTextContainerEl = document.getElementById("search-placeholder-text-container") as HTMLDivElement;
-export const searchPlaceholderTextInputEl = document.getElementById("search-placeholder-text-input") as HTMLInputElement;
-
-export const searchBookmarkPlaceholderTextContainerEl = document.getElementById("search-bookmark-placeholder-text-container") as HTMLDivElement;
-export const searchBookmarkPlaceholderTextInputEl = document.getElementById("search-bookmark-placeholder-text-input") as HTMLInputElement;
-
-export const searchPlaceholderTextColorContainerEl = document.getElementById("search-placeholder-text-color-container") as HTMLDivElement;
-export const searchPlaceholderTextColorInputEl = document.getElementById("search-placeholder-text-color-input") as HTMLInputElement;
-
-export const searchSearchIconColorContainerEl = document.getElementById("search-search-icon-color-container") as HTMLDivElement;
-export const searchSearchIconColorInputEl = document.getElementById("search-search-icon-color-input") as HTMLInputElement;
-
-export const searchBookmarkIconColorContainerEl = document.getElementById("search-bookmark-icon-color-container") as HTMLDivElement;
-export const searchBookmarkIconColorInputEl = document.getElementById("search-bookmark-icon-color-input") as HTMLInputElement;
-
-export const searchSelectIconColorContainerEl = document.getElementById("search-select-icon-color-container") as HTMLDivElement;
-export const searchSelectIconColorInputEl = document.getElementById("search-select-icon-color-input") as HTMLInputElement;
-
-export const searchEngineDuckduckgoButtonEl = document.getElementById("search-engine-duckduckgo-button") as HTMLButtonElement
-export const searchEngineGoogleButtonEl = document.getElementById("search-engine-google-button") as HTMLButtonElement
-export const searchEngineBingButtonEl = document.getElementById("search-engine-bing-button") as HTMLButtonElement
-export const searchEngineBraveButtonEl = document.getElementById("search-engine-brave-button") as HTMLButtonElement
-export const searchEngineYahooButtonEl = document.getElementById("search-engine-yahoo-button") as HTMLButtonElement
-export const searchEngineYandexButtonEl = document.getElementById("search-engine-yandex-button") as HTMLButtonElement
-export const searchEngineStartpageButtonEl = document.getElementById("search-engine-startpage-button") as HTMLButtonElement
-export const searchEngineEcosiaButtonEl = document.getElementById("search-engine-ecosia-button") as HTMLButtonElement
-
-export const searchFocusedBorderColorContainerEl = document.getElementById("search-focused-border-color-container") as HTMLDivElement;
-export const searchFocusedBorderColorInputEl = document.getElementById("search-focused-border-color-input") as HTMLInputElement;
-
-export const searchUseCustomEngineEnabledCheckboxEl = document.getElementById("search-use-custom-engine-enabled-checkbox") as HTMLInputElement;
-
-export const searchCustomEngineURLContainerEl = document.getElementById("search-custom-engine-url-container") as HTMLDivElement;
-export const searchCustomEngineURLInputEl = document.getElementById("search-custom-engine-url-input") as HTMLInputElement;
-
+export const searchEnabledCheckboxEl = getCheckbox("search-enabled");
+export const [searchFontContainerEl, searchFontInputEl] = getContainerAndInput("search-font");
+export const [searchTextColorContainerEl, searchTextColorInputEl] = getContainerAndInput("search-text-color");
+export const [searchPlaceholderTextContainerEl, searchPlaceholderTextInputEl] = getContainerAndInput("search-placeholder-text");
+export const [searchBookmarkPlaceholderTextContainerEl, searchBookmarkPlaceholderTextInputEl] = getContainerAndInput("search-bookmark-placeholder-text");
+export const [searchPlaceholderTextColorContainerEl, searchPlaceholderTextColorInputEl] = getContainerAndInput("search-placeholder-text-color");
+export const [searchSearchIconColorContainerEl, searchSearchIconColorInputEl] = getContainerAndInput("search-search-icon-color");
+export const [searchBookmarkIconColorContainerEl, searchBookmarkIconColorInputEl] = getContainerAndInput("search-bookmark-icon-color");
+export const [searchSelectIconColorContainerEl, searchSelectIconColorInputEl] = getContainerAndInput("search-select-icon-color");
+export const searchEngineDuckduckgoButtonEl = getButton("search-engine-duckduckgo");
+export const searchEngineGoogleButtonEl = getButton("search-engine-google");
+export const searchEngineBingButtonEl = getButton("search-engine-bing");
+export const searchEngineBraveButtonEl = getButton("search-engine-brave");
+export const searchEngineYahooButtonEl = getButton("search-engine-yahoo");
+export const searchEngineYandexButtonEl = getButton("search-engine-yandex");
+export const searchEngineStartpageButtonEl = getButton("search-engine-startpage");
+export const searchEngineEcosiaButtonEl = getButton("search-engine-ecosia");
+export const [searchFocusedBorderColorContainerEl, searchFocusedBorderColorInputEl] = getContainerAndInput("search-focused-border-color");
+export const searchUseCustomEngineEnabledCheckboxEl = getCheckbox("search-use-custom-engine-enabled");
+export const [searchCustomEngineURLContainerEl, searchCustomEngineURLInputEl] = getContainerAndInput("search-custom-engine-url");
 // export const searchAssistHistoryCheckboxEl = document.getElementById("search-assist-history-checkbox") as HTMLInputElement;
-export const searchAssistDateCheckboxEl = document.getElementById("search-assist-date-checkbox") as HTMLInputElement;
-export const searchAssistMathCheckboxEl = document.getElementById("search-assist-math-checkbox") as HTMLInputElement;
-export const searchAssistDefinitionsCheckboxEl = document.getElementById("search-assist-definitions-checkbox") as HTMLInputElement;
-export const searchAssistConversionsCheckboxEl = document.getElementById("search-assist-conversions-checkbox") as HTMLInputElement;
+export const searchAssistDateCheckboxEl = getCheckbox("search-assist-date");
+export const searchAssistMathCheckboxEl = getCheckbox("search-assist-math");
+export const searchAssistDefinitionsCheckboxEl = getCheckbox("search-assist-definitions");
+export const searchAssistConversionsCheckboxEl = getCheckbox("search-assist-conversions");
 
-export const hotkeysEnabledCheckboxEl = document.getElementById("hotkeys-enabled-checkbox") as HTMLInputElement;
-
-export const hotkeysActivationKeyContainerEl = document.getElementById("hotkeys-activation-key-container") as HTMLDivElement;
-export const hotkeysActivationKeyInputEl = document.getElementById("hotkeys-activation-key-input") as HTMLInputElement;
+export const hotkeysEnabledCheckboxEl = getCheckbox("hotkeys-enabled");
+export const [hotkeysActivationKeyContainerEl, hotkeysActivationKeyInputEl] = getContainerAndInput("hotkeys-activation-key");
 export const hotkeysActivationKeyStatusEl = document.getElementById("hotkeys-activation-key-status") as HTMLSpanElement;
-
-export const hotkeysClosePageKeyContainerEl = document.getElementById("hotkeys-close-page-key-container") as HTMLDivElement;
-export const hotkeysClosePageKeyInputEl = document.getElementById("hotkeys-close-page-key-input") as HTMLInputElement;
+export const [hotkeysClosePageKeyContainerEl, hotkeysClosePageKeyInputEl] = getContainerAndInput("hotkeys-close-page-key");
 export const hotkeysClosePageKeyStatusEl = document.getElementById("hotkeys-close-page-key-status") as HTMLSpanElement;
-
-export const hotkeysSearchBookmarksKeyContainerEl = document.getElementById("hotkeys-search-bookmarks-key-container") as HTMLDivElement;
-export const hotkeysSearchBookmarksKeyInputEl = document.getElementById("hotkeys-search-bookmarks-key-input") as HTMLInputElement;
+export const [hotkeysSearchBookmarksKeyContainerEl, hotkeysSearchBookmarksKeyInputEl] = getContainerAndInput("hotkeys-search-bookmarks-key");
 export const hotkeysSearchBookmarksKeyStatusEl = document.getElementById("hotkeys-search-bookmarks-key-status") as HTMLSpanElement;
 
-export const bookmarksTypeUserDefinedButtonEl = document.getElementById("bookmarks-type-user-defined-button") as HTMLButtonElement;
-export const bookmarksTypeDefaultButtonEl = document.getElementById("bookmarks-type-default-button") as HTMLButtonElement;
-export const bookmarksTypeDefaultBlockyButtonEl = document.getElementById("bookmarks-type-default-blocky-button") as HTMLButtonElement;
-export const bookmarksTypeNoneButtonEl = document.getElementById("bookmarks-type-none-button") as HTMLButtonElement;
-
-export const bookmarksShowBookmarkNamesCheckboxEl = document.getElementById("bookmarks-show-bookmark-names-checkbox") as HTMLInputElement;
-
-export const bookmarksUserDefinedColsContainerEl = document.getElementById("bookmarks-user-defined-cols-container") as HTMLDivElement;
-export const bookmarksUserDefinedColsInputEl = document.getElementById("bookmarks-user-defined-cols-input") as HTMLInputElement;
-
-export const bookmarksUserDefinedKeysCheckboxEl = document.getElementById("bookmarks-user-defined-keys-checkbox") as HTMLInputElement;
-
+export const bookmarksTypeUserDefinedButtonEl = getButton("bookmarks-type-user-defined");
+export const bookmarksTypeDefaultButtonEl = getButton("bookmarks-type-default");
+export const bookmarksTypeDefaultBlockyButtonEl = getButton("bookmarks-type-default-blocky");
+export const bookmarksTypeNoneButtonEl = getButton("bookmarks-type-none");
+export const bookmarksShowBookmarkNamesCheckboxEl = getCheckbox("bookmarks-show-bookmark-names");
+export const [bookmarksUserDefinedColsContainerEl, bookmarksUserDefinedColsInputEl] = getContainerAndInput("bookmarks-user-defined-cols");
+export const bookmarksUserDefinedKeysCheckboxEl = getCheckbox("bookmarks-user-defined-keys");
 export const bookmarksUserDefinedList = document.getElementById("bookmarks-user-defined-list") as HTMLDivElement;
-
 export const bookmarksDefaultBlockyColsContainerEl = document.getElementById("bookmarks-default-blocky-cols-container") as HTMLDivElement;
 export const bookmarksDefaultBlockyColsInputEl = document.getElementById("bookmarks-default-blocky-cols-input") as HTMLInputElement;
-
-export const bookmarksDefaultBlockyColorTypeRandomButtonEl = document.getElementById("bookmarks-default-blocky-color-type-random-button") as HTMLButtonElement;
-export const bookmarksDefaultBlockyColorTypeCustomButtonEl = document.getElementById("bookmarks-default-blocky-color-type-custom-button") as HTMLButtonElement;
-
+export const bookmarksDefaultBlockyColorTypeRandomButtonEl = getButton("bookmarks-default-blocky-color-type-random");
+export const bookmarksDefaultBlockyColorTypeCustomButtonEl = getButton("bookmarks-default-blocky-color-type-custom");
 export const bookmarksDefaultBlockyColorContainerEl = document.getElementById("bookmarks-default-blocky-color-container") as HTMLDivElement;
 export const bookmarksDefaultBlockyColorInputEl = document.getElementById("bookmarks-default-blocky-color-input") as HTMLInputElement;
+export const bookmarksLocationFirefoxMenuButtonEl = getButton("bookmarks-location-firefox-menu");
+export const bookmarksLocationFirefoxToolbarButtonEl = getButton("bookmarks-location-firefox-toolbar");
+export const bookmarksLocationFirefoxOtherButtonEl = getButton("bookmarks-location-firefox-other");
+export const bookmarksDefaultFaviconSourceGoogleButton = getButton("bookmarks-default-favicon-source-google");
+export const bookmarksDefaultFaviconSourceDuckduckgoButton = getButton("bookmarks-default-favicon-source-duckduckgo");
 
-export const bookmarksLocationFirefoxMenuButtonEl = document.getElementById("bookmarks-location-firefox-menu-button") as HTMLButtonElement;
-export const bookmarksLocationFirefoxToolbarButtonEl = document.getElementById("bookmarks-location-firefox-toolbar-button") as HTMLButtonElement;
-export const bookmarksLocationFirefoxOtherButtonEl = document.getElementById("bookmarks-location-firefox-other-button") as HTMLButtonElement;
-
-// prettier-ignore
-export const bookmarksDefaultFaviconSourceGoogleButton = document.getElementById("bookmarks-default-favicon-source-google-button") as HTMLButtonElement
-// prettier-ignore
-export const bookmarksDefaultFaviconSourceDuckduckgoButton = document.getElementById("bookmarks-default-favicon-source-duckduckgo-button") as HTMLButtonElement
 
 export const inputs: Input[] = [
   {
