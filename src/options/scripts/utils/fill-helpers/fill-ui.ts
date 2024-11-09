@@ -7,7 +7,9 @@ import {
   uiStyleSolidButtonEl,
   uiCustomCSSTextareaEl,
   uiCornerStyleSharpButtonEl,
-  uiCornerStyleRoundButtonEl
+  uiCornerStyleRoundButtonEl,
+  uiGlassColorInputEl,
+  uiBlurStrengthInputEl
 } from "src/options/scripts/ui";
 
 export const fillUIInputs = (config: Config) => {
@@ -22,6 +24,8 @@ export const fillUIInputs = (config: Config) => {
     }
   }
 
+  uiGlassColorInputEl.value = config.ui.glassColor;
+  uiBlurStrengthInputEl.value = config.ui.blurStrength;
   uiForegroundColorInputEl.value = config.ui.foregroundColor;
   uiBackgroundColorInputEl.value = config.ui.backgroundColor;
   uiHighlightColorInputEl.value = config.ui.highlightColor;

@@ -44,6 +44,12 @@ export const wallpaperFileResetButtonEl = document.getElementById("wallpaper-fil
 export const uiStyleSolidButtonEl = document.getElementById("ui-style-solid-button") as HTMLButtonElement;
 export const uiStyleGlassButtonEl = document.getElementById("ui-style-glass-button") as HTMLButtonElement;
 
+export const uiGlassColorContainerEl = document.getElementById("ui-glass-color-container") as HTMLDivElement;
+export const uiGlassColorInputEl = document.getElementById("ui-glass-color-input") as HTMLInputElement;
+
+export const uiBlurStrengthContainerEl = document.getElementById("ui-blur-strength-container") as HTMLDivElement;
+export const uiBlurStrengthInputEl = document.getElementById("ui-blur-strength-input") as HTMLInputElement;
+
 export const uiForegroundColorContainerEl = document.getElementById("ui-foreground-color-container") as HTMLDivElement;
 export const uiForegroundColorInputEl = document.getElementById("ui-foreground-color-input") as HTMLInputElement;
 

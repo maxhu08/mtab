@@ -3,7 +3,9 @@ import {
   uiBackgroundColorInputEl,
   uiForegroundColorInputEl,
   uiHighlightColorInputEl,
-  uiCustomCSSTextareaEl
+  uiCustomCSSTextareaEl,
+  uiGlassColorInputEl,
+  uiBlurStrengthInputEl
 } from "src/options/scripts/ui";
 
 export const saveUISettingsToDraft = (draft: Config) => {
@@ -22,6 +24,8 @@ export const saveUISettingsToDraft = (draft: Config) => {
     }
   }
 
+  draft.ui.glassColor = uiGlassColorInputEl.value;
+  draft.ui.blurStrength = uiBlurStrengthInputEl.value;
   draft.ui.foregroundColor = uiForegroundColorInputEl.value;
   draft.ui.backgroundColor = uiBackgroundColorInputEl.value;
   draft.ui.highlightColor = uiHighlightColorInputEl.value;
