@@ -23,16 +23,7 @@ export const renderDefaultBookmarks = (config: Config) => {
   // prettier-ignore
   const innerBookmarkContainer = document.getElementById("inner-bookmark-container") as HTMLDivElement;
 
-  bookmarksContainerEl.classList.add(
-    "p-2",
-    "corner-style",
-    "overflow-hidden",
-    "w-full",
-    "overflow-scroll",
-    "scrollbar-hidden",
-    config.animations.enabled ? config.animations.initialType : "_ignore",
-    config.animations.enabled ? "opacity-0" : "_ignore"
-  );
+  bookmarksContainerEl.classList.add("p-2", "corner-style", "overflow-hidden", "w-full", "overflow-scroll", "scrollbar-hidden", config.animations.enabled ? config.animations.initialType : "_ignore", config.animations.enabled ? "opacity-0" : "_ignore");
 
   chrome.bookmarks.search({}, (chromeBookmarks) => {
     if (chromeBookmarks.length === 0) {
@@ -42,12 +33,10 @@ export const renderDefaultBookmarks = (config: Config) => {
       //   </span>
       // </div>
       const containerDivEl = document.createElement("div");
-      containerDivEl.className =
-        "overflow-hidden h-16 md:h-20 grid grid-rows-[auto_max-content] place-items-center";
+      containerDivEl.className = "overflow-hidden h-16 md:h-20 grid grid-rows-[auto_max-content] place-items-center";
 
       const textSpanEl = document.createElement("span");
-      textSpanEl.className =
-        "text-search text-base md:text-2xl font-message w-full text-center text-ellipsis overflow-hidden whitespace-nowrap";
+      textSpanEl.className = "text-search text-base md:text-2xl font-message w-full text-center text-ellipsis overflow-hidden whitespace-nowrap";
       textSpanEl.style.color = config.search.textColor;
       textSpanEl.textContent = "No bookmarks yet";
 
@@ -70,8 +59,7 @@ export const renderDefaultBookmarks = (config: Config) => {
       // </button>
       const buttonEl = document.createElement("button");
       buttonEl.id = `bookmark-default-${bookmark.id}`;
-      buttonEl.className =
-        "overflow-hidden w-16 md:w-20 aspect-square grid grid-rows-[auto_max-content] place-items-center cursor-pointer";
+      buttonEl.className = "overflow-hidden w-16 md:w-20 aspect-square grid grid-rows-[auto_max-content] place-items-center cursor-pointer";
 
       const imgEl = document.createElement("img");
       imgEl.className = "w-10 md:w-14";
@@ -79,8 +67,7 @@ export const renderDefaultBookmarks = (config: Config) => {
       buttonEl.appendChild(imgEl);
 
       const spanEl = document.createElement("span");
-      spanEl.className =
-        "text-base w-full font-search text-center text-ellipsis overflow-hidden whitespace-nowrap";
+      spanEl.className = "text-base w-full font-search text-center text-ellipsis overflow-hidden whitespace-nowrap";
       spanEl.style.color = config.search.textColor;
       spanEl.textContent = bookmark.title.toString();
       buttonEl.appendChild(spanEl);
@@ -95,12 +82,7 @@ export const renderDefaultBookmarks = (config: Config) => {
       const bookmarkEl = document.getElementById(`bookmark-default-${bookmark.id}`) as HTMLDivElement;
       bookmarkEl.onclick = (e) => {
         if (e.ctrlKey) {
-          openBookmark(
-            bookmark.url!,
-            config.animations.enabled,
-            config.animations.bookmarkType,
-            true
-          );
+          openBookmark(bookmark.url!, config.animations.enabled, config.animations.bookmarkType, true);
         } else {
           openBookmark(bookmark.url!, config.animations.enabled, config.animations.bookmarkType);
         }

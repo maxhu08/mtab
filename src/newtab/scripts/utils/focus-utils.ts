@@ -1,8 +1,4 @@
-export const focusElementBorder = (
-  borderEl: HTMLDivElement,
-  focusedBorderColor: string,
-  e: Event
-) => {
+export const focusElementBorder = (borderEl: HTMLDivElement, focusedBorderColor: string, e: Event) => {
   borderEl.classList.remove("border-transparent");
   borderEl.style.borderColor = focusedBorderColor;
 

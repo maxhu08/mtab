@@ -1,13 +1,5 @@
 import { BookmarksType, Config } from "src/newtab/scripts/config";
-import {
-  bookmarksContainerEl,
-  bookmarkSearchContainerEl,
-  bookmarkSearchInputEl,
-  bookmarkSearchResultsContainerEl,
-  bookmarkSearchSectionEl,
-  searchContainerEl,
-  searchSectionEl
-} from "src/newtab/scripts/ui";
+import { bookmarksContainerEl, bookmarkSearchContainerEl, bookmarkSearchInputEl, bookmarkSearchResultsContainerEl, bookmarkSearchSectionEl, searchContainerEl, searchSectionEl } from "src/newtab/scripts/ui";
 
 export const tryFocusBookmarkSearch = (config: Config, e: KeyboardEvent) => {
   // in case already focused
@@ -40,12 +32,7 @@ export const unfocusBookmarkSearch = (animationType: string) => {
   }
 };
 
-export const enableSearchBookmark = (
-  bookmarks: any[],
-  bookmarksType: BookmarksType,
-  textColor: string,
-  placeholderTextColor: string
-) => {
+export const enableSearchBookmark = (bookmarks: any[], bookmarksType: BookmarksType, textColor: string, placeholderTextColor: string) => {
   searchSectionEl.classList.replace("grid", "hidden");
   bookmarkSearchSectionEl.classList.replace("hidden", "grid");
 
@@ -59,12 +46,7 @@ export const disableSearchBookmark = () => {
   bookmarkSearchResultsContainerEl.innerHTML = "";
 };
 
-export const refreshBookmarkSearchResults = (
-  bookmarks: any[],
-  bookmarksType: BookmarksType,
-  textColor: string,
-  placeholderTextColor: string
-) => {
+export const refreshBookmarkSearchResults = (bookmarks: any[], bookmarksType: BookmarksType, textColor: string, placeholderTextColor: string) => {
   bookmarkSearchResultsContainerEl.innerHTML = "";
 
   // prettier-ignore
@@ -75,13 +57,11 @@ export const refreshBookmarkSearchResults = (
   let filteredBookmarks = [];
 
   if (bookmarksType === "user-defined") {
-    filteredBookmarks = fuzzySearchBookmark(bookmarkSearchValue, bookmarks, bookmarksType).sort(
-      (a, b) => {
-        const aContains = a.name.toLowerCase().startsWith(bookmarkSearchValue);
-        const bContains = b.name.toLowerCase().startsWith(bookmarkSearchValue);
-        return aContains === bContains ? 0 : aContains ? -1 : 1;
-      }
-    );
+    filteredBookmarks = fuzzySearchBookmark(bookmarkSearchValue, bookmarks, bookmarksType).sort((a, b) => {
+      const aContains = a.name.toLowerCase().startsWith(bookmarkSearchValue);
+      const bContains = b.name.toLowerCase().startsWith(bookmarkSearchValue);
+      return aContains === bContains ? 0 : aContains ? -1 : 1;
+    });
   } else if (bookmarksType === "default" || bookmarksType === "default-blocky") {
     filteredBookmarks = fuzzySearchBookmark(bookmarkSearchValue, bookmarks, bookmarksType)
       .filter((bm) => {
@@ -102,12 +82,7 @@ export const refreshBookmarkSearchResults = (
   filteredBookmarks.forEach((bookmark, index) => {
     const bName = bookmarksType === "user-defined" ? bookmark.name : bookmark.title;
 
-    const matchedNameHtml = getMatchedNameHtml(
-      bName,
-      bookmarkSearchValue,
-      textColor,
-      placeholderTextColor
-    );
+    const matchedNameHtml = getMatchedNameHtml(bName, bookmarkSearchValue, textColor, placeholderTextColor);
 
     if (index === selectedIndex) {
       // <div bookmark-result-url="${bookmark.url}">
@@ -146,20 +121,12 @@ export const refreshBookmarkSearchResults = (
   }
 };
 
-const getMatchedNameHtml = (
-  name: string,
-  searchValue: string,
-  textColor: string,
-  placeholderTextColor: string
-) => {
+const getMatchedNameHtml = (name: string, searchValue: string, textColor: string, placeholderTextColor: string) => {
   let result = "";
   let searchIndex = 0;
 
   for (let i = 0; i < name.length; i++) {
-    if (
-      searchIndex < searchValue.length &&
-      name[i].toLowerCase() === searchValue[searchIndex].toLowerCase()
-    ) {
+    if (searchIndex < searchValue.length && name[i].toLowerCase() === searchValue[searchIndex].toLowerCase()) {
       result += `<span style="color: ${textColor};">${name[i]}</span>`;
       searchIndex++;
     } else {

@@ -1,9 +1,6 @@
 import { Config } from "src/newtab/scripts/config";
 import { bookmarksContainerEl } from "src/newtab/scripts/ui";
-import {
-  buildChromeBookmarksTree,
-  renderDefaultBlockyBookmarksNodes
-} from "src/newtab/scripts/utils/bookmark-utils";
+import { buildChromeBookmarksTree, renderDefaultBlockyBookmarksNodes } from "src/newtab/scripts/utils/bookmark-utils";
 import { insertCSS } from "src/newtab/scripts/utils/insert-css";
 import { getUserAgent } from "src/util-scripts/user-agent";
 
@@ -22,9 +19,7 @@ export const renderDefaultBlockyBookmarks = (config: Config) => {
   //   }
   // }`;
 
-  insertCSS(
-    `.default-blocky-bookmarks-cols{grid-template-columns:1fr 1fr;}@media (min-width: 768px){.default-blocky-bookmarks-cols{grid-template-columns:repeat(${config.bookmarks.defaultBlockyCols}, minmax(0, 1fr));}}`
-  );
+  insertCSS(`.default-blocky-bookmarks-cols{grid-template-columns:1fr 1fr;}@media (min-width: 768px){.default-blocky-bookmarks-cols{grid-template-columns:repeat(${config.bookmarks.defaultBlockyCols}, minmax(0, 1fr));}}`);
 
   chrome.bookmarks.search({}, (chromeBookmarks) => {
     let chromeBookmarksTree = buildChromeBookmarksTree(chromeBookmarks);
@@ -41,12 +36,6 @@ export const renderDefaultBlockyBookmarks = (config: Config) => {
       chromeBookmarksTree = chromeBookmarksTree.find((cb) => cb.id === location)!.children as unknown as chrome.bookmarks.BookmarkTreeNode[];
     }
 
-    renderDefaultBlockyBookmarksNodes(
-      chromeBookmarksTree[0].parentId!,
-      chromeBookmarksTree,
-      chromeBookmarks,
-      config,
-      false
-    );
+    renderDefaultBlockyBookmarksNodes(chromeBookmarksTree[0].parentId!, chromeBookmarksTree, chromeBookmarks, config, false);
   });
 };

@@ -1,10 +1,4 @@
-import {
-  Config,
-  AnimationInitialType,
-  BookmarkTiming,
-  AnimationSearchType,
-  AnimationBookmarkType
-} from "src/newtab/scripts/config";
+import { Config, AnimationInitialType, BookmarkTiming, AnimationSearchType, AnimationBookmarkType } from "src/newtab/scripts/config";
 import {
   animationsEnabledCheckboxEl,
   animationsBookmarkTimingLeftButtonEl,

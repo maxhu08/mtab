@@ -24,11 +24,11 @@ export interface ButtonSwitch {
 export const inputs: Input[] = [
   {
     container: convertInContainerEl,
-    input: convertInTextareaEl,
+    input: convertInTextareaEl
   },
   {
     container: convertOutContainerEl,
-    input: convertOutTextareaEl,
+    input: convertOutTextareaEl
   }
 ];
 

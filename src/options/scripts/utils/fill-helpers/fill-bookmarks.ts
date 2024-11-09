@@ -1,11 +1,4 @@
-import {
-  BookmarksLocationFirefox,
-  BookmarksType,
-  Config,
-  DefaultBlockyColorType,
-  DefaultFaviconSource,
-  UserDefinedBookmark
-} from "src/newtab/scripts/config";
+import { BookmarksLocationFirefox, BookmarksType, Config, DefaultBlockyColorType, DefaultFaviconSource, UserDefinedBookmark } from "src/newtab/scripts/config";
 import { focusInput, unfocusInput } from "src/options/scripts/inputs";
 import {
   Input,
@@ -219,11 +212,7 @@ const deleteBookmark = (index: number) => {
   bookmarkToDelete.parentNode!.removeChild(bookmarkToDelete);
 }
 
-const toggleCollapseBookmark = (
-  collapsibleContentEl: HTMLDivElement,
-  toggleCollapseBookmarkButtonEl: HTMLButtonElement,
-  mode: "toggle" | "collapse" | "expand"
-) => {
+const toggleCollapseBookmark = (collapsibleContentEl: HTMLDivElement, toggleCollapseBookmarkButtonEl: HTMLButtonElement, mode: "toggle" | "collapse" | "expand") => {
   switch (mode) {
     case "toggle": {
       if (collapsibleContentEl.getAttribute("state") === "expanded") {
@@ -356,25 +345,24 @@ toggleCollapseAllBookmarksButtonEl.onclick = () => {
   }
 };
 
-(document.getElementById("bookmarks-user-defined-add-button") as HTMLButtonElement).onclick =
-  () => {
-    const totalBookmarks = bookmarksUserDefinedList.children.length;
+(document.getElementById("bookmarks-user-defined-add-button") as HTMLButtonElement).onclick = () => {
+  const totalBookmarks = bookmarksUserDefinedList.children.length;
 
-    addUserDefinedBookmark({
-      index: totalBookmarks,
-      bookmark: {
-        name: "NAME",
-        url: "about:blank",
-        color: "#84cc16",
-        iconType: "ri-box-3-line",
-        iconColor: "#ffffff"
-      }
-    });
-
-    for (let i = 0; i <= totalBookmarks; i++) {
-      handleBookmarkSettings(i);
+  addUserDefinedBookmark({
+    index: totalBookmarks,
+    bookmark: {
+      name: "NAME",
+      url: "about:blank",
+      color: "#84cc16",
+      iconType: "ri-box-3-line",
+      iconColor: "#ffffff"
     }
-  };
+  });
+
+  for (let i = 0; i <= totalBookmarks; i++) {
+    handleBookmarkSettings(i);
+  }
+};
 
 const addUserDefinedBookmark = (params: { index: number; bookmark: UserDefinedBookmark }) => {
   const { index, bookmark } = params;

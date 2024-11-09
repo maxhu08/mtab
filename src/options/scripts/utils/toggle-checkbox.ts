@@ -1,14 +1,4 @@
-import {
-  searchEngineDuckduckgoButtonEl,
-  searchEngineBingButtonEl,
-  searchEngineBraveButtonEl,
-  searchEngineGoogleButtonEl,
-  searchEngineYahooButtonEl,
-  searchEngineYandexButtonEl,
-  searchEngineStartpageButtonEl,
-  searchEngineEcosiaButtonEl,
-  searchUseCustomEngineEnabledCheckboxEl
-} from "src/options/scripts/ui";
+import { searchEngineDuckduckgoButtonEl, searchEngineBingButtonEl, searchEngineBraveButtonEl, searchEngineGoogleButtonEl, searchEngineYahooButtonEl, searchEngineYandexButtonEl, searchEngineStartpageButtonEl, searchEngineEcosiaButtonEl, searchUseCustomEngineEnabledCheckboxEl } from "src/options/scripts/ui";
 
 const checkboxSections = [
   ["message-enabled-checkbox", "message-enabled-section"],
@@ -69,9 +59,7 @@ const handleUseCustomEngineChecked = () => {
   searchUseCustomEngineEnabledCheckboxEl.addEventListener("change", () => {
     if (searchUseCustomEngineEnabledCheckboxEl.checked) {
       // if the checkbox is checked, the previously selected search engine should be unselected (visually)
-      const selectedSearchEngineEl = document.querySelector(
-        `button[btn-option-type="search-engine"][selected="yes"]`
-      ) as HTMLButtonElement;
+      const selectedSearchEngineEl = document.querySelector(`button[btn-option-type="search-engine"][selected="yes"]`) as HTMLButtonElement;
 
       switch (selectedSearchEngineEl.id) {
         case "search-engine-duckduckgo-button": {

@@ -1,8 +1,5 @@
 export const getContainerAndInput = (baseId: string) => {
-  return [
-    document.getElementById(`${baseId}-container`),
-    document.getElementById(`${baseId}-input`)
-  ] as [HTMLDivElement, HTMLInputElement];
+  return [document.getElementById(`${baseId}-container`), document.getElementById(`${baseId}-input`)] as [HTMLDivElement, HTMLInputElement];
 };
 
 export const getCheckbox = (baseId: string) => {

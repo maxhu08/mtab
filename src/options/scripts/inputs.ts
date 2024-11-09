@@ -2,17 +2,7 @@ import { oconfig } from "src/options/scripts/oconfig";
 import { buttonSwitches, hotkeyInputs, inputs } from "./ui";
 import { switchButtons } from "src/options/scripts/utils/switch-buttons";
 
-import {
-  searchEngineDuckduckgoButtonEl,
-  searchEngineGoogleButtonEl,
-  searchEngineBingButtonEl,
-  searchEngineBraveButtonEl,
-  searchEngineYahooButtonEl,
-  searchEngineYandexButtonEl,
-  searchEngineStartpageButtonEl,
-  searchEngineEcosiaButtonEl,
-  searchUseCustomEngineEnabledCheckboxEl
-} from "src/options/scripts/ui";
+import { searchEngineDuckduckgoButtonEl, searchEngineGoogleButtonEl, searchEngineBingButtonEl, searchEngineBraveButtonEl, searchEngineYahooButtonEl, searchEngineYandexButtonEl, searchEngineStartpageButtonEl, searchEngineEcosiaButtonEl, searchUseCustomEngineEnabledCheckboxEl } from "src/options/scripts/ui";
 import { listenToHotkeyInputs } from "src/options/scripts/utils/hotkey-inputs";
 import { saveConfig } from "src/options/scripts/utils/save-config";
 import { exportConfig } from "src/options/scripts/utils/export-config";
@@ -51,16 +41,7 @@ export const listenToInputs = () => {
 
   //Special case for using a custom search engine
   // if custom search engine is enabled, then disable it
-  const arrayOfSearchEngines = [
-    searchEngineDuckduckgoButtonEl,
-    searchEngineGoogleButtonEl,
-    searchEngineBingButtonEl,
-    searchEngineBraveButtonEl,
-    searchEngineYahooButtonEl,
-    searchEngineYandexButtonEl,
-    searchEngineStartpageButtonEl,
-    searchEngineEcosiaButtonEl
-  ];
+  const arrayOfSearchEngines = [searchEngineDuckduckgoButtonEl, searchEngineGoogleButtonEl, searchEngineBingButtonEl, searchEngineBraveButtonEl, searchEngineYahooButtonEl, searchEngineYandexButtonEl, searchEngineStartpageButtonEl, searchEngineEcosiaButtonEl];
 
   arrayOfSearchEngines.forEach((searchEngine) => {
     searchEngine.addEventListener("click", () => {
@@ -99,35 +80,13 @@ export const listenToInputs = () => {
   resetToDefaultBtn.onclick = () => setDefaultConfig();
 };
 
-export const unfocusInput = ({
-  container,
-  input,
-  borderClassOld,
-  borderClassNew
-}: {
-  container: HTMLDivElement;
-  input: HTMLInputElement | HTMLTextAreaElement;
-  borderClassOld: string;
-  borderClassNew: string;
-}) => {
+export const unfocusInput = ({ container, input, borderClassOld, borderClassNew }: { container: HTMLDivElement; input: HTMLInputElement | HTMLTextAreaElement; borderClassOld: string; borderClassNew: string }) => {
   input.blur();
 
   container.classList.replace(borderClassOld, borderClassNew);
 };
 
-export const focusInput = ({
-  container,
-  input,
-  borderClassOld,
-  borderClassNew,
-  e
-}: {
-  container: HTMLDivElement;
-  input: HTMLInputElement | HTMLTextAreaElement;
-  borderClassOld: string;
-  borderClassNew: string;
-  e: Event;
-}) => {
+export const focusInput = ({ container, input, borderClassOld, borderClassNew, e }: { container: HTMLDivElement; input: HTMLInputElement | HTMLTextAreaElement; borderClassOld: string; borderClassNew: string; e: Event }) => {
   container.classList.replace(borderClassOld, borderClassNew);
 
   input.focus();

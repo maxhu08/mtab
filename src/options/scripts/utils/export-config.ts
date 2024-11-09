@@ -3,9 +3,7 @@ import { getConfig } from "src/newtab/scripts/config";
 export const exportConfig = () => {
   getConfig(({ config }) => {
     const exportedSave = JSON.stringify(config);
-    const formattedExportedSave = `MTAB_SAVE_FORMAT_${window.btoa(
-      encodeURIComponent(JSON.stringify(exportedSave))
-    )}`;
+    const formattedExportedSave = `MTAB_SAVE_FORMAT_${window.btoa(encodeURIComponent(JSON.stringify(exportedSave)))}`;
 
     navigator.clipboard
       .writeText(formattedExportedSave)

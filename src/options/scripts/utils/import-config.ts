@@ -17,9 +17,7 @@ export const importConfigAndSave = () => {
     return;
   }
 
-  const importedConfig = JSON.parse(
-    JSON.parse(decodeURIComponent(window.atob(dataToImport.replace(pattern, ""))))
-  );
+  const importedConfig = JSON.parse(JSON.parse(decodeURIComponent(window.atob(dataToImport.replace(pattern, "")))));
 
   const mergedConfig = deepMerge(structuredClone(defaultConfig), importedConfig);
 

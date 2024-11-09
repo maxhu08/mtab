@@ -63,9 +63,7 @@ const handleSearch = (config: Config, history: chrome.history.HistoryItem[] = []
 };
 
 const handleHistory = (val: string, history: chrome.history.HistoryItem[]) => {
-  const matchingItems = history
-    .filter((h) => h.title?.toLocaleLowerCase().startsWith(val.toLowerCase()))
-    .slice(0, 6);
+  const matchingItems = history.filter((h) => h.title?.toLocaleLowerCase().startsWith(val.toLowerCase())).slice(0, 6);
 
   if (matchingItems.length > 0) {
     return { type: "history", historyItems: matchingItems } as const;
@@ -84,14 +82,7 @@ const handleMath = (val: string) => {
 
     // allow imaginary numbers
     // prevent returning a function val is a function like `atan` or `derivative`
-    if (
-      result?.re ||
-      result?.im ||
-      isConstantNode(result) ||
-      isComplex(result) ||
-      isOperatorNode(result) ||
-      isNumber(result)
-    ) {
+    if (result?.re || result?.im || isConstantNode(result) || isComplex(result) || isOperatorNode(result) || isNumber(result)) {
       return { type: "math", result: format(result) } as const;
     }
   } catch {
@@ -182,14 +173,5 @@ const handleConversion = (val: string) => {
     }
   };
 
-  return (
-    matchConversion(regexes.inches, "in") ||
-    matchConversion(regexes.centimeters, "cm") ||
-    matchConversion(regexes.pounds, "lbs") ||
-    matchConversion(regexes.kilograms, "kg") ||
-    matchConversion(regexes.miles, "mi") ||
-    matchConversion(regexes.kilometers, "km") ||
-    matchConversion(regexes.fahrenheit, "f") ||
-    matchConversion(regexes.celsius, "c")
-  );
+  return matchConversion(regexes.inches, "in") || matchConversion(regexes.centimeters, "cm") || matchConversion(regexes.pounds, "lbs") || matchConversion(regexes.kilograms, "kg") || matchConversion(regexes.miles, "mi") || matchConversion(regexes.kilometers, "km") || matchConversion(regexes.fahrenheit, "f") || matchConversion(regexes.celsius, "c");
 };

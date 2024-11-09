@@ -31,9 +31,7 @@ export const convertSave = () => {
       return;
     }
 
-    const saveAsMtabFormat = `MTAB_SAVE_FORMAT_${window.btoa(
-      encodeURIComponent(JSON.stringify(inputVal))
-    )}`;
+    const saveAsMtabFormat = `MTAB_SAVE_FORMAT_${window.btoa(encodeURIComponent(JSON.stringify(inputVal)))}`;
 
     convertOutTextareaEl.value = saveAsMtabFormat;
   }

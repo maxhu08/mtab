@@ -1,21 +1,9 @@
-import {
-  AnimationBookmarkType,
-  AnimationInitialType,
-  BookmarkTiming,
-  Config,
-  UIStyle,
-  UserDefinedBookmark
-} from "src/newtab/scripts/config";
+import { AnimationBookmarkType, AnimationInitialType, BookmarkTiming, Config, UIStyle, UserDefinedBookmark } from "src/newtab/scripts/config";
 import { bookmarksContainerEl, bookmarkSearchInputEl, contentEl } from "src/newtab/scripts/ui";
 import { getFaviconURL } from "src/newtab/scripts/utils/favicon-url";
 import { focusElementBorder, unfocusElementBorder } from "src/newtab/scripts/utils/focus-utils";
 
-export const openBookmark = (
-  bookmarkUrl: string,
-  animationsEnabled: boolean,
-  animationsType: AnimationBookmarkType,
-  openInNewTab: boolean = false
-) => {
+export const openBookmark = (bookmarkUrl: string, animationsEnabled: boolean, animationsType: AnimationBookmarkType, openInNewTab: boolean = false) => {
   if (!/^https?:\/\//i.test(bookmarkUrl)) bookmarkUrl = `https://${bookmarkUrl}`;
 
   if (openInNewTab) {
@@ -42,13 +30,7 @@ export const openBookmark = (
   }
 };
 
-export const openBookmarkFolder = (
-  chromeBookmarks: chrome.bookmarks.BookmarkTreeNode[],
-  folderToLeaveId: string,
-  newFolderId: string,
-  config: Config,
-  showBackButton: boolean
-) => {
+export const openBookmarkFolder = (chromeBookmarks: chrome.bookmarks.BookmarkTreeNode[], folderToLeaveId: string, newFolderId: string, config: Config, showBackButton: boolean) => {
   // prettier-ignore
   const oldContainerEl = document.getElementById(`bookmark-folder-container-${folderToLeaveId}`) as HTMLDivElement;
 
@@ -73,23 +55,11 @@ export const openBookmarkFolder = (
 
     setTimeout(() => {
       oldContainerEl.parentNode!.removeChild(oldContainerEl);
-      renderDefaultBlockyBookmarksNodes(
-        newFolderId,
-        newFolderChildren,
-        chromeBookmarks,
-        config,
-        showBackButton
-      );
+      renderDefaultBlockyBookmarksNodes(newFolderId, newFolderChildren, chromeBookmarks, config, showBackButton);
     }, animationDuration + 20);
   } else {
     oldContainerEl.parentNode!.removeChild(oldContainerEl);
-    renderDefaultBlockyBookmarksNodes(
-      newFolderId,
-      newFolderChildren,
-      chromeBookmarks,
-      config,
-      showBackButton
-    );
+    renderDefaultBlockyBookmarksNodes(newFolderId, newFolderChildren, chromeBookmarks, config, showBackButton);
   }
 };
 
@@ -146,11 +116,7 @@ export const renderBlockBookmark = (
 
   const buttonEl = document.createElement("button");
   buttonEl.id = `bookmark-${bookmarkName}-${bookmarkIndex}`;
-  buttonEl.className = `relative duration-[250ms] ease-out bg-foreground cursor-pointer ${
-    uiStyle === "glass" ? "glass-effect" : ""
-  } corner-style h-bookmark overflow-hidden ${
-    animationsEnabled ? `${animationsInitialType} opacity-0 outline-none` : ""
-  }`;
+  buttonEl.className = `relative duration-[250ms] ease-out bg-foreground cursor-pointer ${uiStyle === "glass" ? "glass-effect" : ""} corner-style h-bookmark overflow-hidden ${animationsEnabled ? `${animationsInitialType} opacity-0 outline-none` : ""}`;
   if (animationsEnabled) buttonEl.style.animationDelay = `${delay}ms`;
 
   const borderDiv = document.createElement("div");
@@ -178,8 +144,7 @@ export const renderBlockBookmark = (
 
   if (showName) {
     const nameSpan = document.createElement("span");
-    nameSpan.className =
-      "visibilty-bookmark-name w-full font-message font-semibold text-base text-ellipsis overflow-hidden whitespace-nowrap";
+    nameSpan.className = "visibilty-bookmark-name w-full font-message font-semibold text-base text-ellipsis overflow-hidden whitespace-nowrap";
     nameSpan.style.color = nameTextColor;
     nameSpan.textContent = bookmarkVanityName;
     contentDiv.appendChild(nameSpan);
@@ -189,12 +154,7 @@ export const renderBlockBookmark = (
   containerEl.appendChild(buttonEl);
 };
 
-export const bindActionsToBlockNode = (
-  node: chrome.bookmarks.BookmarkTreeNode,
-  index: number,
-  chromeBookmarks: chrome.bookmarks.BookmarkTreeNode[],
-  config: Config
-) => {
+export const bindActionsToBlockNode = (node: chrome.bookmarks.BookmarkTreeNode, index: number, chromeBookmarks: chrome.bookmarks.BookmarkTreeNode[], config: Config) => {
   // if default-blocky or user-defined
   const identifier = node.id ? node.id : (node as unknown as UserDefinedBookmark).name;
 
@@ -230,8 +190,7 @@ export const bindActionsToBlockNode = (
   const isFolder = node.children && node.children!.length > 0;
 
   if (isFolder) {
-    bookmarkEl.onmouseup = () =>
-      openBookmarkFolder(chromeBookmarks, node.parentId!, node.id, config, true);
+    bookmarkEl.onmouseup = () => openBookmarkFolder(chromeBookmarks, node.parentId!, node.id, config, true);
   } else {
     // can't be onclick in order to register middle click and can't be onmousedown because open in new tab fails
     bookmarkEl.onmouseup = (e) => {
@@ -245,16 +204,10 @@ export const bindActionsToBlockNode = (
   }
 
   bookmarkEl.addEventListener("blur", () => unfocusElementBorder(bookmarkBorderEl));
-  bookmarkEl.addEventListener("focus", (e) =>
-    focusElementBorder(bookmarkBorderEl, config.search.focusedBorderColor, e)
-  );
+  bookmarkEl.addEventListener("focus", (e) => focusElementBorder(bookmarkBorderEl, config.search.focusedBorderColor, e));
 };
 
-export const bindActionsToBackButton = (
-  folderId: string,
-  chromeBookmarks: chrome.bookmarks.BookmarkTreeNode[],
-  config: Config
-) => {
+export const bindActionsToBackButton = (folderId: string, chromeBookmarks: chrome.bookmarks.BookmarkTreeNode[], config: Config) => {
   // prettier-ignore
   const backButtonEl = document.getElementById(`bookmark-folder-${folderId}-back-button`) as HTMLButtonElement;
   // prettier-ignore
@@ -294,9 +247,7 @@ export const bindActionsToBackButton = (
   };
 
   backButtonEl.addEventListener("blur", () => unfocusElementBorder(backButtonBorderEl));
-  backButtonEl.addEventListener("focus", (e) =>
-    focusElementBorder(backButtonBorderEl, config.search.focusedBorderColor, e)
-  );
+  backButtonEl.addEventListener("focus", (e) => focusElementBorder(backButtonBorderEl, config.search.focusedBorderColor, e));
 };
 
 export const renderBlockBookmarkFolder = (
@@ -351,11 +302,7 @@ export const renderBlockBookmarkFolder = (
   // </button>
   const buttonEl = document.createElement("button");
   buttonEl.id = `bookmark-${bookmarkName}-${bookmarkIndex}`;
-  buttonEl.className = `relative duration-[250ms] ease-out bg-foreground cursor-pointer ${
-    uiStyle === "glass" ? "glass-effect" : ""
-  } corner-style h-bookmark overflow-hidden ${
-    animationsEnabled ? `${animationsInitialType} opacity-0 outline-none` : ""
-  }`;
+  buttonEl.className = `relative duration-[250ms] ease-out bg-foreground cursor-pointer ${uiStyle === "glass" ? "glass-effect" : ""} corner-style h-bookmark overflow-hidden ${animationsEnabled ? `${animationsInitialType} opacity-0 outline-none` : ""}`;
   if (animationsEnabled) buttonEl.style.animationDelay = `${delay}ms`;
 
   const borderDiv = document.createElement("div");
@@ -383,8 +330,7 @@ export const renderBlockBookmarkFolder = (
 
   if (showName) {
     const nameSpan = document.createElement("span");
-    nameSpan.className =
-      "visibilty-bookmark-name w-full font-message font-semibold text-base text-ellipsis overflow-hidden whitespace-nowrap";
+    nameSpan.className = "visibilty-bookmark-name w-full font-message font-semibold text-base text-ellipsis overflow-hidden whitespace-nowrap";
     nameSpan.style.color = nameTextColor;
     nameSpan.textContent = bookmarkVanityName;
     contentDiv.appendChild(nameSpan);
@@ -417,13 +363,7 @@ export const buildChromeBookmarksTree = (chromeBookmarks: chrome.bookmarks.Bookm
   return rootNodes;
 };
 
-export const renderDefaultBlockyBookmarksNodes = (
-  folderId: string,
-  nodes: chrome.bookmarks.BookmarkTreeNode[],
-  chromeBookmarks: chrome.bookmarks.BookmarkTreeNode[],
-  config: Config,
-  showBackButton: boolean
-) => {
+export const renderDefaultBlockyBookmarksNodes = (folderId: string, nodes: chrome.bookmarks.BookmarkTreeNode[], chromeBookmarks: chrome.bookmarks.BookmarkTreeNode[], config: Config, showBackButton: boolean) => {
   let delay = 0;
   if (config.animations.bookmarkTiming === "uniform") delay = 150;
   else delay = (nodes.length + 3) * 50;
@@ -447,8 +387,7 @@ export const renderDefaultBlockyBookmarksNodes = (
   folderContainerEl.appendChild(actionsContainerEl);
 
   // Handle Firefox bookmark categories
-  const isParentFirefoxBookmarkCategory =
-    folderId === "menu________" || folderId === "toolbar_____" || folderId === "unfiled_____";
+  const isParentFirefoxBookmarkCategory = folderId === "menu________" || folderId === "toolbar_____" || folderId === "unfiled_____";
   if (isParentFirefoxBookmarkCategory) showBackButton = false;
 
   if (showBackButton) {
@@ -462,17 +401,12 @@ export const renderDefaultBlockyBookmarksNodes = (
     // </button>
     const backButtonEl = document.createElement("button");
     backButtonEl.id = `bookmark-folder-${folderId}-back-button`;
-    backButtonEl.className = `relative duration-[250ms] ease-out bg-foreground cursor-pointer ${
-      config.ui.style === "glass" ? "glass-effect" : ""
-    } corner-style h-9 md:h-12 px-1 md:px-2 overflow-hidden ${
-      config.animations.enabled ? `${config.animations.initialType} opacity-0 outline-none` : ""
-    }`;
+    backButtonEl.className = `relative duration-[250ms] ease-out bg-foreground cursor-pointer ${config.ui.style === "glass" ? "glass-effect" : ""} corner-style h-9 md:h-12 px-1 md:px-2 overflow-hidden ${config.animations.enabled ? `${config.animations.initialType} opacity-0 outline-none` : ""}`;
     if (config.animations.enabled) backButtonEl.style.animationDelay = `${delay}ms`;
 
     const borderDivEl = document.createElement("div");
     borderDivEl.id = `bookmark-folder-${folderId}-border`;
-    borderDivEl.className =
-      "absolute top-0 left-0 w-full h-9 md:h-12 border-2 border-transparent corner-style";
+    borderDivEl.className = "absolute top-0 left-0 w-full h-9 md:h-12 border-2 border-transparent corner-style";
     backButtonEl.appendChild(borderDivEl);
 
     const hoverDivEl = document.createElement("div");
@@ -480,8 +414,7 @@ export const renderDefaultBlockyBookmarksNodes = (
     backButtonEl.appendChild(hoverDivEl);
 
     const gridDivEl = document.createElement("div");
-    gridDivEl.className =
-      "grid grid-cols-[max-content_auto] gap-2 font-message text-base md:text-2xl w-full";
+    gridDivEl.className = "grid grid-cols-[max-content_auto] gap-2 font-message text-base md:text-2xl w-full";
     gridDivEl.style.color = config.message.textColor;
 
     const iconEl = document.createElement("i");
@@ -497,8 +430,7 @@ export const renderDefaultBlockyBookmarksNodes = (
   } else {
     // <div class="relative corner-style h-9 md:h-12 px-1 md:px-2 overflow-hidden opacity-0 outline-none"></div>
     const emptyDivEl = document.createElement("div");
-    emptyDivEl.className =
-      "relative corner-style h-9 md:h-12 px-1 md:px-2 overflow-hidden opacity-0 outline-none";
+    emptyDivEl.className = "relative corner-style h-9 md:h-12 px-1 md:px-2 overflow-hidden opacity-0 outline-none";
     actionsContainerEl.appendChild(emptyDivEl);
   }
 
@@ -507,25 +439,7 @@ export const renderDefaultBlockyBookmarksNodes = (
     const isFolder = node.children!.length > 0;
 
     let color = config.bookmarks.defaultBlockyColor;
-    let randomColors = [
-      "#ef4444",
-      "#f97316",
-      "#f59e0b",
-      "#eab308",
-      "#84cc16",
-      "#22c55e",
-      "#10b981",
-      "#14b8a6",
-      "#06b6d4",
-      "#0ea5e9",
-      "#3b82f6",
-      "#6366f1",
-      "#8b5cf6",
-      "#a855f7",
-      "#d946ef",
-      "#ec4899",
-      "#f43f5e"
-    ];
+    let randomColors = ["#ef4444", "#f97316", "#f59e0b", "#eab308", "#84cc16", "#22c55e", "#10b981", "#14b8a6", "#06b6d4", "#0ea5e9", "#3b82f6", "#6366f1", "#8b5cf6", "#a855f7", "#d946ef", "#ec4899", "#f43f5e"];
 
     // pick random color based on node.title
     if (config.bookmarks.defaultBlockyColorType === "random") {
@@ -542,23 +456,7 @@ export const renderDefaultBlockyBookmarksNodes = (
     if (isFolder) {
       const folder = node;
 
-      renderBlockBookmarkFolder(
-        nodesContainerEl,
-        config.animations.bookmarkTiming,
-        nodes.length,
-        index,
-        folder.id,
-        color,
-        color,
-        "ri-folder-fill",
-        "",
-        config.ui.style,
-        config.bookmarks.showBookmarkNames,
-        node.title,
-        config.message.textColor,
-        config.animations.enabled,
-        config.animations.initialType
-      );
+      renderBlockBookmarkFolder(nodesContainerEl, config.animations.bookmarkTiming, nodes.length, index, folder.id, color, color, "ri-folder-fill", "", config.ui.style, config.bookmarks.showBookmarkNames, node.title, config.message.textColor, config.animations.enabled, config.animations.initialType);
     } else {
       renderBlockBookmark(
         nodesContainerEl,

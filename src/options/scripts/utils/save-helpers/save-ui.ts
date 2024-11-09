@@ -1,17 +1,8 @@
 import { Config } from "src/newtab/scripts/config";
-import {
-  uiBackgroundColorInputEl,
-  uiForegroundColorInputEl,
-  uiHighlightColorInputEl,
-  uiCustomCSSTextareaEl,
-  uiGlassColorInputEl,
-  uiBlurStrengthInputEl
-} from "src/options/scripts/ui";
+import { uiBackgroundColorInputEl, uiForegroundColorInputEl, uiHighlightColorInputEl, uiCustomCSSTextareaEl, uiGlassColorInputEl, uiBlurStrengthInputEl } from "src/options/scripts/ui";
 
 export const saveUISettingsToDraft = (draft: Config) => {
-  const selectedStyleEl = document.querySelector(
-    `button[btn-option-type="ui-style"][selected="yes"]`
-  ) as HTMLButtonElement;
+  const selectedStyleEl = document.querySelector(`button[btn-option-type="ui-style"][selected="yes"]`) as HTMLButtonElement;
 
   switch (selectedStyleEl.id) {
     case "ui-style-solid-button": {
@@ -30,9 +21,7 @@ export const saveUISettingsToDraft = (draft: Config) => {
   draft.ui.backgroundColor = uiBackgroundColorInputEl.value;
   draft.ui.highlightColor = uiHighlightColorInputEl.value;
 
-  const selectedCornerStyleEl = document.querySelector(
-    `button[btn-option-type="ui-corner-style"][selected="yes"]`
-  ) as HTMLButtonElement;
+  const selectedCornerStyleEl = document.querySelector(`button[btn-option-type="ui-corner-style"][selected="yes"]`) as HTMLButtonElement;
 
   switch (selectedCornerStyleEl.id) {
     case "ui-corner-style-sharp-button": {

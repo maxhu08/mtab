@@ -1,13 +1,7 @@
 import { AnimationInitialType, UIStyle } from "src/newtab/scripts/config";
 import { optionsButtonContainerEl } from "src/newtab/scripts/ui";
 
-export const showOptionsButton = (
-  showOptionsButton: boolean,
-  uiStyle: UIStyle,
-  animationsEnabled: boolean,
-  animationsInitialType: AnimationInitialType,
-  textColor: string
-) => {
+export const showOptionsButton = (showOptionsButton: boolean, uiStyle: UIStyle, animationsEnabled: boolean, animationsInitialType: AnimationInitialType, textColor: string) => {
   if (!showOptionsButton) return;
 
   // <button id="options-button" class="${uiStyle === "glass" ? "glass-effect" : ""} ${animationsEnabled ? `${animationsInitialType} opacity-0 outline-none` : ""} bg-foreground cursor-pointer corner-style grid place-items-center w-10 h-10 overflow-hidden" style="color: ${textColor}">
@@ -17,9 +11,7 @@ export const showOptionsButton = (
 
   const buttonEl = document.createElement("button");
   buttonEl.id = "options-button";
-  buttonEl.className = `${uiStyle === "glass" ? "glass-effect" : ""} ${
-    animationsEnabled ? `${animationsInitialType} opacity-0 outline-none` : ""
-  } bg-foreground cursor-pointer corner-style grid place-items-center w-10 h-10 overflow-hidden`;
+  buttonEl.className = `${uiStyle === "glass" ? "glass-effect" : ""} ${animationsEnabled ? `${animationsInitialType} opacity-0 outline-none` : ""} bg-foreground cursor-pointer corner-style grid place-items-center w-10 h-10 overflow-hidden`;
 
   const divEl = document.createElement("div");
   divEl.className = "absolute w-full h-full hover:bg-white/20 corner-style overflow-hidden";

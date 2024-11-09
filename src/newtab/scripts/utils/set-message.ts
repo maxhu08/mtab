@@ -1,12 +1,7 @@
 import { MessageType } from "../config";
 import { messageEl } from "../ui";
 
-export const setMessage = (
-  enabled: boolean,
-  type: MessageType,
-  customText: string,
-  username: string
-) => {
+export const setMessage = (enabled: boolean, type: MessageType, customText: string, username: string) => {
   if (!enabled) {
     messageEl.classList.add("hidden");
   }
@@ -73,20 +68,7 @@ export const setCustomMessage = (customText: string) => {
 };
 
 const containsSlashReplacements = (text: string) => {
-  const checkChars = [
-    "\\h%",
-    "\\hh",
-    "\\mm",
-    "\\ss",
-    "\\md",
-    "\\MD",
-    "\\yyyy",
-    "\\yy",
-    "\\M",
-    "\\m",
-    "\\D",
-    "\\d"
-  ];
+  const checkChars = ["\\h%", "\\hh", "\\mm", "\\ss", "\\md", "\\MD", "\\yyyy", "\\yy", "\\M", "\\m", "\\D", "\\d"];
 
   return checkChars.some((char) => text.includes(char));
 };
@@ -130,20 +112,7 @@ export const setTimeMessage = (format: "12hr" | "24hr" = "12hr") => {
 export const setDateMessage = () => {
   const date = new Date();
 
-  const months = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December"
-  ];
+  const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
   const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
   const dayOfWeek = days[date.getDay()];

@@ -163,34 +163,10 @@ export type UIStyle = "solid" | "glass";
 export type UICornerStyle = "sharp" | "round";
 export type WallpaperType = "url" | "fileUpload";
 export type BookmarkTiming = "left" | "right" | "uniform";
-export type AnimationInitialType =
-  | "animate-down-bouncy"
-  | "animate-down-smooth"
-  | "animate-down-fall"
-  | "animate-up-bouncy"
-  | "animate-up-smooth"
-  | "animate-grow-scale"
-  | "animate-fly-left"
-  | "animate-fly-right";
-export type AnimationSearchType =
-  | "animate-page-shrink"
-  | "animate-page-scale"
-  | "animate-page-up"
-  | "animate-page-down";
-export type AnimationBookmarkType =
-  | "animate-page-shrink"
-  | "animate-page-scale"
-  | "animate-page-up"
-  | "animate-page-down";
-export type SearchEngine =
-  | "duckduckgo"
-  | "google"
-  | "bing"
-  | "brave"
-  | "yahoo"
-  | "yandex"
-  | "startpage"
-  | "ecosia";
+export type AnimationInitialType = "animate-down-bouncy" | "animate-down-smooth" | "animate-down-fall" | "animate-up-bouncy" | "animate-up-smooth" | "animate-grow-scale" | "animate-fly-left" | "animate-fly-right";
+export type AnimationSearchType = "animate-page-shrink" | "animate-page-scale" | "animate-page-up" | "animate-page-down";
+export type AnimationBookmarkType = "animate-page-shrink" | "animate-page-scale" | "animate-page-up" | "animate-page-down";
+export type SearchEngine = "duckduckgo" | "google" | "bing" | "brave" | "yahoo" | "yandex" | "startpage" | "ecosia";
 export type MessageType = "afternoon-morning" | "date" | "time-12" | "time-24" | "custom";
 export type BookmarksType = "user-defined" | "default" | "default-blocky" | "none";
 export type UserDefinedBookmark = {

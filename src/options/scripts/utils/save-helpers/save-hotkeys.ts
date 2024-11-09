@@ -1,10 +1,5 @@
 import { Config } from "src/newtab/scripts/config";
-import {
-  hotkeysEnabledCheckboxEl,
-  hotkeysActivationKeyInputEl,
-  hotkeysClosePageKeyInputEl,
-  hotkeysSearchBookmarksKeyInputEl
-} from "src/options/scripts/ui";
+import { hotkeysEnabledCheckboxEl, hotkeysActivationKeyInputEl, hotkeysClosePageKeyInputEl, hotkeysSearchBookmarksKeyInputEl } from "src/options/scripts/ui";
 
 export const saveHotkeysSettingsToDraft = (draft: Config) => {
   draft.hotkeys.enabled = hotkeysEnabledCheckboxEl.checked;

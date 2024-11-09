@@ -12,10 +12,7 @@ import { saveSearchSettingsToDraft } from "src/options/scripts/utils/save-helper
 import { saveHotkeysSettingsToDraft } from "src/options/scripts/utils/save-helpers/save-hotkeys";
 import { saveBookmarksSettingsToDraft } from "src/options/scripts/utils/save-helpers/save-bookmarks";
 import { fixAllToggleCheckboxSections } from "src/options/scripts/utils/toggle-checkbox";
-import {
-  searchUseCustomEngineEnabledCheckboxEl,
-  searchCustomEngineURLInputEl
-} from "src/options/scripts/ui";
+import { searchUseCustomEngineEnabledCheckboxEl, searchCustomEngineURLInputEl } from "src/options/scripts/ui";
 import { saveOptionsSettingsToDraft } from "src/options/scripts/utils/save-helpers/save-options";
 
 export const saveConfig = () => {

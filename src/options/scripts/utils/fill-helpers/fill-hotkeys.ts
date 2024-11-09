@@ -1,32 +1,12 @@
 import { Config } from "src/newtab/scripts/config";
-import {
-  hotkeysEnabledCheckboxEl,
-  hotkeysActivationKeyInputEl,
-  hotkeysClosePageKeyInputEl,
-  hotkeysSearchBookmarksKeyInputEl,
-  hotkeysActivationKeyStatusEl,
-  hotkeysClosePageKeyStatusEl,
-  hotkeysSearchBookmarksKeyStatusEl
-} from "src/options/scripts/ui";
+import { hotkeysEnabledCheckboxEl, hotkeysActivationKeyInputEl, hotkeysClosePageKeyInputEl, hotkeysSearchBookmarksKeyInputEl, hotkeysActivationKeyStatusEl, hotkeysClosePageKeyStatusEl, hotkeysSearchBookmarksKeyStatusEl } from "src/options/scripts/ui";
 
 export const fillHotkeysInputs = (config: Config) => {
   hotkeysEnabledCheckboxEl.checked = config.hotkeys.enabled;
 
-  fillHotkeyHelper(
-    hotkeysActivationKeyInputEl,
-    hotkeysActivationKeyStatusEl,
-    config.hotkeys.activationKey
-  );
-  fillHotkeyHelper(
-    hotkeysClosePageKeyInputEl,
-    hotkeysClosePageKeyStatusEl,
-    config.hotkeys.closePageKey
-  );
-  fillHotkeyHelper(
-    hotkeysSearchBookmarksKeyInputEl,
-    hotkeysSearchBookmarksKeyStatusEl,
-    config.hotkeys.searchBookmarksKey
-  );
+  fillHotkeyHelper(hotkeysActivationKeyInputEl, hotkeysActivationKeyStatusEl, config.hotkeys.activationKey);
+  fillHotkeyHelper(hotkeysClosePageKeyInputEl, hotkeysClosePageKeyStatusEl, config.hotkeys.closePageKey);
+  fillHotkeyHelper(hotkeysSearchBookmarksKeyInputEl, hotkeysSearchBookmarksKeyStatusEl, config.hotkeys.searchBookmarksKey);
 };
 
 const fillHotkeyHelper = (input: HTMLInputElement, status: HTMLSpanElement, val: string) => {

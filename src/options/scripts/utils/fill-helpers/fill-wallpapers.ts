@@ -1,10 +1,5 @@
 import { Config } from "src/newtab/scripts/config";
-import {
-  wallpaperEnabledCheckboxEl,
-  wallpaperTypeFileUploadButtonEl,
-  wallpaperTypeUrlButtonEl,
-  wallpaperUrlInputEl
-} from "src/options/scripts/ui";
+import { wallpaperEnabledCheckboxEl, wallpaperTypeFileUploadButtonEl, wallpaperTypeUrlButtonEl, wallpaperUrlInputEl } from "src/options/scripts/ui";
 import { previewWallpaper } from "src/options/scripts/utils/preview";
 
 export const fillWallpapersInputs = (config: Config) => {
