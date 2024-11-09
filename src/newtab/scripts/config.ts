@@ -72,6 +72,8 @@ export const defaultConfig: Config = {
   },
   ui: {
     style: "glass",
+    glassColor: "#ffffff20",
+    blurStrength: 32,
     foregroundColor: "#262626",
     backgroundColor: "#171717",
     highlightColor: "#ffffff20",
@@ -230,6 +232,8 @@ export interface Config {
   };
   ui: {
     style: UIStyle;
+    blurStrength: number;
+    glassColor: string;
     foregroundColor: string;
     backgroundColor: string;
     highlightColor: string;
