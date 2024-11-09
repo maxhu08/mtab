@@ -4,7 +4,7 @@ import {
   buildChromeBookmarksTree,
   renderDefaultBlockyBookmarksNodes
 } from "src/newtab/scripts/utils/bookmark-utils";
-import { insertCss } from "src/newtab/scripts/utils/insert-css";
+import { insertCSS } from "src/newtab/scripts/utils/insert-css";
 import { getUserAgent } from "src/util-scripts/user-agent";
 
 // animations handled separately
@@ -22,7 +22,7 @@ export const renderDefaultBlockyBookmarks = (config: Config) => {
   //   }
   // }`;
 
-  insertCss(
+  insertCSS(
     `.default-blocky-bookmarks-cols{grid-template-columns:1fr 1fr;}@media (min-width: 768px){.default-blocky-bookmarks-cols{grid-template-columns:repeat(${config.bookmarks.defaultBlockyCols}, minmax(0, 1fr));}}`
   );
 

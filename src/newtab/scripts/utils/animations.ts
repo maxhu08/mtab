@@ -1,4 +1,4 @@
-import { insertCss } from "src/newtab/scripts/utils/insert-css";
+import { insertCSS } from "src/newtab/scripts/utils/insert-css";
 import { Config } from "../config";
 import { messageEl, searchContainerEl } from "../ui";
 
@@ -13,7 +13,7 @@ export const addAnimations = (animations: Config["animations"]) => {
   //   transition-duration: 250ms;
   // }`;
 
-  insertCss(`*{transition-duration:250ms;}`);
+  insertCSS(`*{transition-duration:250ms;}`);
 
   messageEl.style.animationDelay = "0ms";
   messageEl.classList.add(animations.initialType);

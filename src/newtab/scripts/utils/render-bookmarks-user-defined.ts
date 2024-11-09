@@ -5,7 +5,7 @@ import {
   openBookmark,
   renderBlockBookmark
 } from "src/newtab/scripts/utils/bookmark-utils";
-import { insertCss } from "src/newtab/scripts/utils/insert-css";
+import { insertCSS } from "src/newtab/scripts/utils/insert-css";
 
 // animations handled separately
 export const renderUserDefinedBookmarks = (config: Config) => {
@@ -22,7 +22,7 @@ export const renderUserDefinedBookmarks = (config: Config) => {
   //   }
   // }`;
 
-  insertCss(
+  insertCSS(
     `.user-defined-bookmarks-cols{grid-template-columns:1fr 1fr;}@media (min-width: 768px){.user-defined-bookmarks-cols{grid-template-columns:repeat(${config.bookmarks.userDefinedCols}, minmax(0, 1fr));}}`
   );
 

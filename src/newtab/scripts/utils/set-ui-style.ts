@@ -1,16 +1,16 @@
 import { Config } from "src/newtab/scripts/config";
-import { insertCss } from "src/newtab/scripts/utils/insert-css";
+import { insertCSS } from "src/newtab/scripts/utils/insert-css";
 
 export const setUISyle = (ui: Config["ui"]) => {
   // custom css
-  insertCss(ui.customCSS);
+  insertCSS(ui.customCSS);
 
   // const highlightSyleCss = `
   // ::selection {
   //   background-color: ${ui.highlightColor};
   // }`;
 
-  insertCss(`::selection{background-color:${ui.highlightColor};}`);
+  insertCSS(`::selection{background-color:${ui.highlightColor};}`);
 
   if (ui.style === "solid") {
     // .bg-foreground {
@@ -19,7 +19,7 @@ export const setUISyle = (ui: Config["ui"]) => {
     // .bg-background {
     //   background-color: ${ui.backgroundColor};
     // }`;
-    insertCss(
+    insertCSS(
       `.bg-foreground{background-color:${ui.foregroundColor};}.bg-background{background-color:${ui.backgroundColor};}`
     );
   } else {
@@ -29,7 +29,7 @@ export const setUISyle = (ui: Config["ui"]) => {
     //   box-sizing: border-box !important;
     //   backdrop-filter: blur(${ui.blurStrength});
     // }
-    insertCss(
+    insertCSS(
       `.glass-effect{background-color:${ui.glassColor};box-shadow:0 25px 23px rgba(0,0,0,0.15);box-sizing:border-box!important;backdrop-filter:blur(${ui.blurStrength});}`
     );
   }
@@ -42,7 +42,7 @@ export const setUISyle = (ui: Config["ui"]) => {
   //   border-radius: ${borderRadius} !important;
   // }`;
 
-  insertCss(`.corner-style{border-radius:${borderRadius} !important;}`);
+  insertCSS(`.corner-style{border-radius:${borderRadius} !important;}`);
 
   document.body.style.transitionDuration = "0ms";
   document.body.classList.add("bg-background");

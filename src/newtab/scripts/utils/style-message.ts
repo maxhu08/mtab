@@ -1,5 +1,5 @@
 import { messageEl } from "src/newtab/scripts/ui";
-import { insertCss } from "src/newtab/scripts/utils/insert-css";
+import { insertCSS } from "src/newtab/scripts/utils/insert-css";
 
 export const styleMessage = (textColor: string, font: string) => {
   messageEl.style.color = textColor;
@@ -9,5 +9,5 @@ export const styleMessage = (textColor: string, font: string) => {
   //   font-family: ${font};
   // }`;
 
-  insertCss(`.font-message{font-family:${font};}`);
+  insertCSS(`.font-message{font-family:${font};}`);
 };

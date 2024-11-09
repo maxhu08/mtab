@@ -7,7 +7,7 @@ import {
   searchContainerEl,
   searchInputEl
 } from "src/newtab/scripts/ui";
-import { insertCss } from "src/newtab/scripts/utils/insert-css";
+import { insertCSS } from "src/newtab/scripts/utils/insert-css";
 
 export const styleSearch = (
   enabled: boolean,
@@ -45,7 +45,7 @@ export const styleSearch = (
   // }
   // `;
 
-  insertCss(
+  insertCSS(
     `.placeholder-color-search::placeholder{color:${placeholderTextColor};}.placeholder-color-bookmark-search::placeholder{color:${placeholderTextColor};}.search-search-icon-color{color:${searchIconColor};}.search-bookmark-icon-color{color:${bookmarkIconColor};}.search-select-icon-color{color:${selectIconColor};}`
   );
 
