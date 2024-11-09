@@ -8,6 +8,8 @@ import {
   messageTypeCustomButtonEl,
   titleFaviconTypeCustomButtonEl,
   titleFaviconTypeDefaultButtonEl,
+  uiStyleGlassButtonEl,
+  uiStyleSolidButtonEl,
   wallpaperTypeFileUploadButtonEl,
   wallpaperTypeUrlButtonEl
 } from "src/options/scripts/ui";
@@ -16,6 +18,7 @@ export const handleSwitches = () => {
   handleFaviconTypeSwitch();
   handleMessageTypeSwitch();
   handleWallpaperTypeSwitch();
+  handleUIStyleSwitch();
   handleBookmarksTypeSwitch();
   handleUserDefinedOrDefaultBlockySwitch();
   handleBookmarksDefaultBlockyColorTypeSwitch();
@@ -90,6 +93,21 @@ const handleWallpaperTypeSwitch = () => {
   wallpaperTypeFileUploadButtonEl.addEventListener("click", () => {
     wallpaperUrlSection.style.display = "none";
     wallpaperFileUploadSection.style.display = "block";
+  });
+};
+
+const handleUIStyleSwitch = () => {
+  const uiStyleSolidSection = document.getElementById("ui-style-solid-section") as HTMLDivElement;
+  const uiStyleGlassSection = document.getElementById("ui-style-glass-section") as HTMLDivElement;
+
+  uiStyleSolidButtonEl.addEventListener("click", () => {
+    uiStyleGlassSection.style.display = "none";
+    uiStyleSolidSection.style.display = "block";
+  });
+
+  uiStyleGlassButtonEl.addEventListener("click", () => {
+    uiStyleSolidSection.style.display = "none";
+    uiStyleGlassSection.style.display = "block";
   });
 };
 
