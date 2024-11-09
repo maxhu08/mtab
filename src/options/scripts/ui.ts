@@ -70,8 +70,8 @@ export const [searchSearchIconColorContainerEl, searchSearchIconColorInputEl] = 
 export const [searchBookmarkIconColorContainerEl, searchBookmarkIconColorInputEl] = getContainerAndInput("search-bookmark-icon-color");
 export const [searchSelectIconColorContainerEl, searchSelectIconColorInputEl] = getContainerAndInput("search-select-icon-color");
 export const searchEngineDuckduckgoButtonEl = getButton("search-engine-duckduckgo");
-export const searchEngineGoogleButtonEl = getButton("search-engine-google");
 export const searchEngineBingButtonEl = getButton("search-engine-bing");
+export const searchEngineGoogleButtonEl = getButton("search-engine-google");
 export const searchEngineBraveButtonEl = getButton("search-engine-brave");
 export const searchEngineYahooButtonEl = getButton("search-engine-yahoo");
 export const searchEngineYandexButtonEl = getButton("search-engine-yandex");
@@ -113,7 +113,6 @@ export const bookmarksLocationFirefoxToolbarButtonEl = getButton("bookmarks-loca
 export const bookmarksLocationFirefoxOtherButtonEl = getButton("bookmarks-location-firefox-other");
 export const bookmarksDefaultFaviconSourceGoogleButton = getButton("bookmarks-default-favicon-source-google");
 export const bookmarksDefaultFaviconSourceDuckduckgoButton = getButton("bookmarks-default-favicon-source-duckduckgo");
-
 
 export const inputs: Input[] = [
   {
@@ -162,7 +161,7 @@ export const inputs: Input[] = [
   },
   {
     container: searchTextColorContainerEl,
-    input: searchTextColorInputEl,
+    input: searchTextColorInputEl
   },
   {
     container: searchPlaceholderTextContainerEl,
@@ -225,112 +224,53 @@ export const buttonSwitches: ButtonSwitch[] = [
     attr: "ui-corner-style"
   },
   {
-    buttons: [
-      titleFaviconTypeDefaultButtonEl,
-      titleFaviconTypeCustomButtonEl
-    ],
+    buttons: [titleFaviconTypeDefaultButtonEl, titleFaviconTypeCustomButtonEl],
     attr: "favicon-type"
   },
   {
-    buttons: [
-      messageTypeAfternoonMorningButtonEl,
-      messageTypeDateButtonEl,
-      messageTypeTime12ButtonEl,
-      messageTypeTime24ButtonEl,
-      messageTypeCustomButtonEl
-    ],
+    buttons: [messageTypeAfternoonMorningButtonEl, messageTypeDateButtonEl, messageTypeTime12ButtonEl, messageTypeTime24ButtonEl, messageTypeCustomButtonEl],
     attr: "message-type"
   },
   {
-    buttons: [
-      wallpaperTypeUrlButtonEl,
-      wallpaperTypeFileUploadButtonEl
-    ],
+    buttons: [wallpaperTypeUrlButtonEl, wallpaperTypeFileUploadButtonEl],
     attr: "wallpaper-type"
   },
   {
-    buttons: [
-      animationsBookmarkTimingLeftButtonEl,
-      animationsBookmarkTimingRightButtonEl,
-      animationsBookmarkTimingUniformButtonEl
-    ],
+    buttons: [animationsBookmarkTimingLeftButtonEl, animationsBookmarkTimingRightButtonEl, animationsBookmarkTimingUniformButtonEl],
     attr: "animations-bookmark-timing"
   },
   {
-    buttons: [
-      animationsInitialTypeDownBouncyButtonEl,
-      animationsInitialTypeDownSmoothButtonEl,
-      animationsInitialTypeDownFallButtonEl,
-      animationsInitialTypeUpBouncyButtonEl,
-      animationsInitialTypeUpSmoothButtonEl,
-      animationsInitialTypeGrowScaleButtonEl,
-      animationsInitialTypeFlyLeftButtonEl,
-      animationsInitialTypeFlyRightButtonEl
-    ],
+    buttons: [animationsInitialTypeDownBouncyButtonEl, animationsInitialTypeDownSmoothButtonEl, animationsInitialTypeDownFallButtonEl, animationsInitialTypeUpBouncyButtonEl, animationsInitialTypeUpSmoothButtonEl, animationsInitialTypeGrowScaleButtonEl, animationsInitialTypeFlyLeftButtonEl, animationsInitialTypeFlyRightButtonEl],
     attr: "animations-initial-type"
   },
   {
-    buttons: [
-      animationsSearchTypePageShrinkButtonEl,
-      animationsSearchTypePageScaleButtonEl,
-      animationsSearchTypePageUpButtonEl,
-      animationsSearchTypePageDownButtonEl
-    ],
+    buttons: [animationsSearchTypePageShrinkButtonEl, animationsSearchTypePageScaleButtonEl, animationsSearchTypePageUpButtonEl, animationsSearchTypePageDownButtonEl],
     attr: "animations-search-type"
   },
   {
-    buttons: [
-      animationsBookmarkTypePageShrinkButtonEl,
-      animationsBookmarkTypePageScaleButtonEl,
-      animationsBookmarkTypePageUpButtonEl,
-      animationsBookmarkTypePageDownButtonEl
-    ],
+    buttons: [animationsBookmarkTypePageShrinkButtonEl, animationsBookmarkTypePageScaleButtonEl, animationsBookmarkTypePageUpButtonEl, animationsBookmarkTypePageDownButtonEl],
     attr: "animations-bookmark-type"
   },
   {
-    buttons: [
-      searchEngineDuckduckgoButtonEl,
-      searchEngineGoogleButtonEl,
-      searchEngineBingButtonEl,
-      searchEngineBraveButtonEl,
-      searchEngineYahooButtonEl,
-      searchEngineYandexButtonEl,
-      searchEngineStartpageButtonEl,
-      searchEngineEcosiaButtonEl,
-    ],
+    buttons: [searchEngineDuckduckgoButtonEl, searchEngineGoogleButtonEl, searchEngineBingButtonEl, searchEngineBraveButtonEl, searchEngineYahooButtonEl, searchEngineYandexButtonEl, searchEngineStartpageButtonEl, searchEngineEcosiaButtonEl],
     attr: "search-engine"
   },
   {
-    buttons: [
-      bookmarksTypeUserDefinedButtonEl,
-      bookmarksTypeDefaultButtonEl,
-      bookmarksTypeDefaultBlockyButtonEl,
-        bookmarksTypeNoneButtonEl
-    ],
+    buttons: [bookmarksTypeUserDefinedButtonEl, bookmarksTypeDefaultButtonEl, bookmarksTypeDefaultBlockyButtonEl, bookmarksTypeNoneButtonEl],
     attr: "bookmarks-type"
   },
   {
-    buttons: [
-      bookmarksDefaultBlockyColorTypeRandomButtonEl,
-      bookmarksDefaultBlockyColorTypeCustomButtonEl,
-    ],
+    buttons: [bookmarksDefaultBlockyColorTypeRandomButtonEl, bookmarksDefaultBlockyColorTypeCustomButtonEl],
     attr: "bookmarks-default-blocky-color-type"
   },
   {
-    buttons: [
-      bookmarksLocationFirefoxMenuButtonEl,
-      bookmarksLocationFirefoxToolbarButtonEl,
-      bookmarksLocationFirefoxOtherButtonEl
-    ],
+    buttons: [bookmarksLocationFirefoxMenuButtonEl, bookmarksLocationFirefoxToolbarButtonEl, bookmarksLocationFirefoxOtherButtonEl],
     attr: "bookmarks-location-firefox"
   },
   {
-    buttons: [
-      bookmarksDefaultFaviconSourceGoogleButton,
-      bookmarksDefaultFaviconSourceDuckduckgoButton
-    ],
+    buttons: [bookmarksDefaultFaviconSourceGoogleButton, bookmarksDefaultFaviconSourceDuckduckgoButton],
     attr: "bookmarks-default-favicon-source"
-  },
+  }
 ];
 
 export interface ButtonSwitch {
@@ -342,19 +282,19 @@ export const hotkeyInputs: HotkeyInput[] = [
   {
     container: hotkeysActivationKeyContainerEl,
     input: hotkeysActivationKeyInputEl,
-    status: hotkeysActivationKeyStatusEl,
-  }, 
+    status: hotkeysActivationKeyStatusEl
+  },
   {
     container: hotkeysClosePageKeyContainerEl,
     input: hotkeysClosePageKeyInputEl,
-    status: hotkeysClosePageKeyStatusEl,
+    status: hotkeysClosePageKeyStatusEl
   },
   {
     container: hotkeysSearchBookmarksKeyContainerEl,
     input: hotkeysSearchBookmarksKeyInputEl,
-    status: hotkeysSearchBookmarksKeyStatusEl,
+    status: hotkeysSearchBookmarksKeyStatusEl
   }
-]
+];
 
 export interface HotkeyInput {
   container: HTMLDivElement;
