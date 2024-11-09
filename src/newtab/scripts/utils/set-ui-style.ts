@@ -12,17 +12,25 @@ export const setUISyle = (ui: Config["ui"]) => {
 
   insertCss(`::selection{background-color:${ui.highlightColor};}`);
 
-  // const uiStyleCss = `
-  // .bg-foreground {
-  //   background-color: ${ui.foregroundColor};
-  // }
-  // .bg-background {
-  //   background-color: ${ui.backgroundColor};
-  // }`;
-
   if (ui.style === "solid") {
+    // .bg-foreground {
+    //   background-color: ${ui.foregroundColor};
+    // }
+    // .bg-background {
+    //   background-color: ${ui.backgroundColor};
+    // }`;
     insertCss(
       `.bg-foreground{background-color:${ui.foregroundColor};}.bg-background{background-color:${ui.backgroundColor};}`
+    );
+  } else {
+    // .glass-effect {
+    //   background-color: ${ui.glassColor};
+    //   box-shadow: 0 25px 23px rgba(0, 0, 0, 0.15);
+    //   box-sizing: border-box !important;
+    //   backdrop-filter: blur(${ui.blurStrength});
+    // }
+    insertCss(
+      `.glass-effect{background-color:${ui.glassColor};box-shadow:0 25px 23px rgba(0,0,0,0.15);box-sizing:border-box!important;backdrop-filter:blur(${ui.blurStrength});}`
     );
   }
 

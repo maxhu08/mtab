@@ -38,14 +38,6 @@ html {
   width: auto;
 }
 
-.glass-effect {
-  background-color: #ffffff20;
-  box-shadow: 0 25px 23px rgba(0, 0, 0, 0.15);
-  box-sizing: border-box !important;
-
-  backdrop-filter: blur(32px);
-}
-
 @media (min-height: 600px) {
   .m-padding-bottom {
     padding-bottom: 10rem;
