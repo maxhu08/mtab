@@ -1,5 +1,6 @@
-# Changes in 1.6.2
+# Changes in 1.6.3
 
 in this release:
 
-- add more customizability to custom message option
+- add ability to change glass color and blur strength
+- bug fixes
