@@ -36,7 +36,12 @@ export const handWallpaperFileReset = () => {
   previewWallpaper("");
 };
 
-const resizeImage = (dataUrl: string, maxWidth: number, maxHeight: number, callback: (resizedDataUrl: string) => void) => {
+const resizeImage = (
+  dataUrl: string,
+  maxWidth: number,
+  maxHeight: number,
+  callback: (resizedDataUrl: string) => void
+) => {
   const img = new Image();
   img.src = dataUrl;
   img.onload = () => {

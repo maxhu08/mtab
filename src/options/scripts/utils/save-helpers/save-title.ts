@@ -5,7 +5,9 @@ export const saveTitleSettingsToDraft = (draft: Config) => {
   draft.title.defaultTitle = titleDefaultTitleInputEl.value;
   draft.title.dynamic.enabled = titleDynamicEnabledCheckboxEl.checked;
 
-  const selectedEl = document.querySelector(`button[btn-option-type="favicon-type"][selected="yes"]`) as HTMLButtonElement;
+  const selectedEl = document.querySelector(
+    `button[btn-option-type="favicon-type"][selected="yes"]`
+  ) as HTMLButtonElement;
 
   switch (selectedEl.id) {
     case "title-favicon-type-default-button": {

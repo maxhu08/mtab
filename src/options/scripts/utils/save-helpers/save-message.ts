@@ -1,5 +1,10 @@
 import { Config, MessageType } from "src/newtab/scripts/config";
-import { messageEnabledCheckboxEl, messageFontInputEl, messageTextColorInputEl, messageCustomTextInputEl } from "src/options/scripts/ui";
+import {
+  messageEnabledCheckboxEl,
+  messageFontInputEl,
+  messageTextColorInputEl,
+  messageCustomTextInputEl
+} from "src/options/scripts/ui";
 
 export const saveMessageSettingsToDraft = (draft: Config) => {
   draft.message.enabled = messageEnabledCheckboxEl.checked;
@@ -9,7 +14,9 @@ export const saveMessageSettingsToDraft = (draft: Config) => {
   draft.message.textColor = messageTextColorInputEl.value;
 
   // type
-  const selectedEl = document.querySelector(`button[btn-option-type="message-type"][selected="yes"]`) as HTMLButtonElement;
+  const selectedEl = document.querySelector(
+    `button[btn-option-type="message-type"][selected="yes"]`
+  ) as HTMLButtonElement;
 
   const messageTypePairs: Record<string, MessageType> = {
     "message-type-afternoon-morning-button": "afternoon-morning",

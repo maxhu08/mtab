@@ -36,7 +36,9 @@ export const saveSearchSettingsToDraft = (draft: Config) => {
   draft.search.customEngineURL = searchCustomEngineURLInputEl.value;
 
   if (!searchUseCustomEngineEnabledCheckboxEl.checked) {
-    const selectedEl = document.querySelector(`button[btn-option-type="search-engine"][selected="yes"]`) as HTMLButtonElement;
+    const selectedEl = document.querySelector(
+      `button[btn-option-type="search-engine"][selected="yes"]`
+    ) as HTMLButtonElement;
 
     const searchEnginePairs: Record<string, SearchEngine> = {
       "search-engine-duckduckgo-button": "duckduckgo",

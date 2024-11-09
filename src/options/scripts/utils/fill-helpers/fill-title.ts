@@ -1,5 +1,10 @@
 import { Config } from "src/newtab/scripts/config";
-import { titleDefaultTitleInputEl, titleDynamicEnabledCheckboxEl, titleFaviconTypeCustomButtonEl, titleFaviconTypeDefaultButtonEl } from "src/options/scripts/ui";
+import {
+  titleDefaultTitleInputEl,
+  titleDynamicEnabledCheckboxEl,
+  titleFaviconTypeCustomButtonEl,
+  titleFaviconTypeDefaultButtonEl
+} from "src/options/scripts/ui";
 import { previewFavicon } from "src/options/scripts/utils/preview";
 
 export const fillTitleInputs = (config: Config) => {

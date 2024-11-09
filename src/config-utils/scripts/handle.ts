@@ -1,4 +1,9 @@
-import { buttonSwitches, convertSaveButtonEl, inputs, convertMTJButtonEl } from "src/config-utils/scripts/ui";
+import {
+  buttonSwitches,
+  convertSaveButtonEl,
+  inputs,
+  convertMTJButtonEl
+} from "src/config-utils/scripts/ui";
 import { convertSave } from "src/config-utils/scripts/utils/convert";
 import { switchButtons } from "src/config-utils/scripts/utils/switch-buttons";
 
@@ -35,13 +40,35 @@ export const handle = () => {
   convertMTJButtonEl.click();
 };
 
-export const unfocusInput = ({ container, input, borderClassOld, borderClassNew }: { container: HTMLDivElement; input: HTMLInputElement | HTMLTextAreaElement; borderClassOld: string; borderClassNew: string }) => {
+export const unfocusInput = ({
+  container,
+  input,
+  borderClassOld,
+  borderClassNew
+}: {
+  container: HTMLDivElement;
+  input: HTMLInputElement | HTMLTextAreaElement;
+  borderClassOld: string;
+  borderClassNew: string;
+}) => {
   input.blur();
 
   container.classList.replace(borderClassOld, borderClassNew);
 };
 
-export const focusInput = ({ container, input, borderClassOld, borderClassNew, e }: { container: HTMLDivElement; input: HTMLInputElement | HTMLTextAreaElement; borderClassOld: string; borderClassNew: string; e: Event }) => {
+export const focusInput = ({
+  container,
+  input,
+  borderClassOld,
+  borderClassNew,
+  e
+}: {
+  container: HTMLDivElement;
+  input: HTMLInputElement | HTMLTextAreaElement;
+  borderClassOld: string;
+  borderClassNew: string;
+  e: Event;
+}) => {
   container.classList.replace(borderClassOld, borderClassNew);
 
   input.focus();

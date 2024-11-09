@@ -5,7 +5,10 @@ import { handleWallpaperFileUpload } from "src/options/scripts/utils/upload-wall
 import { getConfig } from "src/newtab/scripts/config";
 import { getUserAgent } from "src/util-scripts/user-agent";
 import { handleSwitches } from "src/options/scripts/utils/handle-switch";
-import { fixAllToggleCheckboxSections, listenAllToggleCheckboxSections } from "src/options/scripts/utils/toggle-checkbox";
+import {
+  fixAllToggleCheckboxSections,
+  listenAllToggleCheckboxSections
+} from "src/options/scripts/utils/toggle-checkbox";
 import { handleCustomFaviconUpload } from "src/options/scripts/utils/upload-favicon";
 
 export const loadPage = () => {
@@ -28,7 +31,8 @@ export const loadPage = () => {
     fixAllToggleCheckboxSections();
   });
 
-  (document.getElementById("version-number-text") as HTMLSpanElement).textContent += chrome.runtime.getManifest().version;
+  (document.getElementById("version-number-text") as HTMLSpanElement).textContent +=
+    chrome.runtime.getManifest().version;
 
   (document.getElementById("user-agent-text") as HTMLSpanElement).textContent += getUserAgent();
 

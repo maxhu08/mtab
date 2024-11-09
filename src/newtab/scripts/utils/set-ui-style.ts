@@ -19,7 +19,9 @@ export const setUISyle = (ui: Config["ui"]) => {
     // .bg-background {
     //   background-color: ${ui.backgroundColor};
     // }`;
-    insertCSS(`.bg-foreground{background-color:${ui.foregroundColor};}.bg-background{background-color:${ui.backgroundColor};}`);
+    insertCSS(
+      `.bg-foreground{background-color:${ui.foregroundColor};}.bg-background{background-color:${ui.backgroundColor};}`
+    );
   } else {
     // .glass-effect {
     //   background-color: ${ui.glassColor};
@@ -27,7 +29,9 @@ export const setUISyle = (ui: Config["ui"]) => {
     //   box-sizing: border-box !important;
     //   backdrop-filter: blur(${ui.blurStrength});
     // }
-    insertCSS(`.glass-effect{background-color:${ui.glassColor};box-shadow:0 25px 23px rgba(0,0,0,0.15);box-sizing:border-box!important;backdrop-filter:blur(${ui.blurStrength});}`);
+    insertCSS(
+      `.glass-effect{background-color:${ui.glassColor};box-shadow:0 25px 23px rgba(0,0,0,0.15);box-sizing:border-box!important;backdrop-filter:blur(${ui.blurStrength});}`
+    );
   }
 
   let borderRadius = "0";

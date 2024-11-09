@@ -23,7 +23,9 @@ export const handleSwitches = () => {
 };
 
 const handleFaviconTypeSwitch = () => {
-  const faviconCustomSection = document.getElementById("title-custom-favicon-upload-section") as HTMLDivElement;
+  const faviconCustomSection = document.getElementById(
+    "title-custom-favicon-upload-section"
+  ) as HTMLDivElement;
 
   titleFaviconTypeDefaultButtonEl.addEventListener("click", () => {
     faviconCustomSection.style.display = "none";
@@ -35,8 +37,15 @@ const handleFaviconTypeSwitch = () => {
 };
 
 const handleMessageTypeSwitch = () => {
-  const messageCustomTextSection = document.getElementById("message-custom-text-section") as HTMLDivElement;
-  const hideButtons = ["message-type-afternoon-morning-button", "message-type-date-button", "message-type-time-12-button", "message-type-time-24-button"];
+  const messageCustomTextSection = document.getElementById(
+    "message-custom-text-section"
+  ) as HTMLDivElement;
+  const hideButtons = [
+    "message-type-afternoon-morning-button",
+    "message-type-date-button",
+    "message-type-time-12-button",
+    "message-type-time-24-button"
+  ];
 
   messageTypeCustomButtonEl.addEventListener("click", () => {
     messageCustomTextSection.style.display = "block";
@@ -69,7 +78,9 @@ const handleMessageTypeSwitch = () => {
 
 const handleWallpaperTypeSwitch = () => {
   const wallpaperUrlSection = document.getElementById("wallpaper-url-section") as HTMLDivElement;
-  const wallpaperFileUploadSection = document.getElementById("wallpaper-file-upload-section") as HTMLDivElement;
+  const wallpaperFileUploadSection = document.getElementById(
+    "wallpaper-file-upload-section"
+  ) as HTMLDivElement;
 
   wallpaperTypeUrlButtonEl.addEventListener("click", () => {
     wallpaperFileUploadSection.style.display = "none";

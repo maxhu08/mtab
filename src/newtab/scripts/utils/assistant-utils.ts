@@ -1,7 +1,12 @@
 import { Config } from "src/newtab/scripts/config";
 import { assistantContainerEl } from "src/newtab/scripts/ui";
 
-export type AssistItem = AssistHistoryList | AssistDate | AssistMath | AssistDefinition | AssistConversion;
+export type AssistItem =
+  | AssistHistoryList
+  | AssistDate
+  | AssistMath
+  | AssistDefinition
+  | AssistConversion;
 
 interface AssistHistoryList {
   type: "history";
@@ -101,7 +106,10 @@ export const displayAssist = (items: AssistItem[], config: Config) => {
       assistantContainerEl.appendChild(gridContainerEl);
 
       const resultAsNum = parseFloat(item.result);
-      if (typeof resultAsNum === "number" && (resultAsNum >= 9007199254740991 || resultAsNum <= -9007199254740991)) {
+      if (
+        typeof resultAsNum === "number" &&
+        (resultAsNum >= 9007199254740991 || resultAsNum <= -9007199254740991)
+      ) {
         // <div class="grid grid-cols-[max-content_auto]">
         //   <span class="font-semibold" style="color: ${config.search.placeholderTextColor}">&nbsp;*&nbsp;</span>
         //   <div class="text-ellipsis overflow-hidden whitespace-nowrap w-full" style="color: ${config.search.placeholderTextColor}">reduced precision</div>

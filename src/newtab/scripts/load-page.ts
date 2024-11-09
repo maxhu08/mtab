@@ -33,14 +33,38 @@ export const loadPage = () => {
 
     loadWallpaper(config.wallpaper);
 
-    setSearchStuff(config.search.font, config.search.placeholderText, config.search.bookmarkPlaceholderText);
-    styleSearch(config.search.enabled, config.ui.style, config.search.textColor, config.search.placeholderTextColor, config.ui.foregroundColor, config.search.searchIconColor, config.search.bookmarkIconColor, config.search.selectIconColor);
+    setSearchStuff(
+      config.search.font,
+      config.search.placeholderText,
+      config.search.bookmarkPlaceholderText
+    );
+    styleSearch(
+      config.search.enabled,
+      config.ui.style,
+      config.search.textColor,
+      config.search.placeholderTextColor,
+      config.ui.foregroundColor,
+      config.search.searchIconColor,
+      config.search.bookmarkIconColor,
+      config.search.selectIconColor
+    );
 
     styleMessage(config.message.textColor, config.message.font);
-    setMessage(config.message.enabled, config.message.type, config.message.customText, config.user.name);
+    setMessage(
+      config.message.enabled,
+      config.message.type,
+      config.message.customText,
+      config.user.name
+    );
 
     renderBookmarks(config);
-    showOptionsButton(config.options.showOptionsButton, config.ui.style, config.animations.enabled, config.animations.initialType, config.message.textColor);
+    showOptionsButton(
+      config.options.showOptionsButton,
+      config.ui.style,
+      config.animations.enabled,
+      config.animations.initialType,
+      config.message.textColor
+    );
     fixDisappearingUI();
 
     addAnimations(config.animations);

@@ -1,10 +1,22 @@
 // ui
 import { Config } from "src/newtab/scripts/config";
-import { bookmarkSearchInputEl, bookmarkSearchResultsContainerEl, bookmarkSearchSectionEl, searchInputEl } from "src/newtab/scripts/ui";
+import {
+  bookmarkSearchInputEl,
+  bookmarkSearchResultsContainerEl,
+  bookmarkSearchSectionEl,
+  searchInputEl
+} from "src/newtab/scripts/ui";
 
 // utils
 import { focusSearch, search, tryFocusSearch, unfocusSearch } from "./utils/search";
-import { disableSearchBookmark, enableSearchBookmark, focusBookmarkSearch, refreshBookmarkSearchResults, tryFocusBookmarkSearch, unfocusBookmarkSearch } from "src/newtab/scripts/utils/bookmark-search-utils";
+import {
+  disableSearchBookmark,
+  enableSearchBookmark,
+  focusBookmarkSearch,
+  refreshBookmarkSearchResults,
+  tryFocusBookmarkSearch,
+  unfocusBookmarkSearch
+} from "src/newtab/scripts/utils/bookmark-search-utils";
 import { buildChromeBookmarksTree, openBookmark } from "src/newtab/scripts/utils/bookmark-utils";
 // import { navigateTab } from "src/newtab/scripts/utils/navigate-tab";
 
@@ -37,10 +49,15 @@ export const listenToKeys = (config: Config) => {
         tryFocusSearch(config, e);
       }
     }
-    if (e.key === config.hotkeys.closePageKey && !searchFocused && !bookmarkSearchFocused) window.close();
+    if (e.key === config.hotkeys.closePageKey && !searchFocused && !bookmarkSearchFocused)
+      window.close();
 
     // bookmarks stuff
-    if (config.bookmarks.type === "user-defined" || config.bookmarks.type === "default" || config.bookmarks.type === "default-blocky") {
+    if (
+      config.bookmarks.type === "user-defined" ||
+      config.bookmarks.type === "default" ||
+      config.bookmarks.type === "default-blocky"
+    ) {
       // if search bookmark is on already (grid)
       if (bookmarkSearchSectionEl.classList.contains("grid")) {
         if (e.key === "Escape") {
@@ -60,7 +77,12 @@ export const listenToKeys = (config: Config) => {
             bookmarkSearchResultsContainerEl.setAttribute("selected-index", (0).toString());
           }
 
-          refreshBookmarkSearchResults(bookmarks, config.bookmarks.type, config.search.textColor, config.search.placeholderTextColor);
+          refreshBookmarkSearchResults(
+            bookmarks,
+            config.bookmarks.type,
+            config.search.textColor,
+            config.search.placeholderTextColor
+          );
         } else if (e.key === "ArrowUp") {
           e.preventDefault();
           const results = bookmarkSearchResultsContainerEl.children.length;
@@ -74,12 +96,27 @@ export const listenToKeys = (config: Config) => {
             bookmarkSearchResultsContainerEl.setAttribute("selected-index", (results - 1).toString());
           }
 
-          refreshBookmarkSearchResults(bookmarks, config.bookmarks.type, config.search.textColor, config.search.placeholderTextColor);
+          refreshBookmarkSearchResults(
+            bookmarks,
+            config.bookmarks.type,
+            config.search.textColor,
+            config.search.placeholderTextColor
+          );
         }
       }
 
-      if (e.key === config.hotkeys.searchBookmarksKey && !searchFocused && !bookmarkSearchFocused && !bookmarkSearchSectionEl.classList.contains("grid")) {
-        enableSearchBookmark(bookmarks, config.bookmarks.type, config.search.textColor, config.search.placeholderTextColor);
+      if (
+        e.key === config.hotkeys.searchBookmarksKey &&
+        !searchFocused &&
+        !bookmarkSearchFocused &&
+        !bookmarkSearchSectionEl.classList.contains("grid")
+      ) {
+        enableSearchBookmark(
+          bookmarks,
+          config.bookmarks.type,
+          config.search.textColor,
+          config.search.placeholderTextColor
+        );
         tryFocusBookmarkSearch(config, e);
       }
     }
@@ -132,7 +169,8 @@ export const listenToKeys = (config: Config) => {
     if (!config.title.dynamic.enabled) return;
 
     // not empty or just spaces
-    if (searchInputEl.value !== "" && !/^\s*$/.test(searchInputEl.value)) document.title = searchInputEl.value;
+    if (searchInputEl.value !== "" && !/^\s*$/.test(searchInputEl.value))
+      document.title = searchInputEl.value;
     else document.title = config.title.defaultTitle;
   });
 
@@ -144,7 +182,12 @@ export const listenToKeys = (config: Config) => {
   bookmarkSearchInputEl.addEventListener("focus", (e) => focusBookmarkSearch(config, e));
 
   bookmarkSearchInputEl.addEventListener("keyup", (e) => {
-    enableSearchBookmark(bookmarks, config.bookmarks.type, config.search.textColor, config.search.placeholderTextColor);
+    enableSearchBookmark(
+      bookmarks,
+      config.bookmarks.type,
+      config.search.textColor,
+      config.search.placeholderTextColor
+    );
   });
 
   bookmarkSearchInputEl.addEventListener("keydown", (e) => {

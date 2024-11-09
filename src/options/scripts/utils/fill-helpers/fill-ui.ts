@@ -1,5 +1,16 @@
 import { Config } from "src/newtab/scripts/config";
-import { uiBackgroundColorInputEl, uiForegroundColorInputEl, uiHighlightColorInputEl, uiStyleGlassButtonEl, uiStyleSolidButtonEl, uiCustomCSSTextareaEl, uiCornerStyleSharpButtonEl, uiCornerStyleRoundButtonEl, uiGlassColorInputEl, uiBlurStrengthInputEl } from "src/options/scripts/ui";
+import {
+  uiBackgroundColorInputEl,
+  uiForegroundColorInputEl,
+  uiHighlightColorInputEl,
+  uiStyleGlassButtonEl,
+  uiStyleSolidButtonEl,
+  uiCustomCSSTextareaEl,
+  uiCornerStyleSharpButtonEl,
+  uiCornerStyleRoundButtonEl,
+  uiGlassColorInputEl,
+  uiBlurStrengthInputEl
+} from "src/options/scripts/ui";
 
 export const fillUIInputs = (config: Config) => {
   switch (config.ui.style) {

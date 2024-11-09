@@ -1,5 +1,15 @@
 import { Config, MessageType } from "src/newtab/scripts/config";
-import { messageCustomTextInputEl, messageEnabledCheckboxEl, messageFontInputEl, messageTextColorInputEl, messageTypeAfternoonMorningButtonEl, messageTypeCustomButtonEl, messageTypeDateButtonEl, messageTypeTime12ButtonEl, messageTypeTime24ButtonEl } from "src/options/scripts/ui";
+import {
+  messageCustomTextInputEl,
+  messageEnabledCheckboxEl,
+  messageFontInputEl,
+  messageTextColorInputEl,
+  messageTypeAfternoonMorningButtonEl,
+  messageTypeCustomButtonEl,
+  messageTypeDateButtonEl,
+  messageTypeTime12ButtonEl,
+  messageTypeTime24ButtonEl
+} from "src/options/scripts/ui";
 
 export const fillMessageInputs = (config: Config) => {
   messageEnabledCheckboxEl.checked = config.message.enabled;
