@@ -60,8 +60,10 @@ const handleMessageTypeSwitch = () => {
                 - \\yy -> Last two digits of the year (e.g., "20")\n\
                 - \\M -> Full month name (e.g., "October")\n\
                 - \\m -> Abbreviated month name (e.g., "Oct")\n\
+                - \\m$ -> Month of year as number (e.g., "11")\n\
                 - \\D -> Full day of the week name (e.g., "Monday")\n\
                 - \\d -> Abbreviated day of the week (e.g., "Mon")\n\n\
+                - \\d$ -> Day of month as number (e.g., "08")\n\
                 - Time components\n\
                 - \\h% -> Hours (12 hour format, e.g., "01")\n\
                 - \\hh -> Hours (with padding, e.g., "01")\n\

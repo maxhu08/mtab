@@ -55,37 +55,44 @@ export const setCustomMessage = (customText: string) => {
   const meridianLower = date.getHours() >= 12 ? "pm" : "am";
   const meridianUpper = meridianLower.toUpperCase();
 
+  const dayOfMonth = date.getDate().toString().padStart(2, "0");
+  const monthOfYear = (date.getMonth() + 1).toString().padStart(2, "0");
+
   customText = customText
+    .replace(/\\yyyy/g, date.getFullYear().toString())
+    .replace(/\\yy/g, date.getFullYear().toString().slice(-2))
+    .replace(/\\M/g, date.toLocaleString("default", { month: "long" }))
+    .replace(/\\m\$/g, monthOfYear) // must come before
+    .replace(/\\m/g, date.toLocaleString("default", { month: "short" }))
+    .replace(/\\D/g, date.toLocaleString("default", { weekday: "long" }))
+    .replace(/\\d\$/g, dayOfMonth) // must come before
+    .replace(/\\d/g, date.toLocaleString("default", { weekday: "short" }))
     .replace(/\\h%/g, hours12.toString().padStart(2, "0"))
     .replace(/\\hh/g, date.getHours().toString().padStart(2, "0"))
     .replace(/\\mm/g, date.getMinutes().toString().padStart(2, "0"))
     .replace(/\\ss/g, date.getSeconds().toString().padStart(2, "0"))
     .replace(/\\md/g, meridianLower)
-    .replace(/\\MD/g, meridianUpper)
-    .replace(/\\yyyy/g, date.getFullYear().toString())
-    .replace(/\\yy/g, date.getFullYear().toString().slice(-2))
-    .replace(/\\M/g, date.toLocaleString("default", { month: "long" })) // full month name
-    .replace(/\\m/g, date.toLocaleString("default", { month: "short" })) // abbreviated month name
-    .replace(/\\D/g, date.toLocaleString("default", { weekday: "long" })) // full day name
-    .replace(/\\d/g, date.toLocaleString("default", { weekday: "short" })); // abbreviated day name
+    .replace(/\\MD/g, meridianUpper);
 
   messageEl.textContent = customText;
 };
 
 const containsSlashReplacements = (text: string) => {
   const checkChars = [
+    "\\yyyy",
+    "\\yy",
+    "\\M",
+    "\\m",
+    "\\m$",
+    "\\D",
+    "\\d",
+    "\\d$",
     "\\h%",
     "\\hh",
     "\\mm",
     "\\ss",
     "\\md",
-    "\\MD",
-    "\\yyyy",
-    "\\yy",
-    "\\M",
-    "\\m",
-    "\\D",
-    "\\d"
+    "\\MD"
   ];
 
   return checkChars.some((char) => text.includes(char));
