@@ -146,7 +146,11 @@ export const renderBlockBookmark = (
 
   const buttonEl = document.createElement("button");
   buttonEl.id = `bookmark-${bookmarkName}-${bookmarkIndex}`;
-  buttonEl.className = `relative duration-[250ms] ease-out bg-foreground cursor-pointer ${uiStyle === "glass" ? "glass-effect" : ""} corner-style h-bookmark overflow-hidden ${animationsEnabled ? `${animationsInitialType} opacity-0 outline-none` : ""}`;
+  buttonEl.className = `relative duration-[250ms] ease-out bg-foreground cursor-pointer ${
+    uiStyle === "glass" ? "glass-effect" : ""
+  } corner-style h-bookmark overflow-hidden ${
+    animationsEnabled ? `${animationsInitialType} opacity-0 outline-none` : ""
+  }`;
   if (animationsEnabled) buttonEl.style.animationDelay = `${delay}ms`;
 
   const borderDiv = document.createElement("div");
@@ -347,7 +351,11 @@ export const renderBlockBookmarkFolder = (
   // </button>
   const buttonEl = document.createElement("button");
   buttonEl.id = `bookmark-${bookmarkName}-${bookmarkIndex}`;
-  buttonEl.className = `relative duration-[250ms] ease-out bg-foreground cursor-pointer ${uiStyle === "glass" ? "glass-effect" : ""} corner-style h-bookmark overflow-hidden ${animationsEnabled ? `${animationsInitialType} opacity-0 outline-none` : ""}`;
+  buttonEl.className = `relative duration-[250ms] ease-out bg-foreground cursor-pointer ${
+    uiStyle === "glass" ? "glass-effect" : ""
+  } corner-style h-bookmark overflow-hidden ${
+    animationsEnabled ? `${animationsInitialType} opacity-0 outline-none` : ""
+  }`;
   if (animationsEnabled) buttonEl.style.animationDelay = `${delay}ms`;
 
   const borderDiv = document.createElement("div");
@@ -454,7 +462,11 @@ export const renderDefaultBlockyBookmarksNodes = (
     // </button>
     const backButtonEl = document.createElement("button");
     backButtonEl.id = `bookmark-folder-${folderId}-back-button`;
-    backButtonEl.className = `relative duration-[250ms] ease-out bg-foreground cursor-pointer ${config.ui.style === "glass" ? "glass-effect" : ""} corner-style h-9 md:h-12 px-1 md:px-2 overflow-hidden ${config.animations.enabled ? `${config.animations.initialType} opacity-0 outline-none` : ""}`;
+    backButtonEl.className = `relative duration-[250ms] ease-out bg-foreground cursor-pointer ${
+      config.ui.style === "glass" ? "glass-effect" : ""
+    } corner-style h-9 md:h-12 px-1 md:px-2 overflow-hidden ${
+      config.animations.enabled ? `${config.animations.initialType} opacity-0 outline-none` : ""
+    }`;
     if (config.animations.enabled) backButtonEl.style.animationDelay = `${delay}ms`;
 
     const borderDivEl = document.createElement("div");
@@ -495,7 +507,7 @@ export const renderDefaultBlockyBookmarksNodes = (
     const isFolder = node.children!.length > 0;
 
     let color = config.bookmarks.defaultBlockyColor;
-    let randomColors = [
+    const randomColors = [
       "#ef4444",
       "#f97316",
       "#f59e0b",
