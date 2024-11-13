@@ -15,7 +15,7 @@
     "package-firefox": "bun build-firefox && ./scripts/linux/package_firefox.sh",
     "zip-source": "./scripts/linux/zip_source.sh",
     "clean": "rm -rf .parcel-cache && rm -rf dist",
-    "prettier": "prettier --write \"./**/*.{js,jsx,mjs,cjs,ts,tsx,json}\"",
+    "prettier": "prettier --write \"./**/*.{js,jsx,mjs,cjs,ts,tsx,json,html}\"",
     "prepare": "husky"
   },
   "dependencies": {

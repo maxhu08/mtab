@@ -1,50 +1,73 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>...</title>
+    <link rel="stylesheet" href="newtab/styles/tailwind.css" />
+    <link rel="stylesheet" href="newtab/styles/index.css" />
+    <link rel="stylesheet" href="newtab/styles/animations.css" />
+    <link rel="stylesheet" href="assets/icons/remixicon.css" />
+    <script src="newtab/scripts/init.ts" type="module" defer></script>
+  </head>
 
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>...</title>
-  <link rel="stylesheet" href="newtab/styles/tailwind.css" />
-  <link rel="stylesheet" href="newtab/styles/index.css" />
-  <link rel="stylesheet" href="newtab/styles/animations.css" />
-  <link rel="stylesheet" href="assets/icons/remixicon.css" />
-  <script src="newtab/scripts/init.ts" type="module" defer></script>
-</head>
-
-<body dir="ltr" class="bg-neutral-500 min-h-screen overflow-y-scroll grid place-items-center overflow-x-hidden">
-  <div id="wallpaper" class="w-screen h-screen fixed top-0 z-[-1]"></div>
-  <div id="content"
-    class="grid place-items-center gap-2 m-padding-bottom w-[95%] md:w-[80%] max-w-[50rem] absolute top-distance">
-    <div class="grid grid-flow-row w-full place-items-center gap-2 md:gap-4">
-      <p id="message" class="font-message text-white text-center text-2xl md:text-4xl lg:text-6xl font-semibold"></p>
-      <section id="search-section" class="grid grid-flow-row w-full place-items-center gap-2">
-        <div id="search-container"
-          class="font-search grid grid-cols-[max-content_auto] text-base md:text-2xl w-full p-1 md:p-2 corner-style border-2 border-transparent opacity-0">
-          <span class="search-search-icon-color font-semibold select-none">->&nbsp;</span>
-          <input id="search-input" type="text" autocomplete="off"
-            class="font-search outline-none bg-transparent placeholder-color-search">
-        </div>
-        <div id="assistant-container"
-          class="font-search corner-style p-2 w-full hidden grid-flow-row gap-2 text-base md:text-2xl">
-        </div>
-        <div id="bookmarks-container"></div>
-      </section>
-      <section id="bookmark-search-section" class="grid-flow-row w-full place-items-center gap-2 hidden">
-        <div id="bookmark-search-container"
-          class="font-search grid grid-cols-[max-content_auto] text-base md:text-2xl w-full p-1 md:p-2 corner-style border-2 border-transparent">
-          <span class="search-bookmark-icon-color font-semibold select-none">//&nbsp;</span>
-          <input id="bookmark-search-input" type="text" autocomplete="off"
-            class="font-bookmark-search outline-none bg-transparent placeholder-color-bookmark-search">
-        </div>
-        <div id="bookmarks-search-results-container"
-          class="font-bookmark-search-results corner-style p-2 w-full grid grid-flow-row gap-2 text-base md:text-2xl"
-          selected-index="0">
-        </div>
-      </section>
+  <body
+    dir="ltr"
+    class="grid min-h-screen place-items-center overflow-x-hidden overflow-y-scroll bg-neutral-500"
+  >
+    <div id="wallpaper" class="fixed top-0 z-[-1] h-screen w-screen"></div>
+    <div
+      id="content"
+      class="m-padding-bottom top-distance absolute grid w-[95%] max-w-[50rem] place-items-center gap-2 md:w-[80%]"
+    >
+      <div class="grid w-full grid-flow-row place-items-center gap-2 md:gap-4">
+        <p
+          id="message"
+          class="font-message text-center text-2xl font-semibold text-white md:text-4xl lg:text-6xl"
+        ></p>
+        <section id="search-section" class="grid w-full grid-flow-row place-items-center gap-2">
+          <div
+            id="search-container"
+            class="font-search corner-style grid w-full grid-cols-[max-content_auto] border-2 border-transparent p-1 text-base opacity-0 md:p-2 md:text-2xl"
+          >
+            <span class="search-search-icon-color select-none font-semibold">->&nbsp;</span>
+            <input
+              id="search-input"
+              type="text"
+              autocomplete="off"
+              class="font-search placeholder-color-search bg-transparent outline-none"
+            />
+          </div>
+          <div
+            id="assistant-container"
+            class="font-search corner-style hidden w-full grid-flow-row gap-2 p-2 text-base md:text-2xl"
+          ></div>
+          <div id="bookmarks-container"></div>
+        </section>
+        <section
+          id="bookmark-search-section"
+          class="hidden w-full grid-flow-row place-items-center gap-2"
+        >
+          <div
+            id="bookmark-search-container"
+            class="font-search corner-style grid w-full grid-cols-[max-content_auto] border-2 border-transparent p-1 text-base md:p-2 md:text-2xl"
+          >
+            <span class="search-bookmark-icon-color select-none font-semibold">//&nbsp;</span>
+            <input
+              id="bookmark-search-input"
+              type="text"
+              autocomplete="off"
+              class="font-bookmark-search placeholder-color-bookmark-search bg-transparent outline-none"
+            />
+          </div>
+          <div
+            id="bookmarks-search-results-container"
+            class="font-bookmark-search-results corner-style grid w-full grid-flow-row gap-2 p-2 text-base md:text-2xl"
+            selected-index="0"
+          ></div>
+        </section>
+      </div>
     </div>
-  </div>
-  <div id="options-button-container" class="fixed right-4 bottom-4"></div>
-</body>
-
+    <div id="options-button-container" class="fixed bottom-4 right-4"></div>
+  </body>
 </html>

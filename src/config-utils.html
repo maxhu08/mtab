@@ -1,59 +1,85 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="newtab/styles/tailwind.css" />
+    <link rel="stylesheet" href="shared/control.css" />
+    <script src="config-utils/scripts/init.ts" type="module" defer></script>
+    <link rel="icon" href="assets/icon.svg" type="image/x-icon" />
+    <link rel="icon" href="assets/favicon.ico" type="image/x-icon" />
+    <title>config-utils</title>
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="newtab/styles/tailwind.css" />
-  <link rel="stylesheet" href="shared/control.css" />
-  <script src="config-utils/scripts/init.ts" type="module" defer></script>
-  <link rel="icon" href="assets/icon.svg" type="image/x-icon" />
-  <link rel="icon" href="assets/favicon.ico" type="image/x-icon" />
-  <title>config-utils</title>
-</head>
+  <!-- TODO: add button to convert MTAB_SAVE_FORMAT -> json & json -> MTAB_SAVE_FORMAT -->
 
-<!-- TODO: add button to convert MTAB_SAVE_FORMAT -> json & json -> MTAB_SAVE_FORMAT -->
-
-<body dir="ltr" class="bg-neutral-900 min-h-screen">
-  <div class="grid grid-flow-row w-[95%] sm:w-[80%] md:w-[60%] lg:w-[40%] mx-auto">
-    <div class="grid place-items-center gap-4 p-4">
-      <img id="mtab-logo" src="./assets/icon.png" class="w-40 aspect-square animate-up-bouncy" alt="logo" />
-      <h1 class="text-white w-max text-2xl md:text-4xl font-semibold">
-        <span class="text-emerald-500">mtab</span><span class="text-neutral-500">/</span><span>config-utils</span>
-      </h1>
-    </div>
-    <main class="grid grid-flow-row gap-20 py-16">
-      <div class="grid gap-2 text-base">
-        <div class="grid grid-cols-2 gap-2">
-          <button id="convert-mtj-button" class="bg-neutral-800 hover:bg-neutral-700 py-2 rounded-md outline-none">
-            <span class="text-white">MTAB_SAVE_FORMAT -> json</span>
-          </button>
-          <button id="convert-jtm-button" class="bg-neutral-800 hover:bg-neutral-700 py-2 rounded-md outline-none">
-            <span class="text-white">json -> MTAB_SAVE_FORMAT</span>
-          </button>
-        </div>
-        <div id="convert-section" class="grid gap-2">
-          <p class="text-white text-base">input</p>
-          <div id="convert-in-container"
-            class="text-base bg-neutral-800 w-full p-1 rounded-md border-2 border-transparent">
-            <textarea id="convert-in-textarea" type="text" autocomplete="off" rows="16"
-              class="w-full outline-none bg-transparent text-white placeholder-neutral-500 resize-none"></textarea>
-          </div>
-          <p class="text-white text-base">output</p>
-          <div id="convert-out-container"
-            class="text-base bg-neutral-800 w-full p-1 rounded-md border-2 border-transparent">
-            <textarea id="convert-out-textarea" type="text" autocomplete="off" rows="16"
-              class="w-full outline-none bg-transparent text-white placeholder-neutral-500 resize-none"
-              readonly></textarea>
-          </div>
-          <button id="convert-save-button"
-            class="bg-indigo-500 hover:bg-indigo-600 transition p-2 rounded-md cursor-pointer">
-            <span class="text-white text-base">convert save</span>
-          </button>
-        </div>
+  <body dir="ltr" class="min-h-screen bg-neutral-900">
+    <div class="mx-auto grid w-[95%] grid-flow-row sm:w-[80%] md:w-[60%] lg:w-[40%]">
+      <div class="grid place-items-center gap-4 p-4">
+        <img
+          id="mtab-logo"
+          src="./assets/icon.png"
+          class="animate-up-bouncy aspect-square w-40"
+          alt="logo"
+        />
+        <h1 class="w-max text-2xl font-semibold text-white md:text-4xl">
+          <span class="text-emerald-500">mtab</span><span class="text-neutral-500">/</span
+          ><span>config-utils</span>
+        </h1>
       </div>
-    </main>
-  </div>
-</body>
-
+      <main class="grid grid-flow-row gap-20 py-16">
+        <div class="grid gap-2 text-base">
+          <div class="grid grid-cols-2 gap-2">
+            <button
+              id="convert-mtj-button"
+              class="rounded-md bg-neutral-800 py-2 outline-none hover:bg-neutral-700"
+            >
+              <span class="text-white">MTAB_SAVE_FORMAT -> json</span>
+            </button>
+            <button
+              id="convert-jtm-button"
+              class="rounded-md bg-neutral-800 py-2 outline-none hover:bg-neutral-700"
+            >
+              <span class="text-white">json -> MTAB_SAVE_FORMAT</span>
+            </button>
+          </div>
+          <div id="convert-section" class="grid gap-2">
+            <p class="text-base text-white">input</p>
+            <div
+              id="convert-in-container"
+              class="w-full rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base"
+            >
+              <textarea
+                id="convert-in-textarea"
+                type="text"
+                autocomplete="off"
+                rows="16"
+                class="w-full resize-none bg-transparent text-white placeholder-neutral-500 outline-none"
+              ></textarea>
+            </div>
+            <p class="text-base text-white">output</p>
+            <div
+              id="convert-out-container"
+              class="w-full rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base"
+            >
+              <textarea
+                id="convert-out-textarea"
+                type="text"
+                autocomplete="off"
+                rows="16"
+                class="w-full resize-none bg-transparent text-white placeholder-neutral-500 outline-none"
+                readonly
+              ></textarea>
+            </div>
+            <button
+              id="convert-save-button"
+              class="cursor-pointer rounded-md bg-indigo-500 p-2 transition hover:bg-indigo-600"
+            >
+              <span class="text-base text-white">convert save</span>
+            </button>
+          </div>
+        </div>
+      </main>
+    </div>
+  </body>
 </html>
