@@ -16,25 +16,12 @@
   <body dir="ltr" class="min-h-screen bg-neutral-900">
     <div class="mx-auto grid w-[95%] grid-flow-row sm:w-[80%] md:w-[60%] lg:w-[40%]">
       <div class="grid place-items-center gap-4 p-4">
-        <img
-          id="mtab-logo"
-          src="./assets/icon.png"
-          class="animate-up-bouncy aspect-square w-40"
-          alt="logo"
-        />
-        <h1 class="w-max text-2xl font-semibold text-white md:text-4xl">
-          <span class="text-emerald-500">mtab</span><span class="text-neutral-500">/</span
-          ><span>options</span>
-        </h1>
+        <img id="mtab-logo" src="./assets/icon.png" class="animate-up-bouncy aspect-square w-40" alt="logo" />
+        <h1 class="w-max text-2xl font-semibold text-white md:text-4xl"><span class="text-emerald-500">mtab</span><span class="text-neutral-500">/</span><span>options</span></h1>
       </div>
       <div>
         <p class="text-center text-sm md:text-base">
-          <a
-            href="https://github.com/maxhu08/mtab"
-            target="_blank"
-            class="cursor-pointer text-blue-500 transition hover:text-blue-600"
-            >github</a
-          >
+          <a href="https://github.com/maxhu08/mtab" target="_blank" class="cursor-pointer text-blue-500 transition hover:text-blue-600">github</a>
           <span class="text-neutral-500"> | </span>
           <span id="version-number-text" class="text-indigo-500">version </span>
           <span class="text-neutral-500"> | </span>
@@ -53,21 +40,14 @@
             <p class="text-base text-white">options.showOptionsButton</p>
             <div class="ml-auto">
               <label class="relative inline-flex cursor-pointer items-center">
-                <input
-                  id="options-show-options-button-checkbox"
-                  type="checkbox"
-                  value=""
-                  class="peer sr-only"
-                />
+                <input id="options-show-options-button-checkbox" type="checkbox" value="" class="peer sr-only" />
                 <div
                   class="peer h-6 w-11 rounded-full bg-neutral-800 outline-none after:absolute after:left-[3px] after:top-[3px] after:aspect-square after:h-[1.15rem] after:rounded-full after:border-none after:bg-neutral-700 after:transition-all after:content-[''] peer-checked:bg-emerald-500 peer-checked:after:translate-x-full peer-checked:after:bg-white"
                 ></div>
               </label>
             </div>
           </div>
-          <p class="text-base text-neutral-500">
-            tip: you can still access the options by pressing extensions > mtab > options
-          </p>
+          <p class="text-base text-neutral-500">tip: you can still access the options by pressing extensions > mtab > options</p>
         </section>
         <!-- user -->
         <section class="grid grid-flow-row gap-4">
@@ -78,18 +58,9 @@
           </div>
           <div class="grid gap-2">
             <p class="text-base text-white">user.name</p>
-            <div
-              id="username-container"
-              class="grid w-full grid-cols-[max-content_auto] rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base"
-            >
+            <div id="username-container" class="grid w-full grid-cols-[max-content_auto] rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base">
               <span class="select-none font-semibold text-pink-500">>&nbsp;</span>
-              <input
-                id="username-input"
-                type="text"
-                autocomplete="off"
-                class="bg-transparent text-white placeholder-neutral-500 outline-none"
-                placeholder="input name..."
-              />
+              <input id="username-input" type="text" autocomplete="off" class="bg-transparent text-white placeholder-neutral-500 outline-none" placeholder="input name..." />
             </div>
           </div>
         </section>
@@ -102,30 +73,16 @@
           </div>
           <div class="grid gap-2">
             <p class="text-base text-white">title.defaultTitle</p>
-            <div
-              id="title-default-title-container"
-              class="grid w-full grid-cols-[max-content_auto] rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base"
-            >
+            <div id="title-default-title-container" class="grid w-full grid-cols-[max-content_auto] rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base">
               <span class="select-none font-semibold text-pink-500">>&nbsp;</span>
-              <input
-                id="title-default-title-input"
-                type="text"
-                autocomplete="off"
-                class="bg-transparent text-white placeholder-neutral-500 outline-none"
-                placeholder="input title..."
-              />
+              <input id="title-default-title-input" type="text" autocomplete="off" class="bg-transparent text-white placeholder-neutral-500 outline-none" placeholder="input title..." />
             </div>
           </div>
           <div class="grid w-full grid-cols-[max-content_auto] place-items-center">
             <p class="text-base text-white">title.dynamic.enabled</p>
             <div class="ml-auto">
               <label class="relative inline-flex cursor-pointer items-center">
-                <input
-                  id="title-dynamic-enabled-checkbox"
-                  type="checkbox"
-                  value=""
-                  class="peer sr-only"
-                />
+                <input id="title-dynamic-enabled-checkbox" type="checkbox" value="" class="peer sr-only" />
                 <div
                   class="peer h-6 w-11 rounded-full bg-neutral-800 outline-none after:absolute after:left-[3px] after:top-[3px] after:aspect-square after:h-[1.15rem] after:rounded-full after:border-none after:bg-neutral-700 after:transition-all after:content-[''] peer-checked:bg-emerald-500 peer-checked:after:translate-x-full peer-checked:after:bg-white"
                 ></div>
@@ -135,16 +92,10 @@
           <div class="grid gap-2 text-base">
             <p class="text-white">title.faviconType</p>
             <div class="grid grid-cols-2 gap-2">
-              <button
-                id="title-favicon-type-default-button"
-                class="rounded-md bg-neutral-800 py-2 outline-none hover:bg-neutral-700"
-              >
+              <button id="title-favicon-type-default-button" class="rounded-md bg-neutral-800 py-2 outline-none hover:bg-neutral-700">
                 <span class="text-white">default</span>
               </button>
-              <button
-                id="title-favicon-type-custom-button"
-                class="rounded-md bg-neutral-800 py-2 outline-none hover:bg-neutral-700"
-              >
+              <button id="title-favicon-type-custom-button" class="rounded-md bg-neutral-800 py-2 outline-none hover:bg-neutral-700">
                 <span class="text-white">custom</span>
               </button>
             </div>
@@ -154,24 +105,13 @@
               <div class="grid gap-2">
                 <p class="text-base text-white">title.customFavicon</p>
                 <div class="grid grid-cols-2 gap-2">
-                  <input
-                    type="file"
-                    id="title-custom-favicon-upload"
-                    accept="image/*"
-                    class="w-full cursor-pointer rounded-md bg-cyan-500 p-2 text-base text-white transition hover:bg-cyan-600"
-                  />
-                  <button
-                    id="title-custom-favicon-reset-button"
-                    class="w-full cursor-pointer rounded-md bg-rose-500 p-2 transition hover:bg-rose-600"
-                  >
+                  <input type="file" id="title-custom-favicon-upload" accept="image/*" class="w-full cursor-pointer rounded-md bg-cyan-500 p-2 text-base text-white transition hover:bg-cyan-600" />
+                  <button id="title-custom-favicon-reset-button" class="w-full cursor-pointer rounded-md bg-rose-500 p-2 transition hover:bg-rose-600">
                     <span class="text-base text-white">reset</span>
                   </button>
                 </div>
                 <p class="text-base text-neutral-500">live preview</p>
-                <div
-                  id="live-favicon-preview"
-                  class="grid aspect-square w-16 place-items-center overflow-hidden rounded-md bg-neutral-800"
-                ></div>
+                <div id="live-favicon-preview" class="grid aspect-square w-16 place-items-center overflow-hidden rounded-md bg-neutral-800"></div>
               </div>
             </div>
           </div>
@@ -187,12 +127,7 @@
             <p class="text-base text-white">message.enabled</p>
             <div class="ml-auto">
               <label class="relative inline-flex cursor-pointer items-center">
-                <input
-                  id="message-enabled-checkbox"
-                  type="checkbox"
-                  value=""
-                  class="peer sr-only"
-                />
+                <input id="message-enabled-checkbox" type="checkbox" value="" class="peer sr-only" />
                 <div
                   class="peer h-6 w-11 rounded-full bg-neutral-800 outline-none after:absolute after:left-[3px] after:top-[3px] after:aspect-square after:h-[1.15rem] after:rounded-full after:border-none after:bg-neutral-700 after:transition-all after:content-[''] peer-checked:bg-emerald-500 peer-checked:after:translate-x-full peer-checked:after:bg-white"
                 ></div>
@@ -202,67 +137,34 @@
           <div id="message-enabled-section" class="grid grid-flow-row gap-4">
             <div class="grid gap-2">
               <p class="text-base text-white">message.font</p>
-              <div
-                id="message-font-container"
-                class="grid w-full grid-cols-[max-content_auto] rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base"
-              >
+              <div id="message-font-container" class="grid w-full grid-cols-[max-content_auto] rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base">
                 <span class="select-none font-semibold text-pink-500">>&nbsp;</span>
-                <input
-                  id="message-font-input"
-                  type="text"
-                  autocomplete="off"
-                  class="bg-transparent text-white placeholder-neutral-500 outline-none"
-                  placeholder="input font..."
-                />
+                <input id="message-font-input" type="text" autocomplete="off" class="bg-transparent text-white placeholder-neutral-500 outline-none" placeholder="input font..." />
               </div>
             </div>
             <div class="grid gap-2">
               <p class="text-base text-white">message.textColor</p>
-              <div
-                id="message-text-color-container"
-                class="grid w-full grid-cols-[max-content_auto] rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base"
-              >
+              <div id="message-text-color-container" class="grid w-full grid-cols-[max-content_auto] rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base">
                 <span class="select-none font-semibold text-pink-500">>&nbsp;</span>
-                <input
-                  id="message-text-color-input"
-                  type="text"
-                  autocomplete="off"
-                  class="bg-transparent text-white placeholder-neutral-500 outline-none"
-                  placeholder="input color..."
-                />
+                <input id="message-text-color-input" type="text" autocomplete="off" class="bg-transparent text-white placeholder-neutral-500 outline-none" placeholder="input color..." />
               </div>
             </div>
             <div class="grid gap-2 text-base">
               <p class="text-white">message.type</p>
               <div class="grid grid-cols-2 gap-2">
-                <button
-                  id="message-type-afternoon-morning-button"
-                  class="rounded-md bg-neutral-800 py-2 outline-none hover:bg-neutral-700"
-                >
+                <button id="message-type-afternoon-morning-button" class="rounded-md bg-neutral-800 py-2 outline-none hover:bg-neutral-700">
                   <span class="text-white">afternoon-morning</span>
                 </button>
-                <button
-                  id="message-type-date-button"
-                  class="rounded-md bg-neutral-800 py-2 outline-none hover:bg-neutral-700"
-                >
+                <button id="message-type-date-button" class="rounded-md bg-neutral-800 py-2 outline-none hover:bg-neutral-700">
                   <span class="text-white">date</span>
                 </button>
-                <button
-                  id="message-type-time-12-button"
-                  class="rounded-md bg-neutral-800 py-2 outline-none hover:bg-neutral-700"
-                >
+                <button id="message-type-time-12-button" class="rounded-md bg-neutral-800 py-2 outline-none hover:bg-neutral-700">
                   <span class="text-white">time-12</span>
                 </button>
-                <button
-                  id="message-type-time-24-button"
-                  class="rounded-md bg-neutral-800 py-2 outline-none hover:bg-neutral-700"
-                >
+                <button id="message-type-time-24-button" class="rounded-md bg-neutral-800 py-2 outline-none hover:bg-neutral-700">
                   <span class="text-white">time-24</span>
                 </button>
-                <button
-                  id="message-type-custom-button"
-                  class="rounded-md bg-neutral-800 py-2 outline-none hover:bg-neutral-700"
-                >
+                <button id="message-type-custom-button" class="rounded-md bg-neutral-800 py-2 outline-none hover:bg-neutral-700">
                   <span class="text-white">custom</span>
                 </button>
               </div>
@@ -270,22 +172,10 @@
             <div id="message-custom-text-section">
               <div class="grid gap-2">
                 <p class="text-base text-white">message.customText</p>
-                <p
-                  id="message-custom-text-info"
-                  class="whitespace-pre-line text-base text-neutral-500"
-                ></p>
-                <div
-                  id="message-custom-text-container"
-                  class="grid w-full grid-cols-[max-content_auto] rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base"
-                >
+                <p id="message-custom-text-info" class="whitespace-pre-line text-base text-neutral-500"></p>
+                <div id="message-custom-text-container" class="grid w-full grid-cols-[max-content_auto] rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base">
                   <span class="select-none font-semibold text-pink-500">>&nbsp;</span>
-                  <input
-                    id="message-custom-text-input"
-                    type="text"
-                    autocomplete="off"
-                    class="bg-transparent text-white placeholder-neutral-500 outline-none"
-                    placeholder="input text..."
-                  />
+                  <input id="message-custom-text-input" type="text" autocomplete="off" class="bg-transparent text-white placeholder-neutral-500 outline-none" placeholder="input text..." />
                 </div>
               </div>
             </div>
@@ -302,12 +192,7 @@
             <p class="text-base text-white">wallpaper.enabled</p>
             <div class="ml-auto">
               <label class="relative inline-flex cursor-pointer items-center">
-                <input
-                  id="wallpaper-enabled-checkbox"
-                  type="checkbox"
-                  value=""
-                  class="peer sr-only"
-                />
+                <input id="wallpaper-enabled-checkbox" type="checkbox" value="" class="peer sr-only" />
                 <div
                   class="peer h-6 w-11 rounded-full bg-neutral-800 outline-none after:absolute after:left-[3px] after:top-[3px] after:aspect-square after:h-[1.15rem] after:rounded-full after:border-none after:bg-neutral-700 after:transition-all after:content-[''] peer-checked:bg-emerald-500 peer-checked:after:translate-x-full peer-checked:after:bg-white"
                 ></div>
@@ -318,16 +203,10 @@
             <div class="grid gap-2 text-base">
               <p class="text-white">wallpaper.type</p>
               <div class="grid grid-cols-2 gap-2">
-                <button
-                  id="wallpaper-type-url-button"
-                  class="rounded-md bg-neutral-800 py-2 outline-none hover:bg-neutral-700"
-                >
+                <button id="wallpaper-type-url-button" class="rounded-md bg-neutral-800 py-2 outline-none hover:bg-neutral-700">
                   <span class="text-white">url</span>
                 </button>
-                <button
-                  id="wallpaper-type-file-upload-button"
-                  class="rounded-md bg-neutral-800 py-2 outline-none hover:bg-neutral-700"
-                >
+                <button id="wallpaper-type-file-upload-button" class="rounded-md bg-neutral-800 py-2 outline-none hover:bg-neutral-700">
                   <span class="text-white">fileUpload</span>
                 </button>
               </div>
@@ -336,18 +215,9 @@
               <div class="grid gap-2">
                 <div id="wallpaper-url-section">
                   <p class="text-base text-white">wallpaper.url</p>
-                  <div
-                    id="wallpaper-url-container"
-                    class="grid w-full grid-cols-[max-content_auto] rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base"
-                  >
+                  <div id="wallpaper-url-container" class="grid w-full grid-cols-[max-content_auto] rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base">
                     <span class="select-none font-semibold text-pink-500">>&nbsp;</span>
-                    <input
-                      id="wallpaper-url-input"
-                      type="text"
-                      autocomplete="off"
-                      class="bg-transparent text-white placeholder-neutral-500 outline-none"
-                      placeholder="input url..."
-                    />
+                    <input id="wallpaper-url-input" type="text" autocomplete="off" class="bg-transparent text-white placeholder-neutral-500 outline-none" placeholder="input url..." />
                   </div>
                 </div>
               </div>
@@ -361,18 +231,12 @@
                       accept="image/*,video/*"
                       class="w-full cursor-pointer rounded-md bg-cyan-500 p-2 text-base text-white transition hover:bg-cyan-600"
                     />
-                    <button
-                      id="wallpaper-file-upload-reset-button"
-                      class="w-full cursor-pointer rounded-md bg-rose-500 p-2 transition hover:bg-rose-600"
-                    >
+                    <button id="wallpaper-file-upload-reset-button" class="w-full cursor-pointer rounded-md bg-rose-500 p-2 transition hover:bg-rose-600">
                       <span class="text-base text-white">reset</span>
                     </button>
                   </div>
                   <p class="text-base text-neutral-500">live preview</p>
-                  <div
-                    id="live-wallpaper-preview"
-                    class="grid aspect-video w-64 place-items-center overflow-hidden rounded-md bg-neutral-800"
-                  ></div>
+                  <div id="live-wallpaper-preview" class="grid aspect-video w-64 place-items-center overflow-hidden rounded-md bg-neutral-800"></div>
                 </div>
               </div>
             </div>
@@ -388,16 +252,10 @@
           <div class="grid gap-2 text-base">
             <p class="text-white">ui.style</p>
             <div class="grid grid-cols-2 gap-2">
-              <button
-                id="ui-style-solid-button"
-                class="rounded-md bg-neutral-800 py-2 outline-none hover:bg-neutral-700"
-              >
+              <button id="ui-style-solid-button" class="rounded-md bg-neutral-800 py-2 outline-none hover:bg-neutral-700">
                 <span class="text-white">solid</span>
               </button>
-              <button
-                id="ui-style-glass-button"
-                class="rounded-md bg-neutral-800 py-2 outline-none hover:bg-neutral-700"
-              >
+              <button id="ui-style-glass-button" class="rounded-md bg-neutral-800 py-2 outline-none hover:bg-neutral-700">
                 <span class="text-white">glass</span>
               </button>
             </div>
@@ -405,117 +263,57 @@
           <div id="ui-style-solid-section" class="grid grid-flow-row gap-4">
             <div class="grid gap-2">
               <p class="text-base text-white">ui.foregroundColor</p>
-              <div
-                id="ui-foreground-color-container"
-                class="grid w-full grid-cols-[max-content_auto] rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base"
-              >
+              <div id="ui-foreground-color-container" class="grid w-full grid-cols-[max-content_auto] rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base">
                 <span class="select-none font-semibold text-pink-500">>&nbsp;</span>
-                <input
-                  id="ui-foreground-color-input"
-                  type="text"
-                  autocomplete="off"
-                  class="bg-transparent text-white placeholder-neutral-500 outline-none"
-                  placeholder="input color..."
-                />
+                <input id="ui-foreground-color-input" type="text" autocomplete="off" class="bg-transparent text-white placeholder-neutral-500 outline-none" placeholder="input color..." />
               </div>
             </div>
           </div>
           <div id="ui-style-glass-section" class="grid grid-flow-row gap-4">
             <div class="grid gap-2">
               <p class="text-base text-white">ui.glassColor</p>
-              <div
-                id="ui-glass-color-container"
-                class="grid w-full grid-cols-[max-content_auto] rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base"
-              >
+              <div id="ui-glass-color-container" class="grid w-full grid-cols-[max-content_auto] rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base">
                 <span class="select-none font-semibold text-pink-500">>&nbsp;</span>
-                <input
-                  id="ui-glass-color-input"
-                  type="text"
-                  autocomplete="off"
-                  class="bg-transparent text-white placeholder-neutral-500 outline-none"
-                  placeholder="input color..."
-                />
+                <input id="ui-glass-color-input" type="text" autocomplete="off" class="bg-transparent text-white placeholder-neutral-500 outline-none" placeholder="input color..." />
               </div>
             </div>
             <div class="grid gap-2 pt-4">
               <p class="text-base text-white">ui.blurStrength</p>
-              <div
-                id="ui-blur-strength-container"
-                class="grid w-full grid-cols-[max-content_auto] rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base"
-              >
+              <div id="ui-blur-strength-container" class="grid w-full grid-cols-[max-content_auto] rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base">
                 <span class="select-none font-semibold text-pink-500">>&nbsp;</span>
-                <input
-                  id="ui-blur-strength-input"
-                  type="text"
-                  autocomplete="off"
-                  class="bg-transparent text-white placeholder-neutral-500 outline-none"
-                  placeholder="input blur strength..."
-                />
+                <input id="ui-blur-strength-input" type="text" autocomplete="off" class="bg-transparent text-white placeholder-neutral-500 outline-none" placeholder="input blur strength..." />
               </div>
             </div>
           </div>
           <div class="grid gap-2">
             <p class="text-base text-white">ui.backgroundColor</p>
-            <div
-              id="ui-background-color-container"
-              class="grid w-full grid-cols-[max-content_auto] rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base"
-            >
+            <div id="ui-background-color-container" class="grid w-full grid-cols-[max-content_auto] rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base">
               <span class="select-none font-semibold text-pink-500">>&nbsp;</span>
-              <input
-                id="ui-background-color-input"
-                type="text"
-                autocomplete="off"
-                class="bg-transparent text-white placeholder-neutral-500 outline-none"
-                placeholder="input color..."
-              />
+              <input id="ui-background-color-input" type="text" autocomplete="off" class="bg-transparent text-white placeholder-neutral-500 outline-none" placeholder="input color..." />
             </div>
           </div>
           <div class="grid gap-2">
             <p class="text-base text-white">ui.highlightColor</p>
-            <div
-              id="ui-highlight-color-container"
-              class="grid w-full grid-cols-[max-content_auto] rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base"
-            >
+            <div id="ui-highlight-color-container" class="grid w-full grid-cols-[max-content_auto] rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base">
               <span class="select-none font-semibold text-pink-500">>&nbsp;</span>
-              <input
-                id="ui-highlight-color-input"
-                type="text"
-                autocomplete="off"
-                class="bg-transparent text-white placeholder-neutral-500 outline-none"
-                placeholder="input color..."
-              />
+              <input id="ui-highlight-color-input" type="text" autocomplete="off" class="bg-transparent text-white placeholder-neutral-500 outline-none" placeholder="input color..." />
             </div>
           </div>
           <div class="grid gap-2 text-base">
             <p class="text-white">ui.cornerStyle</p>
             <div class="grid grid-cols-2 gap-2">
-              <button
-                id="ui-corner-style-sharp-button"
-                class="rounded-md bg-neutral-800 py-2 outline-none hover:bg-neutral-700"
-              >
+              <button id="ui-corner-style-sharp-button" class="rounded-md bg-neutral-800 py-2 outline-none hover:bg-neutral-700">
                 <span class="text-white">sharp</span>
               </button>
-              <button
-                id="ui-corner-style-round-button"
-                class="rounded-md bg-neutral-800 py-2 outline-none hover:bg-neutral-700"
-              >
+              <button id="ui-corner-style-round-button" class="rounded-md bg-neutral-800 py-2 outline-none hover:bg-neutral-700">
                 <span class="text-white">round</span>
               </button>
             </div>
           </div>
           <div class="grid gap-2">
             <p class="text-base text-white">ui.customCSS</p>
-            <div
-              id="ui-custom-css-container"
-              class="w-full rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base"
-            >
-              <textarea
-                id="ui-custom-css-textarea"
-                type="text"
-                autocomplete="off"
-                rows="16"
-                class="w-full resize-none bg-transparent text-white placeholder-neutral-500 outline-none"
-              ></textarea>
+            <div id="ui-custom-css-container" class="w-full rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base">
+              <textarea id="ui-custom-css-textarea" type="text" autocomplete="off" rows="16" class="w-full resize-none bg-transparent text-white placeholder-neutral-500 outline-none"></textarea>
             </div>
           </div>
         </section>
@@ -530,12 +328,7 @@
             <p class="text-base text-white">animations.enabled</p>
             <div class="ml-auto">
               <label class="relative inline-flex cursor-pointer items-center">
-                <input
-                  id="animations-enabled-checkbox"
-                  type="checkbox"
-                  value=""
-                  class="peer sr-only"
-                />
+                <input id="animations-enabled-checkbox" type="checkbox" value="" class="peer sr-only" />
                 <div
                   class="peer h-6 w-11 rounded-full bg-neutral-800 outline-none after:absolute after:left-[3px] after:top-[3px] after:aspect-square after:h-[1.15rem] after:rounded-full after:border-none after:bg-neutral-700 after:transition-all after:content-[''] peer-checked:bg-emerald-500 peer-checked:after:translate-x-full peer-checked:after:bg-white"
                 ></div>
@@ -546,22 +339,13 @@
             <div class="grid gap-2 text-base">
               <p class="text-white">animations.bookmarkTiming</p>
               <div class="grid grid-cols-2 gap-2">
-                <button
-                  id="animations-bookmark-timing-left-button"
-                  class="rounded-md bg-neutral-800 py-2 outline-none hover:bg-neutral-700"
-                >
+                <button id="animations-bookmark-timing-left-button" class="rounded-md bg-neutral-800 py-2 outline-none hover:bg-neutral-700">
                   <span class="text-white">left</span>
                 </button>
-                <button
-                  id="animations-bookmark-timing-right-button"
-                  class="rounded-md bg-neutral-800 py-2 outline-none hover:bg-neutral-700"
-                >
+                <button id="animations-bookmark-timing-right-button" class="rounded-md bg-neutral-800 py-2 outline-none hover:bg-neutral-700">
                   <span class="text-white">right</span>
                 </button>
-                <button
-                  id="animations-bookmark-timing-uniform-button"
-                  class="rounded-md bg-neutral-800 py-2 outline-none hover:bg-neutral-700"
-                >
+                <button id="animations-bookmark-timing-uniform-button" class="rounded-md bg-neutral-800 py-2 outline-none hover:bg-neutral-700">
                   <span class="text-white">uniform</span>
                 </button>
               </div>
@@ -569,52 +353,28 @@
             <div class="grid gap-2 text-base">
               <p class="text-white">animations.initialType</p>
               <div class="grid grid-cols-2 gap-2">
-                <button
-                  id="animations-initial-type-down-bouncy-button"
-                  class="rounded-md bg-neutral-800 py-2 outline-none hover:bg-neutral-700"
-                >
+                <button id="animations-initial-type-down-bouncy-button" class="rounded-md bg-neutral-800 py-2 outline-none hover:bg-neutral-700">
                   <span class="text-white">down-bouncy</span>
                 </button>
-                <button
-                  id="animations-initial-type-down-smooth-button"
-                  class="rounded-md bg-neutral-800 py-2 outline-none hover:bg-neutral-700"
-                >
+                <button id="animations-initial-type-down-smooth-button" class="rounded-md bg-neutral-800 py-2 outline-none hover:bg-neutral-700">
                   <span class="text-white">down-smooth</span>
                 </button>
-                <button
-                  id="animations-initial-type-down-fall-button"
-                  class="rounded-md bg-neutral-800 py-2 outline-none hover:bg-neutral-700"
-                >
+                <button id="animations-initial-type-down-fall-button" class="rounded-md bg-neutral-800 py-2 outline-none hover:bg-neutral-700">
                   <span class="text-white">down-fall</span>
                 </button>
-                <button
-                  id="animations-initial-type-up-bouncy-button"
-                  class="rounded-md bg-neutral-800 py-2 outline-none hover:bg-neutral-700"
-                >
+                <button id="animations-initial-type-up-bouncy-button" class="rounded-md bg-neutral-800 py-2 outline-none hover:bg-neutral-700">
                   <span class="text-white">up-bouncy</span>
                 </button>
-                <button
-                  id="animations-initial-type-up-smooth-button"
-                  class="rounded-md bg-neutral-800 py-2 outline-none hover:bg-neutral-700"
-                >
+                <button id="animations-initial-type-up-smooth-button" class="rounded-md bg-neutral-800 py-2 outline-none hover:bg-neutral-700">
                   <span class="text-white">up-smooth</span>
                 </button>
-                <button
-                  id="animations-initial-type-grow-scale-button"
-                  class="rounded-md bg-neutral-800 py-2 outline-none hover:bg-neutral-700"
-                >
+                <button id="animations-initial-type-grow-scale-button" class="rounded-md bg-neutral-800 py-2 outline-none hover:bg-neutral-700">
                   <span class="text-white">grow-scale</span>
                 </button>
-                <button
-                  id="animations-initial-type-fly-left-button"
-                  class="rounded-md bg-neutral-800 py-2 outline-none hover:bg-neutral-700"
-                >
+                <button id="animations-initial-type-fly-left-button" class="rounded-md bg-neutral-800 py-2 outline-none hover:bg-neutral-700">
                   <span class="text-white">fly-left</span>
                 </button>
-                <button
-                  id="animations-initial-type-fly-right-button"
-                  class="rounded-md bg-neutral-800 py-2 outline-none hover:bg-neutral-700"
-                >
+                <button id="animations-initial-type-fly-right-button" class="rounded-md bg-neutral-800 py-2 outline-none hover:bg-neutral-700">
                   <span class="text-white">fly-right</span>
                 </button>
               </div>
@@ -622,28 +382,16 @@
             <div class="grid gap-2 text-base">
               <p class="text-white">animations.searchType</p>
               <div class="grid grid-cols-2 gap-2">
-                <button
-                  id="animations-search-type-page-shrink-button"
-                  class="rounded-md bg-neutral-800 py-2 outline-none hover:bg-neutral-700"
-                >
+                <button id="animations-search-type-page-shrink-button" class="rounded-md bg-neutral-800 py-2 outline-none hover:bg-neutral-700">
                   <span class="text-white">page-shrink</span>
                 </button>
-                <button
-                  id="animations-search-type-page-scale-button"
-                  class="rounded-md bg-neutral-800 py-2 outline-none hover:bg-neutral-700"
-                >
+                <button id="animations-search-type-page-scale-button" class="rounded-md bg-neutral-800 py-2 outline-none hover:bg-neutral-700">
                   <span class="text-white">page-scale</span>
                 </button>
-                <button
-                  id="animations-search-type-page-up-button"
-                  class="rounded-md bg-neutral-800 py-2 outline-none hover:bg-neutral-700"
-                >
+                <button id="animations-search-type-page-up-button" class="rounded-md bg-neutral-800 py-2 outline-none hover:bg-neutral-700">
                   <span class="text-white">page-up</span>
                 </button>
-                <button
-                  id="animations-search-type-page-down-button"
-                  class="rounded-md bg-neutral-800 py-2 outline-none hover:bg-neutral-700"
-                >
+                <button id="animations-search-type-page-down-button" class="rounded-md bg-neutral-800 py-2 outline-none hover:bg-neutral-700">
                   <span class="text-white">page-down</span>
                 </button>
               </div>
@@ -651,28 +399,16 @@
             <div class="grid gap-2 text-base">
               <p class="text-white">animations.bookmarkType</p>
               <div class="grid grid-cols-2 gap-2">
-                <button
-                  id="animations-bookmark-type-page-shrink-button"
-                  class="rounded-md bg-neutral-800 py-2 outline-none hover:bg-neutral-700"
-                >
+                <button id="animations-bookmark-type-page-shrink-button" class="rounded-md bg-neutral-800 py-2 outline-none hover:bg-neutral-700">
                   <span class="text-white">page-shrink</span>
                 </button>
-                <button
-                  id="animations-bookmark-type-page-scale-button"
-                  class="rounded-md bg-neutral-800 py-2 outline-none hover:bg-neutral-700"
-                >
+                <button id="animations-bookmark-type-page-scale-button" class="rounded-md bg-neutral-800 py-2 outline-none hover:bg-neutral-700">
                   <span class="text-white">page-scale</span>
                 </button>
-                <button
-                  id="animations-bookmark-type-page-up-button"
-                  class="rounded-md bg-neutral-800 py-2 outline-none hover:bg-neutral-700"
-                >
+                <button id="animations-bookmark-type-page-up-button" class="rounded-md bg-neutral-800 py-2 outline-none hover:bg-neutral-700">
                   <span class="text-white">page-up</span>
                 </button>
-                <button
-                  id="animations-bookmark-type-page-down-button"
-                  class="rounded-md bg-neutral-800 py-2 outline-none hover:bg-neutral-700"
-                >
+                <button id="animations-bookmark-type-page-down-button" class="rounded-md bg-neutral-800 py-2 outline-none hover:bg-neutral-700">
                   <span class="text-white">page-down</span>
                 </button>
               </div>
@@ -698,63 +434,31 @@
             </div>
           </div>
           <div id="search-enabled-section" class="grid grid-flow-row gap-4">
-            <span class="text-base text-neutral-500"
-              >tip: press Ctrl+Enter to open your search in a new tab</span
-            >
+            <span class="text-base text-neutral-500">tip: press Ctrl+Enter to open your search in a new tab</span>
             <div class="grid gap-2">
               <p class="text-base text-white">search.font</p>
-              <div
-                id="search-font-container"
-                class="grid w-full grid-cols-[max-content_auto] rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base"
-              >
+              <div id="search-font-container" class="grid w-full grid-cols-[max-content_auto] rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base">
                 <span class="select-none font-semibold text-pink-500">>&nbsp;</span>
-                <input
-                  id="search-font-input"
-                  type="text"
-                  autocomplete="off"
-                  class="bg-transparent text-white placeholder-neutral-500 outline-none"
-                  placeholder="input font..."
-                />
+                <input id="search-font-input" type="text" autocomplete="off" class="bg-transparent text-white placeholder-neutral-500 outline-none" placeholder="input font..." />
               </div>
             </div>
             <div class="grid gap-2">
               <p class="text-base text-white">search.textColor</p>
-              <div
-                id="search-text-color-container"
-                class="grid w-full grid-cols-[max-content_auto] rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base"
-              >
+              <div id="search-text-color-container" class="grid w-full grid-cols-[max-content_auto] rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base">
                 <span class="select-none font-semibold text-pink-500">>&nbsp;</span>
-                <input
-                  id="search-text-color-input"
-                  type="text"
-                  autocomplete="off"
-                  class="bg-transparent text-white placeholder-neutral-500 outline-none"
-                  placeholder="input color..."
-                />
+                <input id="search-text-color-input" type="text" autocomplete="off" class="bg-transparent text-white placeholder-neutral-500 outline-none" placeholder="input color..." />
               </div>
             </div>
             <div class="grid gap-2">
               <p class="text-base text-white">search.placeholderText</p>
-              <div
-                id="search-placeholder-text-container"
-                class="grid w-full grid-cols-[max-content_auto] rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base"
-              >
+              <div id="search-placeholder-text-container" class="grid w-full grid-cols-[max-content_auto] rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base">
                 <span class="select-none font-semibold text-pink-500">>&nbsp;</span>
-                <input
-                  id="search-placeholder-text-input"
-                  type="text"
-                  autocomplete="off"
-                  class="bg-transparent text-white placeholder-neutral-500 outline-none"
-                  placeholder="input placeholder..."
-                />
+                <input id="search-placeholder-text-input" type="text" autocomplete="off" class="bg-transparent text-white placeholder-neutral-500 outline-none" placeholder="input placeholder..." />
               </div>
             </div>
             <div class="grid gap-2">
               <p class="text-base text-white">search.bookmarkPlaceholderText</p>
-              <div
-                id="search-bookmark-placeholder-text-container"
-                class="grid w-full grid-cols-[max-content_auto] rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base"
-              >
+              <div id="search-bookmark-placeholder-text-container" class="grid w-full grid-cols-[max-content_auto] rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base">
                 <span class="select-none font-semibold text-pink-500">>&nbsp;</span>
                 <input
                   id="search-bookmark-placeholder-text-input"
@@ -767,138 +471,78 @@
             </div>
             <div class="grid gap-2">
               <p class="text-base text-white">search.placeholderTextColor</p>
-              <div
-                id="search-placeholder-text-color-container"
-                class="grid w-full grid-cols-[max-content_auto] rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base"
-              >
+              <div id="search-placeholder-text-color-container" class="grid w-full grid-cols-[max-content_auto] rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base">
                 <span class="select-none font-semibold text-pink-500">>&nbsp;</span>
-                <input
-                  id="search-placeholder-text-color-input"
-                  type="text"
-                  autocomplete="off"
-                  class="bg-transparent text-white placeholder-neutral-500 outline-none"
-                  placeholder="input color..."
-                />
+                <input id="search-placeholder-text-color-input" type="text" autocomplete="off" class="bg-transparent text-white placeholder-neutral-500 outline-none" placeholder="input color..." />
               </div>
             </div>
             <div class="grid gap-2">
               <p class="text-base text-white">search.searchIconColor</p>
-              <div
-                id="search-search-icon-color-container"
-                class="grid w-full grid-cols-[max-content_auto] rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base"
-              >
+              <div id="search-search-icon-color-container" class="grid w-full grid-cols-[max-content_auto] rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base">
                 <span class="select-none font-semibold text-pink-500">>&nbsp;</span>
-                <input
-                  id="search-search-icon-color-input"
-                  type="text"
-                  autocomplete="off"
-                  class="bg-transparent text-white placeholder-neutral-500 outline-none"
-                  placeholder="input color..."
-                />
+                <input id="search-search-icon-color-input" type="text" autocomplete="off" class="bg-transparent text-white placeholder-neutral-500 outline-none" placeholder="input color..." />
               </div>
             </div>
             <div class="grid gap-2">
               <p class="text-base text-white">search.bookmarkIconColor</p>
-              <div
-                id="search-bookmark-icon-color-container"
-                class="grid w-full grid-cols-[max-content_auto] rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base"
-              >
+              <div id="search-bookmark-icon-color-container" class="grid w-full grid-cols-[max-content_auto] rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base">
                 <span class="select-none font-semibold text-pink-500">>&nbsp;</span>
-                <input
-                  id="search-bookmark-icon-color-input"
-                  type="text"
-                  autocomplete="off"
-                  class="bg-transparent text-white placeholder-neutral-500 outline-none"
-                  placeholder="input color..."
-                />
+                <input id="search-bookmark-icon-color-input" type="text" autocomplete="off" class="bg-transparent text-white placeholder-neutral-500 outline-none" placeholder="input color..." />
               </div>
             </div>
             <div class="grid gap-2">
               <p class="text-base text-white">search.selectIconColor</p>
-              <div
-                id="search-select-icon-color-container"
-                class="grid w-full grid-cols-[max-content_auto] rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base"
-              >
+              <div id="search-select-icon-color-container" class="grid w-full grid-cols-[max-content_auto] rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base">
                 <span class="select-none font-semibold text-pink-500">>&nbsp;</span>
-                <input
-                  id="search-select-icon-color-input"
-                  type="text"
-                  autocomplete="off"
-                  class="bg-transparent text-white placeholder-neutral-500 outline-none"
-                  placeholder="input color..."
-                />
+                <input id="search-select-icon-color-input" type="text" autocomplete="off" class="bg-transparent text-white placeholder-neutral-500 outline-none" placeholder="input color..." />
               </div>
             </div>
             <div class="grid gap-2 text-base">
               <p class="text-white">search.engine</p>
               <div class="grid grid-cols-2 gap-2">
-                <button
-                  id="search-engine-duckduckgo-button"
-                  class="grid place-items-center rounded-md bg-neutral-800 py-2 outline-none hover:bg-neutral-700"
-                >
+                <button id="search-engine-duckduckgo-button" class="grid place-items-center rounded-md bg-neutral-800 py-2 outline-none hover:bg-neutral-700">
                   <div class="grid grid-cols-[24px_max-content] gap-2">
                     <img src="assets/search-engines/duckduckgo.svg" alt="duckduckgo" />
                     <span class="text-white">duckduckgo</span>
                   </div>
                 </button>
-                <button
-                  id="search-engine-google-button"
-                  class="grid place-items-center rounded-md bg-neutral-800 py-2 outline-none hover:bg-neutral-700"
-                >
+                <button id="search-engine-google-button" class="grid place-items-center rounded-md bg-neutral-800 py-2 outline-none hover:bg-neutral-700">
                   <div class="grid grid-cols-[24px_max-content] gap-2">
                     <img src="assets/search-engines/google.png" alt="google" />
                     <span class="text-white">google</span>
                   </div>
                 </button>
-                <button
-                  id="search-engine-bing-button"
-                  class="grid place-items-center rounded-md bg-neutral-800 py-2 outline-none hover:bg-neutral-700"
-                >
+                <button id="search-engine-bing-button" class="grid place-items-center rounded-md bg-neutral-800 py-2 outline-none hover:bg-neutral-700">
                   <div class="grid grid-cols-[24px_max-content] gap-2">
                     <img src="assets/search-engines/bing.png" alt="bing" />
                     <span class="text-white">bing</span>
                   </div>
                 </button>
-                <button
-                  id="search-engine-brave-button"
-                  class="grid place-items-center rounded-md bg-neutral-800 py-2 outline-none hover:bg-neutral-700"
-                >
+                <button id="search-engine-brave-button" class="grid place-items-center rounded-md bg-neutral-800 py-2 outline-none hover:bg-neutral-700">
                   <div class="grid grid-cols-[24px_max-content] gap-2">
                     <img src="assets/search-engines/brave.png" alt="brave" />
                     <span class="text-white">brave</span>
                   </div>
                 </button>
-                <button
-                  id="search-engine-yahoo-button"
-                  class="grid place-items-center rounded-md bg-neutral-800 py-2 outline-none hover:bg-neutral-700"
-                >
+                <button id="search-engine-yahoo-button" class="grid place-items-center rounded-md bg-neutral-800 py-2 outline-none hover:bg-neutral-700">
                   <div class="grid grid-cols-[24px_max-content] gap-2">
                     <img src="assets/search-engines/yahoo.png" alt="yahoo" />
                     <span class="text-white">yahoo</span>
                   </div>
                 </button>
-                <button
-                  id="search-engine-yandex-button"
-                  class="grid place-items-center rounded-md bg-neutral-800 py-2 outline-none hover:bg-neutral-700"
-                >
+                <button id="search-engine-yandex-button" class="grid place-items-center rounded-md bg-neutral-800 py-2 outline-none hover:bg-neutral-700">
                   <div class="grid grid-cols-[24px_max-content] gap-2">
                     <img src="assets/search-engines/yandex.png" alt="yandex" />
                     <span class="text-white">yandex</span>
                   </div>
                 </button>
-                <button
-                  id="search-engine-startpage-button"
-                  class="grid place-items-center rounded-md bg-neutral-800 py-2 outline-none hover:bg-neutral-700"
-                >
+                <button id="search-engine-startpage-button" class="grid place-items-center rounded-md bg-neutral-800 py-2 outline-none hover:bg-neutral-700">
                   <div class="grid grid-cols-[24px_max-content] gap-2">
                     <img src="assets/search-engines/startpage.png" alt="startpage" />
                     <span class="text-white">startpage</span>
                   </div>
                 </button>
-                <button
-                  id="search-engine-ecosia-button"
-                  class="grid place-items-center rounded-md bg-neutral-800 py-2 outline-none hover:bg-neutral-700"
-                >
+                <button id="search-engine-ecosia-button" class="grid place-items-center rounded-md bg-neutral-800 py-2 outline-none hover:bg-neutral-700">
                   <div class="grid grid-cols-[24px_max-content] gap-2">
                     <img src="assets/search-engines/ecosia.png" alt="ecosia" />
                     <span class="text-white">ecosia</span>
@@ -911,30 +555,16 @@
                 search.focusedBorderColor
                 <span class="text-base text-neutral-500">(use #00000000 for none)</span>
               </p>
-              <div
-                id="search-focused-border-color-container"
-                class="grid w-full grid-cols-[max-content_auto] rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base"
-              >
+              <div id="search-focused-border-color-container" class="grid w-full grid-cols-[max-content_auto] rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base">
                 <span class="select-none font-semibold text-pink-500">>&nbsp;</span>
-                <input
-                  id="search-focused-border-color-input"
-                  type="text"
-                  autocomplete="off"
-                  class="bg-transparent text-white placeholder-neutral-500 outline-none"
-                  placeholder="input color..."
-                />
+                <input id="search-focused-border-color-input" type="text" autocomplete="off" class="bg-transparent text-white placeholder-neutral-500 outline-none" placeholder="input color..." />
               </div>
             </div>
             <div class="grid w-full grid-cols-[max-content_auto] place-items-center">
               <p class="text-base text-white">search.useCustomEngine</p>
               <div class="ml-auto">
                 <label class="relative inline-flex cursor-pointer items-center">
-                  <input
-                    id="search-use-custom-engine-enabled-checkbox"
-                    type="checkbox"
-                    value=""
-                    class="peer sr-only"
-                  />
+                  <input id="search-use-custom-engine-enabled-checkbox" type="checkbox" value="" class="peer sr-only" />
                   <div
                     class="peer h-6 w-11 rounded-full bg-neutral-800 outline-none after:absolute after:left-[3px] after:top-[3px] after:aspect-square after:h-[1.15rem] after:rounded-full after:border-none after:bg-neutral-700 after:transition-all after:content-[''] peer-checked:bg-emerald-500 peer-checked:after:translate-x-full peer-checked:after:bg-white"
                   ></div>
@@ -943,14 +573,8 @@
             </div>
             <div id="search-use-custom-engine-enabled-section" class="grid gap-2">
               <p class="text-base text-white">search.customEngineURL</p>
-              <span class="text-base text-neutral-500"
-                >Use {} to represent the search query<br />Example:
-                https://www.google.com/search?q={}</span
-              >
-              <div
-                id="search-custom-engine-url-container"
-                class="grid w-full grid-cols-[max-content_auto] rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base"
-              >
+              <span class="text-base text-neutral-500">Use {} to represent the search query<br />Example: https://www.google.com/search?q={}</span>
+              <div id="search-custom-engine-url-container" class="grid w-full grid-cols-[max-content_auto] rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base">
                 <span class="select-none font-semibold text-pink-500">>&nbsp;</span>
                 <input
                   id="search-custom-engine-url-input"
@@ -978,12 +602,7 @@
               <p class="text-base text-white">search.assist.date</p>
               <div class="ml-auto">
                 <label class="relative inline-flex cursor-pointer items-center">
-                  <input
-                    id="search-assist-date-checkbox"
-                    type="checkbox"
-                    value=""
-                    class="peer sr-only"
-                  />
+                  <input id="search-assist-date-checkbox" type="checkbox" value="" class="peer sr-only" />
                   <div
                     class="peer h-6 w-11 rounded-full bg-neutral-800 outline-none after:absolute after:left-[3px] after:top-[3px] after:aspect-square after:h-[1.15rem] after:rounded-full after:border-none after:bg-neutral-700 after:transition-all after:content-[''] peer-checked:bg-emerald-500 peer-checked:after:translate-x-full peer-checked:after:bg-white"
                   ></div>
@@ -994,12 +613,7 @@
               <p class="text-base text-white">search.assist.math</p>
               <div class="ml-auto">
                 <label class="relative inline-flex cursor-pointer items-center">
-                  <input
-                    id="search-assist-math-checkbox"
-                    type="checkbox"
-                    value=""
-                    class="peer sr-only"
-                  />
+                  <input id="search-assist-math-checkbox" type="checkbox" value="" class="peer sr-only" />
                   <div
                     class="peer h-6 w-11 rounded-full bg-neutral-800 outline-none after:absolute after:left-[3px] after:top-[3px] after:aspect-square after:h-[1.15rem] after:rounded-full after:border-none after:bg-neutral-700 after:transition-all after:content-[''] peer-checked:bg-emerald-500 peer-checked:after:translate-x-full peer-checked:after:bg-white"
                   ></div>
@@ -1010,12 +624,7 @@
               <p class="text-base text-white">search.assist.definitions</p>
               <div class="ml-auto">
                 <label class="relative inline-flex cursor-pointer items-center">
-                  <input
-                    id="search-assist-definitions-checkbox"
-                    type="checkbox"
-                    value=""
-                    class="peer sr-only"
-                  />
+                  <input id="search-assist-definitions-checkbox" type="checkbox" value="" class="peer sr-only" />
                   <div
                     class="peer h-6 w-11 rounded-full bg-neutral-800 outline-none after:absolute after:left-[3px] after:top-[3px] after:aspect-square after:h-[1.15rem] after:rounded-full after:border-none after:bg-neutral-700 after:transition-all after:content-[''] peer-checked:bg-emerald-500 peer-checked:after:translate-x-full peer-checked:after:bg-white"
                   ></div>
@@ -1026,12 +635,7 @@
               <p class="text-base text-white">search.assist.conversions</p>
               <div class="ml-auto">
                 <label class="relative inline-flex cursor-pointer items-center">
-                  <input
-                    id="search-assist-conversions-checkbox"
-                    type="checkbox"
-                    value=""
-                    class="peer sr-only"
-                  />
+                  <input id="search-assist-conversions-checkbox" type="checkbox" value="" class="peer sr-only" />
                   <div
                     class="peer h-6 w-11 rounded-full bg-neutral-800 outline-none after:absolute after:left-[3px] after:top-[3px] after:aspect-square after:h-[1.15rem] after:rounded-full after:border-none after:bg-neutral-700 after:transition-all after:content-[''] peer-checked:bg-emerald-500 peer-checked:after:translate-x-full peer-checked:after:bg-white"
                   ></div>
@@ -1051,12 +655,7 @@
             <p class="text-base text-white">hotkeys.enabled</p>
             <div class="ml-auto">
               <label class="relative inline-flex cursor-pointer items-center">
-                <input
-                  id="hotkeys-enabled-checkbox"
-                  type="checkbox"
-                  value=""
-                  class="peer sr-only"
-                />
+                <input id="hotkeys-enabled-checkbox" type="checkbox" value="" class="peer sr-only" />
                 <div
                   class="peer h-6 w-11 rounded-full bg-neutral-800 outline-none after:absolute after:left-[3px] after:top-[3px] after:aspect-square after:h-[1.15rem] after:rounded-full after:border-none after:bg-neutral-700 after:transition-all after:content-[''] peer-checked:bg-emerald-500 peer-checked:after:translate-x-full peer-checked:after:bg-white"
                 ></div>
@@ -1067,57 +666,25 @@
             <div class="grid grid-flow-row gap-2 rounded-md bg-neutral-800 p-2">
               <div class="grid grid-cols-[max-content_auto_max-content]">
                 <p class="my-auto text-base text-white">hotkeys.activationKey&nbsp;</p>
-                <span id="hotkeys-activation-key-status" class="my-auto text-base text-neutral-500"
-                  >(none)</span
-                >
-                <div
-                  id="hotkeys-activation-key-container"
-                  class="grid w-full grid-cols-[max-content_auto] rounded-md border-2 border-transparent bg-neutral-900 p-1 text-base"
-                >
-                  <input
-                    id="hotkeys-activation-key-input"
-                    type="text"
-                    autocomplete="off"
-                    class="w-[1ch] bg-transparent text-white placeholder-neutral-500 outline-none"
-                  />
+                <span id="hotkeys-activation-key-status" class="my-auto text-base text-neutral-500">(none)</span>
+                <div id="hotkeys-activation-key-container" class="grid w-full grid-cols-[max-content_auto] rounded-md border-2 border-transparent bg-neutral-900 p-1 text-base">
+                  <input id="hotkeys-activation-key-input" type="text" autocomplete="off" class="w-[1ch] bg-transparent text-white placeholder-neutral-500 outline-none" />
                 </div>
               </div>
               <div class="my-auto h-[1px] rounded-md bg-neutral-500"></div>
               <div class="grid grid-cols-[max-content_auto_max-content]">
                 <p class="my-auto text-base text-white">hotkeys.closePageKey&nbsp;</p>
-                <span id="hotkeys-close-page-key-status" class="my-auto text-base text-neutral-500"
-                  >(none)</span
-                >
-                <div
-                  id="hotkeys-close-page-key-container"
-                  class="grid w-full grid-cols-[max-content_auto] rounded-md border-2 border-transparent bg-neutral-900 p-1 text-base"
-                >
-                  <input
-                    id="hotkeys-close-page-key-input"
-                    type="text"
-                    autocomplete="off"
-                    class="w-[1ch] bg-transparent text-white placeholder-neutral-500 outline-none"
-                  />
+                <span id="hotkeys-close-page-key-status" class="my-auto text-base text-neutral-500">(none)</span>
+                <div id="hotkeys-close-page-key-container" class="grid w-full grid-cols-[max-content_auto] rounded-md border-2 border-transparent bg-neutral-900 p-1 text-base">
+                  <input id="hotkeys-close-page-key-input" type="text" autocomplete="off" class="w-[1ch] bg-transparent text-white placeholder-neutral-500 outline-none" />
                 </div>
               </div>
               <div class="my-auto h-[1px] rounded-md bg-neutral-500"></div>
               <div class="grid grid-cols-[max-content_auto_max-content]">
                 <p class="my-auto text-base text-white">hotkeys.searchBookmarksKey&nbsp;</p>
-                <span
-                  id="hotkeys-search-bookmarks-key-status"
-                  class="my-auto text-base text-neutral-500"
-                  >(none)</span
-                >
-                <div
-                  id="hotkeys-search-bookmarks-key-container"
-                  class="grid w-full grid-cols-[max-content_auto] rounded-md border-2 border-transparent bg-neutral-900 p-1 text-base"
-                >
-                  <input
-                    id="hotkeys-search-bookmarks-key-input"
-                    type="text"
-                    autocomplete="off"
-                    class="w-[1ch] bg-transparent text-white placeholder-neutral-500 outline-none"
-                  />
+                <span id="hotkeys-search-bookmarks-key-status" class="my-auto text-base text-neutral-500">(none)</span>
+                <div id="hotkeys-search-bookmarks-key-container" class="grid w-full grid-cols-[max-content_auto] rounded-md border-2 border-transparent bg-neutral-900 p-1 text-base">
+                  <input id="hotkeys-search-bookmarks-key-input" type="text" autocomplete="off" class="w-[1ch] bg-transparent text-white placeholder-neutral-500 outline-none" />
                 </div>
               </div>
             </div>
@@ -1133,28 +700,16 @@
           <div class="grid gap-2 text-base">
             <p class="text-white">bookmarks.type</p>
             <div class="grid grid-cols-2 gap-2">
-              <button
-                id="bookmarks-type-user-defined-button"
-                class="rounded-md bg-neutral-800 py-2 outline-none hover:bg-neutral-700"
-              >
+              <button id="bookmarks-type-user-defined-button" class="rounded-md bg-neutral-800 py-2 outline-none hover:bg-neutral-700">
                 <span class="text-white">user-defined</span>
               </button>
-              <button
-                id="bookmarks-type-default-button"
-                class="rounded-md bg-neutral-800 py-2 outline-none hover:bg-neutral-700"
-              >
+              <button id="bookmarks-type-default-button" class="rounded-md bg-neutral-800 py-2 outline-none hover:bg-neutral-700">
                 <span class="text-white">default</span>
               </button>
-              <button
-                id="bookmarks-type-default-blocky-button"
-                class="rounded-md bg-neutral-800 py-2 outline-none hover:bg-neutral-700"
-              >
+              <button id="bookmarks-type-default-blocky-button" class="rounded-md bg-neutral-800 py-2 outline-none hover:bg-neutral-700">
                 <span class="text-white">default-blocky</span>
               </button>
-              <button
-                id="bookmarks-type-none-button"
-                class="rounded-md bg-neutral-800 py-2 outline-none hover:bg-neutral-700"
-              >
+              <button id="bookmarks-type-none-button" class="rounded-md bg-neutral-800 py-2 outline-none hover:bg-neutral-700">
                 <span class="text-white">none</span>
               </button>
             </div>
@@ -1165,12 +720,7 @@
                 <p class="text-base text-white">bookmarks.showBookmarkNames</p>
                 <div class="ml-auto">
                   <label class="relative inline-flex cursor-pointer items-center">
-                    <input
-                      id="bookmarks-show-bookmark-names-checkbox"
-                      type="checkbox"
-                      value=""
-                      class="peer sr-only"
-                    />
+                    <input id="bookmarks-show-bookmark-names-checkbox" type="checkbox" value="" class="peer sr-only" />
                     <div
                       class="peer h-6 w-11 rounded-full bg-neutral-800 outline-none after:absolute after:left-[3px] after:top-[3px] after:aspect-square after:h-[1.15rem] after:rounded-full after:border-none after:bg-neutral-700 after:transition-all after:content-[''] peer-checked:bg-emerald-500 peer-checked:after:translate-x-full peer-checked:after:bg-white"
                     ></div>
@@ -1183,35 +733,18 @@
             <div class="grid gap-2 text-base">
               <div class="grid gap-2">
                 <p class="text-base text-white">bookmarks.userDefinedCols</p>
-                <div
-                  id="bookmarks-user-defined-cols-container"
-                  class="grid w-full grid-cols-[max-content_auto] rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base"
-                >
+                <div id="bookmarks-user-defined-cols-container" class="grid w-full grid-cols-[max-content_auto] rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base">
                   <span class="select-none font-semibold text-pink-500">>&nbsp;</span>
-                  <input
-                    id="bookmarks-user-defined-cols-input"
-                    type="text"
-                    autocomplete="off"
-                    class="bg-transparent text-white placeholder-neutral-500 outline-none"
-                    placeholder="input number..."
-                  />
+                  <input id="bookmarks-user-defined-cols-input" type="text" autocomplete="off" class="bg-transparent text-white placeholder-neutral-500 outline-none" placeholder="input number..." />
                 </div>
               </div>
               <div class="grid gap-2 text-base">
-                <p class="text-neutral-500">
-                  enabling userDefinedKeys -> makes it so that pressing 1 opens first bookmark, 2
-                  opens second bookmark, and so on
-                </p>
+                <p class="text-neutral-500">enabling userDefinedKeys -> makes it so that pressing 1 opens first bookmark, 2 opens second bookmark, and so on</p>
                 <div class="grid w-full grid-cols-[max-content_auto] place-items-center">
                   <p class="text-base text-white">bookmarks.userDefinedKeys</p>
                   <div class="ml-auto">
                     <label class="relative inline-flex cursor-pointer items-center">
-                      <input
-                        id="bookmarks-user-defined-keys-checkbox"
-                        type="checkbox"
-                        value=""
-                        class="peer sr-only"
-                      />
+                      <input id="bookmarks-user-defined-keys-checkbox" type="checkbox" value="" class="peer sr-only" />
                       <div
                         class="peer h-6 w-11 rounded-full bg-neutral-800 outline-none after:absolute after:left-[3px] after:top-[3px] after:aspect-square after:h-[1.15rem] after:rounded-full after:border-none after:bg-neutral-700 after:transition-all after:content-[''] peer-checked:bg-emerald-500 peer-checked:after:translate-x-full peer-checked:after:bg-white"
                       ></div>
@@ -1222,25 +755,13 @@
               <p class="text-white">bookmarks.userDefined</p>
               <p class="text-neutral-500">
                 valid iconTypes can be found here:
-                <a
-                  href="https://remixicon.com"
-                  target="_blank"
-                  class="cursor-pointer text-blue-500 transition hover:text-blue-600"
-                >
-                  remixicon.com
-                </a>
+                <a href="https://remixicon.com" target="_blank" class="cursor-pointer text-blue-500 transition hover:text-blue-600"> remixicon.com </a>
                 <span class="text-indigo-500">(using version v4.3.0)</span>.<br />
                 remix icon iconTypes should be classes begin with `ri-`
               </p>
               <p class="text-neutral-500">
                 you can also use nerd font icons as iconTypes:
-                <a
-                  href="https://www.nerdfonts.com/cheat-sheet"
-                  target="_blank"
-                  class="cursor-pointer text-blue-500 transition hover:text-blue-600"
-                >
-                  nerdfonts.com</a
-                >.<br />
+                <a href="https://www.nerdfonts.com/cheat-sheet" target="_blank" class="cursor-pointer text-blue-500 transition hover:text-blue-600"> nerdfonts.com</a>.<br />
                 nerd font iconTypes should be classes begin with `nf-`
               </p>
               <p class="text-neutral-500">
@@ -1248,19 +769,12 @@
                 <br />
                 url iconTypes should be structured like `url-https://...`
               </p>
-              <button
-                id="bookmarks-user-defined-toggle-collapse-all-button"
-                class="w-full cursor-pointer rounded-md bg-neutral-500 p-2 transition hover:bg-neutral-600"
-                last-action="expand"
-              >
+              <button id="bookmarks-user-defined-toggle-collapse-all-button" class="w-full cursor-pointer rounded-md bg-neutral-500 p-2 transition hover:bg-neutral-600" last-action="expand">
                 <span class="text-base text-white">collapse all</span>
               </button>
               <div id="bookmarks-user-defined-list" class="grid grid-flow-row gap-2"></div>
               <div class="">
-                <button
-                  id="bookmarks-user-defined-add-button"
-                  class="w-full cursor-pointer rounded-md bg-emerald-500 p-2 transition hover:bg-emerald-600"
-                >
+                <button id="bookmarks-user-defined-add-button" class="w-full cursor-pointer rounded-md bg-emerald-500 p-2 transition hover:bg-emerald-600">
                   <span class="text-base text-white">add bookmark</span>
                 </button>
               </div>
@@ -1270,33 +784,18 @@
             <div class="grid gap-4 text-base">
               <div class="grid gap-2">
                 <p class="text-base text-white">bookmarks.defaultBlockyCols</p>
-                <div
-                  id="bookmarks-default-blocky-cols-container"
-                  class="grid w-full grid-cols-[max-content_auto] rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base"
-                >
+                <div id="bookmarks-default-blocky-cols-container" class="grid w-full grid-cols-[max-content_auto] rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base">
                   <span class="select-none font-semibold text-pink-500">>&nbsp;</span>
-                  <input
-                    id="bookmarks-default-blocky-cols-input"
-                    type="text"
-                    autocomplete="off"
-                    class="bg-transparent text-white placeholder-neutral-500 outline-none"
-                    placeholder="input number..."
-                  />
+                  <input id="bookmarks-default-blocky-cols-input" type="text" autocomplete="off" class="bg-transparent text-white placeholder-neutral-500 outline-none" placeholder="input number..." />
                 </div>
               </div>
               <div class="grid gap-2 text-base">
                 <p class="text-white">bookmarks.defaultBlockyColorType</p>
                 <div class="grid grid-cols-2 gap-2">
-                  <button
-                    id="bookmarks-default-blocky-color-type-random-button"
-                    class="rounded-md bg-neutral-800 py-2 outline-none hover:bg-neutral-700"
-                  >
+                  <button id="bookmarks-default-blocky-color-type-random-button" class="rounded-md bg-neutral-800 py-2 outline-none hover:bg-neutral-700">
                     <span class="text-white">random</span>
                   </button>
-                  <button
-                    id="bookmarks-default-blocky-color-type-custom-button"
-                    class="rounded-md bg-neutral-800 py-2 outline-none hover:bg-neutral-700"
-                  >
+                  <button id="bookmarks-default-blocky-color-type-custom-button" class="rounded-md bg-neutral-800 py-2 outline-none hover:bg-neutral-700">
                     <span class="text-white">custom</span>
                   </button>
                 </div>
@@ -1304,10 +803,7 @@
               <div id="bookmarks-default-blocky-color-section">
                 <div class="grid gap-2">
                   <p class="text-base text-white">bookmarks.defaultBlockyColor</p>
-                  <div
-                    id="bookmarks-default-blocky-color-container"
-                    class="grid w-full grid-cols-[max-content_auto] rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base"
-                  >
+                  <div id="bookmarks-default-blocky-color-container" class="grid w-full grid-cols-[max-content_auto] rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base">
                     <span class="select-none font-semibold text-pink-500">>&nbsp;</span>
                     <input
                       id="bookmarks-default-blocky-color-input"
@@ -1323,22 +819,13 @@
                 <p class="text-white">bookmarks.bookmarksLocationFirefox</p>
                 <p class="text-neutral-500">(only applies to firefox based browsers)</p>
                 <div class="grid grid-cols-2 gap-2">
-                  <button
-                    id="bookmarks-location-firefox-menu-button"
-                    class="rounded-md bg-neutral-800 py-2 outline-none hover:bg-neutral-700"
-                  >
+                  <button id="bookmarks-location-firefox-menu-button" class="rounded-md bg-neutral-800 py-2 outline-none hover:bg-neutral-700">
                     <span class="text-white">menu</span>
                   </button>
-                  <button
-                    id="bookmarks-location-firefox-toolbar-button"
-                    class="rounded-md bg-neutral-800 py-2 outline-none hover:bg-neutral-700"
-                  >
+                  <button id="bookmarks-location-firefox-toolbar-button" class="rounded-md bg-neutral-800 py-2 outline-none hover:bg-neutral-700">
                     <span class="text-white">toolbar</span>
                   </button>
-                  <button
-                    id="bookmarks-location-firefox-other-button"
-                    class="rounded-md bg-neutral-800 py-2 outline-none hover:bg-neutral-700"
-                  >
+                  <button id="bookmarks-location-firefox-other-button" class="rounded-md bg-neutral-800 py-2 outline-none hover:bg-neutral-700">
                     <span class="text-white">other</span>
                   </button>
                 </div>
@@ -1348,20 +835,12 @@
           <div id="bookmarks-default-or-default-blocky-section">
             <div class="grid gap-2 text-base">
               <p class="text-white">bookmarks.defaultFaviconSource</p>
-              <p class="text-base text-neutral-500">
-                (determines where bookmark favicons are fetched from)
-              </p>
+              <p class="text-base text-neutral-500">(determines where bookmark favicons are fetched from)</p>
               <div class="grid grid-cols-2 gap-2">
-                <button
-                  id="bookmarks-default-favicon-source-google-button"
-                  class="rounded-md bg-neutral-800 py-2 outline-none hover:bg-neutral-700"
-                >
+                <button id="bookmarks-default-favicon-source-google-button" class="rounded-md bg-neutral-800 py-2 outline-none hover:bg-neutral-700">
                   <span class="text-white">google</span>
                 </button>
-                <button
-                  id="bookmarks-default-favicon-source-duckduckgo-button"
-                  class="rounded-md bg-neutral-800 py-2 outline-none hover:bg-neutral-700"
-                >
+                <button id="bookmarks-default-favicon-source-duckduckgo-button" class="rounded-md bg-neutral-800 py-2 outline-none hover:bg-neutral-700">
                   <span class="text-white">duckduckgo</span>
                 </button>
               </div>
@@ -1373,28 +852,16 @@
       <div class="mb-12 mt-20 grid grid-flow-row place-items-center gap-4 py-4">
         <div class="grid w-full grid-flow-row place-items-center gap-4">
           <div class="grid w-full grid-flow-row gap-2 lg:grid-cols-2">
-            <button
-              id="save-button"
-              class="cursor-pointer rounded-md bg-emerald-500 p-2 transition hover:bg-emerald-600"
-            >
+            <button id="save-button" class="cursor-pointer rounded-md bg-emerald-500 p-2 transition hover:bg-emerald-600">
               <span class="text-base text-white">save (ctrl+s)</span>
             </button>
-            <button
-              id="config-utils-button"
-              class="cursor-pointer rounded-md bg-emerald-500 p-2 transition hover:bg-emerald-600"
-            >
+            <button id="config-utils-button" class="cursor-pointer rounded-md bg-emerald-500 p-2 transition hover:bg-emerald-600">
               <span class="text-base text-white">config-utils</span>
             </button>
-            <button
-              id="export-button"
-              class="cursor-pointer rounded-md bg-indigo-500 p-2 transition hover:bg-indigo-600"
-            >
+            <button id="export-button" class="cursor-pointer rounded-md bg-indigo-500 p-2 transition hover:bg-indigo-600">
               <span class="text-base text-white">save & export</span>
             </button>
-            <button
-              id="import-button"
-              class="cursor-pointer rounded-md bg-indigo-500 p-2 transition hover:bg-indigo-600"
-            >
+            <button id="import-button" class="cursor-pointer rounded-md bg-indigo-500 p-2 transition hover:bg-indigo-600">
               <span class="text-base text-white">import & save</span>
             </button>
           </div>
@@ -1404,10 +871,7 @@
               <span class="text-base text-neutral-500">danger</span>
               <div class="my-auto h-[1px] rounded-md bg-neutral-500"></div>
             </div>
-            <button
-              id="reset-to-default-button"
-              class="w-full cursor-pointer rounded-md bg-rose-500 p-2 transition hover:bg-rose-600 lg:w-max"
-            >
+            <button id="reset-to-default-button" class="w-full cursor-pointer rounded-md bg-rose-500 p-2 transition hover:bg-rose-600 lg:w-max">
               <span class="text-base text-white">reset to default</span>
             </button>
           </div>

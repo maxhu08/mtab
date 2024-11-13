@@ -16,52 +16,26 @@
   <body dir="ltr" class="min-h-screen bg-neutral-900">
     <div class="mx-auto grid w-[95%] grid-flow-row sm:w-[80%] md:w-[60%] lg:w-[40%]">
       <div class="grid place-items-center gap-4 p-4">
-        <img
-          id="mtab-logo"
-          src="./assets/icon.png"
-          class="animate-up-bouncy aspect-square w-40"
-          alt="logo"
-        />
-        <h1 class="w-max text-2xl font-semibold text-white md:text-4xl">
-          <span class="text-emerald-500">mtab</span><span class="text-neutral-500">/</span
-          ><span>config-utils</span>
-        </h1>
+        <img id="mtab-logo" src="./assets/icon.png" class="animate-up-bouncy aspect-square w-40" alt="logo" />
+        <h1 class="w-max text-2xl font-semibold text-white md:text-4xl"><span class="text-emerald-500">mtab</span><span class="text-neutral-500">/</span><span>config-utils</span></h1>
       </div>
       <main class="grid grid-flow-row gap-20 py-16">
         <div class="grid gap-2 text-base">
           <div class="grid grid-cols-2 gap-2">
-            <button
-              id="convert-mtj-button"
-              class="rounded-md bg-neutral-800 py-2 outline-none hover:bg-neutral-700"
-            >
+            <button id="convert-mtj-button" class="rounded-md bg-neutral-800 py-2 outline-none hover:bg-neutral-700">
               <span class="text-white">MTAB_SAVE_FORMAT -> json</span>
             </button>
-            <button
-              id="convert-jtm-button"
-              class="rounded-md bg-neutral-800 py-2 outline-none hover:bg-neutral-700"
-            >
+            <button id="convert-jtm-button" class="rounded-md bg-neutral-800 py-2 outline-none hover:bg-neutral-700">
               <span class="text-white">json -> MTAB_SAVE_FORMAT</span>
             </button>
           </div>
           <div id="convert-section" class="grid gap-2">
             <p class="text-base text-white">input</p>
-            <div
-              id="convert-in-container"
-              class="w-full rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base"
-            >
-              <textarea
-                id="convert-in-textarea"
-                type="text"
-                autocomplete="off"
-                rows="16"
-                class="w-full resize-none bg-transparent text-white placeholder-neutral-500 outline-none"
-              ></textarea>
+            <div id="convert-in-container" class="w-full rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base">
+              <textarea id="convert-in-textarea" type="text" autocomplete="off" rows="16" class="w-full resize-none bg-transparent text-white placeholder-neutral-500 outline-none"></textarea>
             </div>
             <p class="text-base text-white">output</p>
-            <div
-              id="convert-out-container"
-              class="w-full rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base"
-            >
+            <div id="convert-out-container" class="w-full rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base">
               <textarea
                 id="convert-out-textarea"
                 type="text"
@@ -71,10 +45,7 @@
                 readonly
               ></textarea>
             </div>
-            <button
-              id="convert-save-button"
-              class="cursor-pointer rounded-md bg-indigo-500 p-2 transition hover:bg-indigo-600"
-            >
+            <button id="convert-save-button" class="cursor-pointer rounded-md bg-indigo-500 p-2 transition hover:bg-indigo-600">
               <span class="text-base text-white">convert save</span>
             </button>
           </div>
