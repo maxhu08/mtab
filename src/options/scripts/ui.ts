@@ -138,6 +138,14 @@ export const inputs: Input[] = [
     input: wallpaperUrlInputEl
   },
   {
+    container: uiGlassColorContainerEl,
+    input: uiGlassColorInputEl
+  },
+  {
+    container: uiBlurStrengthContainerEl,
+    input: uiBlurStrengthInputEl
+  },
+  {
     container: uiForegroundColorContainerEl,
     input: uiForegroundColorInputEl
   },
