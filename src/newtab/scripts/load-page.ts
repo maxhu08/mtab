@@ -5,7 +5,6 @@ import { getConfig } from "./config";
 import { setTitle } from "./utils/set-title";
 import { setUISyle } from "src/newtab/scripts/utils/set-ui-style";
 import { loadWallpaper } from "src/newtab/scripts/utils/load-wallpaper";
-import { setSearchStuff } from "src/newtab/scripts/utils/set-search-stuff";
 import { styleSearch } from "src/newtab/scripts/utils/style-search";
 import { styleMessage } from "src/newtab/scripts/utils/style-message";
 import { setMessage } from "./utils/set-message";
@@ -32,13 +31,6 @@ export const loadPage = () => {
     setUISyle(config.ui);
 
     loadWallpaper(config.wallpaper);
-
-    setSearchStuff(
-      config.search.placeholderText,
-      config.search.bookmarkPlaceholderText,
-      config.search.font.type,
-      config.search.font.custom
-    );
 
     styleSearch(
       config.ui.style,
