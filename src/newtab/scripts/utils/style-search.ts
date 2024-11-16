@@ -7,6 +7,7 @@ import {
   searchContainerEl,
   searchInputEl
 } from "src/newtab/scripts/ui";
+import { getFontNameFromURL } from "src/newtab/scripts/utils/get-font-name";
 import { insertCSS } from "src/newtab/scripts/utils/insert-css";
 
 export const styleSearch = (
@@ -69,7 +70,15 @@ export const styleSearch = (
       `.font-search{font-family:${font};}.font-bookmark-search{font-family:${font};}.font-bookmark-search-results{font-family:${font};}`
     );
   } else {
-    console.log("CUSTOM FONT");
+    // @import url('${fontCustom}');
+    // .font-search { font-family: "${fontName}", sans-serif !important; }
+    // .font-bookmark-search { font-family: "${fontName}", sans-serif !important; }
+    // .font-bookmark-search-results { font-family: "${fontName}", sans-serif !important; }
+
+    const fontName = getFontNameFromURL(fontCustom);
+    insertCSS(
+      `@import url("${fontCustom}");.font-search{font-family:"${fontName}",sans-serif!important;}.font-bookmark-search{font-family:"${fontName}",sans-serif!important;}.font-bookmark-search-results{font-family:"${fontName}",sans-serif!important;}`
+    );
   }
 
   // apply styles based on UIStyle
