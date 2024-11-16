@@ -1,4 +1,4 @@
-import { Config, SearchEngine } from "src/newtab/scripts/config";
+import { Config, FontType, SearchEngine } from "src/newtab/scripts/config";
 import {
   searchEngineDuckduckgoButtonEl,
   searchEngineBingButtonEl,
@@ -24,11 +24,19 @@ import {
   searchAssistMathCheckboxEl,
   searchAssistDefinitionsCheckboxEl,
   searchAssistConversionsCheckboxEl,
-  searchFontCustomInputEl
+  searchFontCustomInputEl,
+  searchFontTypeDefaultButtonEl,
+  searchFontTypeCustomButtonEl
 } from "src/options/scripts/ui";
 
 export const fillSearchInputs = (config: Config) => {
+  const searchFontTypePairs: Record<FontType, HTMLButtonElement> = {
+    default: searchFontTypeDefaultButtonEl,
+    custom: searchFontTypeCustomButtonEl
+  };
+  searchFontTypePairs[config.search.font.type].click();
   searchFontCustomInputEl.value = config.search.font.custom;
+
   searchTextColorInputEl.value = config.search.textColor;
   searchPlaceholderTextInputEl.value = config.search.placeholderText;
   searchBookmarkPlaceholderTextInputEl.value = config.search.bookmarkPlaceholderText;

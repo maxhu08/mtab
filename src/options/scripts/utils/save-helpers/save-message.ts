@@ -1,4 +1,4 @@
-import { Config, MessageType } from "src/newtab/scripts/config";
+import { Config, FontType, MessageType } from "src/newtab/scripts/config";
 import {
   messageEnabledCheckboxEl,
   messageTextColorInputEl,
@@ -9,15 +9,19 @@ import {
 export const saveMessageSettingsToDraft = (draft: Config) => {
   draft.message.enabled = messageEnabledCheckboxEl.checked;
 
-  // font
+  // prettier-ignore
+  const selectedFontTypeEl = document.querySelector(`button[btn-option-type="message-font-type"][selected="yes"]`) as HTMLButtonElement;
+  const messageFontTypePairs: Record<string, FontType> = {
+    "message-font-type-default-button": "default",
+    "message-font-type-custom-button": "custom"
+  };
+  draft.message.font.type = messageFontTypePairs[selectedFontTypeEl.id];
   draft.message.font.custom = messageFontCustomInputEl.value;
+
   draft.message.textColor = messageTextColorInputEl.value;
 
-  // type
-  const selectedEl = document.querySelector(
-    `button[btn-option-type="message-type"][selected="yes"]`
-  ) as HTMLButtonElement;
-
+  // prettier-ignore
+  const selectedTypeEl = document.querySelector(`button[btn-option-type="message-type"][selected="yes"]`) as HTMLButtonElement;
   const messageTypePairs: Record<string, MessageType> = {
     "message-type-afternoon-morning-button": "afternoon-morning",
     "message-type-date-button": "date",
@@ -26,7 +30,7 @@ export const saveMessageSettingsToDraft = (draft: Config) => {
     "message-type-custom-button": "custom"
   };
 
-  draft.message.type = messageTypePairs[selectedEl.id];
+  draft.message.type = messageTypePairs[selectedTypeEl.id];
 
   draft.message.customText = messageCustomTextInputEl.value;
 };

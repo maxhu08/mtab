@@ -1,4 +1,4 @@
-import { Config, SearchEngine } from "src/newtab/scripts/config";
+import { Config, FontType, SearchEngine } from "src/newtab/scripts/config";
 import {
   searchEnabledCheckboxEl,
   searchFocusedBorderColorInputEl,
@@ -21,7 +21,16 @@ import {
 
 export const saveSearchSettingsToDraft = (draft: Config) => {
   draft.search.enabled = searchEnabledCheckboxEl.checked;
+
+  // prettier-ignore
+  const selectedFontTypeEl = document.querySelector(`button[btn-option-type="search-font-type"][selected="yes"]`) as HTMLButtonElement;
+  const searchFontTypePairs: Record<string, FontType> = {
+    "search-font-type-default-button": "default",
+    "search-font-type-custom-button": "custom"
+  };
+  draft.search.font.type = searchFontTypePairs[selectedFontTypeEl.id];
   draft.search.font.custom = searchFontCustomInputEl.value;
+
   draft.search.textColor = searchTextColorInputEl.value;
   draft.search.placeholderText = searchPlaceholderTextInputEl.value;
   draft.search.bookmarkPlaceholderText = searchBookmarkPlaceholderTextInputEl.value;
