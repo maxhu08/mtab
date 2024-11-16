@@ -1,4 +1,4 @@
-# Changes in 1.6.5
+# Changes in 1.6.6
 
 in this release:
 
