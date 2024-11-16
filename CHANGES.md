@@ -1,5 +1,7 @@
-# Changes in 1.6.4
+# Changes in 1.6.5
 
 in this release:
 
-- add more stuff to custom message option
+- improve setting custom fonts
+- fix custom message symbols
+- bug fixes
