@@ -34,9 +34,10 @@ export const loadPage = () => {
     loadWallpaper(config.wallpaper);
 
     setSearchStuff(
-      config.search.font,
       config.search.placeholderText,
-      config.search.bookmarkPlaceholderText
+      config.search.bookmarkPlaceholderText,
+      config.search.font.type,
+      config.search.font.custom
     );
     styleSearch(
       config.search.enabled,
@@ -49,7 +50,7 @@ export const loadPage = () => {
       config.search.selectIconColor
     );
 
-    styleMessage(config.message.textColor, config.message.font);
+    styleMessage(config.message.textColor, config.message.font.type, config.message.font.custom);
     setMessage(
       config.message.enabled,
       config.message.type,
