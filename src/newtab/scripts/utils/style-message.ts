@@ -18,13 +18,12 @@ export const styleMessage = (textColor: string, fontType: FontType, fontCustom: 
     // @import url('${fontCustom}');
     // .font-message {
     //   font-family: "${fontName}", serif !important;
-    //   font-weight: 400;
     //   font-style: normal;
     // }
 
     const fontName = getFontNameFromURL(fontCustom);
     insertCSS(
-      `@import url("${fontCustom}");.font-message{font-family:"${fontName}",sans-serif!important;font-weight:400;font-style:normal;}`
+      `@import url("${fontCustom}");.font-message{font-family:"${fontName}",sans-serif!important;font-style:normal;}`
     );
   }
 };
