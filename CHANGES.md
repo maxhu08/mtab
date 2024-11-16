@@ -2,6 +2,4 @@
 
 in this release:
 
-- improve setting custom fonts
-- fix custom message symbols
-- bug fixes
+- fix issue with old config breaking extension
