@@ -5,7 +5,11 @@ import {
   bookmarksTypeDefaultButtonEl,
   bookmarksTypeNoneButtonEl,
   bookmarksTypeUserDefinedButtonEl,
+  messageFontTypeCustomButtonEl,
+  messageFontTypeDefaultButtonEl,
   messageTypeCustomButtonEl,
+  searchFontTypeCustomButtonEl,
+  searchFontTypeDefaultButtonEl,
   titleFaviconTypeCustomButtonEl,
   titleFaviconTypeDefaultButtonEl,
   uiStyleGlassButtonEl,
@@ -16,9 +20,11 @@ import {
 
 export const handleSwitches = () => {
   handleFaviconTypeSwitch();
+  handleMessageFontTypeSwitch();
   handleMessageTypeSwitch();
   handleWallpaperTypeSwitch();
   handleUIStyleSwitch();
+  handleSearchFontTypeSwitch();
   handleBookmarksTypeSwitch();
   handleUserDefinedOrDefaultBlockySwitch();
   handleBookmarksDefaultBlockyColorTypeSwitch();
@@ -36,6 +42,34 @@ const handleFaviconTypeSwitch = () => {
 
   titleFaviconTypeCustomButtonEl.addEventListener("click", () => {
     faviconCustomSection.style.display = "block";
+  });
+};
+
+const handleMessageFontTypeSwitch = () => {
+  const messageFontCustomSection = document.getElementById(
+    "message-font-custom-section"
+  ) as HTMLDivElement;
+
+  messageFontTypeDefaultButtonEl.addEventListener("click", () => {
+    messageFontCustomSection.style.display = "none";
+  });
+
+  messageFontTypeCustomButtonEl.addEventListener("click", () => {
+    messageFontCustomSection.style.display = "block";
+  });
+};
+
+const handleSearchFontTypeSwitch = () => {
+  const searchFontCustomSection = document.getElementById(
+    "search-font-custom-section"
+  ) as HTMLDivElement;
+
+  searchFontTypeDefaultButtonEl.addEventListener("click", () => {
+    searchFontCustomSection.style.display = "none";
+  });
+
+  searchFontTypeCustomButtonEl.addEventListener("click", () => {
+    searchFontCustomSection.style.display = "block";
   });
 };
 
