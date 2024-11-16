@@ -59,7 +59,10 @@ export const defaultConfig: Config = {
   },
   message: {
     enabled: true,
-    font: `"Jetbrains-Mono-Regular-Fixed"`,
+    font: {
+      type: "default",
+      custom: ""
+    },
     textColor: "#ffffff",
     type: "afternoon-morning",
     customText: "your custom text"
@@ -89,7 +92,10 @@ export const defaultConfig: Config = {
   },
   search: {
     enabled: true,
-    font: `"Jetbrains-Mono-Regular-Fixed"`,
+    font: {
+      type: "default",
+      custom: ""
+    },
     textColor: "#ffffff",
     placeholderText: "search...",
     bookmarkPlaceholderText: "find bookmark...",
@@ -203,6 +209,7 @@ export type UserDefinedBookmark = {
 export type DefaultBlockyColorType = "random" | "custom";
 export type DefaultFaviconSource = "google" | "duckduckgo";
 export type BookmarksLocationFirefox = "menu" | "toolbar" | "other";
+export type FontType = "default" | "custom";
 
 export interface Config {
   options: {
@@ -220,7 +227,10 @@ export interface Config {
   };
   message: {
     enabled: boolean;
-    font: string;
+    font: {
+      type: FontType;
+      custom: string;
+    };
     textColor: string;
     type: MessageType;
     customText: string;
@@ -249,7 +259,10 @@ export interface Config {
   };
   search: {
     enabled: boolean;
-    font: string;
+    font: {
+      type: FontType;
+      custom: string;
+    };
     textColor: string;
     placeholderText: string;
     bookmarkPlaceholderText: string;
