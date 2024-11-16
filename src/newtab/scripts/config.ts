@@ -1,3 +1,12 @@
+const migrateOldConfig = (config: Config): Config => {
+  // if config is before v1.6.5
+  // prettier-ignore
+  if (typeof config.message.font === "string") config.message.font = { type: "default", custom: "" };
+  if (typeof config.search.font === "string") config.search.font = { type: "default", custom: "" };
+
+  return config;
+};
+
 export const getConfig = (f: ({ config }: { config: Config }) => void) => {
   chrome.storage.local.get(["config"], (data) => {
     if (Object.keys(data).length === 0) {
@@ -12,7 +21,9 @@ export const getConfig = (f: ({ config }: { config: Config }) => void) => {
     }
 
     // fill empty properties
-    const mergedConfig = deepMerge(structuredClone(defaultConfig), data.config);
+    let mergedConfig = deepMerge(structuredClone(defaultConfig), data.config);
+    // migrate old config to new version
+    mergedConfig = migrateOldConfig(mergedConfig);
 
     f({
       config: mergedConfig
