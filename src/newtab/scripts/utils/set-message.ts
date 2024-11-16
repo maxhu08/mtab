@@ -60,7 +60,7 @@ export const setCustomMessage = (customText: string) => {
 
   customText = customText;
   customText = customText
-    .replace(/\\yyyy/g, date.getFullYear().toString())
+    .replace(/\\yyyy/g, date.getFullYear().toString()) // must come before \yy
     .replace(/\\yy/g, date.getFullYear().toString().slice(-2))
     .replace(/\\MD/g, meridianUpper) // must come before \M
     .replace(/\\M/g, date.toLocaleString("default", { month: "long" }))
@@ -69,7 +69,7 @@ export const setCustomMessage = (customText: string) => {
     .replace(/\\md/g, meridianLower) // must come before \m
     .replace(/\\m/g, date.toLocaleString("default", { month: "short" }))
     .replace(/\\D/g, date.toLocaleString("default", { weekday: "long" }))
-    .replace(/\\d\$/g, dayOfMonth)
+    .replace(/\\d\$/g, dayOfMonth) // must come before \d
     .replace(/\\d/g, date.toLocaleString("default", { weekday: "short" }))
     .replace(/\\h%/g, hours12.toString().padStart(2, "0"))
     .replace(/\\hh/g, date.getHours().toString().padStart(2, "0"))
