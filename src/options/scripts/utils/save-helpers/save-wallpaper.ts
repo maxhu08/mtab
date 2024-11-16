@@ -6,18 +6,10 @@ export const saveWallpaperSettingsToDraft = (draft: Config) => {
     `button[btn-option-type="wallpaper-type"][selected="yes"]`
   ) as HTMLButtonElement;
 
-  switch (selectedEl.id) {
-    case "wallpaper-type-url-button": {
-      draft.wallpaper.type = "url";
-      break;
-    }
-    case "wallpaper-type-file-upload-button": {
-      draft.wallpaper.type = "fileUpload";
-      break;
-    }
-  }
+  if (selectedEl.id === "wallpaper-type-url-button") draft.wallpaper.type = "url";
+  // prettier-ignore
+  else if (selectedEl.id === "wallpaper-type-file-upload-button") draft.wallpaper.type = "fileUpload";
 
   draft.wallpaper.enabled = wallpaperEnabledCheckboxEl.checked;
-
   draft.wallpaper.url = wallpaperUrlInputEl.value;
 };

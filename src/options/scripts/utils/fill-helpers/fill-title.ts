@@ -11,16 +11,8 @@ export const fillTitleInputs = (config: Config) => {
   titleDefaultTitleInputEl.value = config.title.defaultTitle;
   titleDynamicEnabledCheckboxEl.checked = config.title.dynamic.enabled;
 
-  switch (config.title.faviconType) {
-    case "default": {
-      titleFaviconTypeDefaultButtonEl.click();
-      break;
-    }
-    case "custom": {
-      titleFaviconTypeCustomButtonEl.click();
-      break;
-    }
-  }
+  if (config.title.faviconType === "default") titleFaviconTypeDefaultButtonEl.click();
+  else if (config.title.faviconType === "custom") titleFaviconTypeCustomButtonEl.click();
 
   chrome.storage.local.get(["userUploadedFavicon"], (data) => {
     previewFavicon(data.userUploadedFavicon);

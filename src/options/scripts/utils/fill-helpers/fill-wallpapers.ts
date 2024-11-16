@@ -8,16 +8,8 @@ import {
 import { previewWallpaper } from "src/options/scripts/utils/preview";
 
 export const fillWallpapersInputs = (config: Config) => {
-  switch (config.wallpaper.type) {
-    case "url": {
-      wallpaperTypeUrlButtonEl.click();
-      break;
-    }
-    case "fileUpload": {
-      wallpaperTypeFileUploadButtonEl.click();
-      break;
-    }
-  }
+  if (config.wallpaper.type === "url") wallpaperTypeUrlButtonEl.click();
+  else if (config.wallpaper.type === "fileUpload") wallpaperTypeFileUploadButtonEl.click();
 
   wallpaperEnabledCheckboxEl.checked = config.wallpaper.enabled;
   wallpaperUrlInputEl.value = config.wallpaper.url;

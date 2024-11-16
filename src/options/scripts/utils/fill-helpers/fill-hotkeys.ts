@@ -32,11 +32,7 @@ export const fillHotkeysInputs = (config: Config) => {
 const fillHotkeyHelper = (input: HTMLInputElement, status: HTMLSpanElement, val: string) => {
   input.value = val;
 
-  if (val === "") {
-    status.textContent = ` (none)`;
-  } else if (val === " ") {
-    status.textContent = ` (Space)`;
-  } else {
-    status.textContent = ` (${val})`;
-  }
+  if (val === "") status.textContent = ` (none)`;
+  else if (val === " ") status.textContent = ` (Space)`;
+  else status.textContent = ` (${val})`;
 };

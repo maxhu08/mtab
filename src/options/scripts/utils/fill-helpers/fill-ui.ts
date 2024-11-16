@@ -13,16 +13,8 @@ import {
 } from "src/options/scripts/ui";
 
 export const fillUIInputs = (config: Config) => {
-  switch (config.ui.style) {
-    case "solid": {
-      uiStyleSolidButtonEl.click();
-      break;
-    }
-    case "glass": {
-      uiStyleGlassButtonEl.click();
-      break;
-    }
-  }
+  if (config.ui.style === "solid") uiStyleSolidButtonEl.click();
+  else if (config.ui.style === "glass") uiStyleGlassButtonEl.click();
 
   uiGlassColorInputEl.value = config.ui.glassColor;
   uiBlurStrengthInputEl.value = config.ui.blurStrength;
@@ -30,16 +22,8 @@ export const fillUIInputs = (config: Config) => {
   uiBackgroundColorInputEl.value = config.ui.backgroundColor;
   uiHighlightColorInputEl.value = config.ui.highlightColor;
 
-  switch (config.ui.cornerStyle) {
-    case "sharp": {
-      uiCornerStyleSharpButtonEl.click();
-      break;
-    }
-    case "round": {
-      uiCornerStyleRoundButtonEl.click();
-      break;
-    }
-  }
+  if (config.ui.cornerStyle === "sharp") uiCornerStyleSharpButtonEl.click();
+  else if (config.ui.cornerStyle === "round") uiCornerStyleRoundButtonEl.click();
 
   uiCustomCSSTextareaEl.value = config.ui.customCSS;
 };

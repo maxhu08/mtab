@@ -9,14 +9,6 @@ export const saveTitleSettingsToDraft = (draft: Config) => {
     `button[btn-option-type="favicon-type"][selected="yes"]`
   ) as HTMLButtonElement;
 
-  switch (selectedEl.id) {
-    case "title-favicon-type-default-button": {
-      draft.title.faviconType = "default";
-      break;
-    }
-    case "title-favicon-type-custom-button": {
-      draft.title.faviconType = "custom";
-      break;
-    }
-  }
+  if (selectedEl.id === "title-favicon-type-default-button") draft.title.faviconType = "default";
+  else if (selectedEl.id === "title-favicon-type-custom-button") draft.title.faviconType = "custom";
 };

@@ -34,16 +34,9 @@ export const saveUISettingsToDraft = (draft: Config) => {
     `button[btn-option-type="ui-corner-style"][selected="yes"]`
   ) as HTMLButtonElement;
 
-  switch (selectedCornerStyleEl.id) {
-    case "ui-corner-style-sharp-button": {
-      draft.ui.cornerStyle = "sharp";
-      break;
-    }
-    case "ui-corner-style-round-button": {
-      draft.ui.cornerStyle = "round";
-      break;
-    }
-  }
+  if (selectedCornerStyleEl.id === "ui-corner-style-sharp-button") draft.ui.cornerStyle = "sharp";
+  // prettier-ignore
+  else if (selectedCornerStyleEl.id === "ui-corner-style-round-button") draft.ui.cornerStyle = "round";
 
   draft.ui.customCSS = uiCustomCSSTextareaEl.value;
 };
