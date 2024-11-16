@@ -39,15 +39,20 @@ export const loadPage = () => {
       config.search.font.type,
       config.search.font.custom
     );
+
     styleSearch(
-      config.search.enabled,
       config.ui.style,
+      config.ui.foregroundColor,
+      config.search.enabled,
       config.search.textColor,
       config.search.placeholderTextColor,
-      config.ui.foregroundColor,
       config.search.searchIconColor,
       config.search.bookmarkIconColor,
-      config.search.selectIconColor
+      config.search.selectIconColor,
+      config.search.placeholderText,
+      config.search.bookmarkPlaceholderText,
+      config.search.font.type,
+      config.search.font.custom
     );
 
     styleMessage(config.message.textColor, config.message.font.type, config.message.font.custom);
