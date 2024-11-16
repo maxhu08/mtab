@@ -11,7 +11,9 @@ export const titleFaviconTypeCustomButtonEl = getButton("title-favicon-type-cust
 export const titleCustomFaviconInputEl = document.getElementById("title-custom-favicon-upload") as HTMLInputElement;
 
 export const messageEnabledCheckboxEl = getCheckbox("message-enabled");
-export const [messageFontContainerEl, messageFontInputEl] = getContainerAndInput("message-font");
+export const messageFontTypeDefaultButtonEl = getButton("message-font-type-default");
+export const messageFontTypeCustomButtonEl = getButton("message-font-type-custom");
+export const [messageFontCustomContainerEl, messageFontCustomInputEl] = getContainerAndInput("message-font-custom");
 export const [messageTextColorContainerEl, messageTextColorInputEl] = getContainerAndInput("message-text-color");
 export const messageTypeAfternoonMorningButtonEl = getButton("message-type-afternoon-morning");
 export const messageTypeDateButtonEl = getButton("message-type-date");
@@ -61,7 +63,9 @@ export const animationsBookmarkTypePageUpButtonEl = getButton("animations-bookma
 export const animationsBookmarkTypePageDownButtonEl = getButton("animations-bookmark-type-page-down");
 
 export const searchEnabledCheckboxEl = getCheckbox("search-enabled");
-export const [searchFontContainerEl, searchFontInputEl] = getContainerAndInput("search-font");
+export const searchFontTypeDefaultButtonEl = getButton("search-font-type-default");
+export const searchFontTypeCustomButtonEl = getButton("search-font-type-custom");
+export const [searchFontCustomContainerEl, searchFontCustomInputEl] = getContainerAndInput("search-font-custom");
 export const [searchTextColorContainerEl, searchTextColorInputEl] = getContainerAndInput("search-text-color");
 export const [searchPlaceholderTextContainerEl, searchPlaceholderTextInputEl] = getContainerAndInput("search-placeholder-text");
 export const [searchBookmarkPlaceholderTextContainerEl, searchBookmarkPlaceholderTextInputEl] = getContainerAndInput("search-bookmark-placeholder-text");
@@ -122,8 +126,8 @@ export const inputs: Input[] = [
     input: titleDefaultTitleInputEl
   },
   {
-    container: messageFontContainerEl,
-    input: messageFontInputEl
+    container: messageFontCustomContainerEl,
+    input: messageFontCustomInputEl
   },
   {
     container: messageTextColorContainerEl,
@@ -162,8 +166,8 @@ export const inputs: Input[] = [
     input: uiCustomCSSTextareaEl
   },
   {
-    container: searchFontContainerEl,
-    input: searchFontInputEl
+    container: searchFontCustomContainerEl,
+    input: searchFontCustomInputEl
   },
   {
     container: searchTextColorContainerEl,
@@ -222,16 +226,12 @@ export interface Input {
 
 export const buttonSwitches: ButtonSwitch[] = [
   {
-    buttons: [uiStyleSolidButtonEl, uiStyleGlassButtonEl],
-    attr: "ui-style"
-  },
-  {
-    buttons: [uiCornerStyleSharpButtonEl, uiCornerStyleRoundButtonEl],
-    attr: "ui-corner-style"
-  },
-  {
     buttons: [titleFaviconTypeDefaultButtonEl, titleFaviconTypeCustomButtonEl],
     attr: "favicon-type"
+  },
+  {
+    buttons: [messageFontTypeDefaultButtonEl, messageFontTypeCustomButtonEl],
+    attr: "message-font-type"
   },
   {
     buttons: [messageTypeAfternoonMorningButtonEl, messageTypeDateButtonEl, messageTypeTime12ButtonEl, messageTypeTime24ButtonEl, messageTypeCustomButtonEl],
@@ -240,6 +240,14 @@ export const buttonSwitches: ButtonSwitch[] = [
   {
     buttons: [wallpaperTypeUrlButtonEl, wallpaperTypeFileUploadButtonEl],
     attr: "wallpaper-type"
+  },
+  {
+    buttons: [uiStyleSolidButtonEl, uiStyleGlassButtonEl],
+    attr: "ui-style"
+  },
+  {
+    buttons: [uiCornerStyleSharpButtonEl, uiCornerStyleRoundButtonEl],
+    attr: "ui-corner-style"
   },
   {
     buttons: [animationsBookmarkTimingLeftButtonEl, animationsBookmarkTimingRightButtonEl, animationsBookmarkTimingUniformButtonEl],
@@ -256,6 +264,10 @@ export const buttonSwitches: ButtonSwitch[] = [
   {
     buttons: [animationsBookmarkTypePageShrinkButtonEl, animationsBookmarkTypePageScaleButtonEl, animationsBookmarkTypePageUpButtonEl, animationsBookmarkTypePageDownButtonEl],
     attr: "animations-bookmark-type"
+  },
+  {
+    buttons: [searchFontTypeDefaultButtonEl, searchFontTypeCustomButtonEl],
+    attr: "search-font-type"
   },
   {
     buttons: [searchEngineDuckduckgoButtonEl, searchEngineGoogleButtonEl, searchEngineBingButtonEl, searchEngineBraveButtonEl, searchEngineYahooButtonEl, searchEngineYandexButtonEl, searchEngineStartpageButtonEl, searchEngineEcosiaButtonEl],

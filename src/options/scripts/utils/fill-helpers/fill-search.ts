@@ -9,7 +9,6 @@ import {
   searchEngineStartpageButtonEl,
   searchEngineEcosiaButtonEl,
   searchFocusedBorderColorInputEl,
-  searchFontInputEl,
   searchPlaceholderTextInputEl,
   searchTextColorInputEl,
   searchPlaceholderTextColorInputEl,
@@ -24,11 +23,12 @@ import {
   searchAssistDateCheckboxEl,
   searchAssistMathCheckboxEl,
   searchAssistDefinitionsCheckboxEl,
-  searchAssistConversionsCheckboxEl
+  searchAssistConversionsCheckboxEl,
+  searchFontCustomInputEl
 } from "src/options/scripts/ui";
 
 export const fillSearchInputs = (config: Config) => {
-  searchFontInputEl.value = config.search.font;
+  searchFontCustomInputEl.value = config.search.font.custom;
   searchTextColorInputEl.value = config.search.textColor;
   searchPlaceholderTextInputEl.value = config.search.placeholderText;
   searchBookmarkPlaceholderTextInputEl.value = config.search.bookmarkPlaceholderText;

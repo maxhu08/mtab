@@ -2,7 +2,7 @@ import { Config, MessageType } from "src/newtab/scripts/config";
 import {
   messageCustomTextInputEl,
   messageEnabledCheckboxEl,
-  messageFontInputEl,
+  messageFontCustomInputEl,
   messageTextColorInputEl,
   messageTypeAfternoonMorningButtonEl,
   messageTypeCustomButtonEl,
@@ -13,7 +13,7 @@ import {
 
 export const fillMessageInputs = (config: Config) => {
   messageEnabledCheckboxEl.checked = config.message.enabled;
-  messageFontInputEl.value = config.message.font;
+  messageFontCustomInputEl.value = config.message.font.custom;
   messageTextColorInputEl.value = config.message.textColor;
 
   // prettier-ignore

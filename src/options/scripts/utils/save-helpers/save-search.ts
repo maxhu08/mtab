@@ -2,7 +2,6 @@ import { Config, SearchEngine } from "src/newtab/scripts/config";
 import {
   searchEnabledCheckboxEl,
   searchFocusedBorderColorInputEl,
-  searchFontInputEl,
   searchPlaceholderTextColorInputEl,
   searchPlaceholderTextInputEl,
   searchTextColorInputEl,
@@ -16,12 +15,13 @@ import {
   searchAssistDateCheckboxEl,
   searchAssistMathCheckboxEl,
   searchAssistDefinitionsCheckboxEl,
-  searchAssistConversionsCheckboxEl
+  searchAssistConversionsCheckboxEl,
+  searchFontCustomInputEl
 } from "src/options/scripts/ui";
 
 export const saveSearchSettingsToDraft = (draft: Config) => {
   draft.search.enabled = searchEnabledCheckboxEl.checked;
-  draft.search.font = searchFontInputEl.value;
+  draft.search.font.custom = searchFontCustomInputEl.value;
   draft.search.textColor = searchTextColorInputEl.value;
   draft.search.placeholderText = searchPlaceholderTextInputEl.value;
   draft.search.bookmarkPlaceholderText = searchBookmarkPlaceholderTextInputEl.value;
