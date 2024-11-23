@@ -1,3 +1,4 @@
+import { focusInput, unfocusInput } from "src/config-utils/scripts/handle";
 import {
   BookmarksLocationFirefox,
   BookmarksType,
@@ -6,7 +7,6 @@ import {
   DefaultFaviconSource,
   UserDefinedBookmark
 } from "src/newtab/scripts/config";
-import { focusInput, unfocusInput } from "src/options/scripts/inputs";
 import {
   Input,
   bookmarksUserDefinedList,

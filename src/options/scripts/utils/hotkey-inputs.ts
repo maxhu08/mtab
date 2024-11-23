@@ -1,4 +1,4 @@
-import { focusInput, unfocusInput } from "src/options/scripts/inputs";
+import { focusInput, unfocusInput } from "src/config-utils/scripts/handle";
 import { HotkeyInput } from "src/options/scripts/ui";
 
 export const listenToHotkeyInputs = (hotkeyInputs: HotkeyInput[]) => {
