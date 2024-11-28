@@ -11,7 +11,8 @@ import {
   bookmarksDefaultBlockyColsInputEl,
   bookmarksShowBookmarkNamesCheckboxEl,
   bookmarksUserDefinedColsInputEl,
-  bookmarksUserDefinedKeysCheckboxEl
+  bookmarksUserDefinedKeysCheckboxEl,
+  bookmarksUserDefinedList
 } from "src/options/scripts/ui";
 
 export const saveBookmarksSettingsToDraft = (draft: Config) => {
@@ -84,16 +85,21 @@ export const saveUserDefinedBookmarkSettingsToDraft = (draft: Config) => {
 
   const bookmarksArrToSave: UserDefinedBookmark[] = [];
 
-  for (let i = 0; i < totalBookmarks; i++) {
-    const nameInputEl = document.getElementById(`bookmark-${i}-name-input`) as HTMLInputElement;
-    const urlInputEl = document.getElementById(`bookmark-${i}-url-input`) as HTMLInputElement;
-    const colorInputEl = document.getElementById(`bookmark-${i}-color-input`) as HTMLInputElement;
+  const bookmarkNodeEls = bookmarksUserDefinedList.querySelectorAll('[node-type="bookmark"]');
+  bookmarkNodeEls.forEach((el) => {
+    const uuid = el.getAttribute("bookmark-node-uuid") as string;
+
+    const nameInputEl = document.getElementById(`bookmark-${uuid}-name-input`) as HTMLInputElement;
+    const urlInputEl = document.getElementById(`bookmark-${uuid}-url-input`) as HTMLInputElement;
     // prettier-ignore
-    const iconTypeInputEl = document.getElementById(`bookmark-${i}-icon-type-input`) as HTMLInputElement;
+    const colorInputEl = document.getElementById(`bookmark-${uuid}-color-input`) as HTMLInputElement;
     // prettier-ignore
-    const iconColorInputEl = document.getElementById(`bookmark-${i}-icon-color-input`) as HTMLInputElement;
+    const iconTypeInputEl = document.getElementById(`bookmark-${uuid}-icon-type-input`) as HTMLInputElement;
+    // prettier-ignore
+    const iconColorInputEl = document.getElementById(`bookmark-${uuid}-icon-color-input`) as HTMLInputElement;
 
     const bookmarkObjToSave: UserDefinedBookmark = {
+      type: "bookmark",
       name: nameInputEl.value,
       url: urlInputEl.value,
       color: colorInputEl.value,
@@ -102,7 +108,7 @@ export const saveUserDefinedBookmarkSettingsToDraft = (draft: Config) => {
     };
 
     bookmarksArrToSave.push(bookmarkObjToSave);
-  }
+  });
 
   draft.bookmarks.userDefined = bookmarksArrToSave;
 };
