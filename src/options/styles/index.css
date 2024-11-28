@@ -12,3 +12,7 @@
 #bookmarks-user-defined-list * {
   transition-duration: 0ms;
 }
+
+.bookmark-user-defined-item * {
+  transition-duration: 250ms !important;
+}
