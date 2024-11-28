@@ -4,6 +4,18 @@ const migrateOldConfig = (config: Config): Config => {
   if (typeof config.message.font === "string") config.message.font = { type: "default", custom: "" };
   if (typeof config.search.font === "string") config.search.font = { type: "default", custom: "" };
 
+  // if config is before v.1.6.7
+  // add 'type' property to user-defined bookmarks
+  if (config.bookmarks?.userDefined) {
+    config.bookmarks.userDefined = config.bookmarks.userDefined.map((node: any) => {
+      if (!node.type) {
+        if ("url" in node) return { ...node, type: "bookmark" }; // add type for bookmarks
+        if ("contents" in node) return { ...node, type: "folder" }; // add type for folders
+      }
+      return node;
+    });
+  }
+
   return config;
 };
 
@@ -21,12 +33,12 @@ export const getConfig = (f: ({ config }: { config: Config }) => void) => {
     }
 
     // fill empty properties
-    let mergedConfig = deepMerge(structuredClone(defaultConfig), data.config);
+    const mergedConfig = deepMerge(structuredClone(defaultConfig), data.config);
     // migrate old config to new version
-    mergedConfig = migrateOldConfig(mergedConfig);
+    const finalizedConfig = migrateOldConfig(mergedConfig);
 
     f({
-      config: mergedConfig
+      config: finalizedConfig
     });
   });
 };
@@ -138,6 +150,7 @@ export const defaultConfig: Config = {
     userDefinedKeys: false,
     userDefined: [
       {
+        type: "bookmark",
         name: "github",
         url: "https://github.com",
         color: "#6366f1",
@@ -145,6 +158,7 @@ export const defaultConfig: Config = {
         iconColor: "#ffffff"
       },
       {
+        type: "bookmark",
         name: "youtube",
         url: "https://youtube.com",
         color: "#f43f5e",
@@ -152,6 +166,7 @@ export const defaultConfig: Config = {
         iconColor: "#ffffff"
       },
       {
+        type: "bookmark",
         name: "reddit",
         url: "https://www.reddit.com",
         color: "#f97316",
@@ -159,6 +174,7 @@ export const defaultConfig: Config = {
         iconColor: "#ffffff"
       },
       {
+        type: "bookmark",
         name: "localhost",
         url: "http://localhost:3000",
         color: "#14b8a6",
@@ -210,7 +226,15 @@ export type SearchEngine =
   | "ecosia";
 export type MessageType = "afternoon-morning" | "date" | "time-12" | "time-24" | "custom";
 export type BookmarksType = "user-defined" | "default" | "default-blocky" | "none";
+export type UserDefinedBookmarkNode = UserDefinedBookmarkFolder | UserDefinedBookmark;
+export type UserDefinedBookmarkFolder = {
+  type: "folder";
+  name: string;
+  color: string;
+  contents: UserDefinedBookmark[];
+};
 export type UserDefinedBookmark = {
+  type: "bookmark";
   name: string;
   url: string;
   color: string;
