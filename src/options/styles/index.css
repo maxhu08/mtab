@@ -4,6 +4,7 @@
 
 .bookmark-node-chosen-class {
   border: 2px solid #ec4899;
+  box-sizing: border-box;
 }
 
 /* for sortable animations to work  */

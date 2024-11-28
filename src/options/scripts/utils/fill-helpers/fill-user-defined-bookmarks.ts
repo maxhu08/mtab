@@ -7,13 +7,15 @@ import { v4 as uuidv4 } from "uuid";
 export const fillUserDefinedBookmarks = (config: Config) => {
   // user-defined bookmarks
   bookmarksUserDefinedList.innerHTML = "";
-  config.bookmarks.userDefined.forEach((bookmark, index) => {
+  config.bookmarks.userDefined.forEach((bookmark) => {
     addUserDefinedBookmark(bookmark);
   });
 
-  const bookmarkNodeEls = bookmarksUserDefinedList.querySelectorAll("*"); // Select all child elements
+  const bookmarkNodeEls = bookmarksUserDefinedList.querySelectorAll('[node-type="bookmark"]');
+  console.log(bookmarkNodeEls);
   bookmarkNodeEls.forEach((el) => {
-    handleBookmarkSettings(el.id);
+    const uuid = el.getAttribute("bookmark-node-uuid") as string;
+    handleBookmarkSettings(uuid);
   });
 
   toggleCollapseAllBookmarksButtonEl.click();
@@ -31,30 +33,30 @@ export const handleUserDefinedBookmarkNodeDragging = () => {
 };
 
 // prettier-ignore
-const handleBookmarkSettings = (id: string) => {
+const handleBookmarkSettings = (uuid: string) => {
   // * handle focus stuff start
   const bookmarkInputBorderClass = "border-sky-500";
 
   const inputs: Input[] = [
     {
-      container: document.getElementById(`bookmark-${id}-name-container`) as HTMLDivElement,
-      input: document.getElementById(`bookmark-${id}-name-input`) as HTMLInputElement
+      container: document.getElementById(`bookmark-${uuid}-name-container`) as HTMLDivElement,
+      input: document.getElementById(`bookmark-${uuid}-name-input`) as HTMLInputElement
     },
     {
-      container: document.getElementById(`bookmark-${id}-url-container`) as HTMLDivElement,
-      input: document.getElementById(`bookmark-${id}-url-input`) as HTMLInputElement
+      container: document.getElementById(`bookmark-${uuid}-url-container`) as HTMLDivElement,
+      input: document.getElementById(`bookmark-${uuid}-url-input`) as HTMLInputElement
     },
     {
-      container: document.getElementById(`bookmark-${id}-color-container`) as HTMLDivElement,
-      input: document.getElementById(`bookmark-${id}-color-input`) as HTMLInputElement
+      container: document.getElementById(`bookmark-${uuid}-color-container`) as HTMLDivElement,
+      input: document.getElementById(`bookmark-${uuid}-color-input`) as HTMLInputElement
     },
     {
-      container: document.getElementById(`bookmark-${id}-icon-type-container`) as HTMLDivElement,
-      input: document.getElementById(`bookmark-${id}-icon-type-input`) as HTMLInputElement
+      container: document.getElementById(`bookmark-${uuid}-icon-type-container`) as HTMLDivElement,
+      input: document.getElementById(`bookmark-${uuid}-icon-type-input`) as HTMLInputElement
     },
     {
-      container: document.getElementById(`bookmark-${id}-icon-color-container`) as HTMLDivElement,
-      input: document.getElementById(`bookmark-${id}-icon-color-input`) as HTMLInputElement
+      container: document.getElementById(`bookmark-${uuid}-icon-color-container`) as HTMLDivElement,
+      input: document.getElementById(`bookmark-${uuid}-icon-color-input`) as HTMLInputElement
     }
   ]
 
@@ -84,19 +86,19 @@ const handleBookmarkSettings = (id: string) => {
     })
   });
 
-  const deleteBookmarkButtonEl = document.getElementById(`bookmark-${id}-delete-button`) as HTMLButtonElement
-  deleteBookmarkButtonEl.onclick = () => deleteBookmark(id);
+  const deleteBookmarkButtonEl = document.getElementById(`bookmark-${uuid}-delete-button`) as HTMLButtonElement
+  deleteBookmarkButtonEl.onclick = () => deleteBookmark(uuid);
 
   // prettier-ignore
-  const collapsibleContentEl = document.getElementById(`bookmark-${id}-collapsible-content`) as HTMLDivElement
+  const collapsibleContentEl = document.getElementById(`bookmark-${uuid}-collapsible-content`) as HTMLDivElement
   // prettier-ignore
-  const toggleCollapseBookmarkButtonEl = document.getElementById(`bookmark-${id}-toggle-collapse-button`) as HTMLButtonElement
+  const toggleCollapseBookmarkButtonEl = document.getElementById(`bookmark-${uuid}-toggle-collapse-button`) as HTMLButtonElement
   toggleCollapseBookmarkButtonEl.onclick = () => toggleCollapseBookmark(collapsibleContentEl, toggleCollapseBookmarkButtonEl, "toggle");
 };
 
-const deleteBookmark = (id: string) => {
+const deleteBookmark = (uuid: string) => {
   // prettier-ignore
-  const bookmarkToDelete = document.getElementById(`bookmark-user-defined-item-${id}`) as HTMLDivElement;
+  const bookmarkToDelete = document.getElementById(`bookmark-user-defined-item-${uuid}`) as HTMLDivElement;
 
   bookmarkToDelete.remove();
 };
@@ -142,15 +144,16 @@ const toggleCollapseBookmark = (
 const toggleCollapseAllBookmarksButtonEl = document.getElementById("bookmarks-user-defined-toggle-collapse-all-button") as HTMLButtonElement;
 
 toggleCollapseAllBookmarksButtonEl.onclick = () => {
-  const totalBookmarks = bookmarksUserDefinedList.children.length;
-
   const lastAction = toggleCollapseAllBookmarksButtonEl.getAttribute("last-action");
 
-  for (let i = 0; i < totalBookmarks; i++) {
+  const bookmarkNodeEls = bookmarksUserDefinedList.querySelectorAll('[node-type="bookmark"]');
+  bookmarkNodeEls.forEach((el) => {
+    const uuid = el.getAttribute("bookmark-node-uuid");
+
     // prettier-ignore
-    const collapsibleContentEl = document.getElementById(`bookmark-${i}-collapsible-content`) as HTMLDivElement
+    const collapsibleContentEl = document.getElementById(`bookmark-${uuid}-collapsible-content`) as HTMLDivElement
     // prettier-ignore
-    const toggleCollapseBookmarkButtonEl = document.getElementById(`bookmark-${i}-toggle-collapse-button`) as HTMLButtonElement
+    const toggleCollapseBookmarkButtonEl = document.getElementById(`bookmark-${uuid}-toggle-collapse-button`) as HTMLButtonElement
 
     switch (lastAction) {
       case "expand":
@@ -164,7 +167,7 @@ toggleCollapseAllBookmarksButtonEl.onclick = () => {
         toggleCollapseAllBookmarksButtonEl.innerHTML = `<span class="text-white text-base">collapse all</span>`;
         break;
     }
-  }
+  });
 };
 
 (document.getElementById("bookmarks-user-defined-add-button") as HTMLButtonElement).onclick =
@@ -184,73 +187,73 @@ toggleCollapseAllBookmarksButtonEl.onclick = () => {
   };
 
 const addUserDefinedBookmark = (bookmark: UserDefinedBookmark) => {
-  const id = uuidv4();
+  const uuid = uuidv4();
 
   bookmarksUserDefinedList.innerHTML += `
-    <div id="bookmark-user-defined-item-${id}" class="bg-neutral-800 p-2 rounded-md grid grid-flow-row gap-4">
+    <div class="bookmark-user-defined-item bg-neutral-800 p-2 rounded-md grid grid-flow-row gap-4" node-type="bookmark" bookmark-node-uuid="${uuid}">
       <div class="grid grid-cols-[auto_max-content_max-content]">
-        <span id="bookmark-${id}-user-defined-useless-title" class="text-white text-base my-auto">bookmarks.userDefined[${id}]</span>
+        <span id="bookmark-${uuid}-user-defined-useless-title" class="text-white text-base my-auto">bookmarks.userDefined[${uuid}]</span>
         <div class="grid grid-cols-3 gap-2">
-          <button id="bookmark-${id}-toggle-collapse-button" class="bg-neutral-500 hover:bg-neutral-600 transition w-10 aspect-square rounded-md cursor-pointer">
+          <button id="bookmark-${uuid}-toggle-collapse-button" class="bg-neutral-500 hover:bg-neutral-600 transition w-10 aspect-square rounded-md cursor-pointer">
             <i class="text-white ri-collapse-horizontal-line"></i>
           </button>
           <button class="bookmark-node-handle bg-neutral-500 hover:bg-neutral-600 transition w-10 aspect-square rounded-md cursor-pointer">
             <i class="text-white ri-draggable"></i>
           </button>
-          <button id="bookmark-${id}-delete-button" class="bg-rose-500 hover:bg-rose-600 transition w-10 aspect-square rounded-md cursor-pointer">
+          <button id="bookmark-${uuid}-delete-button" class="bg-rose-500 hover:bg-rose-600 transition w-10 aspect-square rounded-md cursor-pointer">
             <i class="text-white ri-delete-bin-6-line"></i>
           </button>
         </div>
       </div>
-      <div id="bookmark-${id}-collapsible-content" state="expanded" class="grid grid-flow-row gap-4">
+      <div id="bookmark-${uuid}-collapsible-content" state="expanded" class="grid grid-flow-row gap-4">
         <div class="bg-neutral-500 h-[1px] rounded-md my-auto"></div>
         <div class="grid gap-2">
           <p class="text-white text-base">bookmark.name</p>
           <div
-            id="bookmark-${id}-name-container"
+            id="bookmark-${uuid}-name-container"
             class="grid grid-cols-[max-content_auto] text-base bg-neutral-900 w-full p-1 rounded-md border-2 border-transparent">
             <span class="text-sky-500 font-semibold select-none">>&nbsp;</span>
-            <input id="bookmark-${id}-name-input" type="text" autocomplete="off"
+            <input id="bookmark-${uuid}-name-input" type="text" autocomplete="off"
               class="outline-none bg-transparent text-white placeholder-neutral-500" placeholder="input name..." value="${bookmark.name}">
           </div>
         </div>
         <div class="grid gap-2">
           <p class="text-white text-base">bookmark.url</p>
           <div
-            id="bookmark-${id}-url-container"
+            id="bookmark-${uuid}-url-container"
             class="grid grid-cols-[max-content_auto] text-base bg-neutral-900 w-full p-1 rounded-md border-2 border-transparent">
             <span class="text-sky-500 font-semibold select-none">>&nbsp;</span>
-            <input id="bookmark-${id}-url-input" type="text" autocomplete="off"
+            <input id="bookmark-${uuid}-url-input" type="text" autocomplete="off"
               class="outline-none bg-transparent text-white placeholder-neutral-500" placeholder="input url..." value="${bookmark.url}">
           </div>
         </div>
         <div class="grid gap-2">
           <p class="text-white text-base">bookmark.color</p>
           <div
-            id="bookmark-${id}-color-container"
+            id="bookmark-${uuid}-color-container"
             class="grid grid-cols-[max-content_auto] text-base bg-neutral-900 w-full p-1 rounded-md border-2 border-transparent">
             <span class="text-sky-500 font-semibold select-none">>&nbsp;</span>
-            <input id="bookmark-${id}-color-input" type="text" autocomplete="off"
+            <input id="bookmark-${uuid}-color-input" type="text" autocomplete="off"
               class="outline-none bg-transparent text-white placeholder-neutral-500" placeholder="input color..." value="${bookmark.color}">
           </div>
         </div>
         <div class="grid gap-2">
           <p class="text-white text-base">bookmark.iconType</p>
           <div
-            id="bookmark-${id}-icon-type-container"
+            id="bookmark-${uuid}-icon-type-container"
             class="grid grid-cols-[max-content_auto] text-base bg-neutral-900 w-full p-1 rounded-md border-2 border-transparent">
             <span class="text-sky-500 font-semibold select-none">>&nbsp;</span>
-            <input id="bookmark-${id}-icon-type-input" type="text" autocomplete="off"
+            <input id="bookmark-${uuid}-icon-type-input" type="text" autocomplete="off"
               class="outline-none bg-transparent text-white placeholder-neutral-500" placeholder="input icon type..." value="${bookmark.iconType}">
           </div>
         </div>
         <div class="grid gap-2">
           <p class="text-white text-base">bookmark.iconColor</p>
           <div
-            id="bookmark-${id}-icon-color-container"
+            id="bookmark-${uuid}-icon-color-container"
             class="grid grid-cols-[max-content_auto] text-base bg-neutral-900 w-full p-1 rounded-md border-2 border-transparent">
             <span class="text-sky-500 font-semibold select-none">>&nbsp;</span>
-            <input id="bookmark-${id}-icon-color-input" type="text" autocomplete="off"
+            <input id="bookmark-${uuid}-icon-color-input" type="text" autocomplete="off"
               class="outline-none bg-transparent text-white placeholder-neutral-500" placeholder="input icon type..." value="${bookmark.iconColor}">
           </div>
         </div>
@@ -258,5 +261,5 @@ const addUserDefinedBookmark = (bookmark: UserDefinedBookmark) => {
     </div>
     `;
 
-  return id;
+  return uuid;
 };
