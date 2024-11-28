@@ -1,3 +1,4 @@
+import Sortable from "sortablejs";
 import {
   BookmarksLocationFirefox,
   BookmarksType,
@@ -24,7 +25,10 @@ import {
   bookmarksDefaultFaviconSourceGoogleButton,
   bookmarksDefaultFaviconSourceDuckduckgoButton
 } from "src/options/scripts/ui";
-import { fillUserDefinedBookmarks } from "src/options/scripts/utils/fill-helpers/fill-user-defined-bookmarks";
+import {
+  fillUserDefinedBookmarks,
+  handleUserDefinedBookmarkNodeDragging
+} from "src/options/scripts/utils/fill-helpers/fill-user-defined-bookmarks";
 
 export const fillBookmarksInputs = (config: Config) => {
   bookmarksShowBookmarkNamesCheckboxEl.checked = config.bookmarks.showBookmarkNames;
@@ -72,5 +76,7 @@ export const fillBookmarksInputs = (config: Config) => {
 
   bookmarksDefaultFaviconSourcePairs[config.bookmarks.defaultFaviconSource]();
 
+  // must go before fill function
+  handleUserDefinedBookmarkNodeDragging();
   fillUserDefinedBookmarks(config);
 };

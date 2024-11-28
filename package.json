@@ -21,7 +21,8 @@
   "dependencies": {
     "mathjs": "^13.2.3",
     "parcel": "^2.13.0",
-    "sortablejs": "^1.15.6"
+    "sortablejs": "^1.15.6",
+    "uuid": "^11.0.3"
   },
   "devDependencies": {
     "@types/chrome": "^0.0.263",
