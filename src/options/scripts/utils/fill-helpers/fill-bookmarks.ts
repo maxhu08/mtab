@@ -161,65 +161,12 @@ const handleBookmarkSettings = (index: number) => {
   toggleCollapseBookmarkButtonEl.onclick = () => toggleCollapseBookmark(collapsibleContentEl, toggleCollapseBookmarkButtonEl, "toggle");
 };
 
-// prettier-ignore
 const deleteBookmark = (index: number) => {
+  // prettier-ignore
   const bookmarkToDelete = document.getElementById(`bookmark-user-defined-item-${index}`) as HTMLDivElement;
 
-  const totalBookmarks = bookmarksUserDefinedList.children.length;
-  
-  // fix to make saving work normally
-  for (let i = index + 1; i < totalBookmarks; i++) {
-    const userDefinedItemEl = document.getElementById(`bookmark-user-defined-item-${i}`) as HTMLDivElement;
-    const oldUselessTitle = document.getElementById(`bookmark-${i}-user-defined-useless-title`) as HTMLSpanElement;
-
-    const oldNameInputEl = document.getElementById(`bookmark-${i}-name-input`) as HTMLInputElement;
-    const oldUrlInputEl = document.getElementById(`bookmark-${i}-url-input`) as HTMLInputElement;
-    const oldColorInputEl = document.getElementById(`bookmark-${i}-color-input`) as HTMLInputElement;
-    const oldIconTypeInputEl = document.getElementById(`bookmark-${i}-icon-type-input`) as HTMLInputElement;
-    const oldIconColorInputEl = document.getElementById(`bookmark-${i}-icon-color-input`) as HTMLInputElement;
-
-    const oldNameContainerEl = document.getElementById(`bookmark-${i}-name-container`) as HTMLInputElement;
-    const oldUrlContainerEl = document.getElementById(`bookmark-${i}-url-container`) as HTMLInputElement;
-    const oldColorContainerEl = document.getElementById(`bookmark-${i}-color-container`) as HTMLInputElement;     
-    const oldIconTypeContainerEl = document.getElementById(`bookmark-${i}-icon-type-container`) as HTMLInputElement;
-    const oldIconColorContainerEl = document.getElementById(`bookmark-${i}-icon-color-container`) as HTMLInputElement;
-
-    const oldCollapsibleContentEl = document.getElementById(`bookmark-${i}-collapsible-content`) as HTMLDivElement
-    const oldToggleCollapseBookmarkButtonEl = document.getElementById(`bookmark-${i}-toggle-collapse-button`) as HTMLButtonElement
-
-    const oldPushUpButtonEl = document.getElementById(`bookmark-${i}-push-up-button`) as HTMLButtonElement;
-    const oldPushDownButtonEl = document.getElementById(`bookmark-${i}-push-down-button`) as HTMLButtonElement;
-    const oldDeleteButtonEl = document.getElementById(`bookmark-${i}-delete-button`) as HTMLButtonElement;
-
-    userDefinedItemEl.id = `bookmark-user-defined-item-${i - 1}`
-
-    oldUselessTitle.id = `bookmark-${i - 1}-user-defined-useless-title`
-    oldUselessTitle.textContent = `bookmarks.userDefined[${i - 1}]`
-
-    oldNameInputEl.id = `bookmark-${i - 1}-name-input`;
-    oldUrlInputEl.id = `bookmark-${i - 1}-url-input`;
-    oldColorInputEl.id = `bookmark-${i - 1}-color-input`;
-    oldIconTypeInputEl.id = `bookmark-${i - 1}-icon-type-input`;
-    oldIconColorInputEl.id = `bookmark-${i - 1}-icon-color-input`
-
-    oldNameContainerEl.id = `bookmark-${i - 1}-name-container`;
-    oldUrlContainerEl.id = `bookmark-${i - 1}-url-container`;
-    oldColorContainerEl.id = `bookmark-${i - 1}-color-container`;
-    oldIconTypeContainerEl.id = `bookmark-${i - 1}-icon-type-container`;
-    oldIconColorContainerEl.id = `bookmark-${i - 1}-icon-color-container`;
-
-    oldCollapsibleContentEl.id = `bookmark-${i - 1}-collapsible-content`;
-    oldToggleCollapseBookmarkButtonEl.id  = `bookmark-${i - 1}-toggle-collapse-button`;
-
-    oldPushUpButtonEl.id = `bookmark-${i - 1}-push-up-button`;
-    oldPushDownButtonEl.id = `bookmark-${i - 1}-push-down-button`;
-    oldDeleteButtonEl.id = `bookmark-${i - 1}-delete-button`;
-
-    oldDeleteButtonEl.onclick = () => deleteBookmark(index);
-  }
-
-  bookmarkToDelete.parentNode!.removeChild(bookmarkToDelete);
-}
+  bookmarkToDelete.remove();
+};
 
 const toggleCollapseBookmark = (
   collapsibleContentEl: HTMLDivElement,
