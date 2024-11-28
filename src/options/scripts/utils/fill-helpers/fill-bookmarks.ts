@@ -64,6 +64,7 @@ export const fillBookmarksInputs = (config: Config) => {
 
   const dropzone = document.getElementById("bookmarks-user-defined-list") as HTMLDivElement;
   new Sortable(dropzone, {
+    handle: ".bookmark-node-handle",
     animation: 250,
     easing: "cubic-bezier(1, 0, 0, 1)",
     ghostClass: "bookmark-node-ghost-class",
@@ -396,9 +397,12 @@ const addUserDefinedBookmark = (params: { index: number; bookmark: UserDefinedBo
     <div id="bookmark-user-defined-item-${index}" class="bg-neutral-800 p-2 rounded-md grid grid-flow-row gap-4">
       <div class="grid grid-cols-[auto_max-content_max-content]">
         <span id="bookmark-${index}-user-defined-useless-title" class="text-white text-base my-auto">bookmarks.userDefined[${index}]</span>
-        <div class="grid grid-cols-4 gap-2">
+        <div class="grid grid-cols-5 gap-2">
           <button id="bookmark-${index}-toggle-collapse-button" class="bg-neutral-500 hover:bg-neutral-600 transition w-10 aspect-square rounded-md cursor-pointer">
             <i class="text-white ri-collapse-horizontal-line"></i>
+          </button>
+          <button class="bookmark-node-handle bg-neutral-500 hover:bg-neutral-600 transition w-10 aspect-square rounded-md cursor-pointer">
+            <i class="text-white ri-draggable"></i>
           </button>
           <button id="bookmark-${index}-push-up-button" class="bg-cyan-500 hover:bg-cyan-600 transition w-10 aspect-square rounded-md cursor-pointer">
             <i class="text-white ri-arrow-up-line"></i>
