@@ -27,6 +27,7 @@ import {
   bookmarksDefaultFaviconSourceGoogleButton,
   bookmarksDefaultFaviconSourceDuckduckgoButton
 } from "src/options/scripts/ui";
+import Sortable from "sortablejs";
 
 export const fillBookmarksInputs = (config: Config) => {
   bookmarksShowBookmarkNamesCheckboxEl.checked = config.bookmarks.showBookmarkNames;
@@ -60,6 +61,14 @@ export const fillBookmarksInputs = (config: Config) => {
   });
 
   toggleCollapseAllBookmarksButtonEl.click();
+
+  const dropzone = document.getElementById("bookmarks-user-defined-list") as HTMLDivElement;
+  new Sortable(dropzone, {
+    animation: 250,
+    easing: "cubic-bezier(1, 0, 0, 1)",
+    ghostClass: "bookmark-node-ghost-class",
+    chosenClass: "bookmark-node-chosen-class"
+  });
 
   // prettier-ignore
   const bookmarksDefaultBlockyColorTypePairs: Record<DefaultBlockyColorType, () => void> = {
