@@ -109,7 +109,7 @@ const handleBookmarkSettings = (uuid: string) => {
 
 const deleteBookmark = (uuid: string) => {
   // prettier-ignore
-  const bookmarkToDelete = document.getElementById(`bookmark-user-defined-item-${uuid}`) as HTMLDivElement;
+  const bookmarkToDelete = document.querySelector(`[bookmark-node-uuid="${uuid}"]`) as HTMLDivElement;
 
   bookmarkToDelete.remove();
 };
