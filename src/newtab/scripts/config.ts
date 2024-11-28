@@ -6,7 +6,7 @@ const migrateOldConfig = (config: Config): Config => {
 
   // if config is before v.1.6.7
   // add 'type' property to user-defined bookmarks
-  if (config.bookmarks?.userDefined) {
+  if (config.bookmarks.userDefined) {
     config.bookmarks.userDefined = config.bookmarks.userDefined.map((node: any) => {
       if (!node.type) {
         if ("url" in node) return { ...node, type: "bookmark" }; // add type for bookmarks

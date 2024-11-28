@@ -270,6 +270,7 @@ const pushBookmark = (index: number, direction: "up" | "down") => {
   const currBookmarkIconColorInputEl = document.getElementById(`bookmark-${index}-icon-color-input`) as HTMLInputElement;
 
   const currBookmarkData: UserDefinedBookmark = {
+    type: "bookmark",
     name: currBookmarkNameInputEl.value,
     url: currBookmarkUrlInputEl.value,
     color: currBookmarkColorInputEl.value,
@@ -277,7 +278,7 @@ const pushBookmark = (index: number, direction: "up" | "down") => {
     iconColor: currBookmarkIconColorInputEl.value
   };
 
-  let swapBookmarkData: UserDefinedBookmark = { name: "N/A", url: "N/A", color: "N/A", iconType: "N/A", iconColor: "N/A" };
+  let swapBookmarkData: UserDefinedBookmark = { type: "bookmark", name: "N/A", url: "N/A", color: "N/A", iconType: "N/A", iconColor: "N/A" };
   let swapBookmarkNameInputEl: HTMLInputElement;
   let swapBookmarkUrlInputEl: HTMLInputElement;
   let swapBookmarkColorInputEl: HTMLInputElement;
@@ -292,6 +293,7 @@ const pushBookmark = (index: number, direction: "up" | "down") => {
     swapBookmarkIconColorInputEl = document.getElementById(`bookmark-${index - 1}-icon-color-input`) as HTMLInputElement;
 
     swapBookmarkData = {
+      type: "bookmark",
       name: swapBookmarkNameInputEl.value,
       url: swapBookmarkUrlInputEl.value,
       color: swapBookmarkColorInputEl.value,
@@ -306,6 +308,7 @@ const pushBookmark = (index: number, direction: "up" | "down") => {
     swapBookmarkIconColorInputEl = document.getElementById(`bookmark-${index + 1}-icon-color-input`) as HTMLInputElement;
 
     swapBookmarkData = {
+      type: "bookmark",
       name: swapBookmarkNameInputEl.value,
       url: swapBookmarkUrlInputEl.value,
       color: swapBookmarkColorInputEl.value,
@@ -363,6 +366,7 @@ toggleCollapseAllBookmarksButtonEl.onclick = () => {
     addUserDefinedBookmark({
       index: totalBookmarks,
       bookmark: {
+        type: "bookmark",
         name: "NAME",
         url: "about:blank",
         color: "#84cc16",
