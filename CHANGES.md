@@ -1,5 +1,6 @@
-# Changes in 1.6.6
+# Changes in 1.6.7
 
 in this release:
 
-- fix issue with old config breaking extension
+- improve user defined bookmarks ui on options page
+- bug fixes
