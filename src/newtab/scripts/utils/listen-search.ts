@@ -116,14 +116,16 @@ const handleDefinition = async (val: string) => {
 
 const handleConversion = (val: string) => {
   const regexes = {
-    inches: /^(\d+)\s?in\s*$/,
-    centimeters: /^(\d+)\s?cm\s*$/,
-    pounds: /^(\d+)\s?lbs?\s*$/,
-    kilograms: /^(\d+)\s?kg\s*$/,
-    miles: /^(\d+)\s?mi\s*$/,
-    kilometers: /^(\d+)\s?km\s*$/,
-    fahrenheit: /^(\d+)\s?[fF]\s*$/,
-    celsius: /^(\d+)\s?[cC]\s*$/
+    inches: /^(-?\d+)\s?in\s*$/,
+    centimeters: /^(-?\d+)\s?cm\s*$/,
+    pounds: /^(-?\d+)\s?lbs?\s*$/,
+    kilograms: /^(-?\d+)\s?kg\s*$/,
+    miles: /^(-?\d+)\s?mi\s*$/,
+    kilometers: /^(-?\d+)\s?km\s*$/,
+    fahrenheit: /^(-?\d+)\s?[fF]\s*$/,
+    celsius: /^(-?\d+)\s?[cC]\s*$/,
+    feet: /^(-?\d+)\s?ft\s*$/,
+    meters: /^(-?\d+)\s?m\s*$/
   };
 
   const matchConversion = (regex: RegExp, type: string) => {
@@ -170,6 +172,14 @@ const handleConversion = (val: string) => {
           type = "°C";
           unit = "°F";
           break;
+        case "ft":
+          converted = (value * 0.3048).toFixed(2);
+          unit = "m";
+          break;
+        case "m":
+          converted = (value / 0.3048).toFixed(2);
+          unit = "ft";
+          break;
         default:
           return;
       }
@@ -190,6 +200,8 @@ const handleConversion = (val: string) => {
     matchConversion(regexes.miles, "mi") ||
     matchConversion(regexes.kilometers, "km") ||
     matchConversion(regexes.fahrenheit, "f") ||
-    matchConversion(regexes.celsius, "c")
+    matchConversion(regexes.celsius, "c") ||
+    matchConversion(regexes.feet, "ft") ||
+    matchConversion(regexes.meters, "m")
   );
 };
