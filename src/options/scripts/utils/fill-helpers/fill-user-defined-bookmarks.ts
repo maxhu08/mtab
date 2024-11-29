@@ -247,7 +247,7 @@ const addFolderButtonEl = document.getElementById("bookmarks-user-defined-add-fo
 addBookmarkButtonEl.onclick = () => {
   const id = addUserDefinedBookmark({
     type: "bookmark",
-    name: "NAME",
+    name: "New Bookmark",
     url: "about:blank",
     color: "#84cc16",
     iconType: "ri-box-3-line",
@@ -261,8 +261,8 @@ addBookmarkButtonEl.onclick = () => {
 addFolderButtonEl.onclick = () => {
   const id = addUserDefinedBookmarkFolder({
     type: "folder",
-    name: "NAME",
-    color: "#84cc16",
+    name: "New Folder",
+    color: "#4d7c0f",
     contents: []
   });
 
