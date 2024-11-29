@@ -7,7 +7,8 @@ How to setup:
 requirements:
 
 - nodejs >= v21.7.2
-- bun >= v1.1.9
+- bun >= v1.1.37
+- fnm >= v1.37.1
 - zip >= v3.0
 
 OS: (Windows/macOS/Linux)
@@ -16,18 +17,20 @@ OS: (Windows/macOS/Linux)
 
 - install nodejs here: https://nodejs.org/en/download
 - install bun here: https://bun.sh/docs/installation
+- install fnm here: https://github.com/Schniz/fnm
 
 ### macOS (Homebrew)
 
 ```shell
-#updates homebrew
+# updates homebrew
 brew update
 
-#installs nodejs and zip via homebrew
-brew install node@20
+# installs nodejs and zip via homebrew
+brew install node
 brew install zip
+brew install fnm
 
-#installs bun via npm
+# installs bun via npm
 npm i -g bun
 ```
 
@@ -36,6 +39,7 @@ npm i -g bun
 ```shell
 pacman -S nodejs npm zip
 npm i -g bun
+curl -fsSL https://fnm.vercel.app/install | bash
 ```
 
 ## building
@@ -51,6 +55,20 @@ install dependencies
 
 ```shell
 bun i
+```
+
+select correct node version
+
+```shell
+fnm use
+```
+
+to run in dev mode
+go to `extensions > manage extensions > enable developer mode`
+then click load unpacked and choose the dist folder
+
+```shell
+bun d
 ```
 
 to build
