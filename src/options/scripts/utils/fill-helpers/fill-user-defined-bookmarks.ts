@@ -12,7 +12,6 @@ export const fillUserDefinedBookmarks = (config: Config) => {
   });
 
   const bookmarkNodeEls = bookmarksUserDefinedList.querySelectorAll('[node-type="bookmark"]');
-  console.log(bookmarkNodeEls);
   bookmarkNodeEls.forEach((el) => {
     const uuid = el.getAttribute("bookmark-node-uuid") as string;
     handleBookmarkSettings(uuid);
