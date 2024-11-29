@@ -2,6 +2,7 @@ import Sortable from "sortablejs";
 import { focusInput, unfocusInput } from "src/config-utils/scripts/handle";
 import { Config, UserDefinedBookmark, UserDefinedBookmarkFolder } from "src/newtab/scripts/config";
 import { bookmarksUserDefinedList, Input } from "src/options/scripts/ui";
+import { getRandomColor } from "src/options/scripts/utils/random-color";
 import { v4 as uuidv4 } from "uuid";
 
 export const fillUserDefinedBookmarks = (config: Config) => {
@@ -253,7 +254,7 @@ addBookmarkButtonEl.onclick = () => {
       type: "bookmark",
       name: "New Bookmark",
       url: "about:blank",
-      color: "#84cc16",
+      color: "#ffffff",
       iconType: "ri-box-3-line",
       iconColor: "#ffffff"
     },
@@ -266,7 +267,7 @@ addFolderButtonEl.onclick = () => {
     {
       type: "folder",
       name: "New Folder",
-      color: "#4d7c0f",
+      color: getRandomColor(),
       contents: []
     },
     bookmarksUserDefinedList
