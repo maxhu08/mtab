@@ -1,3 +1,8 @@
+/* fix to prevent border transition */
+.bookmark-user-defined-item {
+  transition-duration: border 0ms !important;
+}
+
 .bookmark-node-ghost-class {
   opacity: 0.25;
 }
