@@ -23,6 +23,9 @@ export const fillUserDefinedBookmarks = (config: Config) => {
 export const handleUserDefinedBookmarkNodeDragging = () => {
   const dropzone = document.getElementById("bookmarks-user-defined-list") as HTMLDivElement;
   new Sortable(dropzone, {
+    group: "user-defined-bookmark-group",
+    fallbackOnBody: true,
+    swapThreshold: 0.65,
     handle: ".bookmark-node-handle",
     animation: 250,
     easing: "cubic-bezier(1, 0, 0, 1)",
@@ -71,9 +74,9 @@ const handleBookmarkSettings = (uuid: string) => {
       container: document.getElementById(`bookmark-${uuid}-icon-color-container`) as HTMLDivElement,
       input: document.getElementById(`bookmark-${uuid}-icon-color-input`) as HTMLInputElement
     }
-  ]
+  ];
 
-
+  console.log(inputs);
 
   inputs.forEach((input) => {
     input.input.addEventListener("blur", () =>
@@ -104,6 +107,70 @@ const handleBookmarkSettings = (uuid: string) => {
   // prettier-ignore
   const toggleCollapseBookmarkButtonEl = document.getElementById(`bookmark-${uuid}-toggle-collapse-button`) as HTMLButtonElement
   toggleCollapseBookmarkButtonEl.onclick = () => toggleCollapseBookmark(collapsibleContentEl, toggleCollapseBookmarkButtonEl, "toggle");
+};
+
+const handleFolderSettings = (uuid: string) => {
+  // * handle focus stuff start
+  const bookmarkInputBorderClass = "border-pink-500";
+
+  const nameInput = document.getElementById(`bookmark-${uuid}-name-input`) as HTMLInputElement;
+  const colorInput = document.getElementById(`bookmark-${uuid}-color-input`) as HTMLInputElement;
+  // prettier-ignore
+  const uselessTitle = document.getElementById(`bookmark-${uuid}-user-defined-useless-title`) as HTMLSpanElement;
+  const accent = document.getElementById(`bookmark-${uuid}-user-defined-accent`) as HTMLDivElement;
+
+  nameInput.addEventListener("input", () => {
+    if (nameInput.value.length === 0) uselessTitle.textContent = "Untitled";
+    else uselessTitle.textContent = nameInput.value;
+  });
+
+  colorInput.addEventListener("input", () => {
+    accent.style.backgroundColor = colorInput.value;
+  });
+
+  const inputs: Input[] = [
+    {
+      container: document.getElementById(`bookmark-${uuid}-name-container`) as HTMLDivElement,
+      input: nameInput
+    },
+    {
+      container: document.getElementById(`bookmark-${uuid}-color-container`) as HTMLDivElement,
+      input: colorInput
+    }
+  ];
+
+  inputs.forEach((input) => {
+    input.input.addEventListener("blur", () =>
+      unfocusInput({
+        container: input.container,
+        input: input.input,
+        borderClassOld: bookmarkInputBorderClass,
+        borderClassNew: "border-transparent"
+      })
+    );
+
+    input.input.addEventListener("focus", (e: Event) =>
+      focusInput({
+        container: input.container,
+        input: input.input,
+        borderClassOld: "border-transparent",
+        borderClassNew: bookmarkInputBorderClass,
+        e
+      })
+    );
+  });
+
+  const deleteBookmarkButtonEl = document.getElementById(
+    `bookmark-${uuid}-delete-button`
+  ) as HTMLButtonElement;
+  deleteBookmarkButtonEl.onclick = () => deleteBookmark(uuid);
+
+  // prettier-ignore
+  const collapsibleContentEl = document.getElementById(`bookmark-${uuid}-collapsible-content`) as HTMLDivElement
+  // prettier-ignore
+  const toggleCollapseBookmarkButtonEl = document.getElementById(`bookmark-${uuid}-toggle-collapse-button`) as HTMLButtonElement
+  toggleCollapseBookmarkButtonEl.onclick = () =>
+    toggleCollapseBookmark(collapsibleContentEl, toggleCollapseBookmarkButtonEl, "toggle");
 };
 
 const deleteBookmark = (uuid: string) => {
@@ -206,7 +273,7 @@ addFolderButtonEl.onclick = () => {
     contents: []
   });
 
-  handleBookmarkSettings(id);
+  handleFolderSettings(id);
 };
 
 const addUserDefinedBookmark = (bookmark: UserDefinedBookmark) => {
@@ -312,10 +379,26 @@ const addUserDefinedBookmarkFolder = (folder: UserDefinedBookmarkFolder) => {
               <input id="bookmark-${uuid}-color-input" type="text" autocomplete="off" class="outline-none bg-transparent text-white placeholder-neutral-500" placeholder="input color..." value="${folder.color}">
             </div>
           </div>
+          <div class="grid gap-2">
+            <p class="text-white text-base">folder.contents</p>
+            <div id="bookmark-${uuid}-contents-container" class="grid grid-flow-row gap-2 bg-neutral-900 rounded-md p-4 min-h-14"></div>
+          </div>
         </div>
       </div>
     </div>
   `;
+
+  const dropzone = document.getElementById(`bookmark-${uuid}-contents-container`) as HTMLDivElement;
+  new Sortable(dropzone, {
+    group: "user-defined-bookmark-group",
+    fallbackOnBody: true,
+    swapThreshold: 0.65,
+    handle: ".bookmark-node-handle",
+    animation: 250,
+    easing: "cubic-bezier(1, 0, 0, 1)",
+    ghostClass: "bookmark-node-ghost-class",
+    chosenClass: "bookmark-node-chosen-class"
+  });
 
   return uuid;
 };
