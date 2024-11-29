@@ -7,8 +7,9 @@ import { v4 as uuidv4 } from "uuid";
 export const fillUserDefinedBookmarks = (config: Config) => {
   // user-defined bookmarks
   bookmarksUserDefinedList.innerHTML = "";
-  config.bookmarks.userDefined.forEach((bookmark) => {
-    addUserDefinedBookmark(bookmark);
+  config.bookmarks.userDefined.forEach((bookmarkNode) => {
+    if (bookmarkNode.type === "bookmark") addUserDefinedBookmark(bookmarkNode);
+    else if (bookmarkNode.type === "folder") addUserDefinedBookmarkFolder(bookmarkNode);
   });
 
   const bookmarkNodeEls = bookmarksUserDefinedList.querySelectorAll('[node-type="bookmark"]');
@@ -355,7 +356,7 @@ const addUserDefinedBookmarkFolder = (folder: UserDefinedBookmarkFolder) => {
   const uuid = uuidv4();
 
   bookmarksUserDefinedList.innerHTML += `
-    <div class="bookmark-user-defined-item bg-neutral-800 grid grid-cols-[max-content_auto] rounded-md overflow-hidden" node-type="bookmark" bookmark-node-uuid="${uuid}">
+    <div class="bookmark-user-defined-item bg-neutral-800 grid grid-cols-[max-content_auto] rounded-md overflow-hidden" node-type="folder" bookmark-node-uuid="${uuid}">
       <div id="bookmark-${uuid}-user-defined-accent" class="w-1 h-full" style="background-color:${folder.color};"></div>
       <div class="p-2 grid grid-flow-row gap-4">
         <div class="grid grid-cols-[auto_max-content_max-content]">

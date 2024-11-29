@@ -4,7 +4,9 @@ import {
   BookmarksType,
   BookmarksLocationFirefox,
   DefaultBlockyColorType,
-  DefaultFaviconSource
+  DefaultFaviconSource,
+  UserDefinedBookmarkNode,
+  UserDefinedBookmarkFolder
 } from "src/newtab/scripts/config";
 import {
   bookmarksDefaultBlockyColorInputEl,
@@ -77,40 +79,76 @@ export const saveBookmarksSettingsToDraft = (draft: Config) => {
 };
 
 export const saveUserDefinedBookmarkSettingsToDraft = (draft: Config) => {
+  console.log("RUNRUNRUN");
+
   draft.bookmarks.userDefinedCols = parseInt(bookmarksUserDefinedColsInputEl.value);
 
-  // user defined list stuff
-  const totalBookmarks = (document.getElementById("bookmarks-user-defined-list") as HTMLDivElement)
-    .children.length;
+  const bookmarksNodesToSave: UserDefinedBookmarkNode[] = [];
 
-  const bookmarksArrToSave: UserDefinedBookmark[] = [];
+  const bookmarkTopLevelNodeEls = Array.from(bookmarksUserDefinedList.children);
 
-  const bookmarkNodeEls = bookmarksUserDefinedList.querySelectorAll('[node-type="bookmark"]');
-  bookmarkNodeEls.forEach((el) => {
+  bookmarkTopLevelNodeEls.forEach((el) => {
     const uuid = el.getAttribute("bookmark-node-uuid") as string;
+    const bookmarkNodeType = el.getAttribute("node-type");
 
-    const nameInputEl = document.getElementById(`bookmark-${uuid}-name-input`) as HTMLInputElement;
-    const urlInputEl = document.getElementById(`bookmark-${uuid}-url-input`) as HTMLInputElement;
-    // prettier-ignore
-    const colorInputEl = document.getElementById(`bookmark-${uuid}-color-input`) as HTMLInputElement;
-    // prettier-ignore
-    const iconTypeInputEl = document.getElementById(`bookmark-${uuid}-icon-type-input`) as HTMLInputElement;
-    // prettier-ignore
-    const iconColorInputEl = document.getElementById(`bookmark-${uuid}-icon-color-input`) as HTMLInputElement;
-
-    const bookmarkObjToSave: UserDefinedBookmark = {
-      type: "bookmark",
-      name: nameInputEl.value,
-      url: urlInputEl.value,
-      color: colorInputEl.value,
-      iconType: iconTypeInputEl.value,
-      iconColor: iconColorInputEl.value
-    };
-
-    bookmarksArrToSave.push(bookmarkObjToSave);
+    if (bookmarkNodeType === "bookmark") {
+      bookmarksNodesToSave.push(getUserDefinedBookmarkData(uuid));
+    } else if (bookmarkNodeType === "folder") {
+      bookmarksNodesToSave.push(getUserDefinedBookmarkFolderData(uuid));
+    }
   });
 
-  draft.bookmarks.userDefined = bookmarksArrToSave;
+  console.log(bookmarksNodesToSave);
+
+  draft.bookmarks.userDefined = bookmarksNodesToSave;
+};
+
+// prettier-ignore
+export const getUserDefinedBookmarkData = (uuid: string) => {
+  const nameInputEl = document.getElementById(`bookmark-${uuid}-name-input`) as HTMLInputElement;
+  const urlInputEl = document.getElementById(`bookmark-${uuid}-url-input`) as HTMLInputElement;
+  const colorInputEl = document.getElementById(`bookmark-${uuid}-color-input`) as HTMLInputElement;
+  const iconTypeInputEl = document.getElementById(`bookmark-${uuid}-icon-type-input`) as HTMLInputElement;
+  const iconColorInputEl = document.getElementById(`bookmark-${uuid}-icon-color-input`) as HTMLInputElement;
+
+  return {
+    type: "bookmark",
+    name: nameInputEl.value,
+    url: urlInputEl.value,
+    color: colorInputEl.value,
+    iconType: iconTypeInputEl.value,
+    iconColor: iconColorInputEl.value
+  } satisfies UserDefinedBookmark;
+};
+
+export const getUserDefinedBookmarkFolderData = (uuid: string) => {
+  const nameInputEl = document.getElementById(`bookmark-${uuid}-name-input`) as HTMLInputElement;
+  const colorInputEl = document.getElementById(`bookmark-${uuid}-color-input`) as HTMLInputElement;
+  // prettier-ignore
+  const folderContentsEl = document.getElementById(`bookmark-${uuid}-contents-container`) as HTMLDivElement;
+  const folderContents: UserDefinedBookmarkNode[] = [];
+
+  if (folderContentsEl) {
+    const children = Array.from(folderContentsEl.children);
+
+    children.forEach((childEl) => {
+      const childUuid = childEl.getAttribute("bookmark-node-uuid") as string;
+      const childType = childEl.getAttribute("node-type");
+
+      if (childType === "bookmark") {
+        folderContents.push(getUserDefinedBookmarkData(childUuid));
+      } else if (childType === "folder") {
+        folderContents.push(getUserDefinedBookmarkFolderData(childUuid));
+      }
+    });
+  }
+
+  return {
+    type: "folder",
+    name: nameInputEl.value,
+    color: colorInputEl.value,
+    contents: folderContents
+  } satisfies UserDefinedBookmarkFolder;
 };
 
 export const saveDefaultBlockyBookmarkSettingsToDraft = (draft: Config) => {

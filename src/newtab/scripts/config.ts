@@ -231,7 +231,7 @@ export type UserDefinedBookmarkFolder = {
   type: "folder";
   name: string;
   color: string;
-  contents: UserDefinedBookmark[];
+  contents: UserDefinedBookmarkNode[];
 };
 export type UserDefinedBookmark = {
   type: "bookmark";
@@ -327,7 +327,7 @@ export interface Config {
     type: BookmarksType;
     userDefinedCols: number;
     userDefinedKeys: boolean;
-    userDefined: UserDefinedBookmark[];
+    userDefined: UserDefinedBookmarkNode[];
     defaultBlockyCols: number;
     defaultBlockyColorType: DefaultBlockyColorType;
     defaultBlockyColor: string;
