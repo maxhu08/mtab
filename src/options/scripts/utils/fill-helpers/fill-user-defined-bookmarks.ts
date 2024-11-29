@@ -34,19 +34,19 @@ export const handleUserDefinedBookmarkNodeDragging = () => {
   });
 };
 
-// prettier-ignore
 const handleBookmarkSettings = (uuid: string) => {
   // * handle focus stuff start
   const bookmarkInputBorderClass = "border-pink-500";
 
   const nameInput = document.getElementById(`bookmark-${uuid}-name-input`) as HTMLInputElement;
   const colorInput = document.getElementById(`bookmark-${uuid}-color-input`) as HTMLInputElement;
+  // prettier-ignore
   const uselessTitle = document.getElementById(`bookmark-${uuid}-user-defined-useless-title`) as HTMLSpanElement;
   const accent = document.getElementById(`bookmark-${uuid}-user-defined-accent`) as HTMLDivElement;
 
   nameInput.addEventListener("input", () => {
     if (nameInput.value.length === 0) uselessTitle.textContent = "Untitled";
-    else uselessTitle.textContent = nameInput.value; 
+    else uselessTitle.textContent = nameInput.value;
   });
 
   colorInput.addEventListener("input", () => {
@@ -76,8 +76,6 @@ const handleBookmarkSettings = (uuid: string) => {
     }
   ];
 
-  console.log(inputs);
-
   inputs.forEach((input) => {
     input.input.addEventListener("blur", () =>
       unfocusInput({
@@ -99,13 +97,15 @@ const handleBookmarkSettings = (uuid: string) => {
     );
   });
 
-  const deleteBookmarkButtonEl = document.getElementById(`bookmark-${uuid}-delete-button`) as HTMLButtonElement
+  // prettier-ignore
+  const deleteBookmarkButtonEl = document.getElementById(`bookmark-${uuid}-delete-button`) as HTMLButtonElement;
   deleteBookmarkButtonEl.onclick = () => deleteBookmark(uuid);
 
   // prettier-ignore
   const collapsibleContentEl = document.getElementById(`bookmark-${uuid}-collapsible-content`) as HTMLDivElement
   // prettier-ignore
   const toggleCollapseBookmarkButtonEl = document.getElementById(`bookmark-${uuid}-toggle-collapse-button`) as HTMLButtonElement
+  // prettier-ignore
   toggleCollapseBookmarkButtonEl.onclick = () => toggleCollapseBookmark(collapsibleContentEl, toggleCollapseBookmarkButtonEl, "toggle");
 };
 
@@ -160,17 +160,16 @@ const handleFolderSettings = (uuid: string) => {
     );
   });
 
-  const deleteBookmarkButtonEl = document.getElementById(
-    `bookmark-${uuid}-delete-button`
-  ) as HTMLButtonElement;
+  // prettier-ignore
+  const deleteBookmarkButtonEl = document.getElementById(`bookmark-${uuid}-delete-button`) as HTMLButtonElement;
   deleteBookmarkButtonEl.onclick = () => deleteBookmark(uuid);
 
   // prettier-ignore
   const collapsibleContentEl = document.getElementById(`bookmark-${uuid}-collapsible-content`) as HTMLDivElement
   // prettier-ignore
   const toggleCollapseBookmarkButtonEl = document.getElementById(`bookmark-${uuid}-toggle-collapse-button`) as HTMLButtonElement
-  toggleCollapseBookmarkButtonEl.onclick = () =>
-    toggleCollapseBookmark(collapsibleContentEl, toggleCollapseBookmarkButtonEl, "toggle");
+  // prettier-ignore
+  toggleCollapseBookmarkButtonEl.onclick = () => toggleCollapseBookmark(collapsibleContentEl, toggleCollapseBookmarkButtonEl, "toggle");
 };
 
 const deleteBookmark = (uuid: string) => {
@@ -185,64 +184,49 @@ const toggleCollapseBookmark = (
   toggleCollapseBookmarkButtonEl: HTMLButtonElement,
   mode: "toggle" | "collapse" | "expand"
 ) => {
-  switch (mode) {
-    case "toggle": {
-      if (collapsibleContentEl.getAttribute("state") === "expanded") {
-        collapsibleContentEl.setAttribute("state", "collapsed");
-        collapsibleContentEl.classList.replace("grid", "hidden");
-
-        toggleCollapseBookmarkButtonEl.innerHTML = `<i class="text-white ri-expand-horizontal-s-line"></i>`;
-      } else if (collapsibleContentEl.getAttribute("state") === "collapsed") {
-        collapsibleContentEl.setAttribute("state", "expanded");
-        collapsibleContentEl.classList.replace("hidden", "grid");
-
-        toggleCollapseBookmarkButtonEl.innerHTML = `<i class="text-white ri-collapse-horizontal-line"></i>`;
-      }
-      break;
-    }
-    case "collapse": {
+  if (mode === "toggle") {
+    if (collapsibleContentEl.getAttribute("state") === "expanded") {
       collapsibleContentEl.setAttribute("state", "collapsed");
       collapsibleContentEl.classList.replace("grid", "hidden");
-
       toggleCollapseBookmarkButtonEl.innerHTML = `<i class="text-white ri-expand-horizontal-s-line"></i>`;
-      break;
-    }
-    case "expand": {
+    } else if (collapsibleContentEl.getAttribute("state") === "collapsed") {
       collapsibleContentEl.setAttribute("state", "expanded");
       collapsibleContentEl.classList.replace("hidden", "grid");
-
       toggleCollapseBookmarkButtonEl.innerHTML = `<i class="text-white ri-collapse-horizontal-line"></i>`;
-      break;
     }
+  } else if (mode === "collapse") {
+    collapsibleContentEl.setAttribute("state", "collapsed");
+    collapsibleContentEl.classList.replace("grid", "hidden");
+    toggleCollapseBookmarkButtonEl.innerHTML = `<i class="text-white ri-expand-horizontal-s-line"></i>`;
+  } else if (mode === "expand") {
+    collapsibleContentEl.setAttribute("state", "expanded");
+    collapsibleContentEl.classList.replace("hidden", "grid");
+    toggleCollapseBookmarkButtonEl.innerHTML = `<i class="text-white ri-collapse-horizontal-line"></i>`;
   }
 };
 
 // prettier-ignore
 const toggleCollapseAllBookmarksButtonEl = document.getElementById("bookmarks-user-defined-toggle-collapse-all-button") as HTMLButtonElement;
-
 toggleCollapseAllBookmarksButtonEl.onclick = () => {
   const lastAction = toggleCollapseAllBookmarksButtonEl.getAttribute("last-action");
-
   const bookmarkNodeEls = bookmarksUserDefinedList.querySelectorAll('[node-type="bookmark"]');
+
   bookmarkNodeEls.forEach((el) => {
     const uuid = el.getAttribute("bookmark-node-uuid");
 
     // prettier-ignore
-    const collapsibleContentEl = document.getElementById(`bookmark-${uuid}-collapsible-content`) as HTMLDivElement
+    const collapsibleContentEl = document.getElementById(`bookmark-${uuid}-collapsible-content`) as HTMLDivElement;
     // prettier-ignore
-    const toggleCollapseBookmarkButtonEl = document.getElementById(`bookmark-${uuid}-toggle-collapse-button`) as HTMLButtonElement
+    const toggleCollapseBookmarkButtonEl = document.getElementById(`bookmark-${uuid}-toggle-collapse-button`) as HTMLButtonElement;
 
-    switch (lastAction) {
-      case "expand":
-        toggleCollapseBookmark(collapsibleContentEl, toggleCollapseBookmarkButtonEl, "collapse");
-        toggleCollapseAllBookmarksButtonEl.setAttribute("last-action", "collapse");
-        toggleCollapseAllBookmarksButtonEl.innerHTML = `<span class="text-white text-base">expand all</span>`;
-        break;
-      case "collapse":
-        toggleCollapseBookmark(collapsibleContentEl, toggleCollapseBookmarkButtonEl, "expand");
-        toggleCollapseAllBookmarksButtonEl.setAttribute("last-action", "expand");
-        toggleCollapseAllBookmarksButtonEl.innerHTML = `<span class="text-white text-base">collapse all</span>`;
-        break;
+    if (lastAction === "expand") {
+      toggleCollapseBookmark(collapsibleContentEl, toggleCollapseBookmarkButtonEl, "collapse");
+      toggleCollapseAllBookmarksButtonEl.setAttribute("last-action", "collapse");
+      toggleCollapseAllBookmarksButtonEl.innerHTML = `<span class="text-white text-base">expand all</span>`;
+    } else if (lastAction === "collapse") {
+      toggleCollapseBookmark(collapsibleContentEl, toggleCollapseBookmarkButtonEl, "expand");
+      toggleCollapseAllBookmarksButtonEl.setAttribute("last-action", "expand");
+      toggleCollapseAllBookmarksButtonEl.innerHTML = `<span class="text-white text-base">collapse all</span>`;
     }
   });
 };
@@ -263,6 +247,7 @@ addBookmarkButtonEl.onclick = () => {
   });
 
   handleBookmarkSettings(id);
+  bindToggleCollapseHandlers();
 };
 
 addFolderButtonEl.onclick = () => {
@@ -274,6 +259,22 @@ addFolderButtonEl.onclick = () => {
   });
 
   handleFolderSettings(id);
+  bindToggleCollapseHandlers();
+};
+
+const bindToggleCollapseHandlers = () => {
+  const bookmarkNodeEls = bookmarksUserDefinedList.querySelectorAll('[node-type="bookmark"]');
+  bookmarkNodeEls.forEach((el) => {
+    const uuid = el.getAttribute("bookmark-node-uuid") as string;
+
+    // prettier-ignore
+    const collapsibleContentEl = document.getElementById(`bookmark-${uuid}-collapsible-content`) as HTMLDivElement;
+    // prettier-ignore
+    const toggleCollapseBookmarkButtonEl = document.getElementById(`bookmark-${uuid}-toggle-collapse-button`) as HTMLButtonElement;
+
+    toggleCollapseBookmarkButtonEl.onclick = () =>
+      toggleCollapseBookmark(collapsibleContentEl, toggleCollapseBookmarkButtonEl, "toggle");
+  });
 };
 
 const addUserDefinedBookmark = (bookmark: UserDefinedBookmark) => {
@@ -302,35 +303,35 @@ const addUserDefinedBookmark = (bookmark: UserDefinedBookmark) => {
           <div class="grid gap-2">
             <p class="text-white text-base">bookmark.name</p>
             <div id="bookmark-${uuid}-name-container" class="grid grid-cols-[max-content_auto] text-base bg-neutral-900 w-full p-1 rounded-md border-2 border-transparent">
-              <span class="text-sky-500 font-semibold select-none">>&nbsp;</span>
+              <span class="text-pink-500 font-semibold select-none">>&nbsp;</span>
               <input id="bookmark-${uuid}-name-input" type="text" autocomplete="off" class="outline-none bg-transparent text-white placeholder-neutral-500" placeholder="input name..." value="${bookmark.name}">
             </div>
           </div>
           <div class="grid gap-2">
             <p class="text-white text-base">bookmark.url</p>
             <div id="bookmark-${uuid}-url-container" class="grid grid-cols-[max-content_auto] text-base bg-neutral-900 w-full p-1 rounded-md border-2 border-transparent">
-              <span class="text-sky-500 font-semibold select-none">>&nbsp;</span>
+              <span class="text-pink-500 font-semibold select-none">>&nbsp;</span>
               <input id="bookmark-${uuid}-url-input" type="text" autocomplete="off" class="outline-none bg-transparent text-white placeholder-neutral-500" placeholder="input url..." value="${bookmark.url}">
             </div>
           </div>
           <div class="grid gap-2">
             <p class="text-white text-base">bookmark.color</p>
             <div id="bookmark-${uuid}-color-container" class="grid grid-cols-[max-content_auto] text-base bg-neutral-900 w-full p-1 rounded-md border-2 border-transparent">
-              <span class="text-sky-500 font-semibold select-none">>&nbsp;</span>
+              <span class="text-pink-500 font-semibold select-none">>&nbsp;</span>
               <input id="bookmark-${uuid}-color-input" type="text" autocomplete="off" class="outline-none bg-transparent text-white placeholder-neutral-500" placeholder="input color..." value="${bookmark.color}">
             </div>
           </div>
           <div class="grid gap-2">
             <p class="text-white text-base">bookmark.iconType</p>
             <div id="bookmark-${uuid}-icon-type-container" class="grid grid-cols-[max-content_auto] text-base bg-neutral-900 w-full p-1 rounded-md border-2 border-transparent">
-              <span class="text-sky-500 font-semibold select-none">>&nbsp;</span>
+              <span class="text-pink-500 font-semibold select-none">>&nbsp;</span>
               <input id="bookmark-${uuid}-icon-type-input" type="text" autocomplete="off" class="outline-none bg-transparent text-white placeholder-neutral-500" placeholder="input icon type..." value="${bookmark.iconType}">
             </div>
           </div>
           <div class="grid gap-2">
             <p class="text-white text-base">bookmark.iconColor</p>
             <div id="bookmark-${uuid}-icon-color-container" class="grid grid-cols-[max-content_auto] text-base bg-neutral-900 w-full p-1 rounded-md border-2 border-transparent">
-              <span class="text-sky-500 font-semibold select-none">>&nbsp;</span>
+              <span class="text-pink-500 font-semibold select-none">>&nbsp;</span>
               <input id="bookmark-${uuid}-icon-color-input" type="text" autocomplete="off" class="outline-none bg-transparent text-white placeholder-neutral-500" placeholder="input icon color..." value="${bookmark.iconColor}">
             </div>
           </div>
@@ -368,14 +369,14 @@ const addUserDefinedBookmarkFolder = (folder: UserDefinedBookmarkFolder) => {
           <div class="grid gap-2">
             <p class="text-white text-base">folder.name</p>
             <div id="bookmark-${uuid}-name-container" class="grid grid-cols-[max-content_auto] text-base bg-neutral-900 w-full p-1 rounded-md border-2 border-transparent">
-              <span class="text-sky-500 font-semibold select-none">>&nbsp;</span>
+              <span class="text-pink-500 font-semibold select-none">>&nbsp;</span>
               <input id="bookmark-${uuid}-name-input" type="text" autocomplete="off" class="outline-none bg-transparent text-white placeholder-neutral-500" placeholder="input name..." value="${folder.name}">
             </div>
           </div>
           <div class="grid gap-2">
             <p class="text-white text-base">folder.color</p>
             <div id="bookmark-${uuid}-color-container" class="grid grid-cols-[max-content_auto] text-base bg-neutral-900 w-full p-1 rounded-md border-2 border-transparent">
-              <span class="text-sky-500 font-semibold select-none">>&nbsp;</span>
+              <span class="text-pink-500 font-semibold select-none">>&nbsp;</span>
               <input id="bookmark-${uuid}-color-input" type="text" autocomplete="off" class="outline-none bg-transparent text-white placeholder-neutral-500" placeholder="input color..." value="${folder.color}">
             </div>
           </div>
