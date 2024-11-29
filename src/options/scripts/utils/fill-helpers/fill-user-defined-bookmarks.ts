@@ -8,8 +8,10 @@ export const fillUserDefinedBookmarks = (config: Config) => {
   // user-defined bookmarks
   bookmarksUserDefinedList.innerHTML = "";
   config.bookmarks.userDefined.forEach((bookmarkNode) => {
-    if (bookmarkNode.type === "bookmark") addUserDefinedBookmark(bookmarkNode);
-    else if (bookmarkNode.type === "folder") addUserDefinedBookmarkFolder(bookmarkNode);
+    if (bookmarkNode.type === "bookmark")
+      addUserDefinedBookmark(bookmarkNode, bookmarksUserDefinedList);
+    else if (bookmarkNode.type === "folder")
+      addUserDefinedBookmarkFolder(bookmarkNode, bookmarksUserDefinedList);
   });
 
   const bookmarkNodeEls = bookmarksUserDefinedList.querySelectorAll('[node-type="bookmark"]');
@@ -246,29 +248,29 @@ const addBookmarkButtonEl = document.getElementById("bookmarks-user-defined-add-
 const addFolderButtonEl = document.getElementById("bookmarks-user-defined-add-folder-button") as HTMLButtonElement;
 
 addBookmarkButtonEl.onclick = () => {
-  const id = addUserDefinedBookmark({
-    type: "bookmark",
-    name: "New Bookmark",
-    url: "about:blank",
-    color: "#84cc16",
-    iconType: "ri-box-3-line",
-    iconColor: "#ffffff"
-  });
-
-  handleBookmarkSettings(id);
-  bindToggleCollapseHandlers();
+  addUserDefinedBookmark(
+    {
+      type: "bookmark",
+      name: "New Bookmark",
+      url: "about:blank",
+      color: "#84cc16",
+      iconType: "ri-box-3-line",
+      iconColor: "#ffffff"
+    },
+    bookmarksUserDefinedList
+  );
 };
 
 addFolderButtonEl.onclick = () => {
-  const id = addUserDefinedBookmarkFolder({
-    type: "folder",
-    name: "New Folder",
-    color: "#4d7c0f",
-    contents: []
-  });
-
-  handleFolderSettings(id);
-  bindToggleCollapseHandlers();
+  addUserDefinedBookmarkFolder(
+    {
+      type: "folder",
+      name: "New Folder",
+      color: "#4d7c0f",
+      contents: []
+    },
+    bookmarksUserDefinedList
+  );
 };
 
 const bindToggleCollapseHandlers = () => {
@@ -286,15 +288,16 @@ const bindToggleCollapseHandlers = () => {
   });
 };
 
-const addUserDefinedBookmark = (bookmark: UserDefinedBookmark) => {
+const addUserDefinedBookmark = (bookmark: UserDefinedBookmark, targetDivEl: HTMLDivElement) => {
   const uuid = uuidv4();
 
-  bookmarksUserDefinedList.innerHTML += `
+  targetDivEl.innerHTML += `
     <div class="bookmark-user-defined-item bg-neutral-800 grid grid-cols-[max-content_auto] rounded-md overflow-hidden" node-type="bookmark" bookmark-node-uuid="${uuid}">
       <div id="bookmark-${uuid}-user-defined-accent" class="w-1 h-full" style="background-color:${bookmark.color};"></div>
       <div class="p-2 grid grid-flow-row gap-4">
-        <div class="grid grid-cols-[auto_max-content_max-content]">
-          <span id="bookmark-${uuid}-user-defined-useless-title" class="text-white text-base my-auto">${bookmark.name}</span>
+        <div class="grid grid-cols-[max-content_auto_max-content] place-items-center">
+          <i class="text-white ri-bookmark-fill"></i>
+          <span id="bookmark-${uuid}-user-defined-useless-title" class="text-white text-base my-auto mr-auto ml-2">${bookmark.name}</span>
           <div class="grid grid-cols-3 gap-2">
             <button id="bookmark-${uuid}-toggle-collapse-button" class="bg-neutral-500 hover:bg-neutral-600 transition w-10 aspect-square rounded-md cursor-pointer">
               <i class="text-white ri-collapse-horizontal-line"></i>
@@ -349,18 +352,24 @@ const addUserDefinedBookmark = (bookmark: UserDefinedBookmark) => {
     </div>
   `;
 
-  return uuid;
+  handleBookmarkSettings(uuid);
+  handleUserDefinedBookmarkNodesDragging();
+  bindToggleCollapseHandlers();
 };
 
-const addUserDefinedBookmarkFolder = (folder: UserDefinedBookmarkFolder) => {
+const addUserDefinedBookmarkFolder = (
+  folder: UserDefinedBookmarkFolder,
+  targetDivEl: HTMLDivElement
+) => {
   const uuid = uuidv4();
 
-  bookmarksUserDefinedList.innerHTML += `
+  targetDivEl.innerHTML += `
     <div class="bookmark-user-defined-item bg-neutral-800 grid grid-cols-[max-content_auto] rounded-md overflow-hidden" node-type="folder" bookmark-node-uuid="${uuid}">
       <div id="bookmark-${uuid}-user-defined-accent" class="w-1 h-full" style="background-color:${folder.color};"></div>
       <div class="p-2 grid grid-flow-row gap-4">
-        <div class="grid grid-cols-[auto_max-content_max-content]">
-          <span id="bookmark-${uuid}-user-defined-useless-title" class="text-white text-base my-auto">${folder.name}</span>
+        <div class="grid grid-cols-[max-content_auto_max-content] place-items-center">
+          <i class="text-white ri-folder-fill"></i>
+          <span id="bookmark-${uuid}-user-defined-useless-title" class="text-white text-base my-auto mr-auto ml-2">${folder.name}</span>
           <div class="grid grid-cols-3 gap-2">
             <button id="bookmark-${uuid}-toggle-collapse-button" class="bg-neutral-500 hover:bg-neutral-600 transition w-10 aspect-square rounded-md cursor-pointer">
               <i class="text-white ri-collapse-horizontal-line"></i>
@@ -398,6 +407,17 @@ const addUserDefinedBookmarkFolder = (folder: UserDefinedBookmarkFolder) => {
     </div>
   `;
 
+  const contentsContainer = document.getElementById(`bookmark-${uuid}-contents-container`);
+
+  folder.contents.forEach((content) => {
+    if (content.type === "bookmark") {
+      addUserDefinedBookmark(content, contentsContainer as HTMLDivElement);
+    } else if (content.type === "folder") {
+      addUserDefinedBookmarkFolder(content, contentsContainer as HTMLDivElement);
+    }
+  });
+
+  handleFolderSettings(uuid);
   handleUserDefinedBookmarkNodesDragging();
-  return uuid;
+  bindToggleCollapseHandlers();
 };
