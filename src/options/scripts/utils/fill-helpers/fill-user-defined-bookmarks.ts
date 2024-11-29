@@ -20,17 +20,25 @@ export const fillUserDefinedBookmarks = (config: Config) => {
   toggleCollapseAllBookmarksButtonEl.click();
 };
 
-export const handleUserDefinedBookmarkNodeDragging = () => {
-  const dropzone = document.getElementById("bookmarks-user-defined-list") as HTMLDivElement;
-  new Sortable(dropzone, {
-    group: "user-defined-bookmark-group",
-    fallbackOnBody: true,
-    swapThreshold: 0.65,
-    handle: ".bookmark-node-handle",
-    animation: 250,
-    easing: "cubic-bezier(1, 0, 0, 1)",
-    ghostClass: "bookmark-node-ghost-class",
-    chosenClass: "bookmark-node-chosen-class"
+export const handleUserDefinedBookmarkNodesDragging = () => {
+  // prettier-ignore
+  const dropzones = document.querySelectorAll(".bookmarks-user-defined-dropzone") as NodeListOf<HTMLDivElement>;
+
+  dropzones.forEach((dropzone: HTMLDivElement) => {
+    new Sortable(dropzone, {
+      group: {
+        name: "user-defined-bookmark-group",
+        pull: true,
+        put: true
+      },
+      fallbackOnBody: true,
+      swapThreshold: 0.65,
+      handle: ".bookmark-node-handle",
+      animation: 250,
+      easing: "cubic-bezier(1, 0, 0, 1)",
+      ghostClass: "bookmark-node-ghost-class",
+      chosenClass: "bookmark-node-chosen-class"
+    });
   });
 };
 
@@ -382,24 +390,13 @@ const addUserDefinedBookmarkFolder = (folder: UserDefinedBookmarkFolder) => {
           </div>
           <div class="grid gap-2">
             <p class="text-white text-base">folder.contents</p>
-            <div id="bookmark-${uuid}-contents-container" class="grid grid-flow-row gap-2 bg-neutral-900 rounded-md p-4 min-h-14"></div>
+            <div id="bookmark-${uuid}-contents-container" class="bookmarks-user-defined-dropzone grid grid-flow-row gap-2 bg-neutral-900 rounded-md p-4 min-h-14"></div>
           </div>
         </div>
       </div>
     </div>
   `;
 
-  const dropzone = document.getElementById(`bookmark-${uuid}-contents-container`) as HTMLDivElement;
-  new Sortable(dropzone, {
-    group: "user-defined-bookmark-group",
-    fallbackOnBody: true,
-    swapThreshold: 0.65,
-    handle: ".bookmark-node-handle",
-    animation: 250,
-    easing: "cubic-bezier(1, 0, 0, 1)",
-    ghostClass: "bookmark-node-ghost-class",
-    chosenClass: "bookmark-node-chosen-class"
-  });
-
+  handleUserDefinedBookmarkNodesDragging();
   return uuid;
 };
