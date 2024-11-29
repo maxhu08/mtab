@@ -1,6 +1,6 @@
 import Sortable from "sortablejs";
 import { focusInput, unfocusInput } from "src/config-utils/scripts/handle";
-import { Config, UserDefinedBookmark } from "src/newtab/scripts/config";
+import { Config, UserDefinedBookmark, UserDefinedBookmarkFolder } from "src/newtab/scripts/config";
 import { bookmarksUserDefinedList, Input } from "src/options/scripts/ui";
 import { v4 as uuidv4 } from "uuid";
 
@@ -180,21 +180,34 @@ toggleCollapseAllBookmarksButtonEl.onclick = () => {
   });
 };
 
-(document.getElementById("bookmarks-user-defined-add-button") as HTMLButtonElement).onclick =
-  () => {
-    // const totalBookmarks = bookmarksUserDefinedList.children.length;
+// prettier-ignore
+const addBookmarkButtonEl = document.getElementById("bookmarks-user-defined-add-bookmark-button") as HTMLButtonElement;
+// prettier-ignore
+const addFolderButtonEl = document.getElementById("bookmarks-user-defined-add-folder-button") as HTMLButtonElement;
 
-    const id = addUserDefinedBookmark({
-      type: "bookmark",
-      name: "NAME",
-      url: "about:blank",
-      color: "#84cc16",
-      iconType: "ri-box-3-line",
-      iconColor: "#ffffff"
-    });
+addBookmarkButtonEl.onclick = () => {
+  const id = addUserDefinedBookmark({
+    type: "bookmark",
+    name: "NAME",
+    url: "about:blank",
+    color: "#84cc16",
+    iconType: "ri-box-3-line",
+    iconColor: "#ffffff"
+  });
 
-    handleBookmarkSettings(id);
-  };
+  handleBookmarkSettings(id);
+};
+
+addFolderButtonEl.onclick = () => {
+  const id = addUserDefinedBookmarkFolder({
+    type: "folder",
+    name: "NAME",
+    color: "#84cc16",
+    contents: []
+  });
+
+  handleBookmarkSettings(id);
+};
 
 const addUserDefinedBookmark = (bookmark: UserDefinedBookmark) => {
   const uuid = uuidv4();
@@ -252,6 +265,51 @@ const addUserDefinedBookmark = (bookmark: UserDefinedBookmark) => {
             <div id="bookmark-${uuid}-icon-color-container" class="grid grid-cols-[max-content_auto] text-base bg-neutral-900 w-full p-1 rounded-md border-2 border-transparent">
               <span class="text-sky-500 font-semibold select-none">>&nbsp;</span>
               <input id="bookmark-${uuid}-icon-color-input" type="text" autocomplete="off" class="outline-none bg-transparent text-white placeholder-neutral-500" placeholder="input icon color..." value="${bookmark.iconColor}">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+
+  return uuid;
+};
+
+const addUserDefinedBookmarkFolder = (folder: UserDefinedBookmarkFolder) => {
+  const uuid = uuidv4();
+
+  bookmarksUserDefinedList.innerHTML += `
+    <div class="bookmark-user-defined-item bg-neutral-800 grid grid-cols-[max-content_auto] rounded-md overflow-hidden" node-type="bookmark" bookmark-node-uuid="${uuid}">
+      <div id="bookmark-${uuid}-user-defined-accent" class="w-1 h-full" style="background-color:${folder.color};"></div>
+      <div class="p-2 grid grid-flow-row gap-4">
+        <div class="grid grid-cols-[auto_max-content_max-content]">
+          <span id="bookmark-${uuid}-user-defined-useless-title" class="text-white text-base my-auto">${folder.name}</span>
+          <div class="grid grid-cols-3 gap-2">
+            <button id="bookmark-${uuid}-toggle-collapse-button" class="bg-neutral-500 hover:bg-neutral-600 transition w-10 aspect-square rounded-md cursor-pointer">
+              <i class="text-white ri-collapse-horizontal-line"></i>
+            </button>
+            <button class="bookmark-node-handle bg-neutral-500 hover:bg-neutral-600 transition w-10 aspect-square rounded-md cursor-pointer">
+              <i class="text-white ri-draggable"></i>
+            </button>
+            <button id="bookmark-${uuid}-delete-button" class="bg-rose-500 hover:bg-rose-600 transition w-10 aspect-square rounded-md cursor-pointer">
+              <i class="text-white ri-delete-bin-6-line"></i>
+            </button>
+          </div>
+        </div>
+        <div id="bookmark-${uuid}-collapsible-content" state="expanded" class="grid grid-flow-row gap-4">
+          <div class="bg-neutral-500 h-[1px] rounded-md my-auto"></div>
+          <div class="grid gap-2">
+            <p class="text-white text-base">folder.name</p>
+            <div id="bookmark-${uuid}-name-container" class="grid grid-cols-[max-content_auto] text-base bg-neutral-900 w-full p-1 rounded-md border-2 border-transparent">
+              <span class="text-sky-500 font-semibold select-none">>&nbsp;</span>
+              <input id="bookmark-${uuid}-name-input" type="text" autocomplete="off" class="outline-none bg-transparent text-white placeholder-neutral-500" placeholder="input name..." value="${folder.name}">
+            </div>
+          </div>
+          <div class="grid gap-2">
+            <p class="text-white text-base">folder.color</p>
+            <div id="bookmark-${uuid}-color-container" class="grid grid-cols-[max-content_auto] text-base bg-neutral-900 w-full p-1 rounded-md border-2 border-transparent">
+              <span class="text-sky-500 font-semibold select-none">>&nbsp;</span>
+              <input id="bookmark-${uuid}-color-input" type="text" autocomplete="off" class="outline-none bg-transparent text-white placeholder-neutral-500" placeholder="input color..." value="${folder.color}">
             </div>
           </div>
         </div>
