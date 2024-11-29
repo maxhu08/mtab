@@ -79,8 +79,6 @@ export const saveBookmarksSettingsToDraft = (draft: Config) => {
 };
 
 export const saveUserDefinedBookmarkSettingsToDraft = (draft: Config) => {
-  console.log("RUNRUNRUN");
-
   draft.bookmarks.userDefinedCols = parseInt(bookmarksUserDefinedColsInputEl.value);
 
   const bookmarksNodesToSave: UserDefinedBookmarkNode[] = [];
@@ -97,8 +95,6 @@ export const saveUserDefinedBookmarkSettingsToDraft = (draft: Config) => {
       bookmarksNodesToSave.push(getUserDefinedBookmarkFolderData(uuid));
     }
   });
-
-  console.log(bookmarksNodesToSave);
 
   draft.bookmarks.userDefined = bookmarksNodesToSave;
 };
