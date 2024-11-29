@@ -1,4 +1,3 @@
-import Sortable from "sortablejs";
 import {
   BookmarksLocationFirefox,
   BookmarksType,
@@ -7,7 +6,6 @@ import {
   DefaultFaviconSource
 } from "src/newtab/scripts/config";
 import {
-  bookmarksUserDefinedList,
   bookmarksTypeUserDefinedButtonEl,
   bookmarksTypeDefaultButtonEl,
   bookmarksTypeDefaultBlockyButtonEl,
