@@ -8,6 +8,7 @@
 }
 
 .bookmark-node-chosen-class {
+  opacity: 1 !important;
   border: 2px solid #ec4899;
   box-sizing: border-box;
 }

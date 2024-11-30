@@ -39,7 +39,7 @@ export const handleUserDefinedBookmarkNodesDragging = () => {
       swapThreshold: 0.65,
       handle: ".bookmark-node-handle",
       animation: 250,
-      easing: "cubic-bezier(1, 0, 0, 1)",
+      easing: "cubic-bezier(0.42, 0, 0.58, 1)",
       ghostClass: "bookmark-node-ghost-class",
       chosenClass: "bookmark-node-chosen-class"
     });
