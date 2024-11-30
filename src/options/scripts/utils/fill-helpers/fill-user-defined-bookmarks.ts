@@ -29,6 +29,8 @@ export const handleUserDefinedBookmarkNodesDragging = () => {
   const dropzones = document.querySelectorAll(".bookmarks-user-defined-dropzone") as NodeListOf<HTMLDivElement>;
 
   dropzones.forEach((dropzone: HTMLDivElement) => {
+    if (dropzone.dataset.sortableInitialized === "true") return;
+
     new Sortable(dropzone, {
       group: {
         name: "user-defined-bookmark-group",
@@ -43,6 +45,8 @@ export const handleUserDefinedBookmarkNodesDragging = () => {
       ghostClass: "bookmark-node-ghost-class",
       chosenClass: "bookmark-node-chosen-class"
     });
+
+    dropzone.dataset.sortableInitialized = "true";
   });
 };
 
