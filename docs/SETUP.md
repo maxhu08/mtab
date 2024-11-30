@@ -37,7 +37,7 @@ npm i -g bun
 ### linux (Arch)
 
 ```shell
-pacman -S nodejs npm zip
+paru -S nodejs npm zip fnm
 npm i -g bun
 curl -fsSL https://fnm.vercel.app/install | bash
 ```
