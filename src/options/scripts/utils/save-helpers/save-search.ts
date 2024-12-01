@@ -57,7 +57,8 @@ export const saveSearchSettingsToDraft = (draft: Config) => {
       "search-engine-yahoo-button": "yahoo",
       "search-engine-yandex-button": "yandex",
       "search-engine-startpage-button": "startpage",
-      "search-engine-ecosia-button": "ecosia"
+      "search-engine-ecosia-button": "ecosia",
+      "search-engine-kagi-button": "kagi"
     };
 
     draft.search.engine = searchEnginePairs[selectedEl.id];

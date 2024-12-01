@@ -81,6 +81,7 @@ export const searchEngineYahooButtonEl = getButton("search-engine-yahoo");
 export const searchEngineYandexButtonEl = getButton("search-engine-yandex");
 export const searchEngineStartpageButtonEl = getButton("search-engine-startpage");
 export const searchEngineEcosiaButtonEl = getButton("search-engine-ecosia");
+export const searchEngineKagiButtonEl = getButton("search-engine-kagi");
 export const [searchFocusedBorderColorContainerEl, searchFocusedBorderColorInputEl] = getContainerAndInput("search-focused-border-color");
 export const searchUseCustomEngineEnabledCheckboxEl = getCheckbox("search-use-custom-engine-enabled");
 export const [searchCustomEngineURLContainerEl, searchCustomEngineURLInputEl] = getContainerAndInput("search-custom-engine-url");
@@ -167,7 +168,7 @@ export const buttonSwitches: ButtonSwitch[] = [
     attr: "search-font-type"
   },
   {
-    buttons: [searchEngineDuckduckgoButtonEl, searchEngineGoogleButtonEl, searchEngineBingButtonEl, searchEngineBraveButtonEl, searchEngineYahooButtonEl, searchEngineYandexButtonEl, searchEngineStartpageButtonEl, searchEngineEcosiaButtonEl],
+    buttons: [searchEngineDuckduckgoButtonEl, searchEngineGoogleButtonEl, searchEngineBingButtonEl, searchEngineBraveButtonEl, searchEngineYahooButtonEl, searchEngineYandexButtonEl, searchEngineStartpageButtonEl, searchEngineEcosiaButtonEl, searchEngineKagiButtonEl],
     attr: "search-engine"
   },
   {

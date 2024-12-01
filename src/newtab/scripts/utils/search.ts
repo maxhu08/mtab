@@ -4,14 +4,15 @@ import { setTitle } from "src/newtab/scripts/utils/set-title";
 
 export const search = (config: Config, value: string, openInNewTab: boolean = false) => {
   const searchUrlMap: Record<SearchEngine, string> = {
-    google: `https://www.google.com/search?q=`,
-    bing: `https://www.bing.com/search?q=`,
-    brave: `https://search.brave.com/search?q=`,
-    duckduckgo: `https://duckduckgo.com/?q=`,
-    yahoo: `https://search.yahoo.com/search?q=`,
-    yandex: `https://yandex.com/search/?text=`,
-    startpage: `https://www.startpage.com/sp/search?query=`,
-    ecosia: `https://www.ecosia.org/search?q=`
+    google: "https://www.google.com/search?q=",
+    bing: "https://www.bing.com/search?q=",
+    brave: "https://search.brave.com/search?q=",
+    duckduckgo: "https://duckduckgo.com/?q=",
+    yahoo: "https://search.yahoo.com/search?q=",
+    yandex: "https://yandex.com/search/?text=",
+    startpage: "https://www.startpage.com/sp/search?query=",
+    ecosia: "https://www.ecosia.org/search?q=",
+    kagi: "https://kagi.com/search?q="
   };
 
   let searchUrl = "";

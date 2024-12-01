@@ -26,7 +26,8 @@ import {
   searchAssistConversionsCheckboxEl,
   searchFontCustomInputEl,
   searchFontTypeDefaultButtonEl,
-  searchFontTypeCustomButtonEl
+  searchFontTypeCustomButtonEl,
+  searchEngineKagiButtonEl
 } from "src/options/scripts/ui";
 
 export const fillSearchInputs = (config: Config) => {
@@ -53,7 +54,8 @@ export const fillSearchInputs = (config: Config) => {
     yahoo: searchEngineYahooButtonEl,
     yandex: searchEngineYandexButtonEl,
     startpage: searchEngineStartpageButtonEl,
-    ecosia: searchEngineEcosiaButtonEl
+    ecosia: searchEngineEcosiaButtonEl,
+    kagi: searchEngineKagiButtonEl
   };
 
   if (!config.search.useCustomEngine) {

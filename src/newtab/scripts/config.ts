@@ -223,7 +223,8 @@ export type SearchEngine =
   | "yahoo"
   | "yandex"
   | "startpage"
-  | "ecosia";
+  | "ecosia"
+  | "kagi";
 export type MessageType = "afternoon-morning" | "date" | "time-12" | "time-24" | "custom";
 export type BookmarksType = "user-defined" | "default" | "default-blocky" | "none";
 export type UserDefinedBookmarkNode = UserDefinedBookmarkFolder | UserDefinedBookmark;
