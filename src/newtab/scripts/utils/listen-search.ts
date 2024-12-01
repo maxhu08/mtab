@@ -77,9 +77,16 @@ const handleDate = (val: string) => {
     return { type: "date" } as const;
   }
 };
-
+4;
 const handleMath = (val: string) => {
   try {
+    // check for pattern d/dx(expression)
+    const derivativeMatch = val.match(/^d\/dx\((.+)\)$/);
+    if (derivativeMatch) {
+      const expression = derivativeMatch[1];
+      val = `derivative("${expression}", "x")`;
+    }
+
     const result = evaluate(val);
 
     // allow imaginary numbers
