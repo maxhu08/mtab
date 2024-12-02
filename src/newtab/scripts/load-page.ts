@@ -8,7 +8,7 @@ import { loadWallpaper } from "src/newtab/scripts/utils/load-wallpaper";
 import { styleSearch } from "src/newtab/scripts/utils/style-search";
 import { styleMessage } from "src/newtab/scripts/utils/style-message";
 import { setMessage } from "./utils/set-message";
-import { renderBookmarks } from "./utils/render-bookmarks";
+import { renderBookmarks } from "./utils/bookmarks/render-bookmarks";
 import { addAnimations } from "./utils/animations";
 import { listenToKeys } from "./keys";
 import { loadFavicon } from "src/newtab/scripts/utils/load-favicon";

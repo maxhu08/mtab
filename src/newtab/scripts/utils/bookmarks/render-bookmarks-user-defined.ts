@@ -4,7 +4,7 @@ import {
   bindActionsToBlockNode,
   openBookmark,
   renderBlockBookmark
-} from "src/newtab/scripts/utils/bookmark-render-utils";
+} from "src/newtab/scripts/utils/bookmarks/bookmark-render-utils";
 import { insertCSS } from "src/newtab/scripts/utils/insert-css";
 
 // animations handled separately

@@ -10,7 +10,7 @@ import { bookmarkSearchInputEl, contentEl } from "src/newtab/scripts/ui";
 import {
   buildChromeBookmarksTree,
   renderDefaultBlockyBookmarksNodes
-} from "src/newtab/scripts/utils/bookmark-default-blocky-utils";
+} from "src/newtab/scripts/utils/bookmarks/bookmark-default-blocky-utils";
 import { focusElementBorder, unfocusElementBorder } from "src/newtab/scripts/utils/focus-utils";
 
 export const openBookmark = (

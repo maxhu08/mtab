@@ -1,6 +1,6 @@
 import { Config } from "src/newtab/scripts/config";
 import { bookmarksContainerEl } from "src/newtab/scripts/ui";
-import { openBookmark } from "src/newtab/scripts/utils/bookmark-render-utils";
+import { openBookmark } from "src/newtab/scripts/utils/bookmarks/bookmark-render-utils";
 import { getFaviconURL } from "src/newtab/scripts/utils/favicon-url";
 
 export const renderDefaultBookmarks = (config: Config) => {

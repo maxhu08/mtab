@@ -5,7 +5,7 @@ import {
   bindActionsToBlockNode,
   renderBlockBookmark,
   renderBlockBookmarkFolder
-} from "src/newtab/scripts/utils/bookmark-render-utils";
+} from "src/newtab/scripts/utils/bookmarks/bookmark-render-utils";
 import { getFaviconURL } from "src/newtab/scripts/utils/favicon-url";
 
 export const buildChromeBookmarksTree = (chromeBookmarks: chrome.bookmarks.BookmarkTreeNode[]) => {
