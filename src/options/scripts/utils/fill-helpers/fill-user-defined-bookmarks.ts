@@ -21,7 +21,7 @@ export const fillUserDefinedBookmarks = (config: Config) => {
     handleBookmarkSettings(uuid);
   });
 
-  toggleCollapseAllBookmarksButtonEl.click();
+  toggleCollapseAllBookmarkNodesButtonEl.click();
 };
 
 export const handleUserDefinedBookmarkNodesDragging = () => {
@@ -222,10 +222,11 @@ const toggleCollapseBookmark = (
 };
 
 // prettier-ignore
-const toggleCollapseAllBookmarksButtonEl = document.getElementById("bookmarks-user-defined-toggle-collapse-all-button") as HTMLButtonElement;
-toggleCollapseAllBookmarksButtonEl.onclick = () => {
-  const lastAction = toggleCollapseAllBookmarksButtonEl.getAttribute("last-action");
-  const bookmarkNodeEls = bookmarksUserDefinedList.querySelectorAll('[node-type="bookmark"]');
+const toggleCollapseAllBookmarkNodesButtonEl = document.getElementById("bookmarks-user-defined-toggle-collapse-all-button") as HTMLButtonElement;
+toggleCollapseAllBookmarkNodesButtonEl.onclick = () => {
+  const lastAction = toggleCollapseAllBookmarkNodesButtonEl.getAttribute("last-action");
+  // prettier-ignore
+  const bookmarkNodeEls = bookmarksUserDefinedList.querySelectorAll('[node-type="bookmark"], [node-type="folder"]');
 
   bookmarkNodeEls.forEach((el) => {
     const uuid = el.getAttribute("bookmark-node-uuid");
@@ -237,12 +238,12 @@ toggleCollapseAllBookmarksButtonEl.onclick = () => {
 
     if (lastAction === "expand") {
       toggleCollapseBookmark(collapsibleContentEl, toggleCollapseBookmarkButtonEl, "collapse");
-      toggleCollapseAllBookmarksButtonEl.setAttribute("last-action", "collapse");
-      toggleCollapseAllBookmarksButtonEl.innerHTML = `<span class="text-white text-base">expand all</span>`;
+      toggleCollapseAllBookmarkNodesButtonEl.setAttribute("last-action", "collapse");
+      toggleCollapseAllBookmarkNodesButtonEl.innerHTML = `<span class="text-white text-base">expand all</span>`;
     } else if (lastAction === "collapse") {
       toggleCollapseBookmark(collapsibleContentEl, toggleCollapseBookmarkButtonEl, "expand");
-      toggleCollapseAllBookmarksButtonEl.setAttribute("last-action", "expand");
-      toggleCollapseAllBookmarksButtonEl.innerHTML = `<span class="text-white text-base">collapse all</span>`;
+      toggleCollapseAllBookmarkNodesButtonEl.setAttribute("last-action", "expand");
+      toggleCollapseAllBookmarkNodesButtonEl.innerHTML = `<span class="text-white text-base">collapse all</span>`;
     }
   });
 };
