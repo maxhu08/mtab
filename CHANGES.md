@@ -1,6 +1,14 @@
-# Changes in 1.6.7
+# Changes in 1.6.8
 
 in this release:
 
-- improve user defined bookmarks ui on options page
+- add user defined bookmark folders
+- change default bookmark values
+- change user defined bookmarks ui in options page
+- improve search unit conversion assist
+- improve search math assist
+- change userDefinedKeys -> numberKeys & make compatible with default-blocky bookmarks
+- add kagi to list of search engines
+- update remix icons from v4.3.0 -> v4.5.0
+- performance improvements
 - bug fixes
