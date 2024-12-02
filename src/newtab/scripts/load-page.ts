@@ -57,7 +57,7 @@ export const loadPage = () => {
     );
 
     renderBookmarks(config);
-    listenBookmarkNumberKeys(config.bookmarks.userDefinedKeys);
+    listenBookmarkNumberKeys(config.bookmarks.numberKeys, config.bookmarks.type);
     showOptionsButton(
       config.options.showOptionsButton,
       config.ui.style,
