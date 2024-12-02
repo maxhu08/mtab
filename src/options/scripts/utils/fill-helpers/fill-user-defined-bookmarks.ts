@@ -29,8 +29,16 @@ export const handleUserDefinedBookmarkNodesDragging = () => {
   const dropzones = document.querySelectorAll(".bookmarks-user-defined-dropzone") as NodeListOf<HTMLDivElement>;
 
   dropzones.forEach((dropzone: HTMLDivElement) => {
-    if (dropzone.dataset.sortableInitialized === "true") return;
+    // Reset the sortable instance
+    if (dropzone.dataset.sortableInitialized === "true") {
+      // Destroy the existing sortable instance (if any)
+      const sortableInstance = (dropzone as any).sortable;
+      if (sortableInstance) {
+        sortableInstance.destroy();
+      }
+    }
 
+    // Reinitialize the sortable instance
     new Sortable(dropzone, {
       group: {
         name: "user-defined-bookmark-group",
