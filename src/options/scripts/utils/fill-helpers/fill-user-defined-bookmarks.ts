@@ -434,7 +434,7 @@ const addUserDefinedBookmarkFolder = (
             <p class="text-white text-base">folder.contents</p>
           </div>
         </div>
-        <div id="bookmark-${uuid}-contents-container" class="bookmarks-user-defined-dropzone grid grid-flow-row gap-2 bg-neutral-900 rounded-md p-4 min-h-14"></div>
+        <div id="bookmark-${uuid}-contents-container" class="bookmarks-user-defined-dropzone grid grid-flow-row gap-2 bg-neutral-900 rounded-md p-2 min-h-14"></div>
       </div>
     </div>
   `;
