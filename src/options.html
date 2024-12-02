@@ -769,6 +769,20 @@
                 </div>
               </div>
             </div>
+            <div class="grid gap-2 text-base">
+              <p class="text-neutral-500">enabling numberKeys -> makes it so that pressing 1 opens first bookmark, 2 opens second bookmark, and so on</p>
+              <div class="grid w-full grid-cols-[max-content_auto] place-items-center">
+                <p class="text-base text-white">bookmarks.numberKeys</p>
+                <div class="ml-auto">
+                  <label class="relative inline-flex cursor-pointer items-center">
+                    <input id="bookmarks-number-keys-checkbox" type="checkbox" value="" class="peer sr-only" />
+                    <div
+                      class="peer h-6 w-11 rounded-full bg-neutral-800 outline-none after:absolute after:left-[3px] after:top-[3px] after:aspect-square after:h-[1.15rem] after:rounded-full after:border-none after:bg-neutral-700 after:transition-all after:content-[''] peer-checked:bg-emerald-500 peer-checked:after:translate-x-full peer-checked:after:bg-white"
+                    ></div>
+                  </label>
+                </div>
+              </div>
+            </div>
           </div>
           <div id="bookmarks-user-defined-section">
             <div class="grid gap-2 text-base">
@@ -777,20 +791,6 @@
                 <div id="bookmarks-user-defined-cols-container" class="grid w-full grid-cols-[max-content_auto] rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base">
                   <span class="select-none font-semibold text-pink-500">>&nbsp;</span>
                   <input id="bookmarks-user-defined-cols-input" type="text" autocomplete="off" class="bg-transparent text-white placeholder-neutral-500 outline-none" placeholder="input number..." />
-                </div>
-              </div>
-              <div class="grid gap-2 text-base">
-                <p class="text-neutral-500">enabling userDefinedKeys -> makes it so that pressing 1 opens first bookmark, 2 opens second bookmark, and so on</p>
-                <div class="grid w-full grid-cols-[max-content_auto] place-items-center">
-                  <p class="text-base text-white">bookmarks.userDefinedKeys</p>
-                  <div class="ml-auto">
-                    <label class="relative inline-flex cursor-pointer items-center">
-                      <input id="bookmarks-user-defined-keys-checkbox" type="checkbox" value="" class="peer sr-only" />
-                      <div
-                        class="peer h-6 w-11 rounded-full bg-neutral-800 outline-none after:absolute after:left-[3px] after:top-[3px] after:aspect-square after:h-[1.15rem] after:rounded-full after:border-none after:bg-neutral-700 after:transition-all after:content-[''] peer-checked:bg-emerald-500 peer-checked:after:translate-x-full peer-checked:after:bg-white"
-                      ></div>
-                    </label>
-                  </div>
                 </div>
               </div>
               <p class="text-white">bookmarks.userDefined</p>
