@@ -293,7 +293,7 @@ const bindToggleCollapseHandlers = () => {
   });
 };
 
-const resetEventListeners = () => {
+const resetBookmarkNodeEventListeners = () => {
   // prettier-ignore
   const bookmarkNodeEls = bookmarksUserDefinedList.querySelectorAll('[node-type="bookmark"], [node-type="folder"]');
 
@@ -305,6 +305,12 @@ const resetEventListeners = () => {
       handleFolderSettings(uuid);
     }
   });
+};
+
+export const fixBookmarkNodes = () => {
+  handleUserDefinedBookmarkNodesDragging();
+  bindToggleCollapseHandlers();
+  resetBookmarkNodeEventListeners();
 };
 
 const addUserDefinedBookmark = (bookmark: UserDefinedBookmark, targetDivEl: HTMLDivElement) => {
@@ -372,9 +378,7 @@ const addUserDefinedBookmark = (bookmark: UserDefinedBookmark, targetDivEl: HTML
   `;
 
   handleBookmarkSettings(uuid);
-  handleUserDefinedBookmarkNodesDragging();
-  bindToggleCollapseHandlers();
-  resetEventListeners();
+  fixBookmarkNodes();
 };
 
 const addUserDefinedBookmarkFolder = (
@@ -438,7 +442,5 @@ const addUserDefinedBookmarkFolder = (
   });
 
   handleFolderSettings(uuid);
-  handleUserDefinedBookmarkNodesDragging();
-  bindToggleCollapseHandlers();
-  resetEventListeners();
+  fixBookmarkNodes();
 };
