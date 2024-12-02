@@ -15,6 +15,7 @@ import { loadFavicon } from "src/newtab/scripts/utils/load-favicon";
 import { fixDisappearingUI } from "src/newtab/scripts/utils/fix-disappearing-ui";
 import { listenToSearch } from "src/newtab/scripts/utils/listen-search";
 import { showOptionsButton } from "src/newtab/scripts/utils/show-options-button";
+import { listenBookmarkNumberKeys } from "src/newtab/scripts/utils/bookmarks/listen-bookmark-number-keys";
 
 export const loadPage = () => {
   const manifest = chrome.runtime.getManifest();
@@ -56,6 +57,7 @@ export const loadPage = () => {
     );
 
     renderBookmarks(config);
+    listenBookmarkNumberKeys(config.bookmarks.userDefinedKeys);
     showOptionsButton(
       config.options.showOptionsButton,
       config.ui.style,
