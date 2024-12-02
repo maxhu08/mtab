@@ -16,6 +16,14 @@ const migrateOldConfig = (config: Config): Config => {
     });
   }
 
+  // if config is before v1.6.8
+  // replace userDefinedKeys with numberKeys
+  if ("userDefinedKeys" in config.bookmarks) {
+    // ensure userDefinedKeys is a boolean
+    config.bookmarks.numberKeys = !!config.bookmarks.userDefinedKeys;
+    delete config.bookmarks.userDefinedKeys;
+  }
+
   return config;
 };
 
@@ -146,8 +154,8 @@ export const defaultConfig: Config = {
   },
   bookmarks: {
     type: "user-defined",
+    numberKeys: false,
     userDefinedCols: 4,
-    userDefinedKeys: false,
     userDefined: [
       {
         type: "bookmark",
@@ -326,8 +334,8 @@ export interface Config {
   };
   bookmarks: {
     type: BookmarksType;
+    numberKeys: boolean;
     userDefinedCols: number;
-    userDefinedKeys: boolean;
     userDefined: UserDefinedBookmarkNode[];
     defaultBlockyCols: number;
     defaultBlockyColorType: DefaultBlockyColorType;
