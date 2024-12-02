@@ -27,6 +27,9 @@ export const renderUserDefinedBookmarks = (config: Config) => {
   );
 
   config.bookmarks.userDefined.forEach((bookmark, index) => {
+    const bookmarkColor = bookmark.type === "folder" ? "#ffffff" : bookmark.iconColor;
+    const bookmarkIconType = bookmark.type === "folder" ? "ri-folder-fill" : bookmark.iconType;
+
     renderBlockBookmark(
       bookmarksContainerEl,
       config.animations.bookmarkTiming,
@@ -34,8 +37,8 @@ export const renderUserDefinedBookmarks = (config: Config) => {
       index,
       bookmark.name,
       bookmark.color,
-      bookmark.iconColor,
-      bookmark.iconType,
+      bookmarkColor,
+      bookmarkIconType,
       "",
       config.ui.style,
       config.bookmarks.showBookmarkNames,
@@ -50,7 +53,7 @@ export const renderUserDefinedBookmarks = (config: Config) => {
         const searchFocused = document.activeElement === searchInputEl;
         const bookmarkSearchFocused = document.activeElement === bookmarkSearchInputEl;
 
-        if (!searchFocused && !bookmarkSearchFocused) {
+        if (!searchFocused && !bookmarkSearchFocused && bookmark.type === "bookmark") {
           if (e.key === (index + 1).toString()) {
             openBookmark(bookmark.url, config.animations.enabled, config.animations.bookmarkType);
           }
