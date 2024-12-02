@@ -3,7 +3,7 @@ import { bookmarksContainerEl } from "src/newtab/scripts/ui";
 import {
   buildChromeBookmarksTree,
   renderDefaultBlockyBookmarksNodes
-} from "src/newtab/scripts/utils/bookmark-utils";
+} from "src/newtab/scripts/utils/bookmark-render-utils";
 import { insertCSS } from "src/newtab/scripts/utils/insert-css";
 import { getUserAgent } from "src/util-scripts/user-agent";
 

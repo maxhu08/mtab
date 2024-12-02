@@ -17,7 +17,10 @@ import {
   tryFocusBookmarkSearch,
   unfocusBookmarkSearch
 } from "src/newtab/scripts/utils/bookmark-search-utils";
-import { buildChromeBookmarksTree, openBookmark } from "src/newtab/scripts/utils/bookmark-utils";
+import {
+  buildChromeBookmarksTree,
+  openBookmark
+} from "src/newtab/scripts/utils/bookmark-render-utils";
 // import { navigateTab } from "src/newtab/scripts/utils/navigate-tab";
 
 export const listenToKeys = (config: Config) => {
