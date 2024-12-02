@@ -231,17 +231,15 @@ const toggleCollapseBookmark = (
 
 // prettier-ignore
 const toggleCollapseAllBookmarkNodesButtonEl = document.getElementById("bookmarks-user-defined-toggle-collapse-all-button") as HTMLButtonElement;
+// prettier-ignore
 toggleCollapseAllBookmarkNodesButtonEl.onclick = () => {
   const lastAction = toggleCollapseAllBookmarkNodesButtonEl.getAttribute("last-action");
-  // prettier-ignore
   const bookmarkNodeEls = bookmarksUserDefinedList.querySelectorAll('[node-type="bookmark"], [node-type="folder"]');
 
   bookmarkNodeEls.forEach((el) => {
     const uuid = el.getAttribute("bookmark-node-uuid");
 
-    // prettier-ignore
     const collapsibleContentEl = document.getElementById(`bookmark-${uuid}-collapsible-content`) as HTMLDivElement;
-    // prettier-ignore
     const toggleCollapseBookmarkButtonEl = document.getElementById(`bookmark-${uuid}-toggle-collapse-button`) as HTMLButtonElement;
 
     if (lastAction === "expand") {
@@ -250,6 +248,7 @@ toggleCollapseAllBookmarkNodesButtonEl.onclick = () => {
       toggleCollapseAllBookmarkNodesButtonEl.innerHTML = `<span class="text-white text-base">expand all</span>`;
     } else if (lastAction === "collapse") {
       toggleCollapseBookmark(collapsibleContentEl, toggleCollapseBookmarkButtonEl, "expand");
+      
       toggleCollapseAllBookmarkNodesButtonEl.setAttribute("last-action", "expand");
       toggleCollapseAllBookmarkNodesButtonEl.innerHTML = `<span class="text-white text-base">collapse all</span>`;
     }
@@ -399,7 +398,7 @@ const addUserDefinedBookmarkFolder = (
   targetDivEl.innerHTML += `
     <div class="bookmark-user-defined-item bg-neutral-800 grid grid-cols-[max-content_auto] rounded-md overflow-hidden" node-type="folder" bookmark-node-uuid="${uuid}">
       <div id="bookmark-${uuid}-user-defined-accent" class="w-1 h-full" style="background-color:${folder.color};"></div>
-      <div class="p-2 grid grid-flow-row gap-4">
+      <div class="p-2 grid grid-flow-row gap-2">
         <div class="grid grid-cols-[max-content_auto_max-content] place-items-center">
           <i class="text-white ri-folder-fill"></i>
           <span id="bookmark-${uuid}-user-defined-useless-title" class="text-white text-base my-auto mr-auto ml-2">${folder.name}</span>
@@ -431,11 +430,11 @@ const addUserDefinedBookmarkFolder = (
               <input id="bookmark-${uuid}-color-input" type="text" autocomplete="off" class="outline-none bg-transparent text-white placeholder-neutral-500" placeholder="input color..." value="${folder.color}">
             </div>
           </div>
-          <div class="grid gap-2">
+          <div>
             <p class="text-white text-base">folder.contents</p>
-            <div id="bookmark-${uuid}-contents-container" class="bookmarks-user-defined-dropzone grid grid-flow-row gap-2 bg-neutral-900 rounded-md p-4 min-h-14"></div>
           </div>
         </div>
+        <div id="bookmark-${uuid}-contents-container" class="bookmarks-user-defined-dropzone grid grid-flow-row gap-2 bg-neutral-900 rounded-md p-4 min-h-14"></div>
       </div>
     </div>
   `;
