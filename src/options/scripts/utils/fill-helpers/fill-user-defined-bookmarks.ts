@@ -3,7 +3,7 @@ import { focusInput, unfocusInput } from "src/config-utils/scripts/handle";
 import { Config, UserDefinedBookmark, UserDefinedBookmarkFolder } from "src/newtab/scripts/config";
 import { bookmarksUserDefinedList, Input } from "src/options/scripts/ui";
 import { getRandomColor } from "src/options/scripts/utils/random-color";
-import { v4 as uuidv4 } from "uuid";
+import { genid } from "src/utils/genid";
 
 export const fillUserDefinedBookmarks = (config: Config) => {
   // user-defined bookmarks
@@ -322,7 +322,7 @@ export const fixBookmarkNodes = () => {
 };
 
 const addUserDefinedBookmark = (bookmark: UserDefinedBookmark, targetDivEl: HTMLDivElement) => {
-  const uuid = uuidv4();
+  const uuid = genid();
 
   targetDivEl.innerHTML += `
     <div class="bookmark-user-defined-item bg-neutral-800 grid grid-cols-[max-content_auto] rounded-md overflow-hidden" node-type="bookmark" bookmark-node-uuid="${uuid}">
@@ -393,7 +393,7 @@ const addUserDefinedBookmarkFolder = (
   folder: UserDefinedBookmarkFolder,
   targetDivEl: HTMLDivElement
 ) => {
-  const uuid = uuidv4();
+  const uuid = genid();
 
   targetDivEl.innerHTML += `
     <div class="bookmark-user-defined-item bg-neutral-800 grid grid-cols-[max-content_auto] rounded-md overflow-hidden" node-type="folder" bookmark-node-uuid="${uuid}">
