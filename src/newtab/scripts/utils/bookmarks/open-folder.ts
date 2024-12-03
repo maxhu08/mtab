@@ -12,13 +12,14 @@ export const openFolder = (
     const animationDuration = parseFloat(computedStyle.animationDuration) * 1000;
 
     setTimeout(() => {
-      currFolderAreaEl.style.opacity = "0%";
+      currFolderAreaEl.classList.replace("grid", "hidden");
     }, animationDuration - 10);
 
     setTimeout(() => {
       openfolderAreaEl.classList.replace("hidden", "grid");
     }, animationDuration + 20);
   } else {
+    currFolderAreaEl.classList.replace("grid", "hidden");
     openfolderAreaEl.classList.replace("hidden", "grid");
   }
 };
