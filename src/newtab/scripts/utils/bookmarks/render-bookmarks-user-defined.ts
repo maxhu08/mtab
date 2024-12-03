@@ -1,8 +1,10 @@
 import { Config } from "src/newtab/scripts/config";
 import { bookmarksContainerEl } from "src/newtab/scripts/ui";
 import {
-  bindActionsToBlockNode,
-  renderBlockBookmark
+  bindActionsToBlockBookmark,
+  bindActionsToBlockFolder,
+  renderBlockBookmark,
+  renderBlockFolder
 } from "src/newtab/scripts/utils/bookmarks/bookmark-render-utils-new";
 import { insertCSS } from "src/newtab/scripts/utils/insert-css";
 
@@ -34,34 +36,56 @@ export const renderUserDefinedBookmarks = (config: Config) => {
   const bookmarkType = config.animations.bookmarkType;
   const focusedBorderColor = config.search.focusedBorderColor;
 
-  config.bookmarks.userDefined.forEach((bookmark, index) => {
-    const bookmarkColor = bookmark.type === "folder" ? "#ffffff" : bookmark.iconColor;
-    const bookmarkIconType = bookmark.type === "folder" ? "ri-folder-fill" : bookmark.iconType;
+  config.bookmarks.userDefined.forEach((bookmarkNode, index) => {
+    if (bookmarkNode.type === "bookmark") {
+      const uuid = renderBlockBookmark(
+        bookmarksContainerEl,
+        bookmarkTiming,
+        config.bookmarks.userDefined.length,
+        index,
+        bookmarkNode.name,
+        bookmarkNode.color,
+        bookmarkNode.iconColor,
+        bookmarkNode.iconType,
+        "",
+        uiStyle,
+        showBookmarkNames,
+        messageTextColor,
+        animationsEnabled,
+        animationsInitialType
+      );
 
-    const uuid = renderBlockBookmark(
-      bookmarksContainerEl,
-      bookmarkTiming,
-      config.bookmarks.userDefined.length,
-      index,
-      bookmark.name,
-      bookmark.color,
-      bookmarkColor,
-      bookmarkIconType,
-      "",
-      uiStyle,
-      showBookmarkNames,
-      messageTextColor,
-      animationsEnabled,
-      animationsInitialType
-    );
+      bindActionsToBlockBookmark(
+        uuid,
+        bookmarkNode.url,
+        animationsEnabled,
+        animationsInitialType,
+        bookmarkType,
+        focusedBorderColor
+      );
+    } else {
+      const uuid = renderBlockFolder(
+        bookmarksContainerEl,
+        bookmarkTiming,
+        config.bookmarks.userDefined.length,
+        index,
+        bookmarkNode.name,
+        bookmarkNode.color,
+        bookmarkNode.iconColor,
+        uiStyle,
+        showBookmarkNames,
+        messageTextColor,
+        animationsEnabled,
+        animationsInitialType
+      );
 
-    bindActionsToBlockNode(
-      uuid,
-      bookmark.type === "bookmark" ? bookmark.url : "",
-      animationsEnabled,
-      animationsInitialType,
-      bookmarkType,
-      focusedBorderColor
-    );
+      bindActionsToBlockFolder(
+        uuid,
+        animationsEnabled,
+        animationsInitialType,
+        bookmarkType,
+        focusedBorderColor
+      );
+    }
   });
 };

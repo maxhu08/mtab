@@ -3,8 +3,7 @@ import { bookmarksContainerEl } from "src/newtab/scripts/ui";
 import {
   bindActionsToBackButton,
   bindActionsToBlockNode,
-  renderBlockBookmark,
-  renderBlockBookmarkFolder
+  renderBlockBookmark
 } from "src/newtab/scripts/utils/bookmarks/bookmark-render-utils";
 import { getFaviconURL } from "src/newtab/scripts/utils/favicon-url";
 
