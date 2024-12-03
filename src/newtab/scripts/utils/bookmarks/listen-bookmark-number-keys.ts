@@ -5,8 +5,6 @@ export const listenBookmarkNumberKeys = (listen: boolean, bookmarksType: Bookmar
   if (bookmarksType !== "user-defined" && bookmarksType !== "default-blocky") return;
   if (!listen) return;
 
-  console.log("NUMBER KEYs");
-
   document.addEventListener("keypress", (e) => {
     const searchFocused = document.activeElement === searchInputEl;
     const bookmarkSearchFocused = document.activeElement === bookmarkSearchInputEl;

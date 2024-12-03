@@ -1,6 +1,4 @@
 export const navigateTab = (direction: "right" | "left") => {
-  console.log("navigate", direction);
-
   if (direction === "right") {
     chrome.tabs.query({ currentWindow: true }, function (tabs) {
       const activeTabIndex = tabs.findIndex((tab) => tab.active);
