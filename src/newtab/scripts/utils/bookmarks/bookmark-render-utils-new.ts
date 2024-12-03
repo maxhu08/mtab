@@ -2,12 +2,89 @@ import {
   AnimationBookmarkType,
   AnimationInitialType,
   BookmarkTiming,
-  UIStyle
+  Config,
+  UIStyle,
+  UserDefinedBookmarkNode
 } from "src/newtab/scripts/config";
 import { bookmarksContainerEl } from "src/newtab/scripts/ui";
 import { openBookmark } from "src/newtab/scripts/utils/bookmarks/open-bookmark";
 import { focusElementBorder, unfocusElementBorder } from "src/newtab/scripts/utils/focus-utils";
 import { genid } from "src/utils/genid";
+
+export const renderBookmarkNodes = (
+  bookmarkNodes: UserDefinedBookmarkNode[],
+  folderAreaEl: HTMLDivElement,
+  config: Config
+) => {
+  const uiStyle = config.ui.style;
+
+  const bookmarkTiming = config.animations.bookmarkTiming;
+  const showBookmarkNames = config.bookmarks.showBookmarkNames;
+  const messageTextColor = config.message.textColor;
+  const animationsEnabled = config.animations.enabled;
+  const animationsInitialType = config.animations.initialType;
+  const bookmarkType = config.animations.bookmarkType;
+  const focusedBorderColor = config.search.focusedBorderColor;
+
+  bookmarkNodes.forEach((bookmarkNode, index) => {
+    if (bookmarkNode.type === "bookmark") {
+      const uuid = renderBlockBookmark(
+        folderAreaEl,
+        bookmarkTiming,
+        config.bookmarks.userDefined.length,
+        index,
+        bookmarkNode.name,
+        bookmarkNode.color,
+        bookmarkNode.iconColor,
+        bookmarkNode.iconType,
+        "",
+        uiStyle,
+        showBookmarkNames,
+        messageTextColor,
+        animationsEnabled,
+        animationsInitialType
+      );
+
+      bindActionsToBlockBookmark(
+        uuid,
+        bookmarkNode.url,
+        animationsEnabled,
+        animationsInitialType,
+        bookmarkType,
+        focusedBorderColor
+      );
+    } else {
+      const uuid = renderBlockFolder(
+        folderAreaEl,
+        bookmarkTiming,
+        config.bookmarks.userDefined.length,
+        index,
+        bookmarkNode.name,
+        bookmarkNode.color,
+        bookmarkNode.iconColor,
+        uiStyle,
+        showBookmarkNames,
+        messageTextColor,
+        animationsEnabled,
+        animationsInitialType
+      );
+
+      bindActionsToBlockFolder(
+        uuid,
+        animationsEnabled,
+        animationsInitialType,
+        bookmarkType,
+        focusedBorderColor
+      );
+
+      if (bookmarkNode.contents.length > 0) {
+        const newFolderAreaEl = createFolderArea(genid());
+
+        renderBookmarkNodes(bookmarkNode.contents, newFolderAreaEl, config);
+      }
+    }
+  });
+};
 
 export const createFolderArea = (uuid: string) => {
   // <div id="folder-${uuid}" class="w-full grid gap-2 user-defined-bookmarks-cols"></div>
