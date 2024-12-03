@@ -20,7 +20,6 @@ export const renderBlockBookmark = (
   bookmarkIconHTML: string,
   uiStyle: UIStyle,
   showName: boolean,
-  bookmarkVanityName: string,
   nameTextColor: string,
   animationsEnabled: boolean,
   animationsInitialType: AnimationInitialType
@@ -93,7 +92,7 @@ export const renderBlockBookmark = (
     nameSpan.className =
       "visibilty-bookmark-name w-full font-message font-semibold text-base text-ellipsis overflow-hidden whitespace-nowrap";
     nameSpan.style.color = nameTextColor;
-    nameSpan.textContent = bookmarkVanityName;
+    nameSpan.textContent = bookmarkName;
   }
 
   button.appendChild(borderDiv);

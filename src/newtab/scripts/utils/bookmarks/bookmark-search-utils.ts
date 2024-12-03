@@ -71,19 +71,26 @@ export const refreshBookmarkSearchResults = (
   let selectedIndex = parseInt(bookmarkSearchResultsContainerEl.getAttribute("selected-index") as string);
 
   const bookmarkSearchValue = bookmarkSearchInputEl.value.toLowerCase();
+  const bookmarkWithoutFolders = bookmarks.filter((bm) => bm.type === "bookmark");
 
   let filteredBookmarks = [];
 
   if (bookmarksType === "user-defined") {
-    filteredBookmarks = fuzzySearchBookmark(bookmarkSearchValue, bookmarks, bookmarksType).sort(
-      (a, b) => {
-        const aContains = a.name.toLowerCase().startsWith(bookmarkSearchValue);
-        const bContains = b.name.toLowerCase().startsWith(bookmarkSearchValue);
-        return aContains === bContains ? 0 : aContains ? -1 : 1;
-      }
-    );
+    filteredBookmarks = fuzzySearchBookmark(
+      bookmarkSearchValue,
+      bookmarkWithoutFolders,
+      bookmarksType
+    ).sort((a, b) => {
+      const aContains = a.name.toLowerCase().startsWith(bookmarkSearchValue);
+      const bContains = b.name.toLowerCase().startsWith(bookmarkSearchValue);
+      return aContains === bContains ? 0 : aContains ? -1 : 1;
+    });
   } else if (bookmarksType === "default" || bookmarksType === "default-blocky") {
-    filteredBookmarks = fuzzySearchBookmark(bookmarkSearchValue, bookmarks, bookmarksType)
+    filteredBookmarks = fuzzySearchBookmark(
+      bookmarkSearchValue,
+      bookmarkWithoutFolders,
+      bookmarksType
+    )
       .filter((bm) => {
         // filter out folders
         return !(bm.children && bm.children!.length > 0);

@@ -50,7 +50,6 @@ export const renderUserDefinedBookmarks = (config: Config) => {
       "",
       uiStyle,
       showBookmarkNames,
-      bookmark.name,
       messageTextColor,
       animationsEnabled,
       animationsInitialType
