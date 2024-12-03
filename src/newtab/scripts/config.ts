@@ -240,6 +240,7 @@ export type UserDefinedBookmarkFolder = {
   type: "folder";
   name: string;
   color: string;
+  iconColor: string;
   contents: UserDefinedBookmarkNode[];
 };
 export type UserDefinedBookmark = {

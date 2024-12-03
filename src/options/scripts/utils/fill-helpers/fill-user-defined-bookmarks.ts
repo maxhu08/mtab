@@ -160,6 +160,10 @@ const handleFolderSettings = (uuid: string) => {
     {
       container: document.getElementById(`bookmark-${uuid}-color-container`) as HTMLDivElement,
       input: colorInput
+    },
+    {
+      container: document.getElementById(`bookmark-${uuid}-icon-color-container`) as HTMLDivElement,
+      input: document.getElementById(`bookmark-${uuid}-icon-color-container`) as HTMLInputElement
     }
   ];
 
@@ -275,11 +279,14 @@ addBookmarkButtonEl.onclick = () => {
 };
 
 addFolderButtonEl.onclick = () => {
+  const randomColor = getRandomColor();
+
   addUserDefinedBookmarkFolder(
     {
       type: "folder",
       name: "New Folder",
-      color: getRandomColor(),
+      color: randomColor,
+      iconColor: randomColor,
       contents: []
     },
     bookmarksUserDefinedList
@@ -428,6 +435,13 @@ const addUserDefinedBookmarkFolder = (
             <div id="bookmark-${uuid}-color-container" class="grid grid-cols-[max-content_auto] text-base bg-neutral-900 w-full p-1 rounded-md border-2 border-transparent">
               <span class="text-pink-500 font-semibold select-none">>&nbsp;</span>
               <input id="bookmark-${uuid}-color-input" type="text" autocomplete="off" class="outline-none bg-transparent text-white placeholder-neutral-500" placeholder="input color..." value="${folder.color}">
+            </div>
+          </div>
+          <div class="grid gap-2">
+            <p class="text-white text-base">folder.iconColor</p>
+            <div id="bookmark-${uuid}-icon-color-container" class="grid grid-cols-[max-content_auto] text-base bg-neutral-900 w-full p-1 rounded-md border-2 border-transparent">
+              <span class="text-pink-500 font-semibold select-none">>&nbsp;</span>
+              <input id="bookmark-${uuid}-icon-color-input" type="text" autocomplete="off" class="outline-none bg-transparent text-white placeholder-neutral-500" placeholder="input color..." value="${folder.color}">
             </div>
           </div>
           <div>
