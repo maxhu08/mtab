@@ -3,7 +3,7 @@ import { bookmarksContainerEl } from "src/newtab/scripts/ui";
 import {
   bindActionsToBlockNode,
   renderBlockBookmark
-} from "src/newtab/scripts/utils/bookmarks/bookmark-render-utils";
+} from "src/newtab/scripts/utils/bookmarks/bookmark-render-utils-new";
 import { insertCSS } from "src/newtab/scripts/utils/insert-css";
 
 // animations handled separately
@@ -29,7 +29,7 @@ export const renderUserDefinedBookmarks = (config: Config) => {
     const bookmarkColor = bookmark.type === "folder" ? "#ffffff" : bookmark.iconColor;
     const bookmarkIconType = bookmark.type === "folder" ? "ri-folder-fill" : bookmark.iconType;
 
-    renderBlockBookmark(
+    const uuid = renderBlockBookmark(
       bookmarksContainerEl,
       config.animations.bookmarkTiming,
       config.bookmarks.userDefined.length,
@@ -46,16 +46,12 @@ export const renderUserDefinedBookmarks = (config: Config) => {
       config.animations.enabled,
       config.animations.initialType
     );
-  });
 
-  config.animations &&
-    config.bookmarks.userDefined.forEach((bookmark, index) => {
-      bindActionsToBlockNode(
-        // @ts-expect-error
-        bookmark,
-        index,
-        [],
-        config
-      );
-    });
+    bindActionsToBlockNode(
+      uuid,
+      config.animations.enabled,
+      config.animations.initialType,
+      config.search.focusedBorderColor
+    );
+  });
 };
