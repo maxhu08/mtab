@@ -25,13 +25,22 @@ export const renderUserDefinedBookmarks = (config: Config) => {
     `.user-defined-bookmarks-cols{grid-template-columns:1fr 1fr;}@media (min-width: 768px){.user-defined-bookmarks-cols{grid-template-columns:repeat(${config.bookmarks.userDefinedCols}, minmax(0, 1fr));}}`
   );
 
+  const uiStyle = config.ui.style;
+  const bookmarkTiming = config.animations.bookmarkTiming;
+  const showBookmarkNames = config.bookmarks.showBookmarkNames;
+  const messageTextColor = config.message.textColor;
+  const animationsEnabled = config.animations.enabled;
+  const animationsInitialType = config.animations.initialType;
+  const bookmarkType = config.animations.bookmarkType;
+  const focusedBorderColor = config.search.focusedBorderColor;
+
   config.bookmarks.userDefined.forEach((bookmark, index) => {
     const bookmarkColor = bookmark.type === "folder" ? "#ffffff" : bookmark.iconColor;
     const bookmarkIconType = bookmark.type === "folder" ? "ri-folder-fill" : bookmark.iconType;
 
     const uuid = renderBlockBookmark(
       bookmarksContainerEl,
-      config.animations.bookmarkTiming,
+      bookmarkTiming,
       config.bookmarks.userDefined.length,
       index,
       bookmark.name,
@@ -39,19 +48,21 @@ export const renderUserDefinedBookmarks = (config: Config) => {
       bookmarkColor,
       bookmarkIconType,
       "",
-      config.ui.style,
-      config.bookmarks.showBookmarkNames,
+      uiStyle,
+      showBookmarkNames,
       bookmark.name,
-      config.message.textColor,
-      config.animations.enabled,
-      config.animations.initialType
+      messageTextColor,
+      animationsEnabled,
+      animationsInitialType
     );
 
     bindActionsToBlockNode(
       uuid,
-      config.animations.enabled,
-      config.animations.initialType,
-      config.search.focusedBorderColor
+      bookmark.type === "bookmark" ? bookmark.url : "",
+      animationsEnabled,
+      animationsInitialType,
+      bookmarkType,
+      focusedBorderColor
     );
   });
 };

@@ -1,4 +1,10 @@
-import { AnimationInitialType, BookmarkTiming, UIStyle } from "src/newtab/scripts/config";
+import {
+  AnimationBookmarkType,
+  AnimationInitialType,
+  BookmarkTiming,
+  UIStyle
+} from "src/newtab/scripts/config";
+import { openBookmark } from "src/newtab/scripts/utils/bookmarks/bookmark-utils";
 import { focusElementBorder, unfocusElementBorder } from "src/newtab/scripts/utils/focus-utils";
 import { v4 as uuidv4 } from "uuid";
 
@@ -104,8 +110,10 @@ export const renderBlockBookmark = (
 
 export const bindActionsToBlockNode = (
   uuid: string,
+  url: string,
   animationsEnabled: boolean,
   animationsInitialType: AnimationInitialType,
+  animationsBookmarkType: AnimationBookmarkType,
   focusedBorderColor: string
 ) => {
   // prettier-ignore
@@ -137,23 +145,23 @@ export const bindActionsToBlockNode = (
     });
   }
 
-  // add later
-  // const isFolder = node.children && node.children!.length > 0;
+  const isFolder = false;
 
-  // if (isFolder) {
-  //   bookmarkEl.onmouseup = () =>
-  //     openBookmarkFolder(chromeBookmarks, node.parentId!, node.id, config, true);
-  // } else {
-  //   // can't be onclick in order to register middle click and can't be onmousedown because open in new tab fails
-  //   bookmarkEl.onmouseup = (e) => {
-  //     // open in new tab when holding ctrl or middle click
-  //     if (e.ctrlKey || e.button === 1) {
-  //       openBookmark(node.url!, config.animations.enabled, config.animations.bookmarkType, true);
-  //     } else if (e.button === 0) {
-  //       openBookmark(node.url!, config.animations.enabled, config.animations.bookmarkType);
-  //     }
-  //   };
-  // }
+  if (isFolder) {
+    bookmarkEl.onmouseup = () =>
+      // openBookmarkFolder(chromeBookmarks, node.parentId!, node.id, config, true);
+      console.log("open folder");
+  } else {
+    // can't be onclick in order to register middle click and can't be onmousedown because open in new tab fails
+    bookmarkEl.onmouseup = (e) => {
+      // open in new tab when holding ctrl or middle click
+      if (e.ctrlKey || e.button === 1) {
+        openBookmark(url, animationsEnabled, animationsBookmarkType, true);
+      } else if (e.button === 0) {
+        openBookmark(url, animationsEnabled, animationsBookmarkType);
+      }
+    };
+  }
 
   bookmarkEl.addEventListener("blur", () => unfocusElementBorder(bookmarkBorderEl));
   bookmarkEl.addEventListener("focus", (e) =>
