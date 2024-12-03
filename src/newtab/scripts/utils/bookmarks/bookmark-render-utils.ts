@@ -1,49 +1,16 @@
 import {
-  AnimationBookmarkType,
   AnimationInitialType,
   BookmarkTiming,
   Config,
   UIStyle,
   UserDefinedBookmark
 } from "src/newtab/scripts/config";
-import { bookmarkSearchInputEl, contentEl } from "src/newtab/scripts/ui";
 import {
   buildChromeBookmarksTree,
   renderDefaultBlockyBookmarksNodes
 } from "src/newtab/scripts/utils/bookmarks/bookmark-default-blocky-utils";
+import { openBookmark } from "src/newtab/scripts/utils/bookmarks/bookmark-utils";
 import { focusElementBorder, unfocusElementBorder } from "src/newtab/scripts/utils/focus-utils";
-
-export const openBookmark = (
-  bookmarkUrl: string,
-  animationsEnabled: boolean,
-  animationsType: AnimationBookmarkType,
-  openInNewTab: boolean = false
-) => {
-  if (!/^https?:\/\//i.test(bookmarkUrl)) bookmarkUrl = `https://${bookmarkUrl}`;
-
-  if (openInNewTab) {
-    window.open(bookmarkUrl, "_blank");
-    bookmarkSearchInputEl.value = "";
-
-    return;
-  }
-
-  if (animationsEnabled) {
-    contentEl.classList.add(animationsType);
-    const computedStyle = getComputedStyle(contentEl);
-    const animationDuration = parseFloat(computedStyle.animationDuration) * 1000;
-
-    setTimeout(() => {
-      contentEl.style.opacity = "0%";
-    }, animationDuration - 10);
-
-    setTimeout(() => {
-      window.location.href = bookmarkUrl;
-    }, animationDuration + 20);
-  } else {
-    window.location.href = bookmarkUrl;
-  }
-};
 
 export const openBookmarkFolder = (
   chromeBookmarks: chrome.bookmarks.BookmarkTreeNode[],
