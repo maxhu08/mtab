@@ -8,6 +8,7 @@ import {
 } from "src/newtab/scripts/config";
 import { bookmarksContainerEl } from "src/newtab/scripts/ui";
 import { openBookmark } from "src/newtab/scripts/utils/bookmarks/open-bookmark";
+import { openFolder } from "src/newtab/scripts/utils/bookmarks/open-folder";
 import { focusElementBorder, unfocusElementBorder } from "src/newtab/scripts/utils/focus-utils";
 import { genid } from "src/utils/genid";
 
@@ -78,7 +79,7 @@ export const renderBookmarkNodes = (
       );
 
       if (bookmarkNode.contents.length > 0) {
-        const newFolderAreaEl = createFolderArea(genid());
+        const newFolderAreaEl = createFolderArea(uuid);
 
         renderBookmarkNodes(bookmarkNode.contents, newFolderAreaEl, config);
       }
@@ -86,12 +87,13 @@ export const renderBookmarkNodes = (
   });
 };
 
-export const createFolderArea = (uuid: string) => {
-  // <div id="folder-${uuid}" class="w-full grid gap-2 user-defined-bookmarks-cols"></div>
+export const createFolderArea = (uuid: string, state: boolean = false) => {
+  // <div id="folder-${uuid}" class="w-full user-defined-bookmarks-cols hidden or grid"></div>
 
   const folderDiv = document.createElement("div");
   folderDiv.id = `folder-${uuid}`;
-  folderDiv.className = "w-full grid gap-2 user-defined-bookmarks-cols";
+  folderDiv.setAttribute("folder-state", state ? "open" : "closed");
+  folderDiv.className = `w-full ${state ? "grid" : "hidden"} gap-2 user-defined-bookmarks-cols`;
 
   bookmarksContainerEl.appendChild(folderDiv);
 
@@ -357,6 +359,17 @@ export const bindActionsToBlockFolder = (
   }
 
   // todo: add onclick stuff
+  // can't be onclick in order to register middle click and can't be onmousedown because open in new tab fails
+  bookmarkEl.onmouseup = (e) => {
+    // open folder when holding ctrl or middle click
+    if (e.button === 0 || e.button === 1) {
+      // prettier-ignore
+      const currFolderAreaEl = bookmarksContainerEl.querySelector('[folder-state="open"]') as HTMLDivElement;
+      const openFolderAreaEl = document.getElementById(`folder-${uuid}`) as HTMLDivElement;
+
+      openFolder(currFolderAreaEl, openFolderAreaEl, animationsEnabled, animationsBookmarkType);
+    }
+  };
 
   bookmarkEl.addEventListener("blur", () => unfocusElementBorder(bookmarkBorderEl));
   bookmarkEl.addEventListener("focus", (e) =>

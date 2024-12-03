@@ -1,11 +1,7 @@
 import { Config } from "src/newtab/scripts/config";
 import { bookmarksContainerEl } from "src/newtab/scripts/ui";
 import {
-  bindActionsToBlockBookmark,
-  bindActionsToBlockFolder,
   createFolderArea,
-  renderBlockBookmark,
-  renderBlockFolder,
   renderBookmarkNodes
 } from "src/newtab/scripts/utils/bookmarks/bookmark-render-utils-new";
 import { insertCSS } from "src/newtab/scripts/utils/insert-css";
@@ -31,7 +27,7 @@ export const renderUserDefinedBookmarks = (config: Config) => {
   );
 
   const rootFolderUUID = genid();
-  const rootFolderAreaEl = createFolderArea(rootFolderUUID);
+  const rootFolderAreaEl = createFolderArea(rootFolderUUID, true);
 
   renderBookmarkNodes(config.bookmarks.userDefined, rootFolderAreaEl, config);
 };
