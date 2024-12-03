@@ -441,7 +441,7 @@ const addUserDefinedBookmarkFolder = (
             <p class="text-white text-base">folder.iconColor</p>
             <div id="bookmark-${uuid}-icon-color-container" class="grid grid-cols-[max-content_auto] text-base bg-neutral-900 w-full p-1 rounded-md border-2 border-transparent">
               <span class="text-pink-500 font-semibold select-none">>&nbsp;</span>
-              <input id="bookmark-${uuid}-icon-color-input" type="text" autocomplete="off" class="outline-none bg-transparent text-white placeholder-neutral-500" placeholder="input color..." value="${folder.color}">
+              <input id="bookmark-${uuid}-icon-color-input" type="text" autocomplete="off" class="outline-none bg-transparent text-white placeholder-neutral-500" placeholder="input color..." value="${folder.iconColor}">
             </div>
           </div>
           <div>
