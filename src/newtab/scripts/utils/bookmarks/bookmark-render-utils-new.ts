@@ -143,8 +143,6 @@ export const bindActionsToBlockBookmark = (
     });
   }
 
-  const isFolder = false;
-
   // can't be onclick in order to register middle click and can't be onmousedown because open in new tab fails
   bookmarkEl.onmouseup = (e) => {
     // open in new tab when holding ctrl or middle click
@@ -188,7 +186,7 @@ export const renderBlockFolder = (
 
   const button = document.createElement("button");
   button.id = `bookmark-node-${uuid}`;
-  button.setAttribute("node-type", "bookmark");
+  button.setAttribute("node-type", "folder");
   button.className = `relative duration-[250ms] ease-out bg-foreground cursor-pointer ${uiStyle === "glass" ? "glass-effect" : ""} corner-style h-bookmark overflow-hidden ${animationsEnabled ? `${animationsInitialType} opacity-0 outline-none` : ""}`;
   if (animationsEnabled) button.style.animationDelay = `${delay}ms`;
 
