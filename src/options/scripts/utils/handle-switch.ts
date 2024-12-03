@@ -178,7 +178,7 @@ const handleUserDefinedOrDefaultBlockySwitch = () => {
   const bookmarksUserDefinedOrDefaultBlockySection = document.getElementById("bookmarks-user-defined-or-default-blocky-section") as HTMLDivElement
 
   const hide = () => (bookmarksUserDefinedOrDefaultBlockySection.style.display = "none");
-  const show = () => (bookmarksUserDefinedOrDefaultBlockySection.style.display = "block");
+  const show = () => (bookmarksUserDefinedOrDefaultBlockySection.style.display = "grid");
 
   bookmarksTypeUserDefinedButtonEl.addEventListener("click", () => show());
   bookmarksTypeDefaultButtonEl.addEventListener("click", () => hide());
