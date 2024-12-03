@@ -3,7 +3,7 @@ import { listenToKeys } from "src/options/scripts/keybinds";
 import { listenToInputs } from "src/options/scripts/inputs";
 import { handleWallpaperFileUpload } from "src/options/scripts/utils/upload-wallpaper";
 import { getConfig } from "src/newtab/scripts/config";
-import { getUserAgent } from "src/util-scripts/user-agent";
+import { getUserAgent } from "src/utils/user-agent";
 import { handleSwitches } from "src/options/scripts/utils/handle-switch";
 import {
   fixAllToggleCheckboxSections,

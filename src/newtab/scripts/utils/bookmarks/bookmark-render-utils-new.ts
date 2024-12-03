@@ -6,7 +6,7 @@ import {
 } from "src/newtab/scripts/config";
 import { openBookmark } from "src/newtab/scripts/utils/bookmarks/bookmark-utils";
 import { focusElementBorder, unfocusElementBorder } from "src/newtab/scripts/utils/focus-utils";
-import { v4 as uuidv4 } from "uuid";
+import { genid } from "src/utils/genid";
 
 export const renderBlockBookmark = (
   containerEl: HTMLDivElement,
@@ -47,7 +47,7 @@ export const renderBlockBookmark = (
     }
   }
 
-  const uuid = uuidv4();
+  const uuid = genid();
 
   // <button id="bookmark-${uuid}" class="relative duration-[250ms] ease-out bg-foreground cursor-pointer ${uiStyle === "glass" ? "glass-effect" : ""} corner-style h-bookmark overflow-hidden ${animationsEnabled ? `${animationsInitialType} opacity-0 outline-none` : ""}" ${animationsEnabled ? `style="animation-delay: ${delay}ms;"` : ""}>
   //   <div id="bookmark-${uuid}-border" class="absolute w-full h-full border-2 border-transparent corner-style"></div>

@@ -5,7 +5,7 @@ import {
   renderDefaultBlockyBookmarksNodes
 } from "src/newtab/scripts/utils/bookmarks/bookmark-default-blocky-utils";
 import { insertCSS } from "src/newtab/scripts/utils/insert-css";
-import { getUserAgent } from "src/util-scripts/user-agent";
+import { getUserAgent } from "src/utils/user-agent";
 
 // animations handled separately
 export const renderDefaultBlockyBookmarks = (config: Config) => {
