@@ -4,9 +4,22 @@ import {
   BookmarkTiming,
   UIStyle
 } from "src/newtab/scripts/config";
-import { openBookmark } from "src/newtab/scripts/utils/bookmarks/bookmark-utils";
+import { bookmarksContainerEl } from "src/newtab/scripts/ui";
+import { openBookmark } from "src/newtab/scripts/utils/bookmarks/open-bookmark";
 import { focusElementBorder, unfocusElementBorder } from "src/newtab/scripts/utils/focus-utils";
 import { genid } from "src/utils/genid";
+
+export const createFolderArea = (uuid: string) => {
+  // <div id="folder-${uuid}" class="w-full grid gap-2 user-defined-bookmarks-cols"></div>
+
+  const folderDiv = document.createElement("div");
+  folderDiv.id = `folder-${uuid}`;
+  folderDiv.className = "w-full grid gap-2 user-defined-bookmarks-cols";
+
+  bookmarksContainerEl.appendChild(folderDiv);
+
+  return folderDiv as HTMLDivElement;
+};
 
 export const renderBlockBookmark = (
   containerEl: HTMLDivElement,
