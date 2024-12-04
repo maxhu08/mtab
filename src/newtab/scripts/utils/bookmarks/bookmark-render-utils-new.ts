@@ -15,6 +15,7 @@ import { genid } from "src/utils/genid";
 export const renderBookmarkNodes = (
   bookmarkNodes: UserDefinedBookmarkNode[],
   folderAreaEl: HTMLDivElement,
+  withAnimations: boolean,
   config: Config
 ) => {
   const uiStyle = config.ui.style;
@@ -22,10 +23,9 @@ export const renderBookmarkNodes = (
   const bookmarkTiming = config.animations.bookmarkTiming;
   const showBookmarkNames = config.bookmarks.showBookmarkNames;
   const messageTextColor = config.message.textColor;
-  const animationsEnabled = config.animations.enabled;
   const animationsInitialType = config.animations.initialType;
   const animationsBookmarkType = config.animations.bookmarkType;
-  const bookmarkType = config.animations.bookmarkType;
+  const animationsbookmarkType = config.animations.bookmarkType;
   const searchFocusedBorderColor = config.search.focusedBorderColor;
 
   bookmarkNodes.forEach((bookmarkNode, index) => {
@@ -43,16 +43,16 @@ export const renderBookmarkNodes = (
         uiStyle,
         showBookmarkNames,
         messageTextColor,
-        animationsEnabled,
+        withAnimations,
         animationsInitialType
       );
 
       bindActionsToBlockBookmark(
         uuid,
         bookmarkNode.url,
-        animationsEnabled,
+        withAnimations,
         animationsInitialType,
-        bookmarkType,
+        animationsbookmarkType,
         searchFocusedBorderColor
       );
     } else {
@@ -67,28 +67,28 @@ export const renderBookmarkNodes = (
         uiStyle,
         showBookmarkNames,
         messageTextColor,
-        animationsEnabled,
+        withAnimations,
         animationsInitialType
       );
 
       bindActionsToBlockFolder(
         uuid,
-        animationsEnabled,
+        withAnimations,
         animationsInitialType,
-        bookmarkType,
         searchFocusedBorderColor
       );
 
       if (bookmarkNode.contents.length > 0) {
         const newFolderAreaEl = createFolderArea(uuid);
+        const wAnimations = false;
 
-        renderBookmarkNodes(bookmarkNode.contents, newFolderAreaEl, config);
+        renderBookmarkNodes(bookmarkNode.contents, newFolderAreaEl, wAnimations, config);
 
         addFolderBackButton(
           newFolderAreaEl.children[1] as HTMLDivElement,
           uuid,
           uiStyle,
-          animationsEnabled,
+          wAnimations,
           animationsInitialType,
           0,
           messageTextColor
@@ -98,7 +98,7 @@ export const renderBookmarkNodes = (
           newFolderAreaEl,
           folderAreaEl,
           uuid,
-          animationsEnabled,
+          wAnimations,
           animationsInitialType,
           animationsBookmarkType,
           searchFocusedBorderColor
@@ -360,7 +360,6 @@ export const bindActionsToBlockFolder = (
   uuid: string,
   animationsEnabled: boolean,
   animationsInitialType: AnimationInitialType,
-  animationsBookmarkType: AnimationBookmarkType,
   searchFocusedBorderColor: string
 ) => {
   // prettier-ignore
@@ -401,13 +400,7 @@ export const bindActionsToBlockFolder = (
       const currFolderAreaEl = bookmarksContainerEl.querySelector('[folder-state="open"]') as HTMLDivElement;
       const openFolderAreaEl = document.getElementById(`folder-${uuid}`) as HTMLDivElement;
 
-      openFolder(
-        currFolderAreaEl,
-        openFolderAreaEl,
-        animationsEnabled,
-        animationsInitialType,
-        animationsBookmarkType
-      );
+      openFolder(currFolderAreaEl, openFolderAreaEl);
     }
   };
 
@@ -507,13 +500,7 @@ export const bindActionsToBackButton = (
   }
 
   backButtonEl.onclick = () => {
-    openFolder(
-      currFolderAreaEl,
-      openFolderAreaEl,
-      animationsEnabled,
-      animationsInitialType,
-      animationsBookmarkType
-    );
+    openFolder(currFolderAreaEl, openFolderAreaEl);
   };
 
   backButtonEl.addEventListener("blur", () => unfocusElementBorder(backButtonBorderEl));

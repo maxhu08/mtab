@@ -1,29 +1,4 @@
-import { AnimationBookmarkType, AnimationInitialType } from "src/newtab/scripts/config";
-
-export const openFolder = (
-  currFolderAreaEl: HTMLDivElement,
-  openfolderAreaEl: HTMLDivElement,
-  animationsEnabled: boolean,
-  animationsInitialType: AnimationInitialType,
-  animationsBookmarkType: AnimationBookmarkType
-) => {
-  if (animationsEnabled) {
-    // fix for going back
-    openfolderAreaEl.classList.remove(animationsBookmarkType);
-    openfolderAreaEl.classList.add(animationsInitialType);
-
-    const computedStyle = getComputedStyle(currFolderAreaEl);
-    const animationDuration = parseFloat(computedStyle.animationDuration) * 1000;
-
-    setTimeout(() => {
-      currFolderAreaEl.classList.replace("grid", "hidden");
-    }, animationDuration - 10);
-
-    setTimeout(() => {
-      openfolderAreaEl.classList.replace("hidden", "grid");
-    }, animationDuration + 20);
-  } else {
-    currFolderAreaEl.classList.replace("grid", "hidden");
-    openfolderAreaEl.classList.replace("hidden", "grid");
-  }
+export const openFolder = (currFolderAreaEl: HTMLDivElement, openfolderAreaEl: HTMLDivElement) => {
+  currFolderAreaEl.classList.replace("grid", "hidden");
+  openfolderAreaEl.classList.replace("hidden", "grid");
 };
