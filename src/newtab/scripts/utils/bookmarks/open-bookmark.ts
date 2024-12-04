@@ -7,7 +7,9 @@ export const openBookmark = (
   animationsType: AnimationBookmarkType,
   openInNewTab: boolean = false
 ) => {
-  if (!/^https?:\/\//i.test(bookmarkUrl)) bookmarkUrl = `https://${bookmarkUrl}`;
+  if (!/^https?:\/\//i.test(bookmarkUrl) && !/^about:/i.test(bookmarkUrl)) {
+    bookmarkUrl = `https://${bookmarkUrl}`;
+  }
 
   if (openInNewTab) {
     window.open(bookmarkUrl, "_blank");
