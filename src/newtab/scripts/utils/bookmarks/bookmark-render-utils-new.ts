@@ -109,11 +109,6 @@ export const renderBookmarkNodes = (
 };
 
 export const createFolderArea = (uuid: string, state: boolean = false) => {
-  // <div id="folder-${uuid}" folder-state="{state ? "open" : "closed"}" class="w-full ${state ? "grid" : "hidden"} grid-flow-row gap-2">
-  //   <div id="folder-${uuid}-items" class="grid gap-2 user-defined-bookmarks-cols"></div>
-  //   <div id="folder-${uuid}-actions"></div>
-  // </div>
-
   const folderDiv = document.createElement("div");
   folderDiv.id = `folder-${uuid}`;
   folderDiv.setAttribute("folder-state", state ? "open" : "closed");
@@ -125,6 +120,7 @@ export const createFolderArea = (uuid: string, state: boolean = false) => {
 
   const actionsDiv = document.createElement("div");
   actionsDiv.id = `folder-${uuid}-actions`;
+  actionsDiv.className = "w-full grid place-items-center";
 
   folderDiv.appendChild(itemsDiv);
   folderDiv.appendChild(actionsDiv);
