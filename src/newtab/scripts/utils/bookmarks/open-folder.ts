@@ -1,13 +1,17 @@
-import { AnimationBookmarkType } from "src/newtab/scripts/config";
+import { AnimationBookmarkType, AnimationInitialType } from "src/newtab/scripts/config";
 
 export const openFolder = (
   currFolderAreaEl: HTMLDivElement,
   openfolderAreaEl: HTMLDivElement,
   animationsEnabled: boolean,
-  animationsType: AnimationBookmarkType
+  animationsInitialType: AnimationInitialType,
+  animationsBookmarkType: AnimationBookmarkType
 ) => {
   if (animationsEnabled) {
-    currFolderAreaEl.classList.add(animationsType);
+    // fix for going back
+    openfolderAreaEl.classList.remove(animationsBookmarkType);
+    openfolderAreaEl.classList.add(animationsInitialType);
+
     const computedStyle = getComputedStyle(currFolderAreaEl);
     const animationDuration = parseFloat(computedStyle.animationDuration) * 1000;
 

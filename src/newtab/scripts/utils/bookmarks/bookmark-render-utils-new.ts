@@ -401,7 +401,13 @@ export const bindActionsToBlockFolder = (
       const currFolderAreaEl = bookmarksContainerEl.querySelector('[folder-state="open"]') as HTMLDivElement;
       const openFolderAreaEl = document.getElementById(`folder-${uuid}`) as HTMLDivElement;
 
-      openFolder(currFolderAreaEl, openFolderAreaEl, animationsEnabled, animationsBookmarkType);
+      openFolder(
+        currFolderAreaEl,
+        openFolderAreaEl,
+        animationsEnabled,
+        animationsInitialType,
+        animationsBookmarkType
+      );
     }
   };
 
@@ -501,7 +507,13 @@ export const bindActionsToBackButton = (
   }
 
   backButtonEl.onclick = () => {
-    openFolder(currFolderAreaEl, openFolderAreaEl, animationsEnabled, animationsBookmarkType);
+    openFolder(
+      currFolderAreaEl,
+      openFolderAreaEl,
+      animationsEnabled,
+      animationsInitialType,
+      animationsBookmarkType
+    );
   };
 
   backButtonEl.addEventListener("blur", () => unfocusElementBorder(backButtonBorderEl));
