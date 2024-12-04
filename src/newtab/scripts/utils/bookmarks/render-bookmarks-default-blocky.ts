@@ -30,9 +30,11 @@ export const renderDefaultBlockyBookmarks = (config: Config) => {
   const rootFolderUUID = genid();
   const rootFolderAreaEl = createFolderArea(rootFolderUUID, true);
 
-  convertBrowserBookmarksToBookmarkNodes(config.bookmarks.bookmarksLocationFirefox).then(
-    (bookmarkNodes) => {
-      renderBookmarkNodes(bookmarkNodes, rootFolderAreaEl, true, config);
-    }
-  );
+  convertBrowserBookmarksToBookmarkNodes(
+    config.bookmarks.bookmarksLocationFirefox,
+    config.bookmarks.defaultBlockyColorType
+  ).then((bookmarkNodes) => {
+    console.log(bookmarkNodes);
+    renderBookmarkNodes(bookmarkNodes, rootFolderAreaEl, true, config);
+  });
 };
