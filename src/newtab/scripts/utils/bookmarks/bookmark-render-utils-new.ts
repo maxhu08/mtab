@@ -14,7 +14,7 @@ import { genid } from "src/utils/genid";
 
 export const renderBookmarkNodes = (
   bookmarkNodes: UserDefinedBookmarkNode[],
-  folderAreaEl: HTMLDivElement,
+  folderItemsAreaEl: HTMLDivElement,
   config: Config
 ) => {
   const uiStyle = config.ui.style;
@@ -30,7 +30,7 @@ export const renderBookmarkNodes = (
   bookmarkNodes.forEach((bookmarkNode, index) => {
     if (bookmarkNode.type === "bookmark") {
       const uuid = renderBlockBookmark(
-        folderAreaEl,
+        folderItemsAreaEl,
         bookmarkTiming,
         config.bookmarks.userDefined.length,
         index,
@@ -56,7 +56,7 @@ export const renderBookmarkNodes = (
       );
     } else {
       const uuid = renderBlockFolder(
-        folderAreaEl,
+        folderItemsAreaEl,
         bookmarkTiming,
         config.bookmarks.userDefined.length,
         index,
@@ -81,19 +81,36 @@ export const renderBookmarkNodes = (
       if (bookmarkNode.contents.length > 0) {
         const newFolderAreaEl = createFolderArea(uuid);
 
-        renderBookmarkNodes(bookmarkNode.contents, newFolderAreaEl, config);
+        renderBookmarkNodes(
+          bookmarkNode.contents,
+          newFolderAreaEl.children[0] as HTMLDivElement,
+          config
+        );
       }
     }
   });
 };
 
 export const createFolderArea = (uuid: string, state: boolean = false) => {
-  // <div id="folder-${uuid}" class="w-full user-defined-bookmarks-cols hidden or grid"></div>
+  // <div id="folder-${uuid}" folder-state="{state ? "open" : "closed"}" class="w-full ${state ? "grid" : "hidden"} grid-flow-row gap-2">
+  //   <div id="folder-${uuid}-items" class="grid gap-2 user-defined-bookmarks-cols"></div>
+  //   <div id="folder-${uuid}-actions"></div>
+  // </div>
 
   const folderDiv = document.createElement("div");
   folderDiv.id = `folder-${uuid}`;
   folderDiv.setAttribute("folder-state", state ? "open" : "closed");
-  folderDiv.className = `w-full ${state ? "grid" : "hidden"} gap-2 user-defined-bookmarks-cols`;
+  folderDiv.className = `w-full ${state ? "grid" : "hidden"} grid-flow-row gap-2`;
+
+  const itemsDiv = document.createElement("div");
+  itemsDiv.id = `folder-${uuid}-items`;
+  itemsDiv.className = "grid gap-2 user-defined-bookmarks-cols";
+
+  const actionsDiv = document.createElement("div");
+  actionsDiv.id = `folder-${uuid}-actions`;
+
+  folderDiv.appendChild(itemsDiv);
+  folderDiv.appendChild(actionsDiv);
 
   bookmarksContainerEl.appendChild(folderDiv);
 
