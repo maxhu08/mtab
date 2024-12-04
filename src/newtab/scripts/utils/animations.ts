@@ -27,7 +27,7 @@ export const addAnimations = (animations: Config["animations"]) => {
     searchContainerEl.addEventListener(
       "animationstart",
       () => {
-        // Fix weird flickering issue on firefox
+        // fix weird flickering issue on firefox
         setTimeout(() => {
           searchContainerEl.classList.remove("opacity-0");
         }, animationDuration - 500);
@@ -37,7 +37,7 @@ export const addAnimations = (animations: Config["animations"]) => {
       }
     );
 
-    // Fix bookmarks disappearing if user leaves tab too quickly
+    // fix bookmarks disappearing if user leaves tab too quickly
     document.addEventListener("visibilitychange", () => {
       searchContainerEl.classList.remove("opacity-0");
     });

@@ -14,7 +14,7 @@ import { genid } from "src/utils/genid";
 
 export const renderBookmarkNodes = (
   bookmarkNodes: UserDefinedBookmarkNode[],
-  folderItemsAreaEl: HTMLDivElement,
+  folderAreaEl: HTMLDivElement,
   config: Config
 ) => {
   const uiStyle = config.ui.style;
@@ -24,13 +24,14 @@ export const renderBookmarkNodes = (
   const messageTextColor = config.message.textColor;
   const animationsEnabled = config.animations.enabled;
   const animationsInitialType = config.animations.initialType;
+  const animationsBookmarkType = config.animations.bookmarkType;
   const bookmarkType = config.animations.bookmarkType;
-  const focusedBorderColor = config.search.focusedBorderColor;
+  const searchFocusedBorderColor = config.search.focusedBorderColor;
 
   bookmarkNodes.forEach((bookmarkNode, index) => {
     if (bookmarkNode.type === "bookmark") {
       const uuid = renderBlockBookmark(
-        folderItemsAreaEl,
+        folderAreaEl.children[0] as HTMLDivElement,
         bookmarkTiming,
         config.bookmarks.userDefined.length,
         index,
@@ -52,11 +53,11 @@ export const renderBookmarkNodes = (
         animationsEnabled,
         animationsInitialType,
         bookmarkType,
-        focusedBorderColor
+        searchFocusedBorderColor
       );
     } else {
       const uuid = renderBlockFolder(
-        folderItemsAreaEl,
+        folderAreaEl.children[0] as HTMLDivElement,
         bookmarkTiming,
         config.bookmarks.userDefined.length,
         index,
@@ -75,16 +76,32 @@ export const renderBookmarkNodes = (
         animationsEnabled,
         animationsInitialType,
         bookmarkType,
-        focusedBorderColor
+        searchFocusedBorderColor
       );
 
       if (bookmarkNode.contents.length > 0) {
         const newFolderAreaEl = createFolderArea(uuid);
 
-        renderBookmarkNodes(
-          bookmarkNode.contents,
-          newFolderAreaEl.children[0] as HTMLDivElement,
-          config
+        renderBookmarkNodes(bookmarkNode.contents, newFolderAreaEl, config);
+
+        addFolderBackButton(
+          folderAreaEl,
+          uuid,
+          uiStyle,
+          animationsEnabled,
+          animationsInitialType,
+          0,
+          messageTextColor
+        );
+
+        bindActionsToBackButton(
+          newFolderAreaEl,
+          folderAreaEl,
+          uuid,
+          animationsEnabled,
+          animationsInitialType,
+          animationsBookmarkType,
+          searchFocusedBorderColor
         );
       }
     }
@@ -221,7 +238,7 @@ export const bindActionsToBlockBookmark = (
   animationsEnabled: boolean,
   animationsInitialType: AnimationInitialType,
   animationsBookmarkType: AnimationBookmarkType,
-  focusedBorderColor: string
+  searchfocusedBorderColor: string
 ) => {
   // prettier-ignore
   const bookmarkEl = document.getElementById(`bookmark-node-${uuid}`) as HTMLButtonElement;
@@ -264,7 +281,7 @@ export const bindActionsToBlockBookmark = (
 
   bookmarkEl.addEventListener("blur", () => unfocusElementBorder(bookmarkBorderEl));
   bookmarkEl.addEventListener("focus", (e) =>
-    focusElementBorder(bookmarkBorderEl, focusedBorderColor, e)
+    focusElementBorder(bookmarkBorderEl, searchfocusedBorderColor, e)
   );
 };
 
@@ -344,7 +361,7 @@ export const bindActionsToBlockFolder = (
   animationsEnabled: boolean,
   animationsInitialType: AnimationInitialType,
   animationsBookmarkType: AnimationBookmarkType,
-  focusedBorderColor: string
+  searchFocusedBorderColor: string
 ) => {
   // prettier-ignore
   const bookmarkEl = document.getElementById(`bookmark-node-${uuid}`) as HTMLButtonElement;
@@ -390,6 +407,105 @@ export const bindActionsToBlockFolder = (
 
   bookmarkEl.addEventListener("blur", () => unfocusElementBorder(bookmarkBorderEl));
   bookmarkEl.addEventListener("focus", (e) =>
-    focusElementBorder(bookmarkBorderEl, focusedBorderColor, e)
+    focusElementBorder(bookmarkBorderEl, searchFocusedBorderColor, e)
+  );
+};
+
+export const addFolderBackButton = (
+  folderActionsAreaEl: HTMLDivElement,
+  uuid: string,
+  uiStyle: UIStyle,
+  animationsEnabled: boolean,
+  animationsInitialType: AnimationInitialType,
+  delay: number,
+  messageTextColor: string
+) => {
+  // <button id="bookmark-folder-${uuid}-back-button" class="relative duration-[250ms] ease-out bg-foreground cursor-pointer ${uiStyle === "glass" ? "glass-effect" : ""} corner-style h-9 md:h-12 px-1 md:px-2 overflow-hidden ${animationsEnabled ? `${animationsInitialType} opacity-0 outline-none` : ""}" ${animationsEnabled ? `style="animation-delay: ${delay}ms;"` : ""}>
+  //   <div id="bookmark-folder-${uuid}-border" class="absolute top-0 left-0 w-full h-9 md:h-12 border-2 border-transparent corner-style"></div>
+  //   <div class="absolute top-0 left-0 w-full h-9 md:h-12 hover:bg-white/20"></div>
+  //   <div class="grid grid-cols-[max-content_auto] gap-2 font-message text-base md:text-2xl w-full" style="color: ${messageTextColor};">
+  //     <i class="ri-arrow-left-line"></i>
+  //     <span>Back</span>
+  //   </div>
+  // </button>
+
+  const backButton = document.createElement("button");
+  backButton.id = `folder-back-button-${uuid}`;
+  backButton.className = `relative duration-[250ms] ease-out bg-foreground cursor-pointer ${uiStyle === "glass" ? "glass-effect" : ""} corner-style h-9 md:h-12 px-1 md:px-2 overflow-hidden ${animationsEnabled ? `${animationsInitialType} opacity-0 outline-none` : ""}`;
+  if (animationsEnabled) {
+    backButton.style.animationDelay = `${delay}ms`;
+  }
+
+  const borderDiv = document.createElement("div");
+  borderDiv.id = `folder-back-button-${uuid}-border`;
+  borderDiv.className =
+    "absolute top-0 left-0 w-full h-9 md:h-12 border-2 border-transparent corner-style";
+
+  const hoverDiv = document.createElement("div");
+  hoverDiv.className = "absolute top-0 left-0 w-full h-9 md:h-12 hover:bg-white/20";
+
+  const gridDiv = document.createElement("div");
+  gridDiv.className =
+    "grid grid-cols-[max-content_auto] gap-2 font-message text-base md:text-2xl w-full";
+  gridDiv.style.color = messageTextColor;
+
+  const icon = document.createElement("i");
+  icon.className = "ri-arrow-left-line";
+
+  const span = document.createElement("span");
+  span.textContent = "Back";
+
+  gridDiv.appendChild(icon);
+  gridDiv.appendChild(span);
+
+  backButton.appendChild(borderDiv);
+  backButton.appendChild(hoverDiv);
+  backButton.appendChild(gridDiv);
+
+  folderActionsAreaEl.appendChild(backButton);
+};
+
+export const bindActionsToBackButton = (
+  currFolderAreaEl: HTMLDivElement,
+  openFolderAreaEl: HTMLDivElement,
+  uuid: string,
+  animationsEnabled: boolean,
+  animationsInitialType: AnimationInitialType,
+  animationsBookmarkType: AnimationBookmarkType,
+  searchFocusedBorderColor: string
+) => {
+  // prettier-ignore
+  const backButtonEl = document.getElementById(`folder-back-button-${uuid}`) as HTMLButtonElement;
+  // prettier-ignore
+  const backButtonBorderEl = document.getElementById(`folder-back-button-${uuid}-border`) as HTMLDivElement;
+
+  if (backButtonEl && animationsEnabled) {
+    const computedStyle = window.getComputedStyle(backButtonEl);
+    const animationDuration = parseFloat(computedStyle.animationDuration) * 1000;
+    backButtonEl.addEventListener(
+      "animationstart",
+      () => {
+        setTimeout(() => {
+          backButtonEl.classList.remove("opacity-0");
+          backButtonEl.classList.remove(animationsInitialType);
+        }, animationDuration * 0.8); // needs to be less than 1
+      },
+      {
+        once: true
+      }
+    );
+
+    document.addEventListener("visibilitychange", () => {
+      backButtonEl.classList.remove("opacity-0");
+    });
+  }
+
+  backButtonEl.onclick = () => {
+    openFolder(currFolderAreaEl, openFolderAreaEl, animationsEnabled, animationsBookmarkType);
+  };
+
+  backButtonEl.addEventListener("blur", () => unfocusElementBorder(backButtonBorderEl));
+  backButtonEl.addEventListener("focus", (e) =>
+    focusElementBorder(backButtonBorderEl, searchFocusedBorderColor, e)
   );
 };
