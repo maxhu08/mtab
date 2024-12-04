@@ -58,30 +58,32 @@ export const convertBrowserBookmarksToBookmarkNodes = async (
   };
 
   const rootBookmarks = await new Promise<chrome.bookmarks.BookmarkTreeNode[]>((resolve) => {
-    let location = "";
-
-    if (bookmarksLocationFirefox === "menu") location = "menu________";
-    else if (bookmarksLocationFirefox === "toolbar") location = "toolbar_____";
-    else if (bookmarksLocationFirefox === "other") location = "unfiled_____";
-
-    if (userAgent === "firefox") {
-      chrome.bookmarks.getTree((bookmarkTree) => {
-        const rootFolder = bookmarkTree.find((cb) => cb.id === location);
-        if (rootFolder && rootFolder.children) {
-          resolve(rootFolder.children);
-        } else {
+    chrome.bookmarks.getTree((bookmarkTree) => {
+      if (userAgent === "firefox") {
+        const root = bookmarkTree[0]; // root________
+        if (!root || !root.children) {
           resolve([]);
+          return;
         }
-      });
-    } else {
-      chrome.bookmarks.getTree(resolve); // for other browsers
-    }
+
+        let folderId: string = "";
+        if (bookmarksLocationFirefox === "menu") folderId = "menu________";
+        else if (bookmarksLocationFirefox === "toolbar") folderId = "toolbar_____";
+        else if (bookmarksLocationFirefox === "other") folderId = "unfiled_____";
+
+        const targetFolder = root.children.find((folder) => folder.id === folderId);
+        resolve(targetFolder?.children ?? []);
+      } else {
+        // other browsers
+        resolve(bookmarkTree);
+      }
+    });
   });
 
   const bookmarkNodes = rootBookmarks.flatMap(getBookmarkNodes);
 
   if (userAgent === "firefox") {
-    return (bookmarkNodes[0] as BookmarkNodeFolder).contents;
+    return bookmarkNodes;
   } else {
     // use the folder with name "Bookmarks"
     const bookmarksFolder = (bookmarkNodes[0] as BookmarkNodeFolder).contents.find(
