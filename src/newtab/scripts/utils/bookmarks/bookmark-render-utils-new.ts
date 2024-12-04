@@ -78,32 +78,32 @@ export const renderBookmarkNodes = (
         searchFocusedBorderColor
       );
 
+      const newFolderAreaEl = createFolderArea(uuid);
+      const wAnimations = false;
+
       if (bookmarkNode.contents.length > 0) {
-        const newFolderAreaEl = createFolderArea(uuid);
-        const wAnimations = false;
-
         renderBookmarkNodes(bookmarkNode.contents, newFolderAreaEl, wAnimations, config);
-
-        addFolderBackButton(
-          newFolderAreaEl.children[1] as HTMLDivElement,
-          uuid,
-          uiStyle,
-          wAnimations,
-          animationsInitialType,
-          0,
-          messageTextColor
-        );
-
-        bindActionsToBackButton(
-          newFolderAreaEl,
-          folderAreaEl,
-          uuid,
-          wAnimations,
-          animationsInitialType,
-          animationsBookmarkType,
-          searchFocusedBorderColor
-        );
       }
+
+      addFolderBackButton(
+        newFolderAreaEl.children[1] as HTMLDivElement,
+        uuid,
+        uiStyle,
+        wAnimations,
+        animationsInitialType,
+        0,
+        messageTextColor
+      );
+
+      bindActionsToBackButton(
+        newFolderAreaEl,
+        folderAreaEl,
+        uuid,
+        wAnimations,
+        animationsInitialType,
+        animationsBookmarkType,
+        searchFocusedBorderColor
+      );
     }
   });
 };
