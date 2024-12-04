@@ -85,7 +85,7 @@ export const renderBookmarkNodes = (
         renderBookmarkNodes(bookmarkNode.contents, newFolderAreaEl, config);
 
         addFolderBackButton(
-          folderAreaEl,
+          newFolderAreaEl.children[1] as HTMLDivElement,
           uuid,
           uiStyle,
           animationsEnabled,
