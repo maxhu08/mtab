@@ -1,10 +1,10 @@
 import {
   AnimationBookmarkType,
   AnimationInitialType,
+  BookmarkNode,
   BookmarkTiming,
   Config,
-  UIStyle,
-  BookmarkNode
+  UIStyle
 } from "src/newtab/scripts/config";
 import { bookmarksContainerEl } from "src/newtab/scripts/ui";
 import { openBookmark } from "src/newtab/scripts/utils/bookmarks/open-bookmark";
@@ -23,6 +23,7 @@ export const renderBookmarkNodes = (
   const bookmarkTiming = config.animations.bookmarkTiming;
   const showBookmarkNames = config.bookmarks.showBookmarkNames;
   const messageTextColor = config.message.textColor;
+  const animationsEnabled = config.animations.enabled;
   const animationsInitialType = config.animations.initialType;
   const animationsBookmarkType = config.animations.bookmarkType;
   const animationsbookmarkType = config.animations.bookmarkType;
@@ -50,7 +51,7 @@ export const renderBookmarkNodes = (
       bindActionsToBlockBookmark(
         uuid,
         bookmarkNode.url,
-        withAnimations,
+        animationsEnabled, // use animationsEnabled instead
         animationsInitialType,
         animationsbookmarkType,
         searchFocusedBorderColor
