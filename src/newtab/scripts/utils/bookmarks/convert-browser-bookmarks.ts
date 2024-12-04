@@ -2,13 +2,16 @@ import {
   BookmarksLocationFirefox,
   DefaultBlockyColorType,
   BookmarkNodeFolder,
-  BookmarkNode
+  BookmarkNode,
+  DefaultFaviconSource
 } from "src/newtab/scripts/config";
+import { getFaviconURL } from "src/newtab/scripts/utils/favicon-url";
 import { getUserAgent } from "src/utils/user-agent";
 
 export const convertBrowserBookmarksToBookmarkNodes = async (
   bookmarksLocationFirefox: BookmarksLocationFirefox,
-  defaultBlockyColorType: DefaultBlockyColorType
+  defaultBlockyColorType: DefaultBlockyColorType,
+  faviconSource: DefaultFaviconSource
 ): Promise<BookmarkNode[]> => {
   const userAgent = getUserAgent();
 
@@ -21,7 +24,7 @@ export const convertBrowserBookmarksToBookmarkNodes = async (
           name: node.title,
           color: getColorFromString(node.title),
           iconColor: "#ffffff",
-          iconType: "ri-instance-line",
+          iconType: `url-${getFaviconURL(node.url, faviconSource)}`,
           url: node.url
         }
       ];
