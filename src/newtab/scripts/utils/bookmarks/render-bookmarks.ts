@@ -1,7 +1,7 @@
 import { Config } from "src/newtab/scripts/config";
 import { renderDefaultBookmarks } from "src/newtab/scripts/utils/bookmarks/render-bookmarks-default";
 import { renderDefaultBlockyBookmarks } from "src/newtab/scripts/utils/bookmarks/render-bookmarks-default-blocky";
-import { renderUserDefinedBookmarks } from "src/newtab/scripts/utils/bookmarks/render-bookmarks-user-defined";
+import { renderBookmarkNodeBookmarks } from "src/newtab/scripts/utils/bookmarks/render-bookmarks-user-defined";
 
 export const renderBookmarks = (config: Config) => {
   switch (config.bookmarks.type) {
@@ -9,7 +9,7 @@ export const renderBookmarks = (config: Config) => {
       return;
     }
     case "user-defined": {
-      renderUserDefinedBookmarks(config);
+      renderBookmarkNodeBookmarks(config);
       break;
     }
     case "default": {

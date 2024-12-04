@@ -4,7 +4,7 @@ import {
   BookmarkTiming,
   Config,
   UIStyle,
-  UserDefinedBookmarkNode
+  BookmarkNode
 } from "src/newtab/scripts/config";
 import { bookmarksContainerEl } from "src/newtab/scripts/ui";
 import { openBookmark } from "src/newtab/scripts/utils/bookmarks/open-bookmark";
@@ -13,7 +13,7 @@ import { focusElementBorder, unfocusElementBorder } from "src/newtab/scripts/uti
 import { genid } from "src/utils/genid";
 
 export const renderBookmarkNodes = (
-  bookmarkNodes: UserDefinedBookmarkNode[],
+  bookmarkNodes: BookmarkNode[],
   folderAreaEl: HTMLDivElement,
   withAnimations: boolean,
   config: Config

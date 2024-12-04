@@ -1,18 +1,18 @@
 import {
   BookmarksLocationFirefox,
   DefaultBlockyColorType,
-  UserDefinedBookmarkFolder,
-  UserDefinedBookmarkNode
+  BookmarkNodeFolder,
+  BookmarkNode
 } from "src/newtab/scripts/config";
 import { getUserAgent } from "src/utils/user-agent";
 
 export const convertBrowserBookmarksToBookmarkNodes = async (
   bookmarksLocationFirefox: BookmarksLocationFirefox,
   defaultBlockyColorType: DefaultBlockyColorType
-): Promise<UserDefinedBookmarkNode[]> => {
+): Promise<BookmarkNode[]> => {
   const userAgent = getUserAgent();
 
-  const getBookmarkNodes = (node: chrome.bookmarks.BookmarkTreeNode): UserDefinedBookmarkNode[] => {
+  const getBookmarkNodes = (node: chrome.bookmarks.BookmarkTreeNode): BookmarkNode[] => {
     if (node.url) {
       // bookmark
       return [
@@ -78,12 +78,12 @@ export const convertBrowserBookmarksToBookmarkNodes = async (
   const bookmarkNodes = rootBookmarks.flatMap(getBookmarkNodes);
 
   if (userAgent === "firefox") {
-    return (bookmarkNodes[0] as UserDefinedBookmarkFolder).contents;
+    return (bookmarkNodes[0] as BookmarkNodeFolder).contents;
   } else {
     // use the folder with name "Bookmarks"
-    const bookmarksFolder = (bookmarkNodes[0] as UserDefinedBookmarkFolder).contents.find(
+    const bookmarksFolder = (bookmarkNodes[0] as BookmarkNodeFolder).contents.find(
       (node) => node.type === "folder" && node.name === "Bookmarks"
-    ) as UserDefinedBookmarkFolder;
+    ) as BookmarkNodeFolder;
 
     if (bookmarksFolder) return bookmarksFolder.contents;
     else return [];

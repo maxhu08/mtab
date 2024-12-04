@@ -11,7 +11,7 @@ import {
   bookmarksNumberKeysCheckboxEl,
   bookmarksShowBookmarkNamesCheckboxEl
 } from "src/options/scripts/ui";
-import { saveUserDefinedBookmarkSettingsToDraft } from "src/options/scripts/utils/save-helpers/save-user-defined-bookmarks";
+import { saveBookmarkNodeBookmarkSettingsToDraft } from "src/options/scripts/utils/save-helpers/save-user-defined-bookmarks";
 
 export const saveBookmarksSettingsToDraft = (draft: Config) => {
   draft.bookmarks.showBookmarkNames = bookmarksShowBookmarkNamesCheckboxEl.checked;
@@ -71,7 +71,7 @@ export const saveBookmarksSettingsToDraft = (draft: Config) => {
   // prettier-ignore
   draft.bookmarks.defaultFaviconSource = bookmarksDefaultFaviconSourcePairs[selectedDefaultFaviconSourceEl.id];
 
-  saveUserDefinedBookmarkSettingsToDraft(draft);
+  saveBookmarkNodeBookmarkSettingsToDraft(draft);
 };
 
 export const saveDefaultBlockyBookmarkSettingsToDraft = (draft: Config) => {

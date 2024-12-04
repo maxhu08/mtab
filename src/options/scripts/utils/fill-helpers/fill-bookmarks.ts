@@ -24,8 +24,8 @@ import {
   bookmarksNumberKeysCheckboxEl
 } from "src/options/scripts/ui";
 import {
-  fillUserDefinedBookmarks,
-  handleUserDefinedBookmarkNodesDragging
+  fillBookmarkNodeBookmarks,
+  handleBookmarkNodesDragging
 } from "src/options/scripts/utils/fill-helpers/fill-user-defined-bookmarks";
 
 export const fillBookmarksInputs = (config: Config) => {
@@ -75,6 +75,6 @@ export const fillBookmarksInputs = (config: Config) => {
   bookmarksDefaultFaviconSourcePairs[config.bookmarks.defaultFaviconSource]();
 
   // must go before fill function
-  handleUserDefinedBookmarkNodesDragging();
-  fillUserDefinedBookmarks(config);
+  handleBookmarkNodesDragging();
+  fillBookmarkNodeBookmarks(config);
 };

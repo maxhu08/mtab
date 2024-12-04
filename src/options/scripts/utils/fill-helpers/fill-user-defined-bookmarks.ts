@@ -1,18 +1,18 @@
 import Sortable from "sortablejs";
 import { focusInput, unfocusInput } from "src/config-utils/scripts/handle";
-import { Config, UserDefinedBookmark, UserDefinedBookmarkFolder } from "src/newtab/scripts/config";
+import { Config, BookmarkNodeBookmark, BookmarkNodeFolder } from "src/newtab/scripts/config";
 import { bookmarksUserDefinedList, Input } from "src/options/scripts/ui";
 import { getRandomColor } from "src/options/scripts/utils/random-color";
 import { genid } from "src/utils/genid";
 
-export const fillUserDefinedBookmarks = (config: Config) => {
+export const fillBookmarkNodeBookmarks = (config: Config) => {
   // user-defined bookmarks
   bookmarksUserDefinedList.innerHTML = "";
   config.bookmarks.userDefined.forEach((bookmarkNode) => {
     if (bookmarkNode.type === "bookmark")
-      addUserDefinedBookmark(bookmarkNode, bookmarksUserDefinedList);
+      addBookmarkNodeBookmark(bookmarkNode, bookmarksUserDefinedList);
     else if (bookmarkNode.type === "folder")
-      addUserDefinedBookmarkFolder(bookmarkNode, bookmarksUserDefinedList);
+      addBookmarkNodeFolder(bookmarkNode, bookmarksUserDefinedList);
   });
 
   const bookmarkNodeEls = bookmarksUserDefinedList.querySelectorAll('[node-type="bookmark"]');
@@ -24,7 +24,7 @@ export const fillUserDefinedBookmarks = (config: Config) => {
   toggleCollapseAllBookmarkNodesButtonEl.click();
 };
 
-export const handleUserDefinedBookmarkNodesDragging = () => {
+export const handleBookmarkNodesDragging = () => {
   // prettier-ignore
   const dropzones = document.querySelectorAll(".bookmarks-user-defined-dropzone") as NodeListOf<HTMLDivElement>;
 
@@ -265,7 +265,7 @@ const addBookmarkButtonEl = document.getElementById("bookmarks-user-defined-add-
 const addFolderButtonEl = document.getElementById("bookmarks-user-defined-add-folder-button") as HTMLButtonElement;
 
 addBookmarkButtonEl.onclick = () => {
-  addUserDefinedBookmark(
+  addBookmarkNodeBookmark(
     {
       type: "bookmark",
       name: "New Bookmark",
@@ -281,7 +281,7 @@ addBookmarkButtonEl.onclick = () => {
 addFolderButtonEl.onclick = () => {
   const randomColor = getRandomColor();
 
-  addUserDefinedBookmarkFolder(
+  addBookmarkNodeFolder(
     {
       type: "folder",
       name: "New Folder",
@@ -323,12 +323,12 @@ const resetBookmarkNodeEventListeners = () => {
 };
 
 export const fixBookmarkNodes = () => {
-  handleUserDefinedBookmarkNodesDragging();
+  handleBookmarkNodesDragging();
   bindToggleCollapseHandlers();
   resetBookmarkNodeEventListeners();
 };
 
-const addUserDefinedBookmark = (bookmark: UserDefinedBookmark, targetDivEl: HTMLDivElement) => {
+const addBookmarkNodeBookmark = (bookmark: BookmarkNodeBookmark, targetDivEl: HTMLDivElement) => {
   const uuid = genid();
 
   targetDivEl.innerHTML += `
@@ -396,10 +396,7 @@ const addUserDefinedBookmark = (bookmark: UserDefinedBookmark, targetDivEl: HTML
   fixBookmarkNodes();
 };
 
-const addUserDefinedBookmarkFolder = (
-  folder: UserDefinedBookmarkFolder,
-  targetDivEl: HTMLDivElement
-) => {
+const addBookmarkNodeFolder = (folder: BookmarkNodeFolder, targetDivEl: HTMLDivElement) => {
   const uuid = genid();
 
   targetDivEl.innerHTML += `
@@ -457,9 +454,9 @@ const addUserDefinedBookmarkFolder = (
 
   folder.contents.forEach((content) => {
     if (content.type === "bookmark") {
-      addUserDefinedBookmark(content, contentsContainer as HTMLDivElement);
+      addBookmarkNodeBookmark(content, contentsContainer as HTMLDivElement);
     } else if (content.type === "folder") {
-      addUserDefinedBookmarkFolder(content, contentsContainer as HTMLDivElement);
+      addBookmarkNodeFolder(content, contentsContainer as HTMLDivElement);
     }
   });
 

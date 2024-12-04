@@ -3,7 +3,7 @@ import {
   BookmarkTiming,
   Config,
   UIStyle,
-  UserDefinedBookmark
+  BookmarkNodeBookmark
 } from "src/newtab/scripts/config";
 import {
   buildChromeBookmarksTree,
@@ -166,7 +166,7 @@ export const bindActionsToBlockNode = (
   config: Config
 ) => {
   // if default-blocky or user-defined
-  const identifier = node.id ? node.id : (node as unknown as UserDefinedBookmark).name;
+  const identifier = node.id ? node.id : (node as unknown as BookmarkNodeBookmark).name;
 
   // prettier-ignore
   const bookmarkEl = document.getElementById(`bookmark-${identifier}-${index}`) as HTMLButtonElement;

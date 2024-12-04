@@ -235,15 +235,15 @@ export type SearchEngine =
   | "kagi";
 export type MessageType = "afternoon-morning" | "date" | "time-12" | "time-24" | "custom";
 export type BookmarksType = "user-defined" | "default" | "default-blocky" | "none";
-export type UserDefinedBookmarkNode = UserDefinedBookmarkFolder | UserDefinedBookmark;
-export type UserDefinedBookmarkFolder = {
+export type BookmarkNode = BookmarkNodeFolder | BookmarkNodeBookmark;
+export type BookmarkNodeFolder = {
   type: "folder";
   name: string;
   color: string;
   iconColor: string;
-  contents: UserDefinedBookmarkNode[];
+  contents: BookmarkNode[];
 };
-export type UserDefinedBookmark = {
+export type BookmarkNodeBookmark = {
   type: "bookmark";
   name: string;
   url: string;
@@ -337,7 +337,7 @@ export interface Config {
     type: BookmarksType;
     numberKeys: boolean;
     userDefinedCols: number;
-    userDefined: UserDefinedBookmarkNode[];
+    userDefined: BookmarkNode[];
     defaultBlockyCols: number;
     defaultBlockyColorType: DefaultBlockyColorType;
     defaultBlockyColor: string;

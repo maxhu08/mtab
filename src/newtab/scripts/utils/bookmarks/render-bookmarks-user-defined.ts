@@ -8,10 +8,10 @@ import { insertCSS } from "src/newtab/scripts/utils/insert-css";
 import { genid } from "src/utils/genid";
 
 // animations handled separately
-export const renderUserDefinedBookmarks = (config: Config) => {
+export const renderBookmarkNodeBookmarks = (config: Config) => {
   bookmarksContainerEl.classList.add("w-full", "grid", "grid-flow-row", "gap-2");
 
-  // const userDefinedBookmarkCss = `
+  // const BookmarkNodeBookmarkCss = `
   // .user-defined-bookmarks-cols {
   //   grid-template-columns: 1fr 1fr;
   // }
