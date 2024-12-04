@@ -1,11 +1,12 @@
 import { Config } from "src/newtab/scripts/config";
 import { bookmarksContainerEl } from "src/newtab/scripts/ui";
 import {
-  buildChromeBookmarksTree,
-  renderDefaultBlockyBookmarksNodes
-} from "src/newtab/scripts/utils/bookmarks/bookmark-default-blocky-utils";
+  createFolderArea,
+  renderBookmarkNodes
+} from "src/newtab/scripts/utils/bookmarks/bookmark-render-utils-new";
+import { convertBrowserBookmarksToBookmarkNodes } from "src/newtab/scripts/utils/bookmarks/convert-browser-bookmarks";
 import { insertCSS } from "src/newtab/scripts/utils/insert-css";
-import { getUserAgent } from "src/utils/user-agent";
+import { genid } from "src/utils/genid";
 
 // animations handled separately
 export const renderDefaultBlockyBookmarks = (config: Config) => {
@@ -23,30 +24,15 @@ export const renderDefaultBlockyBookmarks = (config: Config) => {
   // }`;
 
   insertCSS(
-    `.default-blocky-bookmarks-cols{grid-template-columns:1fr 1fr;}@media (min-width: 768px){.default-blocky-bookmarks-cols{grid-template-columns:repeat(${config.bookmarks.defaultBlockyCols}, minmax(0, 1fr));}}`
+    `.bookmarks-cols{grid-template-columns:1fr 1fr;}@media (min-width: 768px){.bookmarks-cols{grid-template-columns:repeat(${config.bookmarks.defaultBlockyCols}, minmax(0, 1fr));}}`
   );
 
-  chrome.bookmarks.search({}, (chromeBookmarks) => {
-    let chromeBookmarksTree = buildChromeBookmarksTree(chromeBookmarks);
+  const rootFolderUUID = genid();
+  const rootFolderAreaEl = createFolderArea(rootFolderUUID, true);
 
-    let location = "";
-
-    if (config.bookmarks.bookmarksLocationFirefox === "menu") location = "menu________";
-    else if (config.bookmarks.bookmarksLocationFirefox === "toolbar") location = "toolbar_____";
-    else if (config.bookmarks.bookmarksLocationFirefox === "other") location = "unfiled_____";
-
-    const userAgent = getUserAgent();
-    if (userAgent === "firefox") {
-      // prettier-ignore
-      chromeBookmarksTree = chromeBookmarksTree.find((cb) => cb.id === location)!.children as unknown as chrome.bookmarks.BookmarkTreeNode[];
+  convertBrowserBookmarksToBookmarkNodes(config.bookmarks.bookmarksLocationFirefox).then(
+    (bookmarkNodes) => {
+      renderBookmarkNodes(bookmarkNodes, rootFolderAreaEl, true, config);
     }
-
-    renderDefaultBlockyBookmarksNodes(
-      chromeBookmarksTree[0].parentId!,
-      chromeBookmarksTree,
-      chromeBookmarks,
-      config,
-      false
-    );
-  });
+  );
 };

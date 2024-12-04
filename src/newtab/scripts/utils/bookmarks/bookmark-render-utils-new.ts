@@ -116,7 +116,7 @@ export const createFolderArea = (uuid: string, state: boolean = false) => {
 
   const itemsDiv = document.createElement("div");
   itemsDiv.id = `folder-${uuid}-items`;
-  itemsDiv.className = "grid gap-2 user-defined-bookmarks-cols";
+  itemsDiv.className = "grid gap-2 bookmarks-cols";
 
   const actionsDiv = document.createElement("div");
   actionsDiv.id = `folder-${uuid}-actions`;
