@@ -17,21 +17,28 @@ import {
   tryFocusBookmarkSearch,
   unfocusBookmarkSearch
 } from "src/newtab/scripts/utils/bookmarks/bookmark-search-utils";
-import { buildChromeBookmarksTree } from "src/newtab/scripts/utils/bookmarks/bookmark-default-blocky-utils";
 import { openBookmark } from "src/newtab/scripts/utils/bookmarks/open-bookmark";
+import { convertBrowserBookmarksToBookmarkNodes } from "src/newtab/scripts/utils/bookmarks/convert-browser-bookmarks";
+import { flattenBookmarks } from "src/newtab/scripts/utils/bookmarks/flatten-bookmarks";
 // import { navigateTab } from "src/newtab/scripts/utils/navigate-tab";
 
-export const listenToKeys = (config: Config) => {
+export const listenToKeys = async (config: Config) => {
   let bookmarks: any[] = [];
-  let chromeBookmarksTree: chrome.bookmarks.BookmarkTreeNode[] = [];
 
-  if (config.bookmarks.type === "user-defined") bookmarks = config.bookmarks.userDefined;
-  else {
-    chrome.bookmarks.search({}, (chromeBookmarks) => {
-      bookmarks = chromeBookmarks;
-      chromeBookmarksTree = buildChromeBookmarksTree(chromeBookmarks);
-    });
+  if (config.bookmarks.type === "user-defined") {
+    // flatten bookmarks and exclude folders
+    bookmarks = flattenBookmarks(config.bookmarks.userDefined);
+  } else {
+    const bookmarkNodes = await convertBrowserBookmarksToBookmarkNodes(
+      config.bookmarks.bookmarksLocationFirefox,
+      config.bookmarks.defaultBlockyColorType
+    );
+
+    // flatten bookmarks and exclude folders
+    bookmarks = flattenBookmarks(bookmarkNodes);
   }
+
+  console.log(bookmarks);
 
   document.addEventListener("keydown", (e) => {
     if (!config.hotkeys.enabled) return;
@@ -80,7 +87,6 @@ export const listenToKeys = (config: Config) => {
 
           refreshBookmarkSearchResults(
             bookmarks,
-            config.bookmarks.type,
             config.search.textColor,
             config.search.placeholderTextColor
           );
@@ -99,7 +105,6 @@ export const listenToKeys = (config: Config) => {
 
           refreshBookmarkSearchResults(
             bookmarks,
-            config.bookmarks.type,
             config.search.textColor,
             config.search.placeholderTextColor
           );
@@ -114,7 +119,6 @@ export const listenToKeys = (config: Config) => {
       ) {
         enableSearchBookmark(
           bookmarks,
-          config.bookmarks.type,
           config.search.textColor,
           config.search.placeholderTextColor
         );
@@ -183,12 +187,7 @@ export const listenToKeys = (config: Config) => {
   bookmarkSearchInputEl.addEventListener("focus", (e) => focusBookmarkSearch(config, e));
 
   bookmarkSearchInputEl.addEventListener("keyup", (e) => {
-    enableSearchBookmark(
-      bookmarks,
-      config.bookmarks.type,
-      config.search.textColor,
-      config.search.placeholderTextColor
-    );
+    enableSearchBookmark(bookmarks, config.search.textColor, config.search.placeholderTextColor);
   });
 
   bookmarkSearchInputEl.addEventListener("keydown", (e) => {
