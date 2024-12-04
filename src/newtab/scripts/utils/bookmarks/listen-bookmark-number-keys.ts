@@ -16,24 +16,11 @@ export const listenBookmarkNumberKeys = (listen: boolean, bookmarksType: Bookmar
       if (key >= "1" && key <= "9") {
         const index = parseInt(key, 10) - 1;
 
-        if (bookmarksType === "user-defined" && index < bookmarksContainerEl.children.length) {
-          const nthBookmark = bookmarksContainerEl.children[index] as HTMLButtonElement;
+        // prettier-ignore
+        const currFolderAreaEl = bookmarksContainerEl.querySelector('[folder-state="open"]') as HTMLDivElement;
 
-          const mouseEvent = new MouseEvent("mouseup", {
-            bubbles: true,
-            cancelable: true,
-            view: window,
-            button: 0, // left click by default
-            ctrlKey: false // no Ctrl key by default
-          });
-
-          nthBookmark.dispatchEvent(mouseEvent);
-        } else if (
-          bookmarksType === "default-blocky" &&
-          index < bookmarksContainerEl.children[0].children[0].children.length
-        ) {
-          // prettier-ignore
-          const nthBookmark = bookmarksContainerEl.children[0].children[0].children[index] as HTMLButtonElement;
+        if (index < currFolderAreaEl.children[0].children.length) {
+          const nthBookmark = currFolderAreaEl.children[0].children[index] as HTMLButtonElement;
 
           const mouseEvent = new MouseEvent("mouseup", {
             bubbles: true,
