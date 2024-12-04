@@ -38,8 +38,6 @@ export const listenToKeys = async (config: Config) => {
     bookmarks = flattenBookmarks(bookmarkNodes);
   }
 
-  console.log(bookmarks);
-
   document.addEventListener("keydown", (e) => {
     if (!config.hotkeys.enabled) return;
 

@@ -34,7 +34,6 @@ export const renderDefaultBlockyBookmarks = (config: Config) => {
     config.bookmarks.bookmarksLocationFirefox,
     config.bookmarks.defaultBlockyColorType
   ).then((bookmarkNodes) => {
-    console.log(bookmarkNodes);
     renderBookmarkNodes(bookmarkNodes, rootFolderAreaEl, true, config);
   });
 };
