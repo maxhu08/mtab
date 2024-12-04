@@ -3,6 +3,7 @@
 in this release:
 
 - add user defined bookmark folders
+- switch to completely new bookmark rendering system
 - change default bookmark values
 - change user defined bookmarks ui in options page
 - improve search unit conversion assist
