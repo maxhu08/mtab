@@ -11,6 +11,7 @@ import { getUserAgent } from "src/utils/user-agent";
 export const convertBrowserBookmarksToBookmarkNodes = async (
   bookmarksLocationFirefox: BookmarksLocationFirefox,
   defaultBlockyColorType: DefaultBlockyColorType,
+  defaultBlockyColor: string,
   faviconSource: DefaultFaviconSource
 ): Promise<BookmarkNode[]> => {
   const userAgent = getUserAgent();
@@ -47,8 +48,8 @@ export const convertBrowserBookmarksToBookmarkNodes = async (
           {
             type: "folder",
             name: node.title,
-            color: "#ffffff",
-            iconColor: "#ffffff",
+            color: defaultBlockyColor,
+            iconColor: defaultBlockyColorType,
             contents: node.children.flatMap(getBookmarkNodes)
           }
         ];
