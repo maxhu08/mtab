@@ -49,7 +49,7 @@ export const convertBrowserBookmarksToBookmarkNodes = async (
             type: "folder",
             name: node.title,
             color: defaultBlockyColor,
-            iconColor: defaultBlockyColorType,
+            iconColor: defaultBlockyColor,
             contents: node.children.flatMap(getBookmarkNodes)
           }
         ];

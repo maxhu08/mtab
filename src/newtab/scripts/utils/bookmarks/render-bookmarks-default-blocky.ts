@@ -36,6 +36,6 @@ export const renderDefaultBlockyBookmarks = (config: Config) => {
     config.bookmarks.defaultBlockyColor,
     config.bookmarks.defaultFaviconSource
   ).then((bookmarkNodes) => {
-    renderBookmarkNodes(bookmarkNodes, rootFolderAreaEl, true, config);
+    renderBookmarkNodes(bookmarkNodes, rootFolderAreaEl, config.animations.enabled, config);
   });
 };
