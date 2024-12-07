@@ -29,5 +29,10 @@ export const renderBookmarkNodeBookmarks = (config: Config) => {
   const rootFolderUUID = genid();
   const rootFolderAreaEl = createFolderArea(rootFolderUUID, true);
 
-  renderBookmarkNodes(config.bookmarks.userDefined, rootFolderAreaEl, true, config);
+  renderBookmarkNodes(
+    config.bookmarks.userDefined,
+    rootFolderAreaEl,
+    config.animations.enabled,
+    config
+  );
 };
