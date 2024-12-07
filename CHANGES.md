@@ -1,4 +1,4 @@
-# Changes in 1.6.9
+# Changes in 1.7.0
 
 in this release:
 
