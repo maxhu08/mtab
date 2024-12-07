@@ -4,11 +4,11 @@
 
 ## a simple configurable new tab extension
 
+[website](https://get-mtab.vercel.app) · [discord](https://maxhu.dev/redirect/discord/mtab)
+
 </div>
 
 ## info
-
-website: https://get-mtab.vercel.app
 
 mtab is an extension that offers a modern new tab page, prioritizing customizability such as choosing wallpapers, bookmarks, and more. Additionally, it emphasizes a smooth user experience through its animations on the new page.
 
