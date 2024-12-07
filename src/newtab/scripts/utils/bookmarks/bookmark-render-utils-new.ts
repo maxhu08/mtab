@@ -10,6 +10,7 @@ import { bookmarksContainerEl } from "src/newtab/scripts/ui";
 import { openBookmark } from "src/newtab/scripts/utils/bookmarks/open-bookmark";
 import { openFolder } from "src/newtab/scripts/utils/bookmarks/open-folder";
 import { focusElementBorder, unfocusElementBorder } from "src/newtab/scripts/utils/focus-utils";
+import { getTabKeyPressed } from "src/newtab/scripts/utils/tab-key-pressed";
 import { genid } from "src/utils/genid";
 
 export const renderBookmarkNodes = (
@@ -171,7 +172,7 @@ export const renderBlockBookmark = (
 
   const uuid = genid();
 
-  // <button id="bookmark-${uuid}" class="relative duration-[250ms] ease-out bg-foreground cursor-pointer ${uiStyle === "glass" ? "glass-effect" : ""} corner-style h-bookmark overflow-hidden ${animationsEnabled ? `${animationsInitialType} opacity-0 outline-none` : ""}" ${animationsEnabled ? `style="animation-delay: ${delay}ms;"` : ""}>
+  // <button id="bookmark-${uuid}" class="relative duration-[250ms] ease-out bg-foreground cursor-pointer ${uiStyle === "glass" ? "glass-effect" : ""} corner-style h-bookmark overflow-hidden ${animationsEnabled ? `${animationsInitialType} opacity-0` : ""}" outline-none ${animationsEnabled ? `style="animation-delay: ${delay}ms;"` : ""}>
   //   <div id="bookmark-${uuid}-border" class="absolute w-full h-full border-2 border-transparent corner-style"></div>
   //   <div class="h-1" style="background-color: ${bookmarkColor}"></div>
   //   <div class="absolute w-full h-full hover:bg-white/20"></div>
@@ -186,7 +187,7 @@ export const renderBlockBookmark = (
   const button = document.createElement("button");
   button.id = `bookmark-node-${uuid}`;
   button.setAttribute("node-type", "bookmark");
-  button.className = `relative duration-[250ms] ease-out bg-foreground cursor-pointer ${uiStyle === "glass" ? "glass-effect" : ""} corner-style h-bookmark overflow-hidden ${animationsEnabled ? `${animationsInitialType} opacity-0 outline-none` : ""}`;
+  button.className = `relative duration-[250ms] ease-out bg-foreground cursor-pointer ${uiStyle === "glass" ? "glass-effect" : ""} corner-style h-bookmark overflow-hidden ${animationsEnabled ? `${animationsInitialType} opacity-0` : ""} outline-none`;
   if (animationsEnabled) button.style.animationDelay = `${delay}ms`;
 
   const borderDiv = document.createElement("div");
@@ -277,9 +278,11 @@ export const bindActionsToBlockBookmark = (
   };
 
   bookmarkEl.addEventListener("blur", () => unfocusElementBorder(bookmarkBorderEl));
-  bookmarkEl.addEventListener("focus", (e) =>
-    focusElementBorder(bookmarkBorderEl, searchfocusedBorderColor, e)
-  );
+  bookmarkEl.addEventListener("focus", (e) => {
+    if (getTabKeyPressed()) {
+      focusElementBorder(bookmarkBorderEl, searchfocusedBorderColor, e);
+    }
+  });
 };
 
 export const renderBlockFolder = (
@@ -402,9 +405,11 @@ export const bindActionsToBlockFolder = (
   };
 
   bookmarkEl.addEventListener("blur", () => unfocusElementBorder(bookmarkBorderEl));
-  bookmarkEl.addEventListener("focus", (e) =>
-    focusElementBorder(bookmarkBorderEl, searchFocusedBorderColor, e)
-  );
+  bookmarkEl.addEventListener("focus", (e) => {
+    if (getTabKeyPressed()) {
+      focusElementBorder(bookmarkBorderEl, searchFocusedBorderColor, e);
+    }
+  });
 };
 
 export const addFolderBackButton = (
@@ -501,7 +506,9 @@ export const bindActionsToBackButton = (
   };
 
   backButtonEl.addEventListener("blur", () => unfocusElementBorder(backButtonBorderEl));
-  backButtonEl.addEventListener("focus", (e) =>
-    focusElementBorder(backButtonBorderEl, searchFocusedBorderColor, e)
-  );
+  backButtonEl.addEventListener("focus", (e) => {
+    if (getTabKeyPressed()) {
+    }
+    focusElementBorder(backButtonBorderEl, searchFocusedBorderColor, e);
+  });
 };
