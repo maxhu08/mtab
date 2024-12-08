@@ -95,28 +95,49 @@ export const refreshBookmarkSearchResults = (
     );
 
     if (index === selectedIndex) {
-      // <div bookmark-result-url="${bookmark.url}">
-      //   <span class="search-select-icon-color font-semibold">&nbsp;></span>
-      //   ${matchedNameHtml}
+      // <div bookmark-result-url="${bookmark.url}" class="grid grid-cols-[max-content_auto]">
+      //   <span class="search-select-icon-color font-semibold">&nbsp;>&nbsp;</span>
+      //   <div class="truncate" style="color:${placeholderTextColor}">${matchedNameHtml}</div>
       // </div>
 
       const divEl = document.createElement("div");
       divEl.setAttribute("bookmark-result-url", bookmark.url);
+      divEl.className = "grid grid-cols-[max-content_auto]";
+
       const spanEl = document.createElement("span");
       spanEl.className = "search-select-icon-color font-semibold";
-      spanEl.innerHTML = "&nbsp;> ";
+      spanEl.innerHTML = "&nbsp;>&nbsp;";
+
+      const contentDivEl = document.createElement("div");
+      contentDivEl.className = "truncate";
+      contentDivEl.style.color = placeholderTextColor;
+      contentDivEl.innerHTML = matchedNameHtml;
+
       divEl.appendChild(spanEl);
-      divEl.innerHTML += matchedNameHtml;
+      divEl.appendChild(contentDivEl);
 
       bookmarkSearchResultsContainerEl.appendChild(divEl);
     } else {
-      // <div bookmark-result-url="${bookmark.url}">&nbsp;&nbsp;&nbsp;${matchedNameHtml}</div>
+      // <div bookmark-result-url="${bookmark.url}" class="grid grid-cols-[max-content_auto]">
+      //   <div>&nbsp;&nbsp;&nbsp;</div>
+      //   <div class="truncate" style="color:${placeholderTextColor}">${matchedNameHtml}</div>
+      // </div>
 
       const divEl = document.createElement("div");
-      divEl.className = "text-ellipsis overflow-hidden whitespace-nowrap w-full";
-      divEl.style.color = placeholderTextColor;
       divEl.setAttribute("bookmark-result-url", bookmark.url);
-      divEl.innerHTML = "&nbsp;&nbsp;&nbsp;" + matchedNameHtml;
+      divEl.className = "grid grid-cols-[max-content_auto]";
+
+      const placeholderDivEl = document.createElement("div");
+      placeholderDivEl.innerHTML = "&nbsp;&nbsp;&nbsp;";
+
+      const contentDivEl = document.createElement("div");
+      contentDivEl.className = "truncate";
+      contentDivEl.style.color = placeholderTextColor;
+      contentDivEl.innerHTML = matchedNameHtml;
+
+      divEl.appendChild(placeholderDivEl);
+      divEl.appendChild(contentDivEl);
+
       bookmarkSearchResultsContainerEl.appendChild(divEl);
     }
   });
