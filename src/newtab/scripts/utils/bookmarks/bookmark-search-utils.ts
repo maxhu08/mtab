@@ -1,4 +1,3 @@
-import { BookmarksType, Config } from "src/newtab/scripts/config";
 import {
   bookmarksContainerEl,
   bookmarkSearchContainerEl,
@@ -9,16 +8,16 @@ import {
   searchSectionEl
 } from "src/newtab/scripts/ui";
 
-export const tryFocusBookmarkSearch = (config: Config, e: KeyboardEvent) => {
+export const tryFocusBookmarkSearch = (focusedBorderColor: string, e: KeyboardEvent) => {
   // in case already focused
   if (bookmarkSearchInputEl.matches(":focus")) return;
 
-  focusBookmarkSearch(config, e);
+  focusBookmarkSearch(focusedBorderColor, e);
 };
 
-export const focusBookmarkSearch = (config: Config, e: Event) => {
+export const focusBookmarkSearch = (focusedBorderColor: string, e: Event) => {
   bookmarkSearchContainerEl.classList.remove("border-transparent");
-  bookmarkSearchContainerEl.style.borderColor = config.search.focusedBorderColor;
+  bookmarkSearchContainerEl.style.borderColor = focusedBorderColor;
 
   bookmarkSearchInputEl.focus();
   e.preventDefault();

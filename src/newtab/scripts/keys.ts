@@ -52,7 +52,7 @@ export const listenToKeys = async (config: Config) => {
 
     if (e.key === config.hotkeys.activationKey) {
       if (bookmarkSearchSectionEl.classList.contains("grid")) {
-        tryFocusBookmarkSearch(config, e);
+        tryFocusBookmarkSearch(config.search.focusedBorderColor, e);
       } else {
         tryFocusSearch(config, e);
       }
@@ -122,7 +122,7 @@ export const listenToKeys = async (config: Config) => {
           config.search.textColor,
           config.search.placeholderTextColor
         );
-        tryFocusBookmarkSearch(config, e);
+        tryFocusBookmarkSearch(config.search.focusedBorderColor, e);
       }
     }
 
@@ -184,7 +184,9 @@ export const listenToKeys = async (config: Config) => {
     if (document.hasFocus()) unfocusBookmarkSearch(config.animations.initialType);
   });
 
-  bookmarkSearchInputEl.addEventListener("focus", (e) => focusBookmarkSearch(config, e));
+  bookmarkSearchInputEl.addEventListener("focus", (e) =>
+    focusBookmarkSearch(config.search.focusedBorderColor, e)
+  );
 
   bookmarkSearchInputEl.addEventListener("keyup", (e) => {
     enableSearchBookmark(bookmarks, config.search.textColor, config.search.placeholderTextColor);
