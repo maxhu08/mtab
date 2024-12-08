@@ -31,7 +31,9 @@ export const listenToKeys = async (config: Config) => {
   } else {
     const bookmarkNodes = await convertBrowserBookmarksToBookmarkNodes(
       config.bookmarks.bookmarksLocationFirefox,
-      config.bookmarks.defaultBlockyColorType
+      config.bookmarks.defaultBlockyColorType,
+      config.bookmarks.defaultBlockyColor,
+      config.bookmarks.defaultFaviconSource
     );
 
     // flatten bookmarks and exclude folders
