@@ -171,7 +171,7 @@ export const renderBlockBookmark = (
       if (match) {
         const first = match[1];
         const second = match[2];
-        iconHTML = `<span class="w-10 h-10 md:w-16 md:h-16" style="display:inline-block;background-color:${bookmarkColor};mask:url('/icons/fontawesome/svgs/${first}/${second}.svg') no-repeat center;-webkit-mask:url('/icons/fontawesome/svgs/${first}/${second}.svg') no-repeat center;transition:background-color 0.3s;pointer-events:none;"></span>`;
+        iconHTML = `<span class="w-10 h-10 md:w-16 md:h-16" style="display:inline-block;background-color:${bookmarkIconColor};mask:url('/icons/fontawesome/svgs/${first}/${second}.svg') no-repeat center;-webkit-mask:url('/icons/fontawesome/svgs/${first}/${second}.svg') no-repeat center;transition:background-color 0.3s;pointer-events:none;"></span>`;
       }
     } else if (bookmarkIconType.startsWith("url-")) {
       const src = bookmarkIconType.split("url-")[1];
