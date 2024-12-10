@@ -39,8 +39,8 @@ export const renderBookmarkNodes = (
         index,
         bookmarkNode.name,
         bookmarkNode.color,
-        bookmarkNode.iconColor,
         bookmarkNode.iconType,
+        bookmarkNode.iconColor,
         "",
         uiStyle,
         showBookmarkNames,
@@ -139,8 +139,8 @@ export const renderBlockBookmark = (
   bookmarkIndex: number,
   bookmarkName: string,
   bookmarkColor: string,
-  bookmarkIconColor: string,
   bookmarkIconType: string,
+  bookmarkIconColor: string,
   bookmarkIconHTML: string,
   uiStyle: UIStyle,
   showName: boolean,
@@ -164,6 +164,15 @@ export const renderBlockBookmark = (
     } else if (bookmarkIconType.startsWith("nf-")) {
       iconHTML = `<i class="nf ${bookmarkIconType}"></i>`;
       iconSizeClass = "text-5xl md:text-7xl";
+    } else if (/^fa-\w+\sfa-\w+/.test(bookmarkIconType)) {
+      // checks for "fa-... fa-..."
+      const match = bookmarkIconType.match(/fa-(\w+)\sfa-(\w+)/);
+
+      if (match) {
+        const first = match[1];
+        const second = match[2];
+        iconHTML = `<span class="w-10 h-10 md:w-16 md:h-16" style="display:inline-block;background-color:${bookmarkColor};mask:url('/icons/fontawesome/svgs/${first}/${second}.svg') no-repeat center;-webkit-mask:url('/icons/fontawesome/svgs/${first}/${second}.svg') no-repeat center;transition:background-color 0.3s;pointer-events:none;"></span>`;
+      }
     } else if (bookmarkIconType.startsWith("url-")) {
       const src = bookmarkIconType.split("url-")[1];
       iconHTML = `<img class="w-10 md:w-14" src="${src}" />`;

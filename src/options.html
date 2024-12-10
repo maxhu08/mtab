@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="newtab/styles/tailwind.css" />
     <link rel="stylesheet" href="shared/control.css" />
-    <link rel="stylesheet" href="assets/icons/remixicon.css" />
+    <link rel="stylesheet" href="assets/icons/remixicon/remixicon.css" />
     <link rel="stylesheet" href="options/styles/index.css" />
     <script src="options/scripts/init.ts" type="module" defer></script>
     <link rel="icon" href="assets/icon.svg" type="image/x-icon" />
@@ -796,21 +796,34 @@
               </div>
               <p class="text-white">bookmarks.userDefined</p>
               <p class="text-neutral-500">
-                valid iconTypes can be found here:
-                <a href="https://remixicon.com" target="_blank" class="cursor-pointer text-blue-500 transition hover:text-blue-600"> remixicon.com </a>
-                <span class="text-indigo-500">(using version v4.5.0)</span>.<br />
-                remix icon iconTypes should be classes begin with `ri-`
+                <span>valid icon types you can use:</span>
               </p>
               <p class="text-neutral-500">
-                you can also use nerd font icons as iconTypes:
-                <a href="https://www.nerdfonts.com/cheat-sheet" target="_blank" class="cursor-pointer text-blue-500 transition hover:text-blue-600"> nerdfonts.com</a>.<br />
-                nerd font iconTypes should be classes begin with `nf-`
-              </p>
-              <p class="text-neutral-500">
-                you can also use a urls as iconTypes:
+                <span class="text-indigo-500">remixicon:</span>
                 <br />
-                url iconTypes should be structured like `url-https://...`
+                Find available icon types at
+                <a href="https://remixicon.com" target="_blank" class="cursor-pointer text-blue-500 transition hover:text-blue-600"> remixicon.com </a> (using v4.5.0) <br />
+                Remix icon types should be formatted as <span class="text-sky-500">ri-...</span>
               </p>
+              <p class="text-neutral-500">
+                <span class="text-indigo-500">nerdfonts:</span><br />
+                You can also use Nerd Font icons. Check the cheat sheet at
+                <a href="https://www.nerdfonts.com/cheat-sheet" target="_blank" class="cursor-pointer text-blue-500 transition hover:text-blue-600"> nerdfonts.com</a> <br />
+                Nerd font icon types should be formatted as <span class="text-sky-500">nf-...</span>
+              </p>
+              <p class="text-neutral-500">
+                <span class="text-indigo-500">fontawesome:</span>
+                <br />
+                Find available icon types at
+                <a href="https://fontawesome.com/search" target="_blank" class="cursor-pointer text-blue-500 transition hover:text-blue-600"> fontawesome.com </a> (using v6.7.1) <br />
+                Remix icon types should be formatted as <span class="text-sky-500">fa-... fa-...</span>
+              </p>
+              <p class="text-neutral-500">
+                <span class="text-indigo-500">url:</span><br />
+                You can use URLs as icon types<br />
+                URL icon types should be formatted as <span class="text-sky-500">url-https://...</span>
+              </p>
+              <br />
               <button id="bookmarks-user-defined-toggle-collapse-all-button" class="w-full cursor-pointer rounded-md bg-neutral-500 p-2 transition hover:bg-neutral-600" last-action="expand">
                 <span class="text-base text-white">collapse all</span>
               </button>
