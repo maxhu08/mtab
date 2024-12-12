@@ -33,9 +33,10 @@ export const setWeatherMessage = (messageEl: HTMLParagraphElement, unitsType: "f
   const cachedTimestamp = localStorage.getItem("weatherTimestamp");
   const currentTime = new Date().getTime();
 
-  // if cached message is recent enough (5 mins)
-  if (cachedData && cachedTimestamp && currentTime - parseInt(cachedTimestamp) < 60 * 1000) {
-    messageEl.textContent = JSON.parse(cachedData).message;
+  // if cached data is recent enough (5 mins)
+  if (cachedData && cachedTimestamp && currentTime - parseInt(cachedTimestamp) < 5 * 60 * 1000) {
+    const data = JSON.parse(cachedData);
+    messageEl.textContent = getWeatherMessage(data, unitsType);
     return;
   }
 
@@ -51,11 +52,10 @@ export const setWeatherMessage = (messageEl: HTMLParagraphElement, unitsType: "f
         if (!response.ok) throw new Error();
 
         const data = await response.json();
-        const message = getWeatherMessage(data, unitsType);
+        localStorage.setItem("weatherData", JSON.stringify(data)); // cache raw data
+        localStorage.setItem("weatherTimestamp", currentTime.toString()); // cache timestamp
 
-        messageEl.textContent = message;
-        localStorage.setItem("weatherData", JSON.stringify({ message }));
-        localStorage.setItem("weatherTimestamp", currentTime.toString());
+        messageEl.textContent = getWeatherMessage(data, unitsType);
       } catch (err) {
         messageEl.textContent = "Failed to fetch weather data";
         console.error(`SET_WEATHER_MESSAGE: ${err}`);
