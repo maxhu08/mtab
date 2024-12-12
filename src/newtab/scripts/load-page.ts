@@ -7,7 +7,7 @@ import { setUISyle } from "src/newtab/scripts/utils/set-ui-style";
 import { loadWallpaper } from "src/newtab/scripts/utils/load-wallpaper";
 import { styleSearch } from "src/newtab/scripts/utils/style-search";
 import { styleMessage } from "src/newtab/scripts/utils/style-message";
-import { setMessage } from "./utils/set-message";
+import { setMessage } from "src/newtab/scripts/utils/messages/set-message";
 import { renderBookmarks } from "./utils/bookmarks/render-bookmarks";
 import { addAnimations } from "./utils/animations";
 import { listenToKeys } from "./keys";
