@@ -233,7 +233,13 @@ export type SearchEngine =
   | "startpage"
   | "ecosia"
   | "kagi";
-export type MessageType = "afternoon-morning" | "date" | "time-12" | "time-24" | "custom";
+export type MessageType =
+  | "afternoon-morning"
+  | "date"
+  | "time-12"
+  | "time-24"
+  | "weather"
+  | "custom";
 export type BookmarksType = "user-defined" | "default" | "default-blocky" | "none";
 export type BookmarkNode = BookmarkNodeFolder | BookmarkNodeBookmark;
 export type BookmarkNodeFolder = {

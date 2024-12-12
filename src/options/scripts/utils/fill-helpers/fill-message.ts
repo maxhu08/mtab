@@ -10,7 +10,8 @@ import {
   messageTypeCustomButtonEl,
   messageTypeDateButtonEl,
   messageTypeTime12ButtonEl,
-  messageTypeTime24ButtonEl
+  messageTypeTime24ButtonEl,
+  messageTypeWeatherButtonEl
 } from "src/options/scripts/ui";
 
 export const fillMessageInputs = (config: Config) => {
@@ -31,6 +32,7 @@ export const fillMessageInputs = (config: Config) => {
     "date": messageTypeDateButtonEl,
     "time-12": messageTypeTime12ButtonEl,
     "time-24": messageTypeTime24ButtonEl,
+    "weather": messageTypeWeatherButtonEl,
     "custom": messageTypeCustomButtonEl
   };
   messageTypePairs[config.message.type].click();

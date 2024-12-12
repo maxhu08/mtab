@@ -27,6 +27,7 @@ export const saveMessageSettingsToDraft = (draft: Config) => {
     "message-type-date-button": "date",
     "message-type-time-12-button": "time-12",
     "message-type-time-24-button": "time-24",
+    "message-type-weather-button": "weather",
     "message-type-custom-button": "custom"
   };
 

@@ -19,6 +19,7 @@ export const messageTypeAfternoonMorningButtonEl = getButton("message-type-after
 export const messageTypeDateButtonEl = getButton("message-type-date");
 export const messageTypeTime12ButtonEl = getButton("message-type-time-12");
 export const messageTypeTime24ButtonEl = getButton("message-type-time-24");
+export const messageTypeWeatherButtonEl = getButton("message-type-weather");
 export const messageTypeCustomButtonEl = getButton("message-type-custom");
 export const [messageCustomTextContainerEl, messageCustomTextInputEl] = getContainerAndInput("message-custom-text");
 
@@ -132,7 +133,7 @@ export const buttonSwitches: ButtonSwitch[] = [
     attr: "message-font-type"
   },
   {
-    buttons: [messageTypeAfternoonMorningButtonEl, messageTypeDateButtonEl, messageTypeTime12ButtonEl, messageTypeTime24ButtonEl, messageTypeCustomButtonEl],
+    buttons: [messageTypeAfternoonMorningButtonEl, messageTypeDateButtonEl, messageTypeTime12ButtonEl, messageTypeTime24ButtonEl, messageTypeWeatherButtonEl, messageTypeCustomButtonEl],
     attr: "message-type"
   },
   {
