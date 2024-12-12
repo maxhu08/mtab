@@ -33,5 +33,14 @@ export const saveMessageSettingsToDraft = (draft: Config) => {
 
   draft.message.type = messageTypePairs[selectedTypeEl.id];
 
+  // prettier-ignore
+  const selectedWeatherUnitsTypeEl = document.querySelector(`button[btn-option-type="message-weather-units-type"][selected="yes"]`) as HTMLButtonElement;
+  const weatherUnitTypePairs: Record<string, "f" | "c"> = {
+    "message-weather-units-type-f-button": "f",
+    "message-weather-units-type-c-button": "c"
+  };
+
+  draft.message.weather.unitsType = weatherUnitTypePairs[selectedWeatherUnitsTypeEl.id];
+
   draft.message.customText = messageCustomTextInputEl.value;
 };

@@ -11,7 +11,8 @@ import {
   messageTypeDateButtonEl,
   messageTypeTime12ButtonEl,
   messageTypeTime24ButtonEl,
-  messageTypeWeatherButtonEl
+  messageTypeWeatherButtonEl,
+  messageWeatherUnitsTypeFButton
 } from "src/options/scripts/ui";
 
 export const fillMessageInputs = (config: Config) => {
@@ -36,6 +37,12 @@ export const fillMessageInputs = (config: Config) => {
     "custom": messageTypeCustomButtonEl
   };
   messageTypePairs[config.message.type].click();
+
+  const messageWeatherUnitTypePairs: Record<"f" | "c", HTMLButtonElement> = {
+    f: messageWeatherUnitsTypeFButton,
+    c: messageWeatherUnitsTypeFButton
+  };
+  messageWeatherUnitTypePairs[config.message.weather.unitsType].click();
 
   messageCustomTextInputEl.value = config.message.customText;
 };

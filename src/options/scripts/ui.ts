@@ -22,6 +22,8 @@ export const messageTypeTime24ButtonEl = getButton("message-type-time-24");
 export const messageTypeWeatherButtonEl = getButton("message-type-weather");
 export const messageTypeCustomButtonEl = getButton("message-type-custom");
 export const [messageCustomTextContainerEl, messageCustomTextInputEl] = getContainerAndInput("message-custom-text");
+export const messageWeatherUnitsTypeFButton = getButton("message-weather-units-type-f");
+export const messageWeatherUnitsTypeCButton = getButton("message-weather-units-type-c");
 
 export const wallpaperEnabledCheckboxEl = getCheckbox("wallpaper-enabled");
 export const wallpaperTypeUrlButtonEl = getButton("wallpaper-type-url");
@@ -135,6 +137,10 @@ export const buttonSwitches: ButtonSwitch[] = [
   {
     buttons: [messageTypeAfternoonMorningButtonEl, messageTypeDateButtonEl, messageTypeTime12ButtonEl, messageTypeTime24ButtonEl, messageTypeWeatherButtonEl, messageTypeCustomButtonEl],
     attr: "message-type"
+  },
+  {
+    buttons: [messageWeatherUnitsTypeFButton, messageWeatherUnitsTypeCButton],
+    attr: "message-weather-units-type"
   },
   {
     buttons: [wallpaperTypeUrlButtonEl, wallpaperTypeFileUploadButtonEl],
