@@ -48,7 +48,12 @@ export const loadPage = () => {
       config.search.font.custom
     );
 
-    styleMessage(config.message.textColor, config.message.font.type, config.message.font.custom);
+    styleMessage(
+      config.message.textColor,
+      config.message.textSize,
+      config.message.font.type,
+      config.message.font.custom
+    );
     setMessage(
       config.message.enabled,
       config.message.type,

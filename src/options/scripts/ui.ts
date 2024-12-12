@@ -15,6 +15,7 @@ export const messageFontTypeDefaultButtonEl = getButton("message-font-type-defau
 export const messageFontTypeCustomButtonEl = getButton("message-font-type-custom");
 export const [messageFontCustomContainerEl, messageFontCustomInputEl] = getContainerAndInput("message-font-custom");
 export const [messageTextColorContainerEl, messageTextColorInputEl] = getContainerAndInput("message-text-color");
+export const [messageTextSizeContainerEl, messageTextSizeInputEl] = getContainerAndInput("message-text-size");
 export const messageTypeAfternoonMorningButtonEl = getButton("message-type-afternoon-morning");
 export const messageTypeDateButtonEl = getButton("message-type-date");
 export const messageTypeTime12ButtonEl = getButton("message-type-time-12");

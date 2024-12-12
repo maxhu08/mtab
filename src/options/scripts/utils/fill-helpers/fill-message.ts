@@ -6,6 +6,7 @@ import {
   messageFontTypeCustomButtonEl,
   messageFontTypeDefaultButtonEl,
   messageTextColorInputEl,
+  messageTextSizeInputEl,
   messageTypeAfternoonMorningButtonEl,
   messageTypeCustomButtonEl,
   messageTypeDateButtonEl,
@@ -26,6 +27,7 @@ export const fillMessageInputs = (config: Config) => {
 
   messageFontCustomInputEl.value = config.message.font.custom;
   messageTextColorInputEl.value = config.message.textColor;
+  messageTextSizeInputEl.value = config.message.textSize.toString();
 
   // prettier-ignore
   const messageTypePairs: Record<MessageType, HTMLButtonElement> = {

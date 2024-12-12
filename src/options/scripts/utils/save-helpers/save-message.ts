@@ -3,7 +3,8 @@ import {
   messageEnabledCheckboxEl,
   messageTextColorInputEl,
   messageCustomTextInputEl,
-  messageFontCustomInputEl
+  messageFontCustomInputEl,
+  messageTextSizeInputEl
 } from "src/options/scripts/ui";
 
 export const saveMessageSettingsToDraft = (draft: Config) => {
@@ -19,6 +20,7 @@ export const saveMessageSettingsToDraft = (draft: Config) => {
   draft.message.font.custom = messageFontCustomInputEl.value;
 
   draft.message.textColor = messageTextColorInputEl.value;
+  draft.message.textSize = parseFloat(messageTextSizeInputEl.value);
 
   // prettier-ignore
   const selectedTypeEl = document.querySelector(`button[btn-option-type="message-type"][selected="yes"]`) as HTMLButtonElement;

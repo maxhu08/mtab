@@ -3,8 +3,31 @@ import { messageEl } from "src/newtab/scripts/ui";
 import { getFontNameFromURL } from "src/newtab/scripts/utils/get-font-name";
 import { insertCSS } from "src/newtab/scripts/utils/insert-css";
 
-export const styleMessage = (textColor: string, fontType: FontType, fontCustom: string) => {
+export const styleMessage = (
+  textColor: string,
+  textSize: number,
+  fontType: FontType,
+  fontCustom: string
+) => {
   messageEl.style.color = textColor;
+
+  // .text-size-message {
+  //   font-size: 1.5rem;
+  // }
+  // @media (min-width: 768px) {
+  //   .text-size-message {
+  //     font-size: 2.25rem;
+  //   }
+  // }
+  // @media (min-width: 1024px) {
+  //   .text-size-message {
+  //     font-size: ${textSize}rem;
+  //   }
+  // }
+
+  insertCSS(
+    `.text-size-message{font-size:1.5rem}@media (min-width: 768px){.text-size-message{font-size:2.25rem}}@media (min-width: 1024px){.text-size-message{font-size:${textSize}rem}}`
+  );
 
   // const messageFontCss = `
   // .font-message {
