@@ -95,8 +95,12 @@ export const defaultConfig: Config = {
       custom: ""
     },
     textColor: "#ffffff",
+    textSize: 4,
     type: "afternoon-morning",
-    customText: "your custom text"
+    customText: "your custom text",
+    weather: {
+      units: "f"
+    }
   },
   wallpaper: {
     type: "url",
@@ -283,8 +287,12 @@ export interface Config {
       custom: string;
     };
     textColor: string;
+    textSize: number;
     type: MessageType;
     customText: string;
+    weather: {
+      units: "f" | "c";
+    };
   };
   wallpaper: {
     type: WallpaperType;
