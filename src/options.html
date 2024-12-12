@@ -190,9 +190,27 @@
                 </button>
               </div>
             </div>
-            <div id="message-custom-text-section">
-              <div class="grid gap-2">
-                <p class="text-base text-white">message.customText</p>
+            <div id="message-type-weather-section" class="grid grid-flow-row gap-4">
+              <p class="text-base text-neutral-500">
+                note:<br />
+                you need to have location permissions set to `allow` for weather messages to work <br />
+                weather data may be delayed due to being cached in 5 minutes intervals for faster load times
+              </p>
+              <div class="grid gap-2 text-base">
+                <p class="text-white">message.weather.unitsType</p>
+                <div class="grid grid-cols-2 gap-2">
+                  <button id="message-weather-units-type-f-button" class="rounded-md bg-neutral-800 py-2 outline-none hover:bg-neutral-700">
+                    <span class="text-white">°F</span>
+                  </button>
+                  <button id="message-weather-units-type-c-button" class="rounded-md bg-neutral-800 py-2 outline-none hover:bg-neutral-700">
+                    <span class="text-white">°C</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div id="message-type-custom-section">
+              <div class="grid gap-2 text-base">
+                <p class="text-white">message.customText</p>
                 <p id="message-custom-text-info" class="whitespace-pre-line text-base text-neutral-500"></p>
                 <div id="message-custom-text-container" class="grid w-full grid-cols-[max-content_auto] rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base">
                   <span class="select-none font-semibold text-pink-500">>&nbsp;</span>

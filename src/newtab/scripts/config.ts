@@ -99,7 +99,7 @@ export const defaultConfig: Config = {
     type: "afternoon-morning",
     customText: "your custom text",
     weather: {
-      units: "f"
+      unitsType: "f"
     }
   },
   wallpaper: {
@@ -291,7 +291,7 @@ export interface Config {
     type: MessageType;
     customText: string;
     weather: {
-      units: "f" | "c";
+      unitsType: "f" | "c";
     };
   };
   wallpaper: {

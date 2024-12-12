@@ -8,6 +8,7 @@ import {
   messageFontTypeCustomButtonEl,
   messageFontTypeDefaultButtonEl,
   messageTypeCustomButtonEl,
+  messageTypeWeatherButtonEl,
   searchFontTypeCustomButtonEl,
   searchFontTypeDefaultButtonEl,
   titleFaviconTypeCustomButtonEl,
@@ -74,18 +75,33 @@ const handleSearchFontTypeSwitch = () => {
 };
 
 const handleMessageTypeSwitch = () => {
-  const messageCustomTextSection = document.getElementById(
-    "message-custom-text-section"
-  ) as HTMLDivElement;
+  // prettier-ignore
+  const messageTypeWeatherSection = document.getElementById("message-type-weather-section") as HTMLDivElement;
+  // prettier-ignore
+  const messageTypeCustomSection = document.getElementById("message-type-custom-section") as HTMLDivElement;
+
   const hideButtons = [
     "message-type-afternoon-morning-button",
     "message-type-date-button",
     "message-type-time-12-button",
-    "message-type-time-24-button"
+    "message-type-time-24-button",
+    "message-type-weather-button",
+    "message-type-custom-button"
   ];
 
+  hideButtons.forEach((id) => {
+    (document.getElementById(id) as HTMLButtonElement).addEventListener("click", () => {
+      messageTypeWeatherSection.style.display = "none";
+      messageTypeCustomSection.style.display = "none";
+    });
+  });
+
+  messageTypeWeatherButtonEl.addEventListener("click", () => {
+    messageTypeWeatherSection.style.display = "grid";
+  });
+
   messageTypeCustomButtonEl.addEventListener("click", () => {
-    messageCustomTextSection.style.display = "block";
+    messageTypeCustomSection.style.display = "block";
 
     (document.getElementById("message-custom-text-info") as HTMLParagraphElement).textContent =
       'You can use \\ to represent:\n\n\
@@ -106,12 +122,6 @@ const handleMessageTypeSwitch = () => {
                 - Meridian components\n\
                 - \\md -> Lowercase meridian (e.g., "am" or "pm")\n\
                 - \\MD -> Uppercase meridian (e.g., "AM" or "PM")';
-  });
-
-  hideButtons.forEach((id) => {
-    (document.getElementById(id) as HTMLButtonElement).addEventListener("click", () => {
-      messageCustomTextSection.style.display = "none";
-    });
   });
 };
 
