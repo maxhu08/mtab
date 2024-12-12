@@ -29,19 +29,33 @@ interface OpenMeteoResponse {
 export const setWeatherMessage = (messageEl: HTMLParagraphElement) => {
   messageEl.textContent = "...";
 
+  const cachedData = localStorage.getItem("weatherData");
+  const cachedTimestamp = localStorage.getItem("weatherTimestamp");
+  const currentTime = new Date().getTime();
+
+  // if cached message is recent enough (5 mins)
+  if (cachedData && cachedTimestamp && currentTime - parseInt(cachedTimestamp) < 5 * 60 * 1000) {
+    messageEl.textContent = JSON.parse(cachedData).message;
+    return;
+  }
+
   navigator.geolocation.getCurrentPosition(
     async (position) => {
       const { latitude, longitude } = position.coords;
 
       try {
-        // prettier-ignore
-        const response = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current_weather=true`);
+        const response = await fetch(
+          `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current_weather=true`
+        );
 
         if (!response.ok) throw new Error();
 
-        const data = (await response.json()) as OpenMeteoResponse;
+        const data = await response.json();
+        const message = getWeatherMessage(data);
 
-        messageEl.textContent = getWeatherMessage(data);
+        messageEl.textContent = message;
+        localStorage.setItem("weatherData", JSON.stringify({ message }));
+        localStorage.setItem("weatherTimestamp", currentTime.toString());
       } catch (err) {
         messageEl.textContent = "Failed to fetch weather data";
         console.error(`SET_WEATHER_MESSAGE: ${err}`);
@@ -66,7 +80,7 @@ const getWeatherEmoji = (weatherCode: number): string => {
   else if (weatherCode === 3)
     return "☁️"; // overcast
   else if (weatherCode === 45 || weatherCode === 48)
-    return "🌫️"; // fog
+    return "☁️"; // fog
   else if (weatherCode === 51 || weatherCode === 53 || weatherCode === 55)
     return "🌦️"; // drizzle
   else if (weatherCode === 61 || weatherCode === 63 || weatherCode === 65)
@@ -77,7 +91,7 @@ const getWeatherEmoji = (weatherCode: number): string => {
     return "⛈️"; // thunderstorm
   else if (weatherCode === 96 || weatherCode === 99)
     return "🌩️"; // thunderstorm with hail
-  else return "🌈"; // default
+  else return "☁️"; // default
 };
 
 const getWeatherDescription = (weatherCode: number): string => {
@@ -96,5 +110,5 @@ const getWeatherDescription = (weatherCode: number): string => {
   else if (weatherCode === 85 || weatherCode === 86) return "Heavy snow showers";
   else if (weatherCode === 95) return "Thunderstorms";
   else if (weatherCode === 96 || weatherCode === 99) return "Thunderstorm with hail";
-  else return "Unknown weather";
+  else return "Unknown";
 };
