@@ -12,11 +12,11 @@ export const styleMessage = (
   messageEl.style.color = textColor;
 
   // .text-size-message {
-  //   font-size: 1.5rem;
+  //   font-size: ${textSize * 0.4}rem;
   // }
   // @media (min-width: 768px) {
   //   .text-size-message {
-  //     font-size: 2.25rem;
+  //     font-size: ${textSize * 0.75}rem;
   //   }
   // }
   // @media (min-width: 1024px) {
@@ -26,7 +26,7 @@ export const styleMessage = (
   // }
 
   insertCSS(
-    `.text-size-message{font-size:1.5rem}@media (min-width: 768px){.text-size-message{font-size:2.25rem}}@media (min-width: 1024px){.text-size-message{font-size:${textSize}rem}}`
+    `.text-size-message{font-size:${textSize * 0.4}rem}@media (min-width: 768px){.text-size-message{font-size:${textSize * 0.75}rem}}@media (min-width: 1024px){.text-size-message{font-size:${textSize}rem}}`
   );
 
   // const messageFontCss = `

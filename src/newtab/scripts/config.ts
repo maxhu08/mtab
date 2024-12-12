@@ -95,7 +95,7 @@ export const defaultConfig: Config = {
       custom: ""
     },
     textColor: "#ffffff",
-    textSize: 4,
+    textSize: 3.75,
     type: "afternoon-morning",
     customText: "your custom text",
     weather: {
