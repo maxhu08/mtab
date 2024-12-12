@@ -13,7 +13,8 @@ export const setMessage = (
   enabled: boolean,
   type: MessageType,
   customText: string,
-  username: string
+  username: string,
+  weatherUnitsType: "f" | "c"
 ) => {
   if (!enabled) {
     messageEl.classList.add("hidden");
@@ -54,7 +55,7 @@ export const setMessage = (
       break;
     }
     case "weather": {
-      setWeatherMessage(messageEl);
+      setWeatherMessage(messageEl, weatherUnitsType);
       break;
     }
   }

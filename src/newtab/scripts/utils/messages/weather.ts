@@ -26,7 +26,7 @@ interface OpenMeteoResponse {
   };
 }
 
-export const setWeatherMessage = (messageEl: HTMLParagraphElement) => {
+export const setWeatherMessage = (messageEl: HTMLParagraphElement, unitsType: "f" | "c") => {
   messageEl.textContent = "...";
 
   const cachedData = localStorage.getItem("weatherData");
@@ -34,7 +34,7 @@ export const setWeatherMessage = (messageEl: HTMLParagraphElement) => {
   const currentTime = new Date().getTime();
 
   // if cached message is recent enough (5 mins)
-  if (cachedData && cachedTimestamp && currentTime - parseInt(cachedTimestamp) < 5 * 60 * 1000) {
+  if (cachedData && cachedTimestamp && currentTime - parseInt(cachedTimestamp) < 60 * 1000) {
     messageEl.textContent = JSON.parse(cachedData).message;
     return;
   }
@@ -51,7 +51,7 @@ export const setWeatherMessage = (messageEl: HTMLParagraphElement) => {
         if (!response.ok) throw new Error();
 
         const data = await response.json();
-        const message = getWeatherMessage(data);
+        const message = getWeatherMessage(data, unitsType);
 
         messageEl.textContent = message;
         localStorage.setItem("weatherData", JSON.stringify({ message }));
@@ -68,8 +68,19 @@ export const setWeatherMessage = (messageEl: HTMLParagraphElement) => {
   );
 };
 
-const getWeatherMessage = (data: OpenMeteoResponse) => {
-  return `${getWeatherEmoji(data.current_weather.weathercode)} ${getWeatherDescription(data.current_weather.weathercode)} ${data.current_weather.temperature.toString()} ${data.current_weather_units.temperature}`;
+const getWeatherMessage = (data: OpenMeteoResponse, unitsType: "f" | "c"): string => {
+  let temperature = data.current_weather.temperature;
+  let unitSymbol = "°C";
+  const weatherCode = data.current_weather.weathercode;
+  const emoji = getWeatherEmoji(weatherCode);
+  const description = getWeatherDescription(weatherCode);
+
+  if (unitsType === "f") {
+    temperature = (temperature * 9) / 5 + 32;
+    unitSymbol = "°F";
+  }
+
+  return `${emoji} ${description} ${Math.round(temperature)} ${unitSymbol}`;
 };
 
 const getWeatherEmoji = (weatherCode: number): string => {

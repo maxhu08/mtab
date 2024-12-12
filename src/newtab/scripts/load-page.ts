@@ -53,7 +53,8 @@ export const loadPage = () => {
       config.message.enabled,
       config.message.type,
       config.message.customText,
-      config.user.name
+      config.user.name,
+      config.message.weather.unitsType
     );
 
     renderBookmarks(config);
