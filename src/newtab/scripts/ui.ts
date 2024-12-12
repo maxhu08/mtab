@@ -1,3 +1,4 @@
+export const coverEl = document.getElementById("cover") as HTMLDivElement;
 export const wallpaperEl = document.getElementById("wallpaper") as HTMLDivElement;
 
 export const contentEl = document.getElementById("content") as HTMLDivElement;

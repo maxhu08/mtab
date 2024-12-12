@@ -17,6 +17,12 @@ html {
   display: none !important;
 }
 
+#cover {
+  transition: opacity 500ms cubic-bezier(0.25, 1, 0.5, 1);
+  mask-image: radial-gradient(circle, rgba(0, 0, 0, 0) 30%, rgba(0, 0, 0, 1) 100%);
+  -webkit-mask-image: radial-gradient(circle, rgba(0, 0, 0, 0) 30%, rgba(0, 0, 0, 1) 100%);
+}
+
 .top-distance {
   top: 10vh;
 }
