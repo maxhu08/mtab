@@ -29,8 +29,11 @@ export const setUISyle = (ui: Config["ui"]) => {
     //   box-sizing: border-box !important;
     //   backdrop-filter: blur(${ui.blurStrength});
     // }
+    // .bg-background {
+    //   background-color: ${ui.backgroundColor};
+    // }`;
     insertCSS(
-      `.glass-effect{background-color:${ui.glassColor};box-shadow:0 25px 23px rgba(0,0,0,0.15);box-sizing:border-box!important;backdrop-filter:blur(${ui.blurStrength});}`
+      `.glass-effect{background-color:${ui.glassColor};box-shadow:0 25px 23px rgba(0, 0, 0, 0.15);box-sizing:border-box !important;backdrop-filter: blur(${ui.blurStrength})}.bg-background{background-color:${ui.backgroundColor}}`
     );
   }
 

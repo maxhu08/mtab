@@ -16,6 +16,8 @@ import { fixDisappearingUI } from "src/newtab/scripts/utils/fix-disappearing-ui"
 import { listenToSearch } from "src/newtab/scripts/utils/listen-search";
 import { showOptionsButton } from "src/newtab/scripts/utils/show-options-button";
 import { listenBookmarkNumberKeys } from "src/newtab/scripts/utils/bookmarks/listen-bookmark-number-keys";
+import { hideCover } from "src/newtab/scripts/utils/hide-cover";
+import { coverEl } from "src/newtab/scripts/ui";
 
 export const loadPage = () => {
   const manifest = chrome.runtime.getManifest();
@@ -31,7 +33,10 @@ export const loadPage = () => {
 
     setUISyle(config.ui);
 
-    loadWallpaper(config.wallpaper);
+    if (!config.wallpaper.enabled) {
+      coverEl.style.transitionDuration = "0ms";
+      hideCover();
+    } else loadWallpaper(config.wallpaper);
 
     styleSearch(
       config.ui.style,
