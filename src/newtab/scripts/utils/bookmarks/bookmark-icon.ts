@@ -7,28 +7,43 @@ export const getBookmarkIconDetails = (
   bookmarkIconType: string,
   bookmarkIconColor: string
 ): BookmarkIconResult => {
-  let iconHTML = "";
-  let iconSizeClass = "";
-
   if (bookmarkIconType.startsWith("ri-")) {
-    iconHTML = `<i class="${bookmarkIconType}"></i>`;
-    iconSizeClass = "text-4xl md:text-6xl";
-  } else if (bookmarkIconType.startsWith("nf-")) {
-    iconHTML = `<i class="nf ${bookmarkIconType}"></i>`;
-    iconSizeClass = "text-5xl md:text-7xl";
-  } else if (/^fa-\w+\sfa-\w+/.test(bookmarkIconType)) {
-    const match = bookmarkIconType.match(/^fa-(\w+)\sfa-(\w+)/);
-    if (match) {
-      const [, first, second] = match;
-      iconHTML = `<span class="w-10 h-10 md:w-16 md:h-16" style="display:inline-block;background-color:${bookmarkIconColor};mask:url('/icons/fontawesome/svgs/${first}/${second}.svg') no-repeat center;-webkit-mask:url('/icons/fontawesome/svgs/${first}/${second}.svg') no-repeat center;transition:background-color 0.3s;pointer-events:none;"></span>`;
-    }
-  } else if (bookmarkIconType.startsWith("si-")) {
-    const icon = bookmarkIconType.slice(3);
-    iconHTML = `<span class="w-10 h-10 md:w-16 md:h-16" style="display:inline-block;background-color:${bookmarkIconColor};mask:url('/icons/simpleicons/${icon}.svg') no-repeat center;-webkit-mask:url('/icons/simpleicons/${icon}.svg') no-repeat center;transition:background-color 0.3s;pointer-events:none;"></span>`;
-  } else if (bookmarkIconType.startsWith("url-")) {
-    const src = bookmarkIconType.split("url-")[1];
-    iconHTML = `<img class="w-10 md:w-14" src="${src}" />`;
+    return {
+      iconHTML: `<i class="${bookmarkIconType}"></i>`,
+      iconSizeClass: "text-4xl md:text-6xl"
+    };
   }
 
-  return { iconHTML, iconSizeClass };
+  if (bookmarkIconType.startsWith("nf-")) {
+    return {
+      iconHTML: `<i class="nf ${bookmarkIconType}"></i>`,
+      iconSizeClass: "text-5xl md:text-7xl"
+    };
+  }
+
+  if (/^fa-\w+\sfa-\w+/.test(bookmarkIconType)) {
+    const [first, second] = bookmarkIconType.split(/\s/).map((part) => part.slice(3));
+    return {
+      iconHTML: `<span class="w-10 h-10 md:w-16 md:h-16" style="display:inline-block;background-color:${bookmarkIconColor};mask:url('/icons/fontawesome/svgs/${first}/${second}.svg') no-repeat center;-webkit-mask:url('/icons/fontawesome/svgs/${first}/${second}.svg') no-repeat center;transition:background-color 0.3s;pointer-events:none;"></span>`,
+      iconSizeClass: ""
+    };
+  }
+
+  if (bookmarkIconType.startsWith("si-")) {
+    const icon = bookmarkIconType.slice(3);
+    return {
+      iconHTML: `<span class="w-10 h-10 md:w-16 md:h-16" style="display:inline-block;background-color:${bookmarkIconColor};mask:url('/icons/simpleicons/${icon}.svg') no-repeat center;-webkit-mask:url('/icons/simpleicons/${icon}.svg') no-repeat center;transition:background-color 0.3s;pointer-events:none;"></span>`,
+      iconSizeClass: ""
+    };
+  }
+
+  if (bookmarkIconType.startsWith("url-")) {
+    const src = bookmarkIconType.slice(4);
+    return {
+      iconHTML: `<img class="w-10 md:w-14" src="${src}" />`,
+      iconSizeClass: ""
+    };
+  }
+
+  return { iconHTML: "", iconSizeClass: "" };
 };
