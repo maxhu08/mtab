@@ -22,9 +22,16 @@ export const handleMath = (val: string) => {
       isOperatorNode(result) ||
       isNumber(result)
     ) {
-      return { type: "math", result: format(result) } as const;
+      return { type: "math", result: betterFormat(result) } as const;
     }
   } catch {
     if (val !== "date") hideAssist();
   }
+};
+
+const betterFormat = (expression: string) => {
+  return format(expression)
+    .replace(/\s*\*\s*([a-zA-Z])/g, "$1") // remove '* ' followed by any letter
+    .replace(/\s*\^\s*/g, "^") // remove spaces around '^'
+    .replace(/\s+/g, " "); // keep single spaces between terms
 };
