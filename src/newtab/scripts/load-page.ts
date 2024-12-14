@@ -18,6 +18,7 @@ import { showOptionsButton } from "src/newtab/scripts/utils/show-options-button"
 import { listenBookmarkNumberKeys } from "src/newtab/scripts/utils/bookmarks/listen-bookmark-number-keys";
 import { hideCover } from "src/newtab/scripts/utils/hide-cover";
 import { coverEl } from "src/newtab/scripts/ui";
+import { setTopDistance } from "src/newtab/scripts/utils/top-distance";
 
 export const loadPage = () => {
   const manifest = chrome.runtime.getManifest();
@@ -31,6 +32,7 @@ export const loadPage = () => {
     setTitle(config.title.defaultTitle);
     loadFavicon(config.title.faviconType);
 
+    setTopDistance(config.bookmarks.type);
     setUISyle(config.ui);
 
     if (!config.wallpaper.enabled) {
