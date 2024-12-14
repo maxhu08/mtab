@@ -1,6 +1,26 @@
 ## Coding Style
+Everything specified here will be applied by Prettier anyway when you commit, but I'm adding it here anyway fore completeness sake.
 
-TODO: talk about how many spaces in an indent, how to write comments, how to set up prettier, etc
+- There are 2 spaces per indent
+
+- There are no trailing comma's
+  - Correct: 
+    ```typescript
+    const data = [
+      1,
+      2,
+      3 // <--- Notice how there's no trailing comma
+    ]
+    ```
+  - Incorrect: 
+    ```typescript
+    const data = [
+      1,
+      2,
+      3, // <--- Notice the trailing comma
+    ]
+    ```
+
 
 **Naming variables**
 

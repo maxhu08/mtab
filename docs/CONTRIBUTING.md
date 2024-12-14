@@ -5,9 +5,10 @@
 
 ## Table of Contents
 
-Before contributing make sure to read about the coding style, project structure, & how to commit.
+Before contributing make sure to read about how to setup your environment, coding style, project structure, & how to commit.
 
-1. [Coding Style](./CODING_STYLE.md)
-2. [Options Page](./OPTIONS_PAGE.md)
-3. [Project Structure](./PROJECT_STRUCTURE.md)
-4. [Committing](./COMMITTING.md)
+1. [Setup](./SETUP.md)
+2. [Coding Style](./CODING_STYLE.md)
+3. [Options Page](./OPTIONS_PAGE.md)
+4. [Project Structure](./PROJECT_STRUCTURE.md)
+5. [Committing](./COMMITTING.md)
