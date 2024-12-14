@@ -22,6 +22,9 @@ export const getBookmarkIconDetails = (
       const [, first, second] = match;
       iconHTML = `<span class="w-10 h-10 md:w-16 md:h-16" style="display:inline-block;background-color:${bookmarkIconColor};mask:url('/icons/fontawesome/svgs/${first}/${second}.svg') no-repeat center;-webkit-mask:url('/icons/fontawesome/svgs/${first}/${second}.svg') no-repeat center;transition:background-color 0.3s;pointer-events:none;"></span>`;
     }
+  } else if (bookmarkIconType.startsWith("si-")) {
+    const icon = bookmarkIconType.slice(3);
+    iconHTML = `<span class="w-10 h-10 md:w-16 md:h-16" style="display:inline-block;background-color:${bookmarkIconColor};mask:url('/icons/simpleicons/${icon}.svg') no-repeat center;-webkit-mask:url('/icons/simpleicons/${icon}.svg') no-repeat center;transition:background-color 0.3s;pointer-events:none;"></span>`;
   } else if (bookmarkIconType.startsWith("url-")) {
     const src = bookmarkIconType.split("url-")[1];
     iconHTML = `<img class="w-10 md:w-14" src="${src}" />`;
