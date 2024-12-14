@@ -20,7 +20,6 @@ import {
 import { openBookmark } from "src/newtab/scripts/utils/bookmarks/open-bookmark";
 import { convertBrowserBookmarksToBookmarkNodes } from "src/newtab/scripts/utils/bookmarks/convert-browser-bookmarks";
 import { flattenBookmarks } from "src/newtab/scripts/utils/bookmarks/flatten-bookmarks";
-// import { navigateTab } from "src/newtab/scripts/utils/navigate-tab";
 
 export const listenToKeys = async (config: Config) => {
   let bookmarks: any[] = [];
@@ -125,10 +124,6 @@ export const listenToKeys = async (config: Config) => {
         tryFocusBookmarkSearch(config.search.focusedBorderColor, e);
       }
     }
-
-    // nav stuff
-    // if (e.key === "J") navigateTab("left");
-    // if (e.key === "K") navigateTab("right");
   });
 
   let isComposing = false;
