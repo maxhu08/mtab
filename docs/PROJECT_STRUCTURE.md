@@ -1,5 +1,8 @@
 ## Project Structure
 
+**src/utils**
+This folder contains small peices of code that is used everywhere and in a more general manner. This means that code in this folder may be used in other areas of the extension.
+
 **src/scripts/**
 This folder contains all scripts that may need to be ran when building the extension for development or production
 
@@ -34,18 +37,24 @@ Code that needs to be ran when the page is loaded is in `src/options/init.ts`
 **src/assets/**
 This folder contains all the assets used by the extension
 
-- The fonts folder contains all the fonts that are used in the extension
-- The wallpapers folder contains all the default wallpapers the user can choose from
-
+- `fonts/` contains all the fonts that are used in the extension
+- `wallpapers/` contains all the default wallpapers the user can choose from
   - The resolution of each wallpaper can vary, and there is no standard size for wallpapers currently
 
-- The search-engines folder contains all the search engine icons that are used in the options page
+- `search-engines/` contains all the search engine icons that are used in the options page
 
 - 16.png, 32.png, 48.png, 64.png, 128.png, favicon.ico, icon.png, icon.svg are all icons of different sizes used by the extention
 
+**src/popup**
+This folder contains the code for the popup.
+<img src="./assets/popup.png">
+
 **src/newtab**
-This folder contains the code for the new tab page
+This folder contains the code for the configuration page. The `options.html` page.
 All TypeScript files are in `src/newtab/scripts`
 
 Code that needs to be ran when the page is loaded is in the `src/newtab/scripts/load-page.ts` file
 `src/newtab/scripts/init.ts` is not used for anything else except calling the `loadPage` function which resides in `src/newtab/scripts/load-page.ts`
+
+`scripts/utils/`
+  - This folder contains code that the main code files (`config.ts`, `init.ts`, `keys.ts`, `load-page.ts`, and `ui.ts`) call. This functions are **ONLY** ever used in the main code files, and no where else.
