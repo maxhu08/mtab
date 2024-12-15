@@ -187,10 +187,10 @@ export const defaultConfig: Config = {
       },
       {
         type: "bookmark",
-        name: "localhost",
-        url: "http://localhost:3000",
+        name: "chatgpt",
+        url: "https://chatgpt.com",
         color: "#14b8a6",
-        iconType: "ri-global-fill",
+        iconType: "ri-openai-fill",
         iconColor: "#ffffff"
       }
     ],
