@@ -19,6 +19,6 @@
   transition-duration: 0ms;
 }
 
-.bookmark-user-defined-item * {
+.bookmark-user-defined-item :not(.bookmark-user-defined-item) {
   transition-duration: 250ms !important;
 }
