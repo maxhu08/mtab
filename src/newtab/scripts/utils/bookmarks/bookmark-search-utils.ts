@@ -1,3 +1,4 @@
+import { BookmarkNodeBookmark } from "src/newtab/scripts/config";
 import {
   bookmarksContainerEl,
   bookmarkSearchContainerEl,
@@ -40,7 +41,7 @@ export const unfocusBookmarkSearch = (animationType: string) => {
 };
 
 export const enableSearchBookmark = (
-  bookmarks: any[],
+  bookmarks: BookmarkNodeBookmark[],
   textColor: string,
   placeholderTextColor: string
 ) => {
@@ -58,7 +59,7 @@ export const disableSearchBookmark = () => {
 };
 
 export const refreshBookmarkSearchResults = (
-  bookmarks: any[],
+  bookmarks: BookmarkNodeBookmark[],
   textColor: string,
   placeholderTextColor: string
 ) => {
@@ -70,9 +71,7 @@ export const refreshBookmarkSearchResults = (
   const bookmarkSearchValue = bookmarkSearchInputEl.value.toLowerCase();
   const bookmarkWithoutFolders = bookmarks.filter((bm) => bm.type === "bookmark");
 
-  let filteredBookmarks = [];
-
-  filteredBookmarks = fuzzySearchBookmark(bookmarkSearchValue, bookmarkWithoutFolders).sort(
+  let filteredBookmarks = fuzzySearchBookmark(bookmarkSearchValue, bookmarkWithoutFolders).sort(
     (a, b) => {
       const aContains = a.name.toLowerCase().startsWith(bookmarkSearchValue);
       const bContains = b.name.toLowerCase().startsWith(bookmarkSearchValue);
@@ -80,7 +79,10 @@ export const refreshBookmarkSearchResults = (
     }
   );
 
-  // make sure selectedIndex is within filterbookmarks amount
+  const maxResults = 8;
+  const extraCount = filteredBookmarks.length - maxResults;
+  filteredBookmarks = filteredBookmarks.slice(0, maxResults);
+
   if (selectedIndex > filteredBookmarks.length - 1) selectedIndex = filteredBookmarks.length - 1;
 
   filteredBookmarks.forEach((bookmark, index) => {
@@ -149,6 +151,15 @@ export const refreshBookmarkSearchResults = (
     pEl.textContent = "No results!";
     bookmarkSearchResultsContainerEl.appendChild(pEl);
   }
+
+  if (extraCount > 0) {
+    // <p style="color:${placeholderTextColor}">&nsbp;&nsbp;&nsbp;(${extraCount} more)</p>
+
+    const extraEl = document.createElement("p");
+    extraEl.style.color = placeholderTextColor;
+    extraEl.innerHTML = `&nbsp;&nbsp;&nbsp;+${extraCount} more`;
+    bookmarkSearchResultsContainerEl.appendChild(extraEl);
+  }
 };
 
 const getMatchedNameHtml = (
@@ -175,7 +186,7 @@ const getMatchedNameHtml = (
   return result;
 };
 
-const fuzzySearchBookmark = (search: string, bookmarks: any[]) => {
+const fuzzySearchBookmark = (search: string, bookmarks: BookmarkNodeBookmark[]) => {
   if (search === "") return bookmarks;
 
   const results = bookmarks.filter((bookmark) => {
