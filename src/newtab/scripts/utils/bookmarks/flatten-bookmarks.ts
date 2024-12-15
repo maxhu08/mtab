@@ -1,6 +1,6 @@
-import { BookmarkNode } from "src/newtab/scripts/config";
+import { BookmarkNode, BookmarkNodeBookmark } from "src/newtab/scripts/config";
 
-export const flattenBookmarks = (nodes: BookmarkNode[]): BookmarkNode[] => {
+export const flattenBookmarks = (nodes: BookmarkNode[]): BookmarkNodeBookmark[] => {
   return nodes.flatMap((node) => {
     if (node.type === "bookmark") {
       return [node];

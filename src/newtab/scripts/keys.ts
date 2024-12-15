@@ -1,5 +1,5 @@
 // ui
-import { Config } from "src/newtab/scripts/config";
+import { BookmarkNodeBookmark, Config } from "src/newtab/scripts/config";
 import {
   bookmarkSearchInputEl,
   bookmarkSearchResultsContainerEl,
@@ -22,7 +22,7 @@ import { convertBrowserBookmarksToBookmarkNodes } from "src/newtab/scripts/utils
 import { flattenBookmarks } from "src/newtab/scripts/utils/bookmarks/flatten-bookmarks";
 
 export const listenToKeys = async (config: Config) => {
-  let bookmarks: any[] = [];
+  let bookmarks: BookmarkNodeBookmark[] = [];
 
   if (config.bookmarks.type === "user-defined") {
     // flatten bookmarks and exclude folders
