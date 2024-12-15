@@ -29,9 +29,11 @@ export const handleMath = (val: string) => {
   }
 };
 
-const betterFormat = (expression: string) => {
+const betterFormat = (expression: string): string => {
   return format(expression)
-    .replace(/\s*\*\s*([a-zA-Z])/g, "$1") // remove '* ' followed by any letter
+    .replace(/\s*\*\s*\(/g, "(") // remove '* (' to '('
+    .replace(/\s*\*\s*/g, "") // remove '* ' between terms
     .replace(/\s*\^\s*/g, "^") // remove spaces around '^'
+    .replace(/\s*(\d)\s*([a-zA-Z])/g, "$1$2") // remove spaces between numbers and variables
     .replace(/\s+/g, " "); // keep single spaces between terms
 };
