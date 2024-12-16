@@ -106,7 +106,11 @@ export const defaultConfig: Config = {
     type: "url",
     enabled: true,
     // url: `chrome-extension://${chrome.runtime.id}/wallpapers/bg-1.png`
-    url: `./wallpapers/bg-1.png`
+    url: `./wallpapers/bg-1.png`,
+    resize: {
+      w: 1920,
+      h: 1080
+    }
   },
   ui: {
     style: "glass",
@@ -298,6 +302,10 @@ export interface Config {
     type: WallpaperType;
     enabled: boolean;
     url: string;
+    resize: {
+      w: number;
+      h: number;
+    };
   };
   ui: {
     style: UIStyle;
