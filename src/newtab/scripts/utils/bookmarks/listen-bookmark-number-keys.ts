@@ -12,8 +12,14 @@ export const listenBookmarkNumberKeys = (listen: boolean, bookmarksType: Bookmar
     if (!searchFocused && !bookmarkSearchFocused) {
       const key = e.key;
 
-      // check if the key is a number between 1 and 9
-      if (key >= "1" && key <= "9") {
+      if (key === "0") {
+        // prettier-ignore
+        const currFolderAreaEl = bookmarksContainerEl.querySelector('[folder-state="open"]') as HTMLDivElement;
+        const backButtonEl = currFolderAreaEl.children[1].children[0] as HTMLButtonElement;
+
+        backButtonEl.click();
+      } // check if the key is a number between 1 and 9
+      else if (key >= "1" && key <= "9") {
         const index = parseInt(key, 10) - 1;
 
         // prettier-ignore
