@@ -1,4 +1,8 @@
-import { wallpaperFileUploadInputEl } from "src/options/scripts/ui";
+import {
+  wallpaperFileUploadInputEl,
+  wallpaperResizeHInputEl,
+  wallpaperResizeWInputEl
+} from "src/options/scripts/ui";
 import { previewWallpaper } from "src/options/scripts/utils/preview";
 
 export const handleWallpaperFileUpload = () => {
@@ -10,11 +14,15 @@ export const handleWallpaperFileUpload = () => {
       const reader = new FileReader();
 
       if (fileType.startsWith("image/") && fileType !== "image/gif") {
+        const w = parseInt(wallpaperResizeWInputEl.value);
+        const h = parseInt(wallpaperResizeHInputEl.value);
+
         // resize images
         reader.onload = (e: any) => {
-          resizeImage(e.target.result, 1920, 1080, (resizedDataUrl) => {
+          resizeImage(e.target.result, w, h, (resizedDataUrl) => {
             chrome.storage.local.set({ userUploadedWallpaper: resizedDataUrl });
             previewWallpaper(resizedDataUrl);
+            wallpaperFileUploadInputEl.value = ""; // allows consecutive uploads of the same wallpaper
           });
         };
         reader.readAsDataURL(file);
