@@ -9,7 +9,7 @@ export const setDefaultConfig = () => {
     const clonedDefaultConfig = structuredClone(defaultConfig);
     console.log("[RESET_DEBUG]", clonedDefaultConfig);
     fillInputs(clonedDefaultConfig);
-    saveConfig();
+    saveConfig(false);
     alert("options reset to default");
   } else {
     alert("you selected no, options did not reset");
