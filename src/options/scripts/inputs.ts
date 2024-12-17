@@ -14,7 +14,7 @@ import {
 } from "src/options/scripts/ui";
 import { listenToHotkeyInputs } from "src/options/scripts/utils/hotkey-inputs";
 import { saveConfig } from "src/options/scripts/utils/save-config";
-import { exportConfig } from "src/options/scripts/utils/export-config";
+import { saveAndExportConfig } from "src/options/scripts/utils/export-config";
 import { setDefaultConfig } from "src/options/scripts/utils/set-default-config";
 import { handleCustomFaviconReset } from "src/options/scripts/utils/upload-favicon";
 import { handWallpaperFileReset } from "src/options/scripts/utils/upload-wallpaper";
@@ -63,15 +63,10 @@ export const listenToInputs = () => {
   configUtilsBtn.onclick = () => window.open("./config-utils.html", "_blank");
 
   const exportBtn = document.getElementById("export-button") as HTMLButtonElement;
-  exportBtn.onclick = () => {
-    saveConfig();
-    exportConfig();
-  };
+  exportBtn.onclick = () => saveAndExportConfig();
 
   const importBtn = document.getElementById("import-button") as HTMLButtonElement;
-  importBtn.onclick = () => {
-    importConfigAndSave();
-  };
+  importBtn.onclick = () => importConfigAndSave();
 
   const resetToDefaultBtn = document.getElementById("reset-to-default-button") as HTMLButtonElement;
   resetToDefaultBtn.onclick = () => setDefaultConfig();

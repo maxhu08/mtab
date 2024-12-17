@@ -1,4 +1,4 @@
-import { Config, deepMerge, defaultConfig } from "src/newtab/scripts/config";
+import { deepMerge, defaultConfig } from "src/newtab/scripts/config";
 import { fillInputs } from "src/options/scripts/utils/fill-inputs";
 import { saveConfig } from "src/options/scripts/utils/save-config";
 import { fixAllToggleCheckboxSections } from "src/options/scripts/utils/toggle-checkbox";

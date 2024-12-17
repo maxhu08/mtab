@@ -18,7 +18,7 @@ import {
 } from "src/options/scripts/ui";
 import { saveOptionsSettingsToDraft } from "src/options/scripts/utils/save-helpers/save-options";
 
-export const saveConfig = () => {
+export const saveConfig = (notify: boolean = true) => {
   if (searchUseCustomEngineEnabledCheckboxEl.checked) {
     if (!searchCustomEngineURLInputEl.value.includes("{}")) {
       alert("search.customEngineURL must contain {}, aborting save");
@@ -57,7 +57,9 @@ export const saveConfig = () => {
       .set({
         config: draft
       })
-      .then(() => alert("changes saved ☜(･ω･　)"));
+      .then(() => {
+        if (notify) alert("changes saved ☜(･ω･　)");
+      });
 
     fixAllToggleCheckboxSections();
   });
