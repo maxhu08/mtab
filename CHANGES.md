@@ -1,8 +1,8 @@
-# Changes in 1.7.4
+# Changes in 1.7.5
 
 in this release:
 
-- add ability to use simpleicons
-- improve math assist formatting
-- limit amount of bookmark search results displayed at once
-- fix unexpected behavior with adding a new bookmark node
+- add resize option to wallpapers
+- add 0 as back button for bookmarks numberKeys
+- qol improvements
+- bug fixes
