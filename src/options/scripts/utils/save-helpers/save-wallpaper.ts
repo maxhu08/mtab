@@ -1,5 +1,10 @@
 import { Config } from "src/newtab/scripts/config";
-import { wallpaperEnabledCheckboxEl, wallpaperUrlInputEl } from "src/options/scripts/ui";
+import {
+  wallpaperEnabledCheckboxEl,
+  wallpaperResizeHInputEl,
+  wallpaperResizeWInputEl,
+  wallpaperUrlInputEl
+} from "src/options/scripts/ui";
 
 export const saveWallpaperSettingsToDraft = (draft: Config) => {
   const selectedEl = document.querySelector(
@@ -12,4 +17,7 @@ export const saveWallpaperSettingsToDraft = (draft: Config) => {
 
   draft.wallpaper.enabled = wallpaperEnabledCheckboxEl.checked;
   draft.wallpaper.url = wallpaperUrlInputEl.value;
+
+  draft.wallpaper.resize.w = parseInt(wallpaperResizeWInputEl.value);
+  draft.wallpaper.resize.h = parseInt(wallpaperResizeHInputEl.value);
 };
