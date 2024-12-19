@@ -3,7 +3,7 @@ import { bookmarksContainerEl } from "src/newtab/scripts/ui";
 import {
   createFolderArea,
   renderBookmarkNodes
-} from "src/newtab/scripts/utils/bookmarks/bookmark-render-utils-new";
+} from "src/newtab/scripts/utils/bookmarks/bookmark-render-utils";
 import { convertBrowserBookmarksToBookmarkNodes } from "src/newtab/scripts/utils/bookmarks/convert-browser-bookmarks";
 import { insertCSS } from "src/newtab/scripts/utils/insert-css";
 import { genid } from "src/utils/genid";
