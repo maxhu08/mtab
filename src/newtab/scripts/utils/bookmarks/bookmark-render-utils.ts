@@ -7,6 +7,7 @@ import {
   UIStyle
 } from "src/newtab/scripts/config";
 import { bookmarksContainerEl } from "src/newtab/scripts/ui";
+import { handleAnimation } from "src/newtab/scripts/utils/animations/handle-animation";
 import { getBookmarkIconDetails } from "src/newtab/scripts/utils/bookmarks/bookmark-icon";
 import { openBookmark } from "src/newtab/scripts/utils/bookmarks/open-bookmark";
 import { openFolder } from "src/newtab/scripts/utils/bookmarks/open-folder";
@@ -228,27 +229,7 @@ export const bindActionsToBlockBookmark = (
   const bookmarkBorderEl = document.getElementById(`bookmark-node-${uuid}-border`) as HTMLDivElement;
 
   if (bookmarkEl && animationsEnabled) {
-    const computedStyle = window.getComputedStyle(bookmarkEl);
-    const animationDuration = parseFloat(computedStyle.animationDuration) * 1000;
-    bookmarkEl.addEventListener(
-      "animationstart",
-      () => {
-        // fix weird flickering issue on firefox
-        setTimeout(() => {
-          bookmarkEl.classList.remove("opacity-0");
-          // fix bookmarks animations replaying after bookmark search esc
-          bookmarkEl.classList.remove(animationsInitialType);
-        }, animationDuration * 0.8); // needs to be less than 1
-      },
-      {
-        once: true
-      }
-    );
-
-    // fix bookmarks disappearing if user leaves tab too quickly
-    document.addEventListener("visibilitychange", () => {
-      bookmarkEl.classList.remove("opacity-0");
-    });
+    handleAnimation(bookmarkEl, animationsInitialType);
   }
 
   // can't be onclick in order to register middle click and can't be onmousedown because open in new tab fails
@@ -352,27 +333,7 @@ export const bindActionsToBlockFolder = (
   const bookmarkBorderEl = document.getElementById(`bookmark-node-${uuid}-border`) as HTMLDivElement;
 
   if (bookmarkEl && animationsEnabled) {
-    const computedStyle = window.getComputedStyle(bookmarkEl);
-    const animationDuration = parseFloat(computedStyle.animationDuration) * 1000;
-    bookmarkEl.addEventListener(
-      "animationstart",
-      () => {
-        // fix weird flickering issue on firefox
-        setTimeout(() => {
-          bookmarkEl.classList.remove("opacity-0");
-          // fix bookmarks animations replaying after bookmark search esc
-          bookmarkEl.classList.remove(animationsInitialType);
-        }, animationDuration * 0.8); // needs to be less than 1
-      },
-      {
-        once: true
-      }
-    );
-
-    // fix bookmarks disappearing if user leaves tab too quickly
-    document.addEventListener("visibilitychange", () => {
-      bookmarkEl.classList.remove("opacity-0");
-    });
+    handleAnimation(bookmarkEl, animationsInitialType);
   }
 
   // todo: add onclick stuff
@@ -464,24 +425,7 @@ export const bindActionsToBackButton = (
   const backButtonBorderEl = document.getElementById(`folder-back-button-${uuid}-border`) as HTMLDivElement;
 
   if (backButtonEl && animationsEnabled) {
-    const computedStyle = window.getComputedStyle(backButtonEl);
-    const animationDuration = parseFloat(computedStyle.animationDuration) * 1000;
-    backButtonEl.addEventListener(
-      "animationstart",
-      () => {
-        setTimeout(() => {
-          backButtonEl.classList.remove("opacity-0");
-          backButtonEl.classList.remove(animationsInitialType);
-        }, animationDuration * 0.8); // needs to be less than 1
-      },
-      {
-        once: true
-      }
-    );
-
-    document.addEventListener("visibilitychange", () => {
-      backButtonEl.classList.remove("opacity-0");
-    });
+    handleAnimation(backButtonEl, animationsInitialType);
   }
 
   backButtonEl.onclick = () => {

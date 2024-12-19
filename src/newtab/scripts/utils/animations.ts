@@ -1,6 +1,7 @@
 import { insertCSS } from "src/newtab/scripts/utils/insert-css";
 import { Config } from "../config";
 import { messageEl, searchContainerEl } from "../ui";
+import { handleAnimation } from "src/newtab/scripts/utils/animations/handle-animation";
 
 export const addAnimations = (animations: Config["animations"]) => {
   if (!animations.enabled) {
@@ -22,24 +23,6 @@ export const addAnimations = (animations: Config["animations"]) => {
   searchContainerEl.classList.add(animations.initialType);
 
   if (animations.enabled) {
-    const computedStyle = window.getComputedStyle(searchContainerEl);
-    const animationDuration = parseFloat(computedStyle.animationDuration) * 1000;
-    searchContainerEl.addEventListener(
-      "animationstart",
-      () => {
-        // fix weird flickering issue on firefox
-        setTimeout(() => {
-          searchContainerEl.classList.remove("opacity-0");
-        }, animationDuration - 500);
-      },
-      {
-        once: true
-      }
-    );
-
-    // fix bookmarks disappearing if user leaves tab too quickly
-    document.addEventListener("visibilitychange", () => {
-      searchContainerEl.classList.remove("opacity-0");
-    });
+    handleAnimation(searchContainerEl, animations.initialType);
   }
 };
