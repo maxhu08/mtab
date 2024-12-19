@@ -27,7 +27,7 @@ export const renderBookmarkNodes = (
   const messageTextColor = config.message.textColor;
   const animationsEnabled = config.animations.enabled;
   const animationsInitialType = config.animations.initialType;
-  const animationsBookmarkType = config.animations.bookmarkType;
+  // const animationsBookmarkType = config.animations.bookmarkType;
   const animationsbookmarkType = config.animations.bookmarkType;
   const searchFocusedBorderColor = config.search.focusedBorderColor;
 
@@ -103,7 +103,6 @@ export const renderBookmarkNodes = (
         uuid,
         wAnimations,
         animationsInitialType,
-        animationsBookmarkType,
         searchFocusedBorderColor
       );
     }
@@ -457,7 +456,6 @@ export const bindActionsToBackButton = (
   uuid: string,
   animationsEnabled: boolean,
   animationsInitialType: AnimationInitialType,
-  animationsBookmarkType: AnimationBookmarkType,
   searchFocusedBorderColor: string
 ) => {
   // prettier-ignore
