@@ -32,10 +32,15 @@
       <main class="grid grid-flow-row gap-20 pt-16">
         <!-- options -->
         <section class="grid grid-flow-row gap-4">
-          <div class="grid grid-cols-[1fr_max-content_1fr] gap-2">
-            <div class="my-auto h-[1px] rounded-md bg-neutral-500"></div>
-            <span class="text-base text-neutral-500">options</span>
-            <div class="my-auto h-[1px] rounded-md bg-neutral-500"></div>
+          <div class="grid grid-cols-[1fr_max-content_1fr] items-center gap-2">
+            <div class="grid grid-cols-[max-content_auto] items-center gap-2">
+              <button class="text-xl text-neutral-500">
+                <i class="ri-add-line"></i>
+              </button>
+              <div class="h-[1px] flex-grow rounded-md bg-neutral-500"></div>
+            </div>
+            <span class="mx-2 text-base text-neutral-500">options</span>
+            <div class="h-[1px] flex-grow rounded-md bg-neutral-500"></div>
           </div>
           <div class="grid w-full grid-cols-[max-content_auto] place-items-center">
             <p class="text-base text-white">options.showOptionsButton</p>
