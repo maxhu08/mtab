@@ -19,7 +19,7 @@ import { hideCover } from "src/newtab/scripts/utils/hide-cover";
 import { coverEl } from "src/newtab/scripts/ui";
 import { setTopDistance } from "src/newtab/scripts/utils/top-distance";
 import { handleSearchAssist } from "src/newtab/scripts/utils/search/handle-search-assist";
-import { snowStorm } from "src/newtab/scripts/utils/extra/snow-effect";
+import { snowStorm } from "src/newtab/scripts/utils/extras/snow-effect";
 
 export const loadPage = () => {
   const manifest = chrome.runtime.getManifest();
