@@ -19,6 +19,7 @@ import { hideCover } from "src/newtab/scripts/utils/hide-cover";
 import { coverEl } from "src/newtab/scripts/ui";
 import { setTopDistance } from "src/newtab/scripts/utils/top-distance";
 import { handleSearchAssist } from "src/newtab/scripts/utils/search/handle-search-assist";
+import { snowStorm } from "src/newtab/scripts/utils/extra/snow-effect";
 
 export const loadPage = () => {
   const manifest = chrome.runtime.getManifest();
@@ -84,5 +85,11 @@ export const loadPage = () => {
 
     listenToKeys(config);
     handleSearchAssist(config);
+
+    // extra
+    if (config.extra.snow.enabled !== "off") {
+      if (config.extra.snow.enabled === "on") snowStorm();
+      else if (config.extra.snow.enabled === "winter" && new Date().getMonth() === 11) snowStorm();
+    }
   });
 };

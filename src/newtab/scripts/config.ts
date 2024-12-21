@@ -204,6 +204,11 @@ export const defaultConfig: Config = {
     defaultFaviconSource: "duckduckgo",
     showBookmarkNames: false,
     bookmarksLocationFirefox: "toolbar"
+  },
+  extra: {
+    snow: {
+      enabled: "off"
+    }
   }
 };
 
@@ -269,6 +274,7 @@ export type DefaultBlockyColorType = "random" | "custom";
 export type DefaultFaviconSource = "google" | "duckduckgo";
 export type BookmarksLocationFirefox = "menu" | "toolbar" | "other";
 export type FontType = "default" | "custom";
+export type SnowEnabledType = "on" | "off" | "winter";
 
 export interface Config {
   options: {
@@ -366,5 +372,10 @@ export interface Config {
     defaultFaviconSource: DefaultFaviconSource;
     showBookmarkNames: boolean;
     bookmarksLocationFirefox: BookmarksLocationFirefox;
+  };
+  extra: {
+    snow: {
+      enabled: SnowEnabledType;
+    };
   };
 }
