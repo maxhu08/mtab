@@ -29,19 +29,19 @@
           <span id="user-agent-text" class="text-orange-500"></span>
         </p>
       </div>
-      <main class="grid grid-flow-row gap-20 pt-16">
+      <main class="grid grid-flow-row pt-16">
         <!-- options -->
-        <section class="grid grid-flow-row gap-4">
-          <div class="grid grid-cols-[1fr_max-content_1fr] items-center gap-2">
-            <div class="grid grid-cols-[max-content_auto] items-center gap-2">
-              <button class="text-xl text-neutral-500">
-                <i class="ri-add-line"></i>
-              </button>
-              <div class="h-[1px] flex-grow rounded-md bg-neutral-500"></div>
-            </div>
-            <span class="mx-2 text-base text-neutral-500">options</span>
+        <div class="mb-4 grid grid-cols-[1fr_max-content_1fr] items-center gap-2">
+          <div class="grid grid-cols-[max-content_auto] items-center gap-2">
+            <button id="options-collapse-button" class="text-xl text-neutral-500">
+              <i class="ri-collapse-horizontal-line"></i>
+            </button>
             <div class="h-[1px] flex-grow rounded-md bg-neutral-500"></div>
           </div>
+          <span class="mx-2 text-base text-neutral-500">options</span>
+          <div class="h-[1px] flex-grow rounded-md bg-neutral-500"></div>
+        </div>
+        <section id="options-section" class="mb-20 grid grid-flow-row gap-4">
           <div class="grid w-full grid-cols-[max-content_auto] place-items-center">
             <p class="text-base text-white">options.showOptionsButton</p>
             <div class="ml-auto">
@@ -56,12 +56,17 @@
           <p class="text-base text-neutral-500">tip: you can still access the options by pressing extensions > mtab > options</p>
         </section>
         <!-- user -->
-        <section class="grid grid-flow-row gap-4">
-          <div class="grid grid-cols-[1fr_max-content_1fr] gap-2">
-            <div class="my-auto h-[1px] rounded-md bg-neutral-500"></div>
-            <span class="text-base text-neutral-500">user</span>
-            <div class="my-auto h-[1px] rounded-md bg-neutral-500"></div>
+        <div class="mb-4 grid grid-cols-[1fr_max-content_1fr] items-center gap-2">
+          <div class="grid grid-cols-[max-content_auto] items-center gap-2">
+            <button id="user-collapse-button" class="text-xl text-neutral-500">
+              <i class="ri-collapse-horizontal-line"></i>
+            </button>
+            <div class="h-[1px] flex-grow rounded-md bg-neutral-500"></div>
           </div>
+          <span class="mx-2 text-base text-neutral-500">user</span>
+          <div class="h-[1px] flex-grow rounded-md bg-neutral-500"></div>
+        </div>
+        <section id="user-section" class="mb-20 grid grid-flow-row gap-4">
           <div class="grid gap-2">
             <p class="text-base text-white">user.name</p>
             <div id="username-container" class="grid w-full grid-cols-[max-content_auto] rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base">
@@ -71,12 +76,17 @@
           </div>
         </section>
         <!-- title -->
-        <section class="grid grid-flow-row gap-4">
-          <div class="grid grid-cols-[1fr_max-content_1fr] gap-2">
-            <div class="my-auto h-[1px] rounded-md bg-neutral-500"></div>
-            <span class="text-base text-neutral-500">title</span>
-            <div class="my-auto h-[1px] rounded-md bg-neutral-500"></div>
+        <div class="mb-4 grid grid-cols-[1fr_max-content_1fr] items-center gap-2">
+          <div class="grid grid-cols-[max-content_auto] items-center gap-2">
+            <button id="title-collapse-button" class="text-xl text-neutral-500">
+              <i class="ri-collapse-horizontal-line"></i>
+            </button>
+            <div class="h-[1px] flex-grow rounded-md bg-neutral-500"></div>
           </div>
+          <span class="mx-2 text-base text-neutral-500">title</span>
+          <div class="h-[1px] flex-grow rounded-md bg-neutral-500"></div>
+        </div>
+        <section id="title-section" class="mb-20 grid grid-flow-row gap-4">
           <div class="grid gap-2">
             <p class="text-base text-white">title.defaultTitle</p>
             <div id="title-default-title-container" class="grid w-full grid-cols-[max-content_auto] rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base">
@@ -124,12 +134,17 @@
           </div>
         </section>
         <!-- message -->
-        <section class="grid grid-flow-row gap-4">
-          <div class="grid grid-cols-[1fr_max-content_1fr] gap-2">
-            <div class="my-auto h-[1px] rounded-md bg-neutral-500"></div>
-            <span class="text-base text-neutral-500">message</span>
-            <div class="my-auto h-[1px] rounded-md bg-neutral-500"></div>
+        <div class="mb-4 grid grid-cols-[1fr_max-content_1fr] items-center gap-2">
+          <div class="grid grid-cols-[max-content_auto] items-center gap-2">
+            <button id="message-collapse-button" class="text-xl text-neutral-500">
+              <i class="ri-collapse-horizontal-line"></i>
+            </button>
+            <div class="h-[1px] flex-grow rounded-md bg-neutral-500"></div>
           </div>
+          <span class="mx-2 text-base text-neutral-500">message</span>
+          <div class="h-[1px] flex-grow rounded-md bg-neutral-500"></div>
+        </div>
+        <section id="message-section" class="mb-20 grid grid-flow-row gap-4">
           <div class="grid w-full grid-cols-[max-content_auto] place-items-center">
             <p class="text-base text-white">message.enabled</p>
             <div class="ml-auto">
@@ -236,12 +251,17 @@
           </div>
         </section>
         <!-- wallpaper -->
-        <section class="grid grid-flow-row gap-4">
-          <div class="grid grid-cols-[1fr_max-content_1fr] gap-2">
-            <div class="my-auto h-[1px] rounded-md bg-neutral-500"></div>
-            <span class="text-base text-neutral-500">wallpaper</span>
-            <div class="my-auto h-[1px] rounded-md bg-neutral-500"></div>
+        <div class="mb-4 grid grid-cols-[1fr_max-content_1fr] items-center gap-2">
+          <div class="grid grid-cols-[max-content_auto] items-center gap-2">
+            <button id="wallpaper-collapse-button" class="text-xl text-neutral-500">
+              <i class="ri-collapse-horizontal-line"></i>
+            </button>
+            <div class="h-[1px] flex-grow rounded-md bg-neutral-500"></div>
           </div>
+          <span class="mx-2 text-base text-neutral-500">wallpaper</span>
+          <div class="h-[1px] flex-grow rounded-md bg-neutral-500"></div>
+        </div>
+        <section id="wallpaper-section" class="mb-20 grid grid-flow-row gap-4">
           <div class="grid w-full grid-cols-[max-content_auto] place-items-center">
             <p class="text-base text-white">wallpaper.enabled</p>
             <div class="ml-auto">
@@ -314,12 +334,17 @@
           </div>
         </section>
         <!-- ui -->
-        <section class="grid grid-flow-row gap-4">
-          <div class="grid grid-cols-[1fr_max-content_1fr] gap-2">
-            <div class="my-auto h-[1px] rounded-md bg-neutral-500"></div>
-            <span class="text-base text-neutral-500">ui</span>
-            <div class="my-auto h-[1px] rounded-md bg-neutral-500"></div>
+        <div class="mb-4 grid grid-cols-[1fr_max-content_1fr] items-center gap-2">
+          <div class="grid grid-cols-[max-content_auto] items-center gap-2">
+            <button id="ui-collapse-button" class="text-xl text-neutral-500">
+              <i class="ri-collapse-horizontal-line"></i>
+            </button>
+            <div class="h-[1px] flex-grow rounded-md bg-neutral-500"></div>
           </div>
+          <span class="mx-2 text-base text-neutral-500">ui</span>
+          <div class="h-[1px] flex-grow rounded-md bg-neutral-500"></div>
+        </div>
+        <section id="ui-section" class="mb-20 grid grid-flow-row gap-4">
           <div class="grid gap-2 text-base">
             <p class="text-white">ui.style</p>
             <div class="grid grid-cols-2 gap-2">
@@ -389,12 +414,17 @@
           </div>
         </section>
         <!-- animations -->
-        <section class="grid grid-flow-row gap-4">
-          <div class="grid grid-cols-[1fr_max-content_1fr] gap-2">
-            <div class="my-auto h-[1px] rounded-md bg-neutral-500"></div>
-            <span class="text-base text-neutral-500">animations</span>
-            <div class="my-auto h-[1px] rounded-md bg-neutral-500"></div>
+        <div class="mb-4 grid grid-cols-[1fr_max-content_1fr] items-center gap-2">
+          <div class="grid grid-cols-[max-content_auto] items-center gap-2">
+            <button id="animations-collapse-button" class="text-xl text-neutral-500">
+              <i class="ri-collapse-horizontal-line"></i>
+            </button>
+            <div class="h-[1px] flex-grow rounded-md bg-neutral-500"></div>
           </div>
+          <span class="mx-2 text-base text-neutral-500">animations</span>
+          <div class="h-[1px] flex-grow rounded-md bg-neutral-500"></div>
+        </div>
+        <section id="animations-section" class="mb-20 grid grid-flow-row gap-4">
           <div class="grid w-full grid-cols-[max-content_auto] place-items-center">
             <p class="text-base text-white">animations.enabled</p>
             <div class="ml-auto">
@@ -487,12 +517,17 @@
           </div>
         </section>
         <!-- search -->
-        <section class="grid grid-flow-row gap-4">
-          <div class="grid grid-cols-[1fr_max-content_1fr] gap-2">
-            <div class="my-auto h-[1px] rounded-md bg-neutral-500"></div>
-            <span class="text-base text-neutral-500">search</span>
-            <div class="my-auto h-[1px] rounded-md bg-neutral-500"></div>
+        <div class="mb-4 grid grid-cols-[1fr_max-content_1fr] items-center gap-2">
+          <div class="grid grid-cols-[max-content_auto] items-center gap-2">
+            <button id="search-collapse-button" class="text-xl text-neutral-500">
+              <i class="ri-collapse-horizontal-line"></i>
+            </button>
+            <div class="h-[1px] flex-grow rounded-md bg-neutral-500"></div>
           </div>
+          <span class="mx-2 text-base text-neutral-500">search</span>
+          <div class="h-[1px] flex-grow rounded-md bg-neutral-500"></div>
+        </div>
+        <section id="search-section" class="mb-20 grid grid-flow-row gap-4">
           <div class="grid w-full grid-cols-[max-content_auto] place-items-center">
             <p class="text-base text-white">search.enabled</p>
             <div class="ml-auto">
@@ -739,12 +774,17 @@
           </div>
         </section>
         <!-- hotkeys -->
-        <section class="grid grid-flow-row gap-4">
-          <div class="grid grid-cols-[1fr_max-content_1fr] gap-2">
-            <div class="my-auto h-[1px] rounded-md bg-neutral-500"></div>
-            <span class="text-base text-neutral-500">hotkeys</span>
-            <div class="my-auto h-[1px] rounded-md bg-neutral-500"></div>
+        <div class="mb-4 grid grid-cols-[1fr_max-content_1fr] items-center gap-2">
+          <div class="grid grid-cols-[max-content_auto] items-center gap-2">
+            <button id="hotkeys-collapse-button" class="text-xl text-neutral-500">
+              <i class="ri-collapse-horizontal-line"></i>
+            </button>
+            <div class="h-[1px] flex-grow rounded-md bg-neutral-500"></div>
           </div>
+          <span class="mx-2 text-base text-neutral-500">hotkeys</span>
+          <div class="h-[1px] flex-grow rounded-md bg-neutral-500"></div>
+        </div>
+        <section id="hotkeys-section" class="mb-20 grid grid-flow-row gap-4">
           <div class="grid w-full grid-cols-[max-content_auto] place-items-center">
             <p class="text-base text-white">hotkeys.enabled</p>
             <div class="ml-auto">
@@ -785,12 +825,17 @@
           </div>
         </section>
         <!-- bookmarks -->
-        <section class="grid grid-flow-row gap-4">
-          <div class="grid grid-cols-[1fr_max-content_1fr] gap-2">
-            <div class="my-auto h-[1px] rounded-md bg-neutral-500"></div>
-            <span class="text-base text-neutral-500">bookmarks</span>
-            <div class="my-auto h-[1px] rounded-md bg-neutral-500"></div>
+        <div class="mb-4 grid grid-cols-[1fr_max-content_1fr] items-center gap-2">
+          <div class="grid grid-cols-[max-content_auto] items-center gap-2">
+            <button id="bookmarks-collapse-button" class="text-xl text-neutral-500">
+              <i class="ri-collapse-horizontal-line"></i>
+            </button>
+            <div class="h-[1px] flex-grow rounded-md bg-neutral-500"></div>
           </div>
+          <span class="mx-2 text-base text-neutral-500">bookmarks</span>
+          <div class="h-[1px] flex-grow rounded-md bg-neutral-500"></div>
+        </div>
+        <section id="bookmarks-section" class="mb-20 grid grid-flow-row gap-4">
           <div class="grid gap-2 text-base">
             <p class="text-white">bookmarks.type</p>
             <div class="grid grid-cols-2 gap-2">
@@ -969,12 +1014,17 @@
           </div>
         </section>
         <!-- extras -->
-        <section class="grid grid-flow-row gap-4">
-          <div class="grid grid-cols-[1fr_max-content_1fr] gap-2">
-            <div class="my-auto h-[1px] rounded-md bg-neutral-500"></div>
-            <span class="text-base text-neutral-500">extras</span>
-            <div class="my-auto h-[1px] rounded-md bg-neutral-500"></div>
+        <div class="mb-4 grid grid-cols-[1fr_max-content_1fr] items-center gap-2">
+          <div class="grid grid-cols-[max-content_auto] items-center gap-2">
+            <button id="extras-collapse-button" class="text-xl text-neutral-500">
+              <i class="ri-collapse-horizontal-line"></i>
+            </button>
+            <div class="h-[1px] flex-grow rounded-md bg-neutral-500"></div>
           </div>
+          <span class="mx-2 text-base text-neutral-500">extras</span>
+          <div class="h-[1px] flex-grow rounded-md bg-neutral-500"></div>
+        </div>
+        <section id="extras-section" class="mb-20 grid grid-flow-row gap-4">
           <div class="grid gap-2 text-base">
             <p class="text-white">extras.snow.enabled</p>
             <p class="text-base text-neutral-500">

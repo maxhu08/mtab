@@ -216,20 +216,22 @@ const toggleCollapseBookmark = (
     if (collapsibleContentEl.getAttribute("state") === "expanded") {
       collapsibleContentEl.setAttribute("state", "collapsed");
       collapsibleContentEl.classList.replace("grid", "hidden");
-      toggleCollapseBookmarkButtonEl.innerHTML = `<i class="text-white ri-expand-horizontal-s-line"></i>`;
+      toggleCollapseBookmarkButtonEl.children[0].className =
+        "text-white ri-expand-horizontal-s-line";
     } else if (collapsibleContentEl.getAttribute("state") === "collapsed") {
       collapsibleContentEl.setAttribute("state", "expanded");
       collapsibleContentEl.classList.replace("hidden", "grid");
-      toggleCollapseBookmarkButtonEl.innerHTML = `<i class="text-white ri-collapse-horizontal-line"></i>`;
+      toggleCollapseBookmarkButtonEl.children[0].className =
+        "text-white ri-collapse-horizontal-line";
     }
   } else if (mode === "collapse") {
     collapsibleContentEl.setAttribute("state", "collapsed");
     collapsibleContentEl.classList.replace("grid", "hidden");
-    toggleCollapseBookmarkButtonEl.innerHTML = `<i class="text-white ri-expand-horizontal-s-line"></i>`;
+    toggleCollapseBookmarkButtonEl.children[0].className = "text-white ri-expand-horizontal-s-line";
   } else if (mode === "expand") {
     collapsibleContentEl.setAttribute("state", "expanded");
     collapsibleContentEl.classList.replace("hidden", "grid");
-    toggleCollapseBookmarkButtonEl.innerHTML = `<i class="text-white ri-collapse-horizontal-line"></i>`;
+    toggleCollapseBookmarkButtonEl.children[0].className = "text-white ri-collapse-horizontal-line";
   }
 };
 
