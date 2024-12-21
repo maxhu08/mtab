@@ -123,6 +123,10 @@ export const bookmarksLocationFirefoxOtherButtonEl = getButton("bookmarks-locati
 export const bookmarksDefaultFaviconSourceGoogleButton = getButton("bookmarks-default-favicon-source-google");
 export const bookmarksDefaultFaviconSourceDuckduckgoButton = getButton("bookmarks-default-favicon-source-duckduckgo");
 
+export const extraSnowEnabledOn = getButton("extra-snow-enabled-on");
+export const extraSnowEnabledWinter = getButton("extra-snow-enabled-winter");
+export const extraSnowEnabledOff = getButton("extra-snow-enabled-off");
+
 export interface Input {
   container: HTMLDivElement;
   input: HTMLInputElement | HTMLTextAreaElement;
@@ -196,6 +200,10 @@ export const buttonSwitches: ButtonSwitch[] = [
   {
     buttons: [bookmarksDefaultFaviconSourceGoogleButton, bookmarksDefaultFaviconSourceDuckduckgoButton],
     attr: "bookmarks-default-favicon-source"
+  },
+  {
+    buttons: [extraSnowEnabledOn, extraSnowEnabledWinter, extraSnowEnabledOff],
+    attr: "extra-snow-enabled"
   }
 ];
 

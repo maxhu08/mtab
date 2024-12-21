@@ -17,6 +17,7 @@ import {
   searchCustomEngineURLInputEl
 } from "src/options/scripts/ui";
 import { saveOptionsSettingsToDraft } from "src/options/scripts/utils/save-helpers/save-options";
+import { saveExtraSettingsToDraft } from "src/options/scripts/utils/save-helpers/save-extra";
 
 export const saveConfig = (notify: boolean = true) => {
   if (searchUseCustomEngineEnabledCheckboxEl.checked) {
@@ -47,6 +48,8 @@ export const saveConfig = (notify: boolean = true) => {
       saveHotkeysSettingsToDraft(draft);
 
       saveBookmarksSettingsToDraft(draft);
+
+      saveExtraSettingsToDraft(draft);
 
       return draft;
     });
