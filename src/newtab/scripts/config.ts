@@ -205,7 +205,7 @@ export const defaultConfig: Config = {
     showBookmarkNames: false,
     bookmarksLocationFirefox: "toolbar"
   },
-  extra: {
+  extras: {
     snow: {
       enabled: "off"
     }
@@ -373,7 +373,7 @@ export interface Config {
     showBookmarkNames: boolean;
     bookmarksLocationFirefox: BookmarksLocationFirefox;
   };
-  extra: {
+  extras: {
     snow: {
       enabled: SnowEnabledType;
     };

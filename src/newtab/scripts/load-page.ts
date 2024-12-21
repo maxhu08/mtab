@@ -86,10 +86,10 @@ export const loadPage = () => {
     listenToKeys(config);
     handleSearchAssist(config);
 
-    // extra
-    if (config.extra.snow.enabled !== "off") {
-      if (config.extra.snow.enabled === "on") snowStorm();
-      else if (config.extra.snow.enabled === "winter" && new Date().getMonth() === 11) snowStorm();
+    // extras
+    if (config.extras.snow.enabled !== "off") {
+      if (config.extras.snow.enabled === "on") snowStorm();
+      else if (config.extras.snow.enabled === "winter" && new Date().getMonth() === 11) snowStorm();
     }
   });
 };

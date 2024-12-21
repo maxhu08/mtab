@@ -17,7 +17,7 @@ import {
   searchCustomEngineURLInputEl
 } from "src/options/scripts/ui";
 import { saveOptionsSettingsToDraft } from "src/options/scripts/utils/save-helpers/save-options";
-import { saveExtraSettingsToDraft } from "src/options/scripts/utils/save-helpers/save-extra";
+import { saveExtrasSettingsToDraft } from "src/options/scripts/utils/save-helpers/save-extras";
 
 export const saveConfig = (notify: boolean = true) => {
   if (searchUseCustomEngineEnabledCheckboxEl.checked) {
@@ -49,7 +49,7 @@ export const saveConfig = (notify: boolean = true) => {
 
       saveBookmarksSettingsToDraft(draft);
 
-      saveExtraSettingsToDraft(draft);
+      saveExtrasSettingsToDraft(draft);
 
       return draft;
     });
