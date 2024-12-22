@@ -1,17 +1,4 @@
-import { newCollapseGroup } from "src/options/scripts/utils/collapse-option";
 import { getButton, getCheckbox, getContainerAndInput } from "src/options/scripts/utils/ui-helpers";
-
-newCollapseGroup("options-collapse-button", "options-section");
-newCollapseGroup("user-collapse-button", "user-section");
-newCollapseGroup("title-collapse-button", "title-section");
-newCollapseGroup("message-collapse-button", "message-section");
-newCollapseGroup("wallpaper-collapse-button", "wallpaper-section");
-newCollapseGroup("ui-collapse-button", "ui-section");
-newCollapseGroup("animations-collapse-button", "animations-section");
-newCollapseGroup("search-collapse-button", "search-section");
-newCollapseGroup("hotkeys-collapse-button", "hotkeys-section");
-newCollapseGroup("bookmarks-collapse-button", "bookmarks-section");
-newCollapseGroup("extras-collapse-button", "extras-section");
 
 export const optionsShowOptionsButtonCheckboxEl = getCheckbox("options-show-options-button");
 

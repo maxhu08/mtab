@@ -10,6 +10,7 @@ import {
   listenAllToggleCheckboxSections
 } from "src/options/scripts/utils/toggle-checkbox";
 import { handleCustomFaviconUpload } from "src/options/scripts/utils/upload-favicon";
+import { createCollapseGroups } from "src/options/scripts/utils/collapse-option";
 
 export const loadPage = () => {
   const logo = document.getElementById("mtab-logo") as HTMLImageElement;
@@ -24,6 +25,8 @@ export const loadPage = () => {
       once: true
     }
   );
+
+  createCollapseGroups();
 
   getConfig(({ config }) => {
     fillInputs(config);
