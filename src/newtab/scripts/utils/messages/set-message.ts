@@ -1,4 +1,4 @@
-import { MessageType } from "src/newtab/scripts/config";
+import { MessageType } from "src/utils/config";
 import { messageEl } from "src/newtab/scripts/ui";
 import { setMorningAfternoonMessage } from "src/newtab/scripts/utils/messages/afternoon-morning";
 import {

@@ -1,4 +1,4 @@
-import { Config, FontType, MessageType } from "src/newtab/scripts/config";
+import { Config, FontType, MessageType } from "src/utils/config";
 import {
   messageEnabledCheckboxEl,
   messageTextColorInputEl,

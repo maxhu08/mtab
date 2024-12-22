@@ -1,4 +1,4 @@
-import { Config } from "src/newtab/scripts/config";
+import { Config } from "src/utils/config";
 import { usernameInputEl } from "src/options/scripts/ui";
 
 export const saveNameToDraft = (draft: Config) => {

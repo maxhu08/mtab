@@ -1,4 +1,4 @@
-import { Config } from "src/newtab/scripts/config";
+import { Config } from "src/utils/config";
 import { searchInputEl } from "src/newtab/scripts/ui";
 import { handleConversion } from "src/newtab/scripts/utils/search/handle-conversion";
 import { handleDate } from "src/newtab/scripts/utils/search/handle-date";

@@ -1,4 +1,4 @@
-import { Config } from "src/newtab/scripts/config";
+import { Config } from "src/utils/config";
 import { titleDefaultTitleInputEl, titleDynamicEnabledCheckboxEl } from "src/options/scripts/ui";
 
 export const saveTitleSettingsToDraft = (draft: Config) => {

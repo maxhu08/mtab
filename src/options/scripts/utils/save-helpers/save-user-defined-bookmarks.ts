@@ -1,9 +1,4 @@
-import {
-  Config,
-  BookmarkNodeBookmark,
-  BookmarkNodeFolder,
-  BookmarkNode
-} from "src/newtab/scripts/config";
+import { Config, BookmarkNodeBookmark, BookmarkNodeFolder, BookmarkNode } from "src/utils/config";
 import { bookmarksUserDefinedColsInputEl, bookmarksUserDefinedList } from "src/options/scripts/ui";
 
 export const saveBookmarkNodeBookmarkSettingsToDraft = (draft: Config) => {

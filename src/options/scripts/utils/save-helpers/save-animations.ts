@@ -4,7 +4,7 @@ import {
   AnimationSearchType,
   BookmarkTiming,
   Config
-} from "src/newtab/scripts/config";
+} from "src/utils/config";
 import { animationsEnabledCheckboxEl } from "src/options/scripts/ui";
 
 export const saveAnimationsToDraft = (draft: Config) => {

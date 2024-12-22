@@ -1,4 +1,4 @@
-import { Config, SnowEnabledType } from "src/newtab/scripts/config";
+import { Config, SnowEnabledType } from "src/utils/config";
 
 export const saveExtrasSettingsToDraft = (draft: Config) => {
   // prettier-ignore

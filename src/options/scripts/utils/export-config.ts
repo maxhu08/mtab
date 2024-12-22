@@ -1,4 +1,4 @@
-import { getConfig } from "src/newtab/scripts/config";
+import { getConfig } from "src/utils/config";
 import { saveConfig } from "src/options/scripts/utils/save-config";
 
 export const saveAndExportConfig = () => {

@@ -1,4 +1,4 @@
-import { BookmarksType } from "src/newtab/scripts/config";
+import { BookmarksType } from "src/utils/config";
 import { insertCSS } from "src/newtab/scripts/utils/insert-css";
 
 export const setTopDistance = (bookmarksType: BookmarksType) => {

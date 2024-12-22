@@ -1,4 +1,4 @@
-import { Config, FontType, SearchEngine } from "src/newtab/scripts/config";
+import { Config, FontType, SearchEngine } from "src/utils/config";
 import {
   searchEnabledCheckboxEl,
   searchFocusedBorderColorInputEl,

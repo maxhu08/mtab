@@ -1,4 +1,4 @@
-import { AnimationInitialType, UIStyle } from "src/newtab/scripts/config";
+import { AnimationInitialType, UIStyle } from "src/utils/config";
 import { optionsButtonContainerEl } from "src/newtab/scripts/ui";
 
 export const showOptionsButton = (

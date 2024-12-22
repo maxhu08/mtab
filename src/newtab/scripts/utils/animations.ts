@@ -1,5 +1,5 @@
 import { insertCSS } from "src/newtab/scripts/utils/insert-css";
-import { Config } from "../config";
+import { Config } from "../../../utils/config";
 import { messageEl, searchContainerEl } from "../ui";
 import { handleAnimation } from "src/newtab/scripts/utils/animations/handle-animation";
 

@@ -1,5 +1,5 @@
-import { getConfig } from "src/newtab/scripts/config";
-import { modifyNestedObject } from "src/options/scripts/utils/modify";
+import { getConfig } from "src/utils/config";
+import { modifyNestedObject } from "src/utils/modify";
 
 // save helpers
 import { saveNameToDraft } from "src/options/scripts/utils/save-helpers/save-name";

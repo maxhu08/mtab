@@ -4,7 +4,7 @@ import {
   BookmarkNodeFolder,
   BookmarkNode,
   DefaultFaviconSource
-} from "src/newtab/scripts/config";
+} from "src/utils/config";
 import { getFaviconURL } from "src/newtab/scripts/utils/favicon-url";
 import { getUserAgent } from "src/utils/user-agent";
 

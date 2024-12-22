@@ -1,4 +1,4 @@
-import { BookmarksType } from "src/newtab/scripts/config";
+import { BookmarksType } from "src/utils/config";
 import { bookmarksContainerEl, bookmarkSearchInputEl, searchInputEl } from "src/newtab/scripts/ui";
 
 export const listenBookmarkNumberKeys = (listen: boolean, bookmarksType: BookmarksType) => {

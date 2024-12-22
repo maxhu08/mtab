@@ -1,4 +1,4 @@
-import { Config, SearchEngine } from "src/newtab/scripts/config";
+import { Config, SearchEngine } from "src/utils/config";
 import { searchContainerEl, searchInputEl } from "../ui";
 import { setTitle } from "src/newtab/scripts/utils/set-title";
 

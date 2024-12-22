@@ -4,7 +4,7 @@ import {
   Config,
   DefaultBlockyColorType,
   DefaultFaviconSource
-} from "src/newtab/scripts/config";
+} from "src/utils/config";
 import {
   bookmarksTypeUserDefinedButtonEl,
   bookmarksTypeDefaultButtonEl,

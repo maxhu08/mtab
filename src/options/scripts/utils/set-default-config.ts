@@ -1,4 +1,4 @@
-import { defaultConfig } from "src/newtab/scripts/config";
+import { defaultConfig } from "src/utils/config";
 import { fillInputs } from "src/options/scripts/utils/fill-inputs";
 import { saveConfig } from "src/options/scripts/utils/save-config";
 

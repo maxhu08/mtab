@@ -1,7 +1,8 @@
-import { deepMerge, defaultConfig } from "src/newtab/scripts/config";
 import { fillInputs } from "src/options/scripts/utils/fill-inputs";
 import { saveConfig } from "src/options/scripts/utils/save-config";
 import { fixAllToggleCheckboxSections } from "src/options/scripts/utils/toggle-checkbox";
+import { defaultConfig } from "src/utils/config";
+import { deepMerge } from "src/utils/deep-merge";
 
 export const importConfigAndSave = () => {
   const dataToImport = prompt("input your save (this will overwrite your current config)");

@@ -1,4 +1,4 @@
-import { UIStyle, FontType } from "src/newtab/scripts/config";
+import { UIStyle, FontType } from "src/utils/config";
 import {
   assistantContainerEl,
   bookmarkSearchContainerEl,

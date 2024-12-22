@@ -1,4 +1,4 @@
-import { Config } from "src/newtab/scripts/config";
+import { Config } from "src/utils/config";
 import { fillAnimationsInputs } from "src/options/scripts/utils/fill-helpers/fill-animations";
 import { fillBookmarksInputs } from "src/options/scripts/utils/fill-helpers/fill-bookmarks";
 import { fillExtrasInputs } from "src/options/scripts/utils/fill-helpers/fill-extras";

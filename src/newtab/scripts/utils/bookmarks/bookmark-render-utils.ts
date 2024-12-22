@@ -5,7 +5,7 @@ import {
   BookmarkTiming,
   Config,
   UIStyle
-} from "src/newtab/scripts/config";
+} from "src/utils/config";
 import { bookmarksContainerEl } from "src/newtab/scripts/ui";
 import { handleAnimation } from "src/newtab/scripts/utils/animations/handle-animation";
 import { getBookmarkIconDetails } from "src/newtab/scripts/utils/bookmarks/bookmark-icon";

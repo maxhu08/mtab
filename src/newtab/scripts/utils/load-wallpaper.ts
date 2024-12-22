@@ -1,4 +1,4 @@
-import { Config } from "src/newtab/scripts/config";
+import { Config } from "src/utils/config";
 import { wallpaperEl } from "src/newtab/scripts/ui";
 import { hideCover } from "src/newtab/scripts/utils/hide-cover";
 

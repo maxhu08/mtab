@@ -1,4 +1,4 @@
-import { Config } from "src/newtab/scripts/config";
+import { Config } from "src/utils/config";
 import { assistantContainerEl } from "src/newtab/scripts/ui";
 
 export type AssistItem =

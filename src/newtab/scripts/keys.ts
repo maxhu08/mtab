@@ -1,5 +1,5 @@
 // ui
-import { BookmarkNodeBookmark, Config } from "src/newtab/scripts/config";
+import { BookmarkNodeBookmark, Config } from "src/utils/config";
 import {
   bookmarkSearchInputEl,
   bookmarkSearchResultsContainerEl,

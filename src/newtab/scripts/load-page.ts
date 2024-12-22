@@ -1,5 +1,5 @@
 // config
-import { getConfig } from "./config";
+import { getConfig } from "../../utils/config";
 
 // utils
 import { setTitle } from "./utils/set-title";

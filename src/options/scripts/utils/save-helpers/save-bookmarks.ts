@@ -4,7 +4,7 @@ import {
   BookmarksLocationFirefox,
   DefaultBlockyColorType,
   DefaultFaviconSource
-} from "src/newtab/scripts/config";
+} from "src/utils/config";
 import {
   bookmarksDefaultBlockyColorInputEl,
   bookmarksDefaultBlockyColsInputEl,

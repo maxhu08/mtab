@@ -1,4 +1,4 @@
-import { Config } from "src/newtab/scripts/config";
+import { Config } from "src/utils/config";
 import { bookmarksContainerEl } from "src/newtab/scripts/ui";
 import {
   createFolderArea,

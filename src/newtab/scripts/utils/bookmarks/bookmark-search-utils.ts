@@ -1,4 +1,4 @@
-import { BookmarkNodeBookmark } from "src/newtab/scripts/config";
+import { BookmarkNodeBookmark } from "src/utils/config";
 import {
   bookmarksContainerEl,
   bookmarkSearchContainerEl,

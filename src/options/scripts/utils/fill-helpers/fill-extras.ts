@@ -1,4 +1,4 @@
-import { Config, SnowEnabledType } from "src/newtab/scripts/config";
+import { Config, SnowEnabledType } from "src/utils/config";
 import {
   extrasSnowEnabledOff,
   extrasSnowEnabledOn,

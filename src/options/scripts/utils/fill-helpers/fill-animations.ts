@@ -4,7 +4,7 @@ import {
   BookmarkTiming,
   AnimationSearchType,
   AnimationBookmarkType
-} from "src/newtab/scripts/config";
+} from "src/utils/config";
 import {
   animationsEnabledCheckboxEl,
   animationsBookmarkTimingLeftButtonEl,

@@ -1,6 +1,6 @@
 import Sortable from "sortablejs";
 import { focusInput, unfocusInput } from "src/config-utils/scripts/handle";
-import { Config, BookmarkNodeBookmark, BookmarkNodeFolder } from "src/newtab/scripts/config";
+import { Config, BookmarkNodeBookmark, BookmarkNodeFolder } from "src/utils/config";
 import { bookmarksUserDefinedList, Input } from "src/options/scripts/ui";
 import { getRandomColor } from "src/options/scripts/utils/random-color";
 import { genid } from "src/utils/genid";
