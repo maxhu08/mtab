@@ -13,6 +13,11 @@ export const snowStorm = (): void => {
 
   if (!ctx) return;
 
+  canvas.style.pointerEvents = "none";
+  canvas.addEventListener("contextmenu", (event) => {
+    event.preventDefault();
+  });
+
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
 
