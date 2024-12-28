@@ -88,6 +88,8 @@ export const refreshBookmarkSearchResults = (
     bookmarkSearchResultsContainerEl.setAttribute("selected-index", selectedIndex.toString());
   }
 
+  if (selectedIndex < 0) selectedIndex = 0;
+
   filteredBookmarks.forEach((bookmark, index) => {
     const bName = bookmark.name;
 
