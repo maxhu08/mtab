@@ -1,7 +1,5 @@
-# Changes in 1.7.6
+# Changes in 1.7.7
 
 in this release:
 
-- improve options page
-- add snow effect
-- bug fixes
+- fix issue with bookmark search
