@@ -83,12 +83,10 @@ export const refreshBookmarkSearchResults = (
   const extraCount = filteredBookmarks.length - maxResults;
   filteredBookmarks = filteredBookmarks.slice(0, maxResults);
 
-  if (selectedIndex > filteredBookmarks.length - 1) {
-    selectedIndex = filteredBookmarks.length - 1;
-    bookmarkSearchResultsContainerEl.setAttribute("selected-index", selectedIndex.toString());
-  }
-
+  if (selectedIndex > filteredBookmarks.length - 1) selectedIndex = filteredBookmarks.length - 1;
   if (selectedIndex < 0) selectedIndex = 0;
+
+  bookmarkSearchResultsContainerEl.setAttribute("selected-index", selectedIndex.toString());
 
   filteredBookmarks.forEach((bookmark, index) => {
     const bName = bookmark.name;
