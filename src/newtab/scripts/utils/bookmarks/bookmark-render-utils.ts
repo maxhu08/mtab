@@ -43,6 +43,7 @@ export const renderBookmarkNodes = (
         bookmarkNode.color,
         bookmarkNode.iconType,
         bookmarkNode.iconColor,
+        bookmarkNode.fill,
         uiStyle,
         showBookmarkNames,
         messageTextColor,
@@ -141,6 +142,7 @@ export const renderBlockBookmark = (
   bookmarkColor: string,
   bookmarkIconType: string,
   bookmarkIconColor: string,
+  bookmarkFill: string,
   uiStyle: UIStyle,
   showName: boolean,
   nameTextColor: string,
@@ -172,7 +174,9 @@ export const renderBlockBookmark = (
   const button = document.createElement("button");
   button.id = `bookmark-node-${uuid}`;
   button.setAttribute("node-type", "bookmark");
-  button.className = `relative duration-[250ms] ease-out bg-foreground cursor-pointer ${uiStyle === "glass" ? "glass-effect" : ""} corner-style h-bookmark overflow-hidden ${animationsEnabled ? `${animationsInitialType} opacity-0` : ""} outline-none`;
+  button.className = `relative duration-[250ms] ease-out ${bookmarkFill.length === 0 ? "bg-foreground " : ""}cursor-pointer ${uiStyle === "glass" ? "glass-effect" : ""} corner-style h-bookmark overflow-hidden ${animationsEnabled ? `${animationsInitialType} opacity-0` : ""} outline-none`;
+  if (bookmarkFill.length > 0) button.style.backgroundColor = bookmarkFill;
+
   if (animationsEnabled) button.style.animationDelay = `${delay}ms`;
 
   const borderDiv = document.createElement("div");
