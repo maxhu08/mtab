@@ -68,6 +68,7 @@ export const renderBookmarkNodes = (
         bookmarkNode.name,
         bookmarkNode.color,
         bookmarkNode.iconColor,
+        bookmarkNode.fill,
         uiStyle,
         showBookmarkNames,
         messageTextColor,
@@ -262,6 +263,7 @@ export const renderBlockFolder = (
   folderName: string,
   folderColor: string,
   folderIconColor: string,
+  folderFill: string,
   uiStyle: UIStyle,
   showName: boolean,
   nameTextColor: string,
@@ -282,7 +284,9 @@ export const renderBlockFolder = (
   const button = document.createElement("button");
   button.id = `bookmark-node-${uuid}`;
   button.setAttribute("node-type", "folder");
-  button.className = `relative duration-[250ms] ease-out bg-foreground cursor-pointer ${uiStyle === "glass" ? "glass-effect" : ""} corner-style h-bookmark overflow-hidden ${animationsEnabled ? `${animationsInitialType} opacity-0 outline-none` : ""}`;
+  button.className = `relative duration-[250ms] ease-out ${folderFill.length === 0 ? "bg-foreground " : ""}cursor-pointer ${uiStyle === "glass" ? "glass-effect" : ""} corner-style h-bookmark overflow-hidden ${animationsEnabled ? `${animationsInitialType} opacity-0 outline-none` : ""}`;
+  if (folderFill.length > 0) button.style.backgroundColor = folderFill;
+
   if (animationsEnabled) button.style.animationDelay = `${delay}ms`;
 
   const borderDiv = document.createElement("div");
