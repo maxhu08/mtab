@@ -48,6 +48,8 @@ const getBookmarkNodeFolderData = (uuid: string) => {
   // prettier-ignore
   const iconColorInputEl = document.getElementById(`bookmark-${uuid}-icon-color-input`) as HTMLInputElement;
   // prettier-ignore
+  const fillInputEl = document.getElementById(`bookmark-${uuid}-fill-input`) as HTMLInputElement;
+  // prettier-ignore
   const folderContentsEl = document.getElementById(`bookmark-${uuid}-contents-container`) as HTMLDivElement;
   const folderContents: BookmarkNode[] = [];
 
@@ -71,6 +73,7 @@ const getBookmarkNodeFolderData = (uuid: string) => {
     name: nameInputEl.value,
     color: colorInputEl.value,
     iconColor: iconColorInputEl.value,
+    fill: fillInputEl.value,
     contents: folderContents
   } satisfies BookmarkNodeFolder;
 };

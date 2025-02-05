@@ -30,7 +30,7 @@ const migrateOldConfig = (config: Config): Config => {
   // ensure 'fill' property exists for user-defined bookmarks
   if (config.bookmarks.userDefined) {
     config.bookmarks.userDefined = config.bookmarks.userDefined.map((node: any) => {
-      if (node.type === "bookmark" && !("fill" in node)) {
+      if ((node.type === "bookmark" || node.type === "folder") && !("fill" in node)) {
         return { ...node, fill: "" };
       }
       return node;
@@ -258,6 +258,7 @@ export type BookmarkNodeFolder = {
   name: string;
   color: string;
   iconColor: string;
+  fill: string;
   contents: BookmarkNode[];
 };
 export type BookmarkNodeBookmark = {

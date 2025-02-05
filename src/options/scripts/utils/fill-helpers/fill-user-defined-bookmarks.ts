@@ -290,6 +290,7 @@ addFolderButtonEl.onclick = () => {
       name: "New Folder",
       color: randomColor,
       iconColor: randomColor,
+      fill: "",
       contents: []
     },
     bookmarksUserDefinedList
@@ -638,7 +639,8 @@ const addBookmarkNodeFolder = (folder: BookmarkNodeFolder, targetDivEl: HTMLDivE
   const fields = [
     { label: "folder.name", id: "name", value: folder.name },
     { label: "folder.color", id: "color", value: folder.color },
-    { label: "folder.iconColor", id: "icon-color", value: folder.iconColor }
+    { label: "folder.iconColor", id: "icon-color", value: folder.iconColor },
+    { label: "folder.fill", id: "fill", value: folder.fill }
   ];
 
   fields.forEach(({ label, id, value }) => {
@@ -663,7 +665,10 @@ const addBookmarkNodeFolder = (folder: BookmarkNodeFolder, targetDivEl: HTMLDivE
     input.type = "text";
     input.autocomplete = "off";
     input.className = "outline-none bg-transparent text-white placeholder-neutral-500";
-    input.placeholder = `input ${id}...`;
+
+    if (id === "fill") input.placeholder = `input fill... (leave empty for default)`;
+    else input.placeholder = `input ${id}...`;
+
     input.value = value;
 
     inputContainer.append(inputPrefix, input);
