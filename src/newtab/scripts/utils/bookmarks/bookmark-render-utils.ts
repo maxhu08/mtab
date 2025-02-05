@@ -1,6 +1,7 @@
 import {
   AnimationBookmarkType,
   AnimationInitialType,
+  BookmarkLineOrientation,
   BookmarkNode,
   BookmarkTiming,
   Config,
@@ -45,6 +46,7 @@ export const renderBookmarkNodes = (
         bookmarkNode.iconColor,
         bookmarkNode.fill,
         uiStyle,
+        "bottom",
         showBookmarkNames,
         messageTextColor,
         withAnimations,
@@ -70,6 +72,7 @@ export const renderBookmarkNodes = (
         bookmarkNode.iconColor,
         bookmarkNode.fill,
         uiStyle,
+        "bottom",
         showBookmarkNames,
         messageTextColor,
         withAnimations,
@@ -145,6 +148,7 @@ export const renderBlockBookmark = (
   bookmarkIconColor: string,
   bookmarkFill: string,
   uiStyle: UIStyle,
+  lineOrientation: BookmarkLineOrientation,
   showName: boolean,
   nameTextColor: string,
   animationsEnabled: boolean,
@@ -185,8 +189,15 @@ export const renderBlockBookmark = (
   borderDiv.className = "absolute w-full h-full border-2 border-transparent corner-style";
 
   const colorBar = document.createElement("div");
-  colorBar.className = "h-1";
   colorBar.style.backgroundColor = bookmarkColor;
+  const orientationClasses: Record<BookmarkLineOrientation, string> = {
+    top: "w-full h-1 top-0 left-0",
+    bottom: "w-full h-1 bottom-0 left-0",
+    left: "h-full w-1 left-0 top-0",
+    right: "h-full w-1 right-0 top-0",
+    none: "hidden"
+  };
+  colorBar.className = `absolute ${orientationClasses[lineOrientation]}`;
 
   const hoverDiv = document.createElement("div");
   hoverDiv.className = "absolute w-full h-full hover:bg-white/20";
@@ -265,6 +276,7 @@ export const renderBlockFolder = (
   folderIconColor: string,
   folderFill: string,
   uiStyle: UIStyle,
+  lineOrientation: BookmarkLineOrientation,
   showName: boolean,
   nameTextColor: string,
   animationsEnabled: boolean,
@@ -294,8 +306,15 @@ export const renderBlockFolder = (
   borderDiv.className = "absolute w-full h-full border-2 border-transparent corner-style";
 
   const colorBar = document.createElement("div");
-  colorBar.className = "h-1";
   colorBar.style.backgroundColor = folderColor;
+  const orientationClasses: Record<BookmarkLineOrientation, string> = {
+    top: "w-full h-1 top-0 left-0",
+    bottom: "w-full h-1 bottom-0 left-0",
+    left: "h-full w-1 left-0 top-0",
+    right: "h-full w-1 right-0 top-0",
+    none: "hidden"
+  };
+  colorBar.className = `absolute ${orientationClasses[lineOrientation]}`;
 
   const hoverDiv = document.createElement("div");
   hoverDiv.className = "absolute w-full h-full hover:bg-white/20";
