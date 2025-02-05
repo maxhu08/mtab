@@ -29,6 +29,7 @@ const getBookmarkNodeBookmarkData = (uuid: string) => {
   const colorInputEl = document.getElementById(`bookmark-${uuid}-color-input`) as HTMLInputElement;
   const iconTypeInputEl = document.getElementById(`bookmark-${uuid}-icon-type-input`) as HTMLInputElement;
   const iconColorInputEl = document.getElementById(`bookmark-${uuid}-icon-color-input`) as HTMLInputElement;
+  const fillInputEl = document.getElementById(`bookmark-${uuid}-fill-input`) as HTMLInputElement;
 
   return {
     type: "bookmark",
@@ -36,7 +37,8 @@ const getBookmarkNodeBookmarkData = (uuid: string) => {
     url: urlInputEl.value,
     color: colorInputEl.value,
     iconType: iconTypeInputEl.value,
-    iconColor: iconColorInputEl.value
+    iconColor: iconColorInputEl.value,
+    fill: fillInputEl.value
   } satisfies BookmarkNodeBookmark;
 };
 

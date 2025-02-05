@@ -274,7 +274,8 @@ addBookmarkButtonEl.onclick = () => {
       url: "about:blank",
       color: "#ffffff",
       iconType: "ri-box-3-line",
-      iconColor: "#ffffff"
+      iconColor: "#ffffff",
+      fill: ""
     },
     bookmarksUserDefinedList
   );
@@ -467,7 +468,8 @@ const addBookmarkNodeBookmark = (bookmark: BookmarkNodeBookmark, targetDivEl: HT
     { label: "bookmark.url", id: "url", value: bookmark.url },
     { label: "bookmark.color", id: "color", value: bookmark.color },
     { label: "bookmark.iconType", id: "icon-type", value: bookmark.iconType },
-    { label: "bookmark.iconColor", id: "icon-color", value: bookmark.iconColor }
+    { label: "bookmark.iconColor", id: "icon-color", value: bookmark.iconColor },
+    { label: "bookmark.fill", id: "fill", value: bookmark.fill }
   ];
 
   fields.forEach(({ label, id, value }) => {
@@ -492,7 +494,10 @@ const addBookmarkNodeBookmark = (bookmark: BookmarkNodeBookmark, targetDivEl: HT
     input.type = "text";
     input.autocomplete = "off";
     input.className = "outline-none bg-transparent text-white placeholder-neutral-500";
-    input.placeholder = `input ${id}...`;
+
+    if (id === "fill") input.placeholder = `input fill... (leave empty for default)`;
+    else input.placeholder = `input ${id}...`;
+
     input.value = value;
 
     inputContainer.append(inputPrefix, input);
