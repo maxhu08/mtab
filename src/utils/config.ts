@@ -154,6 +154,7 @@ export const defaultConfig: Config = {
     type: "user-defined",
     numberKeys: false,
     userDefinedCols: 4,
+    lineOrientation: "top",
     userDefined: [
       {
         type: "bookmark",
@@ -251,6 +252,7 @@ export type MessageType =
   | "time-24"
   | "weather"
   | "custom";
+export type BookmarkLineOrientation = "top" | "bottom" | "left" | "right" | "none";
 export type BookmarksType = "user-defined" | "default" | "default-blocky" | "none";
 export type BookmarkNode = BookmarkNodeFolder | BookmarkNodeBookmark;
 export type BookmarkNodeFolder = {
@@ -366,6 +368,7 @@ export interface Config {
     type: BookmarksType;
     numberKeys: boolean;
     userDefinedCols: number;
+    lineOrientation: BookmarkLineOrientation;
     userDefined: BookmarkNode[];
     defaultBlockyCols: number;
     defaultBlockyColorType: DefaultBlockyColorType;
