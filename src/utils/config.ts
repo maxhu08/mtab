@@ -26,6 +26,17 @@ const migrateOldConfig = (config: Config): Config => {
     delete config.bookmarks.userDefinedKeys;
   }
 
+  // if config is before v1.8.0
+  // ensure 'fill' property exists for user-defined bookmarks
+  if (config.bookmarks.userDefined) {
+    config.bookmarks.userDefined = config.bookmarks.userDefined.map((node: any) => {
+      if (node.type === "bookmark" && !("fill" in node)) {
+        return { ...node, fill: "" };
+      }
+      return node;
+    });
+  }
+
   return config;
 };
 
@@ -150,7 +161,9 @@ export const defaultConfig: Config = {
         url: "https://github.com",
         color: "#6366f1",
         iconType: "ri-github-fill",
-        iconColor: "#ffffff"
+        // extra options
+        iconColor: "#ffffff",
+        fill: ""
       },
       {
         type: "bookmark",
@@ -158,7 +171,9 @@ export const defaultConfig: Config = {
         url: "https://youtube.com",
         color: "#f43f5e",
         iconType: "ri-youtube-fill",
-        iconColor: "#ffffff"
+        // extra options
+        iconColor: "#ffffff",
+        fill: ""
       },
       {
         type: "bookmark",
@@ -166,7 +181,9 @@ export const defaultConfig: Config = {
         url: "https://www.reddit.com",
         color: "#f97316",
         iconType: "ri-reddit-fill",
-        iconColor: "#ffffff"
+        // extra options
+        iconColor: "#ffffff",
+        fill: ""
       },
       {
         type: "bookmark",
@@ -174,7 +191,9 @@ export const defaultConfig: Config = {
         url: "https://chatgpt.com",
         color: "#14b8a6",
         iconType: "ri-openai-fill",
-        iconColor: "#ffffff"
+        // extra options
+        iconColor: "#ffffff",
+        fill: ""
       }
     ],
     defaultBlockyCols: 4,
@@ -247,7 +266,9 @@ export type BookmarkNodeBookmark = {
   url: string;
   color: string;
   iconType: string;
+  // extra options
   iconColor: string;
+  fill: string;
 };
 export type DefaultBlockyColorType = "random" | "custom";
 export type DefaultFaviconSource = "google" | "duckduckgo";
