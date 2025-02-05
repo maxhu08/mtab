@@ -284,7 +284,7 @@ export const renderBlockFolder = (
   const button = document.createElement("button");
   button.id = `bookmark-node-${uuid}`;
   button.setAttribute("node-type", "folder");
-  button.className = `relative duration-[250ms] ease-out ${folderFill.length === 0 ? "bg-foreground " : ""}cursor-pointer ${uiStyle === "glass" ? "glass-effect" : ""} corner-style h-bookmark overflow-hidden ${animationsEnabled ? `${animationsInitialType} opacity-0 outline-none` : ""}`;
+  button.className = `relative duration-[250ms] ease-out ${folderFill.length === 0 ? "bg-foreground " : ""}cursor-pointer ${uiStyle === "glass" ? "glass-effect" : ""} corner-style h-bookmark overflow-hidden ${animationsEnabled ? `${animationsInitialType} opacity-0 ` : ""}outline-none`;
   if (folderFill.length > 0) button.style.backgroundColor = folderFill;
 
   if (animationsEnabled) button.style.animationDelay = `${delay}ms`;
@@ -385,7 +385,7 @@ export const addFolderBackButton = (
 
   const backButton = document.createElement("button");
   backButton.id = `folder-back-button-${uuid}`;
-  backButton.className = `relative duration-[250ms] ease-out bg-foreground cursor-pointer ${uiStyle === "glass" ? "glass-effect" : ""} corner-style h-9 md:h-12 px-1 md:px-2 overflow-hidden ${animationsEnabled ? `${animationsInitialType} opacity-0 outline-none` : ""}`;
+  backButton.className = `relative duration-[250ms] ease-out bg-foreground cursor-pointer ${uiStyle === "glass" ? "glass-effect " : ""}corner-style h-9 md:h-12 px-1 md:px-2 overflow-hidden ${animationsEnabled ? `${animationsInitialType} opacity-0 ` : ""}outline-none`;
   if (animationsEnabled) {
     backButton.style.animationDelay = `${delay}ms`;
   }
@@ -443,7 +443,7 @@ export const bindActionsToBackButton = (
   backButtonEl.addEventListener("blur", () => unfocusElementBorder(backButtonBorderEl));
   backButtonEl.addEventListener("focus", (e) => {
     if (getTabKeyPressed()) {
+      focusElementBorder(backButtonBorderEl, searchFocusedBorderColor, e);
     }
-    focusElementBorder(backButtonBorderEl, searchFocusedBorderColor, e);
   });
 };
