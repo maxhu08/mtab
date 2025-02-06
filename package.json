@@ -19,10 +19,11 @@
     "prepare": "husky"
   },
   "dependencies": {
+    "caniuse-lite": "^1.0.30001697",
     "mathjs": "^13.2.3",
     "parcel": "^2.13.3",
     "sortablejs": "^1.15.6",
-    "uuid": "^11.0.3"
+    "uuid": "^11.0.5"
   },
   "devDependencies": {
     "@types/chrome": "^0.0.263",
@@ -30,9 +31,9 @@
     "@typescript-eslint/eslint-plugin": "^7.18.0",
     "@typescript-eslint/parser": "^7.18.0",
     "husky": "^9.1.7",
-    "postcss": "^8.4.49",
+    "postcss": "^8.5.1",
     "prettier": "^3.4.2",
-    "prettier-plugin-tailwindcss": "^0.6.9",
+    "prettier-plugin-tailwindcss": "^0.6.11",
     "tailwindcss": "^3.4.17"
   }
 }
