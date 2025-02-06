@@ -7,20 +7,19 @@ import {
   uiGlassColorInputEl,
   uiBlurStrengthInputEl
 } from "src/options/scripts/ui";
+import { getSelectedButton } from "src/options/scripts/utils/get-selected-button";
 
 export const saveUISettingsToDraft = (draft: Config) => {
-  const selectedStyleEl = document.querySelector(
-    `button[btn-option-type="ui-style"][selected="yes"]`
-  ) as HTMLButtonElement;
+  const selectedStyleEl = getSelectedButton("ui-style");
 
-  switch (selectedStyleEl.id) {
-    case "ui-style-solid-button": {
-      draft.ui.style = "solid";
-      break;
-    }
-    case "ui-style-glass-button": {
-      draft.ui.style = "glass";
-      break;
+  if (selectedStyleEl) {
+    switch (selectedStyleEl.id) {
+      case "ui-style-solid-button":
+        draft.ui.style = "solid";
+        break;
+      case "ui-style-glass-button":
+        draft.ui.style = "glass";
+        break;
     }
   }
 
@@ -30,13 +29,15 @@ export const saveUISettingsToDraft = (draft: Config) => {
   draft.ui.backgroundColor = uiBackgroundColorInputEl.value;
   draft.ui.highlightColor = uiHighlightColorInputEl.value;
 
-  const selectedCornerStyleEl = document.querySelector(
-    `button[btn-option-type="ui-corner-style"][selected="yes"]`
-  ) as HTMLButtonElement;
+  const selectedCornerStyleEl = getSelectedButton("ui-corner-style");
 
-  if (selectedCornerStyleEl.id === "ui-corner-style-sharp-button") draft.ui.cornerStyle = "sharp";
-  // prettier-ignore
-  else if (selectedCornerStyleEl.id === "ui-corner-style-round-button") draft.ui.cornerStyle = "round";
+  if (selectedCornerStyleEl) {
+    if (selectedCornerStyleEl.id === "ui-corner-style-sharp-button") {
+      draft.ui.cornerStyle = "sharp";
+    } else if (selectedCornerStyleEl.id === "ui-corner-style-round-button") {
+      draft.ui.cornerStyle = "round";
+    }
+  }
 
   draft.ui.customCSS = uiCustomCSSTextareaEl.value;
 };

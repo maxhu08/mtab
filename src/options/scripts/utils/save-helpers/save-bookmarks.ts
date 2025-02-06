@@ -13,6 +13,7 @@ import {
   bookmarksShowBookmarkNamesCheckboxEl
 } from "src/options/scripts/ui";
 import { saveBookmarkNodeBookmarkSettingsToDraft } from "src/options/scripts/utils/save-helpers/save-user-defined-bookmarks";
+import { getSelectedButton } from "src/options/scripts/utils/get-selected-button";
 
 export const saveBookmarksSettingsToDraft = (draft: Config) => {
   draft.bookmarks.showBookmarkNames = bookmarksShowBookmarkNamesCheckboxEl.checked;
@@ -22,23 +23,18 @@ export const saveBookmarksSettingsToDraft = (draft: Config) => {
 
   draft.bookmarks.numberKeys = bookmarksNumberKeysCheckboxEl.checked;
 
-  const selectedTypeEl = document.querySelector(
-    `button[btn-option-type="bookmarks-type"][selected="yes"]`
-  ) as HTMLButtonElement;
-
+  const selectedTypeEl = getSelectedButton("bookmarks-type");
   const bookmarksTypePairs: Record<string, BookmarksType> = {
     "bookmarks-type-user-defined-button": "user-defined",
     "bookmarks-type-default-button": "default",
     "bookmarks-type-default-blocky-button": "default-blocky",
     "bookmarks-type-none-button": "none"
   };
+  if (selectedTypeEl) {
+    draft.bookmarks.type = bookmarksTypePairs[selectedTypeEl.id];
+  }
 
-  draft.bookmarks.type = bookmarksTypePairs[selectedTypeEl.id];
-
-  const selectedLineOrientation = document.querySelector(
-    `button[btn-option-type="bookmarks-line-orientation"][selected="yes"]`
-  ) as HTMLButtonElement;
-
+  const selectedLineOrientation = getSelectedButton("bookmarks-line-orientation");
   const bookmarksLineOrientationPairs: Record<string, BookmarkLineOrientation> = {
     "bookmarks-line-orientation-top-button": "top",
     "bookmarks-line-orientation-bottom-button": "bottom",
@@ -46,45 +42,40 @@ export const saveBookmarksSettingsToDraft = (draft: Config) => {
     "bookmarks-line-orientation-right-button": "right",
     "bookmarks-line-orientation-none-button": "none"
   };
+  if (selectedLineOrientation) {
+    draft.bookmarks.lineOrientation = bookmarksLineOrientationPairs[selectedLineOrientation.id];
+  }
 
-  draft.bookmarks.lineOrientation = bookmarksLineOrientationPairs[selectedLineOrientation.id];
-
-  const selectedDefaultBlockyColorType = document.querySelector(
-    `button[btn-option-type="bookmarks-default-blocky-color-type"][selected="yes"]`
-  ) as HTMLButtonElement;
-
+  const selectedDefaultBlockyColorType = getSelectedButton("bookmarks-default-blocky-color-type");
   const bookmarksDefaultBlockyColorTypePairs: Record<string, DefaultBlockyColorType> = {
     "bookmarks-default-blocky-color-type-random-button": "random",
     "bookmarks-default-blocky-color-type-custom-button": "custom"
   };
+  if (selectedDefaultBlockyColorType) {
+    draft.bookmarks.defaultBlockyColorType =
+      bookmarksDefaultBlockyColorTypePairs[selectedDefaultBlockyColorType.id];
+  }
 
-  // prettier-ignore
-  draft.bookmarks.defaultBlockyColorType = bookmarksDefaultBlockyColorTypePairs[selectedDefaultBlockyColorType.id];
-
-  const selectedLocationFirefoxEl = document.querySelector(
-    `button[btn-option-type="bookmarks-location-firefox"][selected="yes"]`
-  ) as HTMLButtonElement;
-
+  const selectedLocationFirefoxEl = getSelectedButton("bookmarks-location-firefox");
   const bookmarksLocationFirefoxPairs: Record<string, BookmarksLocationFirefox> = {
     "bookmarks-location-firefox-menu-button": "menu",
     "bookmarks-location-firefox-toolbar-button": "toolbar",
     "bookmarks-location-firefox-other-button": "other"
   };
+  if (selectedLocationFirefoxEl) {
+    draft.bookmarks.bookmarksLocationFirefox =
+      bookmarksLocationFirefoxPairs[selectedLocationFirefoxEl.id];
+  }
 
-  const selectedDefaultFaviconSourceEl = document.querySelector(
-    `button[btn-option-type="bookmarks-default-favicon-source"][selected="yes"]`
-  ) as HTMLButtonElement;
-
-  // prettier-ignore
-  draft.bookmarks.bookmarksLocationFirefox = bookmarksLocationFirefoxPairs[selectedLocationFirefoxEl.id];
-
+  const selectedDefaultFaviconSourceEl = getSelectedButton("bookmarks-default-favicon-source");
   const bookmarksDefaultFaviconSourcePairs: Record<string, DefaultFaviconSource> = {
     "bookmarks-default-favicon-source-google-button": "google",
     "bookmarks-default-favicon-source-duckduckgo-button": "duckduckgo"
   };
-
-  // prettier-ignore
-  draft.bookmarks.defaultFaviconSource = bookmarksDefaultFaviconSourcePairs[selectedDefaultFaviconSourceEl.id];
+  if (selectedDefaultFaviconSourceEl) {
+    draft.bookmarks.defaultFaviconSource =
+      bookmarksDefaultFaviconSourcePairs[selectedDefaultFaviconSourceEl.id];
+  }
 
   saveBookmarkNodeBookmarkSettingsToDraft(draft);
 };

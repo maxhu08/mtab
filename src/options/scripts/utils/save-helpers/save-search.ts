@@ -11,24 +11,25 @@ import {
   searchSearchIconColorInputEl,
   searchBookmarkIconColorInputEl,
   searchSelectIconColorInputEl,
-  // searchAssistHistoryCheckboxEl,
   searchAssistDateCheckboxEl,
   searchAssistMathCheckboxEl,
   searchAssistDefinitionsCheckboxEl,
   searchAssistConversionsCheckboxEl,
   searchFontCustomInputEl
 } from "src/options/scripts/ui";
+import { getSelectedButton } from "src/options/scripts/utils/get-selected-button";
 
 export const saveSearchSettingsToDraft = (draft: Config) => {
   draft.search.enabled = searchEnabledCheckboxEl.checked;
 
-  // prettier-ignore
-  const selectedFontTypeEl = document.querySelector(`button[btn-option-type="search-font-type"][selected="yes"]`) as HTMLButtonElement;
+  const selectedFontTypeEl = getSelectedButton("search-font-type");
   const searchFontTypePairs: Record<string, FontType> = {
     "search-font-type-default-button": "default",
     "search-font-type-custom-button": "custom"
   };
-  draft.search.font.type = searchFontTypePairs[selectedFontTypeEl.id];
+  if (selectedFontTypeEl) {
+    draft.search.font.type = searchFontTypePairs[selectedFontTypeEl.id];
+  }
   draft.search.font.custom = searchFontCustomInputEl.value;
 
   draft.search.textColor = searchTextColorInputEl.value;
@@ -45,9 +46,7 @@ export const saveSearchSettingsToDraft = (draft: Config) => {
   draft.search.customEngineURL = searchCustomEngineURLInputEl.value;
 
   if (!searchUseCustomEngineEnabledCheckboxEl.checked) {
-    const selectedEl = document.querySelector(
-      `button[btn-option-type="search-engine"][selected="yes"]`
-    ) as HTMLButtonElement;
+    const selectedEl = getSelectedButton("search-engine");
 
     const searchEnginePairs: Record<string, SearchEngine> = {
       "search-engine-duckduckgo-button": "duckduckgo",
@@ -61,12 +60,13 @@ export const saveSearchSettingsToDraft = (draft: Config) => {
       "search-engine-kagi-button": "kagi"
     };
 
-    draft.search.engine = searchEnginePairs[selectedEl.id];
+    if (selectedEl) {
+      draft.search.engine = searchEnginePairs[selectedEl.id];
+    }
   }
 
   draft.search.focusedBorderColor = searchFocusedBorderColorInputEl.value;
 
-  // draft.search.assist.history = searchAssistHistoryCheckboxEl.checked;
   draft.search.assist.date = searchAssistDateCheckboxEl.checked;
   draft.search.assist.math = searchAssistMathCheckboxEl.checked;
   draft.search.assist.definitions = searchAssistDefinitionsCheckboxEl.checked;
