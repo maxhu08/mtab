@@ -32,6 +32,7 @@ export const renderBookmarkNodes = (
   // const animationsBookmarkType = config.animations.bookmarkType;
   const animationsbookmarkType = config.animations.bookmarkType;
   const searchFocusedBorderColor = config.search.focusedBorderColor;
+  const bookmarksLineOrientation = config.bookmarks.lineOrientation;
 
   bookmarkNodes.forEach((bookmarkNode, index) => {
     if (bookmarkNode.type === "bookmark") {
@@ -46,7 +47,7 @@ export const renderBookmarkNodes = (
         bookmarkNode.iconColor,
         bookmarkNode.fill,
         uiStyle,
-        "bottom",
+        bookmarksLineOrientation,
         showBookmarkNames,
         messageTextColor,
         withAnimations,
@@ -72,7 +73,7 @@ export const renderBookmarkNodes = (
         bookmarkNode.iconColor,
         bookmarkNode.fill,
         uiStyle,
-        "bottom",
+        bookmarksLineOrientation,
         showBookmarkNames,
         messageTextColor,
         withAnimations,
