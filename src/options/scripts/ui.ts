@@ -112,7 +112,11 @@ export const bookmarksTypeNoneButtonEl = getButton("bookmarks-type-none");
 export const bookmarksShowBookmarkNamesCheckboxEl = getCheckbox("bookmarks-show-bookmark-names");
 export const [bookmarksUserDefinedColsContainerEl, bookmarksUserDefinedColsInputEl] = getContainerAndInput("bookmarks-user-defined-cols");
 export const bookmarksNumberKeysCheckboxEl = getCheckbox("bookmarks-number-keys");
-export const bookmarksUserDefinedList = document.getElementById("bookmarks-user-defined-list") as HTMLDivElement;
+export const bookmarksLineOrientationTopButtonEl = getButton("bookmarks-line-orientation-top");
+export const bookmarksLineOrientationBottomButtonEl = getButton("bookmarks-line-orientation-bottom");
+export const bookmarksLineOrientationLeftButtonEl = getButton("bookmarks-line-orientation-left");
+export const bookmarksLineOrientationRightButtonEl = getButton("bookmarks-line-orientation-right");
+export const bookmarksLineOrientationNoneButtonEl = getButton("bookmarks-line-orientation-none");
 export const [bookmarksDefaultBlockyColsContainerEl, bookmarksDefaultBlockyColsInputEl] = getContainerAndInput("bookmarks-default-blocky-cols");
 export const bookmarksDefaultBlockyColorTypeRandomButtonEl = getButton("bookmarks-default-blocky-color-type-random");
 export const bookmarksDefaultBlockyColorTypeCustomButtonEl = getButton("bookmarks-default-blocky-color-type-custom");
@@ -122,6 +126,7 @@ export const bookmarksLocationFirefoxToolbarButtonEl = getButton("bookmarks-loca
 export const bookmarksLocationFirefoxOtherButtonEl = getButton("bookmarks-location-firefox-other");
 export const bookmarksDefaultFaviconSourceGoogleButton = getButton("bookmarks-default-favicon-source-google");
 export const bookmarksDefaultFaviconSourceDuckduckgoButton = getButton("bookmarks-default-favicon-source-duckduckgo");
+export const bookmarksUserDefinedList = document.getElementById("bookmarks-user-defined-list") as HTMLDivElement;
 
 export const extrasSnowEnabledOn = getButton("extras-snow-enabled-on");
 export const extrasSnowEnabledWinter = getButton("extras-snow-enabled-winter");
@@ -188,6 +193,10 @@ export const buttonSwitches: ButtonSwitch[] = [
   {
     buttons: [bookmarksTypeUserDefinedButtonEl, bookmarksTypeDefaultButtonEl, bookmarksTypeDefaultBlockyButtonEl, bookmarksTypeNoneButtonEl],
     attr: "bookmarks-type"
+  },
+  {
+    buttons: [bookmarksLineOrientationTopButtonEl, bookmarksLineOrientationBottomButtonEl, bookmarksLineOrientationLeftButtonEl, bookmarksLineOrientationRightButtonEl, bookmarksLineOrientationNoneButtonEl],
+    attr: "bookmarks-line-orientation"
   },
   {
     buttons: [bookmarksDefaultBlockyColorTypeRandomButtonEl, bookmarksDefaultBlockyColorTypeCustomButtonEl],

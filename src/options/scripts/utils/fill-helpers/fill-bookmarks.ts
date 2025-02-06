@@ -1,4 +1,5 @@
 import {
+  BookmarkLineOrientation,
   BookmarksLocationFirefox,
   BookmarksType,
   Config,
@@ -21,7 +22,12 @@ import {
   bookmarksDefaultBlockyColorTypeCustomButtonEl,
   bookmarksDefaultFaviconSourceGoogleButton,
   bookmarksDefaultFaviconSourceDuckduckgoButton,
-  bookmarksNumberKeysCheckboxEl
+  bookmarksNumberKeysCheckboxEl,
+  bookmarksLineOrientationTopButtonEl,
+  bookmarksLineOrientationBottomButtonEl,
+  bookmarksLineOrientationLeftButtonEl,
+  bookmarksLineOrientationRightButtonEl,
+  bookmarksLineOrientationNoneButtonEl
 } from "src/options/scripts/ui";
 import {
   fillBookmarkNodeBookmarks,
@@ -48,6 +54,17 @@ export const fillBookmarksInputs = (config: Config) => {
   };
 
   bookmarksTypePairs[config.bookmarks.type]();
+
+  // prettier-ignore
+  const bookmarkLineOrientationPairs: Record<BookmarkLineOrientation, () => void> = {
+    "top": () => bookmarksLineOrientationTopButtonEl.click(),
+    "bottom": () => bookmarksLineOrientationBottomButtonEl.click(),
+    "left": () => bookmarksLineOrientationLeftButtonEl.click(),
+    "right": () => bookmarksLineOrientationRightButtonEl.click(),
+    "none": () => bookmarksLineOrientationNoneButtonEl.click()
+  };
+
+  bookmarkLineOrientationPairs[config.bookmarks.lineOrientation]();
 
   // prettier-ignore
   const bookmarksDefaultBlockyColorTypePairs: Record<DefaultBlockyColorType, () => void> = {

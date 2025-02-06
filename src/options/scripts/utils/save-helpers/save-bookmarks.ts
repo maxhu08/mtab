@@ -3,7 +3,8 @@ import {
   BookmarksType,
   BookmarksLocationFirefox,
   DefaultBlockyColorType,
-  DefaultFaviconSource
+  DefaultFaviconSource,
+  BookmarkLineOrientation
 } from "src/utils/config";
 import {
   bookmarksDefaultBlockyColorInputEl,
@@ -33,6 +34,20 @@ export const saveBookmarksSettingsToDraft = (draft: Config) => {
   };
 
   draft.bookmarks.type = bookmarksTypePairs[selectedTypeEl.id];
+
+  const selectedLineOrientation = document.querySelector(
+    `button[btn-option-type="bookmarks-line-orientation"][selected="yes"]`
+  ) as HTMLButtonElement;
+
+  const bookmarksLineOrientationPairs: Record<string, BookmarkLineOrientation> = {
+    "bookmarks-line-orientation-top-button": "top",
+    "bookmarks-line-orientation-bottom-button": "bottom",
+    "bookmarks-line-orientation-left-button": "left",
+    "bookmarks-line-orientation-right-button": "right",
+    "bookmarks-line-orientation-none-button": "none"
+  };
+
+  draft.bookmarks.lineOrientation = bookmarksLineOrientationPairs[selectedLineOrientation.id];
 
   const selectedDefaultBlockyColorType = document.querySelector(
     `button[btn-option-type="bookmarks-default-blocky-color-type"][selected="yes"]`
