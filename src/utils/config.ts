@@ -1,6 +1,8 @@
 import { deepMerge } from "src/utils/deep-merge";
 
-const migrateOldConfig = (config: Config): Config => {
+export const migrateOldConfig = (config: Config): Config => {
+  console.log("MIGRATE");
+
   // if config is before v1.6.5
   // prettier-ignore
   if (typeof config.message.font === "string") config.message.font = { type: "default", custom: "" };
@@ -30,9 +32,20 @@ const migrateOldConfig = (config: Config): Config => {
   // ensure 'fill' property exists for user-defined bookmarks
   if (config.bookmarks.userDefined) {
     config.bookmarks.userDefined = config.bookmarks.userDefined.map((node: any) => {
-      if ((node.type === "bookmark" || node.type === "folder") && !("fill" in node)) {
-        return { ...node, fill: "" };
+      const stack = [node];
+
+      while (stack.length) {
+        const current = stack.pop();
+
+        if ((current.type === "bookmark" || current.type === "folder") && !("fill" in current)) {
+          current.fill = "";
+        }
+
+        if (current.type === "folder" && Array.isArray(current.contents)) {
+          stack.push(...current.contents);
+        }
       }
+
       return node;
     });
   }

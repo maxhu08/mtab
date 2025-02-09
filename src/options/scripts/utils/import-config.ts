@@ -1,7 +1,7 @@
 import { fillInputs } from "src/options/scripts/utils/fill-inputs";
 import { saveConfig } from "src/options/scripts/utils/save-config";
 import { fixAllToggleCheckboxSections } from "src/options/scripts/utils/toggle-checkbox";
-import { defaultConfig } from "src/utils/config";
+import { defaultConfig, migrateOldConfig } from "src/utils/config";
 import { deepMerge } from "src/utils/deep-merge";
 
 export const importConfigAndSave = () => {
@@ -23,9 +23,10 @@ export const importConfigAndSave = () => {
   );
 
   const mergedConfig = deepMerge(structuredClone(defaultConfig), importedConfig);
+  const finalizedConfig = migrateOldConfig(mergedConfig);
 
-  console.log("[IMPORT_DEBUG]", mergedConfig);
-  fillInputs(mergedConfig);
+  console.log("[IMPORT_DEBUG]", finalizedConfig);
+  fillInputs(finalizedConfig);
   fixAllToggleCheckboxSections();
 
   saveConfig();
