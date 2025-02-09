@@ -1,8 +1,6 @@
 import { deepMerge } from "src/utils/deep-merge";
 
 export const migrateOldConfig = (config: Config): Config => {
-  console.log("MIGRATE");
-
   // if config is before v1.6.5
   // prettier-ignore
   if (typeof config.message.font === "string") config.message.font = { type: "default", custom: "" };
