@@ -35,7 +35,10 @@ export const migrateOldConfig = (config: Config): Config => {
       while (stack.length) {
         const current = stack.pop();
 
-        if ((current.type === "bookmark" || current.type === "folder") && !("fill" in current)) {
+        if (
+          ((current.type === "bookmark" || current.type === "folder") && !("fill" in current)) ||
+          current.fill === "undefined"
+        ) {
           current.fill = "";
         }
 
