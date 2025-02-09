@@ -1,5 +1,5 @@
-# Changes in 1.8.0
+# Changes in 1.8.1
 
 in this release:
 
-- add more customization options for bookmarks
+- fix issue with old config not being migrated properly
