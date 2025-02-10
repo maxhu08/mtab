@@ -23,10 +23,11 @@ export const convertBrowserBookmarksToBookmarkNodes = async (
         {
           type: "bookmark",
           name: node.title,
+          url: node.url,
           color: getColorFromString(node.title),
-          iconColor: "#ffffff",
           iconType: `url-${getFaviconURL(node.url, faviconSource)}`,
-          url: node.url
+          iconColor: "#ffffff",
+          fill: ""
         }
       ];
     } else if (node.children) {
@@ -40,6 +41,7 @@ export const convertBrowserBookmarksToBookmarkNodes = async (
             name: node.title,
             color: randomColor,
             iconColor: randomColor,
+            fill: "",
             contents: node.children.flatMap(getBookmarkNodes)
           }
         ];
@@ -50,6 +52,7 @@ export const convertBrowserBookmarksToBookmarkNodes = async (
             name: node.title,
             color: defaultBlockyColor,
             iconColor: defaultBlockyColor,
+            fill: "",
             contents: node.children.flatMap(getBookmarkNodes)
           }
         ];
