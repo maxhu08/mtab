@@ -1,5 +1,5 @@
-# Changes in 1.8.1
+# Changes in 1.8.2
 
 in this release:
 
-- fix issue with old config not being migrated properly
+- fix issue with default-blocky bookmarks not working after update
