@@ -4,11 +4,21 @@ import { hideCover } from "src/newtab/scripts/utils/hide-cover";
 import { get as idbGet } from "idb-keyval";
 
 const applyWallpaper = (wallpaper: Blob | string) => {
+  const imgEl = wallpaperEl.querySelector("img") || document.createElement("img");
+
   if (wallpaper instanceof Blob) {
     const objectUrl = URL.createObjectURL(wallpaper);
 
     if (wallpaper.type.startsWith("image/")) {
-      wallpaperEl.style.background = `url("${objectUrl}") center center / cover no-repeat fixed`;
+      imgEl.src = objectUrl;
+      imgEl.style.position = "absolute";
+      imgEl.style.top = "0";
+      imgEl.style.left = "0";
+      imgEl.style.width = "100%";
+      imgEl.style.height = "100%";
+      imgEl.style.objectFit = "cover";
+      imgEl.style.zIndex = "-1";
+      wallpaperEl.appendChild(imgEl);
     } else if (wallpaper.type.startsWith("video/")) {
       const videoEl = document.createElement("video");
       videoEl.src = objectUrl;
@@ -22,22 +32,15 @@ const applyWallpaper = (wallpaper: Blob | string) => {
       videoEl.style.height = "100%";
       videoEl.style.objectFit = "cover";
       videoEl.style.zIndex = "-1";
-
-      const existingVideo = wallpaperEl.querySelector("video");
-      if (existingVideo) {
-        wallpaperEl.removeChild(existingVideo);
-      }
-
       wallpaperEl.appendChild(videoEl);
     }
-  } else {
-    wallpaperEl.style.background = `url("${wallpaper}") center center / cover no-repeat fixed`;
   }
 
   wallpaperEl.style.transitionDuration = "0ms";
 };
 
 export const loadWallpaper = (wallpaper: Config["wallpaper"]) => {
+  console.log("RAN");
   if (!wallpaper.enabled) return;
 
   if (wallpaper.type === "fileUpload") {
