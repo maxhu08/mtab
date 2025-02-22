@@ -29,12 +29,9 @@ const applyWallpaper = (wallpaper: Blob | string) => {
   const mediaEl = isVideo ? document.createElement("video") : document.createElement("img");
   mediaEl.src = src;
   mediaEl.style.position = "absolute";
-  mediaEl.style.top = "0";
-  mediaEl.style.left = "0";
   mediaEl.style.width = "100%";
   mediaEl.style.height = "100%";
   mediaEl.style.objectFit = "cover";
-  mediaEl.style.zIndex = "-1";
 
   if (isVideo) {
     (mediaEl as HTMLVideoElement).autoplay = true;
