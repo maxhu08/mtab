@@ -1,11 +1,12 @@
-export const previewWallpaper = (wallpaper: string) => {
+export const previewWallpaper = (wallpaper: Blob | undefined) => {
   // prettier-ignore
   const liveWallpaperPreviewEl = document.getElementById("live-wallpaper-preview") as HTMLDivElement;
 
   if (!wallpaper) {
     liveWallpaperPreviewEl.innerHTML = `<i class="text-neutral-500 text-4xl ri-prohibited-2-line"></i>`;
   } else {
-    liveWallpaperPreviewEl.innerHTML = `<img src="${wallpaper}" class="w-full h-full" />`;
+    const imageUrl = URL.createObjectURL(wallpaper);
+    liveWallpaperPreviewEl.innerHTML = `<img src="${imageUrl}" class="w-full h-full" />`;
   }
 };
 

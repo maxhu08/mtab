@@ -4,44 +4,32 @@ import {
   wallpaperResizeWInputEl
 } from "src/options/scripts/ui";
 import { previewWallpaper } from "src/options/scripts/utils/preview";
+import { set as idbSet, get as idbGet } from "idb-keyval";
 
 export const handleWallpaperFileUpload = () => {
   wallpaperFileUploadInputEl.addEventListener("change", (e: any) => {
     const file = e.target.files[0];
-
     if (file) {
-      const fileType = file.type;
-      const reader = new FileReader();
+      idbSet("userUploadedWallpaper", file)
+        .then(() => {
+          previewWallpaper(file);
 
-      if (fileType.startsWith("image/") && fileType !== "image/gif") {
-        const w = parseInt(wallpaperResizeWInputEl.value);
-        const h = parseInt(wallpaperResizeHInputEl.value);
+          console.log("Wallpaper stored successfully in IndexedDB");
 
-        // resize images
-        reader.onload = (e: any) => {
-          resizeImage(e.target.result, w, h, (resizedDataUrl) => {
-            chrome.storage.local.set({ userUploadedWallpaper: resizedDataUrl });
-            previewWallpaper(resizedDataUrl);
-            wallpaperFileUploadInputEl.value = ""; // allows consecutive uploads of the same wallpaper
+          idbGet("userUploadedWallpaper").then((storedValue) => {
+            console.log("Stored wallpaper (Blob):", storedValue);
           });
-        };
-        reader.readAsDataURL(file);
-      } else if (fileType === "image/gif" || fileType.startsWith("video/")) {
-        // don't resize gifs and videos
-        reader.onload = (e: any) => {
-          const fileDataUrl = e.target.result;
-          chrome.storage.local.set({ userUploadedWallpaper: fileDataUrl });
-          previewWallpaper(fileDataUrl);
-        };
-        reader.readAsDataURL(file);
-      }
+        })
+        .catch((err) => {
+          console.log("Error storing wallpaper in IndexedDB", err);
+        });
     }
   });
 };
 
 export const handWallpaperFileReset = () => {
   chrome.storage.local.set({ userUploadedWallpaper: null });
-  previewWallpaper("");
+  previewWallpaper(undefined);
 };
 
 const resizeImage = (

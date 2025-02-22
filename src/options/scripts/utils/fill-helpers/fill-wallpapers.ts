@@ -8,6 +8,7 @@ import {
   wallpaperUrlInputEl
 } from "src/options/scripts/ui";
 import { previewWallpaper } from "src/options/scripts/utils/preview";
+import { get as idbGet } from "idb-keyval";
 
 export const fillWallpapersInputs = (config: Config) => {
   if (config.wallpaper.type === "url") wallpaperTypeUrlButtonEl.click();
@@ -19,7 +20,7 @@ export const fillWallpapersInputs = (config: Config) => {
   wallpaperResizeWInputEl.value = config.wallpaper.resize.w.toString();
   wallpaperResizeHInputEl.value = config.wallpaper.resize.h.toString();
 
-  chrome.storage.local.get(["userUploadedWallpaper"], (data) => {
-    previewWallpaper(data.userUploadedWallpaper);
+  idbGet("userUploadedWallpaper").then((file) => {
+    previewWallpaper(file);
   });
 };
