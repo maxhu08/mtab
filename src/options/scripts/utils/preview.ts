@@ -6,7 +6,14 @@ export const previewWallpaper = (wallpaper: Blob | undefined) => {
     liveWallpaperPreviewEl.innerHTML = `<i class="text-neutral-500 text-4xl ri-prohibited-2-line"></i>`;
   } else {
     const imageUrl = URL.createObjectURL(wallpaper);
-    liveWallpaperPreviewEl.innerHTML = `<img src="${imageUrl}" class="w-full h-full" />`;
+
+    if (wallpaper.type.startsWith("image/")) {
+      liveWallpaperPreviewEl.innerHTML = `<img src="${imageUrl}" class="w-full h-full" />`;
+    } else if (wallpaper.type.startsWith("video/")) {
+      liveWallpaperPreviewEl.innerHTML = `<video src="${imageUrl}" class="w-full h-full" autoplay loop muted />`;
+    } else {
+      liveWallpaperPreviewEl.innerHTML = `<i class="text-neutral-500 text-4xl ri-prohibited-2-line"></i>`;
+    }
   }
 };
 
