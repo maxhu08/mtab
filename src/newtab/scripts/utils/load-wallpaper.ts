@@ -8,10 +8,8 @@ export const loadWallpaper = (wallpaper: Config["wallpaper"]) => {
 
   if (wallpaper.type === "fileUpload") {
     idbGet("userUploadedWallpaper").then((file) => {
-      if (file) {
-        applyWallpaper(file);
-        hideCover();
-      }
+      if (file) applyWallpaper(file);
+      hideCover();
     });
   } else {
     applyWallpaper(wallpaper.url);

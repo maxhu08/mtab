@@ -9,12 +9,6 @@ export const handleWallpaperFileUpload = () => {
       idbSet("userUploadedWallpaper", file)
         .then(() => {
           previewWallpaper(file);
-
-          console.log("Wallpaper stored successfully in IndexedDB");
-
-          idbGet("userUploadedWallpaper").then((storedValue) => {
-            console.log("Stored wallpaper (Blob):", storedValue);
-          });
         })
         .catch((err) => {
           console.log("Error storing wallpaper in IndexedDB", err);
@@ -24,6 +18,6 @@ export const handleWallpaperFileUpload = () => {
 };
 
 export const handWallpaperFileReset = () => {
-  chrome.storage.local.set({ userUploadedWallpaper: null });
+  idbSet("userUploadedWallpaper", null);
   previewWallpaper(undefined);
 };
