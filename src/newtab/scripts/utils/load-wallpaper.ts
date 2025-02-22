@@ -3,44 +3,7 @@ import { wallpaperEl } from "src/newtab/scripts/ui";
 import { hideCover } from "src/newtab/scripts/utils/hide-cover";
 import { get as idbGet } from "idb-keyval";
 
-const applyWallpaper = (wallpaper: Blob | string) => {
-  const imgEl = wallpaperEl.querySelector("img") || document.createElement("img");
-
-  if (wallpaper instanceof Blob) {
-    const objectUrl = URL.createObjectURL(wallpaper);
-
-    if (wallpaper.type.startsWith("image/")) {
-      imgEl.src = objectUrl;
-      imgEl.style.position = "absolute";
-      imgEl.style.top = "0";
-      imgEl.style.left = "0";
-      imgEl.style.width = "100%";
-      imgEl.style.height = "100%";
-      imgEl.style.objectFit = "cover";
-      imgEl.style.zIndex = "-1";
-      wallpaperEl.appendChild(imgEl);
-    } else if (wallpaper.type.startsWith("video/")) {
-      const videoEl = document.createElement("video");
-      videoEl.src = objectUrl;
-      videoEl.autoplay = true;
-      videoEl.loop = true;
-      videoEl.muted = true;
-      videoEl.style.position = "absolute";
-      videoEl.style.top = "0";
-      videoEl.style.left = "0";
-      videoEl.style.width = "100%";
-      videoEl.style.height = "100%";
-      videoEl.style.objectFit = "cover";
-      videoEl.style.zIndex = "-1";
-      wallpaperEl.appendChild(videoEl);
-    }
-  }
-
-  wallpaperEl.style.transitionDuration = "0ms";
-};
-
 export const loadWallpaper = (wallpaper: Config["wallpaper"]) => {
-  console.log("RAN");
   if (!wallpaper.enabled) return;
 
   if (wallpaper.type === "fileUpload") {
@@ -53,5 +16,37 @@ export const loadWallpaper = (wallpaper: Config["wallpaper"]) => {
   } else {
     applyWallpaper(wallpaper.url);
     hideCover();
+  }
+};
+
+const applyWallpaper = (wallpaper: Blob | string) => {
+  wallpaperEl.style.transitionDuration = "0ms";
+  let src: string;
+
+  if (wallpaper instanceof Blob) src = URL.createObjectURL(wallpaper);
+  else src = wallpaper;
+
+  const isVideo = wallpaper instanceof Blob && wallpaper.type.startsWith("video/");
+
+  const mediaEl = isVideo ? document.createElement("video") : document.createElement("img");
+  mediaEl.src = src;
+  mediaEl.style.position = "absolute";
+  mediaEl.style.top = "0";
+  mediaEl.style.left = "0";
+  mediaEl.style.width = "100%";
+  mediaEl.style.height = "100%";
+  mediaEl.style.objectFit = "cover";
+  mediaEl.style.zIndex = "-1";
+
+  if (isVideo) {
+    (mediaEl as HTMLVideoElement).autoplay = true;
+    (mediaEl as HTMLVideoElement).loop = true;
+    (mediaEl as HTMLVideoElement).muted = true;
+  }
+
+  wallpaperEl.appendChild(mediaEl);
+
+  if (wallpaper instanceof Blob) {
+    mediaEl.onload = () => URL.revokeObjectURL(src);
   }
 };
