@@ -51,6 +51,12 @@ export const migrateOldConfig = (config: Config): Config => {
     });
   }
 
+  // if config is before v1.8.3
+  // remove the resize property from wallpaper
+  if (config.wallpaper && (config as any).wallpaper.resize) {
+    delete (config as any).wallpaper.resize;
+  }
+
   return config;
 };
 
@@ -110,11 +116,7 @@ export const defaultConfig: Config = {
     type: "url",
     enabled: true,
     // url: `chrome-extension://${chrome.runtime.id}/wallpapers/bg-1.png`
-    url: `./wallpapers/bg-1.png`,
-    resize: {
-      w: 1920,
-      h: 1080
-    }
+    url: `./wallpapers/bg-1.png`
   },
   ui: {
     style: "glass",
@@ -325,10 +327,6 @@ export interface Config {
     type: WallpaperType;
     enabled: boolean;
     url: string;
-    resize: {
-      w: number;
-      h: number;
-    };
   };
   ui: {
     style: UIStyle;

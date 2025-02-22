@@ -32,8 +32,6 @@ export const wallpaperTypeFileUploadButtonEl = getButton("wallpaper-type-file-up
 export const [wallpaperUrlContainerEl, wallpaperUrlInputEl] = getContainerAndInput("wallpaper-url");
 export const wallpaperFileUploadInputEl = document.getElementById("wallpaper-file-upload-input") as HTMLInputElement;
 export const wallpaperFileResetButtonEl = getButton("wallpaper-file-upload-reset");
-export const [wallpaperResizeWContainerEl, wallpaperResizeWInputEl] = getContainerAndInput("wallpaper-resize-w");
-export const [wallpaperResizeHContainerEl, wallpaperResizeHInputEl] = getContainerAndInput("wallpaper-resize-h");
 
 export const uiStyleSolidButtonEl = getButton("ui-style-solid");
 export const uiStyleGlassButtonEl = getButton("ui-style-glass");
