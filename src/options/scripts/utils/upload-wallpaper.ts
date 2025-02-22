@@ -1,6 +1,6 @@
 import { wallpaperFileUploadInputEl } from "src/options/scripts/ui";
 import { previewWallpaper } from "src/options/scripts/utils/preview";
-import { set as idbSet, get as idbGet } from "idb-keyval";
+import { set as idbSet } from "idb-keyval";
 
 export const handleWallpaperFileUpload = () => {
   wallpaperFileUploadInputEl.addEventListener("change", (e: any) => {
