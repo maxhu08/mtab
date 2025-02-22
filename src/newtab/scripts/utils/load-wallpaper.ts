@@ -8,16 +8,16 @@ export const loadWallpaper = (wallpaper: Config["wallpaper"]) => {
 
   if (wallpaper.type === "fileUpload") {
     idbGet("userUploadedWallpaper").then((file) => {
-      if (file) applyWallpaper(file);
+      if (file) applyWallpaper(file, wallpaper.brightness, wallpaper.blur);
       hideCover();
     });
   } else {
-    applyWallpaper(wallpaper.url);
+    applyWallpaper(wallpaper.url, wallpaper.brightness, wallpaper.blur);
     hideCover();
   }
 };
 
-const applyWallpaper = (wallpaper: Blob | string) => {
+const applyWallpaper = (wallpaper: Blob | string, brightness: string, blur: string) => {
   wallpaperEl.style.transitionDuration = "0ms";
   let src: string;
 
@@ -39,9 +39,14 @@ const applyWallpaper = (wallpaper: Blob | string) => {
     (mediaEl as HTMLVideoElement).muted = true;
   }
 
+  applyWallpaperFilters(mediaEl, brightness, blur);
   wallpaperEl.appendChild(mediaEl);
 
   if (wallpaper instanceof Blob) {
     mediaEl.onload = () => URL.revokeObjectURL(src);
   }
+};
+
+const applyWallpaperFilters = (element: HTMLElement, brightness: string, blur: string) => {
+  element.style.filter = `brightness(${brightness}) blur(${blur})`;
 };
