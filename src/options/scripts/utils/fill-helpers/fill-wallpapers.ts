@@ -18,7 +18,7 @@ export const fillWallpapersInputs = (config: Config) => {
   wallpaperUrlInputEl.value = config.wallpaper.url;
 
   idbGet("userUploadedWallpaper").then((file) => {
-    previewWallpaper(file);
+    previewWallpaper(file, config.wallpaper.filters.brightness, config.wallpaper.filters.blur);
   });
 
   wallpaperFiltersBrightnessInputEl.value = config.wallpaper.filters.brightness;
