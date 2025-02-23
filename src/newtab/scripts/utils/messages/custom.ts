@@ -10,6 +10,8 @@ export const setCustomMessage = (messageEl: HTMLParagraphElement, customText: st
 
   customText = customText;
   customText = customText
+    .replace(/\\n/g, "\n")
+    .replace(/\\yyyy/g, date.getFullYear().toString()) // must come before \yy
     .replace(/\\yyyy/g, date.getFullYear().toString()) // must come before \yy
     .replace(/\\yy/g, date.getFullYear().toString().slice(-2))
     .replace(/\\MD/g, meridianUpper) // must come before \M

@@ -121,7 +121,8 @@ const handleMessageTypeSwitch = () => {
                 - \\ss -> Seconds (with padding, e.g., "03")\n\n\
                 - Meridian components\n\
                 - \\md -> Lowercase meridian (e.g., "am" or "pm")\n\
-                - \\MD -> Uppercase meridian (e.g., "AM" or "PM")';
+                - \\MD -> Uppercase meridian (e.g., "AM" or "PM")\n\
+                - \\n -> New line';
   });
 };
 
