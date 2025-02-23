@@ -1,5 +1,10 @@
 import { Config } from "src/utils/config";
-import { wallpaperEnabledCheckboxEl, wallpaperUrlInputEl } from "src/options/scripts/ui";
+import {
+  wallpaperEnabledCheckboxEl,
+  wallpaperUrlInputEl,
+  wallpaperFiltersBrightnessInputEl,
+  wallpaperFiltersBlurInputEl
+} from "src/options/scripts/ui";
 import { getSelectedButton } from "src/options/scripts/utils/get-selected-button";
 
 export const saveWallpaperSettingsToDraft = (draft: Config) => {
@@ -15,4 +20,7 @@ export const saveWallpaperSettingsToDraft = (draft: Config) => {
 
   draft.wallpaper.enabled = wallpaperEnabledCheckboxEl.checked;
   draft.wallpaper.url = wallpaperUrlInputEl.value;
+
+  draft.wallpaper.filters.brightness = wallpaperFiltersBrightnessInputEl.value;
+  draft.wallpaper.filters.blur = wallpaperFiltersBlurInputEl.value;
 };

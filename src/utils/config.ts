@@ -58,9 +58,9 @@ export const migrateOldConfig = (config: Config): Config => {
   }
 
   // if config is before v1.8.3
-  // ensure 'blur' and 'brightness' properties exist for wallpaper
-  if (!config.wallpaper.blur) config.wallpaper.blur = "0px";
-  if (!config.wallpaper.brightness) config.wallpaper.brightness = "1";
+  // ensure 'blur' and 'brightness' properties exist for wallpaper.filter
+  if (!config.wallpaper.filters.blur) config.wallpaper.filters.blur = "0px";
+  if (!config.wallpaper.filters.brightness) config.wallpaper.filters.brightness = "1";
 
   return config;
 };
@@ -122,8 +122,10 @@ export const defaultConfig: Config = {
     enabled: true,
     // url: `chrome-extension://${chrome.runtime.id}/wallpapers/bg-1.png`
     url: `./wallpapers/bg-1.png`,
-    brightness: "1",
-    blur: "0px"
+    filters: {
+      brightness: "1",
+      blur: "0px"
+    }
   },
   ui: {
     style: "glass",
@@ -334,8 +336,10 @@ export interface Config {
     type: WallpaperType;
     enabled: boolean;
     url: string;
-    brightness: string;
-    blur: string;
+    filters: {
+      brightness: string;
+      blur: string;
+    };
   };
   ui: {
     style: UIStyle;

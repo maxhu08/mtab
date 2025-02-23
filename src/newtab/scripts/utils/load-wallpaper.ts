@@ -8,11 +8,11 @@ export const loadWallpaper = (wallpaper: Config["wallpaper"]) => {
 
   if (wallpaper.type === "fileUpload") {
     idbGet("userUploadedWallpaper").then((file) => {
-      if (file) applyWallpaper(file, wallpaper.brightness, wallpaper.blur);
+      if (file) applyWallpaper(file, wallpaper.filters.brightness, wallpaper.filters.blur);
       hideCover();
     });
   } else {
-    applyWallpaper(wallpaper.url, wallpaper.brightness, wallpaper.blur);
+    applyWallpaper(wallpaper.url, wallpaper.filters.brightness, wallpaper.filters.blur);
     hideCover();
   }
 };

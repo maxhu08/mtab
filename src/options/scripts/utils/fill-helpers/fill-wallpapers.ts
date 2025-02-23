@@ -1,6 +1,8 @@
 import { Config } from "src/utils/config";
 import {
   wallpaperEnabledCheckboxEl,
+  wallpaperFiltersBlurInputEl,
+  wallpaperFiltersBrightnessInputEl,
   wallpaperTypeFileUploadButtonEl,
   wallpaperTypeUrlButtonEl,
   wallpaperUrlInputEl
@@ -18,4 +20,7 @@ export const fillWallpapersInputs = (config: Config) => {
   idbGet("userUploadedWallpaper").then((file) => {
     previewWallpaper(file);
   });
+
+  wallpaperFiltersBrightnessInputEl.value = config.wallpaper.filters.brightness;
+  wallpaperFiltersBlurInputEl.value = config.wallpaper.filters.blur;
 };
