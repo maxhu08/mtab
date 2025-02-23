@@ -7,7 +7,7 @@ import {
   wallpaperTypeUrlButtonEl,
   wallpaperUrlInputEl
 } from "src/options/scripts/ui";
-import { previewWallpaper } from "src/options/scripts/utils/preview";
+import { previewWallpaper, previewWallpaperLegacy } from "src/options/scripts/utils/preview";
 import { get as idbGet } from "idb-keyval";
 
 export const fillWallpapersInputs = (config: Config) => {
@@ -18,7 +18,19 @@ export const fillWallpapersInputs = (config: Config) => {
   wallpaperUrlInputEl.value = config.wallpaper.url;
 
   idbGet("userUploadedWallpaper").then((file) => {
-    previewWallpaper(file, config.wallpaper.filters.brightness, config.wallpaper.filters.blur);
+    if (file) {
+      previewWallpaper(file, config.wallpaper.filters.brightness, config.wallpaper.filters.blur);
+    } else {
+      // not in idb, handle legacy wallpaper
+
+      chrome.storage.local.get(["userUploadedWallpaper"], (data) => {
+        previewWallpaperLegacy(
+          data.userUploadedWallpaper,
+          config.wallpaper.filters.brightness,
+          config.wallpaper.filters.blur
+        );
+      });
+    }
   });
 
   wallpaperFiltersBrightnessInputEl.value = config.wallpaper.filters.brightness;

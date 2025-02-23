@@ -8,8 +8,20 @@ export const loadWallpaper = (wallpaper: Config["wallpaper"]) => {
 
   if (wallpaper.type === "fileUpload") {
     idbGet("userUploadedWallpaper").then((file) => {
-      if (file) applyWallpaper(file, wallpaper.filters.brightness, wallpaper.filters.blur);
-      hideCover();
+      if (file) {
+        applyWallpaper(file, wallpaper.filters.brightness, wallpaper.filters.blur);
+        hideCover();
+      } else {
+        // not in idb, handle legacy wallpaper
+
+        chrome.storage.local.get(["userUploadedWallpaper"], (data) => {
+          applyWallpaperLegacy(
+            data.userUploadedWallpaper,
+            wallpaper.filters.brightness,
+            wallpaper.filters.blur
+          );
+        });
+      }
     });
   } else {
     applyWallpaper(wallpaper.url, wallpaper.filters.brightness, wallpaper.filters.blur);
@@ -49,4 +61,18 @@ const applyWallpaper = (wallpaper: Blob | string, brightness: string, blur: stri
 
 const applyWallpaperFilters = (element: HTMLElement, brightness: string, blur: string) => {
   element.style.filter = `brightness(${brightness}) blur(${blur})`;
+};
+
+export const applyWallpaperLegacy = (url: string, brightness: string, blur: string) => {
+  wallpaperEl.style.transitionDuration = "0ms";
+
+  const imgEl = document.createElement("img");
+  imgEl.src = url;
+  imgEl.style.position = "absolute";
+  imgEl.style.width = "100%";
+  imgEl.style.height = "100%";
+  imgEl.style.objectFit = "cover";
+
+  applyWallpaperFilters(imgEl, brightness, blur);
+  wallpaperEl.appendChild(imgEl);
 };

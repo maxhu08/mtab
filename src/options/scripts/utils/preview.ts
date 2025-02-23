@@ -30,6 +30,20 @@ export const applyWallpaperFilters = (brightness: string, blur: string) => {
   liveWallpaperPreviewEl.style.filter = `brightness(${brightness}) blur(${blur})`;
 };
 
+export const previewWallpaperLegacy = (
+  wallpaperBase64: string,
+  brightness: string,
+  blur: string
+) => {
+  applyWallpaperFilters(brightness, blur);
+
+  if (!wallpaperBase64) {
+    liveWallpaperPreviewEl.innerHTML = `<i class="text-neutral-500 text-4xl ri-prohibited-2-line"></i>`;
+  } else {
+    liveWallpaperPreviewEl.innerHTML = `<img src="${wallpaperBase64}" class="w-full h-full" />`;
+  }
+};
+
 export const previewFavicon = (favicon: string) => {
   // prettier-ignore
   const liveFaviconPreviewEl = document.getElementById("live-favicon-preview") as HTMLDivElement;
