@@ -51,6 +51,17 @@ export const migrateOldConfig = (config: Config): Config => {
     });
   }
 
+  // if config is before v1.8.3
+  // remove the resize property from wallpaper
+  if (config.wallpaper && (config as any).wallpaper.resize) {
+    delete (config as any).wallpaper.resize;
+  }
+
+  // if config is before v1.8.3
+  // ensure 'blur' and 'brightness' properties exist for wallpaper.filter
+  if (!config.wallpaper.filters.blur) config.wallpaper.filters.blur = "0px";
+  if (!config.wallpaper.filters.brightness) config.wallpaper.filters.brightness = "1";
+
   return config;
 };
 
@@ -111,9 +122,9 @@ export const defaultConfig: Config = {
     enabled: true,
     // url: `chrome-extension://${chrome.runtime.id}/wallpapers/bg-1.png`
     url: `./wallpapers/bg-1.png`,
-    resize: {
-      w: 1920,
-      h: 1080
+    filters: {
+      brightness: "1",
+      blur: "0px"
     }
   },
   ui: {
@@ -325,9 +336,9 @@ export interface Config {
     type: WallpaperType;
     enabled: boolean;
     url: string;
-    resize: {
-      w: number;
-      h: number;
+    filters: {
+      brightness: string;
+      blur: string;
     };
   };
   ui: {

@@ -1,77 +1,39 @@
 import {
   wallpaperFileUploadInputEl,
-  wallpaperResizeHInputEl,
-  wallpaperResizeWInputEl
+  wallpaperFiltersBlurInputEl,
+  wallpaperFiltersBrightnessInputEl
 } from "src/options/scripts/ui";
-import { previewWallpaper } from "src/options/scripts/utils/preview";
+import { applyWallpaperFilters, previewWallpaper } from "src/options/scripts/utils/preview";
+import { set as idbSet } from "idb-keyval";
 
 export const handleWallpaperFileUpload = () => {
   wallpaperFileUploadInputEl.addEventListener("change", (e: any) => {
     const file = e.target.files[0];
-
     if (file) {
-      const fileType = file.type;
-      const reader = new FileReader();
-
-      if (fileType.startsWith("image/") && fileType !== "image/gif") {
-        const w = parseInt(wallpaperResizeWInputEl.value);
-        const h = parseInt(wallpaperResizeHInputEl.value);
-
-        // resize images
-        reader.onload = (e: any) => {
-          resizeImage(e.target.result, w, h, (resizedDataUrl) => {
-            chrome.storage.local.set({ userUploadedWallpaper: resizedDataUrl });
-            previewWallpaper(resizedDataUrl);
-            wallpaperFileUploadInputEl.value = ""; // allows consecutive uploads of the same wallpaper
-          });
-        };
-        reader.readAsDataURL(file);
-      } else if (fileType === "image/gif" || fileType.startsWith("video/")) {
-        // don't resize gifs and videos
-        reader.onload = (e: any) => {
-          const fileDataUrl = e.target.result;
-          chrome.storage.local.set({ userUploadedWallpaper: fileDataUrl });
-          previewWallpaper(fileDataUrl);
-        };
-        reader.readAsDataURL(file);
-      }
+      idbSet("userUploadedWallpaper", file)
+        .then(() => {
+          previewWallpaper(
+            file,
+            wallpaperFiltersBrightnessInputEl.value,
+            wallpaperFiltersBlurInputEl.value
+          );
+        })
+        .catch((err) => {
+          console.log("Error storing wallpaper in IndexedDB", err);
+        });
     }
   });
 };
 
 export const handWallpaperFileReset = () => {
-  chrome.storage.local.set({ userUploadedWallpaper: null });
-  previewWallpaper("");
+  idbSet("userUploadedWallpaper", null);
+  previewWallpaper(undefined, "", "");
 };
 
-const resizeImage = (
-  dataUrl: string,
-  maxWidth: number,
-  maxHeight: number,
-  callback: (resizedDataUrl: string) => void
-) => {
-  const img = new Image();
-  img.src = dataUrl;
-  img.onload = () => {
-    const canvas = document.createElement("canvas");
-    let width = img.width;
-    let height = img.height;
+wallpaperFiltersBrightnessInputEl.onchange = () => {
+  applyWallpaperFilters(wallpaperFiltersBrightnessInputEl.value, wallpaperFiltersBlurInputEl.value);
+};
 
-    if (width > height) {
-      if (width > maxWidth) {
-        height = Math.round((height *= maxWidth / width));
-        width = maxWidth;
-      }
-    } else {
-      if (height > maxHeight) {
-        width = Math.round((width *= maxHeight / height));
-        height = maxHeight;
-      }
-    }
-    canvas.width = width;
-    canvas.height = height;
-    const ctx = canvas.getContext("2d") as CanvasRenderingContext2D;
-    ctx.drawImage(img, 0, 0, width, height);
-    callback(canvas.toDataURL("image/jpeg"));
-  };
+wallpaperFiltersBlurInputEl.onchange = () => {
+  applyWallpaperFilters(wallpaperFiltersBrightnessInputEl.value, wallpaperFiltersBlurInputEl.value);
 };
