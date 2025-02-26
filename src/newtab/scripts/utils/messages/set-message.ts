@@ -16,8 +16,10 @@ export const setMessage = (
   username: string,
   weatherUnitsType: "f" | "c"
 ) => {
-  if (!enabled) {
-    messageEl.classList.add("hidden");
+  if (!enabled || (type === "custom" && customText.length === 0)) {
+    messageEl.textContent = "\n";
+
+    return;
   }
 
   switch (type) {
