@@ -18,6 +18,7 @@ import {
 } from "src/options/scripts/ui";
 import { saveOptionsSettingsToDraft } from "src/options/scripts/utils/save-helpers/save-options";
 import { saveExtrasSettingsToDraft } from "src/options/scripts/utils/save-helpers/save-extras";
+import { logger } from "src/utils/logger";
 
 export const saveConfig = (notify: boolean = true) => {
   if (searchUseCustomEngineEnabledCheckboxEl.checked) {
@@ -54,7 +55,7 @@ export const saveConfig = (notify: boolean = true) => {
       return draft;
     });
 
-    console.log("[CONFIG_DEBUG]", draft);
+    logger.log("[CONFIG_DEBUG]", draft);
 
     chrome.storage.local
       .set({

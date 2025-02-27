@@ -5,6 +5,7 @@ import {
 } from "src/options/scripts/ui";
 import { applyWallpaperFilters, previewWallpaper } from "src/options/scripts/utils/preview";
 import { set as idbSet } from "idb-keyval";
+import { logger } from "src/utils/logger";
 
 export const handleWallpaperFileUpload = () => {
   wallpaperFileUploadInputEl.addEventListener("change", async (e: any) => {
@@ -21,13 +22,13 @@ export const handleWallpaperFileUpload = () => {
           );
         })
         .catch((err) => {
-          console.log("Error storing wallpaper in IndexedDB", err);
+          logger.log("Error storing wallpaper in IndexedDB", err);
         });
 
       const base64String = await fileToBase64(file);
       chrome.storage.local.set({ userUploadedWallpaper: base64String });
     } catch (err) {
-      console.log("Error storing wallpaper", err);
+      logger.log("Error storing wallpaper", err);
     }
   });
 };

@@ -3,6 +3,7 @@ import { saveConfig } from "src/options/scripts/utils/save-config";
 import { fixAllToggleCheckboxSections } from "src/options/scripts/utils/toggle-checkbox";
 import { defaultConfig, migrateOldConfig } from "src/utils/config";
 import { deepMerge } from "src/utils/deep-merge";
+import { logger } from "src/utils/logger";
 
 export const importConfigAndSave = () => {
   const dataToImport = prompt("input your save (this will overwrite your current config)");
@@ -25,7 +26,7 @@ export const importConfigAndSave = () => {
   const mergedConfig = deepMerge(structuredClone(defaultConfig), importedConfig);
   const finalizedConfig = migrateOldConfig(mergedConfig);
 
-  console.log("[IMPORT_DEBUG]", finalizedConfig);
+  logger.log("[IMPORT_DEBUG]", finalizedConfig);
   fillInputs(finalizedConfig);
   fixAllToggleCheckboxSections();
 

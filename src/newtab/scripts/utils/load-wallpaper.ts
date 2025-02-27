@@ -2,6 +2,7 @@ import { Config } from "src/utils/config";
 import { wallpaperEl } from "src/newtab/scripts/ui";
 import { hideCover } from "src/newtab/scripts/utils/hide-cover";
 import { get as idbGet } from "idb-keyval";
+import { logger } from "src/utils/logger";
 
 export const loadWallpaper = (wallpaper: Config["wallpaper"]) => {
   if (!wallpaper.enabled) return;
@@ -27,7 +28,7 @@ export const loadWallpaper = (wallpaper: Config["wallpaper"]) => {
       })
       .catch((err) => {
         // likely in private window, indexedDB not available
-        console.log(
+        logger.log(
           "Error getting user uploaded blob wallpaper from IndexedDB, likely due to being in a private window, using storage base64 fallback",
           err
         );
