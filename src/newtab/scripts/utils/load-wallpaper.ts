@@ -21,6 +21,7 @@ export const loadWallpaper = (wallpaper: Config["wallpaper"]) => {
             wallpaper.filters.blur
           );
         });
+        hideCover();
       }
     });
   } else {
