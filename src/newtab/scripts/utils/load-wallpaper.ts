@@ -7,12 +7,30 @@ export const loadWallpaper = (wallpaper: Config["wallpaper"]) => {
   if (!wallpaper.enabled) return;
 
   if (wallpaper.type === "fileUpload") {
-    idbGet("userUploadedWallpaper").then((file) => {
-      if (file) {
-        applyWallpaper(file, wallpaper.filters.brightness, wallpaper.filters.blur);
-        hideCover();
-      } else {
-        // not in idb, handle legacy wallpaper
+    idbGet("userUploadedWallpaper")
+      .then((file) => {
+        if (file) {
+          applyWallpaper(file, wallpaper.filters.brightness, wallpaper.filters.blur);
+          hideCover();
+        } else {
+          // not in idb, handle legacy wallpaper
+
+          chrome.storage.local.get(["userUploadedWallpaper"], (data) => {
+            applyWallpaperLegacy(
+              data.userUploadedWallpaper,
+              wallpaper.filters.brightness,
+              wallpaper.filters.blur
+            );
+          });
+          hideCover();
+        }
+      })
+      .catch((err) => {
+        // likely in private window, indexedDB not available
+        console.log(
+          "Error getting user uploaded blob wallpaper from IndexedDB, likely due to being in a private window, using storage base64 fallback",
+          err
+        );
 
         chrome.storage.local.get(["userUploadedWallpaper"], (data) => {
           applyWallpaperLegacy(
@@ -22,8 +40,7 @@ export const loadWallpaper = (wallpaper: Config["wallpaper"]) => {
           );
         });
         hideCover();
-      }
-    });
+      });
   } else {
     applyWallpaper(wallpaper.url, wallpaper.filters.brightness, wallpaper.filters.blur);
     hideCover();
