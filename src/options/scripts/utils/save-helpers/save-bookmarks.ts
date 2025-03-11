@@ -9,6 +9,7 @@ import {
 import {
   bookmarksDefaultBlockyColorInputEl,
   bookmarksDefaultBlockyColsInputEl,
+  bookmarksDefaultFolderIconTypeInputEl,
   bookmarksNumberKeysCheckboxEl,
   bookmarksShowBookmarkNamesCheckboxEl
 } from "src/options/scripts/ui";
@@ -22,6 +23,7 @@ export const saveBookmarksSettingsToDraft = (draft: Config) => {
   draft.bookmarks.defaultBlockyColor = bookmarksDefaultBlockyColorInputEl.value;
 
   draft.bookmarks.numberKeys = bookmarksNumberKeysCheckboxEl.checked;
+  draft.bookmarks.defaultFolderIconType = bookmarksDefaultFolderIconTypeInputEl.value;
 
   const selectedTypeEl = getSelectedButton("bookmarks-type");
   const bookmarksTypePairs: Record<string, BookmarksType> = {

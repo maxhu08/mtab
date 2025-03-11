@@ -33,6 +33,7 @@ export const renderBookmarkNodes = (
   const animationsbookmarkType = config.animations.bookmarkType;
   const searchFocusedBorderColor = config.search.focusedBorderColor;
   const bookmarksLineOrientation = config.bookmarks.lineOrientation;
+  const bookmarksDefaultFolderIconType = config.bookmarks.defaultFolderIconType;
 
   bookmarkNodes.forEach((bookmarkNode, index) => {
     if (bookmarkNode.type === "bookmark") {
@@ -70,7 +71,7 @@ export const renderBookmarkNodes = (
         index,
         bookmarkNode.name,
         bookmarkNode.color,
-        "ri-folder-fill",
+        bookmarksDefaultFolderIconType,
         bookmarkNode.iconColor,
         bookmarkNode.fill,
         uiStyle,

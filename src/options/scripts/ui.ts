@@ -117,6 +117,7 @@ export const bookmarksLineOrientationBottomButtonEl = getButton("bookmarks-line-
 export const bookmarksLineOrientationLeftButtonEl = getButton("bookmarks-line-orientation-left");
 export const bookmarksLineOrientationRightButtonEl = getButton("bookmarks-line-orientation-right");
 export const bookmarksLineOrientationNoneButtonEl = getButton("bookmarks-line-orientation-none");
+export const [bookmarksDefaultFolderIconTypeContainerEl, bookmarksDefaultFolderIconTypeInputEl] = getContainerAndInput("bookmarks-default-folder-icon-type");
 export const [bookmarksDefaultBlockyColsContainerEl, bookmarksDefaultBlockyColsInputEl] = getContainerAndInput("bookmarks-default-blocky-cols");
 export const bookmarksDefaultBlockyColorTypeRandomButtonEl = getButton("bookmarks-default-blocky-color-type-random");
 export const bookmarksDefaultBlockyColorTypeCustomButtonEl = getButton("bookmarks-default-blocky-color-type-custom");

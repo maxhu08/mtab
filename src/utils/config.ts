@@ -177,9 +177,11 @@ export const defaultConfig: Config = {
   },
   bookmarks: {
     type: "user-defined",
+    showBookmarkNames: false,
     numberKeys: false,
-    userDefinedCols: 4,
     lineOrientation: "top",
+    defaultFolderIconType: "ri-folder-fill",
+    userDefinedCols: 4,
     userDefined: [
       {
         type: "bookmark",
@@ -222,13 +224,11 @@ export const defaultConfig: Config = {
         fill: ""
       }
     ],
-    defaultFolderIconType: "ri-folder-fill",
     defaultBlockyCols: 4,
     defaultBlockyColorType: "custom",
     defaultBlockyColor: "#ffffff",
-    defaultFaviconSource: "duckduckgo",
-    showBookmarkNames: false,
-    bookmarksLocationFirefox: "toolbar"
+    bookmarksLocationFirefox: "toolbar",
+    defaultFaviconSource: "duckduckgo"
   },
   extras: {
     snow: {
@@ -392,17 +392,17 @@ export interface Config {
   };
   bookmarks: {
     type: BookmarksType;
+    showBookmarkNames: boolean;
     numberKeys: boolean;
     userDefinedCols: number;
     lineOrientation: BookmarkLineOrientation;
-    userDefined: BookmarkNode[];
     defaultFolderIconType: string;
+    userDefined: BookmarkNode[];
     defaultBlockyCols: number;
     defaultBlockyColorType: DefaultBlockyColorType;
     defaultBlockyColor: string;
-    defaultFaviconSource: DefaultFaviconSource;
-    showBookmarkNames: boolean;
     bookmarksLocationFirefox: BookmarksLocationFirefox;
+    defaultFaviconSource: DefaultFaviconSource;
   };
   extras: {
     snow: {
