@@ -222,6 +222,7 @@ export const defaultConfig: Config = {
         fill: ""
       }
     ],
+    defaultFolderIconType: "ri-folder-fill",
     defaultBlockyCols: 4,
     defaultBlockyColorType: "custom",
     defaultBlockyColor: "#ffffff",
@@ -395,6 +396,7 @@ export interface Config {
     userDefinedCols: number;
     lineOrientation: BookmarkLineOrientation;
     userDefined: BookmarkNode[];
+    defaultFolderIconType: string;
     defaultBlockyCols: number;
     defaultBlockyColorType: DefaultBlockyColorType;
     defaultBlockyColor: string;

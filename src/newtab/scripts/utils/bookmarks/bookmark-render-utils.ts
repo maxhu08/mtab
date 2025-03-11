@@ -70,6 +70,7 @@ export const renderBookmarkNodes = (
         index,
         bookmarkNode.name,
         bookmarkNode.color,
+        "ri-folder-fill",
         bookmarkNode.iconColor,
         bookmarkNode.fill,
         uiStyle,
@@ -274,6 +275,7 @@ export const renderBlockFolder = (
   nodeIndex: number,
   folderName: string,
   folderColor: string,
+  defaultFolderIconType: string,
   folderIconColor: string,
   folderFill: string,
   uiStyle: UIStyle,
@@ -289,8 +291,7 @@ export const renderBlockFolder = (
   else if (bookmarkTiming === "left") delay = (nodeIndex + 2) * 50;
   else if (bookmarkTiming === "right") delay = (nodesLength + 2 - nodeIndex) * 50;
 
-  const iconHTML = `<i class="ri-folder-fill"></i>`;
-  const iconSizeClass = "text-4xl md:text-6xl";
+  const { iconHTML, iconSizeClass } = getBookmarkIconDetails(defaultFolderIconType, folderColor);
 
   const uuid = genid();
 
@@ -323,8 +324,10 @@ export const renderBlockFolder = (
   const gridDiv = document.createElement("div");
   gridDiv.className = "p-1 md:p-2 grid place-items-center h-full";
 
+  console.log({ iconHTML, iconSizeClass, defaultFolderIconType, folderColor });
+
   const iconDiv = document.createElement("div");
-  iconDiv.className = `bookmark-icon ${iconSizeClass}`;
+  iconDiv.className = `bookmark-node-icon${iconSizeClass ? " " + iconSizeClass : ""}`;
   iconDiv.style.color = folderIconColor;
   iconDiv.innerHTML = iconHTML;
 
