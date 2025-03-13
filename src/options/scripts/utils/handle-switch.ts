@@ -15,6 +15,7 @@ import {
   titleFaviconTypeDefaultButtonEl,
   uiStyleGlassButtonEl,
   uiStyleSolidButtonEl,
+  wallpaperTypeCollectionButtonEl,
   wallpaperTypeFileUploadButtonEl,
   wallpaperTypeUrlButtonEl
 } from "src/options/scripts/ui";
@@ -128,18 +129,28 @@ const handleMessageTypeSwitch = () => {
 
 const handleWallpaperTypeSwitch = () => {
   const wallpaperUrlSection = document.getElementById("wallpaper-url-section") as HTMLDivElement;
-  const wallpaperFileUploadSection = document.getElementById(
-    "wallpaper-file-upload-section"
+  // prettier-ignore
+  const wallpaperFileUploadSection = document.getElementById("wallpaper-file-upload-section") as HTMLDivElement;
+  const wallpaperCollectionSection = document.getElementById(
+    "wallpaper-collection-section"
   ) as HTMLDivElement;
 
   wallpaperTypeUrlButtonEl.addEventListener("click", () => {
     wallpaperFileUploadSection.style.display = "none";
+    wallpaperCollectionSection.style.display = "none";
     wallpaperUrlSection.style.display = "block";
   });
 
   wallpaperTypeFileUploadButtonEl.addEventListener("click", () => {
     wallpaperUrlSection.style.display = "none";
+    wallpaperCollectionSection.style.display = "none";
     wallpaperFileUploadSection.style.display = "block";
+  });
+
+  wallpaperTypeCollectionButtonEl.addEventListener("click", () => {
+    wallpaperUrlSection.style.display = "none";
+    wallpaperFileUploadSection.style.display = "none";
+    wallpaperCollectionSection.style.display = "block";
   });
 };
 
