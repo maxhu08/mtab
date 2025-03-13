@@ -1,24 +1,25 @@
 /* fix to prevent border transition */
-.bookmark-user-defined-item {
+.draggable-item {
   transition-duration: border 0ms !important;
 }
 
-.bookmark-node-ghost-class {
+.draggable-item-ghost-class {
   opacity: 0.25;
 }
 
-.bookmark-node-chosen-class {
+.draggable-item-chosen-class {
   opacity: 1 !important;
   border: 2px solid #ec4899;
   box-sizing: border-box;
 }
 
 /* for sortable animations to work  */
+#wallpaper-collections-list,
 #bookmarks-user-defined-list,
 #bookmarks-user-defined-list * {
   transition-duration: 0ms;
 }
 
-.bookmark-user-defined-item :not(.bookmark-user-defined-item) {
+.draggable-item :not(.draggable-item) {
   transition-duration: 250ms !important;
 }

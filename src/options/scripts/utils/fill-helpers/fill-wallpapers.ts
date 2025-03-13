@@ -10,6 +10,7 @@ import {
 } from "src/options/scripts/ui";
 import { previewWallpaper, previewWallpaperLegacy } from "src/options/scripts/utils/preview";
 import { get as idbGet } from "idb-keyval";
+import { fillCollectionWallpaper } from "src/options/scripts/utils/fill-helpers/fill-collection-wallpaper";
 
 export const fillWallpapersInputs = (config: Config) => {
   if (config.wallpaper.type === "url") wallpaperTypeUrlButtonEl.click();
@@ -37,4 +38,6 @@ export const fillWallpapersInputs = (config: Config) => {
 
   wallpaperFiltersBrightnessInputEl.value = config.wallpaper.filters.brightness;
   wallpaperFiltersBlurInputEl.value = config.wallpaper.filters.blur;
+
+  fillCollectionWallpaper();
 };

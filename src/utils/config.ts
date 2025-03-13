@@ -125,7 +125,7 @@ export const defaultConfig: Config = {
   wallpaper: {
     type: "url",
     enabled: true,
-    // url: `chrome-extension://${chrome.runtime.id}/wallpapers/bg-1.png`
+    // url: `chrome-extension://${chrome.runtime.id}/wallpapers/default.png`
     url: `./wallpapers/default.png`,
     filters: {
       brightness: "1",

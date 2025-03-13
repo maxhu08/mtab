@@ -50,8 +50,8 @@ export const handleBookmarkNodesDragging = () => {
       handle: ".bookmark-node-handle",
       animation: 250,
       easing: "cubic-bezier(0.42, 0, 0.58, 1)",
-      ghostClass: "bookmark-node-ghost-class",
-      chosenClass: "bookmark-node-chosen-class"
+      ghostClass: "draggable-item-ghost-class",
+      chosenClass: "draggable-item-chosen-class"
     });
 
     dropzone.dataset.sortableInitialized = "true";
@@ -336,7 +336,7 @@ const addBookmarkNodeBookmark = (bookmark: BookmarkNodeBookmark, targetDivEl: HT
   const uuid = genid();
 
   // targetDivEl.innerHTML += `
-  //   <div class="bookmark-user-defined-item bg-neutral-800 grid grid-cols-[max-content_auto] rounded-md overflow-hidden" node-type="bookmark" bookmark-node-uuid="${uuid}">
+  //   <div class="draggable-item bg-neutral-800 grid grid-cols-[max-content_auto] rounded-md overflow-hidden" node-type="bookmark" bookmark-node-uuid="${uuid}">
   //     <div id="bookmark-${uuid}-user-defined-accent" class="w-1 h-full" style="background-color:${bookmark.color};"></div>
   //     <div class="p-2 grid grid-flow-row gap-4">
   //       <div class="grid grid-cols-[max-content_auto_max-content] place-items-center">
@@ -399,7 +399,7 @@ const addBookmarkNodeBookmark = (bookmark: BookmarkNodeBookmark, targetDivEl: HT
   // container div
   const containerDiv = document.createElement("div");
   containerDiv.className =
-    "bookmark-user-defined-item bg-neutral-800 grid grid-cols-[max-content_auto] rounded-md overflow-hidden";
+    "draggable-item bg-neutral-800 grid grid-cols-[max-content_auto] rounded-md overflow-hidden";
   containerDiv.setAttribute("node-type", "bookmark");
   containerDiv.setAttribute("bookmark-node-uuid", uuid);
 
@@ -518,7 +518,7 @@ const addBookmarkNodeFolder = (folder: BookmarkNodeFolder, targetDivEl: HTMLDivE
   const uuid = genid();
 
   // targetDivEl.innerHTML += `
-  //   <div class="bookmark-user-defined-item bg-neutral-800 grid grid-cols-[max-content_auto] rounded-md overflow-hidden" node-type="folder" bookmark-node-uuid="${uuid}">
+  //   <div class="draggable-item bg-neutral-800 grid grid-cols-[max-content_auto] rounded-md overflow-hidden" node-type="folder" bookmark-node-uuid="${uuid}">
   //     <div id="bookmark-${uuid}-user-defined-accent" class="w-1 h-full" style="background-color:${folder.color};"></div>
   //     <div class="p-2 grid grid-flow-row gap-2">
   //       <div class="grid grid-cols-[max-content_auto_max-content] place-items-center">
@@ -571,7 +571,7 @@ const addBookmarkNodeFolder = (folder: BookmarkNodeFolder, targetDivEl: HTMLDivE
   // container div
   const containerDiv = document.createElement("div");
   containerDiv.className =
-    "bookmark-user-defined-item bg-neutral-800 grid grid-cols-[max-content_auto] rounded-md overflow-hidden";
+    "draggable-item bg-neutral-800 grid grid-cols-[max-content_auto] rounded-md overflow-hidden";
   containerDiv.setAttribute("node-type", "folder");
   containerDiv.setAttribute("bookmark-node-uuid", uuid);
 
