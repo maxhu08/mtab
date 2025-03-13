@@ -240,7 +240,7 @@ export const defaultConfig: Config = {
 export type FaviconType = "default" | "custom";
 export type UIStyle = "solid" | "glass";
 export type UICornerStyle = "sharp" | "round";
-export type WallpaperType = "url" | "fileUpload";
+export type WallpaperType = "url" | "fileUpload" | "collection";
 export type BookmarkTiming = "left" | "right" | "uniform";
 export type AnimationInitialType =
   | "animate-down-bouncy"

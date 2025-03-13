@@ -3,6 +3,7 @@ import {
   wallpaperEnabledCheckboxEl,
   wallpaperFiltersBlurInputEl,
   wallpaperFiltersBrightnessInputEl,
+  wallpaperTypeCollectionButtonEl,
   wallpaperTypeFileUploadButtonEl,
   wallpaperTypeUrlButtonEl,
   wallpaperUrlInputEl
@@ -13,6 +14,7 @@ import { get as idbGet } from "idb-keyval";
 export const fillWallpapersInputs = (config: Config) => {
   if (config.wallpaper.type === "url") wallpaperTypeUrlButtonEl.click();
   else if (config.wallpaper.type === "fileUpload") wallpaperTypeFileUploadButtonEl.click();
+  else if (config.wallpaper.type === "collection") wallpaperTypeCollectionButtonEl.click();
 
   wallpaperEnabledCheckboxEl.checked = config.wallpaper.enabled;
   wallpaperUrlInputEl.value = config.wallpaper.url;
