@@ -62,6 +62,11 @@ export const migrateOldConfig = (config: Config): Config => {
   if (!config.wallpaper.filters.blur) config.wallpaper.filters.blur = "0px";
   if (!config.wallpaper.filters.brightness) config.wallpaper.filters.brightness = "1";
 
+  // if config is before v1.8.6
+  if (config.wallpaper.url === "./wallpapers/bg-1.png") {
+    config.wallpaper.url = "./wallpapers/default.png";
+  }
+
   return config;
 };
 
@@ -121,7 +126,7 @@ export const defaultConfig: Config = {
     type: "url",
     enabled: true,
     // url: `chrome-extension://${chrome.runtime.id}/wallpapers/bg-1.png`
-    url: `./wallpapers/bg-1.png`,
+    url: `./wallpapers/default.png`,
     filters: {
       brightness: "1",
       blur: "0px"
