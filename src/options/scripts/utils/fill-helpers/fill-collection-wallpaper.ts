@@ -1,7 +1,7 @@
 import Sortable from "sortablejs";
 
 export const fillCollectionWallpaper = () => {
-  handleWallpaperCollectionsDragging();
+  console.log("test");
 };
 
 export const handleWallpaperCollectionsDragging = () => {
@@ -20,15 +20,17 @@ export const handleWallpaperCollectionsDragging = () => {
   new Sortable(dropzone, {
     group: {
       name: "collection-wallpaper-group",
-      pull: true,
-      put: true
+      pull: false, // needs to be false to prevent dragging to bookmarks
+      put: false // needs to be false to prevent dragging to bookmarks
     },
     fallbackOnBody: true,
     swapThreshold: 0.65,
     handle: ".wallpaper-collection-node-handle",
-    animation: 250,
+    animation: 0,
     easing: "cubic-bezier(0.42, 0, 0.58, 1)",
     ghostClass: "draggable-item-ghost-class",
     chosenClass: "draggable-item-chosen-class"
   });
+
+  dropzone.dataset.sortableInitialized = "true";
 };
