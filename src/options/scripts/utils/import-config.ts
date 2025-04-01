@@ -1,9 +1,10 @@
 import { fillInputs } from "src/options/scripts/utils/fill-inputs";
 import { saveConfig } from "src/options/scripts/utils/save-config";
 import { fixAllToggleCheckboxSections } from "src/options/scripts/utils/toggle-checkbox";
-import { defaultConfig, migrateOldConfig } from "src/utils/config";
+import { defaultConfig } from "src/utils/config";
 import { deepMerge } from "src/utils/deep-merge";
 import { logger } from "src/utils/logger";
+import { migrateOldConfig } from "src/utils/migrate-config";
 
 export const importConfigAndSave = () => {
   const dataToImport = prompt("input your save (this will overwrite your current config)");
