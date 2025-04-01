@@ -3,18 +3,14 @@ const mainEl = document.querySelector("main") as HTMLElement;
 const bottomOfPageSensorEl = document.getElementById("bottom-of-page-sensor") as HTMLDivElement;
 
 export const showControls = () => {
-  if (mainEl) {
-    const { left, width } = mainEl.getBoundingClientRect();
-    controlsContainerEl.style.left = `${left}px`;
-    controlsContainerEl.style.width = `${width}px`;
-  }
+  const { left, width } = mainEl.getBoundingClientRect();
+  controlsContainerEl.style.left = `${left}px`;
+  controlsContainerEl.style.width = `${width}px`;
 
   controlsContainerEl.classList.remove("hidden");
 };
 
 const updateFloatingControlsPosition = () => {
-  console.log("Updating floating controls position");
-
   bottomOfPageSensorEl.style.height = controlsContainerEl.style.height;
   controlsContainerEl.style.bottom = "10px";
 
@@ -50,6 +46,16 @@ export const handleControls = () => {
   window.addEventListener("resize", () => {
     if (!isIntersecting) {
       updateFloatingControlsPosition();
+    }
+  });
+
+  window.addEventListener("scroll", () => {
+    if (window.scrollY === 0) {
+      controlsContainerEl.classList.remove("falling-up");
+      controlsContainerEl.classList.add("falling-down");
+    } else {
+      controlsContainerEl.classList.remove("falling-down");
+      controlsContainerEl.classList.add("falling-up");
     }
   });
 };
