@@ -38,7 +38,7 @@ export const handleControls = () => {
         controlsContainerEl.classList.add("drop-shadow");
       }
     },
-    { rootMargin: "0px", threshold: 0.1 }
+    { rootMargin: "0px", threshold: 0.01 }
   );
 
   if (bottomOfPageSensorEl) observer.observe(bottomOfPageSensorEl);
