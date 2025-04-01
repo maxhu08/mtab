@@ -1,6 +1,7 @@
-# Changes in 1.8.5
+# Changes in 1.8.6
 
 in this release:
 
-- fix unexpected behavior when message length exceeds a certain threshold
-- fix wallpapers breaking in private windows after adding new wallpaper system
+- make control panel on options page float
+- allow user to change default bookmark folder icon
+- reduce space taken by default background
