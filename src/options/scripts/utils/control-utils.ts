@@ -11,6 +11,8 @@ export const showControls = () => {
 };
 
 const updateFloatingControlsPosition = () => {
+  console.log("REFLOAT");
+
   bottomOfPageSensorEl.style.height = controlsContainerEl.style.height;
   controlsContainerEl.style.bottom = "10px";
 
@@ -46,6 +48,10 @@ export const handleControls = () => {
   window.addEventListener("resize", () => {
     if (!isIntersecting) {
       updateFloatingControlsPosition();
+
+      setTimeout(() => {
+        updateFloatingControlsPosition();
+      }, 500);
     }
   });
 
