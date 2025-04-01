@@ -1088,21 +1088,25 @@
         </section>
       </main>
       <!-- save buttons and more -->
-      <div class="mb-12 mt-20 grid grid-flow-row place-items-center gap-4 py-4">
+      <div class="my-12 grid grid-flow-row place-items-center gap-4 py-4">
         <div class="grid w-full grid-flow-row place-items-center gap-4">
-          <div class="grid w-full grid-flow-row gap-2 lg:grid-cols-2">
-            <button id="save-button" class="cursor-pointer rounded-md bg-emerald-500 p-2 transition hover:bg-emerald-600">
-              <span class="text-base text-white">save (ctrl+s)</span>
-            </button>
-            <button id="config-utils-button" class="cursor-pointer rounded-md bg-emerald-500 p-2 transition hover:bg-emerald-600">
-              <span class="text-base text-white">config-utils</span>
-            </button>
-            <button id="export-button" class="cursor-pointer rounded-md bg-indigo-500 p-2 transition hover:bg-indigo-600">
-              <span class="text-base text-white">save & export</span>
-            </button>
-            <button id="import-button" class="cursor-pointer rounded-md bg-indigo-500 p-2 transition hover:bg-indigo-600">
-              <span class="text-base text-white">import & save</span>
-            </button>
+          <div id="bottom-of-page-sensor" class="w-full">
+            <div id="controls-container" class="fixed bottom-4 left-0 hidden bg-black p-4 transition-none">
+              <div class="grid w-full grid-flow-row gap-2 lg:grid-cols-2">
+                <button id="save-button" class="cursor-pointer rounded-md bg-emerald-500 p-2 transition hover:bg-emerald-600">
+                  <span class="text-base text-white">save (ctrl+s)</span>
+                </button>
+                <button id="config-utils-button" class="cursor-pointer rounded-md bg-emerald-500 p-2 transition hover:bg-emerald-600">
+                  <span class="text-base text-white">config-utils</span>
+                </button>
+                <button id="export-button" class="cursor-pointer rounded-md bg-indigo-500 p-2 transition hover:bg-indigo-600">
+                  <span class="text-base text-white">save & export</span>
+                </button>
+                <button id="import-button" class="cursor-pointer rounded-md bg-indigo-500 p-2 transition hover:bg-indigo-600">
+                  <span class="text-base text-white">import & save</span>
+                </button>
+              </div>
+            </div>
           </div>
           <div class="grid w-full grid-flow-row place-items-center gap-4">
             <div class="grid w-full grid-cols-[1fr_max-content_1fr] gap-2">

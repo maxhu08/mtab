@@ -11,6 +11,7 @@ import {
 } from "src/options/scripts/utils/toggle-checkbox";
 import { handleCustomFaviconUpload } from "src/options/scripts/utils/upload-favicon";
 import { createCollapseGroups } from "src/options/scripts/utils/collapse-option";
+import { handleControls, showControls } from "src/options/scripts/utils/control-utils";
 
 export const loadPage = () => {
   const logo = document.getElementById("mtab-logo") as HTMLImageElement;
@@ -48,4 +49,7 @@ export const loadPage = () => {
   handleSwitches();
 
   listenAllToggleCheckboxSections();
+
+  handleControls();
+  showControls();
 };
