@@ -22,3 +22,7 @@
 .bookmark-user-defined-item :not(.bookmark-user-defined-item) {
   transition-duration: 250ms !important;
 }
+
+.drop-shadow {
+  box-shadow: 0 25px 23px rgba(0, 0, 0, 0.15);
+}

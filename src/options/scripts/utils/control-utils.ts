@@ -18,15 +18,17 @@ export const handleControls = () => {
   const observer = new IntersectionObserver(
     ([entry]) => {
       if (entry.isIntersecting) {
-        controlsContainerEl.style.position = "relative";
         controlsContainerEl.style.bottom = "0";
         controlsContainerEl.style.left = "0";
+        controlsContainerEl.classList.replace("fixed", "relative");
+        controlsContainerEl.classList.remove("border-emerald-500", "border-2");
       } else {
         const { left, width } = mainEl.getBoundingClientRect();
-        controlsContainerEl.style.position = "fixed";
         controlsContainerEl.style.bottom = "10px";
         controlsContainerEl.style.left = `${left}px`;
         controlsContainerEl.style.width = `${width}px`;
+        controlsContainerEl.classList.replace("relative", "fixed");
+        controlsContainerEl.classList.add("border-emerald-500", "border-2");
       }
     },
     { rootMargin: "0px", threshold: 0.1 }
