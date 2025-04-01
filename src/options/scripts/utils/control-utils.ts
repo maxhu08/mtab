@@ -11,8 +11,6 @@ export const showControls = () => {
 };
 
 const updateFloatingControlsPosition = () => {
-  console.log("REFLOAT");
-
   bottomOfPageSensorEl.style.height = controlsContainerEl.style.height;
   controlsContainerEl.style.bottom = "10px";
 
