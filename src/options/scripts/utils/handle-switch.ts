@@ -15,9 +15,15 @@ import {
   titleFaviconTypeDefaultButtonEl,
   uiStyleGlassButtonEl,
   uiStyleSolidButtonEl,
+  wallpaperFiltersBlurInputEl,
+  wallpaperFiltersBrightnessInputEl,
   wallpaperTypeFileUploadButtonEl,
-  wallpaperTypeUrlButtonEl
+  wallpaperTypeUrlButtonEl,
+  wallpaperUrlInputEl
 } from "src/options/scripts/ui";
+import { get as idbGet } from "idb-keyval";
+import { previewWallpaper } from "src/options/scripts/utils/preview";
+import { logger } from "src/utils/logger";
 
 export const handleSwitches = () => {
   handleFaviconTypeSwitch();
@@ -133,11 +139,31 @@ const handleWallpaperTypeSwitch = () => {
   ) as HTMLDivElement;
 
   wallpaperTypeUrlButtonEl.addEventListener("click", () => {
+    previewWallpaper(
+      wallpaperUrlInputEl.value,
+      wallpaperFiltersBrightnessInputEl.value,
+      wallpaperFiltersBlurInputEl.value
+    );
+
     wallpaperFileUploadSection.style.display = "none";
     wallpaperUrlSection.style.display = "block";
   });
 
   wallpaperTypeFileUploadButtonEl.addEventListener("click", () => {
+    try {
+      idbGet("userUploadedWallpaper").then((file) => {
+        if (file) {
+          previewWallpaper(
+            file,
+            wallpaperFiltersBrightnessInputEl.value,
+            wallpaperFiltersBlurInputEl.value
+          );
+        }
+      });
+    } catch (err) {
+      logger.log("Error storing wallpaper", err);
+    }
+
     wallpaperUrlSection.style.display = "none";
     wallpaperFileUploadSection.style.display = "block";
   });

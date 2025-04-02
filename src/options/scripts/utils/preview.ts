@@ -1,29 +1,43 @@
 const liveWallpaperPreviewEl = document.getElementById("live-wallpaper-preview") as HTMLDivElement;
 
-export const previewWallpaper = (wallpaper: Blob | undefined, brightness: string, blur: string) => {
+export const previewWallpaper = (
+  wallpaper: Blob | string | undefined,
+  brightness: string,
+  blur: string
+) => {
   if (!wallpaper) {
     liveWallpaperPreviewEl.innerHTML = `<i class="text-neutral-500 text-4xl ri-prohibited-2-line"></i>`;
     return;
   }
 
-  const imageUrl = URL.createObjectURL(wallpaper);
-  const isVideo = wallpaper.type.startsWith("video/");
+  let src: string;
+  if (wallpaper instanceof Blob) src = URL.createObjectURL(wallpaper);
+  else src = wallpaper;
+
+  const isVideo =
+    (wallpaper instanceof Blob && wallpaper.type.startsWith("video/")) ||
+    (typeof wallpaper === "string" && /\.(mp4|webm|ogg|mov)(\?.*)?$/i.test(wallpaper));
 
   const mediaEl = isVideo ? document.createElement("video") : document.createElement("img");
-  mediaEl.src = imageUrl;
-  mediaEl.className = "w-full h-full";
-  applyWallpaperFilters(brightness, blur);
+  mediaEl.src = src;
+  mediaEl.className = "w-full h-full object-cover";
 
   if (isVideo) {
-    (mediaEl as HTMLVideoElement).autoplay = true;
-    (mediaEl as HTMLVideoElement).loop = true;
-    (mediaEl as HTMLVideoElement).muted = true;
+    const videoEl = mediaEl as HTMLVideoElement;
+    videoEl.autoplay = true;
+    videoEl.loop = true;
+    videoEl.muted = true;
+    videoEl.playsInline = true;
   }
+
+  applyWallpaperFilters(brightness, blur);
 
   liveWallpaperPreviewEl.innerHTML = "";
   liveWallpaperPreviewEl.appendChild(mediaEl);
 
-  mediaEl.onload = () => URL.revokeObjectURL(imageUrl);
+  if (wallpaper instanceof Blob) {
+    mediaEl.onload = () => URL.revokeObjectURL(src);
+  }
 };
 
 export const applyWallpaperFilters = (brightness: string, blur: string) => {
