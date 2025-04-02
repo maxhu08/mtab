@@ -1,6 +1,8 @@
+// prettier-ignore
+const controlsContainerPlaceholderEl = document.getElementById("controls-container-placeholder") as HTMLDivElement;
 const controlsContainerEl = document.getElementById("controls-container") as HTMLDivElement;
-const mainEl = document.querySelector("main") as HTMLElement;
 const bottomOfPageSensorEl = document.getElementById("bottom-of-page-sensor") as HTMLDivElement;
+const mainEl = document.querySelector("main") as HTMLElement;
 
 export const showControls = () => {
   const { left, width } = mainEl.getBoundingClientRect();
@@ -11,9 +13,10 @@ export const showControls = () => {
 };
 
 const updateFloatingControlsPosition = () => {
-  bottomOfPageSensorEl.style.height = controlsContainerEl.style.height;
-  controlsContainerEl.style.bottom = "10px";
+  const { height } = controlsContainerEl.getBoundingClientRect();
+  controlsContainerPlaceholderEl.style.height = `${height}px`;
 
+  controlsContainerEl.style.bottom = "10px";
   const { left, width } = mainEl.getBoundingClientRect();
   controlsContainerEl.style.left = `${left}px`;
   controlsContainerEl.style.width = `${width}px`;
@@ -21,7 +24,7 @@ const updateFloatingControlsPosition = () => {
 
 export const handleControls = () => {
   let isIntersecting = false;
-  bottomOfPageSensorEl.style.height = controlsContainerEl.style.height;
+  controlsContainerPlaceholderEl.style.height = controlsContainerEl.style.height;
 
   const observer = new IntersectionObserver(
     ([entry]) => {
@@ -38,7 +41,7 @@ export const handleControls = () => {
         controlsContainerEl.classList.add("drop-shadow");
       }
     },
-    { rootMargin: "0px", threshold: 0.01 }
+    { rootMargin: "0px", threshold: 1 }
   );
 
   if (bottomOfPageSensorEl) observer.observe(bottomOfPageSensorEl);

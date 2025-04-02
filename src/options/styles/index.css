@@ -24,7 +24,7 @@
 }
 
 .drop-shadow {
-  box-shadow: 0 25px 23px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 0 23px rgba(0, 0, 0, 0.5);
 }
 
 @keyframes fallDown {
