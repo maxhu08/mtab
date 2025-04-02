@@ -17,7 +17,7 @@ downloads here:
 | Browser                              | Download                                                                                                                                                                |
 | ------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | chromium-based (chrome, edge, brave) | [<img src="./assets/download/download-chrome.svg" height="53" alt="Chromium Download">](https://chromewebstore.google.com/detail/mtab/fdaphilojaklgkoocegabckfanjoacjg) |
-| firefox-based (firefox, floorp, zen) | [<img src="./assets/download/download-firefox.svg" height="53" alt="Firefox Download">](https://addons.mozilla.org/en-US/firefox/addon/mtab)                            |
+| firefox-based (firefox, floorp, zen) | [<img src="./assets/download/download-firefox.svg" height="53" alt="Firefox Download">](https://addons.mozilla.org/firefox/addon/mtab)                            |
 
 ## features
 
