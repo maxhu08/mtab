@@ -55,7 +55,9 @@ const applyWallpaper = (wallpaper: Blob | string, brightness: string, blur: stri
   if (wallpaper instanceof Blob) src = URL.createObjectURL(wallpaper);
   else src = wallpaper;
 
-  const isVideo = wallpaper instanceof Blob && wallpaper.type.startsWith("video/");
+  const isVideo =
+    (wallpaper instanceof Blob && wallpaper.type.startsWith("video/")) ||
+    (typeof wallpaper === "string" && /\.(mp4|webm|ogg|mov)(\?.*)?$/i.test(wallpaper));
 
   const mediaEl = isVideo ? document.createElement("video") : document.createElement("img");
   mediaEl.src = src;
@@ -65,9 +67,11 @@ const applyWallpaper = (wallpaper: Blob | string, brightness: string, blur: stri
   mediaEl.style.objectFit = "cover";
 
   if (isVideo) {
-    (mediaEl as HTMLVideoElement).autoplay = true;
-    (mediaEl as HTMLVideoElement).loop = true;
-    (mediaEl as HTMLVideoElement).muted = true;
+    const videoEl = mediaEl as HTMLVideoElement;
+    videoEl.autoplay = true;
+    videoEl.loop = true;
+    videoEl.muted = true;
+    videoEl.playsInline = true; // Ensures proper playback on mobile
   }
 
   applyWallpaperFilters(mediaEl, brightness, blur);
