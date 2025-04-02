@@ -325,8 +325,6 @@ export const renderBlockFolder = (
   const gridDiv = document.createElement("div");
   gridDiv.className = "p-1 md:p-2 grid place-items-center h-full";
 
-  console.log({ iconHTML, iconSizeClass, defaultFolderIconType, folderColor });
-
   const iconDiv = document.createElement("div");
   iconDiv.className = `bookmark-node-icon${iconSizeClass ? " " + iconSizeClass : ""}`;
   iconDiv.style.color = folderIconColor;

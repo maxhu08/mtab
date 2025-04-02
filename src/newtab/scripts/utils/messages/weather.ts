@@ -1,3 +1,5 @@
+import { logger } from "src/utils/logger";
+
 interface OpenMeteoResponse {
   latitude: number;
   longitude: number;
@@ -58,12 +60,12 @@ export const setWeatherMessage = (messageEl: HTMLParagraphElement, unitsType: "f
         messageEl.textContent = getWeatherMessage(data, unitsType);
       } catch (err) {
         messageEl.textContent = "Failed to fetch weather data";
-        console.error(`SET_WEATHER_MESSAGE: ${err}`);
+        logger.log(`SET_WEATHER_MESSAGE: ${err}`);
       }
     },
     (err) => {
       messageEl.textContent = "Location Access Denied";
-      console.error(`SET_WEATHER_MESSAGE: ${err}`);
+      logger.log(`SET_WEATHER_MESSAGE: ${err}`);
     }
   );
 };
