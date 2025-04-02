@@ -1,7 +1,7 @@
-# Changes in 1.8.6
+# Changes in 1.8.7
 
 in this release:
 
-- make control panel on options page float
-- allow user to change default bookmark folder icon
-- reduce space taken by default background
+- allow using a video wallpaper url
+- revamp wallpaper ui in options page
+- make control panel on options page look better and act smoother
