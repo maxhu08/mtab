@@ -299,6 +299,10 @@
               <div id="wallpaper-file-upload-section">
                 <div class="grid gap-2">
                   <p class="text-base text-white">wallpaper.fileUpload</p>
+                  <p class="text-base text-neutral-500">
+                    tip: you can upload PNG, JPG, WEBP, GIF, MP4 file formats & more<br />
+                    it is recommended to scale images to match your resolution for faster loading times
+                  </p>
                   <p class="text-base text-neutral-500">note: the fileUpload wallpaper is not included when exporting and importing configs due to taking too much space</p>
                   <div class="grid grid-cols-2 gap-2">
                     <input
@@ -311,12 +315,6 @@
                       <span class="text-base text-white">reset</span>
                     </button>
                   </div>
-                  <p class="text-base text-neutral-500">live preview</p>
-                  <div id="live-wallpaper-preview" class="grid aspect-video w-64 place-items-center overflow-hidden rounded-md bg-neutral-800"></div>
-                  <p class="text-base text-neutral-500">
-                    tip: you can upload PNG, JPG, WEBP, GIF, MP4 file formats & more<br />
-                    it is recommended to scale images to match your resolution for faster loading times
-                  </p>
                 </div>
               </div>
             </div>
@@ -340,6 +338,8 @@
                 <input id="wallpaper-filters-blur-input" type="text" autocomplete="off" class="bg-transparent text-white placeholder-neutral-500 outline-none" placeholder="input blur..." />
               </div>
             </div>
+            <p class="text-base text-neutral-500">live preview</p>
+            <div id="live-wallpaper-preview" class="grid aspect-video w-64 place-items-center overflow-hidden rounded-md bg-neutral-800"></div>
           </div>
         </section>
         <!-- ui -->
