@@ -5,8 +5,6 @@ const bottomOfPageSensorEl = document.getElementById("bottom-of-page-sensor") as
 const mainEl = document.querySelector("main") as HTMLElement;
 
 export const showControls = () => {
-  console.trace("test");
-
   const { left, width } = mainEl.getBoundingClientRect();
   controlsContainerEl.style.left = `${left}px`;
   controlsContainerEl.style.width = `${width}px`;

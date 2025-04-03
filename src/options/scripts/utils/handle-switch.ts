@@ -160,6 +160,26 @@ const handleWallpaperTypeSwitch = () => {
           );
         }
       });
+
+      idbGet("userUploadedWallpaper").then((file) => {
+        if (file) {
+          previewWallpaper(
+            file,
+            wallpaperFiltersBrightnessInputEl.value,
+            wallpaperFiltersBlurInputEl.value
+          );
+        } else {
+          // not in idb, handle legacy wallpaper
+
+          chrome.storage.local.get(["userUploadedWallpaper"], (data) => {
+            previewWallpaper(
+              data.userUploadedWallpaper,
+              wallpaperFiltersBrightnessInputEl.value,
+              wallpaperFiltersBlurInputEl.value
+            );
+          });
+        }
+      });
     } catch (err) {
       logger.log("Error storing wallpaper", err);
     }
