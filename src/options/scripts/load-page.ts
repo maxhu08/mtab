@@ -11,7 +11,7 @@ import {
 } from "src/options/scripts/utils/toggle-checkbox";
 import { handleCustomFaviconUpload } from "src/options/scripts/utils/upload-favicon";
 import { createCollapseGroups } from "src/options/scripts/utils/collapse-option";
-import { handleControls, showControls } from "src/options/scripts/utils/control-utils";
+import { handleControls } from "src/options/scripts/utils/control-utils";
 import { handleWallpaperUrlChange } from "src/options/scripts/utils/handle-wallpaper-url-change";
 
 export const loadPage = () => {
@@ -53,5 +53,4 @@ export const loadPage = () => {
   listenAllToggleCheckboxSections();
 
   handleControls();
-  showControls();
 };
