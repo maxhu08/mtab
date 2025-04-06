@@ -1,4 +1,4 @@
-# Changes in 1.8.8
+# Changes in 1.8.9
 
 in this release:
 
