@@ -1,15 +1,15 @@
 export const handleConversion = (val: string) => {
   const regexes = {
-    inches: /^(-?\d+)\s?in\s*$/,
-    centimeters: /^(-?\d+)\s?cm\s*$/,
-    pounds: /^(-?\d+)\s?lbs?\s*$/,
-    kilograms: /^(-?\d+)\s?kg\s*$/,
-    miles: /^(-?\d+)\s?mi\s*$/,
-    kilometers: /^(-?\d+)\s?km\s*$/,
-    fahrenheit: /^(-?\d+)\s?[fF]\s*$/,
-    celsius: /^(-?\d+)\s?[cC]\s*$/,
-    feet: /^(-?\d+)\s?ft\s*$/,
-    meters: /^(-?\d+)\s?m\s*$/
+    inches: /^(-?\d+(?:\.\d+)?)\s?in\s*$/,
+    centimeters: /^(-?\d+(?:\.\d+)?)\s?cm\s*$/,
+    pounds: /^(-?\d+(?:\.\d+)?)\s?lbs?\s*$/,
+    kilograms: /^(-?\d+(?:\.\d+)?)\s?kg\s*$/,
+    miles: /^(-?\d+(?:\.\d+)?)\s?mi\s*$/,
+    kilometers: /^(-?\d+(?:\.\d+)?)\s?km\s*$/,
+    fahrenheit: /^(-?\d+(?:\.\d+)?)\s?[fF]\s*$/,
+    celsius: /^(-?\d+(?:\.\d+)?)\s?[cC]\s*$/,
+    feet: /^(-?\d+(?:\.\d+)?)\s?ft\s*$/,
+    meters: /^(-?\d+(?:\.\d+)?)\s?m\s*$/
   };
 
   const matchConversion = (regex: RegExp, type: string) => {
