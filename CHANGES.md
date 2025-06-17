@@ -1,5 +1,5 @@
-# Changes in 1.8.9
+# Changes in 1.9.0
 
 in this release:
 
-- bug fixes
+- small improvments for search
