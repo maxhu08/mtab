@@ -23,6 +23,11 @@ html {
   -webkit-mask-image: radial-gradient(circle, rgba(0, 0, 0, 0) 30%, rgba(0, 0, 0, 1) 100%);
 }
 
+.bookmark-node-icon {
+  display: flex;
+  align-items: center;
+}
+
 .bookmark-node-icon svg {
   height: 100%;
   width: auto;
