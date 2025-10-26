@@ -221,6 +221,7 @@ export type BookmarkNodeFolder = {
   type: "folder";
   name: string;
   color: string;
+  iconType?: string;
   iconColor: string;
   fill: string;
   contents: BookmarkNode[];

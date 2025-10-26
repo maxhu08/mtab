@@ -46,6 +46,8 @@ const getBookmarkNodeFolderData = (uuid: string) => {
   const nameInputEl = document.getElementById(`bookmark-${uuid}-name-input`) as HTMLInputElement;
   const colorInputEl = document.getElementById(`bookmark-${uuid}-color-input`) as HTMLInputElement;
   // prettier-ignore
+  const iconTypeInputEl = document.getElementById(`bookmark-${uuid}-icon-type-input`) as HTMLInputElement;
+  // prettier-ignore
   const iconColorInputEl = document.getElementById(`bookmark-${uuid}-icon-color-input`) as HTMLInputElement;
   // prettier-ignore
   const fillInputEl = document.getElementById(`bookmark-${uuid}-fill-input`) as HTMLInputElement;
@@ -72,6 +74,7 @@ const getBookmarkNodeFolderData = (uuid: string) => {
     type: "folder",
     name: nameInputEl.value,
     color: colorInputEl.value,
+    iconType: iconTypeInputEl.value,
     iconColor: iconColorInputEl.value,
     fill: fillInputEl.value,
     contents: folderContents

@@ -1,7 +1,7 @@
 import Sortable from "sortablejs";
 import { focusInput, unfocusInput } from "src/config-utils/scripts/handle";
 import { Config, BookmarkNodeBookmark, BookmarkNodeFolder } from "src/utils/config";
-import { bookmarksUserDefinedList, Input } from "src/options/scripts/ui";
+import { bookmarksDefaultFolderIconTypeInputEl, bookmarksUserDefinedList, Input} from "src/options/scripts/ui";
 import { getRandomColor } from "src/options/scripts/utils/random-color";
 import { genid } from "src/utils/genid";
 
@@ -12,7 +12,13 @@ export const fillBookmarkNodeBookmarks = (config: Config) => {
     if (bookmarkNode.type === "bookmark")
       addBookmarkNodeBookmark(bookmarkNode, bookmarksUserDefinedList);
     else if (bookmarkNode.type === "folder")
-      addBookmarkNodeFolder(bookmarkNode, bookmarksUserDefinedList);
+      addBookmarkNodeFolder(
+        {
+          ...bookmarkNode,
+          iconType: bookmarkNode.iconType ?? config.bookmarks.defaultFolderIconType
+        },
+        bookmarksUserDefinedList
+      );
   });
 
   const bookmarkNodeEls = bookmarksUserDefinedList.querySelectorAll('[node-type="bookmark"]');
@@ -64,6 +70,9 @@ const handleBookmarkSettings = (uuid: string) => {
 
   const nameInput = document.getElementById(`bookmark-${uuid}-name-input`) as HTMLInputElement;
   const colorInput = document.getElementById(`bookmark-${uuid}-color-input`) as HTMLInputElement;
+  const iconTypeInput = document.getElementById(`bookmark-${uuid}-icon-type-input`) as HTMLInputElement;
+  const iconColorInput = document.getElementById(`bookmark-${uuid}-icon-color-input`) as HTMLInputElement;
+  const fillInput = document.getElementById(`bookmark-${uuid}-fill-input`) as HTMLInputElement;
   // prettier-ignore
   const uselessTitle = document.getElementById(`bookmark-${uuid}-user-defined-useless-title`) as HTMLSpanElement;
   const accent = document.getElementById(`bookmark-${uuid}-user-defined-accent`) as HTMLDivElement;
@@ -139,6 +148,9 @@ const handleFolderSettings = (uuid: string) => {
 
   const nameInput = document.getElementById(`bookmark-${uuid}-name-input`) as HTMLInputElement;
   const colorInput = document.getElementById(`bookmark-${uuid}-color-input`) as HTMLInputElement;
+  const iconTypeInput = document.getElementById(`bookmark-${uuid}-icon-type-input`) as HTMLInputElement;
+  const iconColorInput = document.getElementById(`bookmark-${uuid}-icon-color-input`) as HTMLInputElement;
+  const fillInput = document.getElementById(`bookmark-${uuid}-fill-input`) as HTMLInputElement;
   // prettier-ignore
   const uselessTitle = document.getElementById(`bookmark-${uuid}-user-defined-useless-title`) as HTMLSpanElement;
   const accent = document.getElementById(`bookmark-${uuid}-user-defined-accent`) as HTMLDivElement;
@@ -162,8 +174,16 @@ const handleFolderSettings = (uuid: string) => {
       input: colorInput
     },
     {
+      container: document.getElementById(`bookmark-${uuid}-icon-type-container`) as HTMLDivElement,
+      input: iconTypeInput
+    },
+    {
       container: document.getElementById(`bookmark-${uuid}-icon-color-container`) as HTMLDivElement,
-      input: document.getElementById(`bookmark-${uuid}-icon-color-container`) as HTMLInputElement
+      input: iconColorInput
+    },
+    {
+      container: document.getElementById(`bookmark-${uuid}-fill-container`) as HTMLDivElement,
+      input: fillInput
     }
   ];
 
@@ -289,6 +309,8 @@ addFolderButtonEl.onclick = () => {
       type: "folder",
       name: "New Folder",
       color: randomColor,
+      iconType:
+        bookmarksDefaultFolderIconTypeInputEl.value || "ri-folder-fill",
       iconColor: randomColor,
       fill: "",
       contents: []
@@ -639,6 +661,7 @@ const addBookmarkNodeFolder = (folder: BookmarkNodeFolder, targetDivEl: HTMLDivE
   const fields = [
     { label: "folder.name", id: "name", value: folder.name },
     { label: "folder.color", id: "color", value: folder.color },
+    { label: "folder.iconType", id: "icon-type", value: folder.iconType ?? "" },
     { label: "folder.iconColor", id: "icon-color", value: folder.iconColor },
     { label: "folder.fill", id: "fill", value: folder.fill }
   ];

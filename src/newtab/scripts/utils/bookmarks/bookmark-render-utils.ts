@@ -71,7 +71,7 @@ export const renderBookmarkNodes = (
         index,
         bookmarkNode.name,
         bookmarkNode.color,
-        bookmarksDefaultFolderIconType,
+        bookmarkNode.iconType ?? bookmarksDefaultFolderIconType,
         bookmarkNode.iconColor,
         bookmarkNode.fill,
         uiStyle,
@@ -276,7 +276,7 @@ export const renderBlockFolder = (
   nodeIndex: number,
   folderName: string,
   folderColor: string,
-  defaultFolderIconType: string,
+  folderIconType: string,
   folderIconColor: string,
   folderFill: string,
   uiStyle: UIStyle,
@@ -292,7 +292,7 @@ export const renderBlockFolder = (
   else if (bookmarkTiming === "left") delay = (nodeIndex + 2) * 50;
   else if (bookmarkTiming === "right") delay = (nodesLength + 2 - nodeIndex) * 50;
 
-  const { iconHTML, iconSizeClass } = getBookmarkIconDetails(defaultFolderIconType, folderColor);
+  const { iconHTML, iconSizeClass } = getBookmarkIconDetails(folderIconType, folderIconColor || folderColor);
 
   const uuid = genid();
 
