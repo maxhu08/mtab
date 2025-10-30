@@ -292,7 +292,10 @@ export const renderBlockFolder = (
   else if (bookmarkTiming === "left") delay = (nodeIndex + 2) * 50;
   else if (bookmarkTiming === "right") delay = (nodesLength + 2 - nodeIndex) * 50;
 
-  const { iconHTML, iconSizeClass } = getBookmarkIconDetails(folderIconType, folderIconColor || folderColor);
+  const { iconHTML, iconSizeClass } = getBookmarkIconDetails(
+    folderIconType,
+    folderIconColor || folderColor
+  );
 
   const uuid = genid();
 
