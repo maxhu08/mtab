@@ -42,6 +42,10 @@ export const migrateOldConfig = (config: Config): Config => {
           current.fill = "";
         }
 
+        if (current.type === "folder" && (!("iconType" in current) || !current.iconType)) {
+          current.iconType = config.bookmarks.defaultFolderIconType;
+        }
+
         if (current.type === "folder" && Array.isArray(current.contents)) {
           stack.push(...current.contents);
         }
