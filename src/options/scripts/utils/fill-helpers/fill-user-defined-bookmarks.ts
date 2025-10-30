@@ -1,7 +1,7 @@
 import Sortable from "sortablejs";
 import { focusInput, unfocusInput } from "src/config-utils/scripts/handle";
 import { Config, BookmarkNodeBookmark, BookmarkNodeFolder } from "src/utils/config";
-import { bookmarksDefaultFolderIconTypeInputEl, bookmarksUserDefinedList, Input} from "src/options/scripts/ui";
+import { bookmarksUserDefinedList, Input } from "src/options/scripts/ui";
 import { getRandomColor } from "src/options/scripts/utils/random-color";
 import { genid } from "src/utils/genid";
 
@@ -15,7 +15,7 @@ export const fillBookmarkNodeBookmarks = (config: Config) => {
       addBookmarkNodeFolder(
         {
           ...bookmarkNode,
-          iconType: bookmarkNode.iconType ?? config.bookmarks.defaultFolderIconType
+          iconType: bookmarkNode.iconType
         },
         bookmarksUserDefinedList
       );
@@ -70,9 +70,6 @@ const handleBookmarkSettings = (uuid: string) => {
 
   const nameInput = document.getElementById(`bookmark-${uuid}-name-input`) as HTMLInputElement;
   const colorInput = document.getElementById(`bookmark-${uuid}-color-input`) as HTMLInputElement;
-  const iconTypeInput = document.getElementById(`bookmark-${uuid}-icon-type-input`) as HTMLInputElement;
-  const iconColorInput = document.getElementById(`bookmark-${uuid}-icon-color-input`) as HTMLInputElement;
-  const fillInput = document.getElementById(`bookmark-${uuid}-fill-input`) as HTMLInputElement;
   // prettier-ignore
   const uselessTitle = document.getElementById(`bookmark-${uuid}-user-defined-useless-title`) as HTMLSpanElement;
   const accent = document.getElementById(`bookmark-${uuid}-user-defined-accent`) as HTMLDivElement;
@@ -148,8 +145,12 @@ const handleFolderSettings = (uuid: string) => {
 
   const nameInput = document.getElementById(`bookmark-${uuid}-name-input`) as HTMLInputElement;
   const colorInput = document.getElementById(`bookmark-${uuid}-color-input`) as HTMLInputElement;
-  const iconTypeInput = document.getElementById(`bookmark-${uuid}-icon-type-input`) as HTMLInputElement;
-  const iconColorInput = document.getElementById(`bookmark-${uuid}-icon-color-input`) as HTMLInputElement;
+  const iconTypeInput = document.getElementById(
+    `bookmark-${uuid}-icon-type-input`
+  ) as HTMLInputElement;
+  const iconColorInput = document.getElementById(
+    `bookmark-${uuid}-icon-color-input`
+  ) as HTMLInputElement;
   const fillInput = document.getElementById(`bookmark-${uuid}-fill-input`) as HTMLInputElement;
   // prettier-ignore
   const uselessTitle = document.getElementById(`bookmark-${uuid}-user-defined-useless-title`) as HTMLSpanElement;
@@ -309,8 +310,7 @@ addFolderButtonEl.onclick = () => {
       type: "folder",
       name: "New Folder",
       color: randomColor,
-      iconType:
-        bookmarksDefaultFolderIconTypeInputEl.value || "ri-folder-fill",
+      iconType: "",
       iconColor: randomColor,
       fill: "",
       contents: []
@@ -403,14 +403,14 @@ const addBookmarkNodeBookmark = (bookmark: BookmarkNodeBookmark, targetDivEl: HT
   //           <p class="text-white text-base">bookmark.iconType</p>
   //           <div id="bookmark-${uuid}-icon-type-container" class="grid grid-cols-[max-content_auto] text-base bg-neutral-900 w-full p-1 rounded-md border-2 border-transparent">
   //             <span class="text-pink-500 font-semibold select-none">>&nbsp;</span>
-  //             <input id="bookmark-${uuid}-icon-type-input" type="text" autocomplete="off" class="outline-none bg-transparent text-white placeholder-neutral-500" placeholder="input icon type..." value="${bookmark.iconType}">
+  //             <input id="bookmark-${uuid}-icon-type-input" type="text" autocomplete="off" class="outline-none bg-transparent text-white placeholder-neutral-500" placeholder="input icon-type..." value="${bookmark.iconType}">
   //           </div>
   //         </div>
   //         <div class="grid gap-2">
   //           <p class="text-white text-base">bookmark.iconColor</p>
   //           <div id="bookmark-${uuid}-icon-color-container" class="grid grid-cols-[max-content_auto] text-base bg-neutral-900 w-full p-1 rounded-md border-2 border-transparent">
   //             <span class="text-pink-500 font-semibold select-none">>&nbsp;</span>
-  //             <input id="bookmark-${uuid}-icon-color-input" type="text" autocomplete="off" class="outline-none bg-transparent text-white placeholder-neutral-500" placeholder="input icon color..." value="${bookmark.iconColor}">
+  //             <input id="bookmark-${uuid}-icon-color-input" type="text" autocomplete="off" class="outline-none bg-transparent text-white placeholder-neutral-500" placeholder="input-icon color..." value="${bookmark.iconColor}">
   //           </div>
   //         </div>
   //       </div>
@@ -575,6 +575,13 @@ const addBookmarkNodeFolder = (folder: BookmarkNodeFolder, targetDivEl: HTMLDivE
   //           </div>
   //         </div>
   //         <div class="grid gap-2">
+  //           <p class="text-white text-base">folder.color</p>
+  //           <div id="bookmark-${uuid}-icon-type-container" class="grid grid-cols-[max-content_auto] text-base bg-neutral-900 w-full p-1 rounded-md border-2 border-transparent">
+  //             <span class="text-pink-500 font-semibold select-none">>&nbsp;</span>
+  //             <input id="bookmark-${uuid}-icon-type-input" type="text" autocomplete="off" class="outline-none bg-transparent text-white placeholder-neutral-500" placeholder="input icon-type... (leave empty for default)" value="${folder.color}">
+  //           </div>
+  //         </div>
+  //         <div class="grid gap-2">
   //           <p class="text-white text-base">folder.iconColor</p>
   //           <div id="bookmark-${uuid}-icon-color-container" class="grid grid-cols-[max-content_auto] text-base bg-neutral-900 w-full p-1 rounded-md border-2 border-transparent">
   //             <span class="text-pink-500 font-semibold select-none">>&nbsp;</span>
@@ -690,6 +697,7 @@ const addBookmarkNodeFolder = (folder: BookmarkNodeFolder, targetDivEl: HTMLDivE
     input.className = "outline-none bg-transparent text-white placeholder-neutral-500";
 
     if (id === "fill") input.placeholder = `input fill... (leave empty for default)`;
+    if (id === "icon-type") input.placeholder = `input icon-type... (leave empty for default)`;
     else input.placeholder = `input ${id}...`;
 
     input.value = value;
