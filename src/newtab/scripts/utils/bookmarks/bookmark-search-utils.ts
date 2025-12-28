@@ -1,4 +1,4 @@
-import { BookmarkNodeBookmark } from "src/utils/config";
+import { AnimationBookmarkType, BookmarkNodeBookmark } from "src/utils/config";
 import {
   bookmarksContainerEl,
   bookmarkSearchContainerEl,
@@ -11,6 +11,7 @@ import {
 } from "src/newtab/scripts/ui";
 
 import { renderSearchResults } from "src/newtab/scripts/utils/search/handle-search-results";
+import { openBookmark } from "src/newtab/scripts/utils/bookmarks/open-bookmark";
 
 type SearchResultItem = {
   name: string;
@@ -54,14 +55,22 @@ export const unfocusBookmarkSearch = (animationType: string) => {
 export const enableSearchBookmark = (
   bookmarks: BookmarkNodeBookmark[],
   textColor: string,
-  placeholderTextColor: string
+  placeholderTextColor: string,
+  animationsEnabled: boolean,
+  bookmarkAnimationType: AnimationBookmarkType
 ) => {
   searchSectionEl.classList.replace("grid", "hidden");
   bookmarkSearchSectionEl.classList.replace("hidden", "grid");
 
   searchResultsSectionEl.classList.replace("grid", "hidden");
 
-  refreshBookmarkSearchResults(bookmarks, textColor, placeholderTextColor);
+  refreshBookmarkSearchResults(
+    bookmarks,
+    textColor,
+    placeholderTextColor,
+    animationsEnabled,
+    bookmarkAnimationType
+  );
 };
 
 export const disableSearchBookmark = () => {
@@ -76,7 +85,9 @@ export const disableSearchBookmark = () => {
 export const refreshBookmarkSearchResults = (
   bookmarks: BookmarkNodeBookmark[],
   textColor: string,
-  placeholderTextColor: string
+  placeholderTextColor: string,
+  animationsEnabled: boolean,
+  bookmarkAnimationType: AnimationBookmarkType
 ) => {
   const bookmarkWithoutFolders = bookmarks
     .filter((bm) => bm.type === "bookmark")
@@ -90,6 +101,18 @@ export const refreshBookmarkSearchResults = (
     resultUrlAttr: "bookmark-result-url",
     selectedIndexAttr: "selected-index",
     resultsSectionEl: searchResultsSectionEl,
-    maxResults: 8
+    maxResults: 8,
+    onOpen: (url, openInNewTab) => {
+      openBookmark(url, animationsEnabled, bookmarkAnimationType, openInNewTab);
+
+      if (openInNewTab)
+        refreshBookmarkSearchResults(
+          bookmarks,
+          textColor,
+          placeholderTextColor,
+          animationsEnabled,
+          bookmarkAnimationType
+        );
+    }
   });
 };

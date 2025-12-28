@@ -13,7 +13,6 @@ import {
   disableSearchBookmark,
   enableSearchBookmark,
   focusBookmarkSearch,
-  refreshBookmarkSearchResults,
   tryFocusBookmarkSearch,
   unfocusBookmarkSearch
 } from "src/newtab/scripts/utils/bookmarks/bookmark-search-utils";
@@ -73,10 +72,12 @@ export const listenToKeys = async (config: Config) => {
           selectedIndexAttr: "selected-index",
           resultUrlAttr: "bookmark-result-url",
           refreshResults: () =>
-            refreshBookmarkSearchResults(
+            enableSearchBookmark(
               bookmarks,
               config.search.textColor,
-              config.search.placeholderTextColor
+              config.search.placeholderTextColor,
+              config.animations.enabled,
+              config.animations.bookmarkType
             ),
           onOpen: (url, openInNewTab) =>
             openBookmark(
@@ -100,12 +101,14 @@ export const listenToKeys = async (config: Config) => {
         !bookmarkSearchFocused &&
         !bookmarkSearchSectionEl.classList.contains("grid")
       ) {
-        enableSearchBookmark(
+        (enableSearchBookmark(
           bookmarks,
           config.search.textColor,
-          config.search.placeholderTextColor
-        );
-        tryFocusBookmarkSearch(config.search.focusedBorderColor, e);
+          config.search.placeholderTextColor,
+          config.animations.enabled,
+          config.animations.bookmarkType
+        ),
+          tryFocusBookmarkSearch(config.search.focusedBorderColor, e));
       }
     }
   });
@@ -168,6 +171,12 @@ export const listenToKeys = async (config: Config) => {
   );
 
   bookmarkSearchInputEl.addEventListener("keyup", () => {
-    enableSearchBookmark(bookmarks, config.search.textColor, config.search.placeholderTextColor);
+    enableSearchBookmark(
+      bookmarks,
+      config.search.textColor,
+      config.search.placeholderTextColor,
+      config.animations.enabled,
+      config.animations.bookmarkType
+    );
   });
 };

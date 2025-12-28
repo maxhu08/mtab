@@ -12,7 +12,7 @@ export const openBookmark = (
   }
 
   if (openInNewTab) {
-    window.open(bookmarkUrl, "_blank");
+    chrome.tabs.create({ url: bookmarkUrl, active: false });
     bookmarkSearchInputEl.value = "";
 
     return;
