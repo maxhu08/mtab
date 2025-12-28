@@ -18,9 +18,6 @@ export const snowStorm = (): void => {
     event.preventDefault();
   });
 
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-
   canvas.style.position = "absolute";
   canvas.style.top = "0";
   canvas.style.left = "0";
@@ -28,6 +25,14 @@ export const snowStorm = (): void => {
 
   const circles: Circle[] = [];
   const angle = (Math.random() * (60 - 30) + 30) * (Math.PI / 180); // random angle between 30 and 60 degrees
+
+  const resizeCanvas = (): void => {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  };
+
+  resizeCanvas();
+  window.addEventListener("resize", resizeCanvas);
 
   // create random circles
   for (let i = 0; i < 150; i++) {
@@ -65,3 +70,4 @@ export const snowStorm = (): void => {
 
   drawCircles();
 };
+
