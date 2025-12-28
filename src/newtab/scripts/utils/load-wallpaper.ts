@@ -66,6 +66,11 @@ const applyWallpaper = (wallpaper: Blob | string, brightness: string, blur: stri
   mediaEl.style.height = "100%";
   mediaEl.style.objectFit = "cover";
 
+  if (wallpaper === "./wallpapers/default.png") {
+    mediaEl.style.transformOrigin = "center";
+    mediaEl.style.transform = "scale(1.01)";
+  }
+
   if (isVideo) {
     const videoEl = mediaEl as HTMLVideoElement;
     videoEl.autoplay = true;
