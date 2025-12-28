@@ -70,4 +70,3 @@ export const snowStorm = (): void => {
 
   drawCircles();
 };
-

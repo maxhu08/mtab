@@ -3,7 +3,7 @@ import {
   assistantContainerEl,
   bookmarkSearchContainerEl,
   bookmarkSearchInputEl,
-  bookmarkSearchResultsContainerEl,
+  searchResultsContainerEl,
   searchContainerEl,
   searchInputEl
 } from "src/newtab/scripts/ui";
@@ -28,7 +28,7 @@ export const styleSearch = (
 
   searchInputEl.style.color = textColor;
   bookmarkSearchInputEl.style.color = textColor;
-  bookmarkSearchResultsContainerEl.style.color = textColor;
+  searchResultsContainerEl.style.color = textColor;
 
   searchInputEl.placeholder = placeholderText;
   bookmarkSearchInputEl.placeholder = bookmarkPlaceholderText;
@@ -63,21 +63,21 @@ export const styleSearch = (
     // .font-bookmark-search {
     //   font-family: ${font};
     // }
-    // .font-bookmark-search-results {
+    // .font-search-results {
     //   font-family: ${font};
     // }`;
     insertCSS(
-      `.font-search{font-family:${font};}.font-bookmark-search{font-family:${font};}.font-bookmark-search-results{font-family:${font};}`
+      `.font-search{font-family:${font};}.font-bookmark-search{font-family:${font};}.font-search-results{font-family:${font};}`
     );
   } else {
     // @import url('${fontCustom}');
     // .font-search { font-family: "${fontName}", sans-serif !important; }
     // .font-bookmark-search { font-family: "${fontName}", sans-serif !important; }
-    // .font-bookmark-search-results { font-family: "${fontName}", sans-serif !important; }
+    // .font-search-results { font-family: "${fontName}", sans-serif !important; }
 
     const fontName = getFontNameFromURL(fontCustom);
     insertCSS(
-      `@import url("${fontCustom}");.font-search{font-family:"${fontName}",sans-serif!important;}.font-bookmark-search{font-family:"${fontName}",sans-serif!important;}.font-bookmark-search-results{font-family:"${fontName}",sans-serif!important;}`
+      `@import url("${fontCustom}");.font-search{font-family:"${fontName}",sans-serif!important;}.font-bookmark-search{font-family:"${fontName}",sans-serif!important;}.font-search-results{font-family:"${fontName}",sans-serif!important;}`
     );
   }
 
@@ -86,11 +86,11 @@ export const styleSearch = (
     searchContainerEl.style.backgroundColor = foregroundColor;
     assistantContainerEl.style.backgroundColor = foregroundColor;
     bookmarkSearchContainerEl.style.backgroundColor = foregroundColor;
-    bookmarkSearchResultsContainerEl.style.backgroundColor = foregroundColor;
+    searchResultsContainerEl.style.backgroundColor = foregroundColor;
   } else if (style === "glass") {
     searchContainerEl.classList.add("glass-effect");
     assistantContainerEl.classList.add("glass-effect");
     bookmarkSearchContainerEl.classList.add("glass-effect");
-    bookmarkSearchResultsContainerEl.classList.add("glass-effect");
+    searchResultsContainerEl.classList.add("glass-effect");
   }
 };

@@ -2,7 +2,7 @@
 import { BookmarkNodeBookmark, Config } from "src/utils/config";
 import {
   bookmarkSearchInputEl,
-  bookmarkSearchResultsContainerEl,
+  searchResultsContainerEl,
   bookmarkSearchSectionEl,
   searchInputEl
 } from "src/newtab/scripts/ui";
@@ -20,6 +20,7 @@ import {
 import { openBookmark } from "src/newtab/scripts/utils/bookmarks/open-bookmark";
 import { convertBrowserBookmarksToBookmarkNodes } from "src/newtab/scripts/utils/bookmarks/convert-browser-bookmarks";
 import { flattenBookmarks } from "src/newtab/scripts/utils/bookmarks/flatten-bookmarks";
+import { handleSearchResultsNavigation } from "src/newtab/scripts/utils/search/handle-search-results";
 
 export const listenToKeys = async (config: Config) => {
   let bookmarks: BookmarkNodeBookmark[] = [];
@@ -67,46 +68,29 @@ export const listenToKeys = async (config: Config) => {
     ) {
       // if search bookmark is on already (grid)
       if (bookmarkSearchSectionEl.classList.contains("grid")) {
+        handleSearchResultsNavigation(e, {
+          resultsContainerEl: searchResultsContainerEl,
+          selectedIndexAttr: "selected-index",
+          resultUrlAttr: "bookmark-result-url",
+          refreshResults: () =>
+            refreshBookmarkSearchResults(
+              bookmarks,
+              config.search.textColor,
+              config.search.placeholderTextColor
+            ),
+          onOpen: (url, openInNewTab) =>
+            openBookmark(
+              url,
+              config.animations.enabled,
+              config.animations.bookmarkType,
+              openInNewTab
+            )
+        });
+
         if (e.key === "Escape") {
           unfocusBookmarkSearch(config.animations.initialType);
           disableSearchBookmark();
           bookmarkSearchInputEl.value = "";
-        } else if (e.key === "ArrowDown") {
-          e.preventDefault();
-          const results = bookmarkSearchResultsContainerEl.children.length;
-
-          // prettier-ignore
-          const prevIndex = parseInt(bookmarkSearchResultsContainerEl.getAttribute("selected-index") as string);
-          // prettier-ignore
-          if (prevIndex < results - 1) {
-            bookmarkSearchResultsContainerEl.setAttribute("selected-index", ((prevIndex) + 1).toString());
-          } else {
-            bookmarkSearchResultsContainerEl.setAttribute("selected-index", (0).toString());
-          }
-
-          refreshBookmarkSearchResults(
-            bookmarks,
-            config.search.textColor,
-            config.search.placeholderTextColor
-          );
-        } else if (e.key === "ArrowUp") {
-          e.preventDefault();
-          const results = bookmarkSearchResultsContainerEl.children.length;
-
-          // prettier-ignore
-          const prevIndex = parseInt(bookmarkSearchResultsContainerEl.getAttribute("selected-index") as string);
-          // prettier-ignore
-          if (prevIndex > 0) {
-            bookmarkSearchResultsContainerEl.setAttribute("selected-index", ((prevIndex) - 1).toString());
-          } else {
-            bookmarkSearchResultsContainerEl.setAttribute("selected-index", (results - 1).toString());
-          }
-
-          refreshBookmarkSearchResults(
-            bookmarks,
-            config.search.textColor,
-            config.search.placeholderTextColor
-          );
         }
       }
 
@@ -183,27 +167,7 @@ export const listenToKeys = async (config: Config) => {
     focusBookmarkSearch(config.search.focusedBorderColor, e)
   );
 
-  bookmarkSearchInputEl.addEventListener("keyup", (e) => {
+  bookmarkSearchInputEl.addEventListener("keyup", () => {
     enableSearchBookmark(bookmarks, config.search.textColor, config.search.placeholderTextColor);
-  });
-
-  bookmarkSearchInputEl.addEventListener("keydown", (e) => {
-    if (e.key === "Enter" && !e.repeat) {
-      e.preventDefault();
-
-      // prettier-ignore
-      const resultIndex = parseInt(bookmarkSearchResultsContainerEl.getAttribute("selected-index") as string);
-      // prettier-ignore
-      const bookmarkUrl = bookmarkSearchResultsContainerEl.children[resultIndex].getAttribute("bookmark-result-url") as string;
-      if (isComposing || !bookmarkUrl) return;
-
-      // open in new tab if ctrl
-      if (e.ctrlKey) {
-        openBookmark(bookmarkUrl, config.animations.enabled, config.animations.bookmarkType, true);
-        return;
-      }
-
-      openBookmark(bookmarkUrl, config.animations.enabled, config.animations.bookmarkType);
-    }
   });
 };
