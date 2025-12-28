@@ -38,6 +38,7 @@ export const handleBookmarkNodesDragging = () => {
     // Reset the sortable instance
     if (dropzone.dataset.sortableInitialized === "true") {
       // Destroy the existing sortable instance (if any)
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const sortableInstance = (dropzone as any).sortable;
       if (sortableInstance) {
         sortableInstance.destroy();
@@ -103,6 +104,10 @@ const handleBookmarkSettings = (uuid: string) => {
     {
       container: document.getElementById(`bookmark-${uuid}-icon-color-container`) as HTMLDivElement,
       input: document.getElementById(`bookmark-${uuid}-icon-color-input`) as HTMLInputElement
+    },
+    {
+      container: document.getElementById(`bookmark-${uuid}-fill-container`) as HTMLDivElement,
+      input: document.getElementById(`bookmark-${uuid}-fill-input`) as HTMLInputElement
     }
   ];
 

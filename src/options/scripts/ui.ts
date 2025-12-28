@@ -1,4 +1,4 @@
-import { getButton, getCheckbox, getContainerAndInput } from "src/options/scripts/utils/ui-helpers";
+import { getButton, getCheckbox, getContainerAndInput, getContainerAndTextarea } from "src/options/scripts/utils/ui-helpers";
 
 export const optionsShowOptionsButtonCheckboxEl = getCheckbox("options-show-options-button");
 
@@ -44,8 +44,7 @@ export const [uiBackgroundColorContainerEl, uiBackgroundColorInputEl] = getConta
 export const [uiHighlightColorContainerEl, uiHighlightColorInputEl] = getContainerAndInput("ui-highlight-color");
 export const uiCornerStyleSharpButtonEl = getButton("ui-corner-style-sharp");
 export const uiCornerStyleRoundButtonEl = getButton("ui-corner-style-round");
-export const uiCustomCSSContainerEl = document.getElementById("ui-custom-css-container") as HTMLInputElement;
-export const uiCustomCSSTextareaEl = document.getElementById("ui-custom-css-textarea") as HTMLTextAreaElement;
+export const [uiCustomCSSContainerEl, uiCustomCSSTextareaEl] = getContainerAndTextarea("ui-custom-css");
 
 export const animationsEnabledCheckboxEl = getCheckbox("animations-enabled");
 export const animationsBookmarkTimingLeftButtonEl = getButton("animations-bookmark-timing-left");

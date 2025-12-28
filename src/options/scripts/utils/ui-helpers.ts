@@ -28,6 +28,34 @@ export const getContainerAndInput = (baseId: string) => {
   return [container, input] as [HTMLDivElement, HTMLInputElement];
 };
 
+export const getContainerAndTextarea = (baseId: string) => {
+  const container = document.getElementById(`${baseId}-container`) as HTMLDivElement;
+  const textarea = document.getElementById(`${baseId}-textarea`) as HTMLTextAreaElement;
+
+  if (textarea) {
+    textarea.addEventListener("blur", () =>
+      unfocusInput({
+        container,
+        input: textarea,
+        borderClassOld: oconfig.inputBorderClass,
+        borderClassNew: "border-transparent"
+      })
+    );
+
+    textarea.addEventListener("focus", (e) =>
+      focusInput({
+        container,
+        input: textarea,
+        borderClassOld: "border-transparent",
+        borderClassNew: oconfig.inputBorderClass,
+        e
+      })
+    );
+  }
+
+  return [container, textarea] as [HTMLDivElement, HTMLTextAreaElement];
+};
+
 export const unfocusInput = ({
   container,
   input,
