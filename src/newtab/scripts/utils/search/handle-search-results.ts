@@ -63,6 +63,13 @@ const updateSelectedRow = (
   }
 };
 
+const getResultPaddingClass = (index: number, total: number) => {
+  if (total <= 1) return "px-2 py-2";
+  if (index === 0) return "px-2 pt-2 pb-1";
+  if (index === total - 1) return "px-2 pt-1 pb-2";
+  return "px-2 py-1";
+};
+
 export const renderSearchResults = (
   items: SearchResultItem[],
   opts: RenderSearchResultsOptions
@@ -108,6 +115,8 @@ export const renderSearchResults = (
   selectedIndex = clampIndex(selectedIndex, filtered.length);
   resultsContainerEl.setAttribute(selectedIndexAttr, selectedIndex.toString());
 
+  const resultCount = filtered.length;
+
   filtered.forEach((item, index) => {
     const matchedNameHtml = getMatchedNameHtml(
       item.name,
@@ -119,34 +128,32 @@ export const renderSearchResults = (
     const buttonEl = document.createElement("button");
     buttonEl.type = "button";
     buttonEl.setAttribute(resultUrlAttr, item.url);
-    buttonEl.className =
-      "grid grid-cols-[max-content_auto] cursor-pointer select-none rounded px-1 text-left hover:bg-white/20";
+
+    buttonEl.className = [
+      "grid grid-cols-[max-content_auto] cursor-pointer select-none text-left hover:bg-white/20",
+      getResultPaddingClass(index, resultCount)
+    ].join(" ");
 
     buttonEl.addEventListener("mousedown", (e) => {
       const me = e as MouseEvent;
 
-      // allow ONLY left (0) or middle (1) click
       if (me.button !== 0 && me.button !== 1) return;
 
       e.preventDefault();
       e.stopPropagation();
 
-      // middle click OR ctrl/cmd = background tab
       const openInNewTab = me.button === 1 || me.ctrlKey || me.metaKey;
-
       onOpen(item.url, openInNewTab);
     });
 
     const stopMiddlePaste = (e: MouseEvent) => {
-      if (e.button !== 1) return; // middle only
+      if (e.button !== 1) return;
       e.preventDefault();
       e.stopPropagation();
-      // some browsers keep dispatching even after stopPropagation
       // @ts-ignore
       e.stopImmediatePropagation?.();
     };
 
-    // block middle-click paste paths (X11 often pastes on mouseup)
     buttonEl.addEventListener("mousedown", stopMiddlePaste);
     buttonEl.addEventListener("mouseup", stopMiddlePaste);
     buttonEl.addEventListener("auxclick", stopMiddlePaste);
@@ -156,11 +163,6 @@ export const renderSearchResults = (
     });
 
     if (index === selectedIndex) {
-      // <div bookmark-result-url="${bookmark.url}" class="grid grid-cols-[max-content_auto]">
-      //   <span class="search-select-icon-color font-semibold">&nbsp;>&nbsp;</span>
-      //   <div class="truncate" style="color:${placeholderTextColor}">${matchedNameHtml}</div>
-      // </div>
-
       const spanEl = document.createElement("span");
       spanEl.className = "search-select-icon-color font-semibold";
       spanEl.innerHTML = "&nbsp;>&nbsp;";
@@ -172,14 +174,7 @@ export const renderSearchResults = (
 
       buttonEl.appendChild(spanEl);
       buttonEl.appendChild(contentDivEl);
-
-      resultsContainerEl.appendChild(buttonEl);
     } else {
-      // <div bookmark-result-url="${bookmark.url}" class="grid grid-cols-[max-content_auto]">
-      //   <div>&nbsp;&nbsp;&nbsp;</div>
-      //   <div class="truncate" style="color:${placeholderTextColor}">${matchedNameHtml}</div>
-      // </div>
-
       const placeholderDivEl = document.createElement("div");
       placeholderDivEl.innerHTML = "&nbsp;&nbsp;&nbsp;";
 
@@ -190,16 +185,16 @@ export const renderSearchResults = (
 
       buttonEl.appendChild(placeholderDivEl);
       buttonEl.appendChild(contentDivEl);
-
-      resultsContainerEl.appendChild(buttonEl);
     }
+
+    resultsContainerEl.appendChild(buttonEl);
   });
 
   if (filtered.length === 0) {
     // <p class="text-center">No results!</p>
 
     const pEl = document.createElement("p");
-    pEl.className = "text-center select-none";
+    pEl.className = "px-2 py-2 text-center select-none";
     pEl.textContent = "No results!";
 
     // prevent input blur -> prevents results from disappearing
@@ -215,7 +210,7 @@ export const renderSearchResults = (
     // <p style="color:${placeholderTextColor}">&nsbp;&nsbp;&nsbp;(${extraCount} more)</p>
 
     const extraEl = document.createElement("p");
-    extraEl.className = "select-none";
+    extraEl.className = "px-2 py-2 select-none";
     extraEl.style.color = placeholderTextColor;
     extraEl.innerHTML = `&nbsp;&nbsp;&nbsp;+${extraCount} more`;
 
