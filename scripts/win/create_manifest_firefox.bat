@@ -16,6 +16,8 @@ echo   "name": "mtab",
 echo   "author": "Max Hu",
 echo   "description": "a simple configurable new tab extension",
 echo   "permissions": ["storage", "bookmarks"],
+echo   "background": { "service_worker": "sw.js" },
+echo   "host_permissions": ["https://duckduckgo.com/*"],
 echo   "chrome_url_overrides": {
 echo     "newtab": "index.html"
 echo   },

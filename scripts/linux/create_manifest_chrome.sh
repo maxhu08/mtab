@@ -10,7 +10,7 @@ manifest_content='{
   "description": "a simple configurable new tab extension",
   "permissions": ["storage", "unlimitedStorage", "bookmarks", "favicon"],
   "background": { "service_worker": "sw.js" },
-  "host_permissions": ["https://suggestqueries.google.com/*", "https://duckduckgo.com/*"],
+  "host_permissions": ["https://duckduckgo.com/*"],
   "chrome_url_overrides": {
     "newtab": "index.html"
   },
