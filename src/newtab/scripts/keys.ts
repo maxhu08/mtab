@@ -60,15 +60,29 @@ export const listenToKeys = async (config: Config) => {
     if (e.key === config.hotkeys.closePageKey && !searchFocused && !bookmarkSearchFocused)
       window.close();
 
-    // search suggestions arrow nav
+    const inBookmarkSearch = bookmarkSearchSectionEl.classList.contains("grid");
     const searchResultsVisible = searchResultsSectionEl.classList.contains("block");
-    if (searchResultsVisible) {
+
+    // normal search suggestions navigation
+    if (searchFocused && searchResultsVisible) {
       handleSearchResultsNavigation(e, {
         resultsContainerEl: searchResultsContainerEl,
         selectedIndexAttr: "selected-index",
         resultUrlAttr: "search-result-url",
         refreshResults: () => {},
         onOpen: (value, openInNewTab) => search(config, value, openInNewTab)
+      });
+    }
+
+    // bookmark search navigation (exclusive)
+    if (inBookmarkSearch && searchResultsVisible) {
+      handleSearchResultsNavigation(e, {
+        resultsContainerEl: searchResultsContainerEl,
+        selectedIndexAttr: "selected-index",
+        resultUrlAttr: "bookmark-result-url",
+        refreshResults: () => {},
+        onOpen: (url, openInNewTab) =>
+          openBookmark(url, config.animations.enabled, config.animations.bookmarkType, openInNewTab)
       });
     }
 
@@ -80,27 +94,6 @@ export const listenToKeys = async (config: Config) => {
     ) {
       // if search bookmark is on already (grid)
       if (bookmarkSearchSectionEl.classList.contains("grid")) {
-        handleSearchResultsNavigation(e, {
-          resultsContainerEl: searchResultsContainerEl,
-          selectedIndexAttr: "selected-index",
-          resultUrlAttr: "bookmark-result-url",
-          refreshResults: () =>
-            enableSearchBookmark(
-              bookmarks,
-              config.search.textColor,
-              config.search.placeholderTextColor,
-              config.animations.enabled,
-              config.animations.bookmarkType
-            ),
-          onOpen: (url, openInNewTab) =>
-            openBookmark(
-              url,
-              config.animations.enabled,
-              config.animations.bookmarkType,
-              openInNewTab
-            )
-        });
-
         if (e.key === "Escape") {
           unfocusBookmarkSearch(config.animations.initialType);
           disableSearchBookmark();

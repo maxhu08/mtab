@@ -19,7 +19,7 @@ export const handleSearchAssist = (
   const resultsSectionEl = document.getElementById("search-results-section") as HTMLElement;
   const resultsContainerEl = document.getElementById("search-results-container") as HTMLElement;
 
-  const { refreshResults } = handleSearchSuggestions(config, {
+  const { refreshResults } = handleSearchSuggestions({
     inputEl: searchInputEl,
     resultsContainerEl,
     resultsSectionEl,

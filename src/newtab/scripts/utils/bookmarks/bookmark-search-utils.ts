@@ -39,7 +39,6 @@ export const unfocusBookmarkSearch = (animationType: string) => {
   bookmarkSearchContainerEl.style.borderColor = "#00000000";
   bookmarkSearchContainerEl.classList.add("border-transparent");
 
-  hideSearchResultsSection();
   searchContainerEl.classList.remove(animationType);
 
   const bookmarkEls = bookmarksContainerEl.children;

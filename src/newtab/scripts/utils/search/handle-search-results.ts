@@ -285,7 +285,6 @@ export const handleSearchResultsNavigation = (
 ) => {
   const {
     resultsContainerEl,
-    refreshResults,
     onOpen,
     selectedIndexAttr = "selected-index",
     resultUrlAttr = "bookmark-result-url"
@@ -302,7 +301,6 @@ export const handleSearchResultsNavigation = (
     e.preventDefault();
     const nextIndex = prevIndex < count - 1 ? prevIndex + 1 : 0;
     updateSelectedRow(resultsContainerEl, selectedIndexAttr, nextIndex);
-    refreshResults();
     return;
   }
 
@@ -310,7 +308,6 @@ export const handleSearchResultsNavigation = (
     e.preventDefault();
     const nextIndex = prevIndex > 0 ? prevIndex - 1 : count - 1;
     updateSelectedRow(resultsContainerEl, selectedIndexAttr, nextIndex);
-    refreshResults();
     return;
   }
 

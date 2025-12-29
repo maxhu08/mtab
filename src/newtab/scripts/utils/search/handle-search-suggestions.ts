@@ -4,7 +4,6 @@ import {
   SearchResultItem
 } from "src/newtab/scripts/utils/search/handle-search-results";
 import { fetchSearchSuggestions } from "./suggestions";
-import { Config } from "src/utils/config";
 import { bookmarksContainerEl, searchResultsSectionEl } from "src/newtab/scripts/ui";
 
 const debounce = (fn: () => void, ms: number) => {
@@ -25,7 +24,7 @@ export const hideSearchResultsSection = () => {
   searchResultsSectionEl.classList.replace("block", "hidden");
 };
 
-export const handleSearchSuggestions = (config: Config, opts: RenderSearchResultsOptions) => {
+export const handleSearchSuggestions = (opts: RenderSearchResultsOptions) => {
   const { inputEl, resultsContainerEl, maxResults = 8 } = opts;
 
   let abort: AbortController | null = null;
@@ -68,15 +67,14 @@ export const handleSearchSuggestions = (config: Config, opts: RenderSearchResult
   };
 
   const debouncedRefresh = debounce(() => {
-    void refresh();
+    refresh();
   }, 120);
 
   inputEl.addEventListener("input", debouncedRefresh);
-  inputEl.addEventListener("focus", () => void refresh());
-
-  inputEl.addEventListener("blur", () => {
-    if (inputEl.value.trim() === "") hideSearchResultsSection();
+  inputEl.addEventListener("focus", () => {
+    if (inputEl.value.trim() !== "") showSearchResultsSection();
   });
+  inputEl.addEventListener("blur", hideSearchResultsSection);
 
   return { refreshResults: refresh };
 };
