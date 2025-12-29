@@ -130,7 +130,7 @@ export const renderSearchResults = (
     buttonEl.setAttribute(resultUrlAttr, item.url);
 
     buttonEl.className = [
-      "grid grid-cols-[max-content_auto] cursor-pointer select-none text-left hover:bg-white/20",
+      "grid grid-cols-[max-content_auto] cursor-pointer select-none text-left hover:bg-white/20 duration-0",
       getResultPaddingClass(index, resultCount)
     ].join(" ");
 
