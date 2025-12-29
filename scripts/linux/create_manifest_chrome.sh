@@ -9,6 +9,8 @@ manifest_content='{
   "author": "Max Hu",
   "description": "a simple configurable new tab extension",
   "permissions": ["storage", "unlimitedStorage", "bookmarks", "favicon"],
+  "background": { "service_worker": "sw.js" },
+  "host_permissions": ["https://suggestqueries.google.com/*", "https://duckduckgo.com/*"],
   "chrome_url_overrides": {
     "newtab": "index.html"
   },

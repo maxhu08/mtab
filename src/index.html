@@ -23,6 +23,9 @@
             <input id="search-input" type="text" autocomplete="off" class="font-search placeholder-color-search bg-transparent outline-none" />
           </div>
           <div id="assistant-container" class="font-search corner-style hidden w-full grid-flow-row gap-2 p-2 text-base md:text-2xl"></div>
+          <section id="search-results-section" class="hidden w-full">
+            <div id="search-results-container" class="font-search-results corner-style grid w-full grid-flow-row overflow-hidden text-base md:text-2xl" selected-index="0"></div>
+          </section>
           <div id="bookmarks-container"></div>
         </section>
         <section id="bookmark-search-section" class="hidden w-full grid-flow-row place-items-center gap-2">
@@ -30,9 +33,6 @@
             <span class="search-bookmark-icon-color select-none font-semibold">//&nbsp;</span>
             <input id="bookmark-search-input" type="text" autocomplete="off" class="font-bookmark-search placeholder-color-bookmark-search bg-transparent outline-none" />
           </div>
-        </section>
-        <section id="search-results-section" class="hidden w-full">
-          <div id="search-results-container" class="font-search-results corner-style grid w-full grid-flow-row overflow-hidden text-base md:text-2xl" selected-index="0"></div>
         </section>
       </div>
     </div>
