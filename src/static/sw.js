@@ -1,5 +1,3 @@
-console.log("[sw] init");
-
 // eslint-disable-next-line no-undef
 chrome.runtime.onMessage.addListener((msg, _sender, sendResponse) => {
   const type = String(msg?.type ?? "");
@@ -40,7 +38,6 @@ chrome.runtime.onMessage.addListener((msg, _sender, sendResponse) => {
 
       return sendResponse({ ok: true, suggestions });
     } catch (e) {
-      console.log("[sw] error:", e);
       return sendResponse({ ok: false, suggestions: [] });
     }
   })();

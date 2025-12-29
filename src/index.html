@@ -17,23 +17,25 @@
     <div id="content" class="m-padding-bottom top-distance absolute grid w-[95%] max-w-[50rem] place-items-center gap-2 md:w-[80%]">
       <div class="grid w-full grid-flow-row place-items-center gap-2 md:gap-4">
         <p id="message" class="font-message text-size-message overflow-hidden whitespace-pre-wrap text-center font-semibold text-white"></p>
-        <section id="search-section" class="grid w-full grid-flow-row place-items-center gap-2">
-          <div id="search-container" class="font-search corner-style grid w-full grid-cols-[max-content_auto] border-2 border-transparent p-1 text-base opacity-0 md:p-2 md:text-2xl">
-            <span class="search-search-icon-color select-none font-semibold">->&nbsp;</span>
-            <input id="search-input" type="text" autocomplete="off" class="font-search placeholder-color-search bg-transparent outline-none" />
-          </div>
-          <div id="assistant-container" class="font-search corner-style hidden w-full grid-flow-row gap-2 p-2 text-base md:text-2xl"></div>
+        <div class="grid w-full gap-2">
+          <section id="search-section" class="grid w-full grid-flow-row place-items-center gap-2">
+            <div id="search-container" class="font-search corner-style grid w-full grid-cols-[max-content_auto] border-2 border-transparent p-1 text-base opacity-0 md:p-2 md:text-2xl">
+              <span class="search-search-icon-color select-none font-semibold">->&nbsp;</span>
+              <input id="search-input" type="text" autocomplete="off" class="font-search placeholder-color-search bg-transparent outline-none" />
+            </div>
+            <div id="assistant-container" class="font-search corner-style hidden w-full grid-flow-row gap-2 p-2 text-base md:text-2xl"></div>
+            <div id="bookmarks-container"></div>
+          </section>
+          <section id="bookmark-search-section" class="hidden w-full">
+            <div id="bookmark-search-container" class="font-search corner-style grid w-full grid-cols-[max-content_auto] border-2 border-transparent p-1 text-base md:p-2 md:text-2xl">
+              <span class="search-bookmark-icon-color select-none font-semibold">//&nbsp;</span>
+              <input id="bookmark-search-input" type="text" autocomplete="off" class="font-bookmark-search placeholder-color-bookmark-search bg-transparent outline-none" />
+            </div>
+          </section>
           <section id="search-results-section" class="hidden w-full">
             <div id="search-results-container" class="font-search-results corner-style grid w-full grid-flow-row overflow-hidden text-base md:text-2xl" selected-index="0"></div>
           </section>
-          <div id="bookmarks-container"></div>
-        </section>
-        <section id="bookmark-search-section" class="hidden w-full grid-flow-row place-items-center gap-2">
-          <div id="bookmark-search-container" class="font-search corner-style grid w-full grid-cols-[max-content_auto] border-2 border-transparent p-1 text-base md:p-2 md:text-2xl">
-            <span class="search-bookmark-icon-color select-none font-semibold">//&nbsp;</span>
-            <input id="bookmark-search-input" type="text" autocomplete="off" class="font-bookmark-search placeholder-color-bookmark-search bg-transparent outline-none" />
-          </div>
-        </section>
+        </div>
       </div>
     </div>
     <div id="options-button-container" class="fixed bottom-4 right-4"></div>

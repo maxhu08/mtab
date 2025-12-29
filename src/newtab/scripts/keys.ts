@@ -4,7 +4,8 @@ import {
   bookmarkSearchInputEl,
   searchResultsContainerEl,
   bookmarkSearchSectionEl,
-  searchInputEl
+  searchInputEl,
+  searchResultsSectionEl
 } from "src/newtab/scripts/ui";
 
 // utils
@@ -58,6 +59,18 @@ export const listenToKeys = async (config: Config) => {
     }
     if (e.key === config.hotkeys.closePageKey && !searchFocused && !bookmarkSearchFocused)
       window.close();
+
+    // search suggestions arrow nav
+    const searchResultsVisible = searchResultsSectionEl.classList.contains("block");
+    if (searchResultsVisible) {
+      handleSearchResultsNavigation(e, {
+        resultsContainerEl: searchResultsContainerEl,
+        selectedIndexAttr: "selected-index",
+        resultUrlAttr: "search-result-url",
+        refreshResults: () => {},
+        onOpen: (value, openInNewTab) => search(config, value, openInNewTab)
+      });
+    }
 
     // bookmarks stuff
     if (

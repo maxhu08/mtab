@@ -10,18 +10,18 @@ import {
   searchResultsSectionEl
 } from "src/newtab/scripts/ui";
 
-import { renderSearchResults } from "src/newtab/scripts/utils/search/handle-search-results";
+import {
+  renderSearchResults,
+  SearchResultItem
+} from "src/newtab/scripts/utils/search/handle-search-results";
 import { openBookmark } from "src/newtab/scripts/utils/bookmarks/open-bookmark";
-
-type SearchResultItem = {
-  name: string;
-  url: string;
-};
+import {
+  showSearchResultsSection,
+  hideSearchResultsSection
+} from "src/newtab/scripts/utils/search/handle-search-suggestions";
 
 export const tryFocusBookmarkSearch = (focusedBorderColor: string, e: KeyboardEvent) => {
-  // in case already focused
   if (bookmarkSearchInputEl.matches(":focus")) return;
-
   focusBookmarkSearch(focusedBorderColor, e);
 };
 
@@ -39,9 +39,7 @@ export const unfocusBookmarkSearch = (animationType: string) => {
   bookmarkSearchContainerEl.style.borderColor = "#00000000";
   bookmarkSearchContainerEl.classList.add("border-transparent");
 
-  // hide results section when leaving bookmark search
-  searchResultsSectionEl.classList.replace("grid", "hidden");
-
+  hideSearchResultsSection();
   searchContainerEl.classList.remove(animationType);
 
   const bookmarkEls = bookmarksContainerEl.children;
@@ -59,10 +57,10 @@ export const enableSearchBookmark = (
   animationsEnabled: boolean,
   bookmarkAnimationType: AnimationBookmarkType
 ) => {
-  searchSectionEl.classList.replace("grid", "hidden");
   bookmarkSearchSectionEl.classList.replace("hidden", "grid");
+  searchSectionEl.classList.replace("grid", "hidden");
 
-  searchResultsSectionEl.classList.replace("grid", "hidden");
+  showSearchResultsSection();
 
   refreshBookmarkSearchResults(
     bookmarks,
@@ -78,7 +76,7 @@ export const disableSearchBookmark = () => {
   searchSectionEl.classList.replace("hidden", "grid");
 
   // hide + clear
-  searchResultsSectionEl.classList.replace("grid", "hidden");
+  hideSearchResultsSection();
   searchResultsContainerEl.innerHTML = "";
 };
 
@@ -91,7 +89,15 @@ export const refreshBookmarkSearchResults = (
 ) => {
   const bookmarkWithoutFolders = bookmarks
     .filter((bm) => bm.type === "bookmark")
-    .map((bm) => ({ name: bm.name, url: bm.url }) satisfies SearchResultItem);
+    .map((bm) => ({ name: bm.name, value: bm.url }) satisfies SearchResultItem);
+
+  if (bookmarkWithoutFolders.length === 0) {
+    searchResultsContainerEl.innerHTML = "";
+    hideSearchResultsSection();
+    return;
+  }
+
+  showSearchResultsSection();
 
   renderSearchResults(bookmarkWithoutFolders, {
     resultsContainerEl: searchResultsContainerEl,
@@ -105,7 +111,7 @@ export const refreshBookmarkSearchResults = (
     onOpen: (url, openInNewTab) => {
       openBookmark(url, animationsEnabled, bookmarkAnimationType, openInNewTab);
 
-      if (openInNewTab)
+      if (openInNewTab) {
         refreshBookmarkSearchResults(
           bookmarks,
           textColor,
@@ -113,6 +119,7 @@ export const refreshBookmarkSearchResults = (
           animationsEnabled,
           bookmarkAnimationType
         );
+      }
     }
   });
 };

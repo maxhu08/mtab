@@ -221,7 +221,7 @@ export const renderSearchResults = (
   }
 
   if (resultsSectionEl) {
-    resultsSectionEl.classList.replace("hidden", "grid");
+    resultsSectionEl.classList.replace("hidden", "block");
   }
 };
 
