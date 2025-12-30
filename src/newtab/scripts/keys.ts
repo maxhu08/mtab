@@ -1,4 +1,3 @@
-// ui
 import { BookmarkNodeBookmark, Config } from "src/utils/config";
 import {
   bookmarkSearchInputEl,
@@ -8,7 +7,6 @@ import {
   searchResultsSectionEl
 } from "src/newtab/scripts/ui";
 
-// utils
 import { focusSearch, search, tryFocusSearch, unfocusSearch } from "./utils/search";
 import {
   disableSearchBookmark,
@@ -65,7 +63,7 @@ export const listenToKeys = async (config: Config) => {
 
     // normal search suggestions navigation
     if (searchFocused && searchResultsVisible) {
-      handleSearchResultsNavigation(e, {
+      handleSearchResultsNavigation(searchInputEl, e, {
         resultsContainerEl: searchResultsContainerEl,
         selectedIndexAttr: "selected-index",
         resultUrlAttr: "search-result-url",
@@ -76,7 +74,7 @@ export const listenToKeys = async (config: Config) => {
 
     // bookmark search navigation (exclusive)
     if (inBookmarkSearch && searchResultsVisible) {
-      handleSearchResultsNavigation(e, {
+      handleSearchResultsNavigation(bookmarkSearchInputEl, e, {
         resultsContainerEl: searchResultsContainerEl,
         selectedIndexAttr: "selected-index",
         resultUrlAttr: "bookmark-result-url",

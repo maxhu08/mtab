@@ -26,6 +26,7 @@ const clampIndex = (idx: number, len: number) => {
 };
 
 const updateSelectedRow = (
+  inputEl: HTMLInputElement,
   resultsContainerEl: HTMLElement,
   selectedIndexAttr: string,
   nextIndex: number
@@ -52,6 +53,10 @@ const updateSelectedRow = (
         spanEl.className = "search-select-icon-color font-semibold";
         spanEl.innerHTML = "&nbsp;>&nbsp;";
         el.replaceChild(spanEl, firstChild);
+
+        if (inputEl.id !== "bookmark-search-input") {
+          inputEl.value = (el.getAttribute("search-result-value") as string) || "";
+        }
       }
     } else {
       if (firstChild.tagName.toLowerCase() !== "div") {
@@ -128,6 +133,7 @@ export const renderSearchResults = (
     const buttonEl = document.createElement("button");
     buttonEl.type = "button";
     buttonEl.setAttribute(resultUrlAttr, item.value);
+    buttonEl.setAttribute("search-result-value", item.name);
 
     buttonEl.className = [
       "grid grid-cols-[max-content_auto] cursor-pointer select-none text-left hover:bg-white/20 duration-0",
@@ -274,22 +280,18 @@ const fuzzySearch = (search: string, items: SearchResultItem[]) => {
 
 type HandleSearchResultsNavigationOptions = {
   resultsContainerEl: HTMLElement;
-  selectedIndexAttr?: string;
-  resultUrlAttr?: string;
+  selectedIndexAttr: string;
+  resultUrlAttr: string;
   refreshResults: () => void;
   onOpen: (url: string, openInNewTab: boolean) => void;
 };
 
 export const handleSearchResultsNavigation = (
+  inputEl: HTMLInputElement,
   e: KeyboardEvent,
   opts: HandleSearchResultsNavigationOptions
 ) => {
-  const {
-    resultsContainerEl,
-    onOpen,
-    selectedIndexAttr = "selected-index",
-    resultUrlAttr = "bookmark-result-url"
-  } = opts;
+  const { resultsContainerEl, onOpen, selectedIndexAttr, resultUrlAttr } = opts;
 
   const buttons = getButtons(resultsContainerEl);
   const count = buttons.length;
@@ -301,14 +303,14 @@ export const handleSearchResultsNavigation = (
   if (e.key === "ArrowDown") {
     e.preventDefault();
     const nextIndex = prevIndex < count - 1 ? prevIndex + 1 : 0;
-    updateSelectedRow(resultsContainerEl, selectedIndexAttr, nextIndex);
+    updateSelectedRow(inputEl, resultsContainerEl, selectedIndexAttr, nextIndex);
     return;
   }
 
   if (e.key === "ArrowUp") {
     e.preventDefault();
     const nextIndex = prevIndex > 0 ? prevIndex - 1 : count - 1;
-    updateSelectedRow(resultsContainerEl, selectedIndexAttr, nextIndex);
+    updateSelectedRow(inputEl, resultsContainerEl, selectedIndexAttr, nextIndex);
     return;
   }
 
