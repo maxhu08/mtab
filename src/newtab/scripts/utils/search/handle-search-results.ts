@@ -39,6 +39,9 @@ const updateSelectedRow = (
   for (let i = 0; i < buttons.length; i++) {
     const el = buttons[i];
 
+    if (i === clamped) el.classList.add("bg-white/20");
+    else el.classList.remove("bg-white/20");
+
     const firstChild = el.firstElementChild as HTMLElement | null;
     if (!firstChild) continue;
 
@@ -131,6 +134,8 @@ export const renderSearchResults = (
       getResultPaddingClass(index, resultCount)
     ].join(" ");
 
+    if (index === selectedIndex) buttonEl.classList.add("bg-white/20");
+
     buttonEl.addEventListener("mousedown", (e) => {
       const me = e as MouseEvent;
 
@@ -154,10 +159,6 @@ export const renderSearchResults = (
     buttonEl.addEventListener("mousedown", stopMiddlePaste);
     buttonEl.addEventListener("mouseup", stopMiddlePaste);
     buttonEl.addEventListener("auxclick", stopMiddlePaste);
-
-    buttonEl.addEventListener("mouseenter", () => {
-      updateSelectedRow(resultsContainerEl, selectedIndexAttr, index);
-    });
 
     if (index === selectedIndex) {
       const spanEl = document.createElement("span");
