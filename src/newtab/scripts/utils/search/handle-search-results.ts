@@ -95,13 +95,29 @@ export const renderSearchResults = (
 
   const searchValue = inputEl.value.toLowerCase();
 
+  const rawValue = inputEl.value;
+  const isBookmarkInput = inputEl.id === "bookmark-search-input";
+
   let filtered = fuzzySearch(searchValue, items).sort((a, b) => {
     const aContains = a.name.toLowerCase().startsWith(searchValue);
     const bContains = b.name.toLowerCase().startsWith(searchValue);
     return aContains === bContains ? 0 : aContains ? -1 : 1;
   });
 
-  const extraCount = filtered.length - MAX_RESULTS;
+  // force the current input as first item (normal search only)
+  if (!isBookmarkInput) {
+    const q = rawValue.trim();
+    if (q) {
+      const qLower = q.toLowerCase();
+
+      // remove duplicates of the same text
+      filtered = filtered.filter((it) => it.name.trim().toLowerCase() !== qLower);
+
+      // put current query at the top
+      filtered.unshift({ name: q, value: q });
+    }
+  }
+
   filtered = filtered.slice(0, MAX_RESULTS);
 
   let selectedIndex = parseInt(
@@ -193,18 +209,6 @@ export const renderSearchResults = (
       e.stopPropagation();
     });
     searchResultsContainerEl.appendChild(pEl);
-  }
-
-  if (extraCount > 0) {
-    const extraEl = document.createElement("p");
-    extraEl.className = "px-2 py-2 select-none";
-    extraEl.style.color = placeholderTextColor;
-    extraEl.innerHTML = `&nbsp;&nbsp;&nbsp;+${extraCount} more`;
-    extraEl.addEventListener("mousedown", (e) => {
-      e.preventDefault();
-      e.stopPropagation();
-    });
-    searchResultsContainerEl.appendChild(extraEl);
   }
 
   searchResultsSectionEl.classList.replace("hidden", "block");
