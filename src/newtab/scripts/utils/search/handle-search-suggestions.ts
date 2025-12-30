@@ -28,6 +28,19 @@ export const hideSearchResultsSection = () => {
   searchResultsSectionEl.classList.replace("block", "hidden");
 };
 
+const uniq = (arr: string[]) => {
+  const seen = new Set<string>();
+  const out: string[] = [];
+  for (const s of arr) {
+    const v = s.trim();
+    if (!v) continue;
+    if (seen.has(v)) continue;
+    seen.add(v);
+    out.push(v);
+  }
+  return out;
+};
+
 export const handleSearchSuggestions = (opts: RenderSearchResultsOptions) => {
   const { inputEl, resultsContainerEl, selectedIndexAttr, maxResults = 8 } = opts;
 
@@ -43,6 +56,7 @@ export const handleSearchSuggestions = (opts: RenderSearchResultsOptions) => {
       hideSearchResultsSection();
       abort?.abort();
       abort = null;
+      items = [];
       return;
     }
 
@@ -54,22 +68,25 @@ export const handleSearchSuggestions = (opts: RenderSearchResultsOptions) => {
 
     if (signal.aborted) return;
 
-    const limited = suggestions.slice(0, maxResults);
+    // include the original query first, then suggestions, de-duped, max 8 total
+    const merged = uniq([q, ...suggestions]).slice(0, maxResults);
 
-    if (limited.length === 0) {
+    if (merged.length === 0) {
       resultsContainerEl.innerHTML = "";
       hideSearchResultsSection();
+      items = [];
       return;
     }
 
     showSearchResultsSection();
 
-    items = limited.map((s) => ({
+    items = merged.map((s) => ({
       name: s,
       value: s
     }));
 
     renderSearchResults(items, opts);
+    searchResultsContainerEl.setAttribute(selectedIndexAttr, "0");
   };
 
   const debouncedRefresh = debounce(() => {
@@ -77,8 +94,9 @@ export const handleSearchSuggestions = (opts: RenderSearchResultsOptions) => {
   }, 120);
 
   inputEl.addEventListener("input", debouncedRefresh);
+
   inputEl.addEventListener("focus", () => {
-    if (inputEl.value.trim() !== "") {
+    if (inputEl.value.trim() !== "" && items.length > 0) {
       searchResultsContainerEl.setAttribute(selectedIndexAttr, "0");
       showSearchResultsSection();
       renderSearchResults(items, opts);
