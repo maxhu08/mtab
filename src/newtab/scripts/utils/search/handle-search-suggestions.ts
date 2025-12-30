@@ -4,7 +4,11 @@ import {
   SearchResultItem
 } from "src/newtab/scripts/utils/search/handle-search-results";
 import { fetchSearchSuggestions } from "./suggestions";
-import { bookmarksContainerEl, searchResultsSectionEl } from "src/newtab/scripts/ui";
+import {
+  bookmarksContainerEl,
+  searchResultsContainerEl,
+  searchResultsSectionEl
+} from "src/newtab/scripts/ui";
 
 const debounce = (fn: () => void, ms: number) => {
   let t: number | undefined;
@@ -25,9 +29,11 @@ export const hideSearchResultsSection = () => {
 };
 
 export const handleSearchSuggestions = (opts: RenderSearchResultsOptions) => {
-  const { inputEl, resultsContainerEl, maxResults = 8 } = opts;
+  const { inputEl, resultsContainerEl, selectedIndexAttr, maxResults = 8 } = opts;
 
   let abort: AbortController | null = null;
+
+  let items: SearchResultItem[] = [];
 
   const refresh = async () => {
     const q = inputEl.value.trim();
@@ -58,7 +64,7 @@ export const handleSearchSuggestions = (opts: RenderSearchResultsOptions) => {
 
     showSearchResultsSection();
 
-    const items: SearchResultItem[] = limited.map((s) => ({
+    items = limited.map((s) => ({
       name: s,
       value: s
     }));
@@ -72,7 +78,11 @@ export const handleSearchSuggestions = (opts: RenderSearchResultsOptions) => {
 
   inputEl.addEventListener("input", debouncedRefresh);
   inputEl.addEventListener("focus", () => {
-    if (inputEl.value.trim() !== "") showSearchResultsSection();
+    if (inputEl.value.trim() !== "") {
+      searchResultsContainerEl.setAttribute(selectedIndexAttr, "0");
+      showSearchResultsSection();
+      renderSearchResults(items, opts);
+    }
   });
 
   inputEl.addEventListener("blur", () => {
