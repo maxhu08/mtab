@@ -74,7 +74,13 @@ export const handleSearchSuggestions = (opts: RenderSearchResultsOptions) => {
   inputEl.addEventListener("focus", () => {
     if (inputEl.value.trim() !== "") showSearchResultsSection();
   });
-  inputEl.addEventListener("blur", hideSearchResultsSection);
+
+  inputEl.addEventListener("blur", () => {
+    // if the window lost focus
+    if (!document.hasFocus()) return;
+
+    hideSearchResultsSection();
+  });
 
   return { refreshResults: refresh };
 };
