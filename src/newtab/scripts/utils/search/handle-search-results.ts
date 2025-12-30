@@ -1,19 +1,20 @@
+import { searchResultsContainerEl, searchResultsSectionEl } from "src/newtab/scripts/ui";
+
+export const SELECTED_INDEX_ATTR = "selected-index";
+export const MAX_RESULTS = 8;
+
 export type SearchResultItem = { name: string; value: string };
 
 export type RenderSearchResultsOptions = {
-  resultsContainerEl: HTMLElement;
   inputEl: HTMLInputElement;
   textColor: string;
   placeholderTextColor: string;
-  maxResults: number;
   resultUrlAttr: string;
-  selectedIndexAttr: string;
-  resultsSectionEl: HTMLElement;
   onOpen: (url: string, openInNewTab: boolean) => void;
 };
 
-const getButtons = (resultsContainerEl: HTMLElement) => {
-  return Array.from(resultsContainerEl.children).filter(
+const getButtons = () => {
+  return Array.from(searchResultsContainerEl.children).filter(
     (el) => (el as HTMLElement).tagName.toLowerCase() === "button"
   ) as HTMLButtonElement[];
 };
@@ -25,17 +26,12 @@ const clampIndex = (idx: number, len: number) => {
   return idx;
 };
 
-const updateSelectedRow = (
-  inputEl: HTMLInputElement,
-  resultsContainerEl: HTMLElement,
-  selectedIndexAttr: string,
-  nextIndex: number
-) => {
-  const buttons = getButtons(resultsContainerEl);
+const updateSelectedRow = (inputEl: HTMLInputElement, nextIndex: number) => {
+  const buttons = getButtons();
   if (buttons.length === 0) return;
 
   const clamped = clampIndex(nextIndex, buttons.length);
-  resultsContainerEl.setAttribute(selectedIndexAttr, clamped.toString());
+  searchResultsContainerEl.setAttribute(SELECTED_INDEX_ATTR, clamped.toString());
 
   for (let i = 0; i < buttons.length; i++) {
     const el = buttons[i];
@@ -46,7 +42,6 @@ const updateSelectedRow = (
     const firstChild = el.firstElementChild as HTMLElement | null;
     if (!firstChild) continue;
 
-    // first child is either the ">" span or the placeholder div
     if (i === clamped) {
       if (firstChild.tagName.toLowerCase() !== "span") {
         const spanEl = document.createElement("span");
@@ -55,7 +50,7 @@ const updateSelectedRow = (
         el.replaceChild(spanEl, firstChild);
 
         if (inputEl.id !== "bookmark-search-input") {
-          inputEl.value = (el.getAttribute("search-result-value") as string) || "";
+          inputEl.value = el.getAttribute("search-result-value") || "";
         }
       }
     } else {
@@ -80,21 +75,16 @@ export const renderSearchResults = (
   opts: RenderSearchResultsOptions
 ) => {
   const {
-    resultsContainerEl,
     inputEl,
     textColor,
     placeholderTextColor,
-    maxResults = 8,
     resultUrlAttr = "search-result-url",
-    selectedIndexAttr = "selected-index",
-    resultsSectionEl,
     onOpen
   } = opts;
 
-  resultsContainerEl.innerHTML = "";
+  searchResultsContainerEl.innerHTML = "";
 
-  // prevent input blur when clicking non-button rows (No results / +N more)
-  resultsContainerEl.onmousedown = (e) => {
+  searchResultsContainerEl.onmousedown = (e) => {
     const target = e.target as HTMLElement | null;
     const isButton = target?.closest("button");
     if (!isButton) {
@@ -111,14 +101,15 @@ export const renderSearchResults = (
     return aContains === bContains ? 0 : aContains ? -1 : 1;
   });
 
-  const extraCount = filtered.length - maxResults;
-  filtered = filtered.slice(0, maxResults);
+  const extraCount = filtered.length - MAX_RESULTS;
+  filtered = filtered.slice(0, MAX_RESULTS);
 
-  // prettier-ignore
-  let selectedIndex = parseInt(resultsContainerEl.getAttribute(selectedIndexAttr) as string);
+  let selectedIndex = parseInt(
+    searchResultsContainerEl.getAttribute(SELECTED_INDEX_ATTR) as string
+  );
 
   selectedIndex = clampIndex(selectedIndex, filtered.length);
-  resultsContainerEl.setAttribute(selectedIndexAttr, selectedIndex.toString());
+  searchResultsContainerEl.setAttribute(SELECTED_INDEX_ATTR, selectedIndex.toString());
 
   const resultCount = filtered.length;
 
@@ -144,7 +135,6 @@ export const renderSearchResults = (
 
     buttonEl.addEventListener("mousedown", (e) => {
       const me = e as MouseEvent;
-
       if (me.button !== 0 && me.button !== 1) return;
 
       e.preventDefault();
@@ -191,45 +181,33 @@ export const renderSearchResults = (
       buttonEl.appendChild(contentDivEl);
     }
 
-    resultsContainerEl.appendChild(buttonEl);
+    searchResultsContainerEl.appendChild(buttonEl);
   });
 
   if (filtered.length === 0) {
-    // <p class="text-center">No results!</p>
-
     const pEl = document.createElement("p");
     pEl.className = "px-2 py-2 text-center select-none";
     pEl.textContent = "No results!";
-
-    // prevent input blur -> prevents results from disappearing
     pEl.addEventListener("mousedown", (e) => {
       e.preventDefault();
       e.stopPropagation();
     });
-
-    resultsContainerEl.appendChild(pEl);
+    searchResultsContainerEl.appendChild(pEl);
   }
 
   if (extraCount > 0) {
-    // <p style="color:${placeholderTextColor}">&nsbp;&nsbp;&nsbp;(${extraCount} more)</p>
-
     const extraEl = document.createElement("p");
     extraEl.className = "px-2 py-2 select-none";
     extraEl.style.color = placeholderTextColor;
     extraEl.innerHTML = `&nbsp;&nbsp;&nbsp;+${extraCount} more`;
-
-    // prevent input blur -> prevents results from disappearing
     extraEl.addEventListener("mousedown", (e) => {
       e.preventDefault();
       e.stopPropagation();
     });
-
-    resultsContainerEl.appendChild(extraEl);
+    searchResultsContainerEl.appendChild(extraEl);
   }
 
-  if (resultsSectionEl) {
-    resultsSectionEl.classList.replace("hidden", "block");
-  }
+  searchResultsSectionEl.classList.replace("hidden", "block");
 };
 
 const getMatchedNameHtml = (
@@ -259,7 +237,7 @@ const getMatchedNameHtml = (
 const fuzzySearch = (search: string, items: SearchResultItem[]) => {
   if (search === "") return items;
 
-  const results = items.filter((item) => {
+  return items.filter((item) => {
     let searchIndex = 0;
     const name = item.name;
 
@@ -267,22 +245,14 @@ const fuzzySearch = (search: string, items: SearchResultItem[]) => {
       if (name[i].toLowerCase() === search[searchIndex].toLowerCase()) {
         searchIndex++;
       }
-      if (searchIndex === search.length) {
-        return true;
-      }
+      if (searchIndex === search.length) return true;
     }
-
     return false;
   });
-
-  return results;
 };
 
 type HandleSearchResultsNavigationOptions = {
-  resultsContainerEl: HTMLElement;
-  selectedIndexAttr: string;
   resultUrlAttr: string;
-  refreshResults: () => void;
   onOpen: (url: string, openInNewTab: boolean) => void;
 };
 
@@ -291,26 +261,25 @@ export const handleSearchResultsNavigation = (
   e: KeyboardEvent,
   opts: HandleSearchResultsNavigationOptions
 ) => {
-  const { resultsContainerEl, onOpen, selectedIndexAttr, resultUrlAttr } = opts;
+  const { onOpen, resultUrlAttr } = opts;
 
-  const buttons = getButtons(resultsContainerEl);
+  const buttons = getButtons();
   const count = buttons.length;
   if (count === 0) return;
 
-  // prettier-ignore
-  const prevIndex = parseInt(resultsContainerEl.getAttribute(selectedIndexAttr) as string);
+  const prevIndex = parseInt(searchResultsContainerEl.getAttribute(SELECTED_INDEX_ATTR) as string);
 
   if (e.key === "ArrowDown") {
     e.preventDefault();
     const nextIndex = prevIndex < count - 1 ? prevIndex + 1 : 0;
-    updateSelectedRow(inputEl, resultsContainerEl, selectedIndexAttr, nextIndex);
+    updateSelectedRow(inputEl, nextIndex);
     return;
   }
 
   if (e.key === "ArrowUp") {
     e.preventDefault();
     const nextIndex = prevIndex > 0 ? prevIndex - 1 : count - 1;
-    updateSelectedRow(inputEl, resultsContainerEl, selectedIndexAttr, nextIndex);
+    updateSelectedRow(inputEl, nextIndex);
     return;
   }
 
@@ -318,7 +287,7 @@ export const handleSearchResultsNavigation = (
     e.preventDefault();
 
     const idx = clampIndex(prevIndex, count);
-    const selectedEl = buttons[idx] as HTMLElement | undefined;
+    const selectedEl = buttons[idx];
     if (!selectedEl) return;
 
     const url = selectedEl.getAttribute(resultUrlAttr);

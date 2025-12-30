@@ -1,7 +1,6 @@
 import { BookmarkNodeBookmark, Config } from "src/utils/config";
 import {
   bookmarkSearchInputEl,
-  searchResultsContainerEl,
   bookmarkSearchSectionEl,
   searchInputEl,
   searchResultsSectionEl
@@ -64,10 +63,7 @@ export const listenToKeys = async (config: Config) => {
     // normal search suggestions navigation
     if (searchFocused && searchResultsVisible) {
       handleSearchResultsNavigation(searchInputEl, e, {
-        resultsContainerEl: searchResultsContainerEl,
-        selectedIndexAttr: "selected-index",
         resultUrlAttr: "search-result-url",
-        refreshResults: () => {},
         onOpen: (value, openInNewTab) => search(config, value, openInNewTab)
       });
     }
@@ -75,10 +71,7 @@ export const listenToKeys = async (config: Config) => {
     // bookmark search navigation (exclusive)
     if (inBookmarkSearch && searchResultsVisible) {
       handleSearchResultsNavigation(bookmarkSearchInputEl, e, {
-        resultsContainerEl: searchResultsContainerEl,
-        selectedIndexAttr: "selected-index",
         resultUrlAttr: "bookmark-result-url",
-        refreshResults: () => {},
         onOpen: (url, openInNewTab) =>
           openBookmark(url, config.animations.enabled, config.animations.bookmarkType, openInNewTab)
       });

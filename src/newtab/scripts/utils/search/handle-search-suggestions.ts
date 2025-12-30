@@ -1,7 +1,8 @@
 import {
   renderSearchResults,
   RenderSearchResultsOptions,
-  SearchResultItem
+  SearchResultItem,
+  SELECTED_INDEX_ATTR
 } from "src/newtab/scripts/utils/search/handle-search-results";
 import { fetchSearchSuggestions } from "./suggestions";
 import {
@@ -42,7 +43,7 @@ const uniq = (arr: string[]) => {
 };
 
 export const handleSearchSuggestions = (opts: RenderSearchResultsOptions) => {
-  const { inputEl, resultsContainerEl, selectedIndexAttr, maxResults = 8 } = opts;
+  const { inputEl } = opts;
 
   let abort: AbortController | null = null;
 
@@ -52,7 +53,7 @@ export const handleSearchSuggestions = (opts: RenderSearchResultsOptions) => {
     const q = inputEl.value.trim();
 
     if (q === "") {
-      resultsContainerEl.innerHTML = "";
+      searchResultsContainerEl.innerHTML = "";
       hideSearchResultsSection();
       abort?.abort();
       abort = null;
@@ -69,10 +70,10 @@ export const handleSearchSuggestions = (opts: RenderSearchResultsOptions) => {
     if (signal.aborted) return;
 
     // include the original query first, then suggestions, de-duped, max 8 total
-    const merged = uniq([q, ...suggestions]).slice(0, maxResults);
+    const merged = uniq([q, ...suggestions]).slice(0);
 
     if (merged.length === 0) {
-      resultsContainerEl.innerHTML = "";
+      searchResultsContainerEl.innerHTML = "";
       hideSearchResultsSection();
       items = [];
       return;
@@ -86,7 +87,7 @@ export const handleSearchSuggestions = (opts: RenderSearchResultsOptions) => {
     }));
 
     renderSearchResults(items, opts);
-    searchResultsContainerEl.setAttribute(selectedIndexAttr, "0");
+    searchResultsContainerEl.setAttribute(SELECTED_INDEX_ATTR, "0");
   };
 
   const debouncedRefresh = debounce(() => {
@@ -97,7 +98,7 @@ export const handleSearchSuggestions = (opts: RenderSearchResultsOptions) => {
 
   inputEl.addEventListener("focus", () => {
     if (inputEl.value.trim() !== "" && items.length > 0) {
-      searchResultsContainerEl.setAttribute(selectedIndexAttr, "0");
+      searchResultsContainerEl.setAttribute(SELECTED_INDEX_ATTR, "0");
       showSearchResultsSection();
       renderSearchResults(items, opts);
     }

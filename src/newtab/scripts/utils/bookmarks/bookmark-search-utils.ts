@@ -6,8 +6,7 @@ import {
   searchResultsContainerEl,
   bookmarkSearchSectionEl,
   searchContainerEl,
-  searchSectionEl,
-  searchResultsSectionEl
+  searchSectionEl
 } from "src/newtab/scripts/ui";
 
 import {
@@ -99,14 +98,10 @@ export const refreshBookmarkSearchResults = (
   showSearchResultsSection();
 
   renderSearchResults(bookmarkWithoutFolders, {
-    resultsContainerEl: searchResultsContainerEl,
     inputEl: bookmarkSearchInputEl,
     textColor,
     placeholderTextColor,
     resultUrlAttr: "bookmark-result-url",
-    selectedIndexAttr: "selected-index",
-    resultsSectionEl: searchResultsSectionEl,
-    maxResults: 8,
     onOpen: (url, openInNewTab) => {
       openBookmark(url, animationsEnabled, bookmarkAnimationType, openInNewTab);
 
