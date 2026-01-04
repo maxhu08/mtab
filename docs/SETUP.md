@@ -6,9 +6,9 @@ How to setup:
 
 requirements:
 
-- nodejs >= v21.7.2
-- bun >= v1.1.37
-- fnm >= v1.37.1
+- nodejs >= v25.2.1
+- bun >= v1.3.5
+- fnm >= v1.38.1
 - zip >= v3.0
 
 OS: (Windows/macOS/Linux)
