@@ -1,7 +1,16 @@
 // eslint-disable-next-line no-undef
 chrome.runtime.onMessage.addListener((msg, _sender, sendResponse) => {
-  // suggestion request
-  if (!msg || msg.type !== "s") return;
+  // w - warmup (stop cold start)
+  // s - suggestion request
+
+  if (!msg) return;
+
+  if (msg.type === "w") {
+    sendResponse({ ok: true });
+    return;
+  }
+
+  if (msg.type !== "s") return;
 
   (async () => {
     const q = String(msg.q || "").trim();
