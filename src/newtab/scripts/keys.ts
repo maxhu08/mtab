@@ -6,7 +6,7 @@ import {
   searchResultsSectionEl
 } from "src/newtab/scripts/ui";
 
-import { focusSearch, search, tryFocusSearch, unfocusSearch } from "./utils/search";
+import { focusSearch, openUrl, search, tryFocusSearch, unfocusSearch } from "./utils/search";
 import {
   disableSearchBookmark,
   enableSearchBookmark,
@@ -18,6 +18,7 @@ import { openBookmark } from "src/newtab/scripts/utils/bookmarks/open-bookmark";
 import { convertBrowserBookmarksToBookmarkNodes } from "src/newtab/scripts/utils/bookmarks/convert-browser-bookmarks";
 import { flattenBookmarks } from "src/newtab/scripts/utils/bookmarks/flatten-bookmarks";
 import { handleSearchResultsNavigation } from "src/newtab/scripts/utils/search/handle-search-results";
+import { recognizeUrl } from "src/newtab/scripts/utils/search/recognize-url";
 
 export const listenToKeys = async (config: Config) => {
   let bookmarks: BookmarkNodeBookmark[] = [];
@@ -64,7 +65,14 @@ export const listenToKeys = async (config: Config) => {
     if (searchFocused && searchResultsVisible) {
       handleSearchResultsNavigation(searchInputEl, e, {
         resultUrlAttr: "search-result-url",
-        onOpen: (value, openInNewTab) => search(config, value, openInNewTab)
+        onOpen: (value, openInNewTab) => {
+          const direct = recognizeUrl(value);
+          if (direct) {
+            openUrl(config, direct, openInNewTab);
+            return;
+          }
+          search(config, value, openInNewTab);
+        }
       });
     }
 
@@ -139,11 +147,18 @@ export const listenToKeys = async (config: Config) => {
       // do not search if composition is still in progress
       if (isComposing || searchInputEl.value === "") return;
 
+      const raw = searchInputEl.value;
+      const direct = recognizeUrl(raw);
+
       // open in new tab if ctrl
       if (e.ctrlKey) {
-        search(config, searchInputEl.value, true);
+        if (direct) openUrl(config, direct, true);
+        else search(config, raw, true);
         return;
       }
+
+      if (direct) openUrl(config, direct, false);
+      else search(config, raw, false);
 
       search(config, searchInputEl.value);
     }

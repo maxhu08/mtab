@@ -1,9 +1,10 @@
 import { searchResultsContainerEl, searchResultsSectionEl } from "src/newtab/scripts/ui";
+import { recognizeUrl } from "src/newtab/scripts/utils/search/recognize-url";
 
 export const SELECTED_INDEX_ATTR = "selected-index";
 export const MAX_RESULTS = 8;
 
-export type SearchResultItem = { name: string; value: string };
+export type SearchResultItem = { name: string; value: string; directLink: boolean };
 
 export type RenderSearchResultsOptions = {
   inputEl: HTMLInputElement;
@@ -113,8 +114,14 @@ export const renderSearchResults = (
       // remove duplicates of the same text
       filtered = filtered.filter((it) => it.name.trim().toLowerCase() !== qLower);
 
+      const recognized = recognizeUrl(q);
+
       // put current query at the top
-      filtered.unshift({ name: q, value: q });
+      filtered.unshift({
+        name: q,
+        value: recognized ?? q,
+        directLink: recognized !== null
+      });
     }
   }
 
@@ -134,7 +141,9 @@ export const renderSearchResults = (
       item.name,
       searchValue,
       textColor,
-      placeholderTextColor
+      placeholderTextColor,
+      "#4EA1FF",
+      item.directLink
     );
 
     const buttonEl = document.createElement("button");
@@ -218,17 +227,22 @@ const getMatchedNameHtml = (
   name: string,
   searchValue: string,
   textColor: string,
-  placeholderTextColor: string
+  placeholderTextColor: string,
+  linkTextColor: string,
+  directLink: boolean
 ) => {
   let result = "";
   let searchIndex = 0;
+
+  const matchColor = directLink ? linkTextColor : textColor;
+  const matchWeight = directLink ? "font-weight: 700;" : "";
 
   for (let i = 0; i < name.length; i++) {
     if (
       searchIndex < searchValue.length &&
       name[i].toLowerCase() === searchValue[searchIndex].toLowerCase()
     ) {
-      result += `<span style="color: ${textColor};">${name[i]}</span>`;
+      result += `<span style="color: ${matchColor}; ${matchWeight}">${name[i]}</span>`;
       searchIndex++;
     } else {
       result += `<span style="color: ${placeholderTextColor};">${name[i]}</span>`;

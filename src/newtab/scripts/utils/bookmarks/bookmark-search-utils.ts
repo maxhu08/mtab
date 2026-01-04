@@ -87,7 +87,7 @@ export const refreshBookmarkSearchResults = (
 ) => {
   const bookmarkWithoutFolders = bookmarks
     .filter((bm) => bm.type === "bookmark")
-    .map((bm) => ({ name: bm.name, value: bm.url }) satisfies SearchResultItem);
+    .map((bm) => ({ name: bm.name, value: bm.url, directLink: false }) satisfies SearchResultItem);
 
   if (bookmarkWithoutFolders.length === 0) {
     searchResultsContainerEl.innerHTML = "";

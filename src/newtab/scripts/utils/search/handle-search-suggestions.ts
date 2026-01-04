@@ -10,6 +10,7 @@ import {
   searchResultsContainerEl,
   searchResultsSectionEl
 } from "src/newtab/scripts/ui";
+import { recognizeUrl } from "src/newtab/scripts/utils/search/recognize-url";
 
 const debounce = (fn: () => void, ms: number) => {
   let t: number | undefined;
@@ -81,10 +82,14 @@ export const handleSearchSuggestions = (opts: RenderSearchResultsOptions) => {
 
     showSearchResultsSection();
 
-    items = merged.map((s) => ({
-      name: s,
-      value: s
-    }));
+    items = merged.map((s) => {
+      const recognized = recognizeUrl(s);
+      return {
+        name: s,
+        value: recognized ?? s,
+        directLink: recognized !== null
+      };
+    });
 
     renderSearchResults(items, opts);
     searchResultsContainerEl.setAttribute(SELECTED_INDEX_ATTR, "0");
@@ -96,7 +101,18 @@ export const handleSearchSuggestions = (opts: RenderSearchResultsOptions) => {
 
   inputEl.addEventListener("input", () => {
     showSearchResultsSection();
-    items = [{ name: inputEl.value, value: inputEl.value }];
+
+    const raw = inputEl.value;
+    const recognized = recognizeUrl(raw);
+
+    items = [
+      {
+        name: raw,
+        value: recognized ?? raw,
+        directLink: recognized !== null
+      }
+    ];
+
     renderSearchResults(items, opts);
     searchResultsContainerEl.setAttribute(SELECTED_INDEX_ATTR, "0");
 
