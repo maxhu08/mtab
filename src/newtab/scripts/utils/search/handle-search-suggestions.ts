@@ -94,7 +94,14 @@ export const handleSearchSuggestions = (opts: RenderSearchResultsOptions) => {
     refresh();
   }, 120);
 
-  inputEl.addEventListener("input", debouncedRefresh);
+  inputEl.addEventListener("input", () => {
+    showSearchResultsSection();
+    items = [{ name: inputEl.value, value: inputEl.value }];
+    renderSearchResults(items, opts);
+    searchResultsContainerEl.setAttribute(SELECTED_INDEX_ATTR, "0");
+
+    debouncedRefresh();
+  });
 
   inputEl.addEventListener("focus", () => {
     if (inputEl.value.trim() !== "" && items.length > 0) {
