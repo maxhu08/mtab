@@ -3,7 +3,7 @@ import { Config } from "src/utils/config";
 
 export const migrateOldConfig = (config: Config): Config => {
   // if config is before v1.9.2
-  if (!("linkTextColor" in config.search)) (config.search as any).linkTextColor = "#3b82f6";
+  if (!("linkTextColor" in config.search)) (config.search as any).linkTextColor = "#0ea5e9";
   if (typeof config.search.recognizeLinks !== "boolean") config.search.recognizeLinks = true;
   if (typeof config.search.suggestions !== "boolean") config.search.suggestions = true;
 

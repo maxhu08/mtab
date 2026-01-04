@@ -239,14 +239,13 @@ const getMatchedNameHtml = (
   let searchIndex = 0;
 
   const matchColor = directLink ? linkTextColor : textColor;
-  const matchWeight = directLink ? "font-weight: 700;" : "";
 
   for (let i = 0; i < name.length; i++) {
     if (
       searchIndex < searchValue.length &&
       name[i].toLowerCase() === searchValue[searchIndex].toLowerCase()
     ) {
-      result += `<span style="color: ${matchColor}; ${matchWeight}">${name[i]}</span>`;
+      result += `<span style="color: ${matchColor};">${name[i]}</span>`;
       searchIndex++;
     } else {
       result += `<span style="color: ${placeholderTextColor};">${name[i]}</span>`;

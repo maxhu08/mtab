@@ -94,7 +94,7 @@ export const defaultConfig: Config = {
     bookmarkIconColor: "#3b82f6",
     selectIconColor: "#f59e0b",
     recognizeLinks: true,
-    linkTextColor: "#3b82f6",
+    linkTextColor: "#0ea5e9",
     engine: "duckduckgo",
     useCustomEngine: false,
     customEngineURL: "",
