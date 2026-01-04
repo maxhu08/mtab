@@ -16,17 +16,10 @@ export const handleSearchAssist = (
   config: Config
   // history: chrome.history.HistoryItem[] = []
 ) => {
-  const resultsSectionEl = document.getElementById("search-results-section") as HTMLElement;
-  const resultsContainerEl = document.getElementById("search-results-container") as HTMLElement;
-
   const { refreshResults } = handleSearchSuggestions({
     inputEl: searchInputEl,
-    resultsContainerEl,
-    resultsSectionEl,
     textColor: config.search.textColor,
     placeholderTextColor: config.search.placeholderTextColor,
-    maxResults: 8,
-    selectedIndexAttr: "selected-index",
     resultUrlAttr: "search-result-url",
     onOpen: (value, openInNewTab) => search(config, value, openInNewTab)
   });
