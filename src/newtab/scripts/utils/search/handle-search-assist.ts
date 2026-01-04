@@ -10,7 +10,8 @@ import {
   hideAssist
 } from "src/newtab/scripts/utils/search/search-assist-utils";
 import { handleSearchSuggestions } from "src/newtab/scripts/utils/search/handle-search-suggestions";
-import { search } from "src/newtab/scripts/utils/search";
+import { openUrl, search } from "src/newtab/scripts/utils/search";
+import { recognizeUrl } from "src/newtab/scripts/utils/search/recognize-url";
 
 export const handleSearchAssist = (
   config: Config
@@ -26,7 +27,16 @@ export const handleSearchAssist = (
         linkTextColor: config.search.linkTextColor,
         recognizeLinks: config.search.recognizeLinks,
         resultUrlAttr: "search-result-url",
-        onOpen: (value, openInNewTab) => search(config, value, openInNewTab)
+        onOpen: (value, openInNewTab) => {
+          const direct = config.search.recognizeLinks ? recognizeUrl(value) : null;
+
+          if (direct) {
+            openUrl(config, direct, openInNewTab);
+            return;
+          }
+
+          search(config, value, openInNewTab);
+        }
       }).refreshResults
     : () => {};
 
