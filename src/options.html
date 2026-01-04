@@ -537,19 +537,29 @@
           <div class="h-[1px] flex-grow rounded-md bg-neutral-500"></div>
         </div>
         <section id="search-section" class="mb-20 grid grid-flow-row gap-4">
-          <div class="grid w-full grid-cols-[max-content_auto] place-items-center">
-            <p class="text-base text-white">search.enabled</p>
-            <div class="ml-auto">
-              <label class="relative inline-flex cursor-pointer items-center">
-                <input id="search-enabled-checkbox" type="checkbox" value="" class="peer sr-only" />
-                <div
-                  class="peer h-6 w-11 rounded-full bg-neutral-800 outline-none after:absolute after:left-[3px] after:top-[3px] after:aspect-square after:h-[1.15rem] after:rounded-full after:border-none after:bg-neutral-700 after:transition-all after:content-[''] peer-checked:bg-emerald-500 peer-checked:after:translate-x-full peer-checked:after:bg-white"
-                ></div>
-              </label>
+          <div class="grid gap-2">
+            <div class="grid w-full grid-cols-[max-content_auto] place-items-center">
+              <p class="text-base text-white">search.enabled</p>
+              <div class="ml-auto">
+                <label class="relative inline-flex cursor-pointer items-center">
+                  <input id="search-enabled-checkbox" type="checkbox" value="" class="peer sr-only" />
+                  <div
+                    class="peer h-6 w-11 rounded-full bg-neutral-800 outline-none after:absolute after:left-[3px] after:top-[3px] after:aspect-square after:h-[1.15rem] after:rounded-full after:border-none after:bg-neutral-700 after:transition-all after:content-[''] peer-checked:bg-emerald-500 peer-checked:after:translate-x-full peer-checked:after:bg-white"
+                  ></div>
+                </label>
+              </div>
+            </div>
+            <span class="text-base text-neutral-500">tip: press Ctrl+Enter to open your search in a new tab</span>
+          </div>
+          <div class="grid gap-2">
+            <p class="text-base text-white">search.focusedBorderColor</p>
+            <span class="text-base text-neutral-500">(use #00000000 for none)</span>
+            <div id="search-focused-border-color-container" class="grid w-full grid-cols-[max-content_auto] rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base">
+              <span class="select-none font-semibold text-pink-500">>&nbsp;</span>
+              <input id="search-focused-border-color-input" type="text" autocomplete="off" class="bg-transparent text-white placeholder-neutral-500 outline-none" placeholder="input color..." />
             </div>
           </div>
           <div id="search-enabled-section" class="grid grid-flow-row gap-4">
-            <span class="text-base text-neutral-500">tip: press Ctrl+Enter to open your search in a new tab</span>
             <div class="grid gap-2 text-base">
               <p class="text-white">search.font.type</p>
               <div class="grid grid-cols-2 gap-2">
@@ -632,6 +642,26 @@
                 <input id="search-select-icon-color-input" type="text" autocomplete="off" class="bg-transparent text-white placeholder-neutral-500 outline-none" placeholder="input color..." />
               </div>
             </div>
+            <div class="grid w-full grid-cols-[max-content_auto] place-items-center">
+              <p class="text-base text-white">search.recognizeLinks</p>
+              <div class="ml-auto">
+                <label class="relative inline-flex cursor-pointer items-center">
+                  <input id="search-recognize-links-checkbox" type="checkbox" value="" class="peer sr-only" />
+                  <div
+                    class="peer h-6 w-11 rounded-full bg-neutral-800 outline-none after:absolute after:left-[3px] after:top-[3px] after:aspect-square after:h-[1.15rem] after:rounded-full after:border-none after:bg-neutral-700 after:transition-all after:content-[''] peer-checked:bg-emerald-500 peer-checked:after:translate-x-full peer-checked:after:bg-white"
+                  ></div>
+                </label>
+              </div>
+            </div>
+            <div id="search-recognize-links-section" class="grid gap-2">
+              <div class="grid gap-2">
+                <p class="text-base text-white">search.linkTextColor</p>
+                <div id="search-link-text-color-container" class="grid w-full grid-cols-[max-content_auto] rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base">
+                  <span class="select-none font-semibold text-pink-500">>&nbsp;</span>
+                  <input id="search-link-text-color-input" type="text" autocomplete="off" class="bg-transparent text-white placeholder-neutral-500 outline-none" placeholder="input color..." />
+                </div>
+              </div>
+            </div>
             <div class="grid gap-2 text-base">
               <p class="text-white">search.engine</p>
               <div class="grid grid-cols-2 gap-2">
@@ -691,28 +721,18 @@
                 </button>
               </div>
             </div>
-            <div class="grid gap-2">
-              <p class="text-base text-white">
-                search.focusedBorderColor
-                <span class="text-base text-neutral-500">(use #00000000 for none)</span>
-              </p>
-              <div id="search-focused-border-color-container" class="grid w-full grid-cols-[max-content_auto] rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base">
-                <span class="select-none font-semibold text-pink-500">>&nbsp;</span>
-                <input id="search-focused-border-color-input" type="text" autocomplete="off" class="bg-transparent text-white placeholder-neutral-500 outline-none" placeholder="input color..." />
-              </div>
-            </div>
             <div class="grid w-full grid-cols-[max-content_auto] place-items-center">
               <p class="text-base text-white">search.useCustomEngine</p>
               <div class="ml-auto">
                 <label class="relative inline-flex cursor-pointer items-center">
-                  <input id="search-use-custom-engine-enabled-checkbox" type="checkbox" value="" class="peer sr-only" />
+                  <input id="search-use-custom-engine-checkbox" type="checkbox" value="" class="peer sr-only" />
                   <div
                     class="peer h-6 w-11 rounded-full bg-neutral-800 outline-none after:absolute after:left-[3px] after:top-[3px] after:aspect-square after:h-[1.15rem] after:rounded-full after:border-none after:bg-neutral-700 after:transition-all after:content-[''] peer-checked:bg-emerald-500 peer-checked:after:translate-x-full peer-checked:after:bg-white"
                   ></div>
                 </label>
               </div>
             </div>
-            <div id="search-use-custom-engine-enabled-section" class="grid gap-2">
+            <div id="search-use-custom-engine-section" class="grid gap-2">
               <p class="text-base text-white">search.customEngineURL</p>
               <span class="text-base text-neutral-500">Use {} to represent the search query<br />Example: https://www.google.com/search?q={}</span>
               <div id="search-custom-engine-url-container" class="grid w-full grid-cols-[max-content_auto] rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base">
@@ -739,6 +759,24 @@
               </label>
             </div>
           </div> -->
+            <div class="grid gap-2">
+              <div class="grid w-full grid-cols-[max-content_auto] place-items-center">
+                <p class="text-base text-white">search.suggestions</p>
+                <div class="ml-auto">
+                  <label class="relative inline-flex cursor-pointer items-center">
+                    <input id="search-suggestions-checkbox" type="checkbox" value="" class="peer sr-only" />
+                    <div
+                      class="peer h-6 w-11 rounded-full bg-neutral-800 outline-none after:absolute after:left-[3px] after:top-[3px] after:aspect-square after:h-[1.15rem] after:rounded-full after:border-none after:bg-neutral-700 after:transition-all after:content-[''] peer-checked:bg-emerald-500 peer-checked:after:translate-x-full peer-checked:after:bg-white"
+                    ></div>
+                  </label>
+                </div>
+              </div>
+              <p class="text-base text-neutral-500">
+                Shows live query suggestions as you type.<br /><br />
+                Suggestions are sourced from DuckDuckGo's public autocomplete suggestions API and are not based on your personal search history. Requests are sent directly from your browser to
+                DuckDuckGo and do not include cookies, accounts, extension identifiers, or other personal data.
+              </p>
+            </div>
             <div class="grid w-full grid-cols-[max-content_auto] place-items-center">
               <p class="text-base text-white">search.assist.date</p>
               <div class="ml-auto">

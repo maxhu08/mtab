@@ -10,6 +10,8 @@ export type RenderSearchResultsOptions = {
   inputEl: HTMLInputElement;
   textColor: string;
   placeholderTextColor: string;
+  linkTextColor: string;
+  recognizeLinks: boolean;
   resultUrlAttr: string;
   onOpen: (url: string, openInNewTab: boolean) => void;
 };
@@ -79,6 +81,8 @@ export const renderSearchResults = (
     inputEl,
     textColor,
     placeholderTextColor,
+    linkTextColor,
+    recognizeLinks,
     resultUrlAttr = "search-result-url",
     onOpen
   } = opts;
@@ -114,7 +118,7 @@ export const renderSearchResults = (
       // remove duplicates of the same text
       filtered = filtered.filter((it) => it.name.trim().toLowerCase() !== qLower);
 
-      const recognized = recognizeUrl(q);
+      const recognized = recognizeLinks ? recognizeUrl(q) : null;
 
       // put current query at the top
       filtered.unshift({
@@ -142,7 +146,7 @@ export const renderSearchResults = (
       searchValue,
       textColor,
       placeholderTextColor,
-      "#4EA1FF",
+      linkTextColor,
       item.directLink
     );
 

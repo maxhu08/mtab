@@ -13,7 +13,7 @@ import { saveHotkeysSettingsToDraft } from "src/options/scripts/utils/save-helpe
 import { saveBookmarksSettingsToDraft } from "src/options/scripts/utils/save-helpers/save-bookmarks";
 import { fixAllToggleCheckboxSections } from "src/options/scripts/utils/toggle-checkbox";
 import {
-  searchUseCustomEngineEnabledCheckboxEl,
+  searchUseCustomEngineCheckboxEl,
   searchCustomEngineURLInputEl
 } from "src/options/scripts/ui";
 import { saveOptionsSettingsToDraft } from "src/options/scripts/utils/save-helpers/save-options";
@@ -21,7 +21,7 @@ import { saveExtrasSettingsToDraft } from "src/options/scripts/utils/save-helper
 import { logger } from "src/utils/logger";
 
 export const saveConfig = (notify: boolean = true) => {
-  if (searchUseCustomEngineEnabledCheckboxEl.checked) {
+  if (searchUseCustomEngineCheckboxEl.checked) {
     if (!searchCustomEngineURLInputEl.value.includes("{}")) {
       alert("search.customEngineURL must contain {}, aborting save");
       return;

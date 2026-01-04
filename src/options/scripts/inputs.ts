@@ -10,7 +10,7 @@ import {
   searchEngineYandexButtonEl,
   searchEngineStartpageButtonEl,
   searchEngineEcosiaButtonEl,
-  searchUseCustomEngineEnabledCheckboxEl
+  searchUseCustomEngineCheckboxEl
 } from "src/options/scripts/ui";
 import { listenToHotkeyInputs } from "src/options/scripts/utils/hotkey-inputs";
 import { saveConfig } from "src/options/scripts/utils/save-config";
@@ -42,8 +42,8 @@ export const listenToInputs = () => {
 
   arrayOfSearchEngines.forEach((searchEngine) => {
     searchEngine.addEventListener("click", () => {
-      if (searchUseCustomEngineEnabledCheckboxEl.checked) {
-        searchUseCustomEngineEnabledCheckboxEl.click();
+      if (searchUseCustomEngineCheckboxEl.checked) {
+        searchUseCustomEngineCheckboxEl.click();
       }
     });
   });

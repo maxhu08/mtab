@@ -93,10 +93,13 @@ export const defaultConfig: Config = {
     searchIconColor: "#14b8a6",
     bookmarkIconColor: "#3b82f6",
     selectIconColor: "#f59e0b",
+    recognizeLinks: true,
+    linkTextColor: "#3b82f6",
     engine: "duckduckgo",
     useCustomEngine: false,
     customEngineURL: "",
     focusedBorderColor: "#0ea5e9",
+    suggestions: true,
     assist: {
       // history: false,
       date: true,
@@ -309,10 +312,13 @@ export interface Config {
     searchIconColor: string;
     bookmarkIconColor: string;
     selectIconColor: string;
+    recognizeLinks: boolean;
+    linkTextColor: string;
     engine: SearchEngine;
     useCustomEngine: boolean;
     customEngineURL: string;
     focusedBorderColor: string;
+    suggestions: boolean;
     assist: {
       // history: boolean;
       date: boolean;

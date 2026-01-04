@@ -16,18 +16,24 @@ export const handleSearchAssist = (
   config: Config
   // history: chrome.history.HistoryItem[] = []
 ) => {
-  const { refreshResults } = handleSearchSuggestions({
-    inputEl: searchInputEl,
-    textColor: config.search.textColor,
-    placeholderTextColor: config.search.placeholderTextColor,
-    resultUrlAttr: "search-result-url",
-    onOpen: (value, openInNewTab) => search(config, value, openInNewTab)
-  });
+  const suggestionsEnabled = config.search.suggestions;
+
+  const refreshResults = suggestionsEnabled
+    ? handleSearchSuggestions(config.search.recognizeLinks, {
+        inputEl: searchInputEl,
+        textColor: config.search.textColor,
+        placeholderTextColor: config.search.placeholderTextColor,
+        linkTextColor: config.search.linkTextColor,
+        recognizeLinks: config.search.recognizeLinks,
+        resultUrlAttr: "search-result-url",
+        onOpen: (value, openInNewTab) => search(config, value, openInNewTab)
+      }).refreshResults
+    : () => {};
 
   searchInputEl.oninput = async () => {
     const val = searchInputEl.value;
 
-    refreshResults();
+    if (suggestionsEnabled) refreshResults();
 
     if (val === "") {
       hideAssist();

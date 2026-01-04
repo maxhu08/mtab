@@ -43,7 +43,10 @@ const uniq = (arr: string[]) => {
   return out;
 };
 
-export const handleSearchSuggestions = (opts: RenderSearchResultsOptions) => {
+export const handleSearchSuggestions = (
+  recognizeLinks: boolean,
+  opts: RenderSearchResultsOptions
+) => {
   const { inputEl } = opts;
 
   let abort: AbortController | null = null;
@@ -83,7 +86,16 @@ export const handleSearchSuggestions = (opts: RenderSearchResultsOptions) => {
     showSearchResultsSection();
 
     items = merged.map((s) => {
+      if (!recognizeLinks) {
+        return {
+          name: s,
+          value: s,
+          directLink: false
+        };
+      }
+
       const recognized = recognizeUrl(s);
+
       return {
         name: s,
         value: recognized ?? s,

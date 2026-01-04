@@ -7,7 +7,7 @@ import {
   searchEngineYandexButtonEl,
   searchEngineStartpageButtonEl,
   searchEngineEcosiaButtonEl,
-  searchUseCustomEngineEnabledCheckboxEl
+  searchUseCustomEngineCheckboxEl
 } from "src/options/scripts/ui";
 
 const checkboxSections = [
@@ -15,11 +15,12 @@ const checkboxSections = [
   ["wallpaper-enabled-checkbox", "wallpaper-enabled-section"],
   ["animations-enabled-checkbox", "animations-enabled-section"],
   ["search-enabled-checkbox", "search-enabled-section"],
-  ["search-use-custom-engine-enabled-checkbox", "search-use-custom-engine-enabled-section"],
+  ["search-use-custom-engine-checkbox", "search-use-custom-engine-section"],
+  ["search-recognize-links-checkbox", "search-recognize-links-section"],
   ["hotkeys-enabled-checkbox", "hotkeys-enabled-section"]
 ];
 
-// attaches a listener to listen for change and hide/show the sectio nthe checkbox controls
+// attaches a listener to listen for change and hide/show the section the checkbox controls
 export const listenAllToggleCheckboxSections = () => {
   for (let i = 0; i < checkboxSections.length; i++) {
     listenToggleCheckboxSection(checkboxSections[i][0], checkboxSections[i][1]);
@@ -66,8 +67,8 @@ const fixToggleCheckboxSection = (checkboxId: string, sectionId: string) => {
 };
 
 const handleUseCustomEngineChecked = () => {
-  searchUseCustomEngineEnabledCheckboxEl.addEventListener("change", () => {
-    if (searchUseCustomEngineEnabledCheckboxEl.checked) {
+  searchUseCustomEngineCheckboxEl.addEventListener("change", () => {
+    if (searchUseCustomEngineCheckboxEl.checked) {
       // if the checkbox is checked, the previously selected search engine should be unselected (visually)
       const selectedSearchEngineEl = document.querySelector(
         `button[btn-option-type="search-engine"][selected="yes"]`

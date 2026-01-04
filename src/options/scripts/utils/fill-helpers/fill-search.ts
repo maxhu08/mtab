@@ -13,12 +13,15 @@ import {
   searchTextColorInputEl,
   searchPlaceholderTextColorInputEl,
   searchEnabledCheckboxEl,
-  searchUseCustomEngineEnabledCheckboxEl,
+  searchUseCustomEngineCheckboxEl,
   searchCustomEngineURLInputEl,
   searchBookmarkPlaceholderTextInputEl,
   searchSearchIconColorInputEl,
   searchBookmarkIconColorInputEl,
   searchSelectIconColorInputEl,
+  searchRecognizeLinksCheckboxEl,
+  searchLinkTextColorInputEl,
+  searchSuggestionsCheckboxEl,
   // searchAssistHistoryCheckboxEl,
   searchAssistDateCheckboxEl,
   searchAssistMathCheckboxEl,
@@ -31,6 +34,9 @@ import {
 } from "src/options/scripts/ui";
 
 export const fillSearchInputs = (config: Config) => {
+  searchEnabledCheckboxEl.checked = config.search.enabled;
+  searchFocusedBorderColorInputEl.value = config.search.focusedBorderColor;
+
   const searchFontTypePairs: Record<FontType, HTMLButtonElement> = {
     default: searchFontTypeDefaultButtonEl,
     custom: searchFontTypeCustomButtonEl
@@ -42,6 +48,9 @@ export const fillSearchInputs = (config: Config) => {
   searchPlaceholderTextInputEl.value = config.search.placeholderText;
   searchBookmarkPlaceholderTextInputEl.value = config.search.bookmarkPlaceholderText;
   searchPlaceholderTextColorInputEl.value = config.search.placeholderTextColor;
+
+  searchLinkTextColorInputEl.value = config.search.linkTextColor;
+
   searchSearchIconColorInputEl.value = config.search.searchIconColor;
   searchBookmarkIconColorInputEl.value = config.search.bookmarkIconColor;
   searchSelectIconColorInputEl.value = config.search.selectIconColor;
@@ -62,11 +71,11 @@ export const fillSearchInputs = (config: Config) => {
     searchEnginePairs[config.search.engine].click();
   }
 
-  searchFocusedBorderColorInputEl.value = config.search.focusedBorderColor;
-  searchEnabledCheckboxEl.checked = config.search.enabled;
-
-  searchUseCustomEngineEnabledCheckboxEl.checked = config.search.useCustomEngine;
+  searchUseCustomEngineCheckboxEl.checked = config.search.useCustomEngine;
   searchCustomEngineURLInputEl.value = config.search.customEngineURL;
+
+  searchRecognizeLinksCheckboxEl.checked = config.search.recognizeLinks;
+  searchSuggestionsCheckboxEl.checked = config.search.suggestions;
 
   // searchAssistHistoryCheckboxEl.checked = config.search.assist.history;
   searchAssistDateCheckboxEl.checked = config.search.assist.date;

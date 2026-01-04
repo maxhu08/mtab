@@ -5,7 +5,7 @@ import {
   searchPlaceholderTextColorInputEl,
   searchPlaceholderTextInputEl,
   searchTextColorInputEl,
-  searchUseCustomEngineEnabledCheckboxEl,
+  searchUseCustomEngineCheckboxEl,
   searchCustomEngineURLInputEl,
   searchBookmarkPlaceholderTextInputEl,
   searchSearchIconColorInputEl,
@@ -15,7 +15,10 @@ import {
   searchAssistMathCheckboxEl,
   searchAssistDefinitionsCheckboxEl,
   searchAssistConversionsCheckboxEl,
-  searchFontCustomInputEl
+  searchFontCustomInputEl,
+  searchRecognizeLinksCheckboxEl,
+  searchLinkTextColorInputEl,
+  searchSuggestionsCheckboxEl
 } from "src/options/scripts/ui";
 import { getSelectedButton } from "src/options/scripts/utils/get-selected-button";
 
@@ -36,16 +39,20 @@ export const saveSearchSettingsToDraft = (draft: Config) => {
   draft.search.placeholderText = searchPlaceholderTextInputEl.value;
   draft.search.bookmarkPlaceholderText = searchBookmarkPlaceholderTextInputEl.value;
   draft.search.placeholderTextColor = searchPlaceholderTextColorInputEl.value;
-  draft.search.bookmarkIconColor = searchBookmarkPlaceholderTextInputEl.value;
+
+  draft.search.linkTextColor = searchLinkTextColorInputEl.value;
 
   draft.search.searchIconColor = searchSearchIconColorInputEl.value;
   draft.search.bookmarkIconColor = searchBookmarkIconColorInputEl.value;
   draft.search.selectIconColor = searchSelectIconColorInputEl.value;
 
-  draft.search.useCustomEngine = searchUseCustomEngineEnabledCheckboxEl.checked;
+  draft.search.recognizeLinks = searchRecognizeLinksCheckboxEl.checked;
+  draft.search.suggestions = searchSuggestionsCheckboxEl.checked;
+
+  draft.search.useCustomEngine = searchUseCustomEngineCheckboxEl.checked;
   draft.search.customEngineURL = searchCustomEngineURLInputEl.value;
 
-  if (!searchUseCustomEngineEnabledCheckboxEl.checked) {
+  if (!searchUseCustomEngineCheckboxEl.checked) {
     const selectedEl = getSelectedButton("search-engine");
 
     const searchEnginePairs: Record<string, SearchEngine> = {

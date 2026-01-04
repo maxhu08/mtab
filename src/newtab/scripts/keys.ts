@@ -66,11 +66,13 @@ export const listenToKeys = async (config: Config) => {
       handleSearchResultsNavigation(searchInputEl, e, {
         resultUrlAttr: "search-result-url",
         onOpen: (value, openInNewTab) => {
-          const direct = recognizeUrl(value);
+          const direct = config.search.recognizeLinks ? recognizeUrl(value) : null;
+
           if (direct) {
             openUrl(config, direct, openInNewTab);
             return;
           }
+
           search(config, value, openInNewTab);
         }
       });
@@ -148,7 +150,7 @@ export const listenToKeys = async (config: Config) => {
       if (isComposing || searchInputEl.value === "") return;
 
       const raw = searchInputEl.value;
-      const direct = recognizeUrl(raw);
+      const direct = config.search.recognizeLinks ? recognizeUrl(raw) : null;
 
       // open in new tab if ctrl
       if (e.ctrlKey) {

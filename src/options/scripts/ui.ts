@@ -68,6 +68,7 @@ export const animationsBookmarkTypePageUpButtonEl = getButton("animations-bookma
 export const animationsBookmarkTypePageDownButtonEl = getButton("animations-bookmark-type-page-down");
 
 export const searchEnabledCheckboxEl = getCheckbox("search-enabled");
+export const [searchFocusedBorderColorContainerEl, searchFocusedBorderColorInputEl] = getContainerAndInput("search-focused-border-color");
 export const searchFontTypeDefaultButtonEl = getButton("search-font-type-default");
 export const searchFontTypeCustomButtonEl = getButton("search-font-type-custom");
 export const [searchFontCustomContainerEl, searchFontCustomInputEl] = getContainerAndInput("search-font-custom");
@@ -78,6 +79,8 @@ export const [searchPlaceholderTextColorContainerEl, searchPlaceholderTextColorI
 export const [searchSearchIconColorContainerEl, searchSearchIconColorInputEl] = getContainerAndInput("search-search-icon-color");
 export const [searchBookmarkIconColorContainerEl, searchBookmarkIconColorInputEl] = getContainerAndInput("search-bookmark-icon-color");
 export const [searchSelectIconColorContainerEl, searchSelectIconColorInputEl] = getContainerAndInput("search-select-icon-color");
+export const searchRecognizeLinksCheckboxEl = getCheckbox("search-recognize-links");
+export const [searchLinkTextColorContainerEl, searchLinkTextColorInputEl] = getContainerAndInput("search-link-text-color");
 export const searchEngineDuckduckgoButtonEl = getButton("search-engine-duckduckgo");
 export const searchEngineBingButtonEl = getButton("search-engine-bing");
 export const searchEngineGoogleButtonEl = getButton("search-engine-google");
@@ -87,9 +90,10 @@ export const searchEngineYandexButtonEl = getButton("search-engine-yandex");
 export const searchEngineStartpageButtonEl = getButton("search-engine-startpage");
 export const searchEngineEcosiaButtonEl = getButton("search-engine-ecosia");
 export const searchEngineKagiButtonEl = getButton("search-engine-kagi");
-export const [searchFocusedBorderColorContainerEl, searchFocusedBorderColorInputEl] = getContainerAndInput("search-focused-border-color");
-export const searchUseCustomEngineEnabledCheckboxEl = getCheckbox("search-use-custom-engine-enabled");
+export const searchUseCustomEngineCheckboxEl = getCheckbox("search-use-custom-engine");
 export const [searchCustomEngineURLContainerEl, searchCustomEngineURLInputEl] = getContainerAndInput("search-custom-engine-url");
+export const searchSuggestionsCheckboxEl = getCheckbox("search-suggestions");
+
 // export const searchAssistHistoryCheckboxEl = document.getElementById("search-assist-history-checkbox") as HTMLInputElement;
 export const searchAssistDateCheckboxEl = getCheckbox("search-assist-date");
 export const searchAssistMathCheckboxEl = getCheckbox("search-assist-math");
