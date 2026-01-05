@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="newtab/styles/tailwind.css" />
     <link rel="stylesheet" href="shared/control.css" />
     <script src="config-utils/scripts/init.ts" type="module" defer></script>
+    <script src="config-utils/scripts/utils/sonner.ts" type="module" defer></script>
     <link rel="icon" href="assets/icon.svg" type="image/x-icon" />
     <link rel="icon" href="assets/favicon.ico" type="image/x-icon" />
     <title>config-utils</title>
@@ -14,6 +15,7 @@
   <!-- TODO: add button to convert MTAB_SAVE_FORMAT -> json & json -> MTAB_SAVE_FORMAT -->
 
   <body dir="ltr" class="min-h-screen bg-neutral-900">
+    <div id="toaster-wrapper" data-rich-colors="true" data-expand="false" data-position="top-center"></div>
     <div class="mx-auto grid w-[95%] grid-flow-row sm:w-[80%] md:w-[60%] lg:w-[40%]">
       <div class="grid place-items-center gap-4 p-4">
         <img id="mtab-logo" src="./assets/icon.png" class="animate-up-bouncy aspect-square w-40" alt="logo" />

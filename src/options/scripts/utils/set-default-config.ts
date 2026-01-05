@@ -11,8 +11,8 @@ export const setDefaultConfig = () => {
     logger.log("[RESET_DEBUG]", clonedDefaultConfig);
     fillInputs(clonedDefaultConfig);
     saveConfig(false);
-    alert("options reset to default");
+    toast.success("options reset to default");
   } else {
-    alert("you selected no, options did not reset");
+    toast.info("you selected no, options did not reset");
   }
 };

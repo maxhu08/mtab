@@ -12,10 +12,10 @@ export const saveAndExportConfig = () => {
     navigator.clipboard
       .writeText(formattedExportedSave)
       .then(() => {
-        alert("config saved & copied to clipboard (╯✧▽✧)╯");
+        toast.success("config saved & copied to clipboard");
       })
-      .catch((err) => {
-        alert("could not config saved to clipboard (>_<)");
+      .catch(() => {
+        toast.error("could not config saved to clipboard");
       });
   });
 };

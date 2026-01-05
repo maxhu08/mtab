@@ -1,0 +1,127 @@
+/* credit to https://github.com/JeanxPereira/sonner-js/blob/main/sonner-js/sonner.css */
+
+#toaster-wrapper [data-sonner-toaster] {
+  width: var(--width);
+  position: fixed;
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  outline: none;
+  z-index: 999999999;
+  --border-radius: 8px;
+}
+
+#toaster-wrapper [data-sonner-toaster][data-x-position="right"] {
+  right: max(var(--offset), env(safe-area-inset-right));
+}
+
+#toaster-wrapper [data-sonner-toaster][data-x-position="left"] {
+  left: max(var(--offset), env(safe-area-inset-left));
+}
+
+#toaster-wrapper [data-sonner-toaster][data-x-position="center"] {
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+#toaster-wrapper [data-sonner-toaster][data-y-position="top"] {
+  top: max(var(--offset), env(safe-area-inset-top));
+}
+
+#toaster-wrapper [data-sonner-toaster][data-y-position="bottom"] {
+  bottom: max(var(--offset), env(safe-area-inset-bottom));
+}
+
+#toaster-wrapper [data-sonner-toaster] .toast {
+  --lift: -1;
+  --y: translateY(100%);
+  --lift-amount: calc(var(--lift) * var(--gap));
+  box-sizing: border-box;
+  opacity: 0;
+  transform: var(--y);
+  z-index: var(--z-index);
+  position: absolute;
+  width: 356px;
+  padding: 16px;
+  border-radius: var(--border-radius);
+  transition:
+    transform 400ms,
+    opacity 400ms,
+    height 400ms;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+#toaster-wrapper [data-sonner-toaster] .toast[data-y-position="top"] {
+  top: 0;
+  --y: translateY(-100%);
+  --lift: 1;
+  --lift-amount: calc(1 * var(--gap));
+}
+
+#toaster-wrapper [data-sonner-toaster] .toast[data-y-position="bottom"] {
+  bottom: 0;
+  --y: translateY(100%);
+  --lift: -1;
+  --lift-amount: calc(var(--lift) * var(--gap));
+}
+
+#toaster-wrapper [data-sonner-toaster] .toast[data-mounted="true"] {
+  --y: translateY(0);
+  opacity: 1;
+}
+
+#toaster-wrapper [data-sonner-toaster] .toast[data-mounted="true"][data-expanded="true"] {
+  --y: translateY(calc(var(--lift) * var(--offset)));
+  height: var(--initial-height);
+}
+
+#toaster-wrapper
+  [data-sonner-toaster]
+  .toast[data-mounted="true"][data-expanded="false"][data-front="false"] {
+  --scale: var(--toasts-before) * 0.05 + 1;
+  --y: translateY(calc(var(--lift-amount) * var(--toasts-before))) scale(calc(-1 * var(--scale)));
+  height: var(--front-toast-height);
+}
+
+#toaster-wrapper [data-sonner-toaster] .toast[data-visible="false"] {
+  opacity: 0;
+  pointer-events: none;
+}
+
+#toaster-wrapper [data-sonner-toaster] .toast[data-removed="true"][data-front="true"] {
+  --y: translateY(calc(var(--lift) * -100%));
+  opacity: 0;
+}
+
+#toaster-wrapper
+  [data-sonner-toaster]
+  .toast[data-removed="true"][data-front="false"][data-expanded="true"] {
+  --y: translateY(calc(var(--lift) * var(--offset) + var(--lift) * -100%));
+  opacity: 0;
+}
+
+#toaster-wrapper
+  [data-sonner-toaster]
+  .toast[data-removed="true"][data-front="false"][data-expanded="false"] {
+  --y: translateY(40%);
+  opacity: 0;
+  transition:
+    transform 500ms,
+    opacity 200ms;
+}
+
+#toaster-wrapper [data-sonner-toaster] .toast [data-icon] {
+  display: flex;
+  height: 16px;
+  width: 16px;
+  flex-shrink: 0;
+}
+
+#toaster-wrapper [data-sonner-toaster] .toast [data-content] {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}

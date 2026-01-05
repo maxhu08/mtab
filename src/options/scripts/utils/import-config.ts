@@ -10,13 +10,13 @@ export const importConfigAndSave = () => {
   const dataToImport = prompt("input your save (this will overwrite your current config)");
 
   if (dataToImport === null) {
-    alert("could not import your save");
+    toast.error("could not import your save");
     return;
   }
 
   const pattern = `MTAB_SAVE_FORMAT_`;
   if (!dataToImport.startsWith(pattern)) {
-    alert(`incorrect save version (use ${pattern})`);
+    toast.error(`incorrect save version (use ${pattern})`);
     return;
   }
 

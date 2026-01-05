@@ -11,14 +11,14 @@ export const convertSave = () => {
   const inputVal = convertInTextareaEl.value;
 
   if (inputVal === "") {
-    alert("input is empty");
+    toast.error("input is empty");
     return;
   }
 
   const prefix = "MTAB_SAVE_FORMAT_";
   if (selectedMode === "mtj") {
     if (!inputVal.startsWith(prefix)) {
-      alert("incorrect save format, should be MTAB_SAVE_FORMAT");
+      toast.error("incorrect save format, should be MTAB_SAVE_FORMAT");
       return;
     }
 
@@ -27,7 +27,7 @@ export const convertSave = () => {
     convertOutTextareaEl.value = JSON.stringify(JSON.parse(saveAsJson), null, 2);
   } else if (selectedMode === "jtm") {
     if (inputVal.startsWith(prefix)) {
-      alert("incorrect save format, should be json");
+      toast.error("incorrect save format, should be json");
       return;
     }
 

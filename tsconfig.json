@@ -1,12 +1,13 @@
 {
   "compilerOptions": {
+    "ignoreDeprecations": "6.0",
     "target": "ES5",
     "sourceMap": false,
     "module": "ESNext",
     "strict": true,
     "baseUrl": "./",
     "esModuleInterop": true,
-    "moduleResolution": "Node",
+    "moduleResolution": "bundler",
     "outDir": "mtab-v1.0.2-firefox-dist",
     "noEmitOnError": true,
     "lib": ["ES2019", "DOM"]

@@ -23,7 +23,7 @@ import { logger } from "src/utils/logger";
 export const saveConfig = (notify: boolean = true) => {
   if (searchUseCustomEngineCheckboxEl.checked) {
     if (!searchCustomEngineURLInputEl.value.includes("{}")) {
-      alert("search.customEngineURL must contain {}, aborting save");
+      toast.error("search.customEngineURL must contain {}, aborting save");
       return;
     }
   }
@@ -62,7 +62,7 @@ export const saveConfig = (notify: boolean = true) => {
         config: draft
       })
       .then(() => {
-        if (notify) alert("changes saved ☜(･ω･　)");
+        if (notify) toast.success("changes saved");
       });
 
     fixAllToggleCheckboxSections();
