@@ -1,9 +1,8 @@
-# Changes in 1.9.2
+# Changes in 1.9.3
 
 in this release:
 
-- add search query suggestions
-- replace popups with toast notifications on options page
-- add typewriter title effect
-- fix visual bugs on options page
-- fix snow effect on window resize
+- highlight recognized links in search input
+- improve link recognization in serach
+- tweak typerwiter title effect
+- bug fixes
