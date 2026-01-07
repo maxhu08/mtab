@@ -54,7 +54,7 @@ const updateSelectedRow = (inputEl: HTMLInputElement, nextIndex: number) => {
         el.replaceChild(spanEl, firstChild);
 
         if (inputEl.id !== "bookmark-search-input") {
-          setSearchValue(el.getAttribute("search-result-value") || "");
+          setSearchValue(el.getAttribute("search-result-value") || "", false);
         }
       }
     } else {
