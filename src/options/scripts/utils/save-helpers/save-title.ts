@@ -6,12 +6,22 @@ export const saveTitleSettingsToDraft = (draft: Config) => {
   draft.title.defaultTitle = titleDefaultTitleInputEl.value;
   draft.title.dynamic.enabled = titleDynamicEnabledCheckboxEl.checked;
 
-  const selectedEl = getSelectedButton("favicon-type");
+  const selectedEffectEl = getSelectedButton("title-effect-type");
 
-  if (selectedEl) {
-    if (selectedEl.id === "title-favicon-type-default-button") {
+  if (selectedEffectEl) {
+    if (selectedEffectEl.id === "title-effect-none-button") {
+      draft.title.effect = "none";
+    } else if (selectedEffectEl.id === "title-effect-typewriter-button") {
+      draft.title.effect = "typewriter";
+    }
+  }
+
+  const selectedFaviconTypeEl = getSelectedButton("favicon-type");
+
+  if (selectedFaviconTypeEl) {
+    if (selectedFaviconTypeEl.id === "title-favicon-type-default-button") {
       draft.title.faviconType = "default";
-    } else if (selectedEl.id === "title-favicon-type-custom-button") {
+    } else if (selectedFaviconTypeEl.id === "title-favicon-type-custom-button") {
       draft.title.faviconType = "custom";
     }
   }

@@ -37,6 +37,7 @@ export const defaultConfig: Config = {
     dynamic: {
       enabled: true
     },
+    effect: "none",
     faviconType: "default"
   },
   message: {
@@ -176,6 +177,7 @@ export const defaultConfig: Config = {
   }
 };
 
+export type TitleEffectType = "none" | "typewriter";
 export type FaviconType = "default" | "custom";
 export type UIStyle = "solid" | "glass";
 export type UICornerStyle = "sharp" | "round";
@@ -257,6 +259,7 @@ export interface Config {
     dynamic: {
       enabled: boolean;
     };
+    effect: TitleEffectType;
     faviconType: FaviconType;
   };
   message: {

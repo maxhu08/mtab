@@ -2,7 +2,6 @@
 import { getConfig } from "../../utils/config";
 
 // utils
-import { setTitle } from "./utils/set-title";
 import { setUISyle } from "src/newtab/scripts/utils/set-ui-style";
 import { loadWallpaper } from "src/newtab/scripts/utils/load-wallpaper";
 import { styleSearch } from "src/newtab/scripts/utils/style-search";
@@ -21,6 +20,7 @@ import { setTopDistance } from "src/newtab/scripts/utils/top-distance";
 import { handleSearchAssist } from "src/newtab/scripts/utils/search/handle-search-assist";
 import { snowStorm } from "src/newtab/scripts/utils/extras/snow-effect";
 import { initSW } from "src/newtab/scripts/sw";
+import { titleTypewriterEffect } from "src/newtab/scripts/utils/title/title-effects";
 
 export const loadPage = () => {
   const manifest = chrome.runtime.getManifest();
@@ -33,7 +33,12 @@ export const loadPage = () => {
   getConfig(({ config }) => {
     initSW();
 
-    setTitle(config.title.defaultTitle);
+    document.title = config.title.defaultTitle;
+
+    if (config.title.effect === "typewriter") {
+      titleTypewriterEffect(config.title.defaultTitle);
+    }
+
     loadFavicon(config.title.faviconType);
 
     setTopDistance(config.bookmarks.type);

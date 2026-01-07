@@ -1,6 +1,5 @@
 import { Config, SearchEngine } from "src/utils/config";
 import { searchContainerEl, searchInputEl } from "../ui";
-import { setTitle } from "src/newtab/scripts/utils/set-title";
 import { hideSearchResultsSection } from "src/newtab/scripts/utils/search/handle-search-suggestions";
 
 export const openUrl = (config: Config, url: string, openInNewTab: boolean = false) => {
@@ -11,7 +10,7 @@ export const openUrl = (config: Config, url: string, openInNewTab: boolean = fal
     searchInputEl.value = "";
     hideSearchResultsSection();
 
-    setTitle(config.title.defaultTitle);
+    document.title = config.title.defaultTitle;
     return;
   }
 

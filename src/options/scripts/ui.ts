@@ -6,6 +6,8 @@ export const [usernameContainerEl, usernameInputEl] = getContainerAndInput("user
 
 export const [titleDefaultTitleContainerEl, titleDefaultTitleInputEl] = getContainerAndInput("title-default-title");
 export const titleDynamicEnabledCheckboxEl = getCheckbox("title-dynamic-enabled");
+export const titleEffectNoneButtonEl = getButton("title-effect-none");
+export const titleEffectTypewriterButtonEl = getButton("title-effect-typewriter");
 export const titleFaviconTypeDefaultButtonEl = getButton("title-favicon-type-default");
 export const titleFaviconTypeCustomButtonEl = getButton("title-favicon-type-custom");
 export const titleCustomFaviconInputEl = document.getElementById("title-custom-favicon-upload") as HTMLInputElement;
@@ -142,6 +144,10 @@ export interface Input {
 }
 
 export const buttonSwitches: ButtonSwitch[] = [
+  {
+    buttons: [titleEffectNoneButtonEl, titleEffectTypewriterButtonEl],
+    attr: "title-effect-type"
+  },
   {
     buttons: [titleFaviconTypeDefaultButtonEl, titleFaviconTypeCustomButtonEl],
     attr: "favicon-type"

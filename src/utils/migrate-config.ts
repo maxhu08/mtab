@@ -3,6 +3,12 @@ import { Config } from "src/utils/config";
 
 export const migrateOldConfig = (config: Config): Config => {
   // if config is before v1.9.2
+  if (!config.title) {
+    (config as any).title = { effect: "none" };
+  } else if (typeof (config.title as any).effect !== "string") {
+    (config.title as any).effect = "none";
+  }
+
   if (!("linkTextColor" in config.search)) (config.search as any).linkTextColor = "#0ea5e9";
   if (typeof config.search.recognizeLinks !== "boolean") config.search.recognizeLinks = true;
   if (typeof config.search.suggestions !== "boolean") config.search.suggestions = true;
