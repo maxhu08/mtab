@@ -1,13 +1,14 @@
 import { Config, SearchEngine } from "src/utils/config";
 import { searchContainerEl, searchInputEl } from "../ui";
 import { hideSearchResultsSection } from "src/newtab/scripts/utils/search/handle-search-suggestions";
+import { setSearchValue } from "src/newtab/scripts/utils/search/set-search-value";
 
 export const openUrl = (config: Config, url: string, openInNewTab: boolean = false) => {
   if (openInNewTab) {
     window.open(url, "_blank");
 
     // hide search results and clear input
-    searchInputEl.value = "";
+    setSearchValue("");
     hideSearchResultsSection();
 
     document.title = config.title.defaultTitle;
