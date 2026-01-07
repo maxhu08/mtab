@@ -3,7 +3,7 @@
 in this release:
 
 - add search query suggestions
-- replace popups with toast notifactions on options page
+- replace popups with toast notifications on options page
 - add typewriter title effect
 - fix visual bugs on options page
 - fix snow effect on window resize
