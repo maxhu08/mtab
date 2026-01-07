@@ -1,7 +1,9 @@
-# Changes in 1.9.1
+# Changes in 1.9.2
 
 in this release:
 
-- allow for custom folder icon types
-- update remix icons from v4.6.0 -> v4.7.0
-- update fontawesome icons from v6.7.2 -> v7.1.0
+- add search query suggestions
+- replace popups with toast notifactions on options page
+- add typewriter title effect
+- fix visual bugs on options page
+- fix snow effect on window resize
