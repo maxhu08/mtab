@@ -30,7 +30,8 @@ export const titleTypewriterEffect = (text: string) => {
       index--;
       setTitle(text.slice(0, index));
 
-      if (index === 0) {
+      if (index <= 1) {
+        index = 1;
         timeoutId = window.setTimeout(() => {
           direction = "forward";
           tick();
