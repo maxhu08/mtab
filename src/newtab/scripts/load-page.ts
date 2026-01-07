@@ -21,6 +21,7 @@ import { handleSearchAssist } from "src/newtab/scripts/utils/search/handle-searc
 import { snowStorm } from "src/newtab/scripts/utils/extras/snow-effect";
 import { initSW } from "src/newtab/scripts/sw";
 import { titleTypewriterEffect } from "src/newtab/scripts/utils/title/title-effects";
+import { handleSearchHighlighting } from "src/newtab/scripts/utils/search/handle-search-highlighting";
 
 export const loadPage = () => {
   const manifest = chrome.runtime.getManifest();
@@ -93,6 +94,8 @@ export const loadPage = () => {
 
     listenToKeys(config);
     handleSearchAssist(config);
+
+    handleSearchHighlighting(config.search.textColor, config.search.linkTextColor);
 
     // extras
     if (config.extras.snow.enabled !== "off") {

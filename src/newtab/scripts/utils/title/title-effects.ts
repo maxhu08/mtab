@@ -48,7 +48,7 @@ export const titleTypewriterEffect = (text: string, titleDynamicEnabled: boolean
     }
   };
 
-  // Resume when input becomes empty again
+  // resume when input becomes empty again
   const onInput = () => {
     if (titleDynamicEnabled && paused && searchInputEl.value.trim() === "" && timeoutId === null) {
       tick();
