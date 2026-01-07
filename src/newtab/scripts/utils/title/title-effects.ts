@@ -1,21 +1,26 @@
+import { searchInputEl } from "src/newtab/scripts/ui";
+
 const TITLE_DURATION_MS = 500;
 
-// prevent title from turning into chrome://newtab
-const INVISIBLE_TITLE_CHAR = "\u200C";
-
-export const titleTypewriterEffect = (text: string) => {
+export const titleTypewriterEffect = (text: string, titleDynamicEnabled: boolean) => {
   let index = 0;
   let direction: "forward" | "backward" = "forward";
   let timeoutId: number | null = null;
-
-  const setTitle = (value: string) => {
-    document.title = value.length === 0 ? INVISIBLE_TITLE_CHAR : value;
-  };
+  let paused = false;
 
   const tick = () => {
+    // pause when search input not empty and dynamic titles are enabled
+    if (titleDynamicEnabled && searchInputEl.value.trim() !== "") {
+      paused = true;
+      timeoutId = null;
+      return;
+    }
+
+    paused = false;
+
     if (direction === "forward") {
       index++;
-      setTitle(text.slice(0, index));
+      document.title = text.slice(0, index);
 
       if (index === text.length) {
         timeoutId = window.setTimeout(() => {
@@ -28,7 +33,7 @@ export const titleTypewriterEffect = (text: string) => {
       timeoutId = window.setTimeout(tick, TITLE_DURATION_MS);
     } else {
       index--;
-      setTitle(text.slice(0, index));
+      document.title = text.slice(0, index);
 
       if (index <= 1) {
         index = 1;
@@ -43,9 +48,19 @@ export const titleTypewriterEffect = (text: string) => {
     }
   };
 
+  // Resume when input becomes empty again
+  const onInput = () => {
+    if (titleDynamicEnabled && paused && searchInputEl.value.trim() === "" && timeoutId === null) {
+      tick();
+    }
+  };
+
+  searchInputEl.addEventListener("input", onInput);
+
   tick();
 
   return () => {
     if (timeoutId !== null) window.clearTimeout(timeoutId);
+    searchInputEl.removeEventListener("input", onInput);
   };
 };
