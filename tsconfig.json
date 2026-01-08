@@ -8,7 +8,6 @@
     "baseUrl": "./",
     "esModuleInterop": true,
     "moduleResolution": "bundler",
-    "outDir": "mtab-v1.0.2-firefox-dist",
     "noEmitOnError": true,
     "lib": ["ES2019", "DOM"]
   },
