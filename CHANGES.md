@@ -3,6 +3,6 @@
 in this release:
 
 - highlight recognized links in search input
-- improve link recognization in serach
+- improve link recognization in search
 - tweak typerwiter title effect
 - bug fixes
