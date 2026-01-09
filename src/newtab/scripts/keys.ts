@@ -63,28 +63,45 @@ export const listenToKeys = async (config: Config) => {
 
     // normal search suggestions navigation
     if (searchFocused && searchResultsVisible) {
-      handleSearchResultsNavigation(searchInputEl, e, {
-        resultUrlAttr: "search-result-url",
-        onOpen: (value, openInNewTab) => {
-          const direct = config.search.recognizeLinks ? recognizeUrl(value) : null;
+      handleSearchResultsNavigation(
+        searchInputEl,
+        e,
+        {
+          resultUrlAttr: "search-result-url",
+          onOpen: (value, openInNewTab) => {
+            const direct = config.search.recognizeLinks ? recognizeUrl(value) : null;
 
-          if (direct) {
-            openUrl(config, direct, openInNewTab);
-            return;
+            if (direct) {
+              openUrl(config, direct, openInNewTab);
+              return;
+            }
+
+            search(config, value, openInNewTab);
           }
-
-          search(config, value, openInNewTab);
-        }
-      });
+        },
+        config.search.textColor,
+        config.search.linkTextColor
+      );
     }
 
     // bookmark search navigation (exclusive)
     if (inBookmarkSearch && searchResultsVisible) {
-      handleSearchResultsNavigation(bookmarkSearchInputEl, e, {
-        resultUrlAttr: "bookmark-result-url",
-        onOpen: (url, openInNewTab) =>
-          openBookmark(url, config.animations.enabled, config.animations.bookmarkType, openInNewTab)
-      });
+      handleSearchResultsNavigation(
+        bookmarkSearchInputEl,
+        e,
+        {
+          resultUrlAttr: "bookmark-result-url",
+          onOpen: (url, openInNewTab) =>
+            openBookmark(
+              url,
+              config.animations.enabled,
+              config.animations.bookmarkType,
+              openInNewTab
+            )
+        },
+        config.search.textColor,
+        config.search.linkTextColor
+      );
     }
 
     // bookmarks stuff
