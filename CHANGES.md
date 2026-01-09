@@ -1,8 +1,5 @@
-# Changes in 1.9.3
+# Changes in 1.9.4
 
 in this release:
 
-- highlight recognized links in search input
-- improve link recognization in search
-- tweak typerwiter title effect
-- bug fixes
+- visual fix with search input highlighting not working as expected on search result navigation with arrow keys
