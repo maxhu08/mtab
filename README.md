@@ -12,13 +12,19 @@
 
 mtab is an extension that offers a modern new tab page, prioritizing customizability such as choosing wallpapers, bookmarks, and more. Additionally, it emphasizes a smooth user experience through its animations on the new page.
 
-downloads here:
+## download
 
-| Browser                               | Download                                                                                                                                                                   |
-| ------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| chromium-based (chrome, brave, opera) | [<img src="./assets/download/download-chrome.svg" height="53" alt="Chromium Download">](https://chromewebstore.google.com/detail/mtab/fdaphilojaklgkoocegabckfanjoacjg)    |
-| firefox-based (firefox, floorp, zen)  | [<img src="./assets/download/download-firefox.svg" height="53" alt="Firefox Download">](https://addons.mozilla.org/firefox/addon/mtab)                                     |
-| edge                                  | [<img src="./assets/download/download-edge.svg" height="53" alt="Edge Download">](https://microsoftedge.microsoft.com/addons/detail/mtab/nalkeaciblokbmlnfhbdbmnllppkcabe) |
+Chromium-based browsers (Chrome, Brave, Opera)
+
+[<img src="./assets/download/download-chrome.svg" height="53" alt="Chromium Download">](https://chromewebstore.google.com/detail/mtab/fdaphilojaklgkoocegabckfanjoacjg)
+
+Firefox-based browsers (Firefox, Floorp, Zen)
+
+[<img src="./assets/download/download-firefox.svg" height="53" alt="Firefox Download">](https://addons.mozilla.org/firefox/addon/mtab)
+
+Microsoft Edge
+
+[<img src="./assets/download/download-edge.svg" height="53" alt="Edge Download">](https://microsoftedge.microsoft.com/addons/detail/mtab/nalkeaciblokbmlnfhbdbmnllppkcabe)
 
 ## features
 
