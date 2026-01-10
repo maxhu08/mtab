@@ -1,55 +1,97 @@
 export const recognizeUrl = (input: string): string | null => {
   const s = input.trim();
-  if (!s || /\s/.test(s)) return null;
+  if (!s) return null;
 
-  const normalizeAbsoluteHttp = (raw: string): string | null => {
-    const u =
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      typeof (URL as any).parse === "function"
-        ? // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (URL as any).parse(raw)
-        : (() => {
-            try {
-              return new URL(raw);
-            } catch {
-              return null;
-            }
-          })();
+  // fast whitespace rejection (ascii only)
+  for (let i = 0; i < s.length; i++) {
+    if (isAsciiWhitespace(s.charCodeAt(i))) return null;
+  }
 
-    if (!u) return null;
-    if (u.protocol !== "http:" && u.protocol !== "https:") return null;
-    return u.toString();
-  };
-
-  const abs = normalizeAbsoluteHttp(s);
+  // absolute http(s) url
+  const abs = tryParseHttpUrl(s);
   if (abs) return abs;
 
-  const m = s.match(/^([^/?#]+)(.*)$/);
-  if (!m) return null;
-
-  const host = m[1].toLowerCase();
-  const rest = m[2] ?? "";
-
-  const labels = host.split(".");
-  if (labels.length < 2) return null;
-
-  for (const label of labels) {
-    if (
-      label.length < 1 ||
-      label.length > 63 ||
-      !/^[a-z0-9-]+$/.test(label) ||
-      label.startsWith("-") ||
-      label.endsWith("-")
-    ) {
-      return null;
+  // split into host + rest without regex
+  let cut = s.length;
+  for (let i = 0; i < s.length; i++) {
+    const c = s.charCodeAt(i);
+    if (c === 47 || c === 63 || c === 35) {
+      // '/', '?', '#'
+      cut = i;
+      break;
     }
   }
 
-  const tld = labels[labels.length - 1];
-  if (!POPULAR_TLDS.has(tld)) return null;
+  const host = s.slice(0, cut).toLowerCase();
+  const rest = s.slice(cut);
 
-  const candidate = `https://${host}${rest}`;
-  return normalizeAbsoluteHttp(candidate);
+  if (!isValidHostAndTld(host)) return null;
+
+  // only now pay the url parsing cost
+  return tryParseHttpUrl(`https://${host}${rest}`);
+};
+
+const hasUrlParse =
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  typeof (URL as any).parse === "function";
+
+const tryParseHttpUrl = (raw: string): string | null => {
+  try {
+    const u = hasUrlParse
+      ? // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        (URL as any).parse(raw)
+      : new URL(raw);
+
+    const p = u.protocol;
+    if (p !== "http:" && p !== "https:") return null;
+    return u.toString();
+  } catch {
+    return null;
+  }
+};
+
+const isAsciiWhitespace = (c: number) =>
+  c === 9 || c === 10 || c === 11 || c === 12 || c === 13 || c === 32;
+
+const isLabelChar = (c: number) =>
+  (c >= 48 && c <= 57) || // 0-9
+  (c >= 97 && c <= 122) || // a-z
+  c === 45; // '-'
+
+const isValidHostAndTld = (hostLower: string): boolean => {
+  // must contain at least one dot and not start/end with dot
+  const lastDot = hostLower.lastIndexOf(".");
+  if (lastDot <= 0 || lastDot === hostLower.length - 1) return false;
+
+  const tld = hostLower.slice(lastDot + 1);
+  if (!POPULAR_TLDS.has(tld)) return false;
+
+  let labelLen = 0;
+  let labelStart = 0;
+
+  for (let i = 0; i <= hostLower.length; i++) {
+    const end = i === hostLower.length;
+    const c = end ? 46 : hostLower.charCodeAt(i); // sentinel '.'
+
+    if (c === 46) {
+      // close label
+      if (labelLen < 1 || labelLen > 63) return false;
+
+      const first = hostLower.charCodeAt(labelStart);
+      const last = hostLower.charCodeAt(i - 1);
+      if (first === 45 || last === 45) return false;
+
+      labelLen = 0;
+      labelStart = i + 1;
+      continue;
+    }
+
+    if (!isLabelChar(c)) return false;
+    labelLen++;
+    if (labelLen > 63) return false;
+  }
+
+  return true;
 };
 
 const POPULAR_TLDS = new Set<string>([
