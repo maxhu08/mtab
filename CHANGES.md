@@ -1,5 +1,6 @@
-# Changes in 1.9.4
+# Changes in 1.9.5
 
 in this release:
 
-- visual fix with search input highlighting not working as expected on search result navigation with arrow keys
+- add back '+N more' indicator for bookmark search
+- performance improvements
