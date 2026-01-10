@@ -14,10 +14,11 @@ mtab is an extension that offers a modern new tab page, prioritizing customizabi
 
 downloads here:
 
-| Browser                              | Download                                                                                                                                                                |
-| ------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| chromium-based (chrome, edge, brave) | [<img src="./assets/download/download-chrome.svg" height="53" alt="Chromium Download">](https://chromewebstore.google.com/detail/mtab/fdaphilojaklgkoocegabckfanjoacjg) |
-| firefox-based (firefox, floorp, zen) | [<img src="./assets/download/download-firefox.svg" height="53" alt="Firefox Download">](https://addons.mozilla.org/firefox/addon/mtab)                            |
+| Browser                               | Download                                                                                                                                                                   |
+| ------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| chromium-based (chrome, brave, opera) | [<img src="./assets/download/download-chrome.svg" height="53" alt="Chromium Download">](https://chromewebstore.google.com/detail/mtab/fdaphilojaklgkoocegabckfanjoacjg)    |
+| firefox-based (firefox, floorp, zen)  | [<img src="./assets/download/download-firefox.svg" height="53" alt="Firefox Download">](https://addons.mozilla.org/firefox/addon/mtab)                                     |
+| edge                                  | [<img src="./assets/download/download-edge.svg" height="53" alt="Edge Download">](https://microsoftedge.microsoft.com/addons/detail/mtab/nalkeaciblokbmlnfhbdbmnllppkcabe) |
 
 ## features
 
