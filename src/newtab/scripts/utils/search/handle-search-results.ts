@@ -1,5 +1,4 @@
 import { searchResultsContainerEl, searchResultsSectionEl } from "src/newtab/scripts/ui";
-import { updateSearchHighlighting } from "src/newtab/scripts/utils/search/handle-search-highlighting";
 import { recognizeUrl } from "src/newtab/scripts/utils/search/recognize-url";
 import { setSearchValue } from "src/newtab/scripts/utils/search/set-search-value";
 
@@ -31,12 +30,7 @@ const clampIndex = (idx: number, len: number) => {
   return idx;
 };
 
-const updateSelectedRow = (
-  inputEl: HTMLInputElement,
-  nextIndex: number,
-  textColor: string,
-  linkTextColor: string
-) => {
+const updateSelectedRow = (inputEl: HTMLInputElement, nextIndex: number) => {
   const buttons = getButtons();
   if (buttons.length === 0) return;
 
@@ -61,7 +55,6 @@ const updateSelectedRow = (
 
         if (inputEl.id !== "bookmark-search-input") {
           setSearchValue(el.getAttribute("search-result-value") || "", false);
-          updateSearchHighlighting(textColor, linkTextColor);
         }
       }
     } else {
@@ -288,9 +281,7 @@ type HandleSearchResultsNavigationOptions = {
 export const handleSearchResultsNavigation = (
   inputEl: HTMLInputElement,
   e: KeyboardEvent,
-  opts: HandleSearchResultsNavigationOptions,
-  textColor: string,
-  linkTextColor: string
+  opts: HandleSearchResultsNavigationOptions
 ) => {
   const { onOpen, resultUrlAttr } = opts;
 
@@ -303,14 +294,14 @@ export const handleSearchResultsNavigation = (
   if (e.key === "ArrowDown") {
     e.preventDefault();
     const nextIndex = prevIndex < count - 1 ? prevIndex + 1 : 0;
-    updateSelectedRow(inputEl, nextIndex, textColor, linkTextColor);
+    updateSelectedRow(inputEl, nextIndex);
     return;
   }
 
   if (e.key === "ArrowUp") {
     e.preventDefault();
     const nextIndex = prevIndex > 0 ? prevIndex - 1 : count - 1;
-    updateSelectedRow(inputEl, nextIndex, textColor, linkTextColor);
+    updateSelectedRow(inputEl, nextIndex);
     return;
   }
 
