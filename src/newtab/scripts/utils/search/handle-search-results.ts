@@ -130,18 +130,19 @@ export const renderSearchResults = (
     }
   }
 
-  filtered = filtered.slice(0, MAX_RESULTS);
+  const overflow = Math.max(0, filtered.length - MAX_RESULTS);
+  const visible = filtered.slice(0, MAX_RESULTS);
 
   let selectedIndex = parseInt(
     searchResultsContainerEl.getAttribute(SELECTED_INDEX_ATTR) as string
   );
 
-  selectedIndex = clampIndex(selectedIndex, filtered.length);
+  selectedIndex = clampIndex(selectedIndex, visible.length);
   searchResultsContainerEl.setAttribute(SELECTED_INDEX_ATTR, selectedIndex.toString());
 
-  const resultCount = filtered.length;
+  const totalRows = visible.length + (overflow > 0 ? 1 : 0);
 
-  filtered.forEach((item, index) => {
+  visible.forEach((item, index) => {
     const matchedNameHtml = getMatchedNameHtml(
       item.name,
       searchValue,
@@ -158,7 +159,7 @@ export const renderSearchResults = (
 
     buttonEl.className = [
       "grid grid-cols-[max-content_auto] cursor-pointer select-none text-left hover:bg-white/20 duration-0",
-      getResultPaddingClass(index, resultCount)
+      getResultPaddingClass(index, totalRows)
     ].join(" ");
 
     if (index === selectedIndex) buttonEl.classList.add("bg-white/20");
@@ -214,7 +215,32 @@ export const renderSearchResults = (
     searchResultsContainerEl.appendChild(buttonEl);
   });
 
-  if (filtered.length === 0) {
+  // non-interactive overflow row (+N more)
+  if (isBookmarkInput && overflow > 0) {
+    const moreEl = document.createElement("div");
+    moreEl.className = [
+      "grid grid-cols-[max-content_auto] select-none",
+      getResultPaddingClass(totalRows - 1, totalRows)
+    ].join(" ");
+    moreEl.setAttribute("aria-hidden", "true");
+    moreEl.tabIndex = -1;
+    moreEl.style.pointerEvents = "none";
+
+    const leftSpacer = document.createElement("div");
+    leftSpacer.innerHTML = "&nbsp;&nbsp;&nbsp;";
+
+    const textEl = document.createElement("div");
+    textEl.className = "truncate";
+    textEl.style.color = placeholderTextColor;
+    textEl.textContent = `+${overflow} more`;
+
+    moreEl.appendChild(leftSpacer);
+    moreEl.appendChild(textEl);
+
+    searchResultsContainerEl.appendChild(moreEl);
+  }
+
+  if (visible.length === 0) {
     const pEl = document.createElement("p");
     pEl.className = "px-2 py-2 text-center select-none";
     pEl.textContent = "No results!";

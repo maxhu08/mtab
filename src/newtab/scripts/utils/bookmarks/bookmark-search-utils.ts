@@ -53,7 +53,9 @@ export const enableSearchBookmark = (
   textColor: string,
   placeholderTextColor: string,
   animationsEnabled: boolean,
-  bookmarkAnimationType: AnimationBookmarkType
+  bookmarkAnimationType: AnimationBookmarkType,
+  linkTextColor: string,
+  recognizeLinks: boolean
 ) => {
   bookmarkSearchSectionEl.classList.replace("hidden", "grid");
   searchSectionEl.classList.replace("grid", "hidden");
@@ -65,7 +67,9 @@ export const enableSearchBookmark = (
     textColor,
     placeholderTextColor,
     animationsEnabled,
-    bookmarkAnimationType
+    bookmarkAnimationType,
+    linkTextColor,
+    recognizeLinks
   );
 };
 
@@ -83,7 +87,9 @@ export const refreshBookmarkSearchResults = (
   textColor: string,
   placeholderTextColor: string,
   animationsEnabled: boolean,
-  bookmarkAnimationType: AnimationBookmarkType
+  bookmarkAnimationType: AnimationBookmarkType,
+  linkTextColor: string,
+  recognizeLinks: boolean
 ) => {
   const bookmarkWithoutFolders = bookmarks
     .filter((bm) => bm.type === "bookmark")
@@ -101,6 +107,8 @@ export const refreshBookmarkSearchResults = (
     inputEl: bookmarkSearchInputEl,
     textColor,
     placeholderTextColor,
+    linkTextColor,
+    recognizeLinks,
     resultUrlAttr: "bookmark-result-url",
     onOpen: (url, openInNewTab) => {
       openBookmark(url, animationsEnabled, bookmarkAnimationType, openInNewTab);
@@ -111,7 +119,9 @@ export const refreshBookmarkSearchResults = (
           textColor,
           placeholderTextColor,
           animationsEnabled,
-          bookmarkAnimationType
+          bookmarkAnimationType,
+          linkTextColor,
+          recognizeLinks
         );
       }
     }
