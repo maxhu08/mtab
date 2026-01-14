@@ -80,9 +80,7 @@ export const refreshHandleTooltips = () => {
     theme: "dark",
     animation: "shift-away",
     duration: [120, 90] as [number, number],
-    delay: [75, 0] as [number, number],
-    arrow: true,
-    arrowType: "sharp" as const
+    delay: [75, 0] as [number, number]
   };
 
   tooltipInstances.push(
