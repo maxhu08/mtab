@@ -56,6 +56,7 @@ export const handleBookmarkNodesDragging = () => {
       },
       fallbackOnBody: true,
       swapThreshold: 0.65,
+      invertSwap: true,
       handle: ".bookmark-node-handle",
       animation: 250,
       easing: "cubic-bezier(0.42, 0, 0.58, 1)",
