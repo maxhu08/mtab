@@ -95,6 +95,28 @@ export const handleSearchSuggestions = (
   const debouncedRefresh = debounce(refresh, 120);
 
   inputEl.addEventListener("input", () => {
+    showSearchResultsSection();
+
+    const raw = inputEl.value.trim();
+    if (raw === "") {
+      items = [];
+      hideSearchResultsSection();
+      return;
+    }
+
+    const recognized = recognizeLinks ? recognizeUrl(raw) : null;
+    const first: SearchResultItem = {
+      name: raw,
+      value: recognized ?? raw,
+      directLink: recognized !== null
+    };
+
+    if (items.length === 0) items = [first];
+    else items[0] = first;
+
+    searchResultsContainerEl.setAttribute(SELECTED_INDEX_ATTR, "0");
+    renderSearchResults(items, opts);
+
     debouncedRefresh();
   });
 
