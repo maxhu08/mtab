@@ -1,0 +1,39 @@
+.tippy-box[data-theme~="dark"] {
+  background-color: #171717 !important;
+  color: #ffffff !important;
+  border-radius: 0.375rem;
+  font-size: 0.75rem;
+  line-height: 1;
+  padding: 0.375rem 0.5rem;
+  border: 1px solid #262626;
+  transform-origin: center;
+}
+
+.tippy-box[data-theme~="dark"][data-animation="shift-away"][data-state="hidden"] {
+  opacity: 0;
+  transform: translateY(6px) scale(0.96);
+}
+
+.tippy-box[data-theme~="dark"][data-animation="shift-away"][data-state="visible"] {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  transition:
+    opacity 120ms cubic-bezier(0.4, 0, 0.2, 1),
+    transform 120ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.tippy-box[data-animation="shift-away"][data-placement^="top"] {
+  transform-origin: bottom;
+}
+
+.tippy-box[data-animation="shift-away"][data-placement^="bottom"] {
+  transform-origin: top;
+}
+
+.tippy-box[data-animation="shift-away"][data-placement^="left"] {
+  transform-origin: right;
+}
+
+.tippy-box[data-animation="shift-away"][data-placement^="right"] {
+  transform-origin: left;
+}

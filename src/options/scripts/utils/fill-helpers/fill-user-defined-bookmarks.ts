@@ -4,6 +4,7 @@ import { Config, BookmarkNodeBookmark, BookmarkNodeFolder } from "src/utils/conf
 import { bookmarksUserDefinedList, Input } from "src/options/scripts/ui";
 import { getRandomColor } from "src/options/scripts/utils/random-color";
 import { genid } from "src/utils/genid";
+import tippy, { Instance } from "tippy.js";
 
 export const fillBookmarkNodeBookmarks = (config: Config) => {
   // user-defined bookmarks
@@ -28,6 +29,7 @@ export const fillBookmarkNodeBookmarks = (config: Config) => {
   });
 
   toggleCollapseAllBookmarkNodesButtonEl.click();
+  refreshHandleTooltips();
 };
 
 export const handleBookmarkNodesDragging = () => {
@@ -35,9 +37,9 @@ export const handleBookmarkNodesDragging = () => {
   const dropzones = document.querySelectorAll(".bookmarks-user-defined-dropzone") as NodeListOf<HTMLDivElement>;
 
   dropzones.forEach((dropzone: HTMLDivElement) => {
-    // Reset the sortable instance
+    // reset the sortable instance
     if (dropzone.dataset.sortableInitialized === "true") {
-      // Destroy the existing sortable instance (if any)
+      // destroy the existing sortable instance (if any)
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const sortableInstance = (dropzone as any).sortable;
       if (sortableInstance) {
@@ -45,7 +47,7 @@ export const handleBookmarkNodesDragging = () => {
       }
     }
 
-    // Reinitialize the sortable instance
+    // reinitialize the sortable instance
     new Sortable(dropzone, {
       group: {
         name: "user-defined-bookmark-group",
@@ -63,6 +65,34 @@ export const handleBookmarkNodesDragging = () => {
 
     dropzone.dataset.sortableInitialized = "true";
   });
+};
+
+let tooltipInstances: Instance[] = [];
+
+export const refreshHandleTooltips = () => {
+  // destroy old instances
+  tooltipInstances.forEach((instance) => instance.destroy());
+  tooltipInstances = [];
+
+  const base = {
+    placement: "top" as const,
+    theme: "dark",
+    animation: "shift-away",
+    duration: [120, 90] as [number, number],
+    delay: [75, 0] as [number, number],
+    arrow: true,
+    arrowType: "sharp" as const
+  };
+
+  tooltipInstances.push(
+    ...tippy(".toggle-collapse-bookmark-button", { ...base, content: "Toggle Collapse Bookmark" }),
+    ...tippy(".reposition-bookmark-button", { ...base, content: "Reposition Bookmark" }),
+    ...tippy(".delete-bookmark-button", { ...base, content: "Delete Bookmark" }),
+
+    ...tippy(".toggle-collapse-folder-button", { ...base, content: "Toggle Collapse Folder" }),
+    ...tippy(".reposition-folder-button", { ...base, content: "Reposition Folder" }),
+    ...tippy(".delete-folder-button", { ...base, content: "Delete Folder" })
+  );
 };
 
 const handleBookmarkSettings = (uuid: string) => {
@@ -363,64 +393,66 @@ const addBookmarkNodeBookmark = (bookmark: BookmarkNodeBookmark, targetDivEl: HT
   const uuid = genid();
 
   // targetDivEl.innerHTML += `
-  //   <div class="bookmark-user-defined-item bg-neutral-800 grid grid-cols-[max-content_auto] rounded-md overflow-hidden" node-type="bookmark" bookmark-node-uuid="${uuid}">
-  //     <div id="bookmark-${uuid}-user-defined-accent" class="w-1 h-full" style="background-color:${bookmark.color};"></div>
-  //     <div class="p-2 grid grid-flow-row gap-4">
-  //       <div class="grid grid-cols-[max-content_auto_max-content] place-items-center">
-  //         <i class="text-white ri-bookmark-fill"></i>
-  //         <span id="bookmark-${uuid}-user-defined-useless-title" class="text-white text-base my-auto mr-auto ml-2">${bookmark.name}</span>
-  //         <div class="grid grid-cols-3 gap-2">
-  //           <button id="bookmark-${uuid}-toggle-collapse-button" class="bg-neutral-500 hover:bg-neutral-600 transition w-10 aspect-square rounded-md cursor-pointer">
-  //             <i class="text-white ri-collapse-horizontal-line"></i>
-  //           </button>
-  //           <button class="bookmark-node-handle bg-neutral-500 hover:bg-neutral-600 transition w-10 aspect-square rounded-md cursor-pointer">
-  //             <i class="text-white ri-draggable"></i>
-  //           </button>
-  //           <button id="bookmark-${uuid}-delete-button" class="bg-rose-500 hover:bg-rose-600 transition w-10 aspect-square rounded-md cursor-pointer">
-  //             <i class="text-white ri-delete-bin-6-line"></i>
-  //           </button>
+  // <div class="bookmark-user-defined-item bg-neutral-800 grid grid-cols-[max-content_auto] rounded-md overflow-hidden" node-type="bookmark" bookmark-node-uuid="${uuid}">
+  //   <div id="bookmark-${uuid}-user-defined-accent" class="w-1 h-full" style="background-color:${bookmark.color};"></div>
+  //   <div class="p-2 grid grid-flow-row gap-4">
+  //     <div class="grid grid-cols-[max-content_auto_max-content] place-items-center">
+  //       <i class="text-white ri-bookmark-fill"></i>
+  //       <span id="bookmark-${uuid}-user-defined-useless-title" class="text-white text-base my-auto mr-auto ml-2">
+  //         ${bookmark.name}
+  //       </span>
+  //       <div class="grid grid-cols-3 gap-2">
+  //         <button id="bookmark-${uuid}-toggle-collapse-button" class="toggle-collapse-bookmark-button bg-neutral-500 hover:bg-neutral-600 transition w-10 aspect-square rounded-md cursor-pointer">
+  //           <i class="text-white ri-collapse-horizontal-line"></i>
+  //         </button>
+  //         <button class="reposition-bookmark-button bookmark-node-handle bg-neutral-500 hover:bg-neutral-600 transition w-10 aspect-square rounded-md cursor-pointer">
+  //           <i class="text-white ri-draggable"></i>
+  //         </button>
+  //         <button id="bookmark-${uuid}-delete-button" class="delete-bookmark-button bg-rose-500 hover:bg-rose-600 transition w-10 aspect-square rounded-md cursor-pointer">
+  //           <i class="text-white ri-delete-bin-6-line"></i>
+  //         </button>
+  //       </div>
+  //     </div>
+  //     <div id="bookmark-${uuid}-collapsible-content" state="expanded" class="grid grid-flow-row gap-4">
+  //       <div class="bg-neutral-500 h-[1px] rounded-md my-auto"></div>
+  //       <div class="grid gap-2">
+  //         <p class="text-white text-base">bookmark.name</p>
+  //         <div id="bookmark-${uuid}-name-container" class="grid grid-cols-[max-content_auto] text-base bg-neutral-900 w-full p-1 rounded-md border-2 border-transparent">
+  //           <span class="text-pink-500 font-semibold select-none">&gt;&nbsp;</span>
+  //           <input id="bookmark-${uuid}-name-input" type="text" autocomplete="off" class="outline-none bg-transparent text-white placeholder-neutral-500" placeholder="input name..." value="${bookmark.name}">
   //         </div>
   //       </div>
-  //       <div id="bookmark-${uuid}-collapsible-content" state="expanded" class="grid grid-flow-row gap-4">
-  //         <div class="bg-neutral-500 h-[1px] rounded-md my-auto"></div>
-  //         <div class="grid gap-2">
-  //           <p class="text-white text-base">bookmark.name</p>
-  //           <div id="bookmark-${uuid}-name-container" class="grid grid-cols-[max-content_auto] text-base bg-neutral-900 w-full p-1 rounded-md border-2 border-transparent">
-  //             <span class="text-pink-500 font-semibold select-none">>&nbsp;</span>
-  //             <input id="bookmark-${uuid}-name-input" type="text" autocomplete="off" class="outline-none bg-transparent text-white placeholder-neutral-500" placeholder="input name..." value="${bookmark.name}">
-  //           </div>
+  //       <div class="grid gap-2">
+  //         <p class="text-white text-base">bookmark.url</p>
+  //         <div id="bookmark-${uuid}-url-container" class="grid grid-cols-[max-content_auto] text-base bg-neutral-900 w-full p-1 rounded-md border-2 border-transparent">
+  //           <span class="text-pink-500 font-semibold select-none">&gt;&nbsp;</span>
+  //           <input id="bookmark-${uuid}-url-input" type="text" autocomplete="off" class="outline-none bg-transparent text-white placeholder-neutral-500" placeholder="input url..." value="${bookmark.url}">
   //         </div>
-  //         <div class="grid gap-2">
-  //           <p class="text-white text-base">bookmark.url</p>
-  //           <div id="bookmark-${uuid}-url-container" class="grid grid-cols-[max-content_auto] text-base bg-neutral-900 w-full p-1 rounded-md border-2 border-transparent">
-  //             <span class="text-pink-500 font-semibold select-none">>&nbsp;</span>
-  //             <input id="bookmark-${uuid}-url-input" type="text" autocomplete="off" class="outline-none bg-transparent text-white placeholder-neutral-500" placeholder="input url..." value="${bookmark.url}">
-  //           </div>
+  //       </div>
+  //       <div class="grid gap-2">
+  //         <p class="text-white text-base">bookmark.color</p>
+  //         <div id="bookmark-${uuid}-color-container" class="grid grid-cols-[max-content_auto] text-base bg-neutral-900 w-full p-1 rounded-md border-2 border-transparent">
+  //           <span class="text-pink-500 font-semibold select-none">&gt;&nbsp;</span>
+  //           <input id="bookmark-${uuid}-color-input" type="text" autocomplete="off" class="outline-none bg-transparent text-white placeholder-neutral-500" placeholder="input color..." value="${bookmark.color}">
   //         </div>
-  //         <div class="grid gap-2">
-  //           <p class="text-white text-base">bookmark.color</p>
-  //           <div id="bookmark-${uuid}-color-container" class="grid grid-cols-[max-content_auto] text-base bg-neutral-900 w-full p-1 rounded-md border-2 border-transparent">
-  //             <span class="text-pink-500 font-semibold select-none">>&nbsp;</span>
-  //             <input id="bookmark-${uuid}-color-input" type="text" autocomplete="off" class="outline-none bg-transparent text-white placeholder-neutral-500" placeholder="input color..." value="${bookmark.color}">
-  //           </div>
+  //       </div>
+  //       <div class="grid gap-2">
+  //         <p class="text-white text-base">bookmark.iconType</p>
+  //         <div id="bookmark-${uuid}-icon-type-container" class="grid grid-cols-[max-content_auto] text-base bg-neutral-900 w-full p-1 rounded-md border-2 border-transparent">
+  //           <span class="text-pink-500 font-semibold select-none">&gt;&nbsp;</span>
+  //           <input id="bookmark-${uuid}-icon-type-input" type="text" autocomplete="off" class="outline-none bg-transparent text-white placeholder-neutral-500" placeholder="input icon-type..." value="${bookmark.iconType}">
   //         </div>
-  //         <div class="grid gap-2">
-  //           <p class="text-white text-base">bookmark.iconType</p>
-  //           <div id="bookmark-${uuid}-icon-type-container" class="grid grid-cols-[max-content_auto] text-base bg-neutral-900 w-full p-1 rounded-md border-2 border-transparent">
-  //             <span class="text-pink-500 font-semibold select-none">>&nbsp;</span>
-  //             <input id="bookmark-${uuid}-icon-type-input" type="text" autocomplete="off" class="outline-none bg-transparent text-white placeholder-neutral-500" placeholder="input icon-type..." value="${bookmark.iconType}">
-  //           </div>
-  //         </div>
-  //         <div class="grid gap-2">
-  //           <p class="text-white text-base">bookmark.iconColor</p>
-  //           <div id="bookmark-${uuid}-icon-color-container" class="grid grid-cols-[max-content_auto] text-base bg-neutral-900 w-full p-1 rounded-md border-2 border-transparent">
-  //             <span class="text-pink-500 font-semibold select-none">>&nbsp;</span>
-  //             <input id="bookmark-${uuid}-icon-color-input" type="text" autocomplete="off" class="outline-none bg-transparent text-white placeholder-neutral-500" placeholder="input-icon color..." value="${bookmark.iconColor}">
-  //           </div>
+  //       </div>
+  //       <div class="grid gap-2">
+  //         <p class="text-white text-base">bookmark.iconColor</p>
+  //         <div id="bookmark-${uuid}-icon-color-container" class="grid grid-cols-[max-content_auto] text-base bg-neutral-900 w-full p-1 rounded-md border-2 border-transparent">
+  //           <span class="text-pink-500 font-semibold select-none">&gt;&nbsp;</span>
+  //           <input id="bookmark-${uuid}-icon-color-input" type="text" autocomplete="off" class="outline-none bg-transparent text-white placeholder-neutral-500" placeholder="input icon color..." value="${bookmark.iconColor}">
   //         </div>
   //       </div>
   //     </div>
   //   </div>
+  // </div>
   // `;
 
   // container div
@@ -459,13 +491,16 @@ const addBookmarkNodeBookmark = (bookmark: BookmarkNodeBookmark, targetDivEl: HT
     {
       id: `bookmark-${uuid}-toggle-collapse-button`,
       icon: "ri-collapse-horizontal-line",
-      class: "bg-neutral-500 hover:bg-neutral-600"
+      class: "toggle-collapse-bookmark-button bg-neutral-500 hover:bg-neutral-600"
     },
-    { class: "bookmark-node-handle bg-neutral-500 hover:bg-neutral-600", icon: "ri-draggable" },
+    {
+      icon: "ri-draggable",
+      class: "reposition-bookmark-button bookmark-node-handle bg-neutral-500 hover:bg-neutral-600"
+    },
     {
       id: `bookmark-${uuid}-delete-button`,
       icon: "ri-delete-bin-6-line",
-      class: "bg-rose-500 hover:bg-rose-600"
+      class: "delete-bookmark-button bg-rose-500 hover:bg-rose-600"
     }
   ];
 
@@ -539,67 +574,70 @@ const addBookmarkNodeBookmark = (bookmark: BookmarkNodeBookmark, targetDivEl: HT
 
   handleBookmarkSettings(uuid);
   fixBookmarkNodes();
+  refreshHandleTooltips();
 };
 
 const addBookmarkNodeFolder = (folder: BookmarkNodeFolder, targetDivEl: HTMLDivElement) => {
   const uuid = genid();
 
   // targetDivEl.innerHTML += `
-  //   <div class="bookmark-user-defined-item bg-neutral-800 grid grid-cols-[max-content_auto] rounded-md overflow-hidden" node-type="folder" bookmark-node-uuid="${uuid}">
-  //     <div id="bookmark-${uuid}-user-defined-accent" class="w-1 h-full" style="background-color:${folder.color};"></div>
-  //     <div class="p-2 grid grid-flow-row gap-2">
-  //       <div class="grid grid-cols-[max-content_auto_max-content] place-items-center">
-  //         <i class="text-white ri-folder-fill"></i>
-  //         <span id="bookmark-${uuid}-user-defined-useless-title" class="text-white text-base my-auto mr-auto ml-2">${folder.name}</span>
-  //         <div class="grid grid-cols-3 gap-2">
-  //           <button id="bookmark-${uuid}-toggle-collapse-button" class="bg-neutral-500 hover:bg-neutral-600 transition w-10 aspect-square rounded-md cursor-pointer">
-  //             <i class="text-white ri-collapse-horizontal-line"></i>
-  //           </button>
-  //           <button class="bookmark-node-handle bg-neutral-500 hover:bg-neutral-600 transition w-10 aspect-square rounded-md cursor-pointer">
-  //             <i class="text-white ri-draggable"></i>
-  //           </button>
-  //           <button id="bookmark-${uuid}-delete-button" class="bg-rose-500 hover:bg-rose-600 transition w-10 aspect-square rounded-md cursor-pointer">
-  //             <i class="text-white ri-delete-bin-6-line"></i>
-  //           </button>
-  //         </div>
+  // <div class="bookmark-user-defined-item bg-neutral-800 grid grid-cols-[max-content_auto] rounded-md overflow-hidden" node-type="folder" bookmark-node-uuid="${uuid}">
+  //   <div id="bookmark-${uuid}-user-defined-accent" class="w-1 h-full" style="background-color:${folder.color};"></div>
+  //   <div class="p-2 grid grid-flow-row gap-2">
+  //     <div class="grid grid-cols-[max-content_auto_max-content] place-items-center">
+  //       <i class="text-white ri-folder-fill"></i>
+  //       <span id="bookmark-${uuid}-user-defined-useless-title" class="text-white text-base my-auto mr-auto ml-2">
+  //         ${folder.name}
+  //       </span>
+  //       <div class="grid grid-cols-3 gap-2">
+  //         <button id="bookmark-${uuid}-toggle-collapse-button" class="toggle-collapse-folder-button bg-neutral-500 hover:bg-neutral-600 transition w-10 aspect-square rounded-md cursor-pointer">
+  //           <i class="text-white ri-collapse-horizontal-line"></i>
+  //         </button>
+  //         <button class="reposition-folder-button bookmark-node-handle bg-neutral-500 hover:bg-neutral-600 transition w-10 aspect-square rounded-md cursor-pointer">
+  //           <i class="text-white ri-draggable"></i>
+  //         </button>
+  //         <button id="bookmark-${uuid}-delete-button" class="delete-folder-button bg-rose-500 hover:bg-rose-600 transition w-10 aspect-square rounded-md cursor-pointer">
+  //           <i class="text-white ri-delete-bin-6-line"></i>
+  //         </button>
   //       </div>
-  //       <div id="bookmark-${uuid}-collapsible-content" state="expanded" class="grid grid-flow-row gap-4">
-  //         <div class="bg-neutral-500 h-[1px] rounded-md my-auto"></div>
-  //         <div class="grid gap-2">
-  //           <p class="text-white text-base">folder.name</p>
-  //           <div id="bookmark-${uuid}-name-container" class="grid grid-cols-[max-content_auto] text-base bg-neutral-900 w-full p-1 rounded-md border-2 border-transparent">
-  //             <span class="text-pink-500 font-semibold select-none">>&nbsp;</span>
-  //             <input id="bookmark-${uuid}-name-input" type="text" autocomplete="off" class="outline-none bg-transparent text-white placeholder-neutral-500" placeholder="input name..." value="${folder.name}">
-  //           </div>
-  //         </div>
-  //         <div class="grid gap-2">
-  //           <p class="text-white text-base">folder.color</p>
-  //           <div id="bookmark-${uuid}-color-container" class="grid grid-cols-[max-content_auto] text-base bg-neutral-900 w-full p-1 rounded-md border-2 border-transparent">
-  //             <span class="text-pink-500 font-semibold select-none">>&nbsp;</span>
-  //             <input id="bookmark-${uuid}-color-input" type="text" autocomplete="off" class="outline-none bg-transparent text-white placeholder-neutral-500" placeholder="input color..." value="${folder.color}">
-  //           </div>
-  //         </div>
-  //         <div class="grid gap-2">
-  //           <p class="text-white text-base">folder.color</p>
-  //           <div id="bookmark-${uuid}-icon-type-container" class="grid grid-cols-[max-content_auto] text-base bg-neutral-900 w-full p-1 rounded-md border-2 border-transparent">
-  //             <span class="text-pink-500 font-semibold select-none">>&nbsp;</span>
-  //             <input id="bookmark-${uuid}-icon-type-input" type="text" autocomplete="off" class="outline-none bg-transparent text-white placeholder-neutral-500" placeholder="input icon-type... (leave empty for default)" value="${folder.color}">
-  //           </div>
-  //         </div>
-  //         <div class="grid gap-2">
-  //           <p class="text-white text-base">folder.iconColor</p>
-  //           <div id="bookmark-${uuid}-icon-color-container" class="grid grid-cols-[max-content_auto] text-base bg-neutral-900 w-full p-1 rounded-md border-2 border-transparent">
-  //             <span class="text-pink-500 font-semibold select-none">>&nbsp;</span>
-  //             <input id="bookmark-${uuid}-icon-color-input" type="text" autocomplete="off" class="outline-none bg-transparent text-white placeholder-neutral-500" placeholder="input color..." value="${folder.iconColor}">
-  //           </div>
-  //         </div>
-  //         <div>
-  //           <p class="text-white text-base">folder.contents</p>
-  //         </div>
-  //       </div>
-  //       <div id="bookmark-${uuid}-contents-container" class="bookmarks-user-defined-dropzone grid grid-flow-row gap-2 bg-neutral-900 rounded-md p-2 min-h-14"></div>
   //     </div>
+  //     <div id="bookmark-${uuid}-collapsible-content" state="expanded" class="grid grid-flow-row gap-4">
+  //       <div class="bg-neutral-500 h-[1px] rounded-md my-auto"></div>
+  //       <div class="grid gap-2">
+  //         <p class="text-white text-base">folder.name</p>
+  //         <div id="bookmark-${uuid}-name-container" class="grid grid-cols-[max-content_auto] text-base bg-neutral-900 w-full p-1 rounded-md border-2 border-transparent">
+  //           <span class="text-pink-500 font-semibold select-none">&gt;&nbsp;</span>
+  //           <input id="bookmark-${uuid}-name-input" type="text" autocomplete="off" class="outline-none bg-transparent text-white placeholder-neutral-500" placeholder="input name..." value="${folder.name}">
+  //         </div>
+  //       </div>
+  //       <div class="grid gap-2">
+  //         <p class="text-white text-base">folder.color</p>
+  //         <div id="bookmark-${uuid}-color-container" class="grid grid-cols-[max-content_auto] text-base bg-neutral-900 w-full p-1 rounded-md border-2 border-transparent">
+  //           <span class="text-pink-500 font-semibold select-none">&gt;&nbsp;</span>
+  //           <input id="bookmark-${uuid}-color-input" type="text" autocomplete="off" class="outline-none bg-transparent text-white placeholder-neutral-500" placeholder="input color..." value="${folder.color}">
+  //         </div>
+  //       </div>
+  //       <div class="grid gap-2">
+  //         <p class="text-white text-base">folder.iconType</p>
+  //         <div id="bookmark-${uuid}-icon-type-container" class="grid grid-cols-[max-content_auto] text-base bg-neutral-900 w-full p-1 rounded-md border-2 border-transparent">
+  //           <span class="text-pink-500 font-semibold select-none">&gt;&nbsp;</span>
+  //           <input id="bookmark-${uuid}-icon-type-input" type="text" autocomplete="off" class="outline-none bg-transparent text-white placeholder-neutral-500" placeholder="input icon-type... (leave empty for default)" value="${folder.iconType ?? ""}">
+  //         </div>
+  //       </div>
+  //       <div class="grid gap-2">
+  //         <p class="text-white text-base">folder.iconColor</p>
+  //         <div id="bookmark-${uuid}-icon-color-container" class="grid grid-cols-[max-content_auto] text-base bg-neutral-900 w-full p-1 rounded-md border-2 border-transparent">
+  //           <span class="text-pink-500 font-semibold select-none">&gt;&nbsp;</span>
+  //           <input id="bookmark-${uuid}-icon-color-input" type="text" autocomplete="off" class="outline-none bg-transparent text-white placeholder-neutral-500" placeholder="input color..." value="${folder.iconColor}">
+  //         </div>
+  //       </div>
+  //       <div>
+  //         <p class="text-white text-base">folder.contents</p>
+  //       </div>
+  //     </div>
+  //     <div id="bookmark-${uuid}-contents-container" class="bookmarks-user-defined-dropzone grid grid-flow-row gap-2 bg-neutral-900 rounded-md p-2 min-h-14"></div>
   //   </div>
+  // </div>
   // `;
 
   // container div
@@ -638,13 +676,16 @@ const addBookmarkNodeFolder = (folder: BookmarkNodeFolder, targetDivEl: HTMLDivE
     {
       id: `bookmark-${uuid}-toggle-collapse-button`,
       icon: "ri-collapse-horizontal-line",
-      class: "bg-neutral-500 hover:bg-neutral-600"
+      class: "toggle-collapse-folder-button bg-neutral-500 hover:bg-neutral-600"
     },
-    { class: "bookmark-node-handle bg-neutral-500 hover:bg-neutral-600", icon: "ri-draggable" },
+    {
+      class: "reposition-folder-button bookmark-node-handle bg-neutral-500 hover:bg-neutral-600",
+      icon: "ri-draggable"
+    },
     {
       id: `bookmark-${uuid}-delete-button`,
       icon: "ri-delete-bin-6-line",
-      class: "bg-rose-500 hover:bg-rose-600"
+      class: "delete-folder-button bg-rose-500 hover:bg-rose-600"
     }
   ];
 
@@ -736,4 +777,5 @@ const addBookmarkNodeFolder = (folder: BookmarkNodeFolder, targetDivEl: HTMLDivE
 
   handleFolderSettings(uuid);
   fixBookmarkNodes();
+  refreshHandleTooltips();
 };
