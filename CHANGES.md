@@ -1,6 +1,5 @@
-# Changes in 1.9.5
+# Changes in 1.9.6
 
 in this release:
 
-- add back '+N more' indicator for bookmark search
-- performance improvements
+- remove flickering from search suggestion results
