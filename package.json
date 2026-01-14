@@ -19,7 +19,7 @@
     "prepare": "husky"
   },
   "dependencies": {
-    "caniuse-lite": "^1.0.30001761",
+    "caniuse-lite": "^1.0.30001764",
     "idb-keyval": "^6.2.2",
     "mathjs": "^13.2.3",
     "parcel": "2.16.3",

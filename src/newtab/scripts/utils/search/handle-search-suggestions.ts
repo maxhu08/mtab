@@ -50,14 +50,12 @@ export const handleSearchSuggestions = (
   const { inputEl } = opts;
 
   let abort: AbortController | null = null;
-
   let items: SearchResultItem[] = [];
 
   const refresh = async () => {
     const q = inputEl.value.trim();
 
     if (q === "") {
-      searchResultsContainerEl.innerHTML = "";
       hideSearchResultsSection();
       abort?.abort();
       abort = null;
@@ -70,14 +68,11 @@ export const handleSearchSuggestions = (
     const signal = abort.signal;
 
     const suggestions = await fetchSearchSuggestions(q).catch(() => []);
-
     if (signal.aborted) return;
 
-    // include the original query first, then suggestions, de-duped, max 8 total
-    const merged = uniq([q, ...suggestions]).slice(0);
+    const merged = uniq([q, ...suggestions]);
 
     if (merged.length === 0) {
-      searchResultsContainerEl.innerHTML = "";
       hideSearchResultsSection();
       items = [];
       return;
@@ -87,47 +82,19 @@ export const handleSearchSuggestions = (
 
     items = merged.map((s) => {
       if (!recognizeLinks) {
-        return {
-          name: s,
-          value: s,
-          directLink: false
-        };
+        return { name: s, value: s, directLink: false };
       }
-
       const recognized = recognizeUrl(s);
-
-      return {
-        name: s,
-        value: recognized ?? s,
-        directLink: recognized !== null
-      };
+      return { name: s, value: recognized ?? s, directLink: recognized !== null };
     });
 
-    renderSearchResults(items, opts);
     searchResultsContainerEl.setAttribute(SELECTED_INDEX_ATTR, "0");
+    renderSearchResults(items, opts);
   };
 
-  const debouncedRefresh = debounce(() => {
-    refresh();
-  }, 120);
+  const debouncedRefresh = debounce(refresh, 120);
 
   inputEl.addEventListener("input", () => {
-    showSearchResultsSection();
-
-    const raw = inputEl.value;
-    const recognized = recognizeUrl(raw);
-
-    items = [
-      {
-        name: raw,
-        value: recognized ?? raw,
-        directLink: recognized !== null
-      }
-    ];
-
-    renderSearchResults(items, opts);
-    searchResultsContainerEl.setAttribute(SELECTED_INDEX_ATTR, "0");
-
     debouncedRefresh();
   });
 
@@ -140,9 +107,7 @@ export const handleSearchSuggestions = (
   });
 
   inputEl.addEventListener("blur", () => {
-    // if the window lost focus
     if (!document.hasFocus()) return;
-
     hideSearchResultsSection();
   });
 

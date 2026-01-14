@@ -17,6 +17,8 @@ export type RenderSearchResultsOptions = {
   onOpen: (url: string, openInNewTab: boolean) => void;
 };
 
+const ICON_CLASS = "sr-icon";
+
 const getButtons = () => {
   return Array.from(searchResultsContainerEl.children).filter(
     (el) => (el as HTMLElement).tagName.toLowerCase() === "button"
@@ -39,30 +41,14 @@ const updateSelectedRow = (inputEl: HTMLInputElement, nextIndex: number) => {
 
   for (let i = 0; i < buttons.length; i++) {
     const el = buttons[i];
-
     if (i === clamped) el.classList.add("bg-white/20");
     else el.classList.remove("bg-white/20");
 
-    const firstChild = el.firstElementChild as HTMLElement | null;
-    if (!firstChild) continue;
+    const iconEl = el.querySelector(`.${ICON_CLASS}`) as HTMLElement | null;
+    if (iconEl) iconEl.textContent = i === clamped ? " > " : "   ";
 
-    if (i === clamped) {
-      if (firstChild.tagName.toLowerCase() !== "span") {
-        const spanEl = document.createElement("span");
-        spanEl.className = "search-select-icon-color font-semibold";
-        spanEl.innerHTML = "&nbsp;>&nbsp;";
-        el.replaceChild(spanEl, firstChild);
-
-        if (inputEl.id !== "bookmark-search-input") {
-          setSearchValue(el.getAttribute("search-result-value") || "", false);
-        }
-      }
-    } else {
-      if (firstChild.tagName.toLowerCase() !== "div") {
-        const placeholderDivEl = document.createElement("div");
-        placeholderDivEl.innerHTML = "&nbsp;&nbsp;&nbsp;";
-        el.replaceChild(placeholderDivEl, firstChild);
-      }
+    if (i === clamped && inputEl.id !== "bookmark-search-input") {
+      setSearchValue(el.getAttribute("search-result-value") || "", false);
     }
   }
 };
@@ -88,7 +74,7 @@ export const renderSearchResults = (
     onOpen
   } = opts;
 
-  searchResultsContainerEl.innerHTML = "";
+  const frag = document.createDocumentFragment();
 
   searchResultsContainerEl.onmousedown = (e) => {
     const target = e.target as HTMLElement | null;
@@ -100,7 +86,6 @@ export const renderSearchResults = (
   };
 
   const searchValue = inputEl.value.toLowerCase();
-
   const rawValue = inputEl.value;
   const isBookmarkInput = inputEl.id === "bookmark-search-input";
 
@@ -110,18 +95,12 @@ export const renderSearchResults = (
     return aContains === bContains ? 0 : aContains ? -1 : 1;
   });
 
-  // force the current input as first item (normal search only)
   if (!isBookmarkInput) {
     const q = rawValue.trim();
     if (q) {
       const qLower = q.toLowerCase();
-
-      // remove duplicates of the same text
       filtered = filtered.filter((it) => it.name.trim().toLowerCase() !== qLower);
-
       const recognized = recognizeLinks ? recognizeUrl(q) : null;
-
-      // put current query at the top
       filtered.unshift({
         name: q,
         value: recognized ?? q,
@@ -134,13 +113,13 @@ export const renderSearchResults = (
   const visible = filtered.slice(0, MAX_RESULTS);
 
   let selectedIndex = parseInt(
-    searchResultsContainerEl.getAttribute(SELECTED_INDEX_ATTR) as string
+    searchResultsContainerEl.getAttribute(SELECTED_INDEX_ATTR) || "0",
+    10
   );
-
   selectedIndex = clampIndex(selectedIndex, visible.length);
   searchResultsContainerEl.setAttribute(SELECTED_INDEX_ATTR, selectedIndex.toString());
 
-  const totalRows = visible.length + (overflow > 0 ? 1 : 0);
+  const totalRows = visible.length + (isBookmarkInput && overflow > 0 ? 1 : 0);
 
   visible.forEach((item, index) => {
     const matchedNameHtml = getMatchedNameHtml(
@@ -167,10 +146,8 @@ export const renderSearchResults = (
     buttonEl.addEventListener("mousedown", (e) => {
       const me = e as MouseEvent;
       if (me.button !== 0 && me.button !== 1) return;
-
       e.preventDefault();
       e.stopPropagation();
-
       const openInNewTab = me.button === 1 || me.ctrlKey || me.metaKey;
       onOpen(item.value, openInNewTab);
     });
@@ -187,35 +164,21 @@ export const renderSearchResults = (
     buttonEl.addEventListener("mouseup", stopMiddlePaste);
     buttonEl.addEventListener("auxclick", stopMiddlePaste);
 
-    if (index === selectedIndex) {
-      const spanEl = document.createElement("span");
-      spanEl.className = "search-select-icon-color font-semibold";
-      spanEl.innerHTML = "&nbsp;>&nbsp;";
+    const iconEl = document.createElement("span");
+    iconEl.className = `${ICON_CLASS} search-select-icon-color font-semibold whitespace-pre`;
+    iconEl.textContent = index === selectedIndex ? " > " : "   ";
 
-      const contentDivEl = document.createElement("div");
-      contentDivEl.className = "truncate";
-      contentDivEl.style.color = placeholderTextColor;
-      contentDivEl.innerHTML = matchedNameHtml;
+    const contentDivEl = document.createElement("div");
+    contentDivEl.className = "truncate";
+    contentDivEl.style.color = placeholderTextColor;
+    contentDivEl.innerHTML = matchedNameHtml;
 
-      buttonEl.appendChild(spanEl);
-      buttonEl.appendChild(contentDivEl);
-    } else {
-      const placeholderDivEl = document.createElement("div");
-      placeholderDivEl.innerHTML = "&nbsp;&nbsp;&nbsp;";
+    buttonEl.appendChild(iconEl);
+    buttonEl.appendChild(contentDivEl);
 
-      const contentDivEl = document.createElement("div");
-      contentDivEl.className = "truncate";
-      contentDivEl.style.color = placeholderTextColor;
-      contentDivEl.innerHTML = matchedNameHtml;
-
-      buttonEl.appendChild(placeholderDivEl);
-      buttonEl.appendChild(contentDivEl);
-    }
-
-    searchResultsContainerEl.appendChild(buttonEl);
+    frag.appendChild(buttonEl);
   });
 
-  // non-interactive overflow row (+N more)
   if (isBookmarkInput && overflow > 0) {
     const moreEl = document.createElement("div");
     moreEl.className = [
@@ -226,18 +189,19 @@ export const renderSearchResults = (
     moreEl.tabIndex = -1;
     moreEl.style.pointerEvents = "none";
 
-    const leftSpacer = document.createElement("div");
-    leftSpacer.innerHTML = "&nbsp;&nbsp;&nbsp;";
+    const iconElSpacer = document.createElement("span");
+    iconElSpacer.className = `${ICON_CLASS} whitespace-pre`;
+    iconElSpacer.textContent = "   ";
 
     const textEl = document.createElement("div");
     textEl.className = "truncate";
     textEl.style.color = placeholderTextColor;
     textEl.textContent = `+${overflow} more`;
 
-    moreEl.appendChild(leftSpacer);
+    moreEl.appendChild(iconElSpacer);
     moreEl.appendChild(textEl);
 
-    searchResultsContainerEl.appendChild(moreEl);
+    frag.appendChild(moreEl);
   }
 
   if (visible.length === 0) {
@@ -248,9 +212,10 @@ export const renderSearchResults = (
       e.preventDefault();
       e.stopPropagation();
     });
-    searchResultsContainerEl.appendChild(pEl);
+    frag.appendChild(pEl);
   }
 
+  searchResultsContainerEl.replaceChildren(frag);
   searchResultsSectionEl.classList.replace("hidden", "block");
 };
 
@@ -264,7 +229,6 @@ const getMatchedNameHtml = (
 ) => {
   let result = "";
   let searchIndex = 0;
-
   const matchColor = directLink ? linkTextColor : textColor;
 
   for (let i = 0; i < name.length; i++) {
@@ -272,13 +236,12 @@ const getMatchedNameHtml = (
       searchIndex < searchValue.length &&
       name[i].toLowerCase() === searchValue[searchIndex].toLowerCase()
     ) {
-      result += `<span style="color: ${matchColor};">${name[i]}</span>`;
+      result += `<span style="color:${matchColor};">${name[i]}</span>`;
       searchIndex++;
     } else {
-      result += `<span style="color: ${placeholderTextColor};">${name[i]}</span>`;
+      result += `<span style="color:${placeholderTextColor};">${name[i]}</span>`;
     }
   }
-
   return result;
 };
 
@@ -290,7 +253,7 @@ const fuzzySearch = (search: string, items: SearchResultItem[]) => {
     const name = item.name;
 
     for (let i = 0; i < name.length; i++) {
-      if (name[i].toLowerCase() === search[searchIndex].toLowerCase()) {
+      if (name[i].toLowerCase() === search[searchIndex]?.toLowerCase()) {
         searchIndex++;
       }
       if (searchIndex === search.length) return true;
@@ -310,37 +273,31 @@ export const handleSearchResultsNavigation = (
   opts: HandleSearchResultsNavigationOptions
 ) => {
   const { onOpen, resultUrlAttr } = opts;
-
   const buttons = getButtons();
   const count = buttons.length;
   if (count === 0) return;
 
-  const prevIndex = parseInt(searchResultsContainerEl.getAttribute(SELECTED_INDEX_ATTR) as string);
+  const prevIndex = parseInt(searchResultsContainerEl.getAttribute(SELECTED_INDEX_ATTR) || "0", 10);
 
   if (e.key === "ArrowDown") {
     e.preventDefault();
-    const nextIndex = prevIndex < count - 1 ? prevIndex + 1 : 0;
-    updateSelectedRow(inputEl, nextIndex);
+    updateSelectedRow(inputEl, prevIndex < count - 1 ? prevIndex + 1 : 0);
     return;
   }
 
   if (e.key === "ArrowUp") {
     e.preventDefault();
-    const nextIndex = prevIndex > 0 ? prevIndex - 1 : count - 1;
-    updateSelectedRow(inputEl, nextIndex);
+    updateSelectedRow(inputEl, prevIndex > 0 ? prevIndex - 1 : count - 1);
     return;
   }
 
   if (e.key === "Enter" && !e.repeat) {
     e.preventDefault();
-
     const idx = clampIndex(prevIndex, count);
     const selectedEl = buttons[idx];
     if (!selectedEl) return;
-
     const url = selectedEl.getAttribute(resultUrlAttr);
     if (!url) return;
-
     onOpen(url, e.ctrlKey);
   }
 };
