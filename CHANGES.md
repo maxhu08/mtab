@@ -1,5 +1,5 @@
-# Changes in 1.9.6
+# Changes in 1.9.7
 
 in this release:
 
-- remove flickering from search suggestion results
+- improve search results speed
