@@ -137,7 +137,7 @@ export const renderSearchResults = (
     buttonEl.setAttribute("search-result-value", item.name);
 
     buttonEl.className = [
-      "grid grid-cols-[max-content_auto] cursor-pointer select-none text-left hover:bg-white/20 duration-0",
+      "grid grid-cols-[3ch_auto] cursor-pointer select-none text-left hover:bg-white/20 duration-0",
       getResultPaddingClass(index, totalRows)
     ].join(" ");
 
@@ -182,7 +182,7 @@ export const renderSearchResults = (
   if (isBookmarkInput && overflow > 0) {
     const moreEl = document.createElement("div");
     moreEl.className = [
-      "grid grid-cols-[max-content_auto] select-none",
+      "grid grid-cols-[3ch_auto] select-none",
       getResultPaddingClass(totalRows - 1, totalRows)
     ].join(" ");
     moreEl.setAttribute("aria-hidden", "true");
