@@ -1,4 +1,3 @@
-import { focusInput, unfocusInput } from "src/config-utils/scripts/handle";
 import { Config, BookmarkNodeBookmark, BookmarkNodeFolder } from "src/utils/config";
 import { bookmarksUserDefinedList, Input } from "src/options/scripts/ui";
 import { getRandomColor } from "src/options/scripts/utils/random-color";
@@ -8,6 +7,7 @@ import {
   refreshHandleTooltips
 } from "src/options/scripts/utils/bookmarks/handle-bookmark-ui";
 import { exportBookmarkNode } from "src/options/scripts/utils/bookmarks/export-bookmark-node";
+import { focusInput, unfocusInput } from "src/options/scripts/utils/ui-helpers";
 
 export const fillBookmarkNodeBookmarks = (config: Config) => {
   // user-defined bookmarks

@@ -59,9 +59,6 @@ export const listenToInputs = () => {
   const saveBtn = document.getElementById("save-button") as HTMLButtonElement;
   saveBtn.onclick = () => saveConfig();
 
-  const configUtilsBtn = document.getElementById("config-utils-button") as HTMLButtonElement;
-  configUtilsBtn.onclick = () => window.open("./config-utils.html", "_blank");
-
   const exportBtn = document.getElementById("export-button") as HTMLButtonElement;
   exportBtn.onclick = () => saveAndExportConfig();
 

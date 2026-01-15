@@ -19,7 +19,7 @@
 
   <body dir="ltr" class="min-h-screen bg-neutral-900">
     <div id="toaster-wrapper" data-rich-colors="true" data-expand="false" data-position="top-center"></div>
-    <div class="mx-auto grid w-[95%] grid-flow-row sm:w-[80%] md:w-[60%] lg:w-[40%]">
+    <div class="mx-auto grid w-[95%] grid-flow-row sm:w-[80%] md:w-[60%] lg:w-[50%] xl:w-[40%]">
       <div class="grid place-items-center gap-4 p-4">
         <img id="mtab-logo" src="./assets/icon.png" class="animate-up-bouncy aspect-square w-40" alt="logo" />
         <h1 class="w-max text-2xl font-semibold text-white md:text-4xl"><span class="text-emerald-500">mtab</span><span class="text-neutral-500">/</span><span>options</span></h1>
@@ -1162,12 +1162,9 @@
           <div class="grid w-full grid-flow-row place-items-center">
             <div id="controls-container-placeholder" class="w-full">
               <div id="controls-container" class="fixed bottom-4 hidden rounded-md border-2 border-emerald-500 bg-neutral-900 p-4 drop-shadow transition-none">
-                <div class="grid w-full grid-flow-row gap-2 lg:grid-cols-2">
+                <div class="grid w-full grid-flow-row gap-2 lg:grid-cols-3">
                   <button id="save-button" class="cursor-pointer rounded-md bg-emerald-500 p-2 transition hover:bg-emerald-600">
                     <span class="text-base text-white">save (ctrl+s)</span>
-                  </button>
-                  <button id="config-utils-button" class="cursor-pointer rounded-md bg-emerald-500 p-2 transition hover:bg-emerald-600">
-                    <span class="text-base text-white">config-utils</span>
                   </button>
                   <button id="export-button" class="cursor-pointer rounded-md bg-indigo-500 p-2 transition hover:bg-indigo-600">
                     <span class="text-base text-white">save & export</span>
