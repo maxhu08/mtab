@@ -19,6 +19,7 @@ import { setDefaultConfig } from "src/options/scripts/utils/set-default-config";
 import { handleCustomFaviconReset } from "src/options/scripts/utils/upload-favicon";
 import { handWallpaperFileReset } from "src/options/scripts/utils/upload-wallpaper";
 import { importConfigAndSave } from "src/options/scripts/utils/import-config";
+import tippy from "tippy.js";
 
 export const listenToInputs = () => {
   buttonSwitches.forEach((btnSwitch) => {
@@ -27,7 +28,7 @@ export const listenToInputs = () => {
 
   listenToHotkeyInputs(hotkeyInputs);
 
-  //Special case for using a custom search engine
+  // special case for using a custom search engine
   // if custom search engine is enabled, then disable it
   const arrayOfSearchEngines = [
     searchEngineDuckduckgoButtonEl,
@@ -64,6 +65,29 @@ export const listenToInputs = () => {
 
   const importBtn = document.getElementById("import-button") as HTMLButtonElement;
   importBtn.onclick = () => importConfigAndSave();
+
+  const base = {
+    placement: "top" as const,
+    theme: "dark",
+    animation: "shift-away",
+    duration: [120, 90] as [number, number],
+    delay: [75, 0] as [number, number]
+  };
+
+  tippy("#save-button", {
+    ...base,
+    content: "save (ctrl+s)"
+  });
+
+  tippy("#export-button", {
+    ...base,
+    content: "save & export (ctrl+e)"
+  });
+
+  tippy("#import-button", {
+    ...base,
+    content: "import & save (ctrl+i)"
+  });
 
   const resetToDefaultBtn = document.getElementById("reset-to-default-button") as HTMLButtonElement;
   resetToDefaultBtn.onclick = () => setDefaultConfig();

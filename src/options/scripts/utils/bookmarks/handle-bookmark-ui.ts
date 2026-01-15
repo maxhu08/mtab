@@ -54,14 +54,14 @@ export const refreshHandleTooltips = () => {
 
   tooltipInstances.push(
     // bookmark buttons
-    ...tippy(".toggle-collapse-bookmark-button", { ...base, content: "Toggle Collapse Bookmark" }),
-    ...tippy(".reposition-bookmark-button", { ...base, content: "Reposition Bookmark" }),
-    ...tippy(".delete-bookmark-button", { ...base, content: "Delete Bookmark" }),
-    ...tippy(".export-bookmark-button", { ...base, content: "Export Bookmark" }),
+    ...tippy(".toggle-collapse-bookmark-button", { ...base, content: "toggle Collapse Bookmark" }),
+    ...tippy(".reposition-bookmark-button", { ...base, content: "reposition Bookmark" }),
+    ...tippy(".delete-bookmark-button", { ...base, content: "delete Bookmark" }),
+    ...tippy(".export-bookmark-button", { ...base, content: "export Bookmark" }),
     // folder buttons
-    ...tippy(".toggle-collapse-folder-button", { ...base, content: "Toggle Collapse Folder" }),
-    ...tippy(".reposition-folder-button", { ...base, content: "Reposition Folder" }),
-    ...tippy(".delete-folder-button", { ...base, content: "Delete Folder" }),
-    ...tippy(".export-folder-button", { ...base, content: "Export Folder" })
+    ...tippy(".toggle-collapse-folder-button", { ...base, content: "toggle Collapse Folder" }),
+    ...tippy(".reposition-folder-button", { ...base, content: "reposition Folder" }),
+    ...tippy(".delete-folder-button", { ...base, content: "delete Folder" }),
+    ...tippy(".export-folder-button", { ...base, content: "export Folder" })
   );
 };

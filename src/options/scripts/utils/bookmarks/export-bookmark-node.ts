@@ -27,7 +27,6 @@ export const exportBookmarkNode = async (uuid: string) => {
 
   const formattedExport = `${prefix}${JSON.stringify(result)}`;
 
-  console.log(formattedExport);
   await navigator.clipboard.writeText(formattedExport);
 
   if (nodeType === "bookmark") {
