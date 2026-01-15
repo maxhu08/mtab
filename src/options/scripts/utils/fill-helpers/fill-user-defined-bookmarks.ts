@@ -7,6 +7,7 @@ import {
   handleBookmarkNodesDragging,
   refreshHandleTooltips
 } from "src/options/scripts/utils/bookmarks/handle-bookmark-ui";
+import { exportBookmarkNode } from "src/options/scripts/utils/bookmarks/export-bookmark-node";
 
 export const fillBookmarkNodeBookmarks = (config: Config) => {
   // user-defined bookmarks
@@ -32,13 +33,6 @@ export const fillBookmarkNodeBookmarks = (config: Config) => {
 
   toggleCollapseAllBookmarkNodesButtonEl.click();
   refreshHandleTooltips();
-};
-
-const exportBookmarkNode = (uuid: string) => {
-  toast.info("bookmark node export is wip");
-
-  // TODO: implement export logic
-  console.log("export", uuid);
 };
 
 const handleBookmarkSettings = (uuid: string) => {
