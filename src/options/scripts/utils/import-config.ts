@@ -14,9 +14,16 @@ export const importConfigAndSave = () => {
     return;
   }
 
+  if (dataToImport.trim() === "") {
+    toast.info("input was empty, nothing imported");
+    return;
+  }
+
   const basePrefix = "MTAB_SAVE_FORMAT_";
   if (!dataToImport.startsWith(basePrefix)) {
-    toast.error(`incorrect save format (use ${basePrefix})`);
+    toast.error(
+      `incorrect save format, use MTAB_SAVE_FORMAT_v#.#.#_ or ${basePrefix} for legacy saves`
+    );
     return;
   }
 
