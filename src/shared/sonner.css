@@ -42,7 +42,7 @@
   transform: var(--y);
   z-index: var(--z-index);
   position: absolute;
-  width: 356px;
+  width: 100%;
   padding: 16px;
   border-radius: var(--border-radius);
   transition:

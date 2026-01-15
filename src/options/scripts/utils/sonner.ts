@@ -63,7 +63,7 @@ const VISIBLE_TOASTS_AMOUNT = 3;
 const GAP = 14;
 const TOAST_LIFETIME = 4000;
 const TIME_BEFORE_UNMOUNT = 200;
-const TOAST_WIDTH = 356;
+const TOAST_WIDTH = 300;
 const DEFAULT_POSITION = "bottom-right";
 
 const __actionHandlers = new Map();
@@ -327,50 +327,8 @@ function renderToast(list, content, { description, type, action, position } = {}
   return { toast: toastEl, id };
 }
 
-function registerAction(action, toastId) {
-  const actionId = genid();
-  const fn = typeof action.onClick === "function" ? action.onClick : null;
-  if (fn) __actionHandlers.set(actionId, () => fn({ toastId }));
-  return { actionId, label: action.label };
-}
-
-function createActionButton(actionData) {
-  return `
-    <button
-      class="toast-action-button"
-      type="button"
-      data-toast-action="true"
-      data-action-id="${actionData.actionId}"
-      style="
-        border-radius: 4px;
-        padding-left: 8px;
-        padding-right: 8px;
-        height: 24px;
-        font-size: 12px;
-        margin-left: auto;
-        margin-right: 0px;
-        margin-top: 0px;
-        border: none;
-        cursor: pointer;
-        outline: none;
-        display: flex;
-        align-items: center;
-        flex-shrink: 0;
-        transition: opacity .4s, box-shadow .2s;
-        background: transparent;
-      "
-    >
-      ${actionData.label}
-    </button>`;
-}
-
 const style = document.createElement("style");
-style.innerHTML = `
-.toast-action-button {
-  margin-top: 10px;
-  text-decoration: underline;
-}
-`;
+style.innerHTML = `@media(min-width:640px){#toaster-list{--width:350px!important}}@media(min-width:768px){#toaster-list{--width:500px!important}}`;
 
 function refreshProperties() {
   const list = document.getElementById("toaster-list");

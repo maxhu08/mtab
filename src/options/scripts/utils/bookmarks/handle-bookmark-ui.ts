@@ -11,6 +11,8 @@ import { BookmarkNodeBookmark, BookmarkNodeFolder } from "src/utils/config";
 import tippy, { Instance } from "tippy.js";
 import { genid } from "src/utils/genid";
 import { importBookmarkNode } from "src/options/scripts/utils/bookmarks/import-bookmark-node";
+import { exportAllBookmarkNodes } from "src/options/scripts/utils/bookmarks/export-all-bookmark-nodes";
+import { importAllBookmarkNodes } from "src/options/scripts/utils/bookmarks/import-all-bookmark-nodes";
 
 export const handleBookmarkNodesDragging = () => {
   // prettier-ignore
@@ -350,14 +352,8 @@ addFolderButtonEl.onclick = () => {
 
 // TODO: add functionality to these
 importBookmarkNodeButtonEl.onclick = () => importBookmarkNode();
-
-exportAllBookmarkNodesButtonEl.onclick = () => {
-  toast.info("Export all feature coming soon!");
-};
-
-importAllBookmarkNodesButtonEl.onclick = () => {
-  toast.info("Import all feature coming soon!");
-};
+exportAllBookmarkNodesButtonEl.onclick = () => exportAllBookmarkNodes();
+importAllBookmarkNodesButtonEl.onclick = () => importAllBookmarkNodes();
 
 const bindToggleCollapseHandlers = () => {
   const bookmarkNodeEls = bookmarksUserDefinedList.querySelectorAll('[node-type="bookmark"]');

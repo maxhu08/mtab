@@ -28,7 +28,7 @@ export const importBookmarkNode = () => {
 
   if (!headerMatch) {
     toast.error(
-      "incorrect format, expected MTAB_USER_DEFINED_BOOKMARK_FORMAT_v#.#.#_... or MTAB_USER_DEFINED_FOLDER_FORMAT_v#.#.#_..."
+      "incorrect format, expected MTAB_USER_DEFINED_BOOKMARK_FORMAT_v#.#.#_ or MTAB_USER_DEFINED_FOLDER_FORMAT_v#.#.#_"
     );
     return;
   }
