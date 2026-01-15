@@ -42,7 +42,7 @@ export const loadPage = () => {
 
     loadFavicon(config.title.faviconType);
 
-    setTopDistance(config.bookmarks.type);
+    setTopDistance();
     setUISyle(config.ui);
 
     if (!config.wallpaper.enabled) {
