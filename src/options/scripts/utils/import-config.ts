@@ -14,15 +14,39 @@ export const importConfigAndSave = () => {
     return;
   }
 
-  const pattern = `MTAB_SAVE_FORMAT_`;
-  if (!dataToImport.startsWith(pattern)) {
-    toast.error(`incorrect save version (use ${pattern})`);
+  const basePrefix = "MTAB_SAVE_FORMAT_";
+  if (!dataToImport.startsWith(basePrefix)) {
+    toast.error(`incorrect save format (use ${basePrefix})`);
     return;
   }
 
-  const importedConfig = JSON.parse(
-    JSON.parse(decodeURIComponent(window.atob(dataToImport.replace(pattern, ""))))
-  );
+  let rawPayload: string;
+
+  // new format: MTAB_SAVE_FORMAT_v-{version}_{json}
+  const versionedMatch = dataToImport.match(/^MTAB_SAVE_FORMAT_v[^_]+_(.+)$/);
+
+  if (versionedMatch) {
+    // new format: plain json after version
+    rawPayload = versionedMatch[1];
+  } else {
+    // legacy format: base64 + uri + double json
+    try {
+      rawPayload = JSON.parse(
+        decodeURIComponent(window.atob(dataToImport.replace(basePrefix, "")))
+      );
+    } catch {
+      toast.error("failed to parse legacy save format");
+      return;
+    }
+  }
+
+  let importedConfig;
+  try {
+    importedConfig = JSON.parse(rawPayload);
+  } catch {
+    toast.error("invalid config data");
+    return;
+  }
 
   const mergedConfig = deepMerge(structuredClone(defaultConfig), importedConfig);
   const finalizedConfig = migrateOldConfig(mergedConfig);

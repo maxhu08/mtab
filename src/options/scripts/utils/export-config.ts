@@ -6,8 +6,9 @@ export const saveAndExportConfig = () => {
   saveConfig(false);
 
   getConfig(({ config }) => {
-    const exportedSave = JSON.stringify(config);
-    const formattedExportedSave = `MTAB_SAVE_FORMAT_${window.btoa(encodeURIComponent(JSON.stringify(exportedSave)))}`;
+    const extensionVersion = chrome.runtime.getManifest().version;
+
+    const formattedExportedSave = `MTAB_SAVE_FORMAT_v${extensionVersion}_${JSON.stringify(config)}`;
 
     navigator.clipboard
       .writeText(formattedExportedSave)
@@ -15,7 +16,7 @@ export const saveAndExportConfig = () => {
         toast.success("config saved & copied to clipboard");
       })
       .catch(() => {
-        toast.error("could not config saved to clipboard");
+        toast.error("could not save config to clipboard");
       });
   });
 };

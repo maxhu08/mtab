@@ -17,15 +17,15 @@ export const exportBookmarkNode = async (uuid: string) => {
 
   if (nodeType === "bookmark") {
     result = getBookmarkNodeBookmarkData(uuid);
-    prefix = `MTAB_USER_DEFINED_BOOKMARK_v${extensionVersion}_`;
+    prefix = `MTAB_USER_DEFINED_BOOKMARK_FORMAT_v${extensionVersion}_`;
   } else if (nodeType === "folder") {
     result = getBookmarkNodeFolderData(uuid);
-    prefix = `MTAB_USER_DEFINED_FOLDER_v${extensionVersion}_`;
+    prefix = `MTAB_USER_DEFINED_FOLDER_FORMAT_v${extensionVersion}_`;
   }
 
   if (!result) return;
 
-  const formattedExport = `${prefix}${window.btoa(encodeURIComponent(JSON.stringify(result)))}`;
+  const formattedExport = `${prefix}${JSON.stringify(result)}`;
 
   console.log(formattedExport);
   await navigator.clipboard.writeText(formattedExport);
