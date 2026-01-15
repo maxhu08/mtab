@@ -30,8 +30,8 @@ export const exportBookmarkNode = async (uuid: string) => {
   await navigator.clipboard.writeText(formattedExport);
 
   if (nodeType === "bookmark") {
-    toast.info("bookmark copied to clipboard");
+    toast.success("bookmark copied to clipboard");
   } else if (nodeType === "folder") {
-    toast.info("folder and contents copied to clipboard");
+    toast.success("folder and contents copied to clipboard");
   }
 };

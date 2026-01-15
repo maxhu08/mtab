@@ -110,6 +110,8 @@ export const hotkeysClosePageKeyStatusEl = document.getElementById("hotkeys-clos
 export const [hotkeysSearchBookmarksKeyContainerEl, hotkeysSearchBookmarksKeyInputEl] = getContainerAndInput("hotkeys-search-bookmarks-key");
 export const hotkeysSearchBookmarksKeyStatusEl = document.getElementById("hotkeys-search-bookmarks-key-status") as HTMLSpanElement;
 
+export const toggleCollapseAllBookmarkNodesButtonEl = document.getElementById("bookmarks-user-defined-toggle-collapse-all-button") as HTMLButtonElement;
+
 export const bookmarksTypeUserDefinedButtonEl = getButton("bookmarks-type-user-defined");
 export const bookmarksTypeDefaultButtonEl = getButton("bookmarks-type-default");
 export const bookmarksTypeDefaultBlockyButtonEl = getButton("bookmarks-type-default-blocky");
