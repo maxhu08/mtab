@@ -19,27 +19,39 @@ export const importConfigAndSave = () => {
     return;
   }
 
-  const basePrefix = "MTAB_SAVE_FORMAT_";
-  if (!dataToImport.startsWith(basePrefix)) {
+  const legacyPrefix = "MTAB_SAVE_FORMAT_";
+  const newHeaderRegex = /^MTAB_SAVE_FORMAT_v.+_/;
+
+  if (!dataToImport.startsWith(legacyPrefix)) {
     toast.error(
-      `incorrect save format, use MTAB_SAVE_FORMAT_v#.#.#_ or ${basePrefix} for legacy saves`
+      `incorrect save format, use MTAB_SAVE_FORMAT_v#.#.#_ or ${legacyPrefix} for legacy saves`
     );
+    return;
+  }
+
+  // looks like new format but header is invalid
+  if (dataToImport.startsWith("MTAB_SAVE_FORMAT_v") && !newHeaderRegex.test(dataToImport)) {
+    toast.error("invalid save format, expected MTAB_SAVE_FORMAT_v#.#.#_");
     return;
   }
 
   let rawPayload: string;
 
-  // new format: MTAB_SAVE_FORMAT_v-{version}_{json}
+  // new format: MTAB_SAVE_FORMAT_v{version}_{json}
   const versionedMatch = dataToImport.match(/^MTAB_SAVE_FORMAT_v[^_]+_(.+)$/);
 
+  if (dataToImport.startsWith("MTAB_SAVE_FORMAT_v") && !versionedMatch) {
+    toast.error("incorrect save format");
+    return;
+  }
+
   if (versionedMatch) {
-    // new format: plain json after version
-    rawPayload = versionedMatch[1];
+    rawPayload = versionedMatch[1].trim();
   } else {
     // legacy format: base64 + uri + double json
     try {
       rawPayload = JSON.parse(
-        decodeURIComponent(window.atob(dataToImport.replace(basePrefix, "")))
+        decodeURIComponent(window.atob(dataToImport.replace(legacyPrefix, "")))
       );
     } catch {
       toast.error("failed to parse legacy save format");
