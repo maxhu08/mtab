@@ -269,6 +269,12 @@ toggleCollapseAllBookmarkNodesButtonEl.onclick = () => {
 const addBookmarkButtonEl = document.getElementById("bookmarks-user-defined-add-bookmark-button") as HTMLButtonElement;
 // prettier-ignore
 const addFolderButtonEl = document.getElementById("bookmarks-user-defined-add-folder-button") as HTMLButtonElement;
+// prettier-ignore
+const importBookmarkNodeButtonEl = document.getElementById("bookmarks-user-defined-import-bookmark-node-button") as HTMLButtonElement;
+// prettier-ignore
+const exportAllBookmarkNodesButtonEl = document.getElementById("bookmarks-user-defined-export-all-button") as HTMLButtonElement;
+// prettier-ignore
+const importAllBookmarkNodesButtonEl = document.getElementById("bookmarks-user-defined-import-all-button") as HTMLButtonElement;
 
 addBookmarkButtonEl.onclick = () => {
   addBookmarkNodeBookmark(
@@ -300,6 +306,19 @@ addFolderButtonEl.onclick = () => {
     },
     bookmarksUserDefinedList
   );
+};
+
+// TODO: add functionality to these
+importBookmarkNodeButtonEl.onclick = () => {
+  toast.info("Import feature coming soon!");
+};
+
+exportAllBookmarkNodesButtonEl.onclick = () => {
+  toast.info("Export all feature coming soon!");
+};
+
+importAllBookmarkNodesButtonEl.onclick = () => {
+  toast.info("Import all feature coming soon!");
 };
 
 const bindToggleCollapseHandlers = () => {
@@ -438,7 +457,7 @@ const addBookmarkNodeBookmark = (bookmark: BookmarkNodeBookmark, targetDivEl: HT
   const buttons = [
     {
       id: `bookmark-${uuid}-export-button`,
-      icon: "ri-upload-line",
+      icon: "ri-share-2-line",
       class: "export-bookmark-button bg-indigo-500 hover:bg-indigo-600"
     },
     {
@@ -628,7 +647,7 @@ const addBookmarkNodeFolder = (folder: BookmarkNodeFolder, targetDivEl: HTMLDivE
   const buttons = [
     {
       id: `bookmark-${uuid}-export-button`,
-      icon: "ri-upload-line",
+      icon: "ri-share-2-line",
       class: "export-folder-button bg-indigo-500 hover:bg-indigo-600"
     },
     {

@@ -1046,13 +1046,26 @@
                 <span class="text-base text-white">collapse all</span>
               </button>
               <div id="bookmarks-user-defined-list" class="bookmarks-user-defined-dropzone grid grid-flow-row gap-2"></div>
-              <div class="grid grid-cols-2 gap-2">
-                <button id="bookmarks-user-defined-add-bookmark-button" class="w-full cursor-pointer rounded-md bg-emerald-500 p-2 transition hover:bg-emerald-600">
-                  <span class="text-base text-white">add bookmark</span>
+              <div class="grid gap-2">
+                <div class="grid gap-2 lg:grid-cols-2">
+                  <button id="bookmarks-user-defined-add-bookmark-button" class="w-full cursor-pointer rounded-md bg-emerald-500 p-2 transition hover:bg-emerald-600">
+                    <span class="text-base text-white">add bookmark</span>
+                  </button>
+                  <button id="bookmarks-user-defined-add-folder-button" class="w-full cursor-pointer rounded-md bg-emerald-500 p-2 transition hover:bg-emerald-600">
+                    <span class="text-base text-white">add folder</span>
+                  </button>
+                </div>
+                <button id="bookmarks-user-defined-import-bookmark-node-button" class="w-full cursor-pointer rounded-md bg-indigo-500 p-2 transition hover:bg-indigo-600">
+                  <span class="text-base text-white">import bookmark or folder</span>
                 </button>
-                <button id="bookmarks-user-defined-add-folder-button" class="w-full cursor-pointer rounded-md bg-emerald-500 p-2 transition hover:bg-emerald-600">
-                  <span class="text-base text-white">add folder</span>
-                </button>
+                <div class="grid gap-2 lg:grid-cols-2">
+                  <button id="bookmarks-user-defined-export-all-button" class="w-full cursor-pointer rounded-md bg-indigo-500 p-2 transition hover:bg-indigo-600">
+                    <span class="text-base text-white">export all</span>
+                  </button>
+                  <button id="bookmarks-user-defined-import-all-button" class="w-full cursor-pointer rounded-md bg-indigo-500 p-2 transition hover:bg-indigo-600">
+                    <span class="text-base text-white">import all (replace)</span>
+                  </button>
+                </div>
               </div>
             </div>
           </div>
