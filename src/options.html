@@ -772,19 +772,6 @@
                 />
               </div>
             </div>
-            <!-- <div class="grid grid-cols-[max-content_auto] w-full place-items-center">
-            <p class="text-white text-base">search.assist.history <span
-                class="text-neutral-500 text-base">(experimental)</span>
-            </p>
-            <div class="ml-auto">
-              <label class="relative inline-flex items-center cursor-pointer">
-                <input id="search-assist-history-checkbox" type="checkbox" value="" class="sr-only peer" />
-                <div
-                  class="w-11 h-6 peer bg-neutral-800 outline-none rounded-full peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[3px] after:left-[3px] after:bg-neutral-700 after:border-none after:rounded-full after:h-[1.15rem] after:aspect-square after:transition-all peer-checked:bg-emerald-500 peer-checked:after:bg-white">
-                </div>
-              </label>
-            </div>
-          </div> -->
             <div class="grid gap-2">
               <div class="grid w-full grid-cols-[max-content_auto] place-items-center">
                 <p class="text-base text-white">search.suggestions</p>
@@ -803,49 +790,63 @@
                 DuckDuckGo and do not include cookies, accounts, extension identifiers, or other personal data.
               </p>
             </div>
-            <div class="grid w-full grid-cols-[max-content_auto] place-items-center">
-              <p class="text-base text-white">search.assist.date</p>
-              <div class="ml-auto">
-                <label class="relative inline-flex cursor-pointer items-center">
-                  <input id="search-assist-date-checkbox" type="checkbox" value="" class="peer sr-only" />
-                  <div
-                    class="peer h-6 w-11 rounded-full bg-neutral-800 outline-none after:absolute after:left-[3px] after:top-[3px] after:aspect-square after:h-[1.15rem] after:rounded-full after:border-none after:bg-neutral-700 after:transition-all after:content-[''] peer-checked:bg-emerald-500 peer-checked:after:translate-x-full peer-checked:after:bg-white"
-                  ></div>
-                </label>
+            <div class="grid gap-2">
+              <div class="grid w-full grid-cols-[max-content_auto] place-items-center">
+                <p class="text-base text-white">search.assist.date</p>
+                <div class="ml-auto">
+                  <label class="relative inline-flex cursor-pointer items-center">
+                    <input id="search-assist-date-checkbox" type="checkbox" value="" class="peer sr-only" />
+                    <div
+                      class="peer h-6 w-11 rounded-full bg-neutral-800 outline-none after:absolute after:left-[3px] after:top-[3px] after:aspect-square after:h-[1.15rem] after:rounded-full after:border-none after:bg-neutral-700 after:transition-all after:content-[''] peer-checked:bg-emerald-500 peer-checked:after:translate-x-full peer-checked:after:bg-white"
+                    ></div>
+                  </label>
+                </div>
               </div>
+              <p class="text-base text-neutral-500">shows the current date when you type 'date'</p>
             </div>
-            <div class="grid w-full grid-cols-[max-content_auto] place-items-center">
-              <p class="text-base text-white">search.assist.math</p>
-              <div class="ml-auto">
-                <label class="relative inline-flex cursor-pointer items-center">
-                  <input id="search-assist-math-checkbox" type="checkbox" value="" class="peer sr-only" />
-                  <div
-                    class="peer h-6 w-11 rounded-full bg-neutral-800 outline-none after:absolute after:left-[3px] after:top-[3px] after:aspect-square after:h-[1.15rem] after:rounded-full after:border-none after:bg-neutral-700 after:transition-all after:content-[''] peer-checked:bg-emerald-500 peer-checked:after:translate-x-full peer-checked:after:bg-white"
-                  ></div>
-                </label>
+            <div class="grid gap-2">
+              <div class="grid w-full grid-cols-[max-content_auto] place-items-center">
+                <p class="text-base text-white">search.assist.math</p>
+                <div class="ml-auto">
+                  <label class="relative inline-flex cursor-pointer items-center">
+                    <input id="search-assist-math-checkbox" type="checkbox" value="" class="peer sr-only" />
+                    <div
+                      class="peer h-6 w-11 rounded-full bg-neutral-800 outline-none after:absolute after:left-[3px] after:top-[3px] after:aspect-square after:h-[1.15rem] after:rounded-full after:border-none after:bg-neutral-700 after:transition-all after:content-[''] peer-checked:bg-emerald-500 peer-checked:after:translate-x-full peer-checked:after:bg-white"
+                    ></div>
+                  </label>
+                </div>
               </div>
+              <p class="text-base text-neutral-500">
+                automatically evaluates math expressions typed into the search input <br /><br />e.g., cos(pi / 6) * (3^2 - 4) + sin(45deg) + sqrt(20) = 9.50936975510832
+              </p>
             </div>
-            <div class="grid w-full grid-cols-[max-content_auto] place-items-center">
-              <p class="text-base text-white">search.assist.definitions</p>
-              <div class="ml-auto">
-                <label class="relative inline-flex cursor-pointer items-center">
-                  <input id="search-assist-definitions-checkbox" type="checkbox" value="" class="peer sr-only" />
-                  <div
-                    class="peer h-6 w-11 rounded-full bg-neutral-800 outline-none after:absolute after:left-[3px] after:top-[3px] after:aspect-square after:h-[1.15rem] after:rounded-full after:border-none after:bg-neutral-700 after:transition-all after:content-[''] peer-checked:bg-emerald-500 peer-checked:after:translate-x-full peer-checked:after:bg-white"
-                  ></div>
-                </label>
+            <div class="grid gap-2">
+              <div class="grid w-full grid-cols-[max-content_auto] place-items-center">
+                <p class="text-base text-white">search.assist.definitions</p>
+                <div class="ml-auto">
+                  <label class="relative inline-flex cursor-pointer items-center">
+                    <input id="search-assist-definitions-checkbox" type="checkbox" value="" class="peer sr-only" />
+                    <div
+                      class="peer h-6 w-11 rounded-full bg-neutral-800 outline-none after:absolute after:left-[3px] after:top-[3px] after:aspect-square after:h-[1.15rem] after:rounded-full after:border-none after:bg-neutral-700 after:transition-all after:content-[''] peer-checked:bg-emerald-500 peer-checked:after:translate-x-full peer-checked:after:bg-white"
+                    ></div>
+                  </label>
+                </div>
               </div>
+              <p class="text-base text-neutral-500">shows word definitions when you include definition keywords in the search input<br /><br />e.g., 'morning def' or 'morning definition'</p>
             </div>
-            <div class="grid w-full grid-cols-[max-content_auto] place-items-center">
-              <p class="text-base text-white">search.assist.conversions</p>
-              <div class="ml-auto">
-                <label class="relative inline-flex cursor-pointer items-center">
-                  <input id="search-assist-conversions-checkbox" type="checkbox" value="" class="peer sr-only" />
-                  <div
-                    class="peer h-6 w-11 rounded-full bg-neutral-800 outline-none after:absolute after:left-[3px] after:top-[3px] after:aspect-square after:h-[1.15rem] after:rounded-full after:border-none after:bg-neutral-700 after:transition-all after:content-[''] peer-checked:bg-emerald-500 peer-checked:after:translate-x-full peer-checked:after:bg-white"
-                  ></div>
-                </label>
+            <div class="grid gap-2">
+              <div class="grid w-full grid-cols-[max-content_auto] place-items-center">
+                <p class="text-base text-white">search.assist.conversions</p>
+                <div class="ml-auto">
+                  <label class="relative inline-flex cursor-pointer items-center">
+                    <input id="search-assist-conversions-checkbox" type="checkbox" value="" class="peer sr-only" />
+                    <div
+                      class="peer h-6 w-11 rounded-full bg-neutral-800 outline-none after:absolute after:left-[3px] after:top-[3px] after:aspect-square after:h-[1.15rem] after:rounded-full after:border-none after:bg-neutral-700 after:transition-all after:content-[''] peer-checked:bg-emerald-500 peer-checked:after:translate-x-full peer-checked:after:bg-white"
+                    ></div>
+                  </label>
+                </div>
               </div>
+              <p class="text-base text-neutral-500">converts units directly from the search input <br /><br />e.g., '1 ft => 0.30 m'</p>
             </div>
           </div>
         </section>
