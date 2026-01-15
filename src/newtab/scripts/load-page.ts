@@ -16,7 +16,6 @@ import { showOptionsButton } from "src/newtab/scripts/utils/show-options-button"
 import { listenBookmarkNumberKeys } from "src/newtab/scripts/utils/bookmarks/listen-bookmark-number-keys";
 import { hideCover } from "src/newtab/scripts/utils/hide-cover";
 import { coverEl } from "src/newtab/scripts/ui";
-import { setTopDistance } from "src/newtab/scripts/utils/top-distance";
 import { handleSearchAssist } from "src/newtab/scripts/utils/search/handle-search-assist";
 import { snowStorm } from "src/newtab/scripts/utils/extras/snow-effect";
 import { initSW } from "src/newtab/scripts/sw";
@@ -42,7 +41,6 @@ export const loadPage = () => {
 
     loadFavicon(config.title.faviconType);
 
-    setTopDistance();
     setUISyle(config.ui);
 
     if (!config.wallpaper.enabled) {

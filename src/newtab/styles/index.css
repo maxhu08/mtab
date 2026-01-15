@@ -27,6 +27,22 @@ html {
   -webkit-mask-image: radial-gradient(circle, rgba(0, 0, 0, 0) 30%, rgba(0, 0, 0, 1) 100%);
 }
 
+.top-distance {
+  top: 10vh;
+}
+
+@media (min-height: 400px) {
+  .top-distance {
+    top: 20vh;
+  }
+}
+
+@media (min-height: 600px) {
+  .top-distance {
+    top: 30vh;
+  }
+}
+
 .bookmark-node-icon {
   display: flex;
   align-items: center;
