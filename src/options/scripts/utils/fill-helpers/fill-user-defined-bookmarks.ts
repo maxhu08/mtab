@@ -70,7 +70,7 @@ export const handleBookmarkNodesDragging = () => {
 
 let tooltipInstances: Instance[] = [];
 
-export const refreshHandleTooltips = () => {
+const refreshHandleTooltips = () => {
   // destroy old instances
   tooltipInstances.forEach((instance) => instance.destroy());
   tooltipInstances = [];
@@ -84,14 +84,24 @@ export const refreshHandleTooltips = () => {
   };
 
   tooltipInstances.push(
+    // bookmark buttons
     ...tippy(".toggle-collapse-bookmark-button", { ...base, content: "Toggle Collapse Bookmark" }),
     ...tippy(".reposition-bookmark-button", { ...base, content: "Reposition Bookmark" }),
     ...tippy(".delete-bookmark-button", { ...base, content: "Delete Bookmark" }),
-
+    ...tippy(".export-bookmark-button", { ...base, content: "Export Bookmark" }),
+    // folder buttons
     ...tippy(".toggle-collapse-folder-button", { ...base, content: "Toggle Collapse Folder" }),
     ...tippy(".reposition-folder-button", { ...base, content: "Reposition Folder" }),
-    ...tippy(".delete-folder-button", { ...base, content: "Delete Folder" })
+    ...tippy(".delete-folder-button", { ...base, content: "Delete Folder" }),
+    ...tippy(".export-folder-button", { ...base, content: "Export Folder" })
   );
+};
+
+const exportBookmarkNode = (uuid: string) => {
+  toast.info("bookmark node export is wip");
+
+  // TODO: implement export logic
+  console.log("export", uuid);
 };
 
 const handleBookmarkSettings = (uuid: string) => {
@@ -160,6 +170,10 @@ const handleBookmarkSettings = (uuid: string) => {
       })
     );
   });
+
+  // prettier-ignore
+  const exportBookmarkButtonEl = document.getElementById(`bookmark-${uuid}-export-button`) as HTMLButtonElement;
+  exportBookmarkButtonEl.onclick = () => exportBookmarkNode(uuid);
 
   // prettier-ignore
   const deleteBookmarkButtonEl = document.getElementById(`bookmark-${uuid}-delete-button`) as HTMLButtonElement;
@@ -246,6 +260,10 @@ const handleFolderSettings = (uuid: string) => {
   // prettier-ignore
   const deleteBookmarkButtonEl = document.getElementById(`bookmark-${uuid}-delete-button`) as HTMLButtonElement;
   deleteBookmarkButtonEl.onclick = () => deleteBookmark(uuid);
+
+  // prettier-ignore
+  const exportFolderButtonEl = document.getElementById(`bookmark-${uuid}-export-button`) as HTMLButtonElement;
+  exportFolderButtonEl.onclick = () => exportBookmarkNode(uuid);
 
   // prettier-ignore
   const collapsibleContentEl = document.getElementById(`bookmark-${uuid}-collapsible-content`) as HTMLDivElement
@@ -400,7 +418,7 @@ const addBookmarkNodeBookmark = (bookmark: BookmarkNodeBookmark, targetDivEl: HT
   //       <span id="bookmark-${uuid}-user-defined-useless-title" class="text-white text-base my-auto mr-auto ml-2">
   //         ${bookmark.name}
   //       </span>
-  //       <div class="grid grid-cols-3 gap-2">
+  //       <div class="grid grid-cols-4 gap-2">
   //         <button id="bookmark-${uuid}-toggle-collapse-button" class="toggle-collapse-bookmark-button bg-neutral-500 hover:bg-neutral-600 transition w-10 aspect-square rounded-md cursor-pointer">
   //           <i class="text-white ri-collapse-horizontal-line"></i>
   //         </button>
@@ -484,9 +502,14 @@ const addBookmarkNodeBookmark = (bookmark: BookmarkNodeBookmark, targetDivEl: HT
   titleSpan.textContent = bookmark.name;
 
   const buttonGroup = document.createElement("div");
-  buttonGroup.className = "grid grid-cols-3 gap-2";
+  buttonGroup.className = "grid grid-cols-4 gap-2";
 
   const buttons = [
+    {
+      id: `bookmark-${uuid}-export-button`,
+      icon: "ri-upload-line",
+      class: "export-bookmark-button bg-indigo-500 hover:bg-indigo-600"
+    },
     {
       id: `bookmark-${uuid}-toggle-collapse-button`,
       icon: "ri-collapse-horizontal-line",
@@ -588,7 +611,7 @@ const addBookmarkNodeFolder = (folder: BookmarkNodeFolder, targetDivEl: HTMLDivE
   //       <span id="bookmark-${uuid}-user-defined-useless-title" class="text-white text-base my-auto mr-auto ml-2">
   //         ${folder.name}
   //       </span>
-  //       <div class="grid grid-cols-3 gap-2">
+  //       <div class="grid grid-cols-4 gap-2">
   //         <button id="bookmark-${uuid}-toggle-collapse-button" class="toggle-collapse-folder-button bg-neutral-500 hover:bg-neutral-600 transition w-10 aspect-square rounded-md cursor-pointer">
   //           <i class="text-white ri-collapse-horizontal-line"></i>
   //         </button>
@@ -669,9 +692,14 @@ const addBookmarkNodeFolder = (folder: BookmarkNodeFolder, targetDivEl: HTMLDivE
   titleSpan.textContent = folder.name;
 
   const buttonGroup = document.createElement("div");
-  buttonGroup.className = "grid grid-cols-3 gap-2";
+  buttonGroup.className = "grid grid-cols-4 gap-2";
 
   const buttons = [
+    {
+      id: `bookmark-${uuid}-export-button`,
+      icon: "ri-upload-line",
+      class: "export-folder-button bg-indigo-500 hover:bg-indigo-600"
+    },
     {
       id: `bookmark-${uuid}-toggle-collapse-button`,
       icon: "ri-collapse-horizontal-line",
