@@ -11,6 +11,8 @@ import {
   messageTypeWeatherButtonEl,
   searchFontTypeCustomButtonEl,
   searchFontTypeDefaultButtonEl,
+  titleEffectNoneButtonEl,
+  titleEffectTypewriterButtonEl,
   titleFaviconTypeCustomButtonEl,
   titleFaviconTypeDefaultButtonEl,
   uiStyleGlassButtonEl,
@@ -26,6 +28,7 @@ import { previewWallpaper } from "src/options/scripts/utils/preview";
 import { logger } from "src/utils/logger";
 
 export const handleSwitches = () => {
+  handleTitleEffectSwitch();
   handleFaviconTypeSwitch();
   handleMessageFontTypeSwitch();
   handleMessageTypeSwitch();
@@ -36,6 +39,20 @@ export const handleSwitches = () => {
   handleUserDefinedOrDefaultBlockySwitch();
   handleBookmarksDefaultBlockyColorTypeSwitch();
   handleBookmarksDefaultOrDefaultBlockySwitch();
+};
+
+const handleTitleEffectSwitch = () => {
+  const titleEffectTypewriterSection = document.getElementById(
+    "title-effect-typewriter-section"
+  ) as HTMLDivElement;
+
+  titleEffectNoneButtonEl.addEventListener("click", () => {
+    titleEffectTypewriterSection.style.display = "none";
+  });
+
+  titleEffectTypewriterButtonEl.addEventListener("click", () => {
+    titleEffectTypewriterSection.style.display = "";
+  });
 };
 
 const handleFaviconTypeSwitch = () => {

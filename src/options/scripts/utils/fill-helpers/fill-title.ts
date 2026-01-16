@@ -5,7 +5,9 @@ import {
   titleEffectNoneButtonEl,
   titleEffectTypewriterButtonEl,
   titleFaviconTypeCustomButtonEl,
-  titleFaviconTypeDefaultButtonEl
+  titleFaviconTypeDefaultButtonEl,
+  titleTypewriterRemainCountInputEl,
+  titleTypewriterSpeedInputEl
 } from "src/options/scripts/ui";
 import { previewFavicon } from "src/options/scripts/utils/preview";
 
@@ -15,6 +17,9 @@ export const fillTitleInputs = (config: Config) => {
 
   if (config.title.effect === "none") titleEffectNoneButtonEl.click();
   else if (config.title.effect === "typewriter") titleEffectTypewriterButtonEl.click();
+
+  titleTypewriterSpeedInputEl.value = config.title.typewriter.speed.toString();
+  titleTypewriterRemainCountInputEl.value = config.title.typewriter.remainCount.toString();
 
   if (config.title.faviconType === "default") titleFaviconTypeDefaultButtonEl.click();
   else if (config.title.faviconType === "custom") titleFaviconTypeCustomButtonEl.click();

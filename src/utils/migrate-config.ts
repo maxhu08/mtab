@@ -2,6 +2,16 @@
 import { Config } from "src/utils/config";
 
 export const migrateOldConfig = (config: Config): Config => {
+  // if config is before v1.9.8
+  if (!config.title.typewriter || typeof (config.title as any).typewriter !== "object") {
+    (config.title as any).typewriter = { speed: 500, remainCount: 1 };
+  } else {
+    if (typeof (config.title as any).typewriter.speed !== "number")
+      (config.title as any).typewriter.speed = 500;
+    if (typeof (config.title as any).typewriter.remainCount !== "number")
+      (config.title as any).typewriter.remainCount = 1;
+  }
+
   // if config is before v1.9.2
   if (!config.title) {
     (config as any).title = { effect: "none" };

@@ -7,7 +7,7 @@ import { logger } from "src/utils/logger";
 import { migrateOldConfig } from "src/utils/migrate-config";
 
 export const importConfigAndSave = () => {
-  const dataToImport = prompt("input your save (this will overwrite your current config)");
+  const dataToImport = prompt("input your save (THIS WILL OVERWRITE YOUR CURRENT CONFIG)");
 
   if (dataToImport === null) {
     toast.error("could not import your save");

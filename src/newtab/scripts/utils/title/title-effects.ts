@@ -1,12 +1,16 @@
 import { searchInputEl } from "src/newtab/scripts/ui";
 
-const TITLE_DURATION_MS = 500;
-
-export const titleTypewriterEffect = (text: string, titleDynamicEnabled: boolean) => {
+export const titleTypewriterEffect = (
+  text: string,
+  titleDynamicEnabled: boolean,
+  speed: number,
+  remainCount: number
+) => {
   let index = 0;
   let direction: "forward" | "backward" = "forward";
   let timeoutId: number | null = null;
   let paused = false;
+  const minIndex = Math.max(0, remainCount);
 
   const tick = () => {
     // pause when search input not empty and dynamic titles are enabled
@@ -19,33 +23,16 @@ export const titleTypewriterEffect = (text: string, titleDynamicEnabled: boolean
     paused = false;
 
     if (direction === "forward") {
-      index++;
+      index = Math.min(text.length, index + 1);
       document.title = text.slice(0, index);
-
-      if (index === text.length) {
-        timeoutId = window.setTimeout(() => {
-          direction = "backward";
-          tick();
-        }, TITLE_DURATION_MS);
-        return;
-      }
-
-      timeoutId = window.setTimeout(tick, TITLE_DURATION_MS);
+      if (index === text.length) direction = "backward";
     } else {
-      index--;
+      index = Math.max(minIndex, index - 1);
       document.title = text.slice(0, index);
-
-      if (index <= 1) {
-        index = 1;
-        timeoutId = window.setTimeout(() => {
-          direction = "forward";
-          tick();
-        }, TITLE_DURATION_MS);
-        return;
-      }
-
-      timeoutId = window.setTimeout(tick, TITLE_DURATION_MS);
+      if (index === minIndex) direction = "forward";
     }
+
+    timeoutId = window.setTimeout(tick, speed);
   };
 
   // resume when input becomes empty again

@@ -38,6 +38,10 @@ export const defaultConfig: Config = {
       enabled: true
     },
     effect: "none",
+    typewriter: {
+      speed: 500,
+      remainCount: 1
+    },
     faviconType: "default"
   },
   message: {
@@ -260,6 +264,10 @@ export interface Config {
       enabled: boolean;
     };
     effect: TitleEffectType;
+    typewriter: {
+      speed: number;
+      remainCount: number;
+    };
     faviconType: FaviconType;
   };
   message: {

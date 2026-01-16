@@ -1,5 +1,10 @@
 import { Config } from "src/utils/config";
-import { titleDefaultTitleInputEl, titleDynamicEnabledCheckboxEl } from "src/options/scripts/ui";
+import {
+  titleDefaultTitleInputEl,
+  titleDynamicEnabledCheckboxEl,
+  titleTypewriterRemainCountInputEl,
+  titleTypewriterSpeedInputEl
+} from "src/options/scripts/ui";
 import { getSelectedButton } from "src/options/scripts/utils/get-selected-button";
 
 export const saveTitleSettingsToDraft = (draft: Config) => {
@@ -15,6 +20,12 @@ export const saveTitleSettingsToDraft = (draft: Config) => {
       draft.title.effect = "typewriter";
     }
   }
+
+  const speedValue = parseInt(titleTypewriterSpeedInputEl.value);
+  draft.title.typewriter.speed = isNaN(speedValue) ? 500 : speedValue;
+
+  const remainCountValue = parseInt(titleTypewriterRemainCountInputEl.value);
+  draft.title.typewriter.remainCount = isNaN(remainCountValue) ? 1 : remainCountValue;
 
   const selectedFaviconTypeEl = getSelectedButton("favicon-type");
 

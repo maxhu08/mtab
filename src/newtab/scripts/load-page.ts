@@ -36,7 +36,12 @@ export const loadPage = () => {
     document.title = config.title.defaultTitle;
 
     if (config.title.effect === "typewriter") {
-      titleTypewriterEffect(config.title.defaultTitle, config.title.dynamic.enabled);
+      titleTypewriterEffect(
+        config.title.defaultTitle,
+        config.title.dynamic.enabled,
+        config.title.typewriter.speed,
+        config.title.typewriter.remainCount
+      );
     }
 
     loadFavicon(config.title.faviconType);
