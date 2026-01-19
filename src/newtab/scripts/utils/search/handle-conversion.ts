@@ -63,12 +63,12 @@ const UNITS: readonly UnitDef[] = [
   { c: "temperature", u: "K",  a: ["k","kelvin"],          toBase: (n) => n,                             fromBase: (n) => n },
 
   // time (base: s)
-  linear("time","ms",     ["ms","millisecond","milliseconds"],                0.001),
   linear("time","s",      ["s","sec","secs","second","seconds"],              1),
   linear("time","min",    ["min","mins","minute","minutes"],                  60),
-  linear("time","h",      ["h","hr","hrs","hour","hours"],                    3600),
-  linear("time","day",    ["d","day","days"],                                 86400),
-  linear("time","week",   ["w","wk","wks","week","weeks"],                    604800),
+  linear("time","hr",     ["hr","hrs","hour","hours"],                        3600),
+  linear("time","d",      ["d","day","days"],                                 86400),
+  linear("time","wk",     ["w","wk","wks","week","weeks"],                    604800),
+  linear("time","ms",     ["ms","millisecond","milliseconds"],                0.001),
 
   // volume (base: L)
   linear("volume","mL",   ["ml","milliliter","milliliters"],                  0.001),
