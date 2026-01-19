@@ -2,39 +2,18 @@
 import { Config } from "src/utils/config";
 
 export const migrateOldConfig = (config: Config): Config => {
-  // if config is before v1.9.8
-  if (!config.title.typewriter || typeof (config.title as any).typewriter !== "object") {
-    (config.title as any).typewriter = { speed: 500, remainCount: 1 };
-  } else {
-    if (typeof (config.title as any).typewriter.speed !== "number")
-      (config.title as any).typewriter.speed = 500;
-    if (typeof (config.title as any).typewriter.remainCount !== "number")
-      (config.title as any).typewriter.remainCount = 1;
-  }
-
-  // if config is before v1.9.2
-  if (!config.title) {
-    (config as any).title = { effect: "none" };
-  } else if (typeof (config.title as any).effect !== "string") {
-    (config.title as any).effect = "none";
-  }
-
-  if (!("linkTextColor" in config.search)) (config.search as any).linkTextColor = "#0ea5e9";
-  if (typeof config.search.recognizeLinks !== "boolean") config.search.recognizeLinks = true;
-  if (typeof config.search.suggestions !== "boolean") config.search.suggestions = true;
-
   // if config is before v1.6.5
   // prettier-ignore
   if (typeof config.message.font === "string") config.message.font = { type: "default", custom: "" };
   if (typeof config.search.font === "string") config.search.font = { type: "default", custom: "" };
 
-  // if config is before v.1.6.7
+  // if config is before v1.6.7
   // add 'type' property to user-defined bookmarks
   if (config.bookmarks.userDefined) {
     config.bookmarks.userDefined = config.bookmarks.userDefined.map((node: any) => {
       if (!node.type) {
-        if ("url" in node) return { ...node, type: "bookmark" }; // add type for bookmarks
-        if ("contents" in node) return { ...node, type: "folder" }; // add type for folders
+        if ("url" in node) return { ...node, type: "bookmark" };
+        if ("contents" in node) return { ...node, type: "folder" };
       }
       return node;
     });
@@ -43,9 +22,8 @@ export const migrateOldConfig = (config: Config): Config => {
   // if config is before v1.6.8
   // replace userDefinedKeys with numberKeys
   if ("userDefinedKeys" in config.bookmarks) {
-    // ensure userDefinedKeys is a boolean
-    config.bookmarks.numberKeys = !!config.bookmarks.userDefinedKeys;
-    delete config.bookmarks.userDefinedKeys;
+    config.bookmarks.numberKeys = !!(config.bookmarks as any).userDefinedKeys;
+    delete (config.bookmarks as any).userDefinedKeys;
   }
 
   // if config is before v1.8.0
@@ -84,7 +62,13 @@ export const migrateOldConfig = (config: Config): Config => {
   }
 
   // if config is before v1.8.3
-  // ensure 'blur' and 'brightness' properties exist for wallpaper.filter
+  // ensure 'filters' object exists (defensive)
+  if (!config.wallpaper.filters || typeof config.wallpaper.filters !== "object") {
+    (config.wallpaper as any).filters = { blur: "0px", brightness: "1" };
+  }
+
+  // if config is before v1.8.3
+  // ensure 'blur' and 'brightness' properties exist for wallpaper.filters
   if (!config.wallpaper.filters.blur) config.wallpaper.filters.blur = "0px";
   if (!config.wallpaper.filters.brightness) config.wallpaper.filters.brightness = "1";
 
@@ -92,6 +76,30 @@ export const migrateOldConfig = (config: Config): Config => {
   if (config.wallpaper.url === "./wallpapers/bg-1.png") {
     config.wallpaper.url = "./wallpapers/default.png";
   }
+
+  // if config is before v1.9.2
+  if (!config.title) {
+    (config as any).title = { effect: "none" };
+  } else if (typeof (config.title as any).effect !== "string") {
+    (config.title as any).effect = "none";
+  }
+
+  // if config is before v1.9.8
+  if (!(config.title as any).typewriter || typeof (config.title as any).typewriter !== "object") {
+    (config.title as any).typewriter = { speed: 500, remainCount: 1 };
+  } else {
+    if (typeof (config.title as any).typewriter.speed !== "number")
+      (config.title as any).typewriter.speed = 500;
+    if (typeof (config.title as any).typewriter.remainCount !== "number")
+      (config.title as any).typewriter.remainCount = 1;
+  }
+
+  // if config is before v1.9.9
+  if (config.wallpaper.url === "./wallpapers/default.png") config.wallpaper.url = "";
+
+  if (!("linkTextColor" in config.search)) (config.search as any).linkTextColor = "#0ea5e9";
+  if (typeof config.search.recognizeLinks !== "boolean") config.search.recognizeLinks = true;
+  if (typeof config.search.suggestions !== "boolean") config.search.suggestions = true;
 
   return config;
 };

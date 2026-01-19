@@ -43,7 +43,14 @@ export const loadWallpaper = (wallpaper: Config["wallpaper"]) => {
         hideCover();
       });
   } else {
-    applyWallpaper(wallpaper.url, wallpaper.filters.brightness, wallpaper.filters.blur);
+    const isDefault = !wallpaper.url || wallpaper.url === "./wallpapers/default.png";
+
+    applyWallpaper(
+      isDefault ? "./wallpapers/default.jpg" : wallpaper.url,
+      wallpaper.filters.brightness,
+      wallpaper.filters.blur
+    );
+
     hideCover();
   }
 };
@@ -65,11 +72,6 @@ const applyWallpaper = (wallpaper: Blob | string, brightness: string, blur: stri
   mediaEl.style.width = "100%";
   mediaEl.style.height = "100%";
   mediaEl.style.objectFit = "cover";
-
-  if (wallpaper === "./wallpapers/default.png") {
-    mediaEl.style.transformOrigin = "center";
-    mediaEl.style.transform = "scale(1.01)";
-  }
 
   if (isVideo) {
     const videoEl = mediaEl as HTMLVideoElement;
