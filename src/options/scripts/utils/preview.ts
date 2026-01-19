@@ -1,10 +1,18 @@
 const liveWallpaperPreviewEl = document.getElementById("live-wallpaper-preview") as HTMLDivElement;
 
+const isDefaultWallpaper = (w: Blob | string | undefined) =>
+  typeof w === "string" &&
+  (w === "" || w === "./wallpapers/default.jpg" || w === "./wallpapers/default.png");
+
 export const previewWallpaper = (
   wallpaper: Blob | string | undefined,
   brightness: string,
   blur: string
 ) => {
+  if (isDefaultWallpaper(wallpaper)) {
+    wallpaper = "./wallpapers/default.jpg";
+  }
+
   if (!wallpaper) {
     liveWallpaperPreviewEl.innerHTML = `<i class="text-neutral-500 text-4xl ri-prohibited-2-line"></i>`;
     return;
