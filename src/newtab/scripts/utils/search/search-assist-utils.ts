@@ -31,7 +31,7 @@ interface AssistDefinition {
 interface AssistConversion {
   type: "conversion";
   before: string;
-  after: string;
+  after: string[];
 }
 
 export const hideAssist = () => {
@@ -159,38 +159,54 @@ export const displayAssist = (items: AssistItem[], config: Config) => {
         assistantContainerEl.appendChild(gridContainerEl);
       });
     } else if (item.type === "conversion") {
-      // <div class="w-full py-4">
-      //   <div class="w-full grid grid-cols-[1fr_max-content_1fr] place-items-center" style="color: ${config.search.textColor}">
-      //     <span style="color: ${config.search.textColor}">${item.before}</span>
-      //     <span style="color: ${config.search.placeholderTextColor}">=></span>
-      //     <span style="color: ${config.search.textColor}">${item.after}</span>
-      //   </div>
-      // </div>
+      // <div class="w-full py-4"></div>
 
       const outerContainerEl = document.createElement("div");
       outerContainerEl.className = "w-full py-4";
 
-      const innerGridEl = document.createElement("div");
-      innerGridEl.className = "w-full grid grid-cols-[1fr_max-content_1fr] place-items-center";
-      innerGridEl.style.color = config.search.textColor;
+      const listEl = document.createElement("div");
+      listEl.className = "w-full flex flex-col gap-2";
+      listEl.style.color = config.search.textColor;
 
-      const beforeSpanEl = document.createElement("span");
-      beforeSpanEl.style.color = config.search.textColor;
-      beforeSpanEl.textContent = item.before;
+      const rowEl = (left: string, right: string) => {
+        //   <div class="w-full grid grid-cols-[1fr_max-content_1fr] place-items-center" style="color: ${config.search.textColor}">
+        //     <span style="color: ${config.search.textColor}">${item.before}</span>
+        //     <span style="color: ${config.search.placeholderTextColor}">=></span>
+        //     <span style="color: ${config.search.textColor}">${item.after}</span>
+        //   </div>
 
-      const arrowSpanEl = document.createElement("span");
-      arrowSpanEl.style.color = config.search.placeholderTextColor;
-      arrowSpanEl.textContent = "=>";
+        const gridEl = document.createElement("div");
+        gridEl.className = "w-full grid grid-cols-[1fr_max-content_1fr] place-items-center";
+        gridEl.style.color = config.search.textColor;
 
-      const afterSpanEl = document.createElement("span");
-      afterSpanEl.style.color = config.search.textColor;
-      afterSpanEl.textContent = item.after;
+        const leftEl = document.createElement("span");
+        leftEl.style.color = config.search.textColor;
+        leftEl.textContent = left;
 
-      innerGridEl.appendChild(beforeSpanEl);
-      innerGridEl.appendChild(arrowSpanEl);
-      innerGridEl.appendChild(afterSpanEl);
+        const arrowEl = document.createElement("span");
+        arrowEl.style.color = config.search.placeholderTextColor;
+        arrowEl.textContent = "=>";
 
-      outerContainerEl.appendChild(innerGridEl);
+        const rightEl = document.createElement("span");
+        rightEl.style.color = config.search.textColor;
+        rightEl.textContent = right;
+
+        gridEl.appendChild(leftEl);
+        gridEl.appendChild(arrowEl);
+        gridEl.appendChild(rightEl);
+
+        return gridEl;
+      };
+
+      const rows = item.after?.length ? item.after : [];
+      if (rows.length === 0) return;
+
+      listEl.appendChild(rowEl(item.before, rows[0]));
+      for (let i = 1; i < rows.length; i++) {
+        listEl.appendChild(rowEl(item.before, rows[i]));
+      }
+
+      outerContainerEl.appendChild(listEl);
       assistantContainerEl.appendChild(outerContainerEl);
     }
 

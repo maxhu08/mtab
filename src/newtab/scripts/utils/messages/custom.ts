@@ -8,7 +8,6 @@ export const setCustomMessage = (messageEl: HTMLParagraphElement, customText: st
   const dayOfMonth = date.getDate().toString().padStart(2, "0");
   const monthOfYear = (date.getMonth() + 1).toString().padStart(2, "0");
 
-  customText = customText;
   customText = customText
     .replace(/\\n/g, "\n")
     .replace(/\\yyyy/g, date.getFullYear().toString()) // must come before \yy
