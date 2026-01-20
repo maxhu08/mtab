@@ -159,54 +159,99 @@ export const displayAssist = (items: AssistItem[], config: Config) => {
         assistantContainerEl.appendChild(gridContainerEl);
       });
     } else if (item.type === "conversion") {
-      // <div class="w-full py-4"></div>
+      // <div class="w-full py-4">
+      //   <div class="w-full grid grid-cols-[1fr_max-content_1fr] gap-x-3">
+      //     <div class="grid grid-cols-[max-content_1ch_max-content] mx-auto" style="row-gap: .5rem">
+      //       <span class="text-right"><!-- left num row 1 --></span><span class="w-[1ch]"></span><span><!-- left unit row 1 --></span>
+      //       <span class="text-right"><!-- left num row 2 --></span><span class="w-[1ch]"></span><span><!-- left unit row 2 --></span>
+      //       ...
+      //     </div>
+      //     <div class="grid place-items-center" style="row-gap: .5rem">
+      //       <span><!-- => row 1 --></span>
+      //       <span><!-- => row 2 --></span>
+      //       ...
+      //     </div>
+      //     <div class="grid grid-cols-[max-content_1ch_max-content] mx-auto" style="row-gap: .5rem">
+      //       <span class="text-right"><!-- right num row 1 --></span><span class="w-[1ch]"></span><span><!-- right unit row 1 --></span>
+      //       <span class="text-right"><!-- right num row 2 --></span><span class="w-[1ch]"></span><span><!-- right unit row 2 --></span>
+      //       ...
+      //     </div>
+      //   </div>
+      // </div>
 
       const outerContainerEl = document.createElement("div");
       outerContainerEl.className = "w-full py-4";
 
-      const listEl = document.createElement("div");
-      listEl.className = "w-full flex flex-col gap-2";
-      listEl.style.color = config.search.textColor;
-
-      const rowEl = (left: string, right: string) => {
-        //   <div class="w-full grid grid-cols-[1fr_max-content_1fr] place-items-center" style="color: ${config.search.textColor}">
-        //     <span style="color: ${config.search.textColor}">${item.before}</span>
-        //     <span style="color: ${config.search.placeholderTextColor}">=></span>
-        //     <span style="color: ${config.search.textColor}">${item.after}</span>
-        //   </div>
-
-        const gridEl = document.createElement("div");
-        gridEl.className = "w-full grid grid-cols-[1fr_max-content_1fr] place-items-center";
-        gridEl.style.color = config.search.textColor;
-
-        const leftEl = document.createElement("span");
-        leftEl.style.color = config.search.textColor;
-        leftEl.textContent = left;
-
-        const arrowEl = document.createElement("span");
-        arrowEl.style.color = config.search.placeholderTextColor;
-        arrowEl.textContent = "=>";
-
-        const rightEl = document.createElement("span");
-        rightEl.style.color = config.search.textColor;
-        rightEl.textContent = right;
-
-        gridEl.appendChild(leftEl);
-        gridEl.appendChild(arrowEl);
-        gridEl.appendChild(rightEl);
-
-        return gridEl;
-      };
+      const parentGridEl = document.createElement("div");
+      parentGridEl.className = "w-full grid grid-cols-[1fr_max-content_1fr] gap-x-3";
+      parentGridEl.style.color = config.search.textColor;
 
       const rows = item.after?.length ? item.after : [];
       if (rows.length === 0) return;
 
-      listEl.appendChild(rowEl(item.before, rows[0]));
-      for (let i = 1; i < rows.length; i++) {
-        listEl.appendChild(rowEl(item.before, rows[i]));
+      const splitNumberAndUnit = (value: string) => {
+        const parts = value.trim().split(/\s+/).filter(Boolean);
+        if (parts.length <= 1) return { num: value.trim(), unit: "" };
+        return { num: parts.slice(0, -1).join(" "), unit: parts[parts.length - 1] };
+      };
+
+      const makeSideGrid = () => {
+        const el = document.createElement("div");
+        el.className = "grid grid-cols-[max-content_1ch_max-content] mx-auto";
+        el.style.rowGap = "0.5rem";
+        return el;
+      };
+
+      const makeArrowGrid = () => {
+        const el = document.createElement("div");
+        el.className = "grid place-items-center";
+        el.style.rowGap = "0.5rem";
+        return el;
+      };
+
+      const leftGridEl = makeSideGrid();
+      const arrowGridEl = makeArrowGrid();
+      const rightGridEl = makeSideGrid();
+
+      const appendSideTriplet = (gridEl: HTMLDivElement, value: string) => {
+        const { num, unit } = splitNumberAndUnit(value);
+
+        const numEl = document.createElement("span");
+        numEl.className = "text-right";
+        numEl.style.color = config.search.textColor;
+        numEl.textContent = num;
+
+        const gapEl = document.createElement("span");
+        gapEl.className = "w-[1ch]";
+        gapEl.textContent = "";
+
+        const unitEl = document.createElement("span");
+        unitEl.style.color = config.search.placeholderTextColor;
+        unitEl.textContent = unit;
+
+        gridEl.appendChild(numEl);
+        gridEl.appendChild(gapEl);
+        gridEl.appendChild(unitEl);
+      };
+
+      const appendArrow = () => {
+        const arrowEl = document.createElement("span");
+        arrowEl.style.color = config.search.placeholderTextColor;
+        arrowEl.textContent = "=>";
+        arrowGridEl.appendChild(arrowEl);
+      };
+
+      for (let i = 0; i < rows.length; i++) {
+        appendSideTriplet(leftGridEl, item.before);
+        appendArrow();
+        appendSideTriplet(rightGridEl, rows[i]);
       }
 
-      outerContainerEl.appendChild(listEl);
+      parentGridEl.appendChild(leftGridEl);
+      parentGridEl.appendChild(arrowGridEl);
+      parentGridEl.appendChild(rightGridEl);
+
+      outerContainerEl.appendChild(parentGridEl);
       assistantContainerEl.appendChild(outerContainerEl);
     }
 
