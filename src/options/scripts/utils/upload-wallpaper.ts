@@ -50,10 +50,28 @@ export const handWallpaperFileReset = () => {
   previewWallpaper(undefined, "", "");
 };
 
+const getPreviewMediaEl = () =>
+  document.querySelector("#live-wallpaper-preview img, #live-wallpaper-preview video") as
+    | HTMLImageElement
+    | HTMLVideoElement
+    | null;
+
 wallpaperFiltersBrightnessInputEl.onchange = () => {
-  applyWallpaperFilters(wallpaperFiltersBrightnessInputEl.value, wallpaperFiltersBlurInputEl.value);
+  const mediaEl = getPreviewMediaEl();
+  if (!mediaEl) return;
+  applyWallpaperFilters(
+    mediaEl,
+    wallpaperFiltersBrightnessInputEl.value,
+    wallpaperFiltersBlurInputEl.value
+  );
 };
 
 wallpaperFiltersBlurInputEl.onchange = () => {
-  applyWallpaperFilters(wallpaperFiltersBrightnessInputEl.value, wallpaperFiltersBlurInputEl.value);
+  const mediaEl = getPreviewMediaEl();
+  if (!mediaEl) return;
+  applyWallpaperFilters(
+    mediaEl,
+    wallpaperFiltersBrightnessInputEl.value,
+    wallpaperFiltersBlurInputEl.value
+  );
 };
