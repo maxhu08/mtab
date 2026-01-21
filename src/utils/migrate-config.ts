@@ -95,7 +95,12 @@ export const migrateOldConfig = (config: Config): Config => {
   }
 
   // if config is before v1.9.9
-  if (config.wallpaper.url === "./wallpapers/default.png") config.wallpaper.url = "";
+  if (config.wallpaper.url === "./wallpapers/default.png") {
+    config.wallpaper.url = "";
+
+    if (config.wallpaper.enabled && config.wallpaper.type === "url")
+      config.wallpaper.type = "default";
+  }
 
   if (!("linkTextColor" in config.search)) (config.search as any).linkTextColor = "#0ea5e9";
   if (typeof config.search.recognizeLinks !== "boolean") config.search.recognizeLinks = true;

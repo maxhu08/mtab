@@ -19,6 +19,7 @@ import {
   uiStyleSolidButtonEl,
   wallpaperFiltersBlurInputEl,
   wallpaperFiltersBrightnessInputEl,
+  wallpaperTypeDefaultButtonEl,
   wallpaperTypeFileUploadButtonEl,
   wallpaperTypeUrlButtonEl,
   wallpaperUrlInputEl
@@ -203,6 +204,17 @@ const handleWallpaperTypeSwitch = () => {
 
     wallpaperUrlSection.style.display = "none";
     wallpaperFileUploadSection.style.display = "block";
+  });
+
+  wallpaperTypeDefaultButtonEl.addEventListener("click", () => {
+    previewWallpaper(
+      "",
+      wallpaperFiltersBrightnessInputEl.value,
+      wallpaperFiltersBlurInputEl.value
+    );
+
+    wallpaperUrlSection.style.display = "none";
+    wallpaperFileUploadSection.style.display = "none";
   });
 };
 

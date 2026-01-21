@@ -33,6 +33,7 @@ export const messageWeatherUnitsTypeCButton = getButton("message-weather-units-t
 export const wallpaperEnabledCheckboxEl = getCheckbox("wallpaper-enabled");
 export const wallpaperTypeUrlButtonEl = getButton("wallpaper-type-url");
 export const wallpaperTypeFileUploadButtonEl = getButton("wallpaper-type-file-upload");
+export const wallpaperTypeDefaultButtonEl = getButton("wallpaper-type-default");
 export const [wallpaperUrlContainerEl, wallpaperUrlInputEl] = getContainerAndInput("wallpaper-url");
 export const wallpaperFileUploadInputEl = document.getElementById("wallpaper-file-upload-input") as HTMLInputElement;
 export const wallpaperFileResetButtonEl = getButton("wallpaper-file-upload-reset");
@@ -169,7 +170,7 @@ export const buttonSwitches: ButtonSwitch[] = [
     attr: "message-weather-units-type"
   },
   {
-    buttons: [wallpaperTypeUrlButtonEl, wallpaperTypeFileUploadButtonEl],
+    buttons: [wallpaperTypeUrlButtonEl, wallpaperTypeFileUploadButtonEl, wallpaperTypeDefaultButtonEl],
     attr: "wallpaper-type"
   },
   {

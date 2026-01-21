@@ -3,6 +3,7 @@ import {
   wallpaperEnabledCheckboxEl,
   wallpaperFiltersBlurInputEl,
   wallpaperFiltersBrightnessInputEl,
+  wallpaperTypeDefaultButtonEl,
   wallpaperTypeFileUploadButtonEl,
   wallpaperTypeUrlButtonEl,
   wallpaperUrlInputEl
@@ -37,6 +38,10 @@ export const fillWallpapersInputs = (config: Config) => {
         });
       }
     });
+  } else if (config.wallpaper.type === "default") {
+    wallpaperTypeDefaultButtonEl.click();
+
+    previewWallpaper("", config.wallpaper.filters.brightness, config.wallpaper.filters.blur);
   }
 
   wallpaperEnabledCheckboxEl.checked = config.wallpaper.enabled;

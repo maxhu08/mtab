@@ -6,7 +6,7 @@ import {
 import { previewWallpaper } from "src/options/scripts/utils/preview";
 
 export const handleWallpaperUrlChange = () => {
-  wallpaperUrlInputEl.addEventListener("change", (e: any) => {
+  wallpaperUrlInputEl.addEventListener("change", () => {
     previewWallpaper(
       wallpaperUrlInputEl.value,
       wallpaperFiltersBrightnessInputEl.value,

@@ -43,10 +43,8 @@ export const loadWallpaper = (wallpaper: Config["wallpaper"]) => {
         hideCover();
       });
   } else {
-    const isDefault = !wallpaper.url || wallpaper.url === "./wallpapers/default.png";
-
     applyWallpaper(
-      isDefault ? "./wallpapers/default.jpg" : wallpaper.url,
+      wallpaper.type === "default" ? "./wallpapers/default.jpg" : wallpaper.url,
       wallpaper.filters.brightness,
       wallpaper.filters.blur
     );

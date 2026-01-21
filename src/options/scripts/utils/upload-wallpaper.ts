@@ -8,8 +8,10 @@ import { set as idbSet } from "idb-keyval";
 import { logger } from "src/utils/logger";
 
 export const handleWallpaperFileUpload = () => {
-  wallpaperFileUploadInputEl.addEventListener("change", async (e: any) => {
-    const file = e.target.files[0];
+  wallpaperFileUploadInputEl.addEventListener("change", async (e: Event) => {
+    const input = e.currentTarget as HTMLInputElement;
+    const file = input.files?.[0];
+
     if (!file) return;
 
     try {
