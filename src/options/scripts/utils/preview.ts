@@ -14,6 +14,7 @@ export const previewWallpaper = (
 
   if (!wallpaper) {
     liveWallpaperPreviewEl.innerHTML = `<i class="text-neutral-500 text-4xl ri-prohibited-2-line"></i>`;
+    liveWallpaperPreviewEl.style.filter = "";
     return;
   }
 
@@ -37,18 +38,19 @@ export const previewWallpaper = (
     videoEl.playsInline = true;
   }
 
-  applyWallpaperFilters(brightness, blur);
+  liveWallpaperPreviewEl.style.filter = "";
+  applyWallpaperFilters(mediaEl, brightness, blur);
 
   liveWallpaperPreviewEl.innerHTML = "";
   liveWallpaperPreviewEl.appendChild(mediaEl);
 
   if (wallpaper instanceof Blob) {
-    mediaEl.onload = () => URL.revokeObjectURL(src);
+    (mediaEl as HTMLImageElement).onload = () => URL.revokeObjectURL(src);
   }
 };
 
-export const applyWallpaperFilters = (brightness: string, blur: string) => {
-  liveWallpaperPreviewEl.style.filter = `brightness(${brightness}) blur(${blur})`;
+export const applyWallpaperFilters = (el: HTMLElement, brightness: string, blur: string) => {
+  el.style.filter = `brightness(${brightness}) blur(${blur})`;
 };
 
 export const previewWallpaperLegacy = (
@@ -56,12 +58,17 @@ export const previewWallpaperLegacy = (
   brightness: string,
   blur: string
 ) => {
-  applyWallpaperFilters(brightness, blur);
+  liveWallpaperPreviewEl.style.filter = "";
 
   if (!wallpaperBase64) {
     liveWallpaperPreviewEl.innerHTML = `<i class="text-neutral-500 text-4xl ri-prohibited-2-line"></i>`;
   } else {
-    liveWallpaperPreviewEl.innerHTML = `<img src="${wallpaperBase64}" class="w-full h-full" />`;
+    liveWallpaperPreviewEl.innerHTML = "";
+    const img = document.createElement("img");
+    img.src = wallpaperBase64;
+    img.className = "w-full h-full object-cover";
+    applyWallpaperFilters(img, brightness, blur);
+    liveWallpaperPreviewEl.appendChild(img);
   }
 };
 
