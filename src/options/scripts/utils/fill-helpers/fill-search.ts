@@ -22,7 +22,6 @@ import {
   searchRecognizeLinksCheckboxEl,
   searchLinkTextColorInputEl,
   searchSuggestionsCheckboxEl,
-  // searchAssistHistoryCheckboxEl,
   searchAssistDateCheckboxEl,
   searchAssistMathCheckboxEl,
   searchAssistDefinitionsCheckboxEl,
@@ -77,7 +76,6 @@ export const fillSearchInputs = (config: Config) => {
   searchRecognizeLinksCheckboxEl.checked = config.search.recognizeLinks;
   searchSuggestionsCheckboxEl.checked = config.search.suggestions;
 
-  // searchAssistHistoryCheckboxEl.checked = config.search.assist.history;
   searchAssistDateCheckboxEl.checked = config.search.assist.date;
   searchAssistMathCheckboxEl.checked = config.search.assist.math;
   searchAssistDefinitionsCheckboxEl.checked = config.search.assist.definitions;

@@ -13,10 +13,7 @@ import { handleSearchSuggestions } from "src/newtab/scripts/utils/search/handle-
 import { openUrl, search } from "src/newtab/scripts/utils/search";
 import { recognizeUrl } from "src/newtab/scripts/utils/search/recognize-url";
 
-export const handleSearchAssist = (
-  config: Config
-  // history: chrome.history.HistoryItem[] = []
-) => {
+export const handleSearchAssist = (config: Config) => {
   const suggestionsEnabled = config.search.suggestions;
 
   const refreshResults = suggestionsEnabled

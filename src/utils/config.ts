@@ -105,7 +105,6 @@ export const defaultConfig: Config = {
     focusedBorderColor: "#0ea5e9",
     suggestions: true,
     assist: {
-      // history: false,
       date: true,
       math: true,
       definitions: true,
@@ -330,7 +329,6 @@ export interface Config {
     focusedBorderColor: string;
     suggestions: boolean;
     assist: {
-      // history: boolean;
       date: boolean;
       math: boolean;
       definitions: boolean;

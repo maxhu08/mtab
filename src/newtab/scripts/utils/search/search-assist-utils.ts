@@ -1,17 +1,7 @@
 import { Config } from "src/utils/config";
 import { assistantContainerEl } from "src/newtab/scripts/ui";
 
-export type AssistItem =
-  | AssistHistoryList
-  | AssistDate
-  | AssistMath
-  | AssistDefinition
-  | AssistConversion;
-
-interface AssistHistoryList {
-  type: "history";
-  historyItems: chrome.history.HistoryItem[];
-}
+export type AssistItem = AssistDate | AssistMath | AssistDefinition | AssistConversion;
 
 interface AssistDate {
   type: "date";
@@ -44,15 +34,6 @@ export const displayAssist = (items: AssistItem[], config: Config) => {
   assistantContainerEl.classList.replace("hidden", "grid");
 
   items.forEach((item, index) => {
-    // if (item.type === "history") {
-    //   item.historyItems.forEach((hi) => {
-    //     assistantContainerEl.innerHTML += `
-    //     <div class="grid grid-cols-[max-content_auto]">
-    //       <span class="font-semibold" style="color: ${config.search.placeholderTextColor}">&nbsp;~&nbsp;</span>
-    //       <div class="text-ellipsis overflow-hidden whitespace-nowrap w-full" style="color: ${config.search.placeholderTextColor}">${hi.title}</div>
-    //     </div>`;
-    //   });
-    // }
     if (item.type === "date") {
       const date = new Date();
       // <div class="grid grid-cols-[max-content_auto]">

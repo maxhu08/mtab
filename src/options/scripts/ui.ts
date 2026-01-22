@@ -99,7 +99,6 @@ export const searchUseCustomEngineCheckboxEl = getCheckbox("search-use-custom-en
 export const [searchCustomEngineURLContainerEl, searchCustomEngineURLInputEl] = getContainerAndInput("search-custom-engine-url");
 export const searchSuggestionsCheckboxEl = getCheckbox("search-suggestions");
 
-// export const searchAssistHistoryCheckboxEl = document.getElementById("search-assist-history-checkbox") as HTMLInputElement;
 export const searchAssistDateCheckboxEl = getCheckbox("search-assist-date");
 export const searchAssistMathCheckboxEl = getCheckbox("search-assist-math");
 export const searchAssistDefinitionsCheckboxEl = getCheckbox("search-assist-definitions");
