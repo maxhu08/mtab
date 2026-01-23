@@ -278,7 +278,7 @@ export const displayAssist = (items: AssistItem[], config: Config) => {
 
       const resultBtn = document.createElement("button");
       resultBtn.className =
-        "w-full text-left hover:bg-white/20 cursor-pointer px-2 pt-2 grid gap-2";
+        "w-full text-left hover:bg-white/20 cursor-pointer px-2 pt-2 grid gap-2 duration-0";
 
       resultBtn.onclick = () => {
         navigator.clipboard.writeText(item.result);
