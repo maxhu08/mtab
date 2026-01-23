@@ -47,8 +47,6 @@ export const hideAssist = () => {
 };
 
 const createAssistItemWrapper = (uiStyle: UIStyle, sidePadding: boolean) => {
-  // <div class="font-search corner-style hidden w-full grid grid-flow-row gap-2 ${sidePadding ? 'p-2' : 'py-2'} text-base md:text-2xl overflow-hidden ${uiStyle === 'glass' ? 'glass-effect' : 'bg-foreground'}"></div>
-
   const el = document.createElement("div");
 
   el.className = [
@@ -59,12 +57,14 @@ const createAssistItemWrapper = (uiStyle: UIStyle, sidePadding: boolean) => {
     "grid",
     "grid-flow-row",
     "gap-2",
-    sidePadding ? "p-2" : "py-2",
     "text-base",
     "md:text-2xl",
     "overflow-hidden",
-    uiStyle === "glass" ? "glass-effect" : "bg-foreground"
-  ].join(" ");
+    uiStyle === "glass" ? "glass-effect" : "bg-foreground",
+    sidePadding && "p-2"
+  ]
+    .filter(Boolean)
+    .join(" ");
 
   return el;
 };
@@ -274,69 +274,43 @@ export const displayAssist = (items: AssistItem[], config: Config) => {
       assistItemWrapperEl.appendChild(outerContainerEl);
       showWrapper(assistItemWrapperEl);
     } else if (item.type === "password-generator") {
-      // <div class="grid grid-cols-[max-content_auto] text-left w-full rounded-md">
-      //   <span class="font-semibold" style="color: ${config.search.placeholderTextColor}">&nbsp;=&nbsp;</span>
-      //   <div class="text-ellipsis overflow-hidden whitespace-nowrap w-full" style="color: ${config.search.placeholderTextColor}">
-      //     ${item.result}
-      //   </div>
-      // </div>
-      // <div class="grid grid-cols-[max-content_auto]">
-      //   <span class="font-semibold" style="color: ${config.search.placeholderTextColor}">&nbsp;-&nbsp;</span>
-      //   <div style="color: ${config.search.textColor}">length ${item.result.length}</div>
-      // </div>
-      // <div class="grid grid-cols-[max-content_auto]">
-      //   <span class="font-semibold" style="color: ${enabled ? config.search.selectIconColor : config.search.placeholderTextColor}">
-      //     &nbsp;${enabled ? "V" : "X"}&nbsp;
-      //   </span>
-      //   <div>
-      //     <span style="color: ${enabled ? config.search.textColor : config.search.placeholderTextColor}">
-      //       ${label}
-      //     </span>
-      //     <span style="color: ${config.search.placeholderTextColor}">
-      //       (${flag})
-      //     </span>
-      //   </div>
-      // </div>
-      // <div class="w-full h-[1px] rounded-md my-auto" style="background-color: ${config.search.placeholderTextColor}"></div>
+      assistItemWrapperEl.classList.add("pb-2");
 
-      const rowEl = document.createElement("div");
-      rowEl.className = "grid grid-cols-[max-content_auto] text-left w-full rounded-md";
+      const resultBtn = document.createElement("button");
+      resultBtn.className =
+        "w-full text-left hover:bg-white/20 cursor-pointer px-2 pt-2 grid gap-2";
 
-      const spanEl = document.createElement("span");
-      spanEl.className = "font-semibold";
-      spanEl.style.color = config.search.placeholderTextColor;
-      spanEl.innerHTML = "&nbsp;=&nbsp;";
+      resultBtn.onclick = () => {
+        navigator.clipboard.writeText(item.result);
+      };
+
+      const resultRow = document.createElement("div");
+      resultRow.className = "grid grid-cols-[max-content_auto] text-left w-full";
+
+      const eqEl = document.createElement("span");
+      eqEl.className = "font-semibold";
+      eqEl.style.color = config.search.placeholderTextColor;
+      eqEl.innerHTML = "&nbsp;=&nbsp;";
 
       const passwordEl = document.createElement("div");
       passwordEl.className = "text-ellipsis overflow-hidden whitespace-nowrap w-full";
-      passwordEl.style.color = config.search.placeholderTextColor;
+      passwordEl.style.color = config.search.textColor;
       passwordEl.textContent = item.result;
 
-      rowEl.appendChild(spanEl);
-      rowEl.appendChild(passwordEl);
-      assistItemWrapperEl.appendChild(rowEl);
+      resultRow.appendChild(eqEl);
+      resultRow.appendChild(passwordEl);
 
-      const makeLengthRow = (label: string) => {
-        const rowEl = document.createElement("div");
-        rowEl.className = "grid grid-cols-[max-content_auto]";
+      const copyHintEl = document.createElement("div");
+      copyHintEl.style.color = config.search.placeholderTextColor;
+      copyHintEl.innerHTML = `&nbsp;&nbsp;&nbsp;click to copy (${item.result.length} chars)`;
 
-        const dashEl = document.createElement("span");
-        dashEl.className = "font-semibold";
-        dashEl.style.color = config.search.placeholderTextColor;
-        dashEl.innerHTML = "&nbsp;-&nbsp;";
-
-        const textEl = document.createElement("div");
-        textEl.style.color = config.search.textColor;
-        textEl.textContent = label;
-
-        rowEl.appendChild(dashEl);
-        rowEl.appendChild(textEl);
-        assistItemWrapperEl.appendChild(rowEl);
-      };
+      resultBtn.appendChild(resultRow);
+      resultBtn.appendChild(copyHintEl);
+      assistItemWrapperEl.appendChild(resultBtn);
 
       const makeFlagRow = (label: string, flagChar: string, enabled: boolean) => {
         const rowEl = document.createElement("div");
-        rowEl.className = "grid grid-cols-[max-content_auto]";
+        rowEl.className = "grid grid-cols-[max-content_auto] px-2";
 
         const markerEl = document.createElement("span");
         markerEl.className = "font-semibold";
@@ -365,8 +339,6 @@ export const displayAssist = (items: AssistItem[], config: Config) => {
         assistItemWrapperEl.appendChild(rowEl);
         showWrapper(assistItemWrapperEl);
       };
-
-      makeLengthRow(`length ${item.result.length}`);
 
       makeFlagRow("lowercase", "l", item.flags.allowLowercase);
       makeFlagRow("uppercase", "u", item.flags.allowUppercase);
