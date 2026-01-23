@@ -54,9 +54,7 @@ export const handlePasswordGenerator = (val: string) => {
   const makeRandom = () => {
     const charset = buildCharset();
     let out = "";
-    for (let i = 0; i < length; i++) {
-      out += charset[randInt(charset.length)];
-    }
+    for (let i = 0; i < length; i++) out += charset[randInt(charset.length)];
     return out;
   };
 
@@ -93,10 +91,16 @@ export const handlePasswordGenerator = (val: string) => {
     }
 
     let out = joined.slice(0, length);
-    const sliceBoundaries = boundaries.filter((b) => b > 0 && b < length);
+    let sliceBoundaries = boundaries.filter((b) => b > 0 && b < length);
 
     if (allowNumbers) {
-      out = insertAtBoundary(out, sliceBoundaries, digits[randInt(digits.length)]);
+      const maxDigits = Math.max(1, Math.floor(Math.sqrt(length)));
+      const digitCount = 1 + randInt(maxDigits); // [1, sqrt(length)]
+
+      for (let i = 0; i < digitCount; i++) {
+        out = insertAtBoundary(out, sliceBoundaries, digits[randInt(digits.length)]);
+        sliceBoundaries = sliceBoundaries.map((b) => (b >= out.length ? b : b + 1));
+      }
     }
 
     if (allowSymbols) {
