@@ -859,7 +859,16 @@
                   </label>
                 </div>
               </div>
-              <p class="text-base text-neutral-500">shows word definitions when you include definition keywords in the search input<br /><br />e.g., 'morning def' or 'morning definition'</p>
+              <p class="text-base text-neutral-500">
+                shows word definitions when you include definition keywords in the search input
+                <br /><br />
+                e.g., 'morning def' or 'morning definition'
+                <br /><br />
+                definitions are sourced from
+                <a href="https://github.com/open-dictionary/english-dictionary" target="_blank" class="cursor-pointer text-blue-500 transition hover:text-blue-600"
+                  >https://github.com/open-dictionary/english-dictionary</a
+                >
+              </p>
             </div>
             <div class="grid gap-2">
               <div class="grid w-full grid-cols-[max-content_auto] place-items-center">
@@ -873,7 +882,41 @@
                   </label>
                 </div>
               </div>
-              <p class="text-base text-neutral-500">converts units directly from the search input <br /><br />e.g., '1 ft => 0.3048 m'</p>
+              <p class="text-base text-neutral-500">
+                converts units directly from the search input
+                <br /><br />
+                e.g., '1 ft => 0.3048 m'
+                <br /><br />
+                supports length, weight, temperature, time, volume, area, speed, angle, and data
+              </p>
+            </div>
+            <div class="grid gap-2">
+              <div class="grid w-full grid-cols-[max-content_auto] place-items-center">
+                <p class="text-base text-white">search.assist.passwordGenerator</p>
+                <div class="ml-auto">
+                  <label class="relative inline-flex cursor-pointer items-center">
+                    <input id="search-assist-password-generator-checkbox" type="checkbox" value="" class="peer sr-only" />
+                    <div
+                      class="peer h-6 w-11 rounded-full bg-neutral-800 outline-none after:absolute after:left-[3px] after:top-[3px] after:aspect-square after:h-[1.15rem] after:rounded-full after:border-none after:bg-neutral-700 after:transition-all after:content-[''] peer-checked:bg-emerald-500 peer-checked:after:translate-x-full peer-checked:after:bg-white"
+                    ></div>
+                  </label>
+                </div>
+              </div>
+              <p class="text-base text-neutral-500">
+                generates passwords directly from the search input, entirely locally
+                <br /><br />
+                no data is sent anywhere; password generation happens on your device
+                <br /><br />
+                type 'password &lt;length&gt; &lt;flags&gt;' to generate a password
+                <br /><br />
+                e.g., 'password 16 luns' generates a 16 character password with lowercase letters, uppercase letters, numbers, and symbols
+                <br /><br />
+                flags
+                <br />l - lowercase letters <br />u - uppercase letters <br />n - numbers <br />s - symbols <br />m - memorable <br /><br />
+                if no arguments are specified, defaults to 16 luns
+                <br /><br />
+                order of arguments and flags does not matter
+              </p>
             </div>
           </div>
         </section>

@@ -103,6 +103,7 @@ export const searchAssistDateCheckboxEl = getCheckbox("search-assist-date");
 export const searchAssistMathCheckboxEl = getCheckbox("search-assist-math");
 export const searchAssistDefinitionsCheckboxEl = getCheckbox("search-assist-definitions");
 export const searchAssistConversionsCheckboxEl = getCheckbox("search-assist-conversions");
+export const searchAssistPasswordGeneratorCheckboxEl = getCheckbox("search-assist-password-generator");
 
 export const hotkeysEnabledCheckboxEl = getCheckbox("hotkeys-enabled");
 export const [hotkeysActivationKeyContainerEl, hotkeysActivationKeyInputEl] = getContainerAndInput("hotkeys-activation-key");

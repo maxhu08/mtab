@@ -29,7 +29,8 @@ import {
   searchFontCustomInputEl,
   searchFontTypeDefaultButtonEl,
   searchFontTypeCustomButtonEl,
-  searchEngineKagiButtonEl
+  searchEngineKagiButtonEl,
+  searchAssistPasswordGeneratorCheckboxEl
 } from "src/options/scripts/ui";
 
 export const fillSearchInputs = (config: Config) => {
@@ -80,4 +81,5 @@ export const fillSearchInputs = (config: Config) => {
   searchAssistMathCheckboxEl.checked = config.search.assist.math;
   searchAssistDefinitionsCheckboxEl.checked = config.search.assist.definitions;
   searchAssistConversionsCheckboxEl.checked = config.search.assist.conversions;
+  searchAssistPasswordGeneratorCheckboxEl.checked = config.search.assist.passwordGenerator;
 };

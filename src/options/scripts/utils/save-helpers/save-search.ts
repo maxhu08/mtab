@@ -18,7 +18,8 @@ import {
   searchFontCustomInputEl,
   searchRecognizeLinksCheckboxEl,
   searchLinkTextColorInputEl,
-  searchSuggestionsCheckboxEl
+  searchSuggestionsCheckboxEl,
+  searchAssistPasswordGeneratorCheckboxEl
 } from "src/options/scripts/ui";
 import { getSelectedButton } from "src/options/scripts/utils/get-selected-button";
 
@@ -78,4 +79,5 @@ export const saveSearchSettingsToDraft = (draft: Config) => {
   draft.search.assist.math = searchAssistMathCheckboxEl.checked;
   draft.search.assist.definitions = searchAssistDefinitionsCheckboxEl.checked;
   draft.search.assist.conversions = searchAssistConversionsCheckboxEl.checked;
+  draft.search.assist.passwordGenerator = searchAssistPasswordGeneratorCheckboxEl.checked;
 };
