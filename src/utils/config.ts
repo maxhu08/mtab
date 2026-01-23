@@ -108,7 +108,8 @@ export const defaultConfig: Config = {
       date: true,
       math: true,
       definitions: true,
-      conversions: true
+      conversions: true,
+      passwordGenerator: true
     }
   },
   hotkeys: {
@@ -333,6 +334,7 @@ export interface Config {
       math: boolean;
       definitions: boolean;
       conversions: boolean;
+      passwordGenerator: boolean;
     };
   };
   hotkeys: {

@@ -1,27 +1,44 @@
 import { Config } from "src/utils/config";
 import { assistantContainerEl } from "src/newtab/scripts/ui";
 
-export type AssistItem = AssistDate | AssistMath | AssistDefinition | AssistConversion;
+export type AssistItem =
+  | AssistDate
+  | AssistMath
+  | AssistDefinition
+  | AssistConversion
+  | AssistPasswordGenerator;
 
-interface AssistDate {
+export interface AssistDate {
   type: "date";
 }
 
-interface AssistMath {
+export interface AssistMath {
   type: "math";
   result: string;
 }
 
-interface AssistDefinition {
+export interface AssistDefinition {
   type: "definition";
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   result: any;
 }
 
-interface AssistConversion {
+export interface AssistConversion {
   type: "conversion";
   before: string;
   after: string[];
+}
+
+export interface AssistPasswordGenerator {
+  type: "password-generator";
+  result: string;
+  flags: {
+    allowLowercase: boolean;
+    allowUppercase: boolean;
+    allowNumbers: boolean;
+    allowSymbols: boolean;
+    memorable: boolean;
+  };
 }
 
 export const hideAssist = () => {
@@ -234,6 +251,92 @@ export const displayAssist = (items: AssistItem[], config: Config) => {
 
       outerContainerEl.appendChild(parentGridEl);
       assistantContainerEl.appendChild(outerContainerEl);
+    } else if (item.type === "password-generator") {
+      // <div class="grid grid-cols-[max-content_auto] text-left w-full rounded-md">
+      //   <span class="font-semibold" style="color: ${config.search.placeholderTextColor}">&nbsp;=&nbsp;</span>
+      //   <div class="text-ellipsis overflow-hidden whitespace-nowrap w-full" style="color: ${config.search.placeholderTextColor}">
+      //     ${item.result}
+      //   </div>
+      // </div>
+      // <div class="grid grid-cols-[max-content_auto]">
+      //   <span class="font-semibold" style="color: ${config.search.placeholderTextColor}">&nbsp;-&nbsp;</span>
+      //   <span style="color: ${enabled ? config.search.textColor : config.search.placeholderTextColor}">
+      //     lowercase
+      //   </span>
+      // </div>
+      // ...
+
+      const rowEl = document.createElement("div");
+      rowEl.className = "grid grid-cols-[max-content_auto] text-left w-full rounded-md";
+
+      const spanEl = document.createElement("span");
+      spanEl.className = "font-semibold";
+      spanEl.style.color = config.search.placeholderTextColor;
+      spanEl.innerHTML = "&nbsp;=&nbsp;";
+
+      const passwordEl = document.createElement("div");
+      passwordEl.className = "text-ellipsis overflow-hidden whitespace-nowrap w-full";
+      passwordEl.style.color = config.search.placeholderTextColor;
+      passwordEl.textContent = item.result;
+
+      rowEl.appendChild(spanEl);
+      rowEl.appendChild(passwordEl);
+      assistantContainerEl.appendChild(rowEl);
+
+      const makeLengthRow = (label: string) => {
+        const rowEl = document.createElement("div");
+        rowEl.className = "grid grid-cols-[max-content_auto]";
+
+        const dashEl = document.createElement("span");
+        dashEl.className = "font-semibold";
+        dashEl.style.color = config.search.placeholderTextColor;
+        dashEl.innerHTML = "&nbsp;-&nbsp;";
+
+        const textEl = document.createElement("div");
+        textEl.style.color = config.search.textColor;
+        textEl.textContent = label;
+
+        rowEl.appendChild(dashEl);
+        rowEl.appendChild(textEl);
+        assistantContainerEl.appendChild(rowEl);
+      };
+
+      const makeFlagRow = (label: string, flagChar: string, enabled: boolean) => {
+        const rowEl = document.createElement("div");
+        rowEl.className = "grid grid-cols-[max-content_auto]";
+
+        const markerEl = document.createElement("span");
+        markerEl.className = "font-semibold";
+        markerEl.style.color = config.search.placeholderTextColor;
+        markerEl.innerHTML = `&nbsp;${enabled ? "V" : "X"}&nbsp;`;
+
+        const textWrapEl = document.createElement("div");
+
+        const labelEl = document.createElement("span");
+        labelEl.style.color = enabled
+          ? config.search.textColor
+          : config.search.placeholderTextColor;
+        labelEl.textContent = label;
+
+        const flagEl = document.createElement("span");
+        flagEl.style.color = config.search.placeholderTextColor;
+        flagEl.textContent = ` (${flagChar})`;
+
+        textWrapEl.appendChild(labelEl);
+        textWrapEl.appendChild(flagEl);
+
+        rowEl.appendChild(markerEl);
+        rowEl.appendChild(textWrapEl);
+        assistantContainerEl.appendChild(rowEl);
+      };
+
+      makeLengthRow(`length ${item.result.length}`);
+
+      makeFlagRow("lowercase", "l", item.flags.allowLowercase);
+      makeFlagRow("uppercase", "u", item.flags.allowUppercase);
+      makeFlagRow("numbers", "n", item.flags.allowNumbers);
+      makeFlagRow("symbols", "s", item.flags.allowSymbols);
+      makeFlagRow("memorable", "m", item.flags.memorable);
     }
 
     if (index !== items.length - 1) {

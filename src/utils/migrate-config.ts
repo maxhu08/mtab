@@ -84,6 +84,12 @@ export const migrateOldConfig = (config: Config): Config => {
     (config.title as any).effect = "none";
   }
 
+  if (typeof config.search.suggestions !== "boolean") config.search.suggestions = true;
+
+  // if config is before v1.9.3
+  if (!("linkTextColor" in config.search)) (config.search as any).linkTextColor = "#0ea5e9";
+  if (typeof config.search.recognizeLinks !== "boolean") config.search.recognizeLinks = true;
+
   // if config is before v1.9.8
   if (!(config.title as any).typewriter || typeof (config.title as any).typewriter !== "object") {
     (config.title as any).typewriter = { speed: 500, remainCount: 1 };
@@ -101,9 +107,9 @@ export const migrateOldConfig = (config: Config): Config => {
     if (config.wallpaper.type === "url") config.wallpaper.type = "default";
   }
 
-  if (!("linkTextColor" in config.search)) (config.search as any).linkTextColor = "#0ea5e9";
-  if (typeof config.search.recognizeLinks !== "boolean") config.search.recognizeLinks = true;
-  if (typeof config.search.suggestions !== "boolean") config.search.suggestions = true;
+  if (typeof (config.search.assist as any).passwordGenerator !== "boolean") {
+    (config.search.assist as any).passwordGenerator = true;
+  }
 
   return config;
 };

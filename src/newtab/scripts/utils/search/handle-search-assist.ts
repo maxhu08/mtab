@@ -12,6 +12,7 @@ import {
 import { handleSearchSuggestions } from "src/newtab/scripts/utils/search/handle-search-suggestions";
 import { openUrl, search } from "src/newtab/scripts/utils/search";
 import { recognizeUrl } from "src/newtab/scripts/utils/search/recognize-url";
+import { handlePasswordGenerator } from "src/newtab/scripts/utils/search/handle-password-generator";
 
 export const handleSearchAssist = (config: Config) => {
   const suggestionsEnabled = config.search.suggestions;
@@ -67,6 +68,11 @@ export const handleSearchAssist = (config: Config) => {
     if (config.search.assist.conversions) {
       const conversionResult = handleConversion(val);
       if (conversionResult !== undefined) assistItems.push(conversionResult);
+    }
+
+    if (config.search.assist.passwordGenerator) {
+      const passwordGeneratorResult = handlePasswordGenerator(val);
+      if (passwordGeneratorResult !== undefined) assistItems.push(passwordGeneratorResult);
     }
 
     if (assistItems.length > 0) displayAssist(assistItems, config);
