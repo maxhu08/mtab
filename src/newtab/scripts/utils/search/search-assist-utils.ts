@@ -260,11 +260,22 @@ export const displayAssist = (items: AssistItem[], config: Config) => {
       // </div>
       // <div class="grid grid-cols-[max-content_auto]">
       //   <span class="font-semibold" style="color: ${config.search.placeholderTextColor}">&nbsp;-&nbsp;</span>
-      //   <span style="color: ${enabled ? config.search.textColor : config.search.placeholderTextColor}">
-      //     lowercase
-      //   </span>
+      //   <div style="color: ${config.search.textColor}">length ${item.result.length}</div>
       // </div>
-      // ...
+      // <div class="grid grid-cols-[max-content_auto]">
+      //   <span class="font-semibold" style="color: ${enabled ? config.search.selectIconColor : config.search.placeholderTextColor}">
+      //     &nbsp;${enabled ? "V" : "X"}&nbsp;
+      //   </span>
+      //   <div>
+      //     <span style="color: ${enabled ? config.search.textColor : config.search.placeholderTextColor}">
+      //       ${label}
+      //     </span>
+      //     <span style="color: ${config.search.placeholderTextColor}">
+      //       (${flag})
+      //     </span>
+      //   </div>
+      // </div>
+      // <div class="w-full h-[1px] rounded-md my-auto" style="background-color: ${config.search.placeholderTextColor}"></div>
 
       const rowEl = document.createElement("div");
       rowEl.className = "grid grid-cols-[max-content_auto] text-left w-full rounded-md";
@@ -307,7 +318,9 @@ export const displayAssist = (items: AssistItem[], config: Config) => {
 
         const markerEl = document.createElement("span");
         markerEl.className = "font-semibold";
-        markerEl.style.color = config.search.placeholderTextColor;
+        markerEl.style.color = enabled
+          ? config.search.selectIconColor
+          : config.search.placeholderTextColor;
         markerEl.innerHTML = `&nbsp;${enabled ? "V" : "X"}&nbsp;`;
 
         const textWrapEl = document.createElement("div");

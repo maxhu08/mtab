@@ -11,12 +11,12 @@ export const handlePasswordGenerator = (val: string) => {
   const hasAnyFlags = rawFlags.length > 0;
   const flags = new Set(rawFlags);
 
-  const memorable = flags.has("m");
-
   const allowLowercase = hasAnyFlags ? flags.has("l") : true;
   const allowUppercase = hasAnyFlags ? flags.has("u") : true;
   const allowNumbers = hasAnyFlags ? flags.has("n") : true;
   const allowSymbols = hasAnyFlags ? flags.has("s") : true;
+
+  const memorable = flags.has("m");
 
   const cryptoObj: Crypto | undefined =
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -138,7 +138,7 @@ export const handlePasswordGenerator = (val: string) => {
 
     while (joined.length < length) {
       parts.push(applyCase(WORDS[randInt(WORDS.length)]));
-      joined = parts.join("-");
+      joined = parts.join("");
     }
 
     let out = joined.slice(0, length);
