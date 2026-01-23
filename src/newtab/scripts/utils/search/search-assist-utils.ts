@@ -1,4 +1,4 @@
-import { Config } from "src/utils/config";
+import { Config, UIStyle } from "src/utils/config";
 import { assistantContainerEl } from "src/newtab/scripts/ui";
 
 export type AssistItem =
@@ -46,22 +46,54 @@ export const hideAssist = () => {
   assistantContainerEl.classList.replace("grid", "hidden");
 };
 
+const createAssistItemWrapper = (uiStyle: UIStyle, sidePadding: boolean) => {
+  // <div class="font-search corner-style hidden w-full grid grid-flow-row gap-2 ${sidePadding ? 'p-2' : 'py-2'} text-base md:text-2xl overflow-hidden ${uiStyle === 'glass' ? 'glass-effect' : 'bg-foreground'}"></div>
+
+  const el = document.createElement("div");
+
+  el.className = [
+    "font-search",
+    "corner-style",
+    "hidden",
+    "w-full",
+    "grid",
+    "grid-flow-row",
+    "gap-2",
+    sidePadding ? "p-2" : "py-2",
+    "text-base",
+    "md:text-2xl",
+    "overflow-hidden",
+    uiStyle === "glass" ? "glass-effect" : "bg-foreground"
+  ].join(" ");
+
+  return el;
+};
+
+const showWrapper = (el: HTMLElement) => {
+  if (el.classList.contains("hidden")) el.classList.remove("hidden");
+};
+
 export const displayAssist = (items: AssistItem[], config: Config) => {
   assistantContainerEl.innerHTML = "";
   assistantContainerEl.classList.replace("hidden", "grid");
 
-  items.forEach((item, index) => {
+  items.forEach((item) => {
+    const assistItemWrapperEl = createAssistItemWrapper(
+      config.ui.style,
+      item.type !== "password-generator"
+    );
+    assistantContainerEl.appendChild(assistItemWrapperEl);
+
     if (item.type === "date") {
-      const date = new Date();
       // <div class="grid grid-cols-[max-content_auto]">
       //   <span class="font-semibold" style="color: ${config.search.placeholderTextColor}">&nbsp;=&nbsp;</span>
       //   <div class="text-ellipsis overflow-hidden whitespace-nowrap w-full" style="color: ${config.search.textColor}">
-      //     ${new Intl.DateTimeFormat("en-US", { year: "numeric", month: "long", day: "numeric", weekday: "long" }).format(date)}
+      //     Monday, January 1, 2026
       //   </div>
       // </div>
 
       const gridContainerEl = document.createElement("div");
-      gridContainerEl.className = "grid grid-cols-[max-content_auto]";
+      gridContainerEl.className = "w-full grid grid-cols-[max-content_auto]";
 
       const spanEl = document.createElement("span");
       spanEl.className = "font-semibold";
@@ -76,19 +108,22 @@ export const displayAssist = (items: AssistItem[], config: Config) => {
         month: "long",
         day: "numeric",
         weekday: "long"
-      }).format(date);
+      }).format(new Date());
 
       gridContainerEl.appendChild(spanEl);
       gridContainerEl.appendChild(dateTextEl);
-      assistantContainerEl.appendChild(gridContainerEl);
+      assistItemWrapperEl.appendChild(gridContainerEl);
+      showWrapper(assistItemWrapperEl);
     } else if (item.type === "math") {
-      // <div class="grid grid-cols-[max-content_auto]">
+      // <div class="w-full grid grid-cols-[max-content_auto]">
       //   <span class="font-semibold" style="color: ${config.search.placeholderTextColor}">&nbsp;=&nbsp;</span>
-      //   <div class="text-ellipsis overflow-hidden whitespace-nowrap w-full" style="color: ${config.search.textColor}">${item.result}</div>
+      //   <div class="text-ellipsis overflow-hidden whitespace-nowrap w-full" style="color: ${config.search.textColor}">
+      //     42
+      //   </div>
       // </div>
 
       const gridContainerEl = document.createElement("div");
-      gridContainerEl.className = "grid grid-cols-[max-content_auto]";
+      gridContainerEl.className = "w-full grid grid-cols-[max-content_auto]";
 
       const spanEl = document.createElement("span");
       spanEl.className = "font-semibold";
@@ -98,11 +133,12 @@ export const displayAssist = (items: AssistItem[], config: Config) => {
       const resultTextEl = document.createElement("div");
       resultTextEl.className = "text-ellipsis overflow-hidden whitespace-nowrap w-full";
       resultTextEl.style.color = config.search.textColor;
-      resultTextEl.textContent = item.result.toString();
+      resultTextEl.textContent = item.result;
 
       gridContainerEl.appendChild(spanEl);
       gridContainerEl.appendChild(resultTextEl);
-      assistantContainerEl.appendChild(gridContainerEl);
+      assistItemWrapperEl.appendChild(gridContainerEl);
+      showWrapper(assistItemWrapperEl);
 
       const resultAsNum = parseFloat(item.result);
       if (
@@ -111,36 +147,40 @@ export const displayAssist = (items: AssistItem[], config: Config) => {
       ) {
         // <div class="grid grid-cols-[max-content_auto]">
         //   <span class="font-semibold" style="color: ${config.search.placeholderTextColor}">&nbsp;*&nbsp;</span>
-        //   <div class="text-ellipsis overflow-hidden whitespace-nowrap w-full" style="color: ${config.search.placeholderTextColor}">reduced precision</div>
+        //   <div class="text-ellipsis overflow-hidden whitespace-nowrap w-full" style="color: ${config.search.placeholderTextColor}">
+        //     reduced precision
+        //   </div>
         // </div>
 
-        const gridContainerEl = document.createElement("div");
-        gridContainerEl.className = "grid grid-cols-[max-content_auto]";
+        const warnEl = document.createElement("div");
+        warnEl.className = "w-full grid grid-cols-[max-content_auto]";
 
-        const spanEl = document.createElement("span");
-        spanEl.className = "font-semibold";
-        spanEl.style.color = config.search.placeholderTextColor;
-        spanEl.innerHTML = "&nbsp;*&nbsp;";
+        const warnSpanEl = document.createElement("span");
+        warnSpanEl.className = "font-semibold";
+        warnSpanEl.style.color = config.search.placeholderTextColor;
+        warnSpanEl.innerHTML = "&nbsp;*&nbsp;";
 
-        const precisionTextEl = document.createElement("div");
-        precisionTextEl.className = "text-ellipsis overflow-hidden whitespace-nowrap w-full";
-        precisionTextEl.style.color = config.search.placeholderTextColor;
-        precisionTextEl.textContent = "reduced precision";
+        const warnTextEl = document.createElement("div");
+        warnTextEl.className = "text-ellipsis overflow-hidden whitespace-nowrap w-full";
+        warnTextEl.style.color = config.search.placeholderTextColor;
+        warnTextEl.textContent = "reduced precision";
 
-        gridContainerEl.appendChild(spanEl);
-        gridContainerEl.appendChild(precisionTextEl);
-        assistantContainerEl.appendChild(gridContainerEl);
+        warnEl.appendChild(warnSpanEl);
+        warnEl.appendChild(warnTextEl);
+        assistItemWrapperEl.appendChild(warnEl);
       }
     } else if (item.type === "definition") {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       item.result.definitions.slice(0, 3).forEach((def: any) => {
         // <div class="grid grid-cols-[max-content_auto]">
         //   <span class="font-semibold" style="color: ${config.search.placeholderTextColor}">&nbsp;-&nbsp;</span>
-        //   <div class="w-full" style="color: ${config.search.textColor}">${def.definition} <span style="color: ${config.search.placeholderTextColor}">(${def.pos})</span></div>
+        //   <div class="w-full" style="color: ${config.search.textColor}">
+        //     definition <span style="color: ${config.search.placeholderTextColor}">(noun)</span>
+        //   </div>
         // </div>
 
         const gridContainerEl = document.createElement("div");
-        gridContainerEl.className = "grid grid-cols-[max-content_auto]";
+        gridContainerEl.className = "w-full grid grid-cols-[max-content_auto]";
 
         const spanEl = document.createElement("span");
         spanEl.className = "font-semibold";
@@ -154,27 +194,12 @@ export const displayAssist = (items: AssistItem[], config: Config) => {
 
         gridContainerEl.appendChild(spanEl);
         gridContainerEl.appendChild(definitionEl);
-        assistantContainerEl.appendChild(gridContainerEl);
+        assistItemWrapperEl.appendChild(gridContainerEl);
+        showWrapper(assistItemWrapperEl);
       });
     } else if (item.type === "conversion") {
       // <div class="w-full py-4">
-      //   <div class="w-full grid grid-cols-[1fr_max-content_1fr] gap-x-3">
-      //     <div class="grid grid-cols-[max-content_1ch_max-content] mx-auto" style="row-gap: .5rem">
-      //       <span class="text-right"><!-- left num row 1 --></span><span class="w-[1ch]"></span><span><!-- left unit row 1 --></span>
-      //       <span class="text-right"><!-- left num row 2 --></span><span class="w-[1ch]"></span><span><!-- left unit row 2 --></span>
-      //       ...
-      //     </div>
-      //     <div class="grid place-items-center" style="row-gap: .5rem">
-      //       <span><!-- => row 1 --></span>
-      //       <span><!-- => row 2 --></span>
-      //       ...
-      //     </div>
-      //     <div class="grid grid-cols-[max-content_1ch_max-content] mx-auto" style="row-gap: .5rem">
-      //       <span class="text-right"><!-- right num row 1 --></span><span class="w-[1ch]"></span><span><!-- right unit row 1 --></span>
-      //       <span class="text-right"><!-- right num row 2 --></span><span class="w-[1ch]"></span><span><!-- right unit row 2 --></span>
-      //       ...
-      //     </div>
-      //   </div>
+      //   <div class="w-full grid grid-cols-[1fr_max-content_1fr] gap-x-3">...</div>
       // </div>
 
       const outerContainerEl = document.createElement("div");
@@ -184,13 +209,14 @@ export const displayAssist = (items: AssistItem[], config: Config) => {
       parentGridEl.className = "w-full grid grid-cols-[1fr_max-content_1fr] gap-x-3";
       parentGridEl.style.color = config.search.textColor;
 
-      const rows = item.after?.length ? item.after : [];
-      if (rows.length === 0) return;
+      const rows = item.after ?? [];
+      if (!rows.length) return;
 
       const splitNumberAndUnit = (value: string) => {
-        const parts = value.trim().split(/\s+/).filter(Boolean);
-        if (parts.length <= 1) return { num: value.trim(), unit: "" };
-        return { num: parts.slice(0, -1).join(" "), unit: parts[parts.length - 1] };
+        const parts = value.trim().split(/\s+/);
+        return parts.length > 1
+          ? { num: parts.slice(0, -1).join(" "), unit: parts[parts.length - 1]! }
+          : { num: value, unit: "" };
       };
 
       const makeSideGrid = () => {
@@ -207,50 +233,46 @@ export const displayAssist = (items: AssistItem[], config: Config) => {
         return el;
       };
 
-      const leftGridEl = makeSideGrid();
-      const arrowGridEl = makeArrowGrid();
-      const rightGridEl = makeSideGrid();
+      const leftGrid = makeSideGrid();
+      const arrowGrid = makeArrowGrid();
+      const rightGrid = makeSideGrid();
 
-      const appendSideTriplet = (gridEl: HTMLDivElement, value: string) => {
-        const { num, unit } = splitNumberAndUnit(value);
+      rows.forEach((row) => {
+        const left = splitNumberAndUnit(item.before);
+        const right = splitNumberAndUnit(row);
 
-        const numEl = document.createElement("span");
-        numEl.className = "text-right";
-        numEl.style.color = config.search.textColor;
-        numEl.textContent = num;
+        [left, right].forEach((side, idx) => {
+          const target = idx === 0 ? leftGrid : rightGrid;
 
-        const gapEl = document.createElement("span");
-        gapEl.className = "w-[1ch]";
-        gapEl.textContent = "";
+          const numEl = document.createElement("span");
+          numEl.className = "text-right";
+          numEl.textContent = side.num;
 
-        const unitEl = document.createElement("span");
-        unitEl.style.color = config.search.placeholderTextColor;
-        unitEl.textContent = unit;
+          const gapEl = document.createElement("span");
+          gapEl.className = "w-[1ch]";
 
-        gridEl.appendChild(numEl);
-        gridEl.appendChild(gapEl);
-        gridEl.appendChild(unitEl);
-      };
+          const unitEl = document.createElement("span");
+          unitEl.style.color = config.search.placeholderTextColor;
+          unitEl.textContent = side.unit;
 
-      const appendArrow = () => {
+          target.appendChild(numEl);
+          target.appendChild(gapEl);
+          target.appendChild(unitEl);
+        });
+
         const arrowEl = document.createElement("span");
         arrowEl.style.color = config.search.placeholderTextColor;
         arrowEl.textContent = "=>";
-        arrowGridEl.appendChild(arrowEl);
-      };
+        arrowGrid.appendChild(arrowEl);
+      });
 
-      for (let i = 0; i < rows.length; i++) {
-        appendSideTriplet(leftGridEl, item.before);
-        appendArrow();
-        appendSideTriplet(rightGridEl, rows[i]);
-      }
-
-      parentGridEl.appendChild(leftGridEl);
-      parentGridEl.appendChild(arrowGridEl);
-      parentGridEl.appendChild(rightGridEl);
+      parentGridEl.appendChild(leftGrid);
+      parentGridEl.appendChild(arrowGrid);
+      parentGridEl.appendChild(rightGrid);
 
       outerContainerEl.appendChild(parentGridEl);
-      assistantContainerEl.appendChild(outerContainerEl);
+      assistItemWrapperEl.appendChild(outerContainerEl);
+      showWrapper(assistItemWrapperEl);
     } else if (item.type === "password-generator") {
       // <div class="grid grid-cols-[max-content_auto] text-left w-full rounded-md">
       //   <span class="font-semibold" style="color: ${config.search.placeholderTextColor}">&nbsp;=&nbsp;</span>
@@ -292,7 +314,7 @@ export const displayAssist = (items: AssistItem[], config: Config) => {
 
       rowEl.appendChild(spanEl);
       rowEl.appendChild(passwordEl);
-      assistantContainerEl.appendChild(rowEl);
+      assistItemWrapperEl.appendChild(rowEl);
 
       const makeLengthRow = (label: string) => {
         const rowEl = document.createElement("div");
@@ -309,7 +331,7 @@ export const displayAssist = (items: AssistItem[], config: Config) => {
 
         rowEl.appendChild(dashEl);
         rowEl.appendChild(textEl);
-        assistantContainerEl.appendChild(rowEl);
+        assistItemWrapperEl.appendChild(rowEl);
       };
 
       const makeFlagRow = (label: string, flagChar: string, enabled: boolean) => {
@@ -340,7 +362,8 @@ export const displayAssist = (items: AssistItem[], config: Config) => {
 
         rowEl.appendChild(markerEl);
         rowEl.appendChild(textWrapEl);
-        assistantContainerEl.appendChild(rowEl);
+        assistItemWrapperEl.appendChild(rowEl);
+        showWrapper(assistItemWrapperEl);
       };
 
       makeLengthRow(`length ${item.result.length}`);
@@ -350,16 +373,6 @@ export const displayAssist = (items: AssistItem[], config: Config) => {
       makeFlagRow("numbers", "n", item.flags.allowNumbers);
       makeFlagRow("symbols", "s", item.flags.allowSymbols);
       makeFlagRow("memorable", "m", item.flags.memorable);
-    }
-
-    if (index !== items.length - 1) {
-      // <div class="w-full h-[1px] rounded-md my-auto" style="background-color: ${config.search.placeholderTextColor}"></div>
-
-      const dividerEl = document.createElement("div");
-      dividerEl.className = "w-full h-[1px] rounded-md my-auto";
-      dividerEl.style.backgroundColor = config.search.placeholderTextColor;
-
-      assistantContainerEl.appendChild(dividerEl);
     }
   });
 };

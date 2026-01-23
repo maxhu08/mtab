@@ -1,6 +1,5 @@
 import { UIStyle, FontType } from "src/utils/config";
 import {
-  assistantContainerEl,
   bookmarkSearchContainerEl,
   bookmarkSearchInputEl,
   searchResultsContainerEl,
@@ -83,13 +82,11 @@ export const styleSearch = (
 
   // apply styles based on UIStyle
   if (style === "solid") {
-    searchContainerEl.style.backgroundColor = foregroundColor;
-    assistantContainerEl.style.backgroundColor = foregroundColor;
-    bookmarkSearchContainerEl.style.backgroundColor = foregroundColor;
-    searchResultsContainerEl.style.backgroundColor = foregroundColor;
+    searchContainerEl.classList.add("bg-foreground");
+    bookmarkSearchContainerEl.classList.add("bg-foreground");
+    searchResultsContainerEl.classList.add("bg-foreground");
   } else if (style === "glass") {
     searchContainerEl.classList.add("glass-effect");
-    assistantContainerEl.classList.add("glass-effect");
     bookmarkSearchContainerEl.classList.add("glass-effect");
     searchResultsContainerEl.classList.add("glass-effect");
   }
