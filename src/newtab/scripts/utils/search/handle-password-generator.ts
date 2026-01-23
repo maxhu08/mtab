@@ -1,9 +1,10 @@
+import { WORDS } from "src/newtab/scripts/utils/search/password-generator-words";
 import { AssistPasswordGenerator } from "src/newtab/scripts/utils/search/search-assist-utils";
 
 export const handlePasswordGenerator = (val: string) => {
-  if (!/^\s*password\b/i.test(val)) return undefined;
+  if (!/^\s*(?:password|pw)\b/i.test(val)) return undefined;
 
-  const rest = val.replace(/^\s*password\b/i, " ");
+  const rest = val.replace(/^\s*(?:password|pw)\b/i, " ");
   const lenMatch = rest.match(/\b(\d+)\b/);
   const length = lenMatch ? Math.max(1, Math.min(4096, Number(lenMatch[1]))) : 16;
 
@@ -59,69 +60,6 @@ export const handlePasswordGenerator = (val: string) => {
     return out;
   };
 
-  const WORDS = [
-    "amber",
-    "apple",
-    "arch",
-    "arrow",
-    "atlas",
-    "baker",
-    "beach",
-    "berry",
-    "brave",
-    "breeze",
-    "canvas",
-    "canyon",
-    "cedar",
-    "comet",
-    "coral",
-    "dawn",
-    "delta",
-    "echo",
-    "ember",
-    "fable",
-    "falcon",
-    "forest",
-    "glacier",
-    "harbor",
-    "honey",
-    "ivory",
-    "jungle",
-    "karma",
-    "lagoon",
-    "lunar",
-    "maple",
-    "meadow",
-    "mosaic",
-    "nebula",
-    "opal",
-    "orbit",
-    "panda",
-    "pearl",
-    "pioneer",
-    "prairie",
-    "quartz",
-    "radar",
-    "raven",
-    "river",
-    "sable",
-    "sierra",
-    "solar",
-    "spice",
-    "stone",
-    "sunset",
-    "tango",
-    "timber",
-    "valor",
-    "velvet",
-    "whisper",
-    "wild",
-    "willow",
-    "winter",
-    "zephyr",
-    "zinc"
-  ];
-
   const applyCase = (w: string) => {
     if (allowUppercase && !allowLowercase) return w.toUpperCase();
     if (!allowUppercase && allowLowercase) return w.toLowerCase();
@@ -132,25 +70,37 @@ export const handlePasswordGenerator = (val: string) => {
     return w;
   };
 
+  const insertAtBoundary = (out: string, boundaries: number[], ch: string) => {
+    const pickable = boundaries.filter((b) => b > 0 && b < out.length);
+    const pos = pickable.length > 0 ? pickable[randInt(pickable.length)] : out.length;
+
+    const inserted = out.slice(0, pos) + ch + out.slice(pos);
+    return inserted.length > length ? inserted.slice(0, length) : inserted;
+  };
+
   const makeMemorable = () => {
     const parts: string[] = [];
+    const boundaries: number[] = [];
     let joined = "";
+    let accLen = 0;
 
     while (joined.length < length) {
-      parts.push(applyCase(WORDS[randInt(WORDS.length)]));
+      const w = applyCase(WORDS[randInt(WORDS.length)]);
+      parts.push(w);
+      accLen += w.length;
+      boundaries.push(accLen);
       joined = parts.join("");
     }
 
     let out = joined.slice(0, length);
+    const sliceBoundaries = boundaries.filter((b) => b > 0 && b < length);
 
     if (allowNumbers) {
-      const pos = randInt(length);
-      out = out.slice(0, pos) + digits[randInt(digits.length)] + out.slice(pos + 1);
+      out = insertAtBoundary(out, sliceBoundaries, digits[randInt(digits.length)]);
     }
 
     if (allowSymbols) {
-      const pos = randInt(length);
-      out = out.slice(0, pos) + symbols[randInt(symbols.length)] + out.slice(pos + 1);
+      out = insertAtBoundary(out, sliceBoundaries, symbols[randInt(symbols.length)]);
     }
 
     return out;
