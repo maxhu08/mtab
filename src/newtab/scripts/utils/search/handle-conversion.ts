@@ -1,3 +1,5 @@
+import { AssistConversion } from "src/newtab/scripts/utils/search/search-assist-utils";
+
 type Category =
   | "length"
   | "weight"
@@ -19,7 +21,6 @@ type UnitDef = {
 
 type ConversionResult = {
   type: "conversion";
-  c: Category;
   before: string;
   after: string[];
 };
@@ -149,7 +150,6 @@ export const handleConversion = (val: string): ConversionResult | undefined => {
     const targets = allInCat.filter((u) => u.u !== from.u);
     return {
       type: "conversion",
-      c: from.c,
       before: `${p.value} ${from.u}`,
       after: targets.map((t) => `${fmt(t.fromBase(base))} ${t.u}`)
     };
@@ -162,8 +162,7 @@ export const handleConversion = (val: string): ConversionResult | undefined => {
 
   return {
     type: "conversion",
-    c: from.c,
     before: `${p.value} ${from.u}`,
     after: targets.map((t) => `${fmt(t.fromBase(base))} ${t.u}`)
-  };
+  } satisfies AssistConversion;
 };

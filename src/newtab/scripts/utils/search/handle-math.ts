@@ -1,5 +1,5 @@
 import { evaluate, format, isComplex, isConstantNode, isNumber, isOperatorNode } from "mathjs";
-import { hideAssist } from "src/newtab/scripts/utils/search/search-assist-utils";
+import { AssistMath, hideAssist } from "src/newtab/scripts/utils/search/search-assist-utils";
 
 export const handleMath = (val: string) => {
   try {
@@ -22,10 +22,10 @@ export const handleMath = (val: string) => {
       isOperatorNode(result) ||
       isNumber(result)
     ) {
-      return { type: "math", result: betterFormat(result) } as const;
+      return { type: "math", result: betterFormat(result) } satisfies AssistMath;
     }
   } catch {
-    if (val !== "date") hideAssist();
+    if (val.trim() !== "date") hideAssist();
   }
 };
 

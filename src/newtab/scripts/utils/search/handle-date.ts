@@ -1,5 +1,7 @@
+import { AssistDate } from "src/newtab/scripts/utils/search/search-assist-utils";
+
 export const handleDate = (val: string) => {
-  if (val === "date") {
-    return { type: "date" } as const;
+  if (val.trim() === "date") {
+    return { type: "date" } satisfies AssistDate;
   }
 };

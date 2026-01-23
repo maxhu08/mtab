@@ -1,3 +1,5 @@
+import { AssistDefinition } from "src/newtab/scripts/utils/search/search-assist-utils";
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type DefinitionData = any;
 
@@ -47,5 +49,5 @@ export const handleDefinition = async (val: string) => {
   const data = await getDefinition(word);
   if (!data) return;
 
-  return { type: "definition", result: data } as const;
+  return { type: "definition", result: data } satisfies AssistDefinition;
 };
