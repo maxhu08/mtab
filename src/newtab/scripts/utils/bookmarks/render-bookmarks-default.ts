@@ -60,7 +60,7 @@ export const renderDefaultBookmarks = (config: Config) => {
     }
 
     chromeBookmarks.forEach((bookmark) => {
-      if (!!bookmark.dateGroupModified) return;
+      if (bookmark.dateGroupModified) return;
 
       // <button id="bookmark-default-${bookmark.id}" class="overflow-hidden w-16 md:w-20 aspect-square grid grid-rows-[auto_max-content] place-items-center cursor-pointer">
       //   <img class="w-10 md:w-14" src="${getFaviconURL(bookmark.url!, userAgent)}" />
@@ -89,7 +89,7 @@ export const renderDefaultBookmarks = (config: Config) => {
     });
 
     chromeBookmarks.forEach((bookmark) => {
-      if (!!bookmark.dateGroupModified) return;
+      if (bookmark.dateGroupModified) return;
 
       // prettier-ignore
       const bookmarkEl = document.getElementById(`bookmark-default-${bookmark.id}`) as HTMLDivElement;

@@ -293,9 +293,14 @@ export const displayAssist = (items: AssistItem[], config: Config) => {
       eqEl.innerHTML = "&nbsp;=&nbsp;";
 
       const passwordEl = document.createElement("div");
-      passwordEl.className = "text-ellipsis overflow-hidden whitespace-nowrap w-full";
-      passwordEl.style.color = config.search.textColor;
-      passwordEl.textContent = item.result;
+      passwordEl.className = "truncate w-full";
+      passwordEl.style.color = config.search.placeholderTextColor;
+
+      const passwordTextSpan = document.createElement("span");
+      passwordTextSpan.style.color = config.search.textColor;
+      passwordTextSpan.textContent = item.result;
+
+      passwordEl.appendChild(passwordTextSpan);
 
       resultRow.appendChild(eqEl);
       resultRow.appendChild(passwordEl);
