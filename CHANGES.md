@@ -1,13 +1,15 @@
-# Changes in 1.9.8
+# Changes in 1.9.9
 
 in this release:
 
-- change config save format (still supports legacy save importing)
-- add importing and exporting user defined bookmarks
+- change how search assists are handled
+- add password generator search assist option
+- improve conversion search assist
 - improve options page
-- add keybinds for importing and exporting save
-- add title typewriter effect speed and remain count options
-- remove config-utils page
-- fix search results shifting content on bookmarks type none
+- change how default wallpaper is handled
+- make date search assist whitespace and case insensitive
+- fix defintion search assist flashing sometimes
+- fix unexpected behavior with wallpaper preview on options page when blur is present
+- fix default folder icon field populating when should be left empty
 - performance improvements
 - bug fixes
