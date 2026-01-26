@@ -8,7 +8,7 @@ in this release:
 - improve options page
 - change how default wallpaper is handled
 - make date search assist whitespace and case insensitive
-- fix defintion search assist flashing sometimes
+- fix definition search assist flashing sometimes
 - fix unexpected behavior with wallpaper preview on options page when blur is present
 - fix default folder icon field populating when should be left empty
 - performance improvements
