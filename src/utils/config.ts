@@ -59,7 +59,7 @@ export const defaultConfig: Config = {
     }
   },
   wallpaper: {
-    type: "url",
+    type: "default",
     enabled: true,
     url: "",
     filters: {
