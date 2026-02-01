@@ -40,7 +40,7 @@ export const getBookmarkIconDetails = (
   if (bookmarkIconType.startsWith("url-")) {
     const src = bookmarkIconType.slice(4);
     return {
-      iconHTML: `<img class="w-10 md:w-14" src="${src}" />`,
+      iconHTML: `<span class="w-10 h-10 md:w-16 md:h-16" style="display:inline-block;background-color:${bookmarkIconColor};mask:url('${src}') no-repeat center/contain;-webkit-mask:url('${src}') no-repeat center/contain;transition:background-color .3s;pointer-events:none"></span>`,
       iconSizeClass: ""
     };
   }
