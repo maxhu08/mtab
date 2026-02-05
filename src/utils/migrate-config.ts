@@ -27,7 +27,6 @@ export const migrateOldConfig = (config: Config): Config => {
   }
 
   // if config is before v1.8.0
-  // ensure 'fill' property exists for user-defined bookmarks
   if (config.bookmarks.userDefined) {
     config.bookmarks.userDefined = config.bookmarks.userDefined.map((node: any) => {
       const stack = [node];
@@ -35,16 +34,16 @@ export const migrateOldConfig = (config: Config): Config => {
       while (stack.length) {
         const current = stack.pop();
 
-        if (
-          ((current.type === "bookmark" || current.type === "folder") && !("fill" in current)) ||
-          current.fill === "undefined"
-        ) {
-          current.fill = "";
-        }
+        // if (
+        //   ((current.type === "bookmark" || current.type === "folder") && !("fill" in current)) ||
+        //   current.fill === "undefined"
+        // ) {
+        //   current.fill = "";
+        // }
 
-        if (current.type === "folder" && (!("iconType" in current) || !current.iconType)) {
-          current.iconType = config.bookmarks.defaultFolderIconType;
-        }
+        // if (current.type === "folder" && (!("iconType" in current) || !current.iconType)) {
+        //   current.iconType = config.bookmarks.defaultFolderIconType;
+        // }
 
         if (current.type === "folder" && Array.isArray(current.contents)) {
           stack.push(...current.contents);

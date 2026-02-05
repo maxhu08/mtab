@@ -326,8 +326,7 @@ addBookmarkButtonEl.onclick = () => {
       url: "about:blank",
       color: "#ffffff",
       iconType: "ri-box-3-line",
-      iconColor: "#ffffff",
-      fill: ""
+      iconColor: "#ffffff"
     },
     bookmarksUserDefinedList
   );
@@ -341,9 +340,7 @@ addFolderButtonEl.onclick = () => {
       type: "folder",
       name: "New Folder",
       color: randomColor,
-      iconType: "",
       iconColor: randomColor,
-      fill: "",
       contents: []
     },
     bookmarksUserDefinedList
@@ -541,7 +538,7 @@ export const addBookmarkNodeBookmark = (
     { label: "bookmark.color", id: "color", value: bookmark.color },
     { label: "bookmark.iconType", id: "icon-type", value: bookmark.iconType },
     { label: "bookmark.iconColor", id: "icon-color", value: bookmark.iconColor },
-    { label: "bookmark.fill", id: "fill", value: bookmark.fill }
+    { label: "bookmark.fill", id: "fill", value: bookmark.fill ?? "" }
   ];
 
   fields.forEach(({ label, id, value }) => {
@@ -567,8 +564,9 @@ export const addBookmarkNodeBookmark = (
     input.autocomplete = "off";
     input.className = "outline-none bg-transparent text-white placeholder-neutral-500";
 
-    if (id === "fill") input.placeholder = `input fill... (leave empty for default)`;
-    else input.placeholder = `input ${id}...`;
+    if (id === "fill" || id === "icon-color") {
+      input.placeholder = `input color... (leave empty for default)`;
+    } else input.placeholder = `input ${id}...`;
 
     input.value = value;
 
@@ -730,7 +728,7 @@ export const addBookmarkNodeFolder = (folder: BookmarkNodeFolder, targetDivEl: H
     { label: "folder.color", id: "color", value: folder.color },
     { label: "folder.iconType", id: "icon-type", value: folder.iconType ?? "" },
     { label: "folder.iconColor", id: "icon-color", value: folder.iconColor },
-    { label: "folder.fill", id: "fill", value: folder.fill }
+    { label: "folder.fill", id: "fill", value: folder.fill ?? "" }
   ];
 
   fields.forEach(({ label, id, value }) => {
@@ -756,9 +754,11 @@ export const addBookmarkNodeFolder = (folder: BookmarkNodeFolder, targetDivEl: H
     input.autocomplete = "off";
     input.className = "outline-none bg-transparent text-white placeholder-neutral-500";
 
-    if (id === "fill") input.placeholder = `input fill... (leave empty for default)`;
-    if (id === "icon-type") input.placeholder = `input icon-type... (leave empty for default)`;
-    else input.placeholder = `input ${id}...`;
+    if (id === "fill" || id === "icon-color") {
+      input.placeholder = `input color... (leave empty for default)`;
+    } else if (id === "icon-type") {
+      input.placeholder = `input icon-type... (leave empty for default)`;
+    } else input.placeholder = `input ${id}...`;
 
     input.value = value;
 

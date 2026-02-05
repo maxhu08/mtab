@@ -18,8 +18,7 @@ export const setBookmarkNodes = (bookmarkNodes: BookmarkNode[]) => {
     else if (bookmarkNode.type === "folder")
       addBookmarkNodeFolder(
         {
-          ...bookmarkNode,
-          iconType: bookmarkNode.iconType
+          ...bookmarkNode
         },
         bookmarksUserDefinedList
       );

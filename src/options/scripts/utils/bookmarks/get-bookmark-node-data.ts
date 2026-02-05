@@ -9,14 +9,16 @@ export const getBookmarkNodeBookmarkData = (uuid: string) => {
   const iconColorInputEl = document.getElementById(`bookmark-${uuid}-icon-color-input`) as HTMLInputElement;
   const fillInputEl = document.getElementById(`bookmark-${uuid}-fill-input`) as HTMLInputElement;
 
+  const fill = trimmedOrUndefined(fillInputEl.value);
+
   return {
     type: "bookmark",
     name: nameInputEl.value,
     url: urlInputEl.value,
     color: colorInputEl.value,
-    iconType: iconTypeInputEl.value,
     iconColor: iconColorInputEl.value,
-    fill: fillInputEl.value
+    iconType: iconTypeInputEl.value,
+    ...(fill && { fill }),
   } satisfies BookmarkNodeBookmark;
 };
 
@@ -28,12 +30,11 @@ export const getBookmarkNodeFolderData = (uuid: string) => {
   const iconColorInputEl = document.getElementById(`bookmark-${uuid}-icon-color-input`) as HTMLInputElement;
   const fillInputEl = document.getElementById(`bookmark-${uuid}-fill-input`) as HTMLInputElement;
   const folderContentsEl = document.getElementById(`bookmark-${uuid}-contents-container`) as HTMLDivElement;
+
   const folderContents: BookmarkNode[] = [];
 
   if (folderContentsEl) {
-    const children = Array.from(folderContentsEl.children);
-
-    children.forEach((childEl) => {
+    Array.from(folderContentsEl.children).forEach((childEl) => {
       const childUuid = childEl.getAttribute("bookmark-node-uuid") as string;
       const childType = childEl.getAttribute("node-type");
 
@@ -45,13 +46,21 @@ export const getBookmarkNodeFolderData = (uuid: string) => {
     });
   }
 
+  const iconType = trimmedOrUndefined(iconTypeInputEl.value);
+  const fill = trimmedOrUndefined(fillInputEl.value);
+
   return {
     type: "folder",
     name: nameInputEl.value,
     color: colorInputEl.value,
-    iconType: iconTypeInputEl.value,
     iconColor: iconColorInputEl.value,
-    fill: fillInputEl.value,
-    contents: folderContents
+    contents: folderContents,
+    ...(iconType && { iconType }),
+    ...(fill && { fill }),
   } satisfies BookmarkNodeFolder;
+};
+
+const trimmedOrUndefined = (value?: string) => {
+  const v = value?.trim();
+  return v ? v : undefined;
 };

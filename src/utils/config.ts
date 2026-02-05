@@ -231,7 +231,7 @@ export type BookmarkNodeFolder = {
   color: string;
   iconType?: string;
   iconColor: string;
-  fill: string;
+  fill?: string;
   contents: BookmarkNode[];
 };
 export type BookmarkNodeBookmark = {
@@ -242,7 +242,7 @@ export type BookmarkNodeBookmark = {
   iconType: string;
   // extra options
   iconColor: string;
-  fill: string;
+  fill?: string;
 };
 export type DefaultBlockyColorType = "random" | "custom";
 export type DefaultFaviconSource = "google" | "duckduckgo";
