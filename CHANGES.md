@@ -9,5 +9,5 @@ in this release:
 - change fill and iconType to be optional properties on user-defined bookmark folders
 - fix user-defined bookmark url- iconTypes not changing color
 - fix bookmarks.defaultFolderIconType always saving on user-defined bookmarks folders
-- performances improvements
+- performance improvements
 - bug fixes
