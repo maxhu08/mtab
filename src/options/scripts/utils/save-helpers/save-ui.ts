@@ -1,6 +1,5 @@
 import { Config } from "src/utils/config";
 import {
-  uiBackgroundColorInputEl,
   uiForegroundColorInputEl,
   uiHighlightColorInputEl,
   uiCustomCSSTextareaEl,
@@ -26,7 +25,6 @@ export const saveUISettingsToDraft = (draft: Config) => {
   draft.ui.glassColor = uiGlassColorInputEl.value;
   draft.ui.blurStrength = uiBlurStrengthInputEl.value;
   draft.ui.foregroundColor = uiForegroundColorInputEl.value;
-  draft.ui.backgroundColor = uiBackgroundColorInputEl.value;
   draft.ui.highlightColor = uiHighlightColorInputEl.value;
 
   const selectedCornerStyleEl = getSelectedButton("ui-corner-style");

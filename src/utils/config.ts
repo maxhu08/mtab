@@ -65,14 +65,14 @@ export const defaultConfig: Config = {
     filters: {
       brightness: "1",
       blur: "0px"
-    }
+    },
+    solidColor: "#171717"
   },
   ui: {
     style: "glass",
     glassColor: "#ffffff20",
     blurStrength: "32px",
     foregroundColor: "#262626",
-    backgroundColor: "#171717",
     highlightColor: "#ffffff20",
     cornerStyle: "round",
     customCSS: "/* input custom css... */"
@@ -184,7 +184,7 @@ export type TitleEffectType = "none" | "typewriter";
 export type FaviconType = "default" | "custom";
 export type UIStyle = "solid" | "glass";
 export type UICornerStyle = "sharp" | "round";
-export type WallpaperType = "url" | "fileUpload" | "default";
+export type WallpaperType = "url" | "file-upload" | "solid-color" | "default";
 export type BookmarkTiming = "left" | "right" | "uniform";
 export type AnimationInitialType =
   | "animate-down-bouncy"
@@ -291,13 +291,13 @@ export interface Config {
       brightness: string;
       blur: string;
     };
+    solidColor: string;
   };
   ui: {
     style: UIStyle;
     blurStrength: string;
     glassColor: string;
     foregroundColor: string;
-    backgroundColor: string;
     highlightColor: string;
     cornerStyle: UICornerStyle;
     customCSS: string;

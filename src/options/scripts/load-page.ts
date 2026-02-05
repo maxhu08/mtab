@@ -12,7 +12,7 @@ import {
 import { handleCustomFaviconUpload } from "src/options/scripts/utils/upload-favicon";
 import { createCollapseGroups } from "src/options/scripts/utils/collapse-option";
 import { handleControls } from "src/options/scripts/utils/control-utils";
-import { handleWallpaperUrlChange } from "src/options/scripts/utils/handle-wallpaper-url-change";
+import { handleWallpaperChange } from "src/options/scripts/utils/handle-wallpaper-change";
 
 export const loadPage = () => {
   const logo = document.getElementById("mtab-logo") as HTMLImageElement;
@@ -46,7 +46,7 @@ export const loadPage = () => {
 
   handleCustomFaviconUpload();
   handleWallpaperFileUpload();
-  handleWallpaperUrlChange();
+  handleWallpaperChange();
 
   handleSwitches();
 

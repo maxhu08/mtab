@@ -33,19 +33,20 @@ export const messageWeatherUnitsTypeCButton = getButton("message-weather-units-t
 export const wallpaperEnabledCheckboxEl = getCheckbox("wallpaper-enabled");
 export const wallpaperTypeUrlButtonEl = getButton("wallpaper-type-url");
 export const wallpaperTypeFileUploadButtonEl = getButton("wallpaper-type-file-upload");
+export const wallpaperTypeSolidColorButtonEl = getButton("wallpaper-type-solid-color");
 export const wallpaperTypeDefaultButtonEl = getButton("wallpaper-type-default");
 export const [wallpaperUrlContainerEl, wallpaperUrlInputEl] = getContainerAndInput("wallpaper-url");
 export const wallpaperFileUploadInputEl = document.getElementById("wallpaper-file-upload-input") as HTMLInputElement;
 export const wallpaperFileResetButtonEl = getButton("wallpaper-file-upload-reset");
 export const [wallpaperFiltersBrightnessContainerEl, wallpaperFiltersBrightnessInputEl] = getContainerAndInput("wallpaper-filters-brightness");
 export const [wallpaperFiltersBlurContainerEl, wallpaperFiltersBlurInputEl] = getContainerAndInput("wallpaper-filters-blur");
+export const [wallpaperSolidColorContainerEl, wallpaperSolidColorInputEl] = getContainerAndInput("wallpaper-solid-color");
 
 export const uiStyleSolidButtonEl = getButton("ui-style-solid");
 export const uiStyleGlassButtonEl = getButton("ui-style-glass");
 export const [uiGlassColorContainerEl, uiGlassColorInputEl] = getContainerAndInput("ui-glass-color");
 export const [uiBlurStrengthContainerEl, uiBlurStrengthInputEl] = getContainerAndInput("ui-blur-strength");
 export const [uiForegroundColorContainerEl, uiForegroundColorInputEl] = getContainerAndInput("ui-foreground-color");
-export const [uiBackgroundColorContainerEl, uiBackgroundColorInputEl] = getContainerAndInput("ui-background-color");
 export const [uiHighlightColorContainerEl, uiHighlightColorInputEl] = getContainerAndInput("ui-highlight-color");
 export const uiCornerStyleSharpButtonEl = getButton("ui-corner-style-sharp");
 export const uiCornerStyleRoundButtonEl = getButton("ui-corner-style-round");
@@ -170,7 +171,7 @@ export const buttonSwitches: ButtonSwitch[] = [
     attr: "message-weather-units-type"
   },
   {
-    buttons: [wallpaperTypeUrlButtonEl, wallpaperTypeFileUploadButtonEl, wallpaperTypeDefaultButtonEl],
+    buttons: [wallpaperTypeUrlButtonEl, wallpaperTypeFileUploadButtonEl, wallpaperTypeSolidColorButtonEl, wallpaperTypeDefaultButtonEl],
     attr: "wallpaper-type"
   },
   {

@@ -72,6 +72,23 @@ export const previewWallpaperLegacy = (
   }
 };
 
+export const previewWallpaperSolidColor = (color: string) => {
+  liveWallpaperPreviewEl.style.filter = "";
+
+  if (!color) {
+    liveWallpaperPreviewEl.innerHTML = `<i class="text-neutral-500 text-4xl ri-prohibited-2-line"></i>`;
+    return;
+  }
+
+  liveWallpaperPreviewEl.innerHTML = "";
+
+  const solidEl = document.createElement("div");
+  solidEl.className = "w-full h-full";
+  solidEl.style.backgroundColor = color;
+
+  liveWallpaperPreviewEl.appendChild(solidEl);
+};
+
 export const previewFavicon = (favicon: string) => {
   // prettier-ignore
   const liveFaviconPreviewEl = document.getElementById("live-favicon-preview") as HTMLDivElement;

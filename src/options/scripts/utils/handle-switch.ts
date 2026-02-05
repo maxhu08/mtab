@@ -19,13 +19,15 @@ import {
   uiStyleSolidButtonEl,
   wallpaperFiltersBlurInputEl,
   wallpaperFiltersBrightnessInputEl,
+  wallpaperSolidColorInputEl,
   wallpaperTypeDefaultButtonEl,
   wallpaperTypeFileUploadButtonEl,
+  wallpaperTypeSolidColorButtonEl,
   wallpaperTypeUrlButtonEl,
   wallpaperUrlInputEl
 } from "src/options/scripts/ui";
 import { get as idbGet } from "idb-keyval";
-import { previewWallpaper } from "src/options/scripts/utils/preview";
+import { previewWallpaper, previewWallpaperSolidColor } from "src/options/scripts/utils/preview";
 import { logger } from "src/utils/logger";
 
 export const handleSwitches = () => {
@@ -155,6 +157,13 @@ const handleWallpaperTypeSwitch = () => {
   const wallpaperFileUploadSection = document.getElementById(
     "wallpaper-file-upload-section"
   ) as HTMLDivElement;
+  const wallpaperSolidColorSection = document.getElementById(
+    "wallpaper-solid-color-section"
+  ) as HTMLDivElement;
+
+  const wallpaperNotSolidColorSection = document.getElementById(
+    "wallpaper-not-solid-color-section"
+  ) as HTMLDivElement;
 
   wallpaperTypeUrlButtonEl.addEventListener("click", () => {
     previewWallpaper(
@@ -164,7 +173,9 @@ const handleWallpaperTypeSwitch = () => {
     );
 
     wallpaperFileUploadSection.style.display = "none";
+    wallpaperSolidColorSection.style.display = "none";
     wallpaperUrlSection.style.display = "block";
+    wallpaperNotSolidColorSection.style.display = "grid";
   });
 
   wallpaperTypeFileUploadButtonEl.addEventListener("click", () => {
@@ -203,7 +214,18 @@ const handleWallpaperTypeSwitch = () => {
     }
 
     wallpaperUrlSection.style.display = "none";
+    wallpaperSolidColorSection.style.display = "none";
     wallpaperFileUploadSection.style.display = "block";
+    wallpaperNotSolidColorSection.style.display = "grid";
+  });
+
+  wallpaperTypeSolidColorButtonEl.addEventListener("click", () => {
+    wallpaperUrlSection.style.display = "none";
+    wallpaperFileUploadSection.style.display = "none";
+    wallpaperNotSolidColorSection.style.display = "none";
+    wallpaperSolidColorSection.style.display = "block";
+
+    previewWallpaperSolidColor(wallpaperSolidColorInputEl.value);
   });
 
   wallpaperTypeDefaultButtonEl.addEventListener("click", () => {
@@ -215,6 +237,8 @@ const handleWallpaperTypeSwitch = () => {
 
     wallpaperUrlSection.style.display = "none";
     wallpaperFileUploadSection.style.display = "none";
+    wallpaperSolidColorSection.style.display = "block";
+    wallpaperNotSolidColorSection.style.display = "grid";
   });
 };
 

@@ -111,5 +111,18 @@ export const migrateOldConfig = (config: Config): Config => {
     (config.search.assist as any).passwordGenerator = true;
   }
 
+  // if config is before v1.10.1
+  if ((config.wallpaper as any).type === "fileUpload")
+    (config.wallpaper as any).type = "file-upload";
+  if (typeof (config.wallpaper as any).solidColor !== "string")
+    (config.wallpaper as any).solidColor = "#171717";
+  if (config.ui && "backgroundColor" in (config.ui as any)) {
+    const color = (config.ui as any).backgroundColor;
+    if (typeof color === "string" && color.trim() !== "") {
+      (config.wallpaper as any).solidColor = color;
+    }
+    delete (config.ui as any).backgroundColor;
+  }
+
   return config;
 };

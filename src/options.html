@@ -321,14 +321,17 @@
                   <span class="text-white">url</span>
                 </button>
                 <button id="wallpaper-type-file-upload-button" class="rounded-md bg-neutral-800 py-2 outline-none hover:bg-neutral-700">
-                  <span class="text-white">fileUpload</span>
+                  <span class="text-white">file-upload</span>
+                </button>
+                <button id="wallpaper-type-solid-color-button" class="rounded-md bg-neutral-800 py-2 outline-none hover:bg-neutral-700">
+                  <span class="text-white">solid-color</span>
                 </button>
                 <button id="wallpaper-type-default-button" class="rounded-md bg-neutral-800 py-2 outline-none hover:bg-neutral-700">
                   <span class="text-white">default</span>
                 </button>
               </div>
             </div>
-            <div class="grid">
+            <div class="grid gap-4">
               <div id="wallpaper-url-section">
                 <div class="grid gap-2">
                   <p class="text-base text-white">wallpaper.url</p>
@@ -362,25 +365,36 @@
                   </div>
                 </div>
               </div>
-            </div>
-            <div class="grid gap-2">
-              <p class="text-base text-white">wallpaper.filters.brightness</p>
-              <div id="wallpaper-filters-brightness-container" class="grid w-full grid-cols-[max-content_auto] rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base">
-                <span class="select-none font-semibold text-pink-500">>&nbsp;</span>
-                <input
-                  id="wallpaper-filters-brightness-input"
-                  type="text"
-                  autocomplete="off"
-                  class="bg-transparent text-white placeholder-neutral-500 outline-none"
-                  placeholder="input brightness (0.0-1.0)..."
-                />
+              <div id="wallpaper-solid-color-section">
+                <div class="grid gap-2">
+                  <p class="text-base text-white">wallpaper.solidColor</p>
+                  <div id="wallpaper-solid-color-container" class="grid w-full grid-cols-[max-content_auto] rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base">
+                    <span class="select-none font-semibold text-pink-500">>&nbsp;</span>
+                    <input id="wallpaper-solid-color-input" type="text" autocomplete="off" class="bg-transparent text-white placeholder-neutral-500 outline-none" placeholder="input color..." />
+                  </div>
+                </div>
               </div>
-            </div>
-            <div class="grid gap-2">
-              <p class="text-base text-white">wallpaper.filters.blur</p>
-              <div id="wallpaper-filters-blur-container" class="grid w-full grid-cols-[max-content_auto] rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base">
-                <span class="select-none font-semibold text-pink-500">>&nbsp;</span>
-                <input id="wallpaper-filters-blur-input" type="text" autocomplete="off" class="bg-transparent text-white placeholder-neutral-500 outline-none" placeholder="input blur..." />
+              <div id="wallpaper-not-solid-color-section" class="grid gap-4">
+                <div class="grid gap-2">
+                  <p class="text-base text-white">wallpaper.filters.brightness</p>
+                  <div id="wallpaper-filters-brightness-container" class="grid w-full grid-cols-[max-content_auto] rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base">
+                    <span class="select-none font-semibold text-pink-500">>&nbsp;</span>
+                    <input
+                      id="wallpaper-filters-brightness-input"
+                      type="text"
+                      autocomplete="off"
+                      class="bg-transparent text-white placeholder-neutral-500 outline-none"
+                      placeholder="input brightness (0.0-1.0)..."
+                    />
+                  </div>
+                </div>
+                <div class="grid gap-2">
+                  <p class="text-base text-white">wallpaper.filters.blur</p>
+                  <div id="wallpaper-filters-blur-container" class="grid w-full grid-cols-[max-content_auto] rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base">
+                    <span class="select-none font-semibold text-pink-500">>&nbsp;</span>
+                    <input id="wallpaper-filters-blur-input" type="text" autocomplete="off" class="bg-transparent text-white placeholder-neutral-500 outline-none" placeholder="input blur..." />
+                  </div>
+                </div>
               </div>
             </div>
             <p class="text-base text-neutral-500">live preview</p>
@@ -435,13 +449,7 @@
               </div>
             </div>
           </div>
-          <div class="grid gap-2">
-            <p class="text-base text-white">ui.backgroundColor</p>
-            <div id="ui-background-color-container" class="grid w-full grid-cols-[max-content_auto] rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base">
-              <span class="select-none font-semibold text-pink-500">>&nbsp;</span>
-              <input id="ui-background-color-input" type="text" autocomplete="off" class="bg-transparent text-white placeholder-neutral-500 outline-none" placeholder="input color..." />
-            </div>
-          </div>
+
           <div class="grid gap-2">
             <p class="text-base text-white">ui.highlightColor</p>
             <div id="ui-highlight-color-container" class="grid w-full grid-cols-[max-content_auto] rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base">

@@ -3,7 +3,8 @@ import {
   wallpaperEnabledCheckboxEl,
   wallpaperUrlInputEl,
   wallpaperFiltersBrightnessInputEl,
-  wallpaperFiltersBlurInputEl
+  wallpaperFiltersBlurInputEl,
+  wallpaperSolidColorInputEl
 } from "src/options/scripts/ui";
 import { getSelectedButton } from "src/options/scripts/utils/get-selected-button";
 
@@ -14,7 +15,9 @@ export const saveWallpaperSettingsToDraft = (draft: Config) => {
     if (selectedEl.id === "wallpaper-type-url-button") {
       draft.wallpaper.type = "url";
     } else if (selectedEl.id === "wallpaper-type-file-upload-button") {
-      draft.wallpaper.type = "fileUpload";
+      draft.wallpaper.type = "file-upload";
+    } else if (selectedEl.id === "wallpaper-type-solid-color-button") {
+      draft.wallpaper.type = "solid-color";
     } else if (selectedEl.id === "wallpaper-type-default-button") {
       draft.wallpaper.type = "default";
     }
@@ -22,6 +25,7 @@ export const saveWallpaperSettingsToDraft = (draft: Config) => {
 
   draft.wallpaper.enabled = wallpaperEnabledCheckboxEl.checked;
   draft.wallpaper.url = wallpaperUrlInputEl.value;
+  draft.wallpaper.solidColor = wallpaperSolidColorInputEl.value;
 
   draft.wallpaper.filters.brightness = wallpaperFiltersBrightnessInputEl.value;
   draft.wallpaper.filters.blur = wallpaperFiltersBlurInputEl.value;

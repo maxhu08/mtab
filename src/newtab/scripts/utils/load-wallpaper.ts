@@ -7,7 +7,7 @@ import { logger } from "src/utils/logger";
 export const loadWallpaper = (wallpaper: Config["wallpaper"]) => {
   if (!wallpaper.enabled) return;
 
-  if (wallpaper.type === "fileUpload") {
+  if (wallpaper.type === "file-upload") {
     idbGet("userUploadedWallpaper")
       .then((file) => {
         if (file) {
@@ -42,6 +42,9 @@ export const loadWallpaper = (wallpaper: Config["wallpaper"]) => {
         });
         hideCover();
       });
+  } else if (wallpaper.type === "solid-color") {
+    applySolidColorWallpaper(wallpaper.solidColor);
+    hideCover();
   } else {
     applyWallpaper(
       wallpaper.type === "default" ? "./wallpapers/default.jpg" : wallpaper.url,
@@ -103,4 +106,19 @@ export const applyWallpaperLegacy = (url: string, brightness: string, blur: stri
 
   applyWallpaperFilters(imgEl, brightness, blur);
   wallpaperEl.appendChild(imgEl);
+};
+
+export const applySolidColorWallpaper = (color: string) => {
+  if (!color) return;
+
+  wallpaperEl.style.transitionDuration = "0ms";
+
+  const solidEl = document.createElement("div");
+  solidEl.style.position = "absolute";
+  solidEl.style.width = "100%";
+  solidEl.style.height = "100%";
+  solidEl.style.backgroundColor = color;
+
+  wallpaperEl.appendChild(solidEl);
+  hideCover();
 };

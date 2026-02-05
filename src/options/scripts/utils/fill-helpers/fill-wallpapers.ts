@@ -3,12 +3,18 @@ import {
   wallpaperEnabledCheckboxEl,
   wallpaperFiltersBlurInputEl,
   wallpaperFiltersBrightnessInputEl,
+  wallpaperSolidColorInputEl,
   wallpaperTypeDefaultButtonEl,
   wallpaperTypeFileUploadButtonEl,
+  wallpaperTypeSolidColorButtonEl,
   wallpaperTypeUrlButtonEl,
   wallpaperUrlInputEl
 } from "src/options/scripts/ui";
-import { previewWallpaper, previewWallpaperLegacy } from "src/options/scripts/utils/preview";
+import {
+  previewWallpaper,
+  previewWallpaperLegacy,
+  previewWallpaperSolidColor
+} from "src/options/scripts/utils/preview";
 import { get as idbGet } from "idb-keyval";
 
 export const fillWallpapersInputs = (config: Config) => {
@@ -20,7 +26,7 @@ export const fillWallpapersInputs = (config: Config) => {
       config.wallpaper.filters.brightness,
       config.wallpaper.filters.blur
     );
-  } else if (config.wallpaper.type === "fileUpload") {
+  } else if (config.wallpaper.type === "file-upload") {
     wallpaperTypeFileUploadButtonEl.click();
 
     idbGet("userUploadedWallpaper").then((file) => {
@@ -38,6 +44,10 @@ export const fillWallpapersInputs = (config: Config) => {
         });
       }
     });
+  } else if (config.wallpaper.type === "solid-color") {
+    wallpaperTypeSolidColorButtonEl.click();
+
+    previewWallpaperSolidColor(config.wallpaper.solidColor);
   } else if (config.wallpaper.type === "default") {
     wallpaperTypeDefaultButtonEl.click();
 
@@ -49,4 +59,6 @@ export const fillWallpapersInputs = (config: Config) => {
 
   wallpaperFiltersBrightnessInputEl.value = config.wallpaper.filters.brightness;
   wallpaperFiltersBlurInputEl.value = config.wallpaper.filters.blur;
+
+  wallpaperSolidColorInputEl.value = config.wallpaper.solidColor;
 };
