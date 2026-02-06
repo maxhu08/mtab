@@ -39,8 +39,6 @@ export const getBookmarkIconDetails = (
     };
   }
 
-  console.log("bookmarkIconType:", bookmarkIconType);
-
   if (bookmarkIconType.startsWith("url-")) {
     const src = bookmarkIconType.slice(4);
     // if bookmarkIconColor is empty, use <img> tag directly without applying the mask
