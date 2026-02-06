@@ -1,6 +1,6 @@
-# Changes in 1.10.2
+# Changes in 1.10.3
 
 in this release:
 
-- ui improvements
-- bug fixes
+- make keybinds work with caps lock enabled
+- fix issue with some bookmark icons not rendering properly
