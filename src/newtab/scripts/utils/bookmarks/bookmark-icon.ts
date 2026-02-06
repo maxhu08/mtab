@@ -41,16 +41,17 @@ export const getBookmarkIconDetails = (
 
   if (bookmarkIconType.startsWith("url-")) {
     const src = bookmarkIconType.slice(4);
-    // if bookmarkIconColor is empty, use <img> tag directly without applying the mask
 
-    if (iconColor === "") {
+    // only apply mask if iconColor is non-empty AND the file is an SVG
+    const isSvg = /\.svg(\?|#|$)/i.test(src);
+
+    if (iconColor === "" || !isSvg) {
       return {
         iconHTML: `<img class="w-10 md:w-14" src="${src}" alt="icon" />`,
         iconSizeClass: ""
       };
     }
 
-    // if bookmarkIconColor is not empty, use mask as before
     const maskStyles = `background-color:${iconColor};mask:url('${src}') no-repeat center/contain;-webkit-mask:url('${src}') no-repeat center/contain;transition:background-color .3s;pointer-events:none`;
 
     return {
