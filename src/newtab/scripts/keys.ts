@@ -41,67 +41,58 @@ export const listenToKeys = async (config: Config) => {
   document.addEventListener("keydown", (e) => {
     if (!config.hotkeys.enabled) return;
 
+    const key = e.key.toLowerCase();
+
     // keybinds stuff
 
     // search
-    if (e.key === "Escape") unfocusSearch();
+    if (key === "escape") unfocusSearch();
     const searchFocused = document.activeElement === searchInputEl;
     const bookmarkSearchFocused = document.activeElement === bookmarkSearchInputEl;
 
-    if (e.key === config.hotkeys.activationKey) {
+    if (key === config.hotkeys.activationKey.toLowerCase()) {
       if (bookmarkSearchSectionEl.classList.contains("grid")) {
         tryFocusBookmarkSearch(config.search.focusedBorderColor, e);
       } else {
         tryFocusSearch(config, e);
       }
     }
-    if (e.key === config.hotkeys.closePageKey && !searchFocused && !bookmarkSearchFocused)
+
+    if (
+      key === config.hotkeys.closePageKey.toLowerCase() &&
+      !searchFocused &&
+      !bookmarkSearchFocused
+    ) {
       window.close();
+    }
 
     const inBookmarkSearch = bookmarkSearchSectionEl.classList.contains("grid");
     const searchResultsVisible = searchResultsSectionEl.classList.contains("block");
 
     // normal search suggestions navigation
     if (searchFocused && searchResultsVisible) {
-      handleSearchResultsNavigation(
-        searchInputEl,
-        e,
-        {
-          resultUrlAttr: "search-result-url",
-          onOpen: (value, openInNewTab) => {
-            const direct = config.search.recognizeLinks ? recognizeUrl(value) : null;
+      handleSearchResultsNavigation(searchInputEl, e, {
+        resultUrlAttr: "search-result-url",
+        onOpen: (value, openInNewTab) => {
+          const direct = config.search.recognizeLinks ? recognizeUrl(value) : null;
 
-            if (direct) {
-              openUrl(config, direct, openInNewTab);
-              return;
-            }
-
-            search(config, value, openInNewTab);
+          if (direct) {
+            openUrl(config, direct, openInNewTab);
+            return;
           }
-        },
-        config.search.textColor,
-        config.search.linkTextColor
-      );
+
+          search(config, value, openInNewTab);
+        }
+      });
     }
 
     // bookmark search navigation (exclusive)
     if (inBookmarkSearch && searchResultsVisible) {
-      handleSearchResultsNavigation(
-        bookmarkSearchInputEl,
-        e,
-        {
-          resultUrlAttr: "bookmark-result-url",
-          onOpen: (url, openInNewTab) =>
-            openBookmark(
-              url,
-              config.animations.enabled,
-              config.animations.bookmarkType,
-              openInNewTab
-            )
-        },
-        config.search.textColor,
-        config.search.linkTextColor
-      );
+      handleSearchResultsNavigation(bookmarkSearchInputEl, e, {
+        resultUrlAttr: "bookmark-result-url",
+        onOpen: (url, openInNewTab) =>
+          openBookmark(url, config.animations.enabled, config.animations.bookmarkType, openInNewTab)
+      });
     }
 
     // bookmarks stuff
@@ -110,9 +101,8 @@ export const listenToKeys = async (config: Config) => {
       config.bookmarks.type === "default" ||
       config.bookmarks.type === "default-blocky"
     ) {
-      // if search bookmark is on already (grid)
       if (bookmarkSearchSectionEl.classList.contains("grid")) {
-        if (e.key === "Escape") {
+        if (key === "escape") {
           unfocusBookmarkSearch(config.animations.initialType);
           disableSearchBookmark();
           bookmarkSearchInputEl.value = "";
@@ -120,19 +110,21 @@ export const listenToKeys = async (config: Config) => {
       }
 
       if (
-        e.key === config.hotkeys.searchBookmarksKey &&
+        key === config.hotkeys.searchBookmarksKey.toLowerCase() &&
         !searchFocused &&
         !bookmarkSearchFocused &&
         !bookmarkSearchSectionEl.classList.contains("grid")
       ) {
-        (enableSearchBookmark(
+        enableSearchBookmark(
           bookmarks,
           config.search.textColor,
           config.search.placeholderTextColor,
           config.animations.enabled,
-          config.animations.bookmarkType
-        ),
-          tryFocusBookmarkSearch(config.search.focusedBorderColor, e));
+          config.animations.bookmarkType,
+          "",
+          false
+        );
+        tryFocusBookmarkSearch(config.search.focusedBorderColor, e);
       }
     }
   });
@@ -207,7 +199,9 @@ export const listenToKeys = async (config: Config) => {
       config.search.textColor,
       config.search.placeholderTextColor,
       config.animations.enabled,
-      config.animations.bookmarkType
+      config.animations.bookmarkType,
+      "",
+      false
     );
   });
 };
