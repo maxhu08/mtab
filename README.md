@@ -28,19 +28,19 @@ Microsoft Edge
 
 ## features
 
-⚡️ Fast & Lightweight
-🔒 Privacy-Focused
-🎨 Fully Customizable
-🔎 Smart Search Bar (compatible with any search engine)
-🪽 Smooth Animations
-📕 Bookmarks
-👋 Personalized Greeting
-🌦️ Weather
-🖼️ Custom Wallpapers
-🌟 Custom Favicon
-🧑‍💻 Custom CSS Styling
-📝 Custom Fonts
-✈️ Quick Config Sharing
+- ⚡️ Fast & Lightweight
+- 🔒 Privacy-Focused
+- 🎨 Fully Customizable
+- 🔎 Smart Search Bar (compatible with any search engine)
+- 🪽 Smooth Animations
+- 📕 Bookmarks
+- 👋 Personalized Greeting
+- 🌦️ Weather
+- 🖼️ Custom Wallpapers
+- 🌟 Custom Favicon
+- 🧑‍💻 Custom CSS Styling
+- 📝 Custom Fonts
+- ✈️ Quick Config Sharing
 
 ## showcase
 
