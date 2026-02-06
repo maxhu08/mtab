@@ -9,7 +9,8 @@
     "esModuleInterop": true,
     "moduleResolution": "bundler",
     "noEmitOnError": true,
-    "lib": ["ES2019", "DOM"]
+    "lib": ["ES2019", "DOM"],
+    "types": ["chrome"]
   },
   "include": ["src/**/*.ts"],
   "exclude": ["node_modules"]

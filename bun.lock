@@ -5,7 +5,7 @@
     "": {
       "name": "mtab",
       "dependencies": {
-        "caniuse-lite": "^1.0.30001764",
+        "caniuse-lite": "^1.0.30001766",
         "idb-keyval": "^6.2.2",
         "mathjs": "^13.2.3",
         "parcel": "2.16.3",
@@ -17,13 +17,13 @@
         "@parcel/config-default": "2.16.3",
         "@parcel/core": "2.16.3",
         "@parcel/resolver-default": "2.16.3",
-        "@types/chrome": "^0.0.263",
+        "@types/chrome": "^0.1.36",
         "@types/sortablejs": "^1.15.9",
         "@typescript-eslint/eslint-plugin": "^7.18.0",
         "@typescript-eslint/parser": "^7.18.0",
         "husky": "^9.1.7",
         "postcss": "^8.5.6",
-        "prettier": "^3.8.0",
+        "prettier": "^3.8.1",
         "prettier-plugin-tailwindcss": "^0.6.14",
         "tailwindcss": "^3.4.19",
       },
@@ -278,7 +278,7 @@
 
     "@swc/types": ["@swc/types@0.1.25", "", { "dependencies": { "@swc/counter": "^0.1.3" } }, "sha512-iAoY/qRhNH8a/hBvm3zKj9qQ4oc2+3w1unPJa2XvTK3XjeLXtzcCingVPw/9e5mn1+0yPqxcBGp9Jf0pkfMb1g=="],
 
-    "@types/chrome": ["@types/chrome@0.0.263", "", { "dependencies": { "@types/filesystem": "*", "@types/har-format": "*" } }, "sha512-As0vzv99ov3M6ZR7R6VzhMWFZXkPMrFrCEXXVrMN576Cm70fTkj7Df2CF+qEo170JepX50pd11cX6O4DSAtl2Q=="],
+    "@types/chrome": ["@types/chrome@0.1.36", "", { "dependencies": { "@types/filesystem": "*", "@types/har-format": "*" } }, "sha512-BvHbuyGttYXnGt5Gpwa4769KIinKHY1iLjlAPrrMBS2GI9m/XNMPtdsq0NgQalyuUdxvlMN/0OyGw0shFVIoUQ=="],
 
     "@types/filesystem": ["@types/filesystem@0.0.36", "", { "dependencies": { "@types/filewriter": "*" } }, "sha512-vPDXOZuannb9FZdxgHnqSwAG/jvdGM8Wq+6N4D/d80z+D4HWH+bItqsZaVRQykAn6WEVeEkLm2oQigyHtgb0RA=="],
 

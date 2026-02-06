@@ -31,7 +31,7 @@
     "@parcel/config-default": "2.16.3",
     "@parcel/core": "2.16.3",
     "@parcel/resolver-default": "2.16.3",
-    "@types/chrome": "^0.0.263",
+    "@types/chrome": "^0.1.36",
     "@types/sortablejs": "^1.15.9",
     "@typescript-eslint/eslint-plugin": "^7.18.0",
     "@typescript-eslint/parser": "^7.18.0",
