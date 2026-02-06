@@ -54,7 +54,7 @@ export const hideAssist = () => {
   assistantContainerEl.classList.replace("grid", "hidden");
 };
 
-const createAssistItemWrapper = (uiStyle: UIStyle, sidePadding: boolean) => {
+const createAssistItemWrapper = (uiStyle: UIStyle, sidePadding: boolean, gap: string) => {
   const el = document.createElement("div");
 
   el.className = [
@@ -64,7 +64,7 @@ const createAssistItemWrapper = (uiStyle: UIStyle, sidePadding: boolean) => {
     "w-full",
     "grid",
     "grid-flow-row",
-    "gap-2",
+    gap,
     "text-base",
     "md:text-2xl",
     "overflow-hidden",
@@ -88,7 +88,8 @@ export const displayAssist = (items: AssistItem[], config: Config) => {
   items.forEach((item) => {
     const assistItemWrapperEl = createAssistItemWrapper(
       config.ui.style,
-      item.type !== "password-generator"
+      item.type !== "password-generator",
+      item.type === "password-generator" ? "gap-0" : "gap-2"
     );
     assistantContainerEl.appendChild(assistItemWrapperEl);
 
@@ -350,10 +351,21 @@ export const displayAssist = (items: AssistItem[], config: Config) => {
 
       const resultBtn = document.createElement("button");
       resultBtn.className =
-        "w-full text-left hover:bg-white/20 cursor-pointer px-2 pt-2 grid gap-2 duration-0";
+        "w-full text-left hover:bg-white/20 cursor-pointer px-2 pt-2 pb-1 grid gap-2 duration-0";
+
+      const originalCopyText = `click to copy (${item.result.length} chars)`;
+
+      const copyHintEl = document.createElement("div");
+      copyHintEl.className = "select-none";
+      copyHintEl.style.color = config.search.placeholderTextColor;
+      copyHintEl.innerHTML = `&nbsp;&nbsp;&nbsp;${originalCopyText}`;
 
       resultBtn.onclick = () => {
         navigator.clipboard.writeText(item.result);
+        copyHintEl.innerHTML = "&nbsp;&nbsp;&nbsp;copied!";
+        setTimeout(() => {
+          copyHintEl.innerHTML = `&nbsp;&nbsp;&nbsp;${originalCopyText}`;
+        }, 3000);
       };
 
       const resultRow = document.createElement("div");
@@ -377,14 +389,12 @@ export const displayAssist = (items: AssistItem[], config: Config) => {
       resultRow.appendChild(eqEl);
       resultRow.appendChild(passwordEl);
 
-      const copyHintEl = document.createElement("div");
-      copyHintEl.className = "select-none";
-      copyHintEl.style.color = config.search.placeholderTextColor;
-      copyHintEl.innerHTML = `&nbsp;&nbsp;&nbsp;click to copy (${item.result.length} chars)`;
-
       resultBtn.appendChild(resultRow);
       resultBtn.appendChild(copyHintEl);
       assistItemWrapperEl.appendChild(resultBtn);
+
+      const flagGridEl = document.createElement("div");
+      flagGridEl.className = "grid grid-cols-1 gap-2 mt-1";
 
       const makeFlagRow = (label: string, flagChar: string, enabled: boolean) => {
         const rowEl = document.createElement("div");
@@ -414,8 +424,7 @@ export const displayAssist = (items: AssistItem[], config: Config) => {
 
         rowEl.appendChild(markerEl);
         rowEl.appendChild(textWrapEl);
-        assistItemWrapperEl.appendChild(rowEl);
-        showWrapper(assistItemWrapperEl);
+        flagGridEl.appendChild(rowEl);
       };
 
       makeFlagRow("lowercase", "l", item.flags.allowLowercase);
@@ -423,6 +432,10 @@ export const displayAssist = (items: AssistItem[], config: Config) => {
       makeFlagRow("numbers", "n", item.flags.allowNumbers);
       makeFlagRow("symbols", "s", item.flags.allowSymbols);
       makeFlagRow("memorable", "m", item.flags.memorable);
+
+      assistItemWrapperEl.appendChild(flagGridEl);
+
+      showWrapper(assistItemWrapperEl);
     }
   });
 };
