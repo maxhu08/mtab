@@ -28,15 +28,19 @@ Microsoft Edge
 
 ## features
 
-- upload your own wallpaper
-- customize colors
-- change font family
-- change text
-- change search engine
-- change animations
-- change bookmarks
-- hotkeys
-- much more !
+⚡️ Fast & Lightweight
+🔒 Privacy-Focused
+🎨 Fully Customizable
+🔎 Smart Search Bar (compatible with any search engine)
+🪽 Smooth Animations
+📕 Bookmarks
+👋 Personalized Greeting
+🌦️ Weather
+🖼️ Custom Wallpapers
+🌟 Custom Favicon
+🧑‍💻 Custom CSS Styling
+📝 Custom Fonts
+✈️ Quick Config Sharing
 
 ## showcase
 
