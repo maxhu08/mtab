@@ -628,7 +628,7 @@ export const addBookmarkNodeFolder = (folder: BookmarkNodeFolder, targetDivEl: H
   //         <p class="text-white text-base">folder.iconType</p>
   //         <div id="bookmark-${uuid}-icon-type-container" class="grid grid-cols-[max-content_auto] text-base bg-neutral-900 w-full p-1 rounded-md border-2 border-transparent">
   //           <span class="text-pink-500 font-semibold select-none">&gt;&nbsp;</span>
-  //           <input id="bookmark-${uuid}-icon-type-input" type="text" autocomplete="off" class="outline-none bg-transparent text-white placeholder-neutral-500" placeholder="input icon-type... (leave empty for default)" value="${folder.iconType ?? ""}">
+  //           <input id="bookmark-${uuid}-icon-type-input" type="text" autocomplete="off" class="outline-none bg-transparent text-white placeholder-neutral-500" placeholder="input icon-type... (leave empty for bookmarks.defaultFolderIconType)" value="${folder.iconType ?? ""}">
   //         </div>
   //       </div>
   //       <div class="grid gap-2">
@@ -757,7 +757,7 @@ export const addBookmarkNodeFolder = (folder: BookmarkNodeFolder, targetDivEl: H
     if (id === "fill" || id === "icon-color") {
       input.placeholder = `input color... (leave empty for default)`;
     } else if (id === "icon-type") {
-      input.placeholder = `input icon-type... (leave empty for default)`;
+      input.placeholder = `input icon-type... (leave empty for bookmarks.defaultFolderIconType)`;
     } else input.placeholder = `input ${id}...`;
 
     input.value = value;
