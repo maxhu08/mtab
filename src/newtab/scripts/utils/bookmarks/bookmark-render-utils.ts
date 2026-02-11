@@ -34,6 +34,9 @@ export const renderBookmarkNodes = (
   const searchFocusedBorderColor = config.search.focusedBorderColor;
   const bookmarksLineOrientation = config.bookmarks.lineOrientation;
 
+  const bookmarksDefaultIconColor = config.bookmarks.defaultIconColor;
+  const bookmarksDefaultFolderIconType = config.bookmarks.defaultFolderIconType;
+
   bookmarkNodes.forEach((bookmarkNode, index) => {
     if (bookmarkNode.type === "bookmark") {
       const uuid = renderBlockBookmark(
@@ -44,7 +47,7 @@ export const renderBookmarkNodes = (
         bookmarkNode.name,
         bookmarkNode.color,
         bookmarkNode.iconType,
-        bookmarkNode.iconColor,
+        bookmarkNode.iconColor ?? bookmarksDefaultIconColor,
         bookmarkNode.fill ?? "",
         uiStyle,
         bookmarksLineOrientation,
@@ -57,7 +60,7 @@ export const renderBookmarkNodes = (
       bindActionsToBlockBookmark(
         uuid,
         bookmarkNode.url,
-        animationsEnabled, // use animationsEnabled instead
+        animationsEnabled,
         animationsInitialType,
         animationsbookmarkType,
         searchFocusedBorderColor
@@ -70,8 +73,8 @@ export const renderBookmarkNodes = (
         index,
         bookmarkNode.name,
         bookmarkNode.color,
-        bookmarkNode.iconType ?? config.bookmarks.defaultFolderIconType,
-        bookmarkNode.iconColor,
+        bookmarkNode.iconType ?? bookmarksDefaultFolderIconType,
+        bookmarkNode.iconColor ?? bookmarksDefaultIconColor,
         bookmarkNode.fill ?? "",
         uiStyle,
         bookmarksLineOrientation,

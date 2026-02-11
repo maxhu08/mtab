@@ -10,6 +10,7 @@ import {
   bookmarksDefaultBlockyColorInputEl,
   bookmarksDefaultBlockyColsInputEl,
   bookmarksDefaultFolderIconTypeInputEl,
+  bookmarksDefaultIconColorInputEl,
   bookmarksNumberKeysCheckboxEl,
   bookmarksShowBookmarkNamesCheckboxEl
 } from "src/options/scripts/ui";
@@ -23,6 +24,7 @@ export const saveBookmarksSettingsToDraft = (draft: Config) => {
   draft.bookmarks.defaultBlockyColor = bookmarksDefaultBlockyColorInputEl.value;
 
   draft.bookmarks.numberKeys = bookmarksNumberKeysCheckboxEl.checked;
+  draft.bookmarks.defaultIconColor = bookmarksDefaultIconColorInputEl.value;
   draft.bookmarks.defaultFolderIconType = bookmarksDefaultFolderIconTypeInputEl.value;
 
   const selectedTypeEl = getSelectedButton("bookmarks-type");
@@ -80,9 +82,10 @@ export const saveBookmarksSettingsToDraft = (draft: Config) => {
   }
 
   saveBookmarkNodeBookmarkSettingsToDraft(draft);
+  saveDefaultBlockyBookmarkSettingsToDraft(draft);
 };
 
 export const saveDefaultBlockyBookmarkSettingsToDraft = (draft: Config) => {
   draft.bookmarks.defaultBlockyCols = parseInt(bookmarksDefaultBlockyColsInputEl.value);
-  draft.message.textColor = bookmarksDefaultBlockyColorInputEl.value;
+  draft.bookmarks.defaultBlockyColor = bookmarksDefaultBlockyColorInputEl.value;
 };

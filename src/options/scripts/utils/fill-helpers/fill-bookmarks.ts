@@ -28,7 +28,8 @@ import {
   bookmarksLineOrientationLeftButtonEl,
   bookmarksLineOrientationRightButtonEl,
   bookmarksLineOrientationNoneButtonEl,
-  bookmarksDefaultFolderIconTypeInputEl
+  bookmarksDefaultFolderIconTypeInputEl,
+  bookmarksDefaultIconColorInputEl
 } from "src/options/scripts/ui";
 import { fillBookmarkNodeBookmarks } from "src/options/scripts/utils/fill-helpers/fill-user-defined-bookmarks";
 import { handleBookmarkNodesDragging } from "src/options/scripts/utils/bookmarks/handle-bookmark-ui";
@@ -40,6 +41,7 @@ export const fillBookmarksInputs = (config: Config) => {
   bookmarksDefaultBlockyColorInputEl.value = config.bookmarks.defaultBlockyColor;
 
   bookmarksNumberKeysCheckboxEl.checked = config.bookmarks.numberKeys;
+  bookmarksDefaultIconColorInputEl.value = config.bookmarks.defaultIconColor;
   bookmarksDefaultFolderIconTypeInputEl.value = config.bookmarks.defaultFolderIconType;
 
   // prettier-ignore

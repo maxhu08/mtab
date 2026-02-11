@@ -448,7 +448,7 @@ export const addBookmarkNodeBookmark = (
   //         <p class="text-white text-base">bookmark.iconColor</p>
   //         <div id="bookmark-${uuid}-icon-color-container" class="grid grid-cols-[max-content_auto] text-base bg-neutral-900 w-full p-1 rounded-md border-2 border-transparent">
   //           <span class="text-pink-500 font-semibold select-none">&gt;&nbsp;</span>
-  //           <input id="bookmark-${uuid}-icon-color-input" type="text" autocomplete="off" class="outline-none bg-transparent text-white placeholder-neutral-500" placeholder="input icon color..." value="${bookmark.iconColor}">
+  //           <input id="bookmark-${uuid}-icon-color-input" type="text" autocomplete="off" class="outline-none bg-transparent text-white placeholder-neutral-500" placeholder="input icon color... (leave empty for bookmarks.defaultIconColor)" value="${bookmark.iconColor}">
   //         </div>
   //       </div>
   //     </div>
@@ -564,11 +564,14 @@ export const addBookmarkNodeBookmark = (
     input.autocomplete = "off";
     input.className = "outline-none bg-transparent text-white placeholder-neutral-500";
 
-    if (id === "fill" || id === "icon-color") {
-      input.placeholder = `input color... (leave empty for default)`;
-    } else input.placeholder = `input ${id}...`;
+    const placeholderMap: Record<string, string> = {
+      "icon-color": "input color... (leave empty for bookmarks.defaultIconColor)",
+      fill: "input color... (leave empty for default)"
+    };
 
-    input.value = value;
+    input.placeholder = placeholderMap[id] ?? `input ${id}...`;
+
+    input.value = value ?? "";
 
     inputContainer.append(inputPrefix, input);
     fieldGroup.append(labelP, inputContainer);
@@ -635,7 +638,7 @@ export const addBookmarkNodeFolder = (folder: BookmarkNodeFolder, targetDivEl: H
   //         <p class="text-white text-base">folder.iconColor</p>
   //         <div id="bookmark-${uuid}-icon-color-container" class="grid grid-cols-[max-content_auto] text-base bg-neutral-900 w-full p-1 rounded-md border-2 border-transparent">
   //           <span class="text-pink-500 font-semibold select-none">&gt;&nbsp;</span>
-  //           <input id="bookmark-${uuid}-icon-color-input" type="text" autocomplete="off" class="outline-none bg-transparent text-white placeholder-neutral-500" placeholder="input color..." value="${folder.iconColor}">
+  //           <input id="bookmark-${uuid}-icon-color-input" type="text" autocomplete="off" class="outline-none bg-transparent text-white placeholder-neutral-500" placeholder="input color... (leave empty for bookmarks.defaultIconColor)" value="${folder.iconColor}">
   //         </div>
   //       </div>
   //       <div>
@@ -754,13 +757,15 @@ export const addBookmarkNodeFolder = (folder: BookmarkNodeFolder, targetDivEl: H
     input.autocomplete = "off";
     input.className = "outline-none bg-transparent text-white placeholder-neutral-500";
 
-    if (id === "fill" || id === "icon-color") {
-      input.placeholder = `input color... (leave empty for default)`;
-    } else if (id === "icon-type") {
-      input.placeholder = `input icon-type... (leave empty for bookmarks.defaultFolderIconType)`;
-    } else input.placeholder = `input ${id}...`;
+    const placeholderMap: Record<string, string> = {
+      "icon-type": "input icon-type... (leave empty for bookmarks.defaultFolderIconType)",
+      "icon-color": "input color... (leave empty for bookmarks.defaultIconColor)",
+      fill: "input color... (leave empty for default)"
+    };
 
-    input.value = value;
+    input.placeholder = placeholderMap[id] ?? `input ${id}...`;
+
+    input.value = value ?? "";
 
     inputContainer.append(inputPrefix, input);
     fieldGroup.append(labelP, inputContainer);

@@ -123,6 +123,7 @@ export const defaultConfig: Config = {
     showBookmarkNames: false,
     numberKeys: false,
     lineOrientation: "top",
+    defaultIconColor: "#ffffff",
     defaultFolderIconType: "ri-folder-fill",
     userDefinedCols: 4,
     userDefined: [
@@ -131,40 +132,40 @@ export const defaultConfig: Config = {
         name: "github",
         url: "https://github.com",
         color: "#6366f1",
-        iconType: "ri-github-fill",
+        iconType: "ri-github-fill"
         // extra options
-        iconColor: "#ffffff",
-        fill: ""
+        // iconColor: "#ffffff",
+        // fill: ""
       },
       {
         type: "bookmark",
         name: "youtube",
         url: "https://youtube.com",
         color: "#f43f5e",
-        iconType: "ri-youtube-fill",
+        iconType: "ri-youtube-fill"
         // extra options
-        iconColor: "#ffffff",
-        fill: ""
+        // iconColor: "#ffffff",
+        // fill: ""
       },
       {
         type: "bookmark",
         name: "reddit",
         url: "https://www.reddit.com",
         color: "#f97316",
-        iconType: "ri-reddit-fill",
+        iconType: "ri-reddit-fill"
         // extra options
-        iconColor: "#ffffff",
-        fill: ""
+        // iconColor: "#ffffff",
+        // fill: ""
       },
       {
         type: "bookmark",
         name: "chatgpt",
         url: "https://chatgpt.com",
         color: "#14b8a6",
-        iconType: "ri-openai-fill",
+        iconType: "ri-openai-fill"
         // extra options
-        iconColor: "#ffffff",
-        fill: ""
+        // iconColor: "#ffffff",
+        // fill: ""
       }
     ],
     defaultBlockyCols: 4,
@@ -230,7 +231,7 @@ export type BookmarkNodeFolder = {
   name: string;
   color: string;
   iconType?: string;
-  iconColor: string;
+  iconColor?: string;
   fill?: string;
   contents: BookmarkNode[];
 };
@@ -241,7 +242,7 @@ export type BookmarkNodeBookmark = {
   color: string;
   iconType: string;
   // extra options
-  iconColor: string;
+  iconColor?: string;
   fill?: string;
 };
 export type DefaultBlockyColorType = "random" | "custom";
@@ -349,6 +350,7 @@ export interface Config {
     numberKeys: boolean;
     userDefinedCols: number;
     lineOrientation: BookmarkLineOrientation;
+    defaultIconColor: string;
     defaultFolderIconType: string;
     userDefined: BookmarkNode[];
     defaultBlockyCols: number;

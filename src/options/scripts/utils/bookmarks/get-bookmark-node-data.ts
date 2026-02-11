@@ -9,6 +9,7 @@ export const getBookmarkNodeBookmarkData = (uuid: string) => {
   const iconColorInputEl = document.getElementById(`bookmark-${uuid}-icon-color-input`) as HTMLInputElement;
   const fillInputEl = document.getElementById(`bookmark-${uuid}-fill-input`) as HTMLInputElement;
 
+  const iconColor = trimmedOrUndefined(iconColorInputEl.value);
   const fill = trimmedOrUndefined(fillInputEl.value);
 
   return {
@@ -16,8 +17,8 @@ export const getBookmarkNodeBookmarkData = (uuid: string) => {
     name: nameInputEl.value,
     url: urlInputEl.value,
     color: colorInputEl.value,
-    iconColor: iconColorInputEl.value,
-    iconType: iconTypeInputEl.value,
+    iconType: iconTypeInputEl.value, // always saved for bookmark
+    ...(iconColor && { iconColor }),
     ...(fill && { fill }),
   } satisfies BookmarkNodeBookmark;
 };
@@ -47,15 +48,16 @@ export const getBookmarkNodeFolderData = (uuid: string) => {
   }
 
   const iconType = trimmedOrUndefined(iconTypeInputEl.value);
+  const iconColor = trimmedOrUndefined(iconColorInputEl.value);
   const fill = trimmedOrUndefined(fillInputEl.value);
 
   return {
     type: "folder",
     name: nameInputEl.value,
     color: colorInputEl.value,
-    iconColor: iconColorInputEl.value,
     contents: folderContents,
     ...(iconType && { iconType }),
+    ...(iconColor && { iconColor }),
     ...(fill && { fill }),
   } satisfies BookmarkNodeFolder;
 };
