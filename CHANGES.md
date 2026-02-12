@@ -1,6 +1,10 @@
-# Changes in 1.10.3
+# Changes in 1.10.4
 
 in this release:
 
-- make keybinds work with caps lock enabled
-- fix issue with some bookmark icons not rendering properly
+- add bookmarks.defaultIconColor and make bookmark node iconColor property optional
+- improve options page
+- performance improvements
+- fix default-blocky bookmark settings not saving
+- fix issue with rendering url bookmark icons
+- bug fixes
