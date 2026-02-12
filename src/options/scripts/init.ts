@@ -13,6 +13,11 @@ import { handleCustomFaviconUpload } from "src/options/scripts/utils/upload-favi
 import { createCollapseGroups } from "src/options/scripts/utils/collapse-option";
 import { handleControls } from "src/options/scripts/utils/control-utils";
 import { handleWallpaperChange } from "src/options/scripts/utils/handle-wallpaper-change";
+import {
+  initDelegatedHandlers,
+  initSortableForExistingDropzones,
+  initTooltipsDelegated
+} from "src/options/scripts/utils/bookmarks/handle-bookmark-ui";
 
 const logo = document.getElementById("mtab-logo") as HTMLImageElement;
 logo.classList.add("animate-up-bouncy");
@@ -52,3 +57,7 @@ handleSwitches();
 listenAllToggleCheckboxSections();
 
 handleControls();
+
+initDelegatedHandlers();
+initTooltipsDelegated();
+initSortableForExistingDropzones();

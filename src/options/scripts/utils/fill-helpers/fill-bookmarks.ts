@@ -32,7 +32,6 @@ import {
   bookmarksDefaultIconColorInputEl
 } from "src/options/scripts/ui";
 import { fillBookmarkNodeBookmarks } from "src/options/scripts/utils/fill-helpers/fill-user-defined-bookmarks";
-import { handleBookmarkNodesDragging } from "src/options/scripts/utils/bookmarks/handle-bookmark-ui";
 
 export const fillBookmarksInputs = (config: Config) => {
   bookmarksShowBookmarkNamesCheckboxEl.checked = config.bookmarks.showBookmarkNames;
@@ -93,7 +92,5 @@ export const fillBookmarksInputs = (config: Config) => {
 
   bookmarksDefaultFaviconSourcePairs[config.bookmarks.defaultFaviconSource]();
 
-  // must go before fill function
-  handleBookmarkNodesDragging();
   fillBookmarkNodeBookmarks(config);
 };

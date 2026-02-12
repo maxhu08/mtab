@@ -8,45 +8,152 @@ import { exportBookmarkNode } from "src/options/scripts/utils/bookmarks/export-b
 import { getRandomColor } from "src/options/scripts/utils/random-color";
 import { focusInput, unfocusInput } from "src/options/scripts/utils/ui-helpers";
 import { BookmarkNodeBookmark, BookmarkNodeFolder } from "src/utils/config";
-import tippy, { Instance } from "tippy.js";
+import tippy, { Instance, delegate } from "tippy.js";
 import { genid } from "src/utils/genid";
 import { importBookmarkNode } from "src/options/scripts/utils/bookmarks/import-bookmark-node";
 import { exportAllBookmarkNodes } from "src/options/scripts/utils/bookmarks/export-all-bookmark-nodes";
 import { importAllBookmarkNodes } from "src/options/scripts/utils/bookmarks/import-all-bookmark-nodes";
 
-export const handleBookmarkNodesDragging = () => {
+const sortableMap = new WeakMap<HTMLDivElement, Sortable>();
+
+const initSortableForDropzone = (dropzone: HTMLDivElement) => {
+  if (sortableMap.has(dropzone)) return;
+
+  const sortable = new Sortable(dropzone, {
+    group: {
+      name: "user-defined-bookmark-group",
+      pull: true,
+      put: true
+    },
+    fallbackOnBody: true,
+    swapThreshold: 0.65,
+    invertSwap: false,
+    handle: ".bookmark-node-handle",
+    animation: 250,
+    easing: "cubic-bezier(0.42, 0, 0.58, 1)",
+    ghostClass: "bookmark-node-ghost-class",
+    chosenClass: "bookmark-node-chosen-class"
+  });
+
+  sortableMap.set(dropzone, sortable);
+};
+
+export const initSortableForExistingDropzones = () => {
   // prettier-ignore
   const dropzones = document.querySelectorAll(".bookmarks-user-defined-dropzone") as NodeListOf<HTMLDivElement>;
+  dropzones.forEach(initSortableForDropzone);
+};
 
-  dropzones.forEach((dropzone: HTMLDivElement) => {
-    // reset the sortable instance
-    if (dropzone.dataset.sortableInitialized === "true") {
-      // destroy the existing sortable instance (if any)
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const sortableInstance = (dropzone as any).sortable;
-      if (sortableInstance) {
-        sortableInstance.destroy();
-      }
+const getNodeEl = (el: Element | null) =>
+  el?.closest?.("[bookmark-node-uuid]") as HTMLDivElement | null;
+
+const getUuid = (nodeEl: HTMLDivElement | null) =>
+  nodeEl?.getAttribute("bookmark-node-uuid") ?? null;
+
+export const initDelegatedHandlers = () => {
+  const bookmarkInputBorderClass = "border-pink-500";
+
+  document.addEventListener("click", (e) => {
+    const target = e.target as HTMLElement;
+
+    if (!bookmarksUserDefinedList.contains(target)) return;
+
+    const nodeEl = getNodeEl(target);
+    const uuid = getUuid(nodeEl);
+    if (!uuid) return;
+
+    if (target.closest(".delete-bookmark-button") || target.closest(".delete-folder-button")) {
+      nodeEl?.remove();
+      return;
     }
 
-    // reinitialize the sortable instance
-    new Sortable(dropzone, {
-      group: {
-        name: "user-defined-bookmark-group",
-        pull: true,
-        put: true
-      },
-      fallbackOnBody: true,
-      swapThreshold: 0.65,
-      invertSwap: false,
-      handle: ".bookmark-node-handle",
-      animation: 250,
-      easing: "cubic-bezier(0.42, 0, 0.58, 1)",
-      ghostClass: "bookmark-node-ghost-class",
-      chosenClass: "bookmark-node-chosen-class"
-    });
+    if (target.closest(".export-bookmark-button") || target.closest(".export-folder-button")) {
+      exportBookmarkNode(uuid);
+      return;
+    }
 
-    dropzone.dataset.sortableInitialized = "true";
+    if (
+      target.closest(".toggle-collapse-bookmark-button") ||
+      target.closest(".toggle-collapse-folder-button")
+    ) {
+      const collapsibleContentEl = document.getElementById(
+        `bookmark-${uuid}-collapsible-content`
+      ) as HTMLDivElement | null;
+
+      const toggleCollapseBookmarkButtonEl = document.getElementById(
+        `bookmark-${uuid}-toggle-collapse-button`
+      ) as HTMLButtonElement | null;
+
+      if (collapsibleContentEl && toggleCollapseBookmarkButtonEl) {
+        toggleCollapseBookmark(collapsibleContentEl, toggleCollapseBookmarkButtonEl, "toggle");
+      }
+    }
+  });
+
+  bookmarksUserDefinedList.addEventListener(
+    "focusin",
+    (e) => {
+      const input = e.target as HTMLInputElement;
+      if (!(input instanceof HTMLInputElement)) return;
+
+      const container = input.closest('[id$="-container"]') as HTMLDivElement | null;
+      if (!container) return;
+
+      focusInput({
+        container,
+        input,
+        borderClassOld: "border-transparent",
+        borderClassNew: bookmarkInputBorderClass,
+        e
+      });
+    },
+    true
+  );
+
+  bookmarksUserDefinedList.addEventListener(
+    "focusout",
+    (e) => {
+      const input = e.target as HTMLInputElement;
+      if (!(input instanceof HTMLInputElement)) return;
+
+      const container = input.closest('[id$="-container"]') as HTMLDivElement | null;
+      if (!container) return;
+
+      unfocusInput({
+        container,
+        input,
+        borderClassOld: bookmarkInputBorderClass,
+        borderClassNew: "border-transparent"
+      });
+    },
+    true
+  );
+
+  bookmarksUserDefinedList.addEventListener("input", (e) => {
+    const input = e.target as HTMLInputElement;
+    if (!(input instanceof HTMLInputElement)) return;
+
+    const nodeEl = getNodeEl(input);
+    const uuid = getUuid(nodeEl);
+    if (!uuid) return;
+
+    if (input.id === `bookmark-${uuid}-name-input`) {
+      const uselessTitle = document.getElementById(
+        `bookmark-${uuid}-user-defined-useless-title`
+      ) as HTMLSpanElement | null;
+
+      if (uselessTitle)
+        uselessTitle.textContent = input.value.length === 0 ? "Untitled" : input.value;
+      return;
+    }
+
+    if (input.id === `bookmark-${uuid}-color-input`) {
+      const accent = document.getElementById(
+        `bookmark-${uuid}-user-defined-accent`
+      ) as HTMLDivElement | null;
+
+      if (accent) accent.style.backgroundColor = input.value;
+    }
   });
 };
 
@@ -77,6 +184,18 @@ export const refreshHandleTooltips = () => {
     ...tippy(".delete-folder-button", { ...base, content: "delete folder" }),
     ...tippy(".export-folder-button", { ...base, content: "export folder" })
   );
+};
+
+export const initTooltipsDelegated = () => {
+  delegate(bookmarksUserDefinedList, {
+    target:
+      ".toggle-collapse-bookmark-button, .reposition-bookmark-button, .delete-bookmark-button, .export-bookmark-button, .toggle-collapse-folder-button, .reposition-folder-button, .delete-folder-button, .export-folder-button",
+    placement: "top",
+    theme: "dark",
+    animation: "shift-away",
+    duration: [120, 90],
+    delay: [75, 0]
+  });
 };
 
 export const handleBookmarkSettings = (uuid: string) => {
@@ -162,92 +281,6 @@ export const handleBookmarkSettings = (uuid: string) => {
   toggleCollapseBookmarkButtonEl.onclick = () => toggleCollapseBookmark(collapsibleContentEl, toggleCollapseBookmarkButtonEl, "toggle");
 };
 
-const handleFolderSettings = (uuid: string) => {
-  // * handle focus stuff start
-  const bookmarkInputBorderClass = "border-pink-500";
-
-  const nameInput = document.getElementById(`bookmark-${uuid}-name-input`) as HTMLInputElement;
-  const colorInput = document.getElementById(`bookmark-${uuid}-color-input`) as HTMLInputElement;
-  const iconTypeInput = document.getElementById(
-    `bookmark-${uuid}-icon-type-input`
-  ) as HTMLInputElement;
-  const iconColorInput = document.getElementById(
-    `bookmark-${uuid}-icon-color-input`
-  ) as HTMLInputElement;
-  const fillInput = document.getElementById(`bookmark-${uuid}-fill-input`) as HTMLInputElement;
-  // prettier-ignore
-  const uselessTitle = document.getElementById(`bookmark-${uuid}-user-defined-useless-title`) as HTMLSpanElement;
-  const accent = document.getElementById(`bookmark-${uuid}-user-defined-accent`) as HTMLDivElement;
-
-  nameInput.addEventListener("input", () => {
-    if (nameInput.value.length === 0) uselessTitle.textContent = "Untitled";
-    else uselessTitle.textContent = nameInput.value;
-  });
-
-  colorInput.addEventListener("input", () => {
-    accent.style.backgroundColor = colorInput.value;
-  });
-
-  const inputs: Input[] = [
-    {
-      container: document.getElementById(`bookmark-${uuid}-name-container`) as HTMLDivElement,
-      input: nameInput
-    },
-    {
-      container: document.getElementById(`bookmark-${uuid}-color-container`) as HTMLDivElement,
-      input: colorInput
-    },
-    {
-      container: document.getElementById(`bookmark-${uuid}-icon-type-container`) as HTMLDivElement,
-      input: iconTypeInput
-    },
-    {
-      container: document.getElementById(`bookmark-${uuid}-icon-color-container`) as HTMLDivElement,
-      input: iconColorInput
-    },
-    {
-      container: document.getElementById(`bookmark-${uuid}-fill-container`) as HTMLDivElement,
-      input: fillInput
-    }
-  ];
-
-  inputs.forEach((input) => {
-    input.input.addEventListener("blur", () =>
-      unfocusInput({
-        container: input.container,
-        input: input.input,
-        borderClassOld: bookmarkInputBorderClass,
-        borderClassNew: "border-transparent"
-      })
-    );
-
-    input.input.addEventListener("focus", (e: Event) =>
-      focusInput({
-        container: input.container,
-        input: input.input,
-        borderClassOld: "border-transparent",
-        borderClassNew: bookmarkInputBorderClass,
-        e
-      })
-    );
-  });
-
-  // prettier-ignore
-  const deleteBookmarkButtonEl = document.getElementById(`bookmark-${uuid}-delete-button`) as HTMLButtonElement;
-  deleteBookmarkButtonEl.onclick = () => deleteBookmark(uuid);
-
-  // prettier-ignore
-  const exportFolderButtonEl = document.getElementById(`bookmark-${uuid}-export-button`) as HTMLButtonElement;
-  exportFolderButtonEl.onclick = () => exportBookmarkNode(uuid);
-
-  // prettier-ignore
-  const collapsibleContentEl = document.getElementById(`bookmark-${uuid}-collapsible-content`) as HTMLDivElement
-  // prettier-ignore
-  const toggleCollapseBookmarkButtonEl = document.getElementById(`bookmark-${uuid}-toggle-collapse-button`) as HTMLButtonElement
-  // prettier-ignore
-  toggleCollapseBookmarkButtonEl.onclick = () => toggleCollapseBookmark(collapsibleContentEl, toggleCollapseBookmarkButtonEl, "toggle");
-};
-
 const deleteBookmark = (uuid: string) => {
   // prettier-ignore
   const bookmarkToDelete = document.querySelector(`[bookmark-node-uuid="${uuid}"]`) as HTMLDivElement;
@@ -286,25 +319,25 @@ const toggleCollapseBookmark = (
 // prettier-ignore
 toggleCollapseAllBookmarkNodesButtonEl.onclick = () => {
   const lastAction = toggleCollapseAllBookmarkNodesButtonEl.getAttribute("last-action");
+  const mode = lastAction === "expand" ? "collapse" : "expand";
+
   const bookmarkNodeEls = bookmarksUserDefinedList.querySelectorAll('[node-type="bookmark"], [node-type="folder"]');
 
   bookmarkNodeEls.forEach((el) => {
     const uuid = el.getAttribute("bookmark-node-uuid");
+    if (!uuid) return;
 
     const collapsibleContentEl = document.getElementById(`bookmark-${uuid}-collapsible-content`) as HTMLDivElement;
     const toggleCollapseBookmarkButtonEl = document.getElementById(`bookmark-${uuid}-toggle-collapse-button`) as HTMLButtonElement;
 
-    if (lastAction === "expand") {
-      toggleCollapseBookmark(collapsibleContentEl, toggleCollapseBookmarkButtonEl, "collapse");
-      toggleCollapseAllBookmarkNodesButtonEl.setAttribute("last-action", "collapse");
-      toggleCollapseAllBookmarkNodesButtonEl.innerHTML = `<span class="text-white text-base">expand all</span>`;
-    } else if (lastAction === "collapse") {
-      toggleCollapseBookmark(collapsibleContentEl, toggleCollapseBookmarkButtonEl, "expand");
-      
-      toggleCollapseAllBookmarkNodesButtonEl.setAttribute("last-action", "expand");
-      toggleCollapseAllBookmarkNodesButtonEl.innerHTML = `<span class="text-white text-base">collapse all</span>`;
-    }
+    toggleCollapseBookmark(collapsibleContentEl, toggleCollapseBookmarkButtonEl, mode);
   });
+
+  toggleCollapseAllBookmarkNodesButtonEl.setAttribute("last-action", mode);
+  toggleCollapseAllBookmarkNodesButtonEl.innerHTML =
+    mode === "expand"
+      ? `<span class="text-white text-base">collapse all</span>`
+      : `<span class="text-white text-base">expand all</span>`;
 };
 
 // prettier-ignore
@@ -347,44 +380,12 @@ addFolderButtonEl.onclick = () => {
   );
 };
 
-// TODO: add functionality to these
 importBookmarkNodeButtonEl.onclick = () => importBookmarkNode();
 exportAllBookmarkNodesButtonEl.onclick = () => exportAllBookmarkNodes();
 importAllBookmarkNodesButtonEl.onclick = () => importAllBookmarkNodes();
 
-const bindToggleCollapseHandlers = () => {
-  const bookmarkNodeEls = bookmarksUserDefinedList.querySelectorAll('[node-type="bookmark"]');
-  bookmarkNodeEls.forEach((el) => {
-    const uuid = el.getAttribute("bookmark-node-uuid") as string;
-
-    // prettier-ignore
-    const collapsibleContentEl = document.getElementById(`bookmark-${uuid}-collapsible-content`) as HTMLDivElement;
-    // prettier-ignore
-    const toggleCollapseBookmarkButtonEl = document.getElementById(`bookmark-${uuid}-toggle-collapse-button`) as HTMLButtonElement;
-
-    toggleCollapseBookmarkButtonEl.onclick = () =>
-      toggleCollapseBookmark(collapsibleContentEl, toggleCollapseBookmarkButtonEl, "toggle");
-  });
-};
-
-const resetBookmarkNodeEventListeners = () => {
-  // prettier-ignore
-  const bookmarkNodeEls = bookmarksUserDefinedList.querySelectorAll('[node-type="bookmark"], [node-type="folder"]');
-
-  bookmarkNodeEls.forEach((el) => {
-    const uuid = el.getAttribute("bookmark-node-uuid") as string;
-    if (el.getAttribute("node-type") === "bookmark") {
-      handleBookmarkSettings(uuid);
-    } else if (el.getAttribute("node-type") === "folder") {
-      handleFolderSettings(uuid);
-    }
-  });
-};
-
 export const fixBookmarkNodes = () => {
-  handleBookmarkNodesDragging();
-  bindToggleCollapseHandlers();
-  resetBookmarkNodeEventListeners();
+  initSortableForExistingDropzones();
 };
 
 export const addBookmarkNodeBookmark = (
@@ -492,28 +493,33 @@ export const addBookmarkNodeBookmark = (
     {
       id: `bookmark-${uuid}-export-button`,
       icon: "ri-share-2-line",
-      class: "export-bookmark-button bg-indigo-500 hover:bg-indigo-600"
+      class: "export-bookmark-button bg-indigo-500 hover:bg-indigo-600",
+      tooltip: "export bookmark"
     },
     {
       id: `bookmark-${uuid}-toggle-collapse-button`,
       icon: "ri-collapse-horizontal-line",
-      class: "toggle-collapse-bookmark-button bg-neutral-500 hover:bg-neutral-600"
+      class: "toggle-collapse-bookmark-button bg-neutral-500 hover:bg-neutral-600",
+      tooltip: "toggle collapse bookmark"
     },
     {
       icon: "ri-draggable",
-      class: "reposition-bookmark-button bookmark-node-handle bg-neutral-500 hover:bg-neutral-600"
+      class: "reposition-bookmark-button bookmark-node-handle bg-neutral-500 hover:bg-neutral-600",
+      tooltip: "reposition bookmark"
     },
     {
       id: `bookmark-${uuid}-delete-button`,
       icon: "ri-delete-bin-6-line",
-      class: "delete-bookmark-button bg-rose-500 hover:bg-rose-600"
+      class: "delete-bookmark-button bg-rose-500 hover:bg-rose-600",
+      tooltip: "delete bookmark"
     }
   ];
 
-  buttons.forEach(({ id, icon, class: buttonClass }) => {
+  buttons.forEach(({ id, icon, class: buttonClass, tooltip }) => {
     const button = document.createElement("button");
     if (id) button.id = id;
     button.className = `${buttonClass} transition w-10 aspect-square rounded-md cursor-pointer`;
+    button.setAttribute("data-tippy-content", tooltip);
     const buttonIcon = document.createElement("i");
     buttonIcon.className = `text-white ${icon}`;
     button.appendChild(buttonIcon);
@@ -581,10 +587,6 @@ export const addBookmarkNodeBookmark = (
   contentDiv.append(headerDiv, collapsibleContent);
   containerDiv.append(accentDiv, contentDiv);
   targetDivEl.appendChild(containerDiv);
-
-  handleBookmarkSettings(uuid);
-  fixBookmarkNodes();
-  refreshHandleTooltips();
 };
 
 export const addBookmarkNodeFolder = (folder: BookmarkNodeFolder, targetDivEl: HTMLDivElement) => {
@@ -686,28 +688,33 @@ export const addBookmarkNodeFolder = (folder: BookmarkNodeFolder, targetDivEl: H
     {
       id: `bookmark-${uuid}-export-button`,
       icon: "ri-share-2-line",
-      class: "export-folder-button bg-indigo-500 hover:bg-indigo-600"
+      class: "export-folder-button bg-indigo-500 hover:bg-indigo-600",
+      tooltip: "export folder"
     },
     {
       id: `bookmark-${uuid}-toggle-collapse-button`,
       icon: "ri-collapse-horizontal-line",
-      class: "toggle-collapse-folder-button bg-neutral-500 hover:bg-neutral-600"
+      class: "toggle-collapse-folder-button bg-neutral-500 hover:bg-neutral-600",
+      tooltip: "toggle collapse folder"
     },
     {
       class: "reposition-folder-button bookmark-node-handle bg-neutral-500 hover:bg-neutral-600",
-      icon: "ri-draggable"
+      icon: "ri-draggable",
+      tooltip: "reposition folder"
     },
     {
       id: `bookmark-${uuid}-delete-button`,
       icon: "ri-delete-bin-6-line",
-      class: "delete-folder-button bg-rose-500 hover:bg-rose-600"
+      class: "delete-folder-button bg-rose-500 hover:bg-rose-600",
+      tooltip: "delete folder"
     }
   ];
 
-  buttons.forEach(({ id, icon, class: buttonClass }) => {
+  buttons.forEach(({ id, icon, class: buttonClass, tooltip }) => {
     const button = document.createElement("button");
     if (id) button.id = id;
     button.className = `${buttonClass} transition w-10 aspect-square rounded-md cursor-pointer`;
+    button.setAttribute("data-tippy-content", tooltip);
     const buttonIcon = document.createElement("i");
     buttonIcon.className = `text-white ${icon}`;
     button.appendChild(buttonIcon);
@@ -786,15 +793,17 @@ export const addBookmarkNodeFolder = (folder: BookmarkNodeFolder, targetDivEl: H
   containerDiv.append(accentDiv, contentDiv);
   targetDivEl.appendChild(containerDiv);
 
+  initSortableForDropzone(contentsContainer);
+
+  const frag = document.createDocumentFragment();
+
   folder.contents.forEach((content) => {
     if (content.type === "bookmark") {
-      addBookmarkNodeBookmark(content, contentsContainer as HTMLDivElement);
+      addBookmarkNodeBookmark(content, frag as unknown as HTMLDivElement);
     } else if (content.type === "folder") {
-      addBookmarkNodeFolder(content, contentsContainer as HTMLDivElement);
+      addBookmarkNodeFolder(content, frag as unknown as HTMLDivElement);
     }
   });
 
-  handleFolderSettings(uuid);
-  fixBookmarkNodes();
-  refreshHandleTooltips();
+  contentsContainer.appendChild(frag);
 };
