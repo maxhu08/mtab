@@ -325,8 +325,8 @@ addBookmarkButtonEl.onclick = () => {
       name: "New Bookmark",
       url: "about:blank",
       color: "#ffffff",
-      iconType: "ri-box-3-line",
-      iconColor: "#ffffff"
+      iconType: "ri-bookmark-line",
+      iconColor: undefined
     },
     bookmarksUserDefinedList
   );
