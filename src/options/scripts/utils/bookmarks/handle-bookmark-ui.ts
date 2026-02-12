@@ -342,7 +342,6 @@ const toggleCollapseFolderContents = (
   const collapse = () => {
     contentsContainerEl.classList.add("hidden");
     contentsContainerEl.setAttribute("state", "collapsed");
-    if (iconEl) iconEl.className = "text-white ri-folder-add-line";
   };
 
   const expand = () => {
@@ -741,7 +740,7 @@ export const addBookmarkNodeFolder = (folder: BookmarkNodeFolder, targetDivEl: H
     },
     {
       id: `bookmark-${uuid}-toggle-collapse-contents-button`,
-      icon: "ri-folder-reduce-line",
+      icon: "ri-folder-add-line",
       class: "toggle-collapse-folder-contents-button bg-neutral-500 hover:bg-neutral-600",
       tooltip: "toggle collapse folder contents"
     },
@@ -837,6 +836,11 @@ export const addBookmarkNodeFolder = (folder: BookmarkNodeFolder, targetDivEl: H
   contentsContainer.className =
     "bookmarks-user-defined-dropzone grid grid-flow-row gap-2 bg-neutral-900 rounded-md p-2 min-h-14";
   contentsContainer.setAttribute("node-type", "folder-contents-dropzone");
+
+  // contents initially collapsed
+  contentsContainer.setAttribute("state", "collapsed");
+  contentsContainer.classList.add("hidden");
+
   contentDiv.append(headerDiv, collapsibleContent, contentsContainer);
 
   containerDiv.append(accentDiv, contentDiv);
