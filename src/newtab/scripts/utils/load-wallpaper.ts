@@ -18,7 +18,7 @@ export const loadWallpaper = (wallpaper: Config["wallpaper"]) => {
 
           chrome.storage.local.get(["userUploadedWallpaper"], (data) => {
             applyWallpaperLegacy(
-              data.userUploadedWallpaper,
+              data.userUploadedWallpaper as string,
               wallpaper.filters.brightness,
               wallpaper.filters.blur
             );
@@ -35,7 +35,7 @@ export const loadWallpaper = (wallpaper: Config["wallpaper"]) => {
 
         chrome.storage.local.get(["userUploadedWallpaper"], (data) => {
           applyWallpaperLegacy(
-            data.userUploadedWallpaper,
+            data.userUploadedWallpaper as string,
             wallpaper.filters.brightness,
             wallpaper.filters.blur
           );
