@@ -325,7 +325,7 @@ addBookmarkButtonEl.onclick = () => {
       name: "New Bookmark",
       url: "about:blank",
       color: "#ffffff",
-      iconType: "ri-bookmark-line",
+      iconType: "ri-bookmark-fill",
       iconColor: undefined
     },
     bookmarksUserDefinedList
