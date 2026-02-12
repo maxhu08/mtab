@@ -337,24 +337,22 @@ const toggleCollapseFolderContents = (
   toggleButtonEl: HTMLButtonElement,
   mode: "toggle" | "collapse" | "expand"
 ) => {
-  const iconEl = toggleButtonEl.children[0] as HTMLElement | undefined;
+  const iconEl = toggleButtonEl.querySelector("i") as HTMLElement | null;
 
-  const collapse = () => {
-    contentsContainerEl.classList.add("hidden");
-    contentsContainerEl.setAttribute("state", "collapsed");
+  const setCollapsed = (collapsed: boolean) => {
+    if (collapsed) {
+      contentsContainerEl.classList.add("hidden");
+      if (iconEl) iconEl.className = "text-white ri-folder-add-line";
+    } else {
+      contentsContainerEl.classList.remove("hidden");
+      if (iconEl) iconEl.className = "text-white ri-folder-reduce-line";
+    }
   };
 
-  const expand = () => {
-    contentsContainerEl.classList.remove("hidden");
-    contentsContainerEl.setAttribute("state", "expanded");
-    if (iconEl) iconEl.className = "text-white ri-folder-reduce-line";
-  };
+  if (mode === "collapse") return setCollapsed(true);
+  if (mode === "expand") return setCollapsed(false);
 
-  if (mode === "collapse") return collapse();
-  if (mode === "expand") return expand();
-
-  if (contentsContainerEl.getAttribute("state") === "collapsed") expand();
-  else collapse();
+  setCollapsed(!contentsContainerEl.classList.contains("hidden"));
 };
 
 // prettier-ignore
