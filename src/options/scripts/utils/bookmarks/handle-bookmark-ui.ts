@@ -88,6 +88,21 @@ export const initDelegatedHandlers = () => {
         toggleCollapseBookmark(collapsibleContentEl, toggleCollapseBookmarkButtonEl, "toggle");
       }
     }
+
+    if (target.closest(".toggle-collapse-folder-contents-button")) {
+      const contentsContainerEl = document.getElementById(
+        `bookmark-${uuid}-contents-container`
+      ) as HTMLDivElement | null;
+
+      const toggleContentsButtonEl = document.getElementById(
+        `bookmark-${uuid}-toggle-collapse-contents-button`
+      ) as HTMLButtonElement | null;
+
+      if (contentsContainerEl && toggleContentsButtonEl) {
+        toggleCollapseFolderContents(contentsContainerEl, toggleContentsButtonEl, "toggle");
+      }
+      return;
+    }
   });
 
   bookmarksUserDefinedList.addEventListener(
@@ -189,7 +204,8 @@ export const refreshHandleTooltips = () => {
 export const initTooltipsDelegated = () => {
   delegate(bookmarksUserDefinedList, {
     target:
-      ".toggle-collapse-bookmark-button, .reposition-bookmark-button, .delete-bookmark-button, .export-bookmark-button, .toggle-collapse-folder-button, .reposition-folder-button, .delete-folder-button, .export-folder-button",
+      ".toggle-collapse-bookmark-button, .reposition-bookmark-button, .delete-bookmark-button, .export-bookmark-button, " +
+      ".toggle-collapse-folder-button, .toggle-collapse-folder-contents-button, .reposition-folder-button, .delete-folder-button, .export-folder-button",
     placement: "top",
     theme: "dark",
     animation: "shift-away",
@@ -314,6 +330,32 @@ const toggleCollapseBookmark = (
     collapsibleContentEl.classList.replace("hidden", "grid");
     toggleCollapseBookmarkButtonEl.children[0].className = "text-white ri-collapse-horizontal-line";
   }
+};
+
+const toggleCollapseFolderContents = (
+  contentsContainerEl: HTMLDivElement,
+  toggleButtonEl: HTMLButtonElement,
+  mode: "toggle" | "collapse" | "expand"
+) => {
+  const iconEl = toggleButtonEl.children[0] as HTMLElement | undefined;
+
+  const collapse = () => {
+    contentsContainerEl.classList.add("hidden");
+    contentsContainerEl.setAttribute("state", "collapsed");
+    if (iconEl) iconEl.className = "text-white ri-folder-add-line";
+  };
+
+  const expand = () => {
+    contentsContainerEl.classList.remove("hidden");
+    contentsContainerEl.setAttribute("state", "expanded");
+    if (iconEl) iconEl.className = "text-white ri-folder-reduce-line";
+  };
+
+  if (mode === "collapse") return collapse();
+  if (mode === "expand") return expand();
+
+  if (contentsContainerEl.getAttribute("state") === "collapsed") expand();
+  else collapse();
 };
 
 // prettier-ignore
@@ -682,7 +724,7 @@ export const addBookmarkNodeFolder = (folder: BookmarkNodeFolder, targetDivEl: H
   titleSpan.textContent = folder.name;
 
   const buttonGroup = document.createElement("div");
-  buttonGroup.className = "grid grid-cols-4 gap-2";
+  buttonGroup.className = "grid grid-cols-5 gap-2";
 
   const buttons = [
     {
@@ -696,6 +738,12 @@ export const addBookmarkNodeFolder = (folder: BookmarkNodeFolder, targetDivEl: H
       icon: "ri-collapse-horizontal-line",
       class: "toggle-collapse-folder-button bg-neutral-500 hover:bg-neutral-600",
       tooltip: "toggle collapse folder"
+    },
+    {
+      id: `bookmark-${uuid}-toggle-collapse-contents-button`,
+      icon: "ri-folder-reduce-line",
+      class: "toggle-collapse-folder-contents-button bg-neutral-500 hover:bg-neutral-600",
+      tooltip: "toggle collapse folder contents"
     },
     {
       class: "reposition-folder-button bookmark-node-handle bg-neutral-500 hover:bg-neutral-600",
@@ -788,6 +836,7 @@ export const addBookmarkNodeFolder = (folder: BookmarkNodeFolder, targetDivEl: H
   contentsContainer.id = `bookmark-${uuid}-contents-container`;
   contentsContainer.className =
     "bookmarks-user-defined-dropzone grid grid-flow-row gap-2 bg-neutral-900 rounded-md p-2 min-h-14";
+  contentsContainer.setAttribute("node-type", "folder-contents-dropzone");
   contentDiv.append(headerDiv, collapsibleContent, contentsContainer);
 
   containerDiv.append(accentDiv, contentDiv);
