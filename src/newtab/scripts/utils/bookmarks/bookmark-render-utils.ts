@@ -16,6 +16,17 @@ import { focusElementBorder, unfocusElementBorder } from "src/newtab/scripts/uti
 import { getTabKeyPressed } from "src/newtab/scripts/utils/tab-key-pressed";
 import { genid } from "src/utils/genid";
 
+type RenderedNode = {
+  uuid: string;
+  buttonEl: HTMLButtonElement;
+  borderEl: HTMLDivElement;
+};
+
+type RenderedBackButton = {
+  buttonEl: HTMLButtonElement;
+  borderEl: HTMLDivElement;
+};
+
 export const renderBookmarkNodes = (
   bookmarkNodes: BookmarkNode[],
   folderAreaEl: HTMLDivElement,
@@ -29,7 +40,6 @@ export const renderBookmarkNodes = (
   const messageTextColor = config.message.textColor;
   const animationsEnabled = config.animations.enabled;
   const animationsInitialType = config.animations.initialType;
-  // const animationsBookmarkType = config.animations.bookmarkType;
   const animationsbookmarkType = config.animations.bookmarkType;
   const searchFocusedBorderColor = config.search.focusedBorderColor;
   const bookmarksLineOrientation = config.bookmarks.lineOrientation;
@@ -37,10 +47,14 @@ export const renderBookmarkNodes = (
   const bookmarksDefaultIconColor = config.bookmarks.defaultIconColor;
   const bookmarksDefaultFolderIconType = config.bookmarks.defaultFolderIconType;
 
+  const itemsContainerEl = folderAreaEl.children[0] as HTMLDivElement;
+
+  const frag = document.createDocumentFragment();
+  const pendingBinds: Array<() => void> = [];
+
   bookmarkNodes.forEach((bookmarkNode, index) => {
     if (bookmarkNode.type === "bookmark") {
-      const uuid = renderBlockBookmark(
-        folderAreaEl.children[0] as HTMLDivElement,
+      const rendered = renderBlockBookmark(
         bookmarkTiming,
         config.bookmarks.userDefined.length,
         index,
@@ -58,17 +72,21 @@ export const renderBookmarkNodes = (
         animationsInitialType
       );
 
-      bindActionsToBlockBookmark(
-        uuid,
-        bookmarkNode.url,
-        animationsEnabled,
-        animationsInitialType,
-        animationsbookmarkType,
-        searchFocusedBorderColor
-      );
+      frag.appendChild(rendered.buttonEl);
+
+      pendingBinds.push(() => {
+        bindActionsToBlockBookmark(
+          rendered.buttonEl,
+          rendered.borderEl,
+          bookmarkNode.url,
+          animationsEnabled,
+          animationsInitialType,
+          animationsbookmarkType,
+          searchFocusedBorderColor
+        );
+      });
     } else {
-      const uuid = renderBlockFolder(
-        folderAreaEl.children[0] as HTMLDivElement,
+      const rendered = renderBlockFolder(
         bookmarkTiming,
         config.bookmarks.userDefined.length,
         index,
@@ -86,23 +104,29 @@ export const renderBookmarkNodes = (
         animationsInitialType
       );
 
-      bindActionsToBlockFolder(
-        uuid,
-        withAnimations,
-        animationsInitialType,
-        searchFocusedBorderColor
-      );
+      frag.appendChild(rendered.buttonEl);
 
-      const newFolderAreaEl = createFolderArea(uuid);
+      pendingBinds.push(() => {
+        bindActionsToBlockFolder(
+          rendered.uuid,
+          rendered.buttonEl,
+          rendered.borderEl,
+          withAnimations,
+          animationsInitialType,
+          searchFocusedBorderColor
+        );
+      });
+
+      const newFolderAreaEl = createFolderArea(rendered.uuid);
       const wAnimations = false;
 
       if (bookmarkNode.contents.length > 0) {
         renderBookmarkNodes(bookmarkNode.contents, newFolderAreaEl, wAnimations, config);
       }
 
-      addFolderBackButton(
+      const backRendered = addFolderBackButton(
         newFolderAreaEl.children[1] as HTMLDivElement,
-        uuid,
+        rendered.uuid,
         uiStyle,
         wAnimations,
         animationsInitialType,
@@ -113,13 +137,18 @@ export const renderBookmarkNodes = (
       bindActionsToBackButton(
         newFolderAreaEl,
         folderAreaEl,
-        uuid,
+        rendered.uuid,
+        backRendered.buttonEl,
+        backRendered.borderEl,
         wAnimations,
         animationsInitialType,
         searchFocusedBorderColor
       );
     }
   });
+
+  itemsContainerEl.appendChild(frag);
+  for (const bind of pendingBinds) bind();
 };
 
 export const createFolderArea = (uuid: string, state: boolean = false) => {
@@ -144,8 +173,22 @@ export const createFolderArea = (uuid: string, state: boolean = false) => {
   return folderDiv as HTMLDivElement;
 };
 
+const calcDelay = (timing: BookmarkTiming, length: number, index: number) => {
+  if (timing === "uniform") return 150;
+  if (timing === "left") return (index + 2) * 50;
+  if (timing === "right") return (length + 2 - index) * 50;
+  return 0;
+};
+
+const orientationClasses: Record<BookmarkLineOrientation, string> = {
+  top: "w-full h-1 top-0 left-0",
+  bottom: "w-full h-1 bottom-0 left-0",
+  left: "h-full w-1 left-0 top-0",
+  right: "h-full w-1 right-0 top-0",
+  none: "hidden"
+};
+
 export const renderBlockBookmark = (
-  containerEl: HTMLDivElement,
   bookmarkTiming: BookmarkTiming,
   bookmarksLength: number,
   bookmarkIndex: number,
@@ -161,12 +204,8 @@ export const renderBlockBookmark = (
   nameTextColor: string,
   animationsEnabled: boolean,
   animationsInitialType: AnimationInitialType
-) => {
-  let delay = 0;
-
-  if (bookmarkTiming === "uniform") delay = 150;
-  else if (bookmarkTiming === "left") delay = (bookmarkIndex + 2) * 50;
-  else if (bookmarkTiming === "right") delay = (bookmarksLength + 2 - bookmarkIndex) * 50;
+): RenderedNode => {
+  const delay = calcDelay(bookmarkTiming, bookmarksLength, bookmarkIndex);
 
   const { iconHTML, iconSizeClass, iconColor } = getBookmarkIconDetails(
     bookmarkIconType,
@@ -176,24 +215,11 @@ export const renderBlockBookmark = (
 
   const uuid = genid();
 
-  // <button id="bookmark-${uuid}" class="relative duration-[250ms] ease-out bg-foreground cursor-pointer ${uiStyle === "glass" ? "glass-effect" : ""} corner-style h-bookmark overflow-hidden ${animationsEnabled ? `${animationsInitialType} opacity-0` : ""}" outline-none ${animationsEnabled ? `style="animation-delay: ${delay}ms;"` : ""}>
-  //   <div id="bookmark-${uuid}-border" class="absolute w-full h-full border-2 border-transparent corner-style"></div>
-  //   <div class="h-1" style="background-color: ${bookmarkColor}"></div>
-  //   <div class="absolute w-full h-full hover:bg-white/20"></div>
-  //   <div class="p-1 md:p-2 grid place-items-center h-full">
-  //     <div class="bookmark-node-icon${iconSizeClass && " " + iconSizeClass}"${bookmarkIconColor ? ` style="color: ${bookmarkIconColor};"` : ""}>
-  //       ${iconHTML}
-  //     </div>
-  //     ${showName ? `<span class="visibilty-bookmark-name w-full font-message font-semibold text-base text-ellipsis overflow-hidden whitespace-nowrap" style="color: ${nameTextColor}">${bookmarkVanityName}</span>` : ""}
-  //   </div>
-  // </button>
-
   const button = document.createElement("button");
   button.id = `bookmark-node-${uuid}`;
   button.setAttribute("node-type", "bookmark");
   button.className = `relative duration-[250ms] ease-out ${bookmarkFill.length === 0 ? "bg-foreground " : ""}cursor-pointer ${uiStyle === "glass" ? "glass-effect" : ""} corner-style h-bookmark overflow-hidden ${animationsEnabled ? `${animationsInitialType} opacity-0` : ""} outline-none`;
   if (bookmarkFill.length > 0) button.style.backgroundColor = bookmarkFill;
-
   if (animationsEnabled) button.style.animationDelay = `${delay}ms`;
 
   const borderDiv = document.createElement("div");
@@ -202,13 +228,6 @@ export const renderBlockBookmark = (
 
   const colorBar = document.createElement("div");
   colorBar.style.backgroundColor = bookmarkColor;
-  const orientationClasses: Record<BookmarkLineOrientation, string> = {
-    top: "w-full h-1 top-0 left-0",
-    bottom: "w-full h-1 bottom-0 left-0",
-    left: "h-full w-1 left-0 top-0",
-    right: "h-full w-1 right-0 top-0",
-    none: "hidden"
-  };
   colorBar.className = `absolute ${orientationClasses[lineOrientation]}`;
 
   const hoverDiv = document.createElement("div");
@@ -238,31 +257,24 @@ export const renderBlockBookmark = (
   if (nameSpan) gridDiv.appendChild(nameSpan);
   button.appendChild(gridDiv);
 
-  containerEl.appendChild(button);
-
-  return uuid;
+  return { uuid, buttonEl: button, borderEl: borderDiv };
 };
 
 export const bindActionsToBlockBookmark = (
-  uuid: string,
+  bookmarkEl: HTMLButtonElement,
+  bookmarkBorderEl: HTMLDivElement,
   url: string,
   animationsEnabled: boolean,
   animationsInitialType: AnimationInitialType,
   animationsBookmarkType: AnimationBookmarkType,
   searchfocusedBorderColor: string
 ) => {
-  // prettier-ignore
-  const bookmarkEl = document.getElementById(`bookmark-node-${uuid}`) as HTMLButtonElement;
-  // prettier-ignore
-  const bookmarkBorderEl = document.getElementById(`bookmark-node-${uuid}-border`) as HTMLDivElement;
-
-  if (bookmarkEl && animationsEnabled) {
+  if (animationsEnabled) {
     handleAnimation(bookmarkEl, animationsInitialType);
   }
 
   // can't be onclick in order to register middle click and can't be onmousedown because open in new tab fails
   bookmarkEl.onmouseup = (e) => {
-    // open in new tab when holding ctrl or middle click
     if (e.ctrlKey || e.button === 1) {
       openBookmark(url, animationsEnabled, animationsBookmarkType, true);
     } else if (e.button === 0) {
@@ -279,7 +291,6 @@ export const bindActionsToBlockBookmark = (
 };
 
 export const renderBlockFolder = (
-  containerEl: HTMLDivElement,
   bookmarkTiming: BookmarkTiming,
   nodesLength: number,
   nodeIndex: number,
@@ -295,12 +306,8 @@ export const renderBlockFolder = (
   nameTextColor: string,
   animationsEnabled: boolean,
   animationsInitialType: AnimationInitialType
-) => {
-  let delay = 0;
-
-  if (bookmarkTiming === "uniform") delay = 150;
-  else if (bookmarkTiming === "left") delay = (nodeIndex + 2) * 50;
-  else if (bookmarkTiming === "right") delay = (nodesLength + 2 - nodeIndex) * 50;
+): RenderedNode => {
+  const delay = calcDelay(bookmarkTiming, nodesLength, nodeIndex);
 
   const { iconHTML, iconSizeClass, iconColor } = getBookmarkIconDetails(
     folderIconType,
@@ -315,7 +322,6 @@ export const renderBlockFolder = (
   button.setAttribute("node-type", "folder");
   button.className = `relative duration-[250ms] ease-out ${folderFill.length === 0 ? "bg-foreground " : ""}cursor-pointer ${uiStyle === "glass" ? "glass-effect" : ""} corner-style h-bookmark overflow-hidden ${animationsEnabled ? `${animationsInitialType} opacity-0 ` : ""}outline-none`;
   if (folderFill.length > 0) button.style.backgroundColor = folderFill;
-
   if (animationsEnabled) button.style.animationDelay = `${delay}ms`;
 
   const borderDiv = document.createElement("div");
@@ -324,13 +330,6 @@ export const renderBlockFolder = (
 
   const colorBar = document.createElement("div");
   colorBar.style.backgroundColor = folderColor;
-  const orientationClasses: Record<BookmarkLineOrientation, string> = {
-    top: "w-full h-1 top-0 left-0",
-    bottom: "w-full h-1 bottom-0 left-0",
-    left: "h-full w-1 left-0 top-0",
-    right: "h-full w-1 right-0 top-0",
-    none: "hidden"
-  };
   colorBar.className = `absolute ${orientationClasses[lineOrientation]}`;
 
   const hoverDiv = document.createElement("div");
@@ -360,33 +359,27 @@ export const renderBlockFolder = (
   if (nameSpan) gridDiv.appendChild(nameSpan);
   button.appendChild(gridDiv);
 
-  containerEl.appendChild(button);
-
-  return uuid;
+  return { uuid, buttonEl: button, borderEl: borderDiv };
 };
 
 export const bindActionsToBlockFolder = (
   uuid: string,
+  bookmarkEl: HTMLButtonElement,
+  bookmarkBorderEl: HTMLDivElement,
   animationsEnabled: boolean,
   animationsInitialType: AnimationInitialType,
   searchFocusedBorderColor: string
 ) => {
-  // prettier-ignore
-  const bookmarkEl = document.getElementById(`bookmark-node-${uuid}`) as HTMLButtonElement;
-  // prettier-ignore
-  const bookmarkBorderEl = document.getElementById(`bookmark-node-${uuid}-border`) as HTMLDivElement;
-
-  if (bookmarkEl && animationsEnabled) {
+  if (animationsEnabled) {
     handleAnimation(bookmarkEl, animationsInitialType);
   }
 
-  // todo: add onclick stuff
   // can't be onclick in order to register middle click and can't be onmousedown because open in new tab fails
   bookmarkEl.onmouseup = (e) => {
-    // open folder when holding ctrl or middle click
     if (e.button === 0 || e.button === 1) {
-      // prettier-ignore
-      const currFolderAreaEl = bookmarksContainerEl.querySelector('[folder-state="open"]') as HTMLDivElement;
+      const currFolderAreaEl = bookmarksContainerEl.querySelector(
+        '[folder-state="open"]'
+      ) as HTMLDivElement;
       const openFolderAreaEl = document.getElementById(`folder-${uuid}`) as HTMLDivElement;
 
       openFolder(currFolderAreaEl, openFolderAreaEl);
@@ -409,16 +402,7 @@ export const addFolderBackButton = (
   animationsInitialType: AnimationInitialType,
   delay: number,
   messageTextColor: string
-) => {
-  // <button id="bookmark-folder-${uuid}-back-button" class="relative duration-[250ms] ease-out bg-foreground cursor-pointer ${uiStyle === "glass" ? "glass-effect" : ""} corner-style h-9 md:h-12 px-1 md:px-2 overflow-hidden ${animationsEnabled ? `${animationsInitialType} opacity-0 outline-none` : ""}" ${animationsEnabled ? `style="animation-delay: ${delay}ms;"` : ""}>
-  //   <div id="bookmark-folder-${uuid}-border" class="absolute top-0 left-0 w-full h-9 md:h-12 border-2 border-transparent corner-style"></div>
-  //   <div class="absolute top-0 left-0 w-full h-9 md:h-12 hover:bg-white/20"></div>
-  //   <div class="grid grid-cols-[max-content_auto] gap-2 font-message text-base md:text-2xl w-full" style="color: ${messageTextColor};">
-  //     <i class="ri-arrow-left-line"></i>
-  //     <span>Back</span>
-  //   </div>
-  // </button>
-
+): RenderedBackButton => {
   const backButton = document.createElement("button");
   backButton.id = `folder-back-button-${uuid}`;
   backButton.className = `relative duration-[250ms] ease-out bg-foreground cursor-pointer ${uiStyle === "glass" ? "glass-effect " : ""}corner-style h-9 md:h-12 px-1 md:px-2 overflow-hidden ${animationsEnabled ? `${animationsInitialType} opacity-0 ` : ""}outline-none`;
@@ -453,22 +437,21 @@ export const addFolderBackButton = (
   backButton.appendChild(gridDiv);
 
   folderActionsAreaEl.appendChild(backButton);
+
+  return { buttonEl: backButton, borderEl: borderDiv };
 };
 
 export const bindActionsToBackButton = (
   currFolderAreaEl: HTMLDivElement,
   openFolderAreaEl: HTMLDivElement,
   uuid: string,
+  backButtonEl: HTMLButtonElement,
+  backButtonBorderEl: HTMLDivElement,
   animationsEnabled: boolean,
   animationsInitialType: AnimationInitialType,
   searchFocusedBorderColor: string
 ) => {
-  // prettier-ignore
-  const backButtonEl = document.getElementById(`folder-back-button-${uuid}`) as HTMLButtonElement;
-  // prettier-ignore
-  const backButtonBorderEl = document.getElementById(`folder-back-button-${uuid}-border`) as HTMLDivElement;
-
-  if (backButtonEl && animationsEnabled) {
+  if (animationsEnabled) {
     handleAnimation(backButtonEl, animationsInitialType);
   }
 
