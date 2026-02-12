@@ -82,3 +82,20 @@ html {
 .visibilty-bookmark-name {
   display: block;
 }
+
+.bookmark-mask {
+  display: inline-block;
+  width: 2.5rem;
+  height: 2.5rem;
+  pointer-events: none;
+  background-color: var(--icon-color, transparent);
+  mask: var(--icon-mask) no-repeat center / contain;
+  -webkit-mask: var(--icon-mask) no-repeat center / contain;
+}
+
+@media (min-width: 768px) {
+  .bookmark-mask {
+    width: 3.5rem;
+    height: 3.5rem;
+  }
+}

@@ -125,39 +125,40 @@ export const migrateOldConfig = (config: Config): Config => {
 
   // if config is before v1.10.4
   // add bookmarks.defaultIconColor and drop redundant node.iconColor when it equals the default
+  // only runs when defaultIconColor is missing or invalid to avoid messing with users who have already added this property manually
   if (
     !(config.bookmarks as any).defaultIconColor ||
     typeof (config.bookmarks as any).defaultIconColor !== "string"
   ) {
     (config.bookmarks as any).defaultIconColor = "#ffffff";
-  }
 
-  if (config.bookmarks.userDefined) {
-    const defaultIconColor = (config.bookmarks as any).defaultIconColor;
+    if (config.bookmarks.userDefined) {
+      const defaultIconColor = (config.bookmarks as any).defaultIconColor;
 
-    config.bookmarks.userDefined = config.bookmarks.userDefined.map((node: any) => {
-      const stack = [node];
+      config.bookmarks.userDefined = config.bookmarks.userDefined.map((node: any) => {
+        const stack = [node];
 
-      while (stack.length) {
-        const current = stack.pop();
+        while (stack.length) {
+          const current = stack.pop();
 
-        if (
-          current &&
-          typeof current === "object" &&
-          "iconColor" in current &&
-          typeof current.iconColor === "string" &&
-          current.iconColor === defaultIconColor
-        ) {
-          delete current.iconColor;
+          if (
+            current &&
+            typeof current === "object" &&
+            "iconColor" in current &&
+            typeof current.iconColor === "string" &&
+            current.iconColor === defaultIconColor
+          ) {
+            delete current.iconColor;
+          }
+
+          if (current?.type === "folder" && Array.isArray(current.contents)) {
+            stack.push(...current.contents);
+          }
         }
 
-        if (current?.type === "folder" && Array.isArray(current.contents)) {
-          stack.push(...current.contents);
-        }
-      }
-
-      return node;
-    });
+        return node;
+      });
+    }
   }
 
   return config;

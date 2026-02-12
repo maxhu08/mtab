@@ -47,7 +47,8 @@ export const renderBookmarkNodes = (
         bookmarkNode.name,
         bookmarkNode.color,
         bookmarkNode.iconType,
-        bookmarkNode.iconColor ?? bookmarksDefaultIconColor,
+        bookmarkNode.iconColor,
+        bookmarksDefaultIconColor,
         bookmarkNode.fill ?? "",
         uiStyle,
         bookmarksLineOrientation,
@@ -74,7 +75,8 @@ export const renderBookmarkNodes = (
         bookmarkNode.name,
         bookmarkNode.color,
         bookmarkNode.iconType ?? bookmarksDefaultFolderIconType,
-        bookmarkNode.iconColor ?? bookmarksDefaultIconColor,
+        bookmarkNode.iconColor,
+        bookmarksDefaultIconColor,
         bookmarkNode.fill ?? "",
         uiStyle,
         bookmarksLineOrientation,
@@ -150,7 +152,8 @@ export const renderBlockBookmark = (
   bookmarkName: string,
   bookmarkColor: string,
   bookmarkIconType: string,
-  bookmarkIconColor: string,
+  bookmarkIconColor: string | undefined,
+  bookmarksDefaultIconColor: string,
   bookmarkFill: string,
   uiStyle: UIStyle,
   lineOrientation: BookmarkLineOrientation,
@@ -165,7 +168,11 @@ export const renderBlockBookmark = (
   else if (bookmarkTiming === "left") delay = (bookmarkIndex + 2) * 50;
   else if (bookmarkTiming === "right") delay = (bookmarksLength + 2 - bookmarkIndex) * 50;
 
-  const { iconHTML, iconSizeClass } = getBookmarkIconDetails(bookmarkIconType, bookmarkIconColor);
+  const { iconHTML, iconSizeClass, iconColor } = getBookmarkIconDetails(
+    bookmarkIconType,
+    bookmarkIconColor,
+    bookmarksDefaultIconColor
+  );
 
   const uuid = genid();
 
@@ -212,7 +219,7 @@ export const renderBlockBookmark = (
 
   const iconDiv = document.createElement("div");
   iconDiv.className = `bookmark-node-icon${iconSizeClass ? " " + iconSizeClass : ""}`;
-  iconDiv.style.color = bookmarkIconColor;
+  iconDiv.style.color = iconColor;
   iconDiv.innerHTML = iconHTML;
 
   let nameSpan: HTMLSpanElement | null = null;
@@ -279,7 +286,8 @@ export const renderBlockFolder = (
   folderName: string,
   folderColor: string,
   folderIconType: string,
-  folderIconColor: string,
+  folderIconColor: string | undefined,
+  bookmarksDefaultIconColor: string,
   folderFill: string,
   uiStyle: UIStyle,
   lineOrientation: BookmarkLineOrientation,
@@ -294,9 +302,10 @@ export const renderBlockFolder = (
   else if (bookmarkTiming === "left") delay = (nodeIndex + 2) * 50;
   else if (bookmarkTiming === "right") delay = (nodesLength + 2 - nodeIndex) * 50;
 
-  const { iconHTML, iconSizeClass } = getBookmarkIconDetails(
+  const { iconHTML, iconSizeClass, iconColor } = getBookmarkIconDetails(
     folderIconType,
-    folderIconColor || folderColor
+    folderIconColor,
+    bookmarksDefaultIconColor
   );
 
   const uuid = genid();
@@ -332,7 +341,7 @@ export const renderBlockFolder = (
 
   const iconDiv = document.createElement("div");
   iconDiv.className = `bookmark-node-icon${iconSizeClass ? " " + iconSizeClass : ""}`;
-  iconDiv.style.color = folderIconColor;
+  iconDiv.style.color = iconColor;
   iconDiv.innerHTML = iconHTML;
 
   let nameSpan: HTMLSpanElement | null = null;
