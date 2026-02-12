@@ -362,16 +362,39 @@ toggleCollapseAllBookmarkNodesButtonEl.onclick = () => {
   const lastAction = toggleCollapseAllBookmarkNodesButtonEl.getAttribute("last-action");
   const mode = lastAction === "expand" ? "collapse" : "expand";
 
-  const bookmarkNodeEls = bookmarksUserDefinedList.querySelectorAll('[node-type="bookmark"], [node-type="folder"]');
+  const bookmarkNodeEls = bookmarksUserDefinedList.querySelectorAll(
+    '[node-type="bookmark"], [node-type="folder"]'
+  );
 
   bookmarkNodeEls.forEach((el) => {
     const uuid = el.getAttribute("bookmark-node-uuid");
     if (!uuid) return;
 
-    const collapsibleContentEl = document.getElementById(`bookmark-${uuid}-collapsible-content`) as HTMLDivElement;
-    const toggleCollapseBookmarkButtonEl = document.getElementById(`bookmark-${uuid}-toggle-collapse-button`) as HTMLButtonElement;
+    const collapsibleContentEl = document.getElementById(
+      `bookmark-${uuid}-collapsible-content`
+    ) as HTMLDivElement | null;
 
-    toggleCollapseBookmark(collapsibleContentEl, toggleCollapseBookmarkButtonEl, mode);
+    const toggleCollapseBookmarkButtonEl = document.getElementById(
+      `bookmark-${uuid}-toggle-collapse-button`
+    ) as HTMLButtonElement | null;
+
+    if (collapsibleContentEl && toggleCollapseBookmarkButtonEl) {
+      toggleCollapseBookmark(collapsibleContentEl, toggleCollapseBookmarkButtonEl, mode);
+    }
+
+    if (el.getAttribute("node-type") === "folder") {
+      const contentsContainerEl = document.getElementById(
+        `bookmark-${uuid}-contents-container`
+      ) as HTMLDivElement | null;
+
+      const toggleContentsButtonEl = document.getElementById(
+        `bookmark-${uuid}-toggle-collapse-contents-button`
+      ) as HTMLButtonElement | null;
+
+      if (contentsContainerEl && toggleContentsButtonEl) {
+        toggleCollapseFolderContents(contentsContainerEl, toggleContentsButtonEl, mode);
+      }
+    }
   });
 
   toggleCollapseAllBookmarkNodesButtonEl.setAttribute("last-action", mode);
