@@ -19,5 +19,6 @@ export const setBookmarkNodes = (bookmarkNodes: BookmarkNode[]) => {
     }
   });
 
+  toggleCollapseAllBookmarkNodesButtonEl.setAttribute("last-action", "expand");
   toggleCollapseAllBookmarkNodesButtonEl.click();
 };
