@@ -10,10 +10,7 @@ import {
   wallpaperTypeUrlButtonEl,
   wallpaperUrlInputEl
 } from "src/options/scripts/ui";
-import {
-  previewWallpaper,
-  previewWallpaperSolidColor
-} from "src/options/scripts/utils/preview";
+import { previewWallpaper, previewWallpaperSolidColor } from "src/options/scripts/utils/preview";
 import { getStoredWallpaperFile } from "src/utils/wallpaper-file-storage";
 
 export const fillWallpapersInputs = (config: Config) => {
