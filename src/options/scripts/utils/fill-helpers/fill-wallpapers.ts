@@ -29,15 +29,17 @@ export const fillWallpapersInputs = (config: Config) => {
   } else if (config.wallpaper.type === "file-upload") {
     wallpaperTypeFileUploadButtonEl.click();
 
-    idbGet("userUploadedWallpaper").then((file) => {
-      if (file) {
+    idbGet<Blob | string>("userUploadedWallpaper").then((file) => {
+      if (file instanceof Blob || typeof file === "string") {
         previewWallpaper(file, config.wallpaper.filters.brightness, config.wallpaper.filters.blur);
       } else {
         // not in idb, handle legacy wallpaper
 
         chrome.storage.local.get(["userUploadedWallpaper"], (data) => {
+          const legacyWallpaper =
+            typeof data.userUploadedWallpaper === "string" ? data.userUploadedWallpaper : "";
           previewWallpaperLegacy(
-            data.userUploadedWallpaper,
+            legacyWallpaper,
             config.wallpaper.filters.brightness,
             config.wallpaper.filters.blur
           );

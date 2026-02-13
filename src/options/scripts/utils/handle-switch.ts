@@ -180,18 +180,8 @@ const handleWallpaperTypeSwitch = () => {
 
   wallpaperTypeFileUploadButtonEl.addEventListener("click", () => {
     try {
-      idbGet("userUploadedWallpaper").then((file) => {
-        if (file) {
-          previewWallpaper(
-            file,
-            wallpaperFiltersBrightnessInputEl.value,
-            wallpaperFiltersBlurInputEl.value
-          );
-        }
-      });
-
-      idbGet("userUploadedWallpaper").then((file) => {
-        if (file) {
+      idbGet<Blob | string>("userUploadedWallpaper").then((file) => {
+        if (file instanceof Blob || typeof file === "string") {
           previewWallpaper(
             file,
             wallpaperFiltersBrightnessInputEl.value,
@@ -201,8 +191,12 @@ const handleWallpaperTypeSwitch = () => {
           // not in idb, handle legacy wallpaper
 
           chrome.storage.local.get(["userUploadedWallpaper"], (data) => {
+            const legacyWallpaper =
+              typeof data.userUploadedWallpaper === "string"
+                ? data.userUploadedWallpaper
+                : undefined;
             previewWallpaper(
-              data.userUploadedWallpaper,
+              legacyWallpaper,
               wallpaperFiltersBrightnessInputEl.value,
               wallpaperFiltersBlurInputEl.value
             );

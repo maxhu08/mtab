@@ -1,11 +1,13 @@
 {
   "compilerOptions": {
-    "ignoreDeprecations": "6.0",
-    "target": "ES5",
+    "ignoreDeprecations": "5.0",
+    "target": "ES2019",
     "sourceMap": false,
     "module": "ESNext",
     "strict": true,
-    "baseUrl": "./",
+    "paths": {
+      "src/*": ["./src/*"]
+    },
     "esModuleInterop": true,
     "moduleResolution": "bundler",
     "noEmitOnError": true,

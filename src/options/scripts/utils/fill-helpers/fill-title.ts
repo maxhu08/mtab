@@ -25,6 +25,6 @@ export const fillTitleInputs = (config: Config) => {
   else if (config.title.faviconType === "custom") titleFaviconTypeCustomButtonEl.click();
 
   chrome.storage.local.get(["userUploadedFavicon"], (data) => {
-    previewFavicon(data.userUploadedFavicon);
+    previewFavicon(typeof data.userUploadedFavicon === "string" ? data.userUploadedFavicon : "");
   });
 };

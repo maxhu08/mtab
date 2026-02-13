@@ -16,7 +16,8 @@
     "zip-source": "./scripts/linux/zip_source.sh",
     "clean": "rm -rf .parcel-cache && rm -rf dist",
     "prettier": "prettier --write \"./**/*.{js,jsx,mjs,cjs,ts,tsx,json,html}\"",
-    "prepare": "husky"
+    "prepare": "husky",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
   },
   "dependencies": {
     "caniuse-lite": "^1.0.30001766",
