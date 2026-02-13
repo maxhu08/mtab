@@ -2,6 +2,7 @@ import { Config } from "src/utils/config";
 import { bookmarksContainerEl } from "src/newtab/scripts/ui";
 import {
   createFolderArea,
+  initBookmarkRenderRuntime,
   renderBookmarkNodes
 } from "src/newtab/scripts/utils/bookmarks/bookmark-render-utils";
 import { insertCSS } from "src/newtab/scripts/utils/insert-css";
@@ -23,11 +24,17 @@ export const renderBookmarkNodeBookmarks = (config: Config) => {
   // }`;
 
   insertCSS(
-    `.bookmarks-cols{grid-template-columns:1fr 1fr;}@media (min-width: 768px){.bookmarks-cols{grid-template-columns:repeat(${config.bookmarks.userDefinedCols}, minmax(0, 1fr));}}`
+    `.bookmarks-cols{grid-template-columns:1fr 1fr;}@media (min-width: 768px){.bookmarks-cols{grid-template-columns:repeat(${config.bookmarks.userDefinedCols}, minmax(0, 1fr));}}`,
+    "bookmarks-cols-style"
   );
 
   const rootFolderUUID = genid();
   const rootFolderAreaEl = createFolderArea(rootFolderUUID, true);
+  const frag = document.createDocumentFragment();
+  frag.appendChild(rootFolderAreaEl);
+  bookmarksContainerEl.appendChild(frag);
+
+  initBookmarkRenderRuntime(rootFolderAreaEl, config);
 
   renderBookmarkNodes(
     config.bookmarks.userDefined,

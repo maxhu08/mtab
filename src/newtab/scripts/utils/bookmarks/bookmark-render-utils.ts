@@ -1,8 +1,8 @@
 import {
-  AnimationBookmarkType,
   AnimationInitialType,
   BookmarkLineOrientation,
   BookmarkNode,
+  BookmarkNodeFolder,
   BookmarkTiming,
   Config,
   UIStyle
@@ -27,36 +27,225 @@ type RenderedBackButton = {
   borderEl: HTMLDivElement;
 };
 
+type FolderMeta = {
+  node: BookmarkNodeFolder;
+  parentFolderUUID: string;
+  folderAreaEl: HTMLDivElement | null;
+};
+
+type RenderRuntime = {
+  config: Config;
+  folderMetaByUUID: Map<string, FolderMeta>;
+  folderAreaByUUID: Map<string, HTMLDivElement>;
+  currentOpenFolderEl: HTMLDivElement;
+};
+
+let renderRuntime: RenderRuntime | null = null;
+let delegatedHandlersRegistered = false;
+
+const BOOKMARK_ACTION_ATTR = "data-bookmark-action";
+const BORDER_ROLE_ATTR = "data-bookmark-role";
+
+const getFolderUUIDFromArea = (folderAreaEl: HTMLDivElement) =>
+  folderAreaEl.getAttribute("data-folder-uuid") ?? "";
+
+const getBorderEl = (buttonEl: HTMLButtonElement) =>
+  buttonEl.querySelector(`[${BORDER_ROLE_ATTR}='border']`) as HTMLDivElement | null;
+
+const ensureDelegatedHandlers = () => {
+  if (delegatedHandlersRegistered) return;
+
+  bookmarksContainerEl.addEventListener("mouseup", (e) => {
+    if (!renderRuntime) return;
+
+    const target = e.target as HTMLElement | null;
+    if (!target) return;
+
+    const actionButtonEl = target.closest(
+      `button[${BOOKMARK_ACTION_ATTR}]`
+    ) as HTMLButtonElement | null;
+    if (!actionButtonEl) return;
+
+    if (e.button !== 0 && e.button !== 1) return;
+
+    const action = actionButtonEl.getAttribute("data-bookmark-action");
+
+    if (action === "bookmark") {
+      const url = actionButtonEl.getAttribute("data-bookmark-url");
+      if (!url) return;
+
+      openBookmark(
+        url,
+        renderRuntime.config.animations.enabled,
+        renderRuntime.config.animations.bookmarkType,
+        e.ctrlKey || e.button === 1
+      );
+      return;
+    }
+
+    if (action === "folder") {
+      const folderUUID = actionButtonEl.getAttribute("data-folder-uuid");
+      if (!folderUUID) return;
+
+      openFolderByUUID(folderUUID);
+      return;
+    }
+
+    if (action === "back") {
+      const parentFolderUUID = actionButtonEl.getAttribute("data-parent-folder-uuid");
+      if (!parentFolderUUID) return;
+
+      openParentFolder(parentFolderUUID);
+    }
+  });
+
+  bookmarksContainerEl.addEventListener(
+    "focusin",
+    (e) => {
+      if (!renderRuntime) return;
+
+      const target = e.target as HTMLElement | null;
+      if (!target) return;
+
+      const actionButtonEl = target.closest(
+        `button[${BOOKMARK_ACTION_ATTR}]`
+      ) as HTMLButtonElement | null;
+      if (!actionButtonEl) return;
+
+      const borderEl = getBorderEl(actionButtonEl);
+      if (!borderEl) return;
+
+      if (getTabKeyPressed()) {
+        focusElementBorder(borderEl, renderRuntime.config.search.focusedBorderColor, e);
+      }
+    },
+    true
+  );
+
+  bookmarksContainerEl.addEventListener(
+    "focusout",
+    (e) => {
+      const target = e.target as HTMLElement | null;
+      if (!target) return;
+
+      const actionButtonEl = target.closest(
+        `button[${BOOKMARK_ACTION_ATTR}]`
+      ) as HTMLButtonElement | null;
+      if (!actionButtonEl) return;
+
+      const borderEl = getBorderEl(actionButtonEl);
+      if (!borderEl) return;
+
+      unfocusElementBorder(borderEl);
+    },
+    true
+  );
+
+  delegatedHandlersRegistered = true;
+};
+
+const openParentFolder = (parentFolderUUID: string) => {
+  if (!renderRuntime) return;
+
+  const openFolderAreaEl = renderRuntime.folderAreaByUUID.get(parentFolderUUID);
+  if (!openFolderAreaEl) return;
+
+  openFolder(renderRuntime.currentOpenFolderEl, openFolderAreaEl);
+  renderRuntime.currentOpenFolderEl = openFolderAreaEl;
+};
+
+const openFolderByUUID = (folderUUID: string) => {
+  if (!renderRuntime) return;
+
+  const meta = renderRuntime.folderMetaByUUID.get(folderUUID);
+  if (!meta) return;
+
+  if (!meta.folderAreaEl) {
+    const folderAreaEl = createFolderArea(folderUUID);
+    const folderActionsAreaEl = folderAreaEl.children[1] as HTMLDivElement;
+
+    renderRuntime.folderAreaByUUID.set(folderUUID, folderAreaEl);
+    meta.folderAreaEl = folderAreaEl;
+
+    if (meta.node.contents.length > 0) {
+      renderBookmarkNodes(meta.node.contents, folderAreaEl, false, renderRuntime.config);
+    }
+
+    const backRendered = addFolderBackButton(
+      folderActionsAreaEl,
+      folderUUID,
+      renderRuntime.config.ui.style,
+      false,
+      renderRuntime.config.animations.initialType,
+      0,
+      renderRuntime.config.message.textColor
+    );
+
+    initializeRenderedButton(backRendered.borderEl);
+    backRendered.buttonEl.setAttribute("data-bookmark-action", "back");
+    backRendered.buttonEl.setAttribute("data-parent-folder-uuid", meta.parentFolderUUID);
+
+    const folderFrag = document.createDocumentFragment();
+    folderFrag.appendChild(folderAreaEl);
+    bookmarksContainerEl.appendChild(folderFrag);
+  }
+
+  const targetFolderAreaEl = meta.folderAreaEl;
+  if (!targetFolderAreaEl) return;
+
+  openFolder(renderRuntime.currentOpenFolderEl, targetFolderAreaEl);
+  renderRuntime.currentOpenFolderEl = targetFolderAreaEl;
+};
+
+const initializeRenderedButton = (borderEl: HTMLDivElement) => {
+  borderEl.setAttribute("data-bookmark-role", "border");
+};
+
+export const initBookmarkRenderRuntime = (rootFolderAreaEl: HTMLDivElement, config: Config) => {
+  ensureDelegatedHandlers();
+
+  const rootFolderUUID = getFolderUUIDFromArea(rootFolderAreaEl);
+
+  renderRuntime = {
+    config,
+    folderMetaByUUID: new Map(),
+    folderAreaByUUID: new Map([[rootFolderUUID, rootFolderAreaEl]]),
+    currentOpenFolderEl: rootFolderAreaEl
+  };
+};
+
 export const renderBookmarkNodes = (
   bookmarkNodes: BookmarkNode[],
   folderAreaEl: HTMLDivElement,
   withAnimations: boolean,
   config: Config
 ) => {
+  if (!renderRuntime) {
+    initBookmarkRenderRuntime(folderAreaEl, config);
+  }
+
   const uiStyle = config.ui.style;
 
   const bookmarkTiming = config.animations.bookmarkTiming;
   const showBookmarkNames = config.bookmarks.showBookmarkNames;
   const messageTextColor = config.message.textColor;
-  const animationsEnabled = config.animations.enabled;
   const animationsInitialType = config.animations.initialType;
-  const animationsbookmarkType = config.animations.bookmarkType;
-  const searchFocusedBorderColor = config.search.focusedBorderColor;
   const bookmarksLineOrientation = config.bookmarks.lineOrientation;
 
   const bookmarksDefaultIconColor = config.bookmarks.defaultIconColor;
   const bookmarksDefaultFolderIconType = config.bookmarks.defaultFolderIconType;
 
   const itemsContainerEl = folderAreaEl.children[0] as HTMLDivElement;
+  const parentFolderUUID = getFolderUUIDFromArea(folderAreaEl);
 
   const frag = document.createDocumentFragment();
-  const pendingBinds: Array<() => void> = [];
+  const nodesToAnimate: HTMLButtonElement[] = [];
 
   bookmarkNodes.forEach((bookmarkNode, index) => {
     if (bookmarkNode.type === "bookmark") {
       const rendered = renderBlockBookmark(
         bookmarkTiming,
-        config.bookmarks.userDefined.length,
+        bookmarkNodes.length,
         index,
         bookmarkNode.name,
         bookmarkNode.color,
@@ -72,88 +261,59 @@ export const renderBookmarkNodes = (
         animationsInitialType
       );
 
-      frag.appendChild(rendered.buttonEl);
-
-      pendingBinds.push(() => {
-        bindActionsToBlockBookmark(
-          rendered.buttonEl,
-          rendered.borderEl,
-          bookmarkNode.url,
-          animationsEnabled,
-          animationsInitialType,
-          animationsbookmarkType,
-          searchFocusedBorderColor
-        );
-      });
-    } else {
-      const rendered = renderBlockFolder(
-        bookmarkTiming,
-        config.bookmarks.userDefined.length,
-        index,
-        bookmarkNode.name,
-        bookmarkNode.color,
-        bookmarkNode.iconType ?? bookmarksDefaultFolderIconType,
-        bookmarkNode.iconColor,
-        bookmarksDefaultIconColor,
-        bookmarkNode.fill ?? "",
-        uiStyle,
-        bookmarksLineOrientation,
-        showBookmarkNames,
-        messageTextColor,
-        withAnimations,
-        animationsInitialType
-      );
+      initializeRenderedButton(rendered.borderEl);
+      rendered.buttonEl.setAttribute("data-bookmark-action", "bookmark");
+      rendered.buttonEl.setAttribute("data-bookmark-url", bookmarkNode.url);
+      if (withAnimations) nodesToAnimate.push(rendered.buttonEl);
 
       frag.appendChild(rendered.buttonEl);
-
-      pendingBinds.push(() => {
-        bindActionsToBlockFolder(
-          rendered.uuid,
-          rendered.buttonEl,
-          rendered.borderEl,
-          withAnimations,
-          animationsInitialType,
-          searchFocusedBorderColor
-        );
-      });
-
-      const newFolderAreaEl = createFolderArea(rendered.uuid);
-      const wAnimations = false;
-
-      if (bookmarkNode.contents.length > 0) {
-        renderBookmarkNodes(bookmarkNode.contents, newFolderAreaEl, wAnimations, config);
-      }
-
-      const backRendered = addFolderBackButton(
-        newFolderAreaEl.children[1] as HTMLDivElement,
-        rendered.uuid,
-        uiStyle,
-        wAnimations,
-        animationsInitialType,
-        0,
-        messageTextColor
-      );
-
-      bindActionsToBackButton(
-        newFolderAreaEl,
-        folderAreaEl,
-        rendered.uuid,
-        backRendered.buttonEl,
-        backRendered.borderEl,
-        wAnimations,
-        animationsInitialType,
-        searchFocusedBorderColor
-      );
+      return;
     }
+
+    const rendered = renderBlockFolder(
+      bookmarkTiming,
+      bookmarkNodes.length,
+      index,
+      bookmarkNode.name,
+      bookmarkNode.color,
+      bookmarkNode.iconType ?? bookmarksDefaultFolderIconType,
+      bookmarkNode.iconColor,
+      bookmarksDefaultIconColor,
+      bookmarkNode.fill ?? "",
+      uiStyle,
+      bookmarksLineOrientation,
+      showBookmarkNames,
+      messageTextColor,
+      withAnimations,
+      animationsInitialType
+    );
+
+    initializeRenderedButton(rendered.borderEl);
+    rendered.buttonEl.setAttribute("data-bookmark-action", "folder");
+    rendered.buttonEl.setAttribute("data-folder-uuid", rendered.uuid);
+    if (withAnimations) nodesToAnimate.push(rendered.buttonEl);
+
+    renderRuntime?.folderMetaByUUID.set(rendered.uuid, {
+      node: bookmarkNode,
+      parentFolderUUID,
+      folderAreaEl: null
+    });
+
+    frag.appendChild(rendered.buttonEl);
   });
 
   itemsContainerEl.appendChild(frag);
-  for (const bind of pendingBinds) bind();
+  if (withAnimations) {
+    for (const buttonEl of nodesToAnimate) {
+      handleAnimation(buttonEl, animationsInitialType);
+    }
+  }
 };
 
 export const createFolderArea = (uuid: string, state: boolean = false) => {
   const folderDiv = document.createElement("div");
   folderDiv.id = `folder-${uuid}`;
+  folderDiv.setAttribute("data-folder-uuid", uuid);
   folderDiv.setAttribute("folder-state", state ? "open" : "closed");
   folderDiv.className = `w-full ${state ? "grid" : "hidden"} grid-flow-row gap-2`;
 
@@ -167,8 +327,6 @@ export const createFolderArea = (uuid: string, state: boolean = false) => {
 
   folderDiv.appendChild(itemsDiv);
   folderDiv.appendChild(actionsDiv);
-
-  bookmarksContainerEl.appendChild(folderDiv);
 
   return folderDiv as HTMLDivElement;
 };
@@ -260,36 +418,6 @@ export const renderBlockBookmark = (
   return { uuid, buttonEl: button, borderEl: borderDiv };
 };
 
-export const bindActionsToBlockBookmark = (
-  bookmarkEl: HTMLButtonElement,
-  bookmarkBorderEl: HTMLDivElement,
-  url: string,
-  animationsEnabled: boolean,
-  animationsInitialType: AnimationInitialType,
-  animationsBookmarkType: AnimationBookmarkType,
-  searchfocusedBorderColor: string
-) => {
-  if (animationsEnabled) {
-    handleAnimation(bookmarkEl, animationsInitialType);
-  }
-
-  // can't be onclick in order to register middle click and can't be onmousedown because open in new tab fails
-  bookmarkEl.onmouseup = (e) => {
-    if (e.ctrlKey || e.button === 1) {
-      openBookmark(url, animationsEnabled, animationsBookmarkType, true);
-    } else if (e.button === 0) {
-      openBookmark(url, animationsEnabled, animationsBookmarkType);
-    }
-  };
-
-  bookmarkEl.addEventListener("blur", () => unfocusElementBorder(bookmarkBorderEl));
-  bookmarkEl.addEventListener("focus", (e) => {
-    if (getTabKeyPressed()) {
-      focusElementBorder(bookmarkBorderEl, searchfocusedBorderColor, e);
-    }
-  });
-};
-
 export const renderBlockFolder = (
   bookmarkTiming: BookmarkTiming,
   nodesLength: number,
@@ -362,38 +490,6 @@ export const renderBlockFolder = (
   return { uuid, buttonEl: button, borderEl: borderDiv };
 };
 
-export const bindActionsToBlockFolder = (
-  uuid: string,
-  bookmarkEl: HTMLButtonElement,
-  bookmarkBorderEl: HTMLDivElement,
-  animationsEnabled: boolean,
-  animationsInitialType: AnimationInitialType,
-  searchFocusedBorderColor: string
-) => {
-  if (animationsEnabled) {
-    handleAnimation(bookmarkEl, animationsInitialType);
-  }
-
-  // can't be onclick in order to register middle click and can't be onmousedown because open in new tab fails
-  bookmarkEl.onmouseup = (e) => {
-    if (e.button === 0 || e.button === 1) {
-      const currFolderAreaEl = bookmarksContainerEl.querySelector(
-        '[folder-state="open"]'
-      ) as HTMLDivElement;
-      const openFolderAreaEl = document.getElementById(`folder-${uuid}`) as HTMLDivElement;
-
-      openFolder(currFolderAreaEl, openFolderAreaEl);
-    }
-  };
-
-  bookmarkEl.addEventListener("blur", () => unfocusElementBorder(bookmarkBorderEl));
-  bookmarkEl.addEventListener("focus", (e) => {
-    if (getTabKeyPressed()) {
-      focusElementBorder(bookmarkBorderEl, searchFocusedBorderColor, e);
-    }
-  });
-};
-
 export const addFolderBackButton = (
   folderActionsAreaEl: HTMLDivElement,
   uuid: string,
@@ -439,30 +535,4 @@ export const addFolderBackButton = (
   folderActionsAreaEl.appendChild(backButton);
 
   return { buttonEl: backButton, borderEl: borderDiv };
-};
-
-export const bindActionsToBackButton = (
-  currFolderAreaEl: HTMLDivElement,
-  openFolderAreaEl: HTMLDivElement,
-  uuid: string,
-  backButtonEl: HTMLButtonElement,
-  backButtonBorderEl: HTMLDivElement,
-  animationsEnabled: boolean,
-  animationsInitialType: AnimationInitialType,
-  searchFocusedBorderColor: string
-) => {
-  if (animationsEnabled) {
-    handleAnimation(backButtonEl, animationsInitialType);
-  }
-
-  backButtonEl.onclick = () => {
-    openFolder(currFolderAreaEl, openFolderAreaEl);
-  };
-
-  backButtonEl.addEventListener("blur", () => unfocusElementBorder(backButtonBorderEl));
-  backButtonEl.addEventListener("focus", (e) => {
-    if (getTabKeyPressed()) {
-      focusElementBorder(backButtonBorderEl, searchFocusedBorderColor, e);
-    }
-  });
 };
