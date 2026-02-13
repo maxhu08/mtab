@@ -189,12 +189,18 @@ export const refreshHandleTooltips = () => {
 
   tooltipInstances.push(
     // bookmark buttons
-    ...tippy(".toggle-collapse-bookmark-button", { ...base, content: "toggle collapse bookmark" }),
+    ...tippy(".toggle-collapse-bookmark-button", {
+      ...base,
+      content: "toggle collapse bookmark settings"
+    }),
     ...tippy(".reposition-bookmark-button", { ...base, content: "reposition bookmark" }),
     ...tippy(".delete-bookmark-button", { ...base, content: "delete bookmark" }),
     ...tippy(".export-bookmark-button", { ...base, content: "export bookmark" }),
     // folder buttons
-    ...tippy(".toggle-collapse-folder-button", { ...base, content: "toggle collapse folder" }),
+    ...tippy(".toggle-collapse-folder-button", {
+      ...base,
+      content: "toggle collapse folder settings"
+    }),
     ...tippy(".reposition-folder-button", { ...base, content: "reposition folder" }),
     ...tippy(".delete-folder-button", { ...base, content: "delete folder" }),
     ...tippy(".export-folder-button", { ...base, content: "export folder" })
@@ -438,7 +444,8 @@ addFolderButtonEl.onclick = () => {
       iconColor: randomColor,
       contents: []
     },
-    bookmarksUserDefinedList
+    bookmarksUserDefinedList,
+    true
   );
 };
 
@@ -562,7 +569,7 @@ export const addBookmarkNodeBookmark = (
       id: `bookmark-${uuid}-toggle-collapse-button`,
       icon: "ri-collapse-horizontal-line",
       class: "toggle-collapse-bookmark-button bg-neutral-500 hover:bg-neutral-600",
-      tooltip: "toggle collapse bookmark"
+      tooltip: "toggle collapse bookmark settings"
     },
     {
       icon: "ri-draggable",
@@ -651,7 +658,11 @@ export const addBookmarkNodeBookmark = (
   targetDivEl.appendChild(containerDiv);
 };
 
-export const addBookmarkNodeFolder = (folder: BookmarkNodeFolder, targetDivEl: HTMLDivElement) => {
+export const addBookmarkNodeFolder = (
+  folder: BookmarkNodeFolder,
+  targetDivEl: HTMLDivElement,
+  isExpanded = false
+) => {
   const uuid = genid();
 
   // targetDivEl.innerHTML += `
@@ -757,11 +768,11 @@ export const addBookmarkNodeFolder = (folder: BookmarkNodeFolder, targetDivEl: H
       id: `bookmark-${uuid}-toggle-collapse-button`,
       icon: "ri-collapse-horizontal-line",
       class: "toggle-collapse-folder-button bg-neutral-500 hover:bg-neutral-600",
-      tooltip: "toggle collapse folder"
+      tooltip: "toggle collapse folder settings"
     },
     {
       id: `bookmark-${uuid}-toggle-collapse-contents-button`,
-      icon: "ri-folder-add-line",
+      icon: isExpanded ? "ri-folder-reduce-line" : "ri-folder-add-line",
       class: "toggle-collapse-folder-contents-button bg-neutral-500 hover:bg-neutral-600",
       tooltip: "toggle collapse folder contents"
     },
@@ -858,9 +869,8 @@ export const addBookmarkNodeFolder = (folder: BookmarkNodeFolder, targetDivEl: H
     "bookmarks-user-defined-dropzone grid grid-flow-row gap-2 bg-neutral-900 rounded-md p-2 min-h-14";
   contentsContainer.setAttribute("node-type", "folder-contents-dropzone");
 
-  // contents initially collapsed
-  contentsContainer.setAttribute("state", "collapsed");
-  contentsContainer.classList.add("hidden");
+  contentsContainer.setAttribute("state", isExpanded ? "expanded" : "collapsed");
+  contentsContainer.classList.toggle("hidden", !isExpanded);
 
   contentDiv.append(headerDiv, collapsibleContent, contentsContainer);
 
@@ -875,7 +885,7 @@ export const addBookmarkNodeFolder = (folder: BookmarkNodeFolder, targetDivEl: H
     if (content.type === "bookmark") {
       addBookmarkNodeBookmark(content, frag as unknown as HTMLDivElement);
     } else if (content.type === "folder") {
-      addBookmarkNodeFolder(content, frag as unknown as HTMLDivElement);
+      addBookmarkNodeFolder(content, frag as unknown as HTMLDivElement, false);
     }
   });
 

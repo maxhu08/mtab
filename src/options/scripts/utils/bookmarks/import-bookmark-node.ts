@@ -52,7 +52,8 @@ export const importBookmarkNode = () => {
         ...bookmarkNode,
         iconType: bookmarkNode.iconType
       },
-      bookmarksUserDefinedList
+      bookmarksUserDefinedList,
+      false
     );
   } else {
     toast.error("invalid bookmark data");
