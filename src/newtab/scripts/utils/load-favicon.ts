@@ -15,7 +15,8 @@ export const loadFavicon = (faviconType: FaviconType) => {
     const customFavicon = document.createElement("link");
     customFavicon.id = "favicon";
     customFavicon.rel = "icon";
-    customFavicon.href = typeof data.userUploadedFavicon === "string" ? data.userUploadedFavicon : "";
+    customFavicon.href =
+      typeof data.userUploadedFavicon === "string" ? data.userUploadedFavicon : "";
     customFavicon.type = "image/x-icon";
     document.head.appendChild(customFavicon);
   });
