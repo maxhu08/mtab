@@ -4,8 +4,11 @@ import {
   wallpaperFiltersBrightnessInputEl
 } from "src/options/scripts/ui";
 import { applyWallpaperFilters, previewWallpaper } from "src/options/scripts/utils/preview";
-import { set as idbSet } from "idb-keyval";
 import { logger } from "src/utils/logger";
+import {
+  resetUploadedWallpaperFile,
+  saveUploadedWallpaperFile
+} from "src/utils/wallpaper-file-storage";
 
 export const handleWallpaperFileUpload = () => {
   wallpaperFileUploadInputEl.addEventListener("change", async (e: Event) => {
@@ -15,38 +18,20 @@ export const handleWallpaperFileUpload = () => {
     if (!file) return;
 
     try {
-      idbSet("userUploadedWallpaper", file)
-        .then(() => {
-          previewWallpaper(
-            file,
-            wallpaperFiltersBrightnessInputEl.value,
-            wallpaperFiltersBlurInputEl.value
-          );
-        })
-        .catch((err) => {
-          logger.log("Error storing wallpaper in IndexedDB", err);
-        });
-
-      const base64String = await fileToBase64(file);
-      chrome.storage.local.set({ userUploadedWallpaper: base64String });
+      await saveUploadedWallpaperFile(file);
+      previewWallpaper(
+        file,
+        wallpaperFiltersBrightnessInputEl.value,
+        wallpaperFiltersBlurInputEl.value
+      );
     } catch (err) {
       logger.log("Error storing wallpaper", err);
     }
   });
 };
 
-const fileToBase64 = (file: Blob): Promise<string> => {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.onload = () => resolve(reader.result as string);
-    reader.onerror = reject;
-    reader.readAsDataURL(file);
-  });
-};
-
 export const handWallpaperFileReset = () => {
-  idbSet("userUploadedWallpaper", null);
-  chrome.storage.local.set({ userUploadedWallpaper: null }, () => {});
+  void resetUploadedWallpaperFile();
   previewWallpaper(undefined, "", "");
 };
 

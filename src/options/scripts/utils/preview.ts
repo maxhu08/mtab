@@ -24,7 +24,8 @@ export const previewWallpaper = (
 
   const isVideo =
     (wallpaper instanceof Blob && wallpaper.type.startsWith("video/")) ||
-    (typeof wallpaper === "string" && /\.(mp4|webm|ogg|mov)(\?.*)?$/i.test(wallpaper));
+    (typeof wallpaper === "string" &&
+      (wallpaper.startsWith("data:video/") || /\.(mp4|webm|ogg|mov)(\?.*)?$/i.test(wallpaper)));
 
   const mediaEl = isVideo ? document.createElement("video") : document.createElement("img");
   mediaEl.src = src;

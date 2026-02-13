@@ -26,9 +26,9 @@ import {
   wallpaperTypeUrlButtonEl,
   wallpaperUrlInputEl
 } from "src/options/scripts/ui";
-import { get as idbGet } from "idb-keyval";
 import { previewWallpaper, previewWallpaperSolidColor } from "src/options/scripts/utils/preview";
 import { logger } from "src/utils/logger";
+import { getStoredWallpaperFile } from "src/utils/wallpaper-file-storage";
 
 export const handleSwitches = () => {
   handleTitleEffectSwitch();
@@ -180,28 +180,12 @@ const handleWallpaperTypeSwitch = () => {
 
   wallpaperTypeFileUploadButtonEl.addEventListener("click", () => {
     try {
-      idbGet<Blob | string>("userUploadedWallpaper").then((file) => {
-        if (file instanceof Blob || typeof file === "string") {
-          previewWallpaper(
-            file,
-            wallpaperFiltersBrightnessInputEl.value,
-            wallpaperFiltersBlurInputEl.value
-          );
-        } else {
-          // not in idb, handle legacy wallpaper
-
-          chrome.storage.local.get(["userUploadedWallpaper"], (data) => {
-            const legacyWallpaper =
-              typeof data.userUploadedWallpaper === "string"
-                ? data.userUploadedWallpaper
-                : undefined;
-            previewWallpaper(
-              legacyWallpaper,
-              wallpaperFiltersBrightnessInputEl.value,
-              wallpaperFiltersBlurInputEl.value
-            );
-          });
-        }
+      getStoredWallpaperFile().then((file) => {
+        previewWallpaper(
+          file,
+          wallpaperFiltersBrightnessInputEl.value,
+          wallpaperFiltersBlurInputEl.value
+        );
       });
     } catch (err) {
       logger.log("Error storing wallpaper", err);

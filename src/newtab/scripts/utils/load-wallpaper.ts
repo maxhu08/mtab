@@ -1,45 +1,39 @@
 import { Config } from "src/utils/config";
 import { wallpaperEl } from "src/newtab/scripts/ui";
 import { hideCover } from "src/newtab/scripts/utils/hide-cover";
-import { get as idbGet } from "idb-keyval";
 import { logger } from "src/utils/logger";
+import { getStoredWallpaperFile } from "src/utils/wallpaper-file-storage";
 
 export const loadWallpaper = (wallpaper: Config["wallpaper"]) => {
   if (!wallpaper.enabled) return;
 
   if (wallpaper.type === "file-upload") {
-    idbGet("userUploadedWallpaper")
-      .then((file) => {
-        if (file) {
-          applyWallpaper(file, wallpaper.filters.brightness, wallpaper.filters.blur);
-          hideCover();
+    getStoredWallpaperFile()
+      .then((wallpaperFile) => {
+        if (wallpaperFile) {
+          applyWallpaper(wallpaperFile, wallpaper.filters.brightness, wallpaper.filters.blur);
         } else {
-          // not in idb, handle legacy wallpaper
-
           chrome.storage.local.get(["userUploadedWallpaper"], (data) => {
-            applyWallpaperLegacy(
-              data.userUploadedWallpaper as string,
-              wallpaper.filters.brightness,
-              wallpaper.filters.blur
-            );
+            const legacyWallpaper =
+              typeof data.userUploadedWallpaper === "string" ? data.userUploadedWallpaper : "";
+            if (legacyWallpaper) {
+              applyWallpaper(legacyWallpaper, wallpaper.filters.brightness, wallpaper.filters.blur);
+            }
           });
-          hideCover();
         }
       })
       .catch((err) => {
-        // likely in private window, indexedDB not available
-        logger.log(
-          "Error getting user uploaded blob wallpaper from IndexedDB, likely due to being in a private window, using storage base64 fallback",
-          err
-        );
+        logger.log("Error loading wallpaper", err);
 
         chrome.storage.local.get(["userUploadedWallpaper"], (data) => {
-          applyWallpaperLegacy(
-            data.userUploadedWallpaper as string,
-            wallpaper.filters.brightness,
-            wallpaper.filters.blur
-          );
+          const legacyWallpaper =
+            typeof data.userUploadedWallpaper === "string" ? data.userUploadedWallpaper : "";
+          if (legacyWallpaper) {
+            applyWallpaper(legacyWallpaper, wallpaper.filters.brightness, wallpaper.filters.blur);
+          }
         });
+      })
+      .finally(() => {
         hideCover();
       });
   } else if (wallpaper.type === "solid-color") {
@@ -65,7 +59,8 @@ const applyWallpaper = (wallpaper: Blob | string, brightness: string, blur: stri
 
   const isVideo =
     (wallpaper instanceof Blob && wallpaper.type.startsWith("video/")) ||
-    (typeof wallpaper === "string" && /\.(mp4|webm|ogg|mov)(\?.*)?$/i.test(wallpaper));
+    (typeof wallpaper === "string" &&
+      (wallpaper.startsWith("data:video/") || /\.(mp4|webm|ogg|mov)(\?.*)?$/i.test(wallpaper)));
 
   const mediaEl = isVideo ? document.createElement("video") : document.createElement("img");
   mediaEl.src = src;
@@ -95,17 +90,7 @@ const applyWallpaperFilters = (element: HTMLElement, brightness: string, blur: s
 };
 
 export const applyWallpaperLegacy = (url: string, brightness: string, blur: string) => {
-  wallpaperEl.style.transitionDuration = "0ms";
-
-  const imgEl = document.createElement("img");
-  imgEl.src = url;
-  imgEl.style.position = "absolute";
-  imgEl.style.width = "100%";
-  imgEl.style.height = "100%";
-  imgEl.style.objectFit = "cover";
-
-  applyWallpaperFilters(imgEl, brightness, blur);
-  wallpaperEl.appendChild(imgEl);
+  applyWallpaper(url, brightness, blur);
 };
 
 export const applySolidColorWallpaper = (color: string) => {

@@ -12,10 +12,9 @@ import {
 } from "src/options/scripts/ui";
 import {
   previewWallpaper,
-  previewWallpaperLegacy,
   previewWallpaperSolidColor
 } from "src/options/scripts/utils/preview";
-import { get as idbGet } from "idb-keyval";
+import { getStoredWallpaperFile } from "src/utils/wallpaper-file-storage";
 
 export const fillWallpapersInputs = (config: Config) => {
   if (config.wallpaper.type === "url") {
@@ -29,22 +28,8 @@ export const fillWallpapersInputs = (config: Config) => {
   } else if (config.wallpaper.type === "file-upload") {
     wallpaperTypeFileUploadButtonEl.click();
 
-    idbGet<Blob | string>("userUploadedWallpaper").then((file) => {
-      if (file instanceof Blob || typeof file === "string") {
-        previewWallpaper(file, config.wallpaper.filters.brightness, config.wallpaper.filters.blur);
-      } else {
-        // not in idb, handle legacy wallpaper
-
-        chrome.storage.local.get(["userUploadedWallpaper"], (data) => {
-          const legacyWallpaper =
-            typeof data.userUploadedWallpaper === "string" ? data.userUploadedWallpaper : "";
-          previewWallpaperLegacy(
-            legacyWallpaper,
-            config.wallpaper.filters.brightness,
-            config.wallpaper.filters.blur
-          );
-        });
-      }
+    getStoredWallpaperFile().then((file) => {
+      previewWallpaper(file, config.wallpaper.filters.brightness, config.wallpaper.filters.blur);
     });
   } else if (config.wallpaper.type === "solid-color") {
     wallpaperTypeSolidColorButtonEl.click();
