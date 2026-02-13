@@ -15,7 +15,7 @@ import {
   unfocusBookmarkSearch
 } from "src/newtab/scripts/utils/bookmarks/bookmark-search-utils";
 import { openBookmark } from "src/newtab/scripts/utils/bookmarks/open-bookmark";
-import { convertBrowserBookmarksToBookmarkNodes } from "src/newtab/scripts/utils/bookmarks/convert-browser-bookmarks";
+import { getBrowserFlattenedBookmarks } from "src/newtab/scripts/utils/bookmarks/bookmark-data-cache";
 import { flattenBookmarks } from "src/newtab/scripts/utils/bookmarks/flatten-bookmarks";
 import { handleSearchResultsNavigation } from "src/newtab/scripts/utils/search/handle-search-results";
 import { recognizeUrl } from "src/newtab/scripts/utils/search/recognize-url";
@@ -27,15 +27,12 @@ export const listenToKeys = async (config: Config) => {
     // flatten bookmarks and exclude folders
     bookmarks = flattenBookmarks(config.bookmarks.userDefined);
   } else {
-    const bookmarkNodes = await convertBrowserBookmarksToBookmarkNodes(
-      config.bookmarks.bookmarksLocationFirefox,
-      config.bookmarks.defaultBlockyColorType,
-      config.bookmarks.defaultBlockyColor,
-      config.bookmarks.defaultFaviconSource
-    );
-
-    // flatten bookmarks and exclude folders
-    bookmarks = flattenBookmarks(bookmarkNodes);
+    bookmarks = await getBrowserFlattenedBookmarks({
+      bookmarksLocationFirefox: config.bookmarks.bookmarksLocationFirefox,
+      defaultBlockyColorType: config.bookmarks.defaultBlockyColorType,
+      defaultBlockyColor: config.bookmarks.defaultBlockyColor,
+      defaultFaviconSource: config.bookmarks.defaultFaviconSource
+    });
   }
 
   document.addEventListener("keydown", (e) => {
@@ -170,8 +167,6 @@ export const listenToKeys = async (config: Config) => {
 
       if (direct) openUrl(config, direct, false);
       else search(config, raw, false);
-
-      search(config, searchInputEl.value);
     }
   });
 

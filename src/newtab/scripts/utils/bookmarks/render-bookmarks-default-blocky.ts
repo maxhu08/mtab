@@ -5,7 +5,7 @@ import {
   initBookmarkRenderRuntime,
   renderBookmarkNodes
 } from "src/newtab/scripts/utils/bookmarks/bookmark-render-utils";
-import { convertBrowserBookmarksToBookmarkNodes } from "src/newtab/scripts/utils/bookmarks/convert-browser-bookmarks";
+import { getBrowserBookmarkNodes } from "src/newtab/scripts/utils/bookmarks/bookmark-data-cache";
 import { insertCSS } from "src/newtab/scripts/utils/insert-css";
 import { genid } from "src/utils/genid";
 
@@ -37,12 +37,12 @@ export const renderDefaultBlockyBookmarks = (config: Config) => {
 
   initBookmarkRenderRuntime(rootFolderAreaEl, config);
 
-  convertBrowserBookmarksToBookmarkNodes(
-    config.bookmarks.bookmarksLocationFirefox,
-    config.bookmarks.defaultBlockyColorType,
-    config.bookmarks.defaultBlockyColor,
-    config.bookmarks.defaultFaviconSource
-  ).then((bookmarkNodes) => {
+  getBrowserBookmarkNodes({
+    bookmarksLocationFirefox: config.bookmarks.bookmarksLocationFirefox,
+    defaultBlockyColorType: config.bookmarks.defaultBlockyColorType,
+    defaultBlockyColor: config.bookmarks.defaultBlockyColor,
+    defaultFaviconSource: config.bookmarks.defaultFaviconSource
+  }).then((bookmarkNodes) => {
     renderBookmarkNodes(bookmarkNodes, rootFolderAreaEl, config.animations.enabled, config);
   });
 };
