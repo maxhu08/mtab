@@ -52,6 +52,40 @@ const getFolderUUIDFromArea = (folderAreaEl: HTMLDivElement) =>
 const getBorderEl = (buttonEl: HTMLButtonElement) =>
   buttonEl.querySelector(`[${BORDER_ROLE_ATTR}='border']`) as HTMLDivElement | null;
 
+const handleBookmarkAction = (actionButtonEl: HTMLButtonElement, openInNewTab: boolean) => {
+  if (!renderRuntime) return;
+
+  const action = actionButtonEl.getAttribute("data-bookmark-action");
+
+  if (action === "bookmark") {
+    const url = actionButtonEl.getAttribute("data-bookmark-url");
+    if (!url) return;
+
+    openBookmark(
+      url,
+      renderRuntime.config.animations.enabled,
+      renderRuntime.config.animations.bookmarkType,
+      openInNewTab
+    );
+    return;
+  }
+
+  if (action === "folder") {
+    const folderUUID = actionButtonEl.getAttribute("data-folder-uuid");
+    if (!folderUUID) return;
+
+    openFolderByUUID(folderUUID);
+    return;
+  }
+
+  if (action === "back") {
+    const parentFolderUUID = actionButtonEl.getAttribute("data-parent-folder-uuid");
+    if (!parentFolderUUID) return;
+
+    openParentFolder(parentFolderUUID);
+  }
+};
+
 const ensureDelegatedHandlers = () => {
   if (delegatedHandlersRegistered) return;
 
@@ -67,36 +101,22 @@ const ensureDelegatedHandlers = () => {
     if (!actionButtonEl) return;
 
     if (e.button !== 0 && e.button !== 1) return;
+    handleBookmarkAction(actionButtonEl, e.ctrlKey || e.metaKey || e.button === 1);
+  });
 
-    const action = actionButtonEl.getAttribute("data-bookmark-action");
+  bookmarksContainerEl.addEventListener("keydown", (e) => {
+    if (!renderRuntime) return;
+    if (e.key !== "Enter") return;
 
-    if (action === "bookmark") {
-      const url = actionButtonEl.getAttribute("data-bookmark-url");
-      if (!url) return;
+    const target = e.target as HTMLElement | null;
+    if (!target) return;
 
-      openBookmark(
-        url,
-        renderRuntime.config.animations.enabled,
-        renderRuntime.config.animations.bookmarkType,
-        e.ctrlKey || e.button === 1
-      );
-      return;
-    }
+    const actionButtonEl = target.closest(
+      `button[${BOOKMARK_ACTION_ATTR}]`
+    ) as HTMLButtonElement | null;
+    if (!actionButtonEl) return;
 
-    if (action === "folder") {
-      const folderUUID = actionButtonEl.getAttribute("data-folder-uuid");
-      if (!folderUUID) return;
-
-      openFolderByUUID(folderUUID);
-      return;
-    }
-
-    if (action === "back") {
-      const parentFolderUUID = actionButtonEl.getAttribute("data-parent-folder-uuid");
-      if (!parentFolderUUID) return;
-
-      openParentFolder(parentFolderUUID);
-    }
+    handleBookmarkAction(actionButtonEl, e.ctrlKey || e.metaKey);
   });
 
   bookmarksContainerEl.addEventListener(
