@@ -26,7 +26,8 @@ export const styleMessage = (
   // }
 
   insertCSS(
-    `.text-size-message{font-size:${textSize * 0.4}rem}@media (min-width: 768px){.text-size-message{font-size:${textSize * 0.75}rem}}@media (min-width: 1024px){.text-size-message{font-size:${textSize}rem}}`
+    `.text-size-message{font-size:${textSize * 0.4}rem}@media (min-width: 768px){.text-size-message{font-size:${textSize * 0.75}rem}}@media (min-width: 1024px){.text-size-message{font-size:${textSize}rem}}`,
+    "message-size-style"
   );
 
   // const messageFontCss = `
@@ -36,7 +37,7 @@ export const styleMessage = (
 
   if (fontType === "default") {
     const font = '"Jetbrains-Mono-Regular-Fixed"';
-    insertCSS(`.font-message{font-family:${font};}`);
+    insertCSS(`.font-message{font-family:${font};}`, "message-font-style");
   } else {
     // @import url('${fontCustom}');
     // .font-message {
@@ -46,7 +47,8 @@ export const styleMessage = (
 
     const fontName = getFontNameFromURL(fontCustom);
     insertCSS(
-      `@import url("${fontCustom}");.font-message{font-family:"${fontName}",sans-serif!important;font-style:normal;}`
+      `@import url("${fontCustom}");.font-message{font-family:"${fontName}",sans-serif!important;font-style:normal;}`,
+      "message-font-style"
     );
   }
 };

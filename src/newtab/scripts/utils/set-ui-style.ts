@@ -3,25 +3,20 @@ import { insertCSS } from "src/newtab/scripts/utils/insert-css";
 
 export const setUISyle = (ui: Config["ui"]) => {
   // custom css
-  insertCSS(ui.customCSS);
+  insertCSS(ui.customCSS, "ui-custom-css");
 
   // const highlightSyleCss = `
   // ::selection {
   //   background-color: ${ui.highlightColor};
   // }`;
 
-  insertCSS(`::selection{background-color:${ui.highlightColor};}`);
+  insertCSS(`::selection{background-color:${ui.highlightColor};}`, "ui-highlight-style");
 
   if (ui.style === "solid") {
     // .bg-foreground {
     //   background-color: ${ui.foregroundColor};
     // }
-    // .bg-background {
-    //   background-color: ${ui.backgroundColor};
-    // }`;
-    insertCSS(
-      `.bg-foreground{background-color:${ui.foregroundColor};}.bg-background{background-color:${ui.backgroundColor};}`
-    );
+    insertCSS(`.bg-foreground{background-color:${ui.foregroundColor};}`, "ui-surface-style");
   } else {
     // .glass-effect {
     //   background-color: ${ui.glassColor};
@@ -29,11 +24,9 @@ export const setUISyle = (ui: Config["ui"]) => {
     //   box-sizing: border-box !important;
     //   backdrop-filter: blur(${ui.blurStrength});
     // }
-    // .bg-background {
-    //   background-color: ${ui.backgroundColor};
-    // }`;
     insertCSS(
-      `.glass-effect{background-color:${ui.glassColor};box-shadow:0 25px 23px rgba(0, 0, 0, 0.15);box-sizing:border-box !important;backdrop-filter: blur(${ui.blurStrength})}.bg-background{background-color:${ui.backgroundColor}}`
+      `.glass-effect{background-color:${ui.glassColor};box-shadow:0 25px 23px rgba(0, 0, 0, 0.15);box-sizing:border-box !important;backdrop-filter: blur(${ui.blurStrength})}`,
+      "ui-surface-style"
     );
   }
 
@@ -45,8 +38,7 @@ export const setUISyle = (ui: Config["ui"]) => {
   //   border-radius: ${borderRadius} !important;
   // }`;
 
-  insertCSS(`.corner-style{border-radius:${borderRadius} !important;}`);
+  insertCSS(`.corner-style{border-radius:${borderRadius} !important;}`, "ui-corner-style");
 
   document.body.style.transitionDuration = "0ms";
-  document.body.classList.add("bg-background");
 };

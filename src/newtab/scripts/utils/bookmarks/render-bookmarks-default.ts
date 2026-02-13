@@ -19,9 +19,7 @@ export const renderDefaultBookmarks = (config: Config) => {
   const innerBookmarkContainerEl = document.createElement("div");
   innerBookmarkContainerEl.id = "inner-bookmark-container";
   bookmarksContainerEl.appendChild(innerBookmarkContainerEl);
-
-  // prettier-ignore
-  const innerBookmarkContainer = document.getElementById("inner-bookmark-container") as HTMLDivElement;
+  const innerBookmarkContainer = innerBookmarkContainerEl;
 
   bookmarksContainerEl.classList.add(
     "p-2",
@@ -35,7 +33,34 @@ export const renderDefaultBookmarks = (config: Config) => {
   );
 
   chrome.bookmarks.search({}, (chromeBookmarks) => {
-    if (chromeBookmarks.length === 0) {
+    const frag = document.createDocumentFragment();
+    let hasRenderableBookmarks = false;
+
+    for (const bookmark of chromeBookmarks) {
+      if (bookmark.dateGroupModified || !bookmark.url) continue;
+      hasRenderableBookmarks = true;
+
+      const buttonEl = document.createElement("button");
+      buttonEl.className =
+        "overflow-hidden w-16 md:w-20 aspect-square grid grid-rows-[auto_max-content] place-items-center cursor-pointer";
+      buttonEl.setAttribute("data-bookmark-url", bookmark.url);
+
+      const imgEl = document.createElement("img");
+      imgEl.className = "w-10 md:w-14";
+      imgEl.src = getFaviconURL(bookmark.url, config.bookmarks.defaultFaviconSource);
+      buttonEl.appendChild(imgEl);
+
+      const spanEl = document.createElement("span");
+      spanEl.className =
+        "text-base w-full font-search text-center text-ellipsis overflow-hidden whitespace-nowrap";
+      spanEl.style.color = config.search.textColor;
+      spanEl.textContent = bookmark.title.toString();
+      buttonEl.appendChild(spanEl);
+
+      frag.appendChild(buttonEl);
+    }
+
+    if (!hasRenderableBookmarks) {
       // <div class="overflow-hidden h-16 md:h-20 grid grid-rows-[auto_max-content] place-items-center">
       //   <span class="text-search text-base md:text-2xl font-message w-full text-center text-ellipsis overflow-hidden whitespace-nowrap" style="color: ${config.search.textColor}">
       //     No bookmarks yet
@@ -52,59 +77,43 @@ export const renderDefaultBookmarks = (config: Config) => {
       textSpanEl.textContent = "No bookmarks yet";
 
       containerDivEl.appendChild(textSpanEl);
-      innerBookmarkContainer.appendChild(containerDivEl);
+      frag.appendChild(containerDivEl);
     }
 
-    if (chromeBookmarks.length > 0) {
+    if (hasRenderableBookmarks) {
       innerBookmarkContainer.classList.add("grid", "grid-flow-col", "gap-2", "w-max");
     }
 
-    chromeBookmarks.forEach((bookmark) => {
-      if (bookmark.dateGroupModified) return;
+    innerBookmarkContainer.appendChild(frag);
 
-      // <button id="bookmark-default-${bookmark.id}" class="overflow-hidden w-16 md:w-20 aspect-square grid grid-rows-[auto_max-content] place-items-center cursor-pointer">
-      //   <img class="w-10 md:w-14" src="${getFaviconURL(bookmark.url!, userAgent)}" />
-      //   <span class="text-base w-full font-search text-center text-ellipsis overflow-hidden whitespace-nowrap" style="color: ${config.search.textColor}">
-      //     ${bookmark.title.toString()}
-      //   </span>
-      // </button>
-      const buttonEl = document.createElement("button");
-      buttonEl.id = `bookmark-default-${bookmark.id}`;
-      buttonEl.className =
-        "overflow-hidden w-16 md:w-20 aspect-square grid grid-rows-[auto_max-content] place-items-center cursor-pointer";
+    innerBookmarkContainer.addEventListener("click", (e) => {
+      const target = e.target as HTMLElement | null;
+      if (!target) return;
+      const buttonEl = target.closest("button[data-bookmark-url]") as HTMLButtonElement | null;
+      if (!buttonEl) return;
 
-      const imgEl = document.createElement("img");
-      imgEl.className = "w-10 md:w-14";
-      imgEl.src = getFaviconURL(bookmark.url!, config.bookmarks.defaultFaviconSource);
-      buttonEl.appendChild(imgEl);
+      const url = buttonEl.getAttribute("data-bookmark-url");
+      if (!url) return;
 
-      const spanEl = document.createElement("span");
-      spanEl.className =
-        "text-base w-full font-search text-center text-ellipsis overflow-hidden whitespace-nowrap";
-      spanEl.style.color = config.search.textColor;
-      spanEl.textContent = bookmark.title.toString();
-      buttonEl.appendChild(spanEl);
-
-      innerBookmarkContainer.appendChild(buttonEl);
+      openBookmark(
+        url,
+        config.animations.enabled,
+        config.animations.bookmarkType,
+        e.ctrlKey || e.metaKey
+      );
     });
 
-    chromeBookmarks.forEach((bookmark) => {
-      if (bookmark.dateGroupModified) return;
+    innerBookmarkContainer.addEventListener("auxclick", (e) => {
+      if (e.button !== 1) return;
+      const target = e.target as HTMLElement | null;
+      if (!target) return;
+      const buttonEl = target.closest("button[data-bookmark-url]") as HTMLButtonElement | null;
+      if (!buttonEl) return;
 
-      // prettier-ignore
-      const bookmarkEl = document.getElementById(`bookmark-default-${bookmark.id}`) as HTMLDivElement;
-      bookmarkEl.onclick = (e) => {
-        if (e.ctrlKey) {
-          openBookmark(
-            bookmark.url!,
-            config.animations.enabled,
-            config.animations.bookmarkType,
-            true
-          );
-        } else {
-          openBookmark(bookmark.url!, config.animations.enabled, config.animations.bookmarkType);
-        }
-      };
+      const url = buttonEl.getAttribute("data-bookmark-url");
+      if (!url) return;
+
+      openBookmark(url, config.animations.enabled, config.animations.bookmarkType, true);
     });
   });
 

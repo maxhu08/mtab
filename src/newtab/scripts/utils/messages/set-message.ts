@@ -9,6 +9,15 @@ import { setDateMessage } from "src/newtab/scripts/utils/messages/date";
 import { setTimeMessage } from "src/newtab/scripts/utils/messages/time";
 import { setWeatherMessage } from "src/newtab/scripts/utils/messages/weather";
 
+let messageUpdateIntervalId: number | null = null;
+
+const clearMessageUpdateInterval = () => {
+  if (messageUpdateIntervalId !== null) {
+    window.clearInterval(messageUpdateIntervalId);
+    messageUpdateIntervalId = null;
+  }
+};
+
 export const setMessage = (
   enabled: boolean,
   type: MessageType,
@@ -16,6 +25,8 @@ export const setMessage = (
   username: string,
   weatherUnitsType: "f" | "c"
 ) => {
+  clearMessageUpdateInterval();
+
   if (!enabled || (type === "custom" && customText.length === 0)) {
     messageEl.textContent = "\n";
 
@@ -27,7 +38,7 @@ export const setMessage = (
       setCustomMessage(messageEl, customText);
 
       if (containsSlashReplacements(customText)) {
-        setInterval(() => {
+        messageUpdateIntervalId = window.setInterval(() => {
           setCustomMessage(messageEl, customText);
         }, 1000);
       }
@@ -44,14 +55,14 @@ export const setMessage = (
     }
     case "time-12": {
       setTimeMessage(messageEl, "12hr");
-      setInterval(() => {
+      messageUpdateIntervalId = window.setInterval(() => {
         setTimeMessage(messageEl, "12hr");
       }, 1000);
       break;
     }
     case "time-24": {
       setTimeMessage(messageEl, "24hr");
-      setInterval(() => {
+      messageUpdateIntervalId = window.setInterval(() => {
         setTimeMessage(messageEl, "24hr");
       }, 1000);
       break;

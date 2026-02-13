@@ -11,7 +11,6 @@ import { insertCSS } from "src/newtab/scripts/utils/insert-css";
 
 export const styleSearch = (
   style: UIStyle,
-  foregroundColor: string,
   enabled: boolean,
   textColor: string,
   placeholderTextColor: string,
@@ -50,7 +49,8 @@ export const styleSearch = (
   // }
   // `;
   insertCSS(
-    `.placeholder-color-search::placeholder{color:${placeholderTextColor};}.placeholder-color-bookmark-search::placeholder{color:${placeholderTextColor};}.search-search-icon-color{color:${searchIconColor};}.search-bookmark-icon-color{color:${bookmarkIconColor};}.search-select-icon-color{color:${selectIconColor};}`
+    `.placeholder-color-search::placeholder{color:${placeholderTextColor};}.placeholder-color-bookmark-search::placeholder{color:${placeholderTextColor};}.search-search-icon-color{color:${searchIconColor};}.search-bookmark-icon-color{color:${bookmarkIconColor};}.search-select-icon-color{color:${selectIconColor};}`,
+    "search-theme-style"
   );
 
   if (fontType === "default") {
@@ -66,7 +66,8 @@ export const styleSearch = (
     //   font-family: ${font};
     // }`;
     insertCSS(
-      `.font-search{font-family:${font};}.font-bookmark-search{font-family:${font};}.font-search-results{font-family:${font};}`
+      `.font-search{font-family:${font};}.font-bookmark-search{font-family:${font};}.font-search-results{font-family:${font};}`,
+      "search-font-style"
     );
   } else {
     // @import url('${fontCustom}');
@@ -76,7 +77,8 @@ export const styleSearch = (
 
     const fontName = getFontNameFromURL(fontCustom);
     insertCSS(
-      `@import url("${fontCustom}");.font-search{font-family:"${fontName}",sans-serif!important;}.font-bookmark-search{font-family:"${fontName}",sans-serif!important;}.font-search-results{font-family:"${fontName}",sans-serif!important;}`
+      `@import url("${fontCustom}");.font-search{font-family:"${fontName}",sans-serif!important;}.font-bookmark-search{font-family:"${fontName}",sans-serif!important;}.font-search-results{font-family:"${fontName}",sans-serif!important;}`,
+      "search-font-style"
     );
   }
 

@@ -54,7 +54,6 @@ getConfig(({ config }) => {
 
   styleSearch(
     config.ui.style,
-    config.ui.foregroundColor,
     config.search.enabled,
     config.search.textColor,
     config.search.placeholderTextColor,
