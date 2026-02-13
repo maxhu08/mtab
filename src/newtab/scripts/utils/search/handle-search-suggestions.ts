@@ -132,5 +132,4 @@ export const handleSearchSuggestions = (
     if (!document.hasFocus()) return;
     hideSearchResultsSection();
   });
-
 };
