@@ -20,20 +20,33 @@ import { flattenBookmarks } from "src/newtab/scripts/utils/bookmarks/flatten-boo
 import { handleSearchResultsNavigation } from "src/newtab/scripts/utils/search/handle-search-results";
 import { recognizeUrl } from "src/newtab/scripts/utils/search/recognize-url";
 
-export const listenToKeys = async (config: Config) => {
-  let bookmarks: BookmarkNodeBookmark[] = [];
+export const listenToKeys = (config: Config) => {
+  let bookmarks: BookmarkNodeBookmark[] | null = null;
+  let bookmarksPromise: Promise<BookmarkNodeBookmark[]> | null = null;
 
-  if (config.bookmarks.type === "user-defined") {
-    // flatten bookmarks and exclude folders
-    bookmarks = flattenBookmarks(config.bookmarks.userDefined);
-  } else {
-    bookmarks = await getBrowserFlattenedBookmarks({
+  const ensureBookmarksLoaded = () => {
+    if (bookmarks) return Promise.resolve(bookmarks);
+    if (bookmarksPromise) return bookmarksPromise;
+
+    if (config.bookmarks.type === "user-defined") {
+      const flattened = flattenBookmarks(config.bookmarks.userDefined);
+      bookmarks = flattened;
+      bookmarksPromise = Promise.resolve(flattened);
+      return bookmarksPromise;
+    }
+
+    bookmarksPromise = getBrowserFlattenedBookmarks({
       bookmarksLocationFirefox: config.bookmarks.bookmarksLocationFirefox,
       defaultBlockyColorType: config.bookmarks.defaultBlockyColorType,
       defaultBlockyColor: config.bookmarks.defaultBlockyColor,
       defaultFaviconSource: config.bookmarks.defaultFaviconSource
+    }).then((loaded) => {
+      bookmarks = loaded;
+      return loaded;
     });
-  }
+
+    return bookmarksPromise;
+  };
 
   document.addEventListener("keydown", (e) => {
     if (!config.hotkeys.enabled) return;
@@ -112,16 +125,20 @@ export const listenToKeys = async (config: Config) => {
         !bookmarkSearchFocused &&
         !bookmarkSearchSectionEl.classList.contains("grid")
       ) {
-        enableSearchBookmark(
-          bookmarks,
-          config.search.textColor,
-          config.search.placeholderTextColor,
-          config.animations.enabled,
-          config.animations.bookmarkType,
-          "",
-          false
-        );
-        tryFocusBookmarkSearch(config.search.focusedBorderColor, e);
+        void ensureBookmarksLoaded()
+          .then((loadedBookmarks) => {
+            enableSearchBookmark(
+              loadedBookmarks,
+              config.search.textColor,
+              config.search.placeholderTextColor,
+              config.animations.enabled,
+              config.animations.bookmarkType,
+              "",
+              false
+            );
+            tryFocusBookmarkSearch(config.search.focusedBorderColor, e);
+          })
+          .catch(() => {});
       }
     }
   });
@@ -189,14 +206,18 @@ export const listenToKeys = async (config: Config) => {
   );
 
   bookmarkSearchInputEl.addEventListener("keyup", () => {
-    enableSearchBookmark(
-      bookmarks,
-      config.search.textColor,
-      config.search.placeholderTextColor,
-      config.animations.enabled,
-      config.animations.bookmarkType,
-      "",
-      false
-    );
+    void ensureBookmarksLoaded()
+      .then((loadedBookmarks) => {
+        enableSearchBookmark(
+          loadedBookmarks,
+          config.search.textColor,
+          config.search.placeholderTextColor,
+          config.animations.enabled,
+          config.animations.bookmarkType,
+          "",
+          false
+        );
+      })
+      .catch(() => {});
   });
 };

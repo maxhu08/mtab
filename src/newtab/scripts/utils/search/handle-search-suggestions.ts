@@ -133,5 +133,4 @@ export const handleSearchSuggestions = (
     hideSearchResultsSection();
   });
 
-  return { refreshResults: refresh };
 };

@@ -16,33 +16,32 @@ import { handlePasswordGenerator } from "src/newtab/scripts/utils/search/handle-
 import { handleConversionCurrency } from "src/newtab/scripts/utils/search/handle-conversion-currency";
 
 export const handleSearchAssist = (config: Config) => {
-  const suggestionsEnabled = config.search.suggestions;
+  if (config.search.suggestions) {
+    handleSearchSuggestions(config.search.recognizeLinks, {
+      inputEl: searchInputEl,
+      textColor: config.search.textColor,
+      placeholderTextColor: config.search.placeholderTextColor,
+      linkTextColor: config.search.linkTextColor,
+      recognizeLinks: config.search.recognizeLinks,
+      resultUrlAttr: "search-result-url",
+      onOpen: (value, openInNewTab) => {
+        const direct = config.search.recognizeLinks ? recognizeUrl(value) : null;
 
-  const refreshResults = suggestionsEnabled
-    ? handleSearchSuggestions(config.search.recognizeLinks, {
-        inputEl: searchInputEl,
-        textColor: config.search.textColor,
-        placeholderTextColor: config.search.placeholderTextColor,
-        linkTextColor: config.search.linkTextColor,
-        recognizeLinks: config.search.recognizeLinks,
-        resultUrlAttr: "search-result-url",
-        onOpen: (value, openInNewTab) => {
-          const direct = config.search.recognizeLinks ? recognizeUrl(value) : null;
-
-          if (direct) {
-            openUrl(config, direct, openInNewTab);
-            return;
-          }
-
-          search(config, value, openInNewTab);
+        if (direct) {
+          openUrl(config, direct, openInNewTab);
+          return;
         }
-      }).refreshResults
-    : () => {};
 
-  searchInputEl.oninput = async () => {
+        search(config, value, openInNewTab);
+      }
+    });
+  }
+
+  let assistRunId = 0;
+
+  searchInputEl.addEventListener("input", async () => {
+    const currentRunId = ++assistRunId;
     const val = searchInputEl.value;
-
-    if (suggestionsEnabled) refreshResults();
 
     if (val === "") {
       hideAssist();
@@ -63,6 +62,7 @@ export const handleSearchAssist = (config: Config) => {
 
     if (config.search.assist.definitions) {
       const definitionResult = await handleDefinition(val);
+      if (currentRunId !== assistRunId) return;
       if (definitionResult !== undefined) assistItems.push(definitionResult);
     }
 
@@ -71,6 +71,7 @@ export const handleSearchAssist = (config: Config) => {
       if (conversionResult !== undefined) assistItems.push(conversionResult);
 
       const conversionCurrencyResult = await handleConversionCurrency(val);
+      if (currentRunId !== assistRunId) return;
       if (conversionCurrencyResult !== undefined) assistItems.push(conversionCurrencyResult);
     }
 
@@ -81,5 +82,5 @@ export const handleSearchAssist = (config: Config) => {
 
     if (assistItems.length > 0) displayAssist(assistItems, config);
     else hideAssist();
-  };
+  });
 };
