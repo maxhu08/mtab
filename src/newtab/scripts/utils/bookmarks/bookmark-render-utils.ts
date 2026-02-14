@@ -324,12 +324,14 @@ const createPaginationNavButton = (
 ) => {
   const buttonEl = document.createElement("button");
   buttonEl.type = "button";
+  buttonEl.setAttribute("data-bookmark-action", "pagination-nav");
   buttonEl.className = `relative duration-[250ms] ease-out bg-foreground cursor-pointer ${uiStyle === "glass" ? "glass-effect " : ""}corner-style h-9 md:h-12 aspect-square overflow-hidden outline-none`;
   buttonEl.addEventListener("click", onClick);
 
   const borderDiv = document.createElement("div");
   borderDiv.className =
     "absolute top-0 left-0 w-full h-9 md:h-12 border-2 border-transparent corner-style";
+  initializeRenderedButton(borderDiv);
 
   const hoverDiv = document.createElement("div");
   hoverDiv.className = "absolute top-0 left-0 w-full h-9 md:h-12 hover:bg-white/20";
