@@ -85,6 +85,8 @@ export const [searchPlaceholderTextColorContainerEl, searchPlaceholderTextColorI
 export const [searchSearchIconColorContainerEl, searchSearchIconColorInputEl] = getContainerAndInput("search-search-icon-color");
 export const [searchBookmarkIconColorContainerEl, searchBookmarkIconColorInputEl] = getContainerAndInput("search-bookmark-icon-color");
 export const [searchSelectIconColorContainerEl, searchSelectIconColorInputEl] = getContainerAndInput("search-select-icon-color");
+export const searchButtonsClearCheckboxEl = getCheckbox("search-buttons-clear");
+export const searchButtonsSearchCheckboxEl = getCheckbox("search-buttons-search");
 export const searchRecognizeLinksCheckboxEl = getCheckbox("search-recognize-links");
 export const [searchLinkTextColorContainerEl, searchLinkTextColorInputEl] = getContainerAndInput("search-link-text-color");
 export const searchEngineDuckduckgoButtonEl = getButton("search-engine-duckduckgo");

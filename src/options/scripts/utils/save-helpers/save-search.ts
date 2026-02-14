@@ -19,7 +19,9 @@ import {
   searchRecognizeLinksCheckboxEl,
   searchLinkTextColorInputEl,
   searchSuggestionsCheckboxEl,
-  searchAssistPasswordGeneratorCheckboxEl
+  searchAssistPasswordGeneratorCheckboxEl,
+  searchButtonsClearCheckboxEl,
+  searchButtonsSearchCheckboxEl
 } from "src/options/scripts/ui";
 import { getSelectedButton } from "src/options/scripts/utils/get-selected-button";
 
@@ -46,6 +48,8 @@ export const saveSearchSettingsToDraft = (draft: Config) => {
   draft.search.searchIconColor = searchSearchIconColorInputEl.value;
   draft.search.bookmarkIconColor = searchBookmarkIconColorInputEl.value;
   draft.search.selectIconColor = searchSelectIconColorInputEl.value;
+  draft.search.buttons.clear = searchButtonsClearCheckboxEl.checked;
+  draft.search.buttons.search = searchButtonsSearchCheckboxEl.checked;
 
   draft.search.recognizeLinks = searchRecognizeLinksCheckboxEl.checked;
   draft.search.suggestions = searchSuggestionsCheckboxEl.checked;

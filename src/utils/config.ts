@@ -86,6 +86,10 @@ export const defaultConfig: Config = {
   },
   search: {
     enabled: true,
+    buttons: {
+      clear: true,
+      search: true
+    },
     font: {
       type: "default",
       custom: ""
@@ -312,6 +316,10 @@ export interface Config {
   };
   search: {
     enabled: boolean;
+    buttons: {
+      clear: boolean;
+      search: boolean;
+    };
     font: {
       type: FontType;
       custom: string;

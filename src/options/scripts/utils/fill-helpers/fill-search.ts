@@ -30,7 +30,9 @@ import {
   searchFontTypeDefaultButtonEl,
   searchFontTypeCustomButtonEl,
   searchEngineKagiButtonEl,
-  searchAssistPasswordGeneratorCheckboxEl
+  searchAssistPasswordGeneratorCheckboxEl,
+  searchButtonsClearCheckboxEl,
+  searchButtonsSearchCheckboxEl
 } from "src/options/scripts/ui";
 
 export const fillSearchInputs = (config: Config) => {
@@ -54,6 +56,8 @@ export const fillSearchInputs = (config: Config) => {
   searchSearchIconColorInputEl.value = config.search.searchIconColor;
   searchBookmarkIconColorInputEl.value = config.search.bookmarkIconColor;
   searchSelectIconColorInputEl.value = config.search.selectIconColor;
+  searchButtonsClearCheckboxEl.checked = config.search.buttons.clear;
+  searchButtonsSearchCheckboxEl.checked = config.search.buttons.search;
 
   const searchEnginePairs: Record<SearchEngine, HTMLButtonElement> = {
     duckduckgo: searchEngineDuckduckgoButtonEl,

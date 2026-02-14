@@ -161,5 +161,19 @@ export const migrateOldConfig = (config: Config): Config => {
     }
   }
 
+  // if config is before v1.10.5
+  if (!(config.search as any).buttons || typeof (config.search as any).buttons !== "object") {
+    (config.search as any).buttons = {
+      clear: true,
+      search: true
+    };
+  }
+  if (typeof (config.search as any).buttons.clear !== "boolean") {
+    (config.search as any).buttons.clear = true;
+  }
+  if (typeof (config.search as any).buttons.search !== "boolean") {
+    (config.search as any).buttons.search = true;
+  }
+
   return config;
 };

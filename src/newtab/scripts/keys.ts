@@ -1,5 +1,8 @@
 import { BookmarkNodeBookmark, Config } from "src/utils/config";
 import {
+  searchClearButtonEl,
+  searchInputButtonsEl,
+  searchSubmitButtonEl,
   bookmarkSearchInputEl,
   bookmarkSearchSectionEl,
   searchInputEl,
@@ -19,6 +22,7 @@ import { getBrowserFlattenedBookmarks } from "src/newtab/scripts/utils/bookmarks
 import { flattenBookmarks } from "src/newtab/scripts/utils/bookmarks/flatten-bookmarks";
 import { handleSearchResultsNavigation } from "src/newtab/scripts/utils/search/handle-search-results";
 import { recognizeUrl } from "src/newtab/scripts/utils/search/recognize-url";
+import { setSearchValue } from "src/newtab/scripts/utils/search/set-search-value";
 
 export const listenToKeys = (config: Config) => {
   let bookmarks: BookmarkNodeBookmark[] | null = null;
@@ -144,6 +148,31 @@ export const listenToKeys = (config: Config) => {
   });
 
   let isComposing = false;
+  const hasSearchValue = () => searchInputEl.value.trim() !== "";
+
+  const updateSearchButtonsVisibility = () => {
+    const hasValue = hasSearchValue();
+    const showSearchButton = config.search.buttons.search && hasValue;
+    const showClearButton = config.search.buttons.clear && hasValue;
+    const showGroup = showSearchButton || showClearButton;
+
+    searchInputButtonsEl.classList.toggle("hidden", !showGroup);
+    searchInputButtonsEl.classList.toggle("flex", showGroup);
+    searchSubmitButtonEl.classList.toggle("hidden", !showSearchButton);
+    searchSubmitButtonEl.classList.toggle("grid", showSearchButton);
+    searchClearButtonEl.classList.toggle("hidden", !showClearButton);
+    searchClearButtonEl.classList.toggle("grid", showClearButton);
+  };
+
+  const runSearchFromInput = (openInNewTab: boolean) => {
+    if (isComposing || !hasSearchValue()) return;
+
+    const raw = searchInputEl.value;
+    const direct = config.search.recognizeLinks ? recognizeUrl(raw) : null;
+
+    if (direct) openUrl(config, direct, openInNewTab);
+    else search(config, raw, openInNewTab);
+  };
 
   function addCompositionListeners(element: HTMLElement) {
     element.addEventListener("compositionstart", () => {
@@ -168,26 +197,13 @@ export const listenToKeys = (config: Config) => {
   searchInputEl.addEventListener("keydown", (e) => {
     if (e.key === "Enter" && !e.repeat) {
       e.preventDefault();
-
-      // do not search if composition is still in progress
-      if (isComposing || searchInputEl.value === "") return;
-
-      const raw = searchInputEl.value;
-      const direct = config.search.recognizeLinks ? recognizeUrl(raw) : null;
-
-      // open in new tab if ctrl
-      if (e.ctrlKey) {
-        if (direct) openUrl(config, direct, true);
-        else search(config, raw, true);
-        return;
-      }
-
-      if (direct) openUrl(config, direct, false);
-      else search(config, raw, false);
+      runSearchFromInput(e.ctrlKey);
     }
   });
 
   searchInputEl.addEventListener("input", () => {
+    updateSearchButtonsVisibility();
+
     if (!config.title.dynamic.enabled) return;
 
     // not empty or just spaces
@@ -195,6 +211,27 @@ export const listenToKeys = (config: Config) => {
       document.title = searchInputEl.value;
     else document.title = config.title.defaultTitle;
   });
+
+  searchSubmitButtonEl.addEventListener("mousedown", (e) => {
+    e.preventDefault();
+  });
+
+  searchClearButtonEl.addEventListener("mousedown", (e) => {
+    e.preventDefault();
+  });
+
+  searchSubmitButtonEl.addEventListener("click", (e) => {
+    const me = e as MouseEvent;
+    runSearchFromInput(me.ctrlKey || me.metaKey);
+  });
+
+  searchClearButtonEl.addEventListener("click", () => {
+    setSearchValue("");
+    searchInputEl.focus();
+    updateSearchButtonsVisibility();
+  });
+
+  updateSearchButtonsVisibility();
 
   bookmarkSearchInputEl.addEventListener("blur", () => {
     // prevent getting unfocused on window unfocus

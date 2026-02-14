@@ -19,9 +19,17 @@
         <p id="message" class="font-message text-size-message overflow-hidden whitespace-pre-wrap text-center font-semibold text-white"></p>
         <div class="grid w-full gap-2">
           <section id="search-section" class="grid w-full grid-flow-row place-items-center gap-2">
-            <div id="search-container" class="font-search corner-style grid w-full grid-cols-[max-content_auto] border-2 border-transparent p-1 text-base opacity-0 md:p-2 md:text-2xl">
+            <div id="search-container" class="font-search corner-style grid w-full grid-cols-[max-content_auto_max-content] border-2 border-transparent p-1 text-base opacity-0 md:p-2 md:text-2xl">
               <span class="search-search-icon-color select-none font-semibold">->&nbsp;</span>
               <input id="search-input" type="text" autocomplete="off" class="font-search placeholder-color-search text-transition-none bg-transparent outline-none" />
+              <div id="search-input-buttons" class="hidden items-center gap-1 pl-1">
+                <button id="search-clear-button" type="button" class="corner-style hidden h-[1.5em] w-[1.5em] place-items-center text-lg leading-none transition-colors hover:bg-white/20 md:text-2xl">
+                  <i class="ri-close-large-line search-action-icon-color block leading-none"></i>
+                </button>
+                <button id="search-submit-button" type="button" class="corner-style hidden h-[1.5em] w-[1.5em] place-items-center text-lg leading-none transition-colors hover:bg-white/20 md:text-2xl">
+                  <i class="ri-search-line search-action-icon-color block leading-none"></i>
+                </button>
+              </div>
             </div>
             <div id="assistant-container" class="hidden w-full gap-2"></div>
             <div id="bookmarks-container"></div>

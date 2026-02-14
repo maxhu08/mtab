@@ -110,7 +110,7 @@
                 </label>
               </div>
             </div>
-            <p class="text-base text-neutral-500">When enabled the page title changes to match what is in the search bar</p>
+            <p class="text-base text-neutral-500">When enabled, the page title changes to match what is in the search bar</p>
           </div>
           <div class="grid gap-2 text-base">
             <p class="text-white">title.effect</p>
@@ -694,6 +694,34 @@
                 <span class="select-none font-semibold text-pink-500">>&nbsp;</span>
                 <input id="search-select-icon-color-input" type="text" autocomplete="off" class="bg-transparent text-white placeholder-neutral-500 outline-none" placeholder="input color..." />
               </div>
+            </div>
+            <div class="grid gap-2">
+              <div class="grid w-full grid-cols-[max-content_auto] place-items-center">
+                <p class="text-base text-white">search.buttons.clear</p>
+                <div class="ml-auto">
+                  <label class="relative inline-flex cursor-pointer items-center">
+                    <input id="search-buttons-clear-checkbox" type="checkbox" value="" class="peer sr-only" />
+                    <div
+                      class="peer h-6 w-11 rounded-full bg-neutral-800 outline-none after:absolute after:left-[3px] after:top-[3px] after:aspect-square after:h-[1.15rem] after:rounded-full after:border-none after:bg-neutral-700 after:transition-all after:content-[''] peer-checked:bg-emerald-500 peer-checked:after:translate-x-full peer-checked:after:bg-white"
+                    ></div>
+                  </label>
+                </div>
+              </div>
+              <p class="text-base text-neutral-500">When enabled, shows a button to quickly clear the search input.</p>
+            </div>
+            <div class="grid gap-2">
+              <div class="grid w-full grid-cols-[max-content_auto] place-items-center">
+                <p class="text-base text-white">search.buttons.search</p>
+                <div class="ml-auto">
+                  <label class="relative inline-flex cursor-pointer items-center">
+                    <input id="search-buttons-search-checkbox" type="checkbox" value="" class="peer sr-only" />
+                    <div
+                      class="peer h-6 w-11 rounded-full bg-neutral-800 outline-none after:absolute after:left-[3px] after:top-[3px] after:aspect-square after:h-[1.15rem] after:rounded-full after:border-none after:bg-neutral-700 after:transition-all after:content-[''] peer-checked:bg-emerald-500 peer-checked:after:translate-x-full peer-checked:after:bg-white"
+                    ></div>
+                  </label>
+                </div>
+              </div>
+              <p class="text-base text-neutral-500">When enabled, shows a button to submit your search.</p>
             </div>
             <div class="grid gap-2">
               <div class="grid w-full grid-cols-[max-content_auto] place-items-center">

@@ -11,6 +11,9 @@ export const searchResultsSectionEl = document.getElementById("search-results-se
 
 export const searchContainerEl = document.getElementById("search-container") as HTMLInputElement;
 export const searchInputEl = document.getElementById("search-input") as HTMLInputElement;
+export const searchInputButtonsEl = document.getElementById("search-input-buttons") as HTMLDivElement;
+export const searchSubmitButtonEl = document.getElementById("search-submit-button") as HTMLButtonElement;
+export const searchClearButtonEl = document.getElementById("search-clear-button") as HTMLButtonElement;
 
 export const assistantContainerEl = document.getElementById("assistant-container") as HTMLDivElement;
 
