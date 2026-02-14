@@ -2,9 +2,19 @@ import { get as idbGet, set as idbSet } from "idb-keyval";
 import { logger } from "src/utils/logger";
 
 const WALLPAPER_CACHE_NAME = "local-files";
-const WALLPAPER_CACHE_URL = "http://127.0.0.1:8888/userUploadedWallpaper/full";
+// use an unroutable, RFC 6761 reserved TLD to avoid any real network collisions.
+const WALLPAPER_CACHE_URL = "https://wallpaper.invalid/full";
 const WALLPAPER_IDB_KEY = "userUploadedWallpaper";
 const WALLPAPER_STORAGE_KEY = "userUploadedWallpaper";
+export const WALLPAPER_HINT_LOCAL_KEY = "wallpaper-first-paint-hint";
+
+type CompressOptions = {
+  type?: "jpeg" | "png" | "webp";
+  size?: number;
+  q?: number;
+  raw?: boolean;
+  square?: boolean;
+};
 
 const canUseCacheStorage = () => typeof caches !== "undefined";
 
@@ -19,6 +29,84 @@ const setStorageLocal = (key: string, value: unknown): Promise<void> =>
   new Promise((resolve) => {
     chrome.storage.local.set({ [key]: value }, () => resolve());
   });
+
+const loadOnCanvas = async (url: string, options: CompressOptions): Promise<HTMLCanvasElement> => {
+  const canvas = document.createElement("canvas");
+  const ctx = canvas.getContext("2d");
+  const img = new Image();
+
+  if (!ctx) throw new Error("Cannot get canvas context");
+
+  await new Promise((resolve) => {
+    img.onload = () => {
+      const { size, square, raw } = options;
+
+      if (raw || !size) {
+        canvas.width = img.width;
+        canvas.height = img.height;
+        ctx.drawImage(img, 0, 0);
+
+        img.remove();
+        resolve(true);
+        return;
+      }
+
+      const isLandscape = img.width > img.height;
+      let sx = 0;
+      let sy = 0;
+      let sWidth = img.width;
+      let sHeight = img.height;
+      let dWidth = size;
+      let dHeight = size;
+
+      if (!square) {
+        if (isLandscape) {
+          dHeight = size;
+          dWidth = (img.width / img.height) * size;
+        } else {
+          dWidth = size;
+          dHeight = (img.height / img.width) * size;
+        }
+      } else {
+        if (isLandscape) {
+          sx = (img.width - img.height) / 2;
+          sWidth = sHeight = img.height;
+        } else {
+          sy = (img.height - img.width) / 2;
+          sWidth = sHeight = img.width;
+        }
+      }
+
+      canvas.width = dWidth;
+      canvas.height = dHeight;
+      ctx.drawImage(img, sx, sy, sWidth, sHeight, 0, 0, dWidth, dHeight);
+
+      img.remove();
+      resolve(true);
+    };
+
+    img.src = url;
+  });
+
+  return canvas;
+};
+
+const compressAsBlob = async (elem: Blob | string, options: CompressOptions): Promise<Blob> => {
+  const type = options.type ?? "jpeg";
+  const q = options.q ?? 0.9;
+
+  const src: string = typeof elem === "string" ? elem : URL.createObjectURL(elem);
+
+  const canvas = await loadOnCanvas(src, options);
+  const ctx = canvas.getContext("2d");
+  const newBlob = await new Promise<Blob | null>((resolve) => {
+    ctx?.canvas.toBlob((b) => resolve(b), `image/${type}`, q);
+  });
+
+  if (!newBlob) throw new Error("Failed to compress wallpaper");
+  if (typeof elem !== "string") URL.revokeObjectURL(src);
+  return newBlob;
+};
 
 const getWallpaperCache = async () => {
   if (!canUseCacheStorage()) return null;
@@ -99,19 +187,49 @@ export const getStoredWallpaperFile = async (): Promise<Blob | string | undefine
   return typeof storageWallpaper === "string" ? storageWallpaper : undefined;
 };
 
+const optimizeWallpaper = async (file: Blob): Promise<Blob> => {
+  const isImage = file.type?.startsWith("image/");
+
+  // keep gifs and videos uncompressed
+  if (!isImage || file.type.includes("gif")) return file;
+
+  try {
+    const objectUrl = URL.createObjectURL(file);
+
+    const isLandscape = globalThis.screen?.orientation?.type === "landscape-primary";
+    const long = isLandscape ? globalThis.screen.width : globalThis.screen.height;
+    const short = isLandscape ? globalThis.screen.height : globalThis.screen.width;
+    const density = Math.min(2, globalThis.devicePixelRatio || 1);
+    const ratio = Math.min(1.8, long / short);
+    const target = short * ratio * density;
+
+    URL.revokeObjectURL(objectUrl);
+
+    // leave small images untouched
+    if (file.size < 300000) return file;
+
+    return await compressAsBlob(file, { size: target, q: 0.82 });
+  } catch (err) {
+    logger.log("Error compressing wallpaper", err);
+    return file;
+  }
+};
+
 export const saveUploadedWallpaperFile = async (file: Blob) => {
-  const wroteToCache = await setCachedWallpaper(file);
+  const optimized = await optimizeWallpaper(file);
+
+  const wroteToCache = await setCachedWallpaper(optimized);
 
   if (!wroteToCache) {
     try {
-      await idbSet(WALLPAPER_IDB_KEY, file);
+      await idbSet(WALLPAPER_IDB_KEY, optimized);
     } catch (err) {
       logger.log("Error writing wallpaper to IndexedDB fallback", err);
     }
   }
 
   try {
-    const base64String = await fileToBase64(file);
+    const base64String = await fileToBase64(optimized);
     await setStorageLocal(WALLPAPER_STORAGE_KEY, base64String);
   } catch (err) {
     logger.log("Error writing wallpaper base64 fallback", err);
