@@ -131,14 +131,24 @@ export const defaultConfig: Config = {
     lineOrientation: "top",
     defaultIconColor: "#ffffff",
     defaultFolderIconType: "ri-folder-fill",
-    userDefinedCols: 4,
+    userDefinedCols: 5,
     userDefined: [
       {
         type: "bookmark",
-        name: "github",
-        url: "https://github.com",
-        color: "#6366f1",
-        iconType: "ri-github-fill"
+        name: "gmail",
+        url: "https://mail.google.com/mail/u/0/#inbox",
+        color: "#ec4899",
+        iconType: "si-gmail"
+        // extra options
+        // iconColor: "#ffffff",
+        // fill: ""
+      },
+      {
+        type: "bookmark",
+        name: "chatgpt",
+        url: "https://chatgpt.com",
+        color: "#14b8a6",
+        iconType: "ri-openai-fill"
         // extra options
         // iconColor: "#ffffff",
         // fill: ""
@@ -165,10 +175,10 @@ export const defaultConfig: Config = {
       },
       {
         type: "bookmark",
-        name: "chatgpt",
-        url: "https://chatgpt.com",
-        color: "#14b8a6",
-        iconType: "ri-openai-fill"
+        name: "github",
+        url: "https://github.com",
+        color: "#6366f1",
+        iconType: "ri-github-fill"
         // extra options
         // iconColor: "#ffffff",
         // fill: ""

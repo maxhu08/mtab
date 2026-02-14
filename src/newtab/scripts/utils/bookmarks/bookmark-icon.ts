@@ -12,6 +12,7 @@ export const getBookmarkIconDetails = (
   const trimmed = bookmarkIconColor == null ? undefined : bookmarkIconColor.trim() || undefined;
 
   const iconColor = trimmed ?? bookmarksDefaultIconColor;
+  const resolvedColor = iconColor.trim();
 
   if (bookmarkIconType.startsWith("ri-")) {
     return {
@@ -38,8 +39,8 @@ export const getBookmarkIconDetails = (
 
       return {
         iconHTML:
-          trimmed !== undefined
-            ? maskSpanHTML(url, trimmed)
+          resolvedColor !== ""
+            ? maskSpanHTML(url, resolvedColor)
             : `<img class="w-10 md:w-14" src="${url}" alt="icon" />`,
         iconSizeClass: "",
         iconColor
@@ -53,8 +54,8 @@ export const getBookmarkIconDetails = (
 
     return {
       iconHTML:
-        trimmed !== undefined
-          ? maskSpanHTML(url, trimmed)
+        resolvedColor !== ""
+          ? maskSpanHTML(url, resolvedColor)
           : `<img class="w-10 md:w-14" src="${url}" alt="icon" />`,
       iconSizeClass: "",
       iconColor
@@ -64,7 +65,7 @@ export const getBookmarkIconDetails = (
   if (bookmarkIconType.startsWith("url-")) {
     const src = bookmarkIconType.slice(4);
 
-    if (!isSvgUrl(src) || trimmed === undefined) {
+    if (!isSvgUrl(src) || resolvedColor === "") {
       return {
         iconHTML: `<img class="w-10 md:w-14" src="${src}" alt="icon" />`,
         iconSizeClass: "",
@@ -73,7 +74,7 @@ export const getBookmarkIconDetails = (
     }
 
     return {
-      iconHTML: maskSpanHTML(src, trimmed),
+      iconHTML: maskSpanHTML(src, resolvedColor),
       iconSizeClass: "",
       iconColor
     };
