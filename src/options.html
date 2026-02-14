@@ -604,152 +604,7 @@
             </div>
             <span class="text-base text-neutral-500">Tip: press Ctrl+Enter to open your search in a new tab</span>
           </div>
-          <div class="grid gap-2">
-            <p class="text-base text-white">search.focusedBorderColor</p>
-            <span class="text-base text-neutral-500">(use #00000000 for none)</span>
-            <div id="search-focused-border-color-container" class="grid w-full grid-cols-[max-content_auto] rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base">
-              <span class="select-none font-semibold text-pink-500">>&nbsp;</span>
-              <input id="search-focused-border-color-input" type="text" autocomplete="off" class="bg-transparent text-white placeholder-neutral-500 outline-none" placeholder="input color..." />
-            </div>
-          </div>
           <div id="search-enabled-section" class="grid grid-flow-row gap-4">
-            <div class="grid gap-2 text-base">
-              <p class="text-white">search.font.type</p>
-              <div class="grid grid-cols-2 gap-2">
-                <button id="search-font-type-default-button" class="rounded-md bg-neutral-800 py-2 outline-none hover:bg-neutral-700">
-                  <span class="text-white">default</span>
-                </button>
-                <button id="search-font-type-custom-button" class="rounded-md bg-neutral-800 py-2 outline-none hover:bg-neutral-700">
-                  <span class="text-white">custom</span>
-                </button>
-              </div>
-            </div>
-            <div id="search-font-custom-section" class="grid grid-flow-row gap-4">
-              <div class="grid gap-2">
-                <p class="text-base text-white">search.font.custom</p>
-                <p class="text-base text-neutral-500">
-                  Use a google font url to choose a font<br />
-                  Example: https://fonts.googleapis.com/css2?family=Anton+SC&display=swap
-                </p>
-                <div id="search-font-custom-container" class="grid w-full grid-cols-[max-content_auto] rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base">
-                  <span class="select-none font-semibold text-pink-500">>&nbsp;</span>
-                  <input id="search-font-custom-input" type="text" autocomplete="off" class="bg-transparent text-white placeholder-neutral-500 outline-none" placeholder="input font url..." />
-                </div>
-              </div>
-            </div>
-            <div class="grid gap-2">
-              <p class="text-base text-white">search.textColor</p>
-              <div id="search-text-color-container" class="grid w-full grid-cols-[max-content_auto] rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base">
-                <span class="select-none font-semibold text-pink-500">>&nbsp;</span>
-                <input id="search-text-color-input" type="text" autocomplete="off" class="bg-transparent text-white placeholder-neutral-500 outline-none" placeholder="input color..." />
-              </div>
-            </div>
-            <div class="grid gap-2">
-              <p class="text-base text-white">search.placeholderText</p>
-              <div id="search-placeholder-text-container" class="grid w-full grid-cols-[max-content_auto] rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base">
-                <span class="select-none font-semibold text-pink-500">>&nbsp;</span>
-                <input id="search-placeholder-text-input" type="text" autocomplete="off" class="bg-transparent text-white placeholder-neutral-500 outline-none" placeholder="input placeholder..." />
-              </div>
-            </div>
-            <div class="grid gap-2">
-              <p class="text-base text-white">search.bookmarkPlaceholderText</p>
-              <div id="search-bookmark-placeholder-text-container" class="grid w-full grid-cols-[max-content_auto] rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base">
-                <span class="select-none font-semibold text-pink-500">>&nbsp;</span>
-                <input
-                  id="search-bookmark-placeholder-text-input"
-                  type="text"
-                  autocomplete="off"
-                  class="bg-transparent text-white placeholder-neutral-500 outline-none"
-                  placeholder="input placeholder..."
-                />
-              </div>
-            </div>
-            <div class="grid gap-2">
-              <p class="text-base text-white">search.placeholderTextColor</p>
-              <div id="search-placeholder-text-color-container" class="grid w-full grid-cols-[max-content_auto] rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base">
-                <span class="select-none font-semibold text-pink-500">>&nbsp;</span>
-                <input id="search-placeholder-text-color-input" type="text" autocomplete="off" class="bg-transparent text-white placeholder-neutral-500 outline-none" placeholder="input color..." />
-              </div>
-            </div>
-            <div class="grid gap-2">
-              <p class="text-base text-white">search.searchIconColor</p>
-              <p class="text-base text-neutral-500">This changes the -> color</p>
-              <div id="search-search-icon-color-container" class="grid w-full grid-cols-[max-content_auto] rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base">
-                <span class="select-none font-semibold text-pink-500">>&nbsp;</span>
-                <input id="search-search-icon-color-input" type="text" autocomplete="off" class="bg-transparent text-white placeholder-neutral-500 outline-none" placeholder="input color..." />
-              </div>
-            </div>
-            <div class="grid gap-2">
-              <p class="text-base text-white">search.bookmarkIconColor</p>
-              <p class="text-base text-neutral-500">This changes the // color</p>
-              <div id="search-bookmark-icon-color-container" class="grid w-full grid-cols-[max-content_auto] rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base">
-                <span class="select-none font-semibold text-pink-500">>&nbsp;</span>
-                <input id="search-bookmark-icon-color-input" type="text" autocomplete="off" class="bg-transparent text-white placeholder-neutral-500 outline-none" placeholder="input color..." />
-              </div>
-            </div>
-            <div class="grid gap-2">
-              <p class="text-base text-white">search.selectIconColor</p>
-              <p class="text-base text-neutral-500">This changes the > color</p>
-              <div id="search-select-icon-color-container" class="grid w-full grid-cols-[max-content_auto] rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base">
-                <span class="select-none font-semibold text-pink-500">>&nbsp;</span>
-                <input id="search-select-icon-color-input" type="text" autocomplete="off" class="bg-transparent text-white placeholder-neutral-500 outline-none" placeholder="input color..." />
-              </div>
-            </div>
-            <div class="grid gap-2">
-              <div class="grid w-full grid-cols-[max-content_auto] place-items-center">
-                <p class="text-base text-white">search.buttons.clear</p>
-                <div class="ml-auto">
-                  <label class="relative inline-flex cursor-pointer items-center">
-                    <input id="search-buttons-clear-checkbox" type="checkbox" value="" class="peer sr-only" />
-                    <div
-                      class="peer h-6 w-11 rounded-full bg-neutral-800 outline-none after:absolute after:left-[3px] after:top-[3px] after:aspect-square after:h-[1.15rem] after:rounded-full after:border-none after:bg-neutral-700 after:transition-all after:content-[''] peer-checked:bg-emerald-500 peer-checked:after:translate-x-full peer-checked:after:bg-white"
-                    ></div>
-                  </label>
-                </div>
-              </div>
-              <p class="text-base text-neutral-500">When enabled, shows a button to quickly clear the search input.</p>
-            </div>
-            <div class="grid gap-2">
-              <div class="grid w-full grid-cols-[max-content_auto] place-items-center">
-                <p class="text-base text-white">search.buttons.search</p>
-                <div class="ml-auto">
-                  <label class="relative inline-flex cursor-pointer items-center">
-                    <input id="search-buttons-search-checkbox" type="checkbox" value="" class="peer sr-only" />
-                    <div
-                      class="peer h-6 w-11 rounded-full bg-neutral-800 outline-none after:absolute after:left-[3px] after:top-[3px] after:aspect-square after:h-[1.15rem] after:rounded-full after:border-none after:bg-neutral-700 after:transition-all after:content-[''] peer-checked:bg-emerald-500 peer-checked:after:translate-x-full peer-checked:after:bg-white"
-                    ></div>
-                  </label>
-                </div>
-              </div>
-              <p class="text-base text-neutral-500">When enabled, shows a button to submit your search.</p>
-            </div>
-            <div class="grid gap-2">
-              <div class="grid w-full grid-cols-[max-content_auto] place-items-center">
-                <p class="text-base text-white">search.recognizeLinks</p>
-                <div class="ml-auto">
-                  <label class="relative inline-flex cursor-pointer items-center">
-                    <input id="search-recognize-links-checkbox" type="checkbox" value="" class="peer sr-only" />
-                    <div
-                      class="peer h-6 w-11 rounded-full bg-neutral-800 outline-none after:absolute after:left-[3px] after:top-[3px] after:aspect-square after:h-[1.15rem] after:rounded-full after:border-none after:bg-neutral-700 after:transition-all after:content-[''] peer-checked:bg-emerald-500 peer-checked:after:translate-x-full peer-checked:after:bg-white"
-                    ></div>
-                  </label>
-                </div>
-              </div>
-              <p class="text-base text-neutral-500">
-                Automatically detects links in search results and opens them directly instead of running a search
-                <br /><br />
-                e.g., typing `example.com` navigates directly to https://example.com instead of performing a search
-              </p>
-            </div>
-            <div id="search-recognize-links-section" class="grid gap-2">
-              <div class="grid gap-2">
-                <p class="text-base text-white">search.linkTextColor</p>
-                <div id="search-link-text-color-container" class="grid w-full grid-cols-[max-content_auto] rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base">
-                  <span class="select-none font-semibold text-pink-500">>&nbsp;</span>
-                  <input id="search-link-text-color-input" type="text" autocomplete="off" class="bg-transparent text-white placeholder-neutral-500 outline-none" placeholder="input color..." />
-                </div>
-              </div>
-            </div>
             <div class="grid gap-2 text-base">
               <p class="text-white">search.engine</p>
               <div class="grid grid-cols-2 gap-2">
@@ -833,6 +688,72 @@
                   placeholder="E.g https://www.google.com/search?q={}"
                 />
               </div>
+            </div>
+            <div class="grid gap-2">
+              <p class="text-base text-white">search.placeholderText</p>
+              <div id="search-placeholder-text-container" class="grid w-full grid-cols-[max-content_auto] rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base">
+                <span class="select-none font-semibold text-pink-500">>&nbsp;</span>
+                <input id="search-placeholder-text-input" type="text" autocomplete="off" class="bg-transparent text-white placeholder-neutral-500 outline-none" placeholder="input placeholder..." />
+              </div>
+            </div>
+            <div class="grid gap-2">
+              <p class="text-base text-white">search.bookmarkPlaceholderText</p>
+              <div id="search-bookmark-placeholder-text-container" class="grid w-full grid-cols-[max-content_auto] rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base">
+                <span class="select-none font-semibold text-pink-500">>&nbsp;</span>
+                <input
+                  id="search-bookmark-placeholder-text-input"
+                  type="text"
+                  autocomplete="off"
+                  class="bg-transparent text-white placeholder-neutral-500 outline-none"
+                  placeholder="input placeholder..."
+                />
+              </div>
+            </div>
+            <div class="grid gap-2">
+              <div class="grid w-full grid-cols-[max-content_auto] place-items-center">
+                <p class="text-base text-white">search.buttons.clear</p>
+                <div class="ml-auto">
+                  <label class="relative inline-flex cursor-pointer items-center">
+                    <input id="search-buttons-clear-checkbox" type="checkbox" value="" class="peer sr-only" />
+                    <div
+                      class="peer h-6 w-11 rounded-full bg-neutral-800 outline-none after:absolute after:left-[3px] after:top-[3px] after:aspect-square after:h-[1.15rem] after:rounded-full after:border-none after:bg-neutral-700 after:transition-all after:content-[''] peer-checked:bg-emerald-500 peer-checked:after:translate-x-full peer-checked:after:bg-white"
+                    ></div>
+                  </label>
+                </div>
+              </div>
+              <p class="text-base text-neutral-500">When enabled, shows a button to quickly clear the search input.</p>
+            </div>
+            <div class="grid gap-2">
+              <div class="grid w-full grid-cols-[max-content_auto] place-items-center">
+                <p class="text-base text-white">search.buttons.search</p>
+                <div class="ml-auto">
+                  <label class="relative inline-flex cursor-pointer items-center">
+                    <input id="search-buttons-search-checkbox" type="checkbox" value="" class="peer sr-only" />
+                    <div
+                      class="peer h-6 w-11 rounded-full bg-neutral-800 outline-none after:absolute after:left-[3px] after:top-[3px] after:aspect-square after:h-[1.15rem] after:rounded-full after:border-none after:bg-neutral-700 after:transition-all after:content-[''] peer-checked:bg-emerald-500 peer-checked:after:translate-x-full peer-checked:after:bg-white"
+                    ></div>
+                  </label>
+                </div>
+              </div>
+              <p class="text-base text-neutral-500">When enabled, shows a button to submit your search.</p>
+            </div>
+            <div class="grid gap-2">
+              <div class="grid w-full grid-cols-[max-content_auto] place-items-center">
+                <p class="text-base text-white">search.recognizeLinks</p>
+                <div class="ml-auto">
+                  <label class="relative inline-flex cursor-pointer items-center">
+                    <input id="search-recognize-links-checkbox" type="checkbox" value="" class="peer sr-only" />
+                    <div
+                      class="peer h-6 w-11 rounded-full bg-neutral-800 outline-none after:absolute after:left-[3px] after:top-[3px] after:aspect-square after:h-[1.15rem] after:rounded-full after:border-none after:bg-neutral-700 after:transition-all after:content-[''] peer-checked:bg-emerald-500 peer-checked:after:translate-x-full peer-checked:after:bg-white"
+                    ></div>
+                  </label>
+                </div>
+              </div>
+              <p class="text-base text-neutral-500">
+                Automatically detects links in search results and opens them directly instead of running a search
+                <br /><br />
+                e.g., typing `example.com` navigates directly to https://example.com instead of performing a search
+              </p>
             </div>
             <div class="grid gap-2">
               <div class="grid w-full grid-cols-[max-content_auto] place-items-center">
@@ -955,6 +876,85 @@
                 <br /><br />
                 Order of arguments and flags does not matter
               </p>
+            </div>
+            <div class="grid gap-2">
+              <p class="text-base text-white">search.focusedBorderColor</p>
+              <span class="text-base text-neutral-500">(use #00000000 for none)</span>
+              <div id="search-focused-border-color-container" class="grid w-full grid-cols-[max-content_auto] rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base">
+                <span class="select-none font-semibold text-pink-500">>&nbsp;</span>
+                <input id="search-focused-border-color-input" type="text" autocomplete="off" class="bg-transparent text-white placeholder-neutral-500 outline-none" placeholder="input color..." />
+              </div>
+            </div>
+            <div class="grid gap-2 text-base">
+              <p class="text-white">search.font.type</p>
+              <div class="grid grid-cols-2 gap-2">
+                <button id="search-font-type-default-button" class="rounded-md bg-neutral-800 py-2 outline-none hover:bg-neutral-700">
+                  <span class="text-white">default</span>
+                </button>
+                <button id="search-font-type-custom-button" class="rounded-md bg-neutral-800 py-2 outline-none hover:bg-neutral-700">
+                  <span class="text-white">custom</span>
+                </button>
+              </div>
+            </div>
+            <div id="search-font-custom-section" class="grid grid-flow-row gap-4">
+              <div class="grid gap-2">
+                <p class="text-base text-white">search.font.custom</p>
+                <p class="text-base text-neutral-500">
+                  Use a google font url to choose a font<br />
+                  Example: https://fonts.googleapis.com/css2?family=Anton+SC&display=swap
+                </p>
+                <div id="search-font-custom-container" class="grid w-full grid-cols-[max-content_auto] rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base">
+                  <span class="select-none font-semibold text-pink-500">>&nbsp;</span>
+                  <input id="search-font-custom-input" type="text" autocomplete="off" class="bg-transparent text-white placeholder-neutral-500 outline-none" placeholder="input font url..." />
+                </div>
+              </div>
+            </div>
+            <div class="grid gap-2">
+              <p class="text-base text-white">search.textColor</p>
+              <div id="search-text-color-container" class="grid w-full grid-cols-[max-content_auto] rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base">
+                <span class="select-none font-semibold text-pink-500">>&nbsp;</span>
+                <input id="search-text-color-input" type="text" autocomplete="off" class="bg-transparent text-white placeholder-neutral-500 outline-none" placeholder="input color..." />
+              </div>
+            </div>
+            <div class="grid gap-2">
+              <p class="text-base text-white">search.placeholderTextColor</p>
+              <div id="search-placeholder-text-color-container" class="grid w-full grid-cols-[max-content_auto] rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base">
+                <span class="select-none font-semibold text-pink-500">>&nbsp;</span>
+                <input id="search-placeholder-text-color-input" type="text" autocomplete="off" class="bg-transparent text-white placeholder-neutral-500 outline-none" placeholder="input color..." />
+              </div>
+            </div>
+            <div class="grid gap-2">
+              <p class="text-base text-white">search.searchIconColor</p>
+              <p class="text-base text-neutral-500">This changes the -> color</p>
+              <div id="search-search-icon-color-container" class="grid w-full grid-cols-[max-content_auto] rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base">
+                <span class="select-none font-semibold text-pink-500">>&nbsp;</span>
+                <input id="search-search-icon-color-input" type="text" autocomplete="off" class="bg-transparent text-white placeholder-neutral-500 outline-none" placeholder="input color..." />
+              </div>
+            </div>
+            <div class="grid gap-2">
+              <p class="text-base text-white">search.bookmarkIconColor</p>
+              <p class="text-base text-neutral-500">This changes the // color</p>
+              <div id="search-bookmark-icon-color-container" class="grid w-full grid-cols-[max-content_auto] rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base">
+                <span class="select-none font-semibold text-pink-500">>&nbsp;</span>
+                <input id="search-bookmark-icon-color-input" type="text" autocomplete="off" class="bg-transparent text-white placeholder-neutral-500 outline-none" placeholder="input color..." />
+              </div>
+            </div>
+            <div class="grid gap-2">
+              <p class="text-base text-white">search.selectIconColor</p>
+              <p class="text-base text-neutral-500">This changes the > color</p>
+              <div id="search-select-icon-color-container" class="grid w-full grid-cols-[max-content_auto] rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base">
+                <span class="select-none font-semibold text-pink-500">>&nbsp;</span>
+                <input id="search-select-icon-color-input" type="text" autocomplete="off" class="bg-transparent text-white placeholder-neutral-500 outline-none" placeholder="input color..." />
+              </div>
+            </div>
+            <div id="search-recognize-links-section" class="grid gap-2">
+              <div class="grid gap-2">
+                <p class="text-base text-white">search.linkTextColor</p>
+                <div id="search-link-text-color-container" class="grid w-full grid-cols-[max-content_auto] rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base">
+                  <span class="select-none font-semibold text-pink-500">>&nbsp;</span>
+                  <input id="search-link-text-color-input" type="text" autocomplete="off" class="bg-transparent text-white placeholder-neutral-500 outline-none" placeholder="input color..." />
+                </div>
+              </div>
             </div>
           </div>
         </section>

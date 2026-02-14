@@ -1,58 +1,32 @@
 import { Config, FontType, SearchEngine } from "src/utils/config";
 import {
   searchEnabledCheckboxEl,
-  searchFocusedBorderColorInputEl,
-  searchPlaceholderTextColorInputEl,
-  searchPlaceholderTextInputEl,
-  searchTextColorInputEl,
   searchUseCustomEngineCheckboxEl,
   searchCustomEngineURLInputEl,
-  searchBookmarkPlaceholderTextInputEl,
-  searchSearchIconColorInputEl,
-  searchBookmarkIconColorInputEl,
-  searchSelectIconColorInputEl,
+  searchButtonsClearCheckboxEl,
+  searchButtonsSearchCheckboxEl,
+  searchRecognizeLinksCheckboxEl,
+  searchSuggestionsCheckboxEl,
   searchAssistDateCheckboxEl,
   searchAssistMathCheckboxEl,
   searchAssistDefinitionsCheckboxEl,
   searchAssistConversionsCheckboxEl,
-  searchFontCustomInputEl,
-  searchRecognizeLinksCheckboxEl,
-  searchLinkTextColorInputEl,
-  searchSuggestionsCheckboxEl,
   searchAssistPasswordGeneratorCheckboxEl,
-  searchButtonsClearCheckboxEl,
-  searchButtonsSearchCheckboxEl
+  searchPlaceholderTextInputEl,
+  searchBookmarkPlaceholderTextInputEl,
+  searchFocusedBorderColorInputEl,
+  searchFontCustomInputEl,
+  searchTextColorInputEl,
+  searchPlaceholderTextColorInputEl,
+  searchSearchIconColorInputEl,
+  searchBookmarkIconColorInputEl,
+  searchSelectIconColorInputEl,
+  searchLinkTextColorInputEl
 } from "src/options/scripts/ui";
 import { getSelectedButton } from "src/options/scripts/utils/get-selected-button";
 
 export const saveSearchSettingsToDraft = (draft: Config) => {
   draft.search.enabled = searchEnabledCheckboxEl.checked;
-
-  const selectedFontTypeEl = getSelectedButton("search-font-type");
-  const searchFontTypePairs: Record<string, FontType> = {
-    "search-font-type-default-button": "default",
-    "search-font-type-custom-button": "custom"
-  };
-  if (selectedFontTypeEl) {
-    draft.search.font.type = searchFontTypePairs[selectedFontTypeEl.id];
-  }
-  draft.search.font.custom = searchFontCustomInputEl.value;
-
-  draft.search.textColor = searchTextColorInputEl.value;
-  draft.search.placeholderText = searchPlaceholderTextInputEl.value;
-  draft.search.bookmarkPlaceholderText = searchBookmarkPlaceholderTextInputEl.value;
-  draft.search.placeholderTextColor = searchPlaceholderTextColorInputEl.value;
-
-  draft.search.linkTextColor = searchLinkTextColorInputEl.value;
-
-  draft.search.searchIconColor = searchSearchIconColorInputEl.value;
-  draft.search.bookmarkIconColor = searchBookmarkIconColorInputEl.value;
-  draft.search.selectIconColor = searchSelectIconColorInputEl.value;
-  draft.search.buttons.clear = searchButtonsClearCheckboxEl.checked;
-  draft.search.buttons.search = searchButtonsSearchCheckboxEl.checked;
-
-  draft.search.recognizeLinks = searchRecognizeLinksCheckboxEl.checked;
-  draft.search.suggestions = searchSuggestionsCheckboxEl.checked;
 
   draft.search.useCustomEngine = searchUseCustomEngineCheckboxEl.checked;
   draft.search.customEngineURL = searchCustomEngineURLInputEl.value;
@@ -77,11 +51,35 @@ export const saveSearchSettingsToDraft = (draft: Config) => {
     }
   }
 
-  draft.search.focusedBorderColor = searchFocusedBorderColorInputEl.value;
+  draft.search.buttons.clear = searchButtonsClearCheckboxEl.checked;
+  draft.search.buttons.search = searchButtonsSearchCheckboxEl.checked;
+  draft.search.recognizeLinks = searchRecognizeLinksCheckboxEl.checked;
+  draft.search.suggestions = searchSuggestionsCheckboxEl.checked;
 
   draft.search.assist.date = searchAssistDateCheckboxEl.checked;
   draft.search.assist.math = searchAssistMathCheckboxEl.checked;
   draft.search.assist.definitions = searchAssistDefinitionsCheckboxEl.checked;
   draft.search.assist.conversions = searchAssistConversionsCheckboxEl.checked;
   draft.search.assist.passwordGenerator = searchAssistPasswordGeneratorCheckboxEl.checked;
+
+  draft.search.placeholderText = searchPlaceholderTextInputEl.value;
+  draft.search.bookmarkPlaceholderText = searchBookmarkPlaceholderTextInputEl.value;
+  draft.search.focusedBorderColor = searchFocusedBorderColorInputEl.value;
+
+  const selectedFontTypeEl = getSelectedButton("search-font-type");
+  const searchFontTypePairs: Record<string, FontType> = {
+    "search-font-type-default-button": "default",
+    "search-font-type-custom-button": "custom"
+  };
+  if (selectedFontTypeEl) {
+    draft.search.font.type = searchFontTypePairs[selectedFontTypeEl.id];
+  }
+  draft.search.font.custom = searchFontCustomInputEl.value;
+
+  draft.search.textColor = searchTextColorInputEl.value;
+  draft.search.placeholderTextColor = searchPlaceholderTextColorInputEl.value;
+  draft.search.searchIconColor = searchSearchIconColorInputEl.value;
+  draft.search.bookmarkIconColor = searchBookmarkIconColorInputEl.value;
+  draft.search.selectIconColor = searchSelectIconColorInputEl.value;
+  draft.search.linkTextColor = searchLinkTextColorInputEl.value;
 };

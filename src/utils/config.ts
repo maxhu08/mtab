@@ -86,27 +86,14 @@ export const defaultConfig: Config = {
   },
   search: {
     enabled: true,
+    engine: "duckduckgo",
+    useCustomEngine: false,
+    customEngineURL: "",
     buttons: {
       clear: true,
       search: true
     },
-    font: {
-      type: "default",
-      custom: ""
-    },
-    textColor: "#ffffff",
-    placeholderText: "search...",
-    bookmarkPlaceholderText: "find bookmark...",
-    placeholderTextColor: "#a1a1aa",
-    searchIconColor: "#14b8a6",
-    bookmarkIconColor: "#3b82f6",
-    selectIconColor: "#f59e0b",
     recognizeLinks: true,
-    linkTextColor: "#0ea5e9",
-    engine: "duckduckgo",
-    useCustomEngine: false,
-    customEngineURL: "",
-    focusedBorderColor: "#0ea5e9",
     suggestions: true,
     assist: {
       date: true,
@@ -114,7 +101,20 @@ export const defaultConfig: Config = {
       definitions: true,
       conversions: true,
       passwordGenerator: true
-    }
+    },
+    placeholderText: "search...",
+    bookmarkPlaceholderText: "find bookmark...",
+    focusedBorderColor: "#0ea5e9",
+    font: {
+      type: "default",
+      custom: ""
+    },
+    textColor: "#ffffff",
+    placeholderTextColor: "#a1a1aa",
+    searchIconColor: "#14b8a6",
+    bookmarkIconColor: "#3b82f6",
+    selectIconColor: "#f59e0b",
+    linkTextColor: "#0ea5e9"
   },
   hotkeys: {
     enabled: true,
@@ -316,27 +316,14 @@ export interface Config {
   };
   search: {
     enabled: boolean;
+    engine: SearchEngine;
+    useCustomEngine: boolean;
+    customEngineURL: string;
     buttons: {
       clear: boolean;
       search: boolean;
     };
-    font: {
-      type: FontType;
-      custom: string;
-    };
-    textColor: string;
-    placeholderText: string;
-    bookmarkPlaceholderText: string;
-    placeholderTextColor: string;
-    searchIconColor: string;
-    bookmarkIconColor: string;
-    selectIconColor: string;
     recognizeLinks: boolean;
-    linkTextColor: string;
-    engine: SearchEngine;
-    useCustomEngine: boolean;
-    customEngineURL: string;
-    focusedBorderColor: string;
     suggestions: boolean;
     assist: {
       date: boolean;
@@ -345,6 +332,19 @@ export interface Config {
       conversions: boolean;
       passwordGenerator: boolean;
     };
+    placeholderText: string;
+    bookmarkPlaceholderText: string;
+    focusedBorderColor: string;
+    font: {
+      type: FontType;
+      custom: string;
+    };
+    textColor: string;
+    placeholderTextColor: string;
+    searchIconColor: string;
+    bookmarkIconColor: string;
+    selectIconColor: string;
+    linkTextColor: string;
   };
   hotkeys: {
     enabled: boolean;

@@ -1,63 +1,42 @@
 import { Config, FontType, SearchEngine } from "src/utils/config";
 import {
+  searchEnabledCheckboxEl,
   searchEngineDuckduckgoButtonEl,
+  searchEngineGoogleButtonEl,
   searchEngineBingButtonEl,
   searchEngineBraveButtonEl,
-  searchEngineGoogleButtonEl,
   searchEngineYahooButtonEl,
   searchEngineYandexButtonEl,
   searchEngineStartpageButtonEl,
   searchEngineEcosiaButtonEl,
-  searchFocusedBorderColorInputEl,
-  searchPlaceholderTextInputEl,
-  searchTextColorInputEl,
-  searchPlaceholderTextColorInputEl,
-  searchEnabledCheckboxEl,
+  searchEngineKagiButtonEl,
   searchUseCustomEngineCheckboxEl,
   searchCustomEngineURLInputEl,
-  searchBookmarkPlaceholderTextInputEl,
-  searchSearchIconColorInputEl,
-  searchBookmarkIconColorInputEl,
-  searchSelectIconColorInputEl,
+  searchButtonsClearCheckboxEl,
+  searchButtonsSearchCheckboxEl,
   searchRecognizeLinksCheckboxEl,
-  searchLinkTextColorInputEl,
   searchSuggestionsCheckboxEl,
   searchAssistDateCheckboxEl,
   searchAssistMathCheckboxEl,
   searchAssistDefinitionsCheckboxEl,
   searchAssistConversionsCheckboxEl,
-  searchFontCustomInputEl,
+  searchAssistPasswordGeneratorCheckboxEl,
+  searchPlaceholderTextInputEl,
+  searchBookmarkPlaceholderTextInputEl,
+  searchFocusedBorderColorInputEl,
   searchFontTypeDefaultButtonEl,
   searchFontTypeCustomButtonEl,
-  searchEngineKagiButtonEl,
-  searchAssistPasswordGeneratorCheckboxEl,
-  searchButtonsClearCheckboxEl,
-  searchButtonsSearchCheckboxEl
+  searchFontCustomInputEl,
+  searchTextColorInputEl,
+  searchPlaceholderTextColorInputEl,
+  searchSearchIconColorInputEl,
+  searchBookmarkIconColorInputEl,
+  searchSelectIconColorInputEl,
+  searchLinkTextColorInputEl
 } from "src/options/scripts/ui";
 
 export const fillSearchInputs = (config: Config) => {
   searchEnabledCheckboxEl.checked = config.search.enabled;
-  searchFocusedBorderColorInputEl.value = config.search.focusedBorderColor;
-
-  const searchFontTypePairs: Record<FontType, HTMLButtonElement> = {
-    default: searchFontTypeDefaultButtonEl,
-    custom: searchFontTypeCustomButtonEl
-  };
-  searchFontTypePairs[config.search.font.type].click();
-  searchFontCustomInputEl.value = config.search.font.custom;
-
-  searchTextColorInputEl.value = config.search.textColor;
-  searchPlaceholderTextInputEl.value = config.search.placeholderText;
-  searchBookmarkPlaceholderTextInputEl.value = config.search.bookmarkPlaceholderText;
-  searchPlaceholderTextColorInputEl.value = config.search.placeholderTextColor;
-
-  searchLinkTextColorInputEl.value = config.search.linkTextColor;
-
-  searchSearchIconColorInputEl.value = config.search.searchIconColor;
-  searchBookmarkIconColorInputEl.value = config.search.bookmarkIconColor;
-  searchSelectIconColorInputEl.value = config.search.selectIconColor;
-  searchButtonsClearCheckboxEl.checked = config.search.buttons.clear;
-  searchButtonsSearchCheckboxEl.checked = config.search.buttons.search;
 
   const searchEnginePairs: Record<SearchEngine, HTMLButtonElement> = {
     duckduckgo: searchEngineDuckduckgoButtonEl,
@@ -78,6 +57,8 @@ export const fillSearchInputs = (config: Config) => {
   searchUseCustomEngineCheckboxEl.checked = config.search.useCustomEngine;
   searchCustomEngineURLInputEl.value = config.search.customEngineURL;
 
+  searchButtonsClearCheckboxEl.checked = config.search.buttons.clear;
+  searchButtonsSearchCheckboxEl.checked = config.search.buttons.search;
   searchRecognizeLinksCheckboxEl.checked = config.search.recognizeLinks;
   searchSuggestionsCheckboxEl.checked = config.search.suggestions;
 
@@ -86,4 +67,22 @@ export const fillSearchInputs = (config: Config) => {
   searchAssistDefinitionsCheckboxEl.checked = config.search.assist.definitions;
   searchAssistConversionsCheckboxEl.checked = config.search.assist.conversions;
   searchAssistPasswordGeneratorCheckboxEl.checked = config.search.assist.passwordGenerator;
+
+  searchPlaceholderTextInputEl.value = config.search.placeholderText;
+  searchBookmarkPlaceholderTextInputEl.value = config.search.bookmarkPlaceholderText;
+  searchFocusedBorderColorInputEl.value = config.search.focusedBorderColor;
+
+  const searchFontTypePairs: Record<FontType, HTMLButtonElement> = {
+    default: searchFontTypeDefaultButtonEl,
+    custom: searchFontTypeCustomButtonEl
+  };
+  searchFontTypePairs[config.search.font.type].click();
+  searchFontCustomInputEl.value = config.search.font.custom;
+
+  searchTextColorInputEl.value = config.search.textColor;
+  searchPlaceholderTextColorInputEl.value = config.search.placeholderTextColor;
+  searchSearchIconColorInputEl.value = config.search.searchIconColor;
+  searchBookmarkIconColorInputEl.value = config.search.bookmarkIconColor;
+  searchSelectIconColorInputEl.value = config.search.selectIconColor;
+  searchLinkTextColorInputEl.value = config.search.linkTextColor;
 };
