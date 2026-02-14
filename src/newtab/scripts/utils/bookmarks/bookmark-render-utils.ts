@@ -473,6 +473,34 @@ export const getOpenFolderVisibleBookmarkButtons = () => {
   ) as HTMLButtonElement[];
 };
 
+export const navigateOpenFolderPagination = (direction: "prev" | "next") => {
+  if (!renderRuntime) return false;
+  if (!renderRuntime.config.bookmarks.enablePagination) return false;
+
+  const folderAreaEl = renderRuntime.currentOpenFolderEl;
+  const folderUUID = getFolderUUIDFromArea(folderAreaEl);
+  const paginationState = renderRuntime.paginationStateByFolderUUID.get(folderUUID);
+  if (!paginationState || !paginationState.enabled) return false;
+
+  const itemsContainerEl = folderAreaEl.children[0] as HTMLDivElement;
+  const totalItems = itemsContainerEl.children.length;
+  if (totalItems === 0 || !Number.isFinite(paginationState.itemsPerPage)) return false;
+
+  const totalPages = Math.max(1, Math.ceil(totalItems / paginationState.itemsPerPage));
+  if (totalPages <= 1) return false;
+
+  const targetPage =
+    direction === "prev"
+      ? Math.max(1, paginationState.currentPage - 1)
+      : Math.min(totalPages, paginationState.currentPage + 1);
+
+  if (targetPage === paginationState.currentPage) return false;
+
+  paginationState.currentPage = targetPage;
+  applyPagination(folderAreaEl, renderRuntime.config);
+  return true;
+};
+
 export const renderBookmarkNodes = (
   bookmarkNodes: BookmarkNode[],
   folderAreaEl: HTMLDivElement,
