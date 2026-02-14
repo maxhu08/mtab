@@ -51,9 +51,11 @@ export const handleSearchSuggestions = (
 
   let abort: AbortController | null = null;
   let items: SearchResultItem[] = [];
+  let refreshRunId = 0;
 
   const refresh = async () => {
     const q = inputEl.value.trim();
+    const runId = ++refreshRunId;
 
     if (q === "") {
       hideSearchResultsSection();
@@ -69,6 +71,8 @@ export const handleSearchSuggestions = (
 
     const suggestions = await fetchSearchSuggestions(q).catch(() => []);
     if (signal.aborted) return;
+    if (runId !== refreshRunId) return;
+    if (inputEl.value.trim() !== q) return;
 
     const merged = uniq([q, ...suggestions]);
 
@@ -99,6 +103,9 @@ export const handleSearchSuggestions = (
 
     const raw = inputEl.value.trim();
     if (raw === "") {
+      refreshRunId++;
+      abort?.abort();
+      abort = null;
       items = [];
       hideSearchResultsSection();
       return;
