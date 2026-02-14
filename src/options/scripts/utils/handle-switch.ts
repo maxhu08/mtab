@@ -1,4 +1,5 @@
 import {
+  bookmarksEnablePaginationCheckboxEl,
   bookmarksDefaultBlockyColorTypeCustomButtonEl,
   bookmarksDefaultBlockyColorTypeRandomButtonEl,
   bookmarksTypeDefaultBlockyButtonEl,
@@ -40,6 +41,7 @@ export const handleSwitches = () => {
   handleSearchFontTypeSwitch();
   handleBookmarksTypeSwitch();
   handleUserDefinedOrDefaultBlockySwitch();
+  handleBookmarksPaginationSwitch();
   handleBookmarksDefaultBlockyColorTypeSwitch();
   handleBookmarksDefaultOrDefaultBlockySwitch();
 };
@@ -272,6 +274,19 @@ const handleUserDefinedOrDefaultBlockySwitch = () => {
   bookmarksTypeDefaultButtonEl.addEventListener("click", () => hide());
   bookmarksTypeDefaultBlockyButtonEl.addEventListener("click", () => show());
   bookmarksTypeNoneButtonEl.addEventListener("click", () => hide());
+};
+
+const handleBookmarksPaginationSwitch = () => {
+  const maxRowsSection = document.getElementById(
+    "bookmarks-max-bookmark-rows-per-page-section"
+  ) as HTMLDivElement;
+
+  const sync = () => {
+    maxRowsSection.style.display = bookmarksEnablePaginationCheckboxEl.checked ? "grid" : "none";
+  };
+
+  bookmarksEnablePaginationCheckboxEl.addEventListener("change", sync);
+  sync();
 };
 
 const handleBookmarksDefaultBlockyColorTypeSwitch = () => {

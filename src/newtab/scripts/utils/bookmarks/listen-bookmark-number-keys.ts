@@ -1,5 +1,6 @@
 import { BookmarksType } from "src/utils/config";
 import { bookmarksContainerEl, bookmarkSearchInputEl, searchInputEl } from "src/newtab/scripts/ui";
+import { getOpenFolderVisibleBookmarkButtons } from "src/newtab/scripts/utils/bookmarks/bookmark-render-utils";
 
 export const listenBookmarkNumberKeys = (listen: boolean, bookmarksType: BookmarksType) => {
   if (bookmarksType !== "user-defined" && bookmarksType !== "default-blocky") return;
@@ -21,12 +22,9 @@ export const listenBookmarkNumberKeys = (listen: boolean, bookmarksType: Bookmar
       } // check if the key is a number between 1 and 9
       else if (key >= "1" && key <= "9") {
         const index = parseInt(key, 10) - 1;
-
-        // prettier-ignore
-        const currFolderAreaEl = bookmarksContainerEl.querySelector('[folder-state="open"]') as HTMLDivElement;
-
-        if (index < currFolderAreaEl.children[0].children.length) {
-          const nthBookmark = currFolderAreaEl.children[0].children[index] as HTMLButtonElement;
+        const visibleBookmarks = getOpenFolderVisibleBookmarkButtons();
+        if (index < visibleBookmarks.length) {
+          const nthBookmark = visibleBookmarks[index];
 
           const mouseEvent = new MouseEvent("mouseup", {
             bubbles: true,

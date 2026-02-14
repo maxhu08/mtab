@@ -126,6 +126,8 @@ export const defaultConfig: Config = {
     type: "user-defined",
     showBookmarkNames: false,
     numberKeys: false,
+    enablePagination: false,
+    maxBookmarkRowsPerPage: 2,
     lineOrientation: "top",
     defaultIconColor: "#ffffff",
     defaultFolderIconType: "ri-folder-fill",
@@ -356,6 +358,8 @@ export interface Config {
     type: BookmarksType;
     showBookmarkNames: boolean;
     numberKeys: boolean;
+    enablePagination: boolean;
+    maxBookmarkRowsPerPage: number;
     userDefinedCols: number;
     lineOrientation: BookmarkLineOrientation;
     defaultIconColor: string;

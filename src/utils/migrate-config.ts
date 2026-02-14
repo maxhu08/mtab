@@ -175,5 +175,15 @@ export const migrateOldConfig = (config: Config): Config => {
     (config.search as any).buttons.search = true;
   }
 
+  if (typeof (config.bookmarks as any).enablePagination !== "boolean") {
+    (config.bookmarks as any).enablePagination = true;
+  }
+  if (
+    typeof (config.bookmarks as any).maxBookmarkRowsPerPage !== "number" ||
+    !Number.isFinite((config.bookmarks as any).maxBookmarkRowsPerPage)
+  ) {
+    (config.bookmarks as any).maxBookmarkRowsPerPage = 2;
+  }
+
   return config;
 };

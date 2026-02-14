@@ -23,6 +23,8 @@ import {
   bookmarksDefaultFaviconSourceGoogleButton,
   bookmarksDefaultFaviconSourceDuckduckgoButton,
   bookmarksNumberKeysCheckboxEl,
+  bookmarksEnablePaginationCheckboxEl,
+  bookmarksMaxBookmarkRowsPerPageInputEl,
   bookmarksLineOrientationTopButtonEl,
   bookmarksLineOrientationBottomButtonEl,
   bookmarksLineOrientationLeftButtonEl,
@@ -40,6 +42,9 @@ export const fillBookmarksInputs = (config: Config) => {
   bookmarksDefaultBlockyColorInputEl.value = config.bookmarks.defaultBlockyColor;
 
   bookmarksNumberKeysCheckboxEl.checked = config.bookmarks.numberKeys;
+  bookmarksEnablePaginationCheckboxEl.checked = config.bookmarks.enablePagination;
+  bookmarksMaxBookmarkRowsPerPageInputEl.value = config.bookmarks.maxBookmarkRowsPerPage.toString();
+  bookmarksEnablePaginationCheckboxEl.dispatchEvent(new Event("change"));
   bookmarksDefaultIconColorInputEl.value = config.bookmarks.defaultIconColor;
   bookmarksDefaultFolderIconTypeInputEl.value = config.bookmarks.defaultFolderIconType;
 

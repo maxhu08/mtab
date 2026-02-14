@@ -11,6 +11,8 @@ import {
   bookmarksDefaultBlockyColsInputEl,
   bookmarksDefaultFolderIconTypeInputEl,
   bookmarksDefaultIconColorInputEl,
+  bookmarksEnablePaginationCheckboxEl,
+  bookmarksMaxBookmarkRowsPerPageInputEl,
   bookmarksNumberKeysCheckboxEl,
   bookmarksShowBookmarkNamesCheckboxEl
 } from "src/options/scripts/ui";
@@ -24,6 +26,11 @@ export const saveBookmarksSettingsToDraft = (draft: Config) => {
   draft.bookmarks.defaultBlockyColor = bookmarksDefaultBlockyColorInputEl.value;
 
   draft.bookmarks.numberKeys = bookmarksNumberKeysCheckboxEl.checked;
+  draft.bookmarks.enablePagination = bookmarksEnablePaginationCheckboxEl.checked;
+  draft.bookmarks.maxBookmarkRowsPerPage = Math.max(
+    1,
+    parseInt(bookmarksMaxBookmarkRowsPerPageInputEl.value) || 1
+  );
   draft.bookmarks.defaultIconColor = bookmarksDefaultIconColorInputEl.value;
   draft.bookmarks.defaultFolderIconType = bookmarksDefaultFolderIconTypeInputEl.value;
 

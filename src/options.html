@@ -1068,6 +1068,32 @@
               <p class="text-neutral-500">Enabling numberKeys -> makes it so that pressing 1 opens first bookmark, 2 opens second bookmark, and so on (0 activates the back button)</p>
             </div>
             <div class="grid gap-2 text-base">
+              <div class="grid w-full grid-cols-[max-content_auto] place-items-center">
+                <p class="text-base text-white">bookmarks.enablePagination</p>
+                <div class="ml-auto">
+                  <label class="relative inline-flex cursor-pointer items-center">
+                    <input id="bookmarks-enable-pagination-checkbox" type="checkbox" value="" class="peer sr-only" />
+                    <div
+                      class="peer h-6 w-11 rounded-full bg-neutral-800 outline-none after:absolute after:left-[3px] after:top-[3px] after:aspect-square after:h-[1.15rem] after:rounded-full after:border-none after:bg-neutral-700 after:transition-all after:content-[''] peer-checked:bg-emerald-500 peer-checked:after:translate-x-full peer-checked:after:bg-white"
+                    ></div>
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div id="bookmarks-max-bookmark-rows-per-page-section" class="grid gap-2">
+              <p class="text-base text-white">bookmarks.maxBookmarkRowsPerPage</p>
+              <div id="bookmarks-max-bookmark-rows-per-page-container" class="grid w-full grid-cols-[max-content_auto] rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base">
+                <span class="select-none font-semibold text-pink-500">>&nbsp;</span>
+                <input
+                  id="bookmarks-max-bookmark-rows-per-page-input"
+                  type="text"
+                  autocomplete="off"
+                  class="bg-transparent text-white placeholder-neutral-500 outline-none"
+                  placeholder="input number..."
+                />
+              </div>
+            </div>
+            <div class="grid gap-2 text-base">
               <p class="text-white">bookmarks.lineOrientation</p>
               <div class="grid grid-cols-2 gap-2">
                 <button id="bookmarks-line-orientation-top-button" class="rounded-md bg-neutral-800 py-2 outline-none hover:bg-neutral-700">

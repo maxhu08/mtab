@@ -37,7 +37,17 @@ type RenderRuntime = {
   config: Config;
   folderMetaByUUID: Map<string, FolderMeta>;
   folderAreaByUUID: Map<string, HTMLDivElement>;
+  paginationStateByFolderUUID: Map<string, PaginationState>;
   currentOpenFolderEl: HTMLDivElement;
+};
+
+type PaginationState = {
+  enabled: boolean;
+  itemsPerPage: number;
+  currentPage: number;
+  controlsEl: HTMLDivElement | null;
+  prevButtonEl: HTMLButtonElement | null;
+  nextButtonEl: HTMLButtonElement | null;
 };
 
 let renderRuntime: RenderRuntime | null = null;
@@ -51,6 +61,25 @@ const getFolderUUIDFromArea = (folderAreaEl: HTMLDivElement) =>
 
 const getBorderEl = (buttonEl: HTMLButtonElement) =>
   buttonEl.querySelector(`[${BORDER_ROLE_ATTR}='border']`) as HTMLDivElement | null;
+
+const sanitizePositiveInt = (value: number, fallback: number) =>
+  Number.isFinite(value) && value > 0 ? Math.floor(value) : fallback;
+
+const getBookmarkCols = (config: Config) => {
+  if (config.bookmarks.type === "default-blocky") {
+    return sanitizePositiveInt(config.bookmarks.defaultBlockyCols, 1);
+  }
+
+  return sanitizePositiveInt(config.bookmarks.userDefinedCols, 1);
+};
+
+const getItemsPerPage = (config: Config) => {
+  if (!config.bookmarks.enablePagination) return Number.POSITIVE_INFINITY;
+
+  const rows = sanitizePositiveInt(config.bookmarks.maxBookmarkRowsPerPage, 1);
+  const cols = getBookmarkCols(config);
+  return rows * cols;
+};
 
 const handleBookmarkAction = (actionButtonEl: HTMLButtonElement, openInNewTab: boolean) => {
   if (!renderRuntime) return;
@@ -204,6 +233,7 @@ const openFolderByUUID = (folderUUID: string) => {
     initializeRenderedButton(backRendered.borderEl);
     backRendered.buttonEl.setAttribute("data-bookmark-action", "back");
     backRendered.buttonEl.setAttribute("data-parent-folder-uuid", meta.parentFolderUUID);
+    applyPagination(folderAreaEl, renderRuntime.config);
 
     const folderFrag = document.createDocumentFragment();
     folderFrag.appendChild(folderAreaEl);
@@ -230,8 +260,217 @@ export const initBookmarkRenderRuntime = (rootFolderAreaEl: HTMLDivElement, conf
     config,
     folderMetaByUUID: new Map(),
     folderAreaByUUID: new Map([[rootFolderUUID, rootFolderAreaEl]]),
+    paginationStateByFolderUUID: new Map(),
     currentOpenFolderEl: rootFolderAreaEl
   };
+};
+
+const updatePaginationControls = (
+  folderActionsAreaEl: HTMLDivElement,
+  totalPages: number,
+  paginationState: PaginationState
+) => {
+  if (!paginationState.controlsEl) return;
+  if (!paginationState.prevButtonEl || !paginationState.nextButtonEl) return;
+
+  const backButtonEl = folderActionsAreaEl.querySelector(
+    "button[data-bookmark-action='back']"
+  ) as HTMLButtonElement | null;
+
+  if (totalPages <= 1) {
+    if (backButtonEl && backButtonEl.parentElement === paginationState.controlsEl) {
+      folderActionsAreaEl.appendChild(backButtonEl);
+    }
+    paginationState.controlsEl.style.display = "none";
+    return;
+  }
+
+  const atStart = paginationState.currentPage <= 1;
+  const atEnd = paginationState.currentPage >= totalPages;
+  const showPrev = !atStart;
+  const showNext = !atEnd;
+
+  const leftSlotEl = document.createElement("div");
+  leftSlotEl.className = "grid place-items-center";
+  leftSlotEl.appendChild(showPrev ? paginationState.prevButtonEl : createPaginationSpacer());
+
+  const centerSlotEl = document.createElement("div");
+  centerSlotEl.className = "grid place-items-center";
+  centerSlotEl.appendChild(backButtonEl ?? createPaginationSpacer());
+
+  const rightSlotEl = document.createElement("div");
+  rightSlotEl.className = "grid place-items-center";
+  rightSlotEl.appendChild(showNext ? paginationState.nextButtonEl : createPaginationSpacer());
+
+  paginationState.controlsEl.className =
+    "mt-2 grid grid-cols-[max-content_max-content_max-content] items-center justify-center gap-2";
+  paginationState.controlsEl.replaceChildren(leftSlotEl, centerSlotEl, rightSlotEl);
+  paginationState.controlsEl.style.display = "grid";
+
+  folderActionsAreaEl.appendChild(paginationState.controlsEl);
+};
+
+const createPaginationSpacer = () => {
+  const spacerEl = document.createElement("div");
+  spacerEl.className = "h-9 md:h-12 aspect-square invisible pointer-events-none";
+  return spacerEl;
+};
+
+const createPaginationNavButton = (
+  uiStyle: UIStyle,
+  messageTextColor: string,
+  iconType: string,
+  onClick: () => void
+) => {
+  const buttonEl = document.createElement("button");
+  buttonEl.type = "button";
+  buttonEl.className = `relative duration-[250ms] ease-out bg-foreground cursor-pointer ${uiStyle === "glass" ? "glass-effect " : ""}corner-style h-9 md:h-12 aspect-square overflow-hidden outline-none`;
+  buttonEl.addEventListener("click", onClick);
+
+  const borderDiv = document.createElement("div");
+  borderDiv.className =
+    "absolute top-0 left-0 w-full h-9 md:h-12 border-2 border-transparent corner-style";
+
+  const hoverDiv = document.createElement("div");
+  hoverDiv.className = "absolute top-0 left-0 w-full h-9 md:h-12 hover:bg-white/20";
+
+  const iconWrapper = document.createElement("div");
+  iconWrapper.className = "grid h-full w-full place-items-center text-xl md:text-2xl";
+  iconWrapper.style.color = messageTextColor;
+
+  const iconEl = document.createElement("i");
+  iconEl.className = iconType;
+  iconWrapper.appendChild(iconEl);
+
+  buttonEl.appendChild(borderDiv);
+  buttonEl.appendChild(hoverDiv);
+  buttonEl.appendChild(iconWrapper);
+
+  return buttonEl;
+};
+
+const buildPaginationControls = (
+  folderActionsAreaEl: HTMLDivElement,
+  paginationState: PaginationState,
+  uiStyle: UIStyle,
+  messageTextColor: string,
+  updatePage: (nextPage: number) => void
+) => {
+  const controlsEl = document.createElement("div");
+  controlsEl.className = "mt-2 grid gap-2 place-items-center";
+
+  const prevButtonEl = createPaginationNavButton(
+    uiStyle,
+    messageTextColor,
+    "ri-arrow-left-s-line",
+    () => {
+      updatePage(paginationState.currentPage - 1);
+    }
+  );
+
+  const nextButtonEl = createPaginationNavButton(
+    uiStyle,
+    messageTextColor,
+    "ri-arrow-right-s-line",
+    () => {
+      updatePage(paginationState.currentPage + 1);
+    }
+  );
+
+  controlsEl.appendChild(prevButtonEl);
+  controlsEl.appendChild(nextButtonEl);
+  folderActionsAreaEl.appendChild(controlsEl);
+
+  paginationState.controlsEl = controlsEl;
+  paginationState.prevButtonEl = prevButtonEl;
+  paginationState.nextButtonEl = nextButtonEl;
+};
+
+const applyPagination = (folderAreaEl: HTMLDivElement, config: Config) => {
+  if (!renderRuntime) return;
+
+  const folderUUID = getFolderUUIDFromArea(folderAreaEl);
+  const itemsContainerEl = folderAreaEl.children[0] as HTMLDivElement;
+  const folderActionsAreaEl = folderAreaEl.children[1] as HTMLDivElement;
+
+  let paginationState = renderRuntime.paginationStateByFolderUUID.get(folderUUID);
+  if (!paginationState) {
+    paginationState = {
+      enabled: config.bookmarks.enablePagination,
+      itemsPerPage: getItemsPerPage(config),
+      currentPage: 1,
+      controlsEl: null,
+      prevButtonEl: null,
+      nextButtonEl: null
+    };
+    renderRuntime.paginationStateByFolderUUID.set(folderUUID, paginationState);
+  }
+
+  paginationState.enabled = config.bookmarks.enablePagination;
+  paginationState.itemsPerPage = getItemsPerPage(config);
+
+  const itemButtonEls = Array.from(itemsContainerEl.children) as HTMLButtonElement[];
+  if (!paginationState.enabled || itemButtonEls.length === 0) {
+    itemButtonEls.forEach((buttonEl) => buttonEl.classList.remove("hidden"));
+    if (paginationState.controlsEl) {
+      const backButtonEl = folderActionsAreaEl.querySelector(
+        "button[data-bookmark-action='back']"
+      ) as HTMLButtonElement | null;
+      if (backButtonEl && backButtonEl.parentElement === paginationState.controlsEl) {
+        folderActionsAreaEl.appendChild(backButtonEl);
+      }
+      paginationState.controlsEl.style.display = "none";
+    }
+    paginationState.currentPage = 1;
+    return;
+  }
+
+  const totalPages = Math.max(1, Math.ceil(itemButtonEls.length / paginationState.itemsPerPage));
+  paginationState.currentPage = Math.min(paginationState.currentPage, totalPages);
+
+  const applyPage = () => {
+    if (!paginationState) return;
+
+    const start = (paginationState.currentPage - 1) * paginationState.itemsPerPage;
+    const end = start + paginationState.itemsPerPage;
+
+    itemButtonEls.forEach((buttonEl, index) => {
+      if (index >= start && index < end) {
+        buttonEl.classList.remove("hidden");
+      } else {
+        buttonEl.classList.add("hidden");
+      }
+    });
+
+    updatePaginationControls(folderActionsAreaEl, totalPages, paginationState);
+  };
+
+  if (!paginationState.controlsEl) {
+    buildPaginationControls(
+      folderActionsAreaEl,
+      paginationState,
+      config.ui.style,
+      config.message.textColor,
+      (nextPage) => {
+        paginationState!.currentPage = Math.min(Math.max(1, nextPage), totalPages);
+        applyPage();
+      }
+    );
+  }
+
+  applyPage();
+};
+
+export const getOpenFolderVisibleBookmarkButtons = () => {
+  const currentFolderAreaEl = bookmarksContainerEl.querySelector(
+    '[folder-state="open"]'
+  ) as HTMLDivElement | null;
+  if (!currentFolderAreaEl) return [] as HTMLButtonElement[];
+
+  const itemsContainerEl = currentFolderAreaEl.children[0] as HTMLDivElement;
+  return Array.from(itemsContainerEl.children).filter(
+    (child) => !child.classList.contains("hidden")
+  ) as HTMLButtonElement[];
 };
 
 export const renderBookmarkNodes = (
@@ -323,6 +562,7 @@ export const renderBookmarkNodes = (
   });
 
   itemsContainerEl.appendChild(frag);
+  applyPagination(folderAreaEl, config);
   if (withAnimations) {
     for (const buttonEl of nodesToAnimate) {
       handleAnimation(buttonEl, animationsInitialType);
