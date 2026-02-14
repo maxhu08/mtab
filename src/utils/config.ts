@@ -137,7 +137,7 @@ export const defaultConfig: Config = {
         type: "bookmark",
         name: "gmail",
         url: "https://mail.google.com/mail/u/0/#inbox",
-        color: "#ec4899",
+        color: "#3b82f6",
         iconType: "si-gmail"
         // extra options
         // iconColor: "#ffffff",
