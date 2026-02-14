@@ -1,10 +1,11 @@
-# Changes in 1.10.4
+# Changes in 1.10.5
 
 in this release:
 
-- add bookmarks.defaultIconColor and make bookmark node iconColor property optional
+- improve how wallpapers are handled
+- add bookmarks pagination
+- add clear and search buttons for search
 - improve options page
+- update remix icons from v4.7.0 -> v4.9.1
 - performance improvements
-- fix default-blocky bookmark settings not saving
-- fix issue with rendering url bookmark icons
 - bug fixes
