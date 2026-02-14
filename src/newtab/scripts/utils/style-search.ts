@@ -12,6 +12,7 @@ import { insertCSS } from "src/newtab/scripts/utils/insert-css";
 export const styleSearch = (
   style: UIStyle,
   enabled: boolean,
+  animationsEnabled: boolean,
   textColor: string,
   placeholderTextColor: string,
   searchIconColor: string,
@@ -51,6 +52,11 @@ export const styleSearch = (
   insertCSS(
     `.placeholder-color-search::placeholder{color:${placeholderTextColor};}.placeholder-color-bookmark-search::placeholder{color:${placeholderTextColor};}.search-search-icon-color{color:${searchIconColor};}.search-bookmark-icon-color{color:${bookmarkIconColor};}.search-select-icon-color{color:${selectIconColor};}.search-action-icon-color{color:${placeholderTextColor};}`,
     "search-theme-style"
+  );
+
+  insertCSS(
+    `.search-action-button::before{transition-duration:${animationsEnabled ? "120ms" : "0ms"};}`,
+    "search-animation-style"
   );
 
   if (fontType === "default") {
