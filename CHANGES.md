@@ -1,6 +1,5 @@
-# Changes in 1.10.6
+# Changes in 1.10.7
 
 in this release:
 
-- change default config
 - bug fixes
