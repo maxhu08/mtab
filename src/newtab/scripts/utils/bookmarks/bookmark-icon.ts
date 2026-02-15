@@ -52,10 +52,7 @@ export const getBookmarkIconDetails = (
     const url = `/icons/simpleicons/${icon}.svg`;
 
     return {
-      iconHTML:
-        trimmed !== undefined
-          ? maskSpanHTML(url, trimmed)
-          : `<img class="w-10 md:w-14" src="${url}" alt="icon" />`,
+      iconHTML: maskSpanHTML(url, iconColor),
       iconSizeClass: "",
       iconColor
     };
