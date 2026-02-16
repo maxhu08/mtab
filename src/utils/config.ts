@@ -126,7 +126,7 @@ export const defaultConfig: Config = {
     type: "user-defined",
     showBookmarkNames: false,
     numberKeys: false,
-    enablePagination: false,
+    enablePagination: true,
     maxBookmarkRowsPerPage: 2,
     lineOrientation: "top",
     defaultIconColor: "#ffffff",
