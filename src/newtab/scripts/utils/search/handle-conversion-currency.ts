@@ -109,7 +109,7 @@ export const handleConversionCurrency = async (
   const input = normalizeInput(val);
   if (!input) return undefined;
 
-  const parts = input.split(/\bto\b/i).map((p) => p.trim());
+  const parts = input.split(/\b(?:into|to|in)\b/i).map((p) => p.trim());
   if (parts.length > 2) return undefined;
 
   const left = parts[0];
