@@ -132,45 +132,6 @@ export const migrateOldConfig = (config: Config): Config => {
     delete (config.ui as any).backgroundColor;
   }
 
-  // migrate single wallpaper url/solidColor fields to arrays
-  const legacyUrl =
-    typeof (config.wallpaper as any).url === "string" ? (config.wallpaper as any).url.trim() : "";
-  const legacySolidColor =
-    typeof (config.wallpaper as any).solidColor === "string"
-      ? (config.wallpaper as any).solidColor.trim()
-      : "";
-
-  const migratedUrls = toCleanStringArray((config.wallpaper as any).urls);
-  const migratedSolidColors = toCleanStringArray((config.wallpaper as any).solidColors);
-
-  (config.wallpaper as any).urls =
-    migratedUrls.length > 0 ? migratedUrls : legacyUrl.length > 0 ? [legacyUrl] : [];
-
-  (config.wallpaper as any).solidColors =
-    migratedSolidColors.length > 0
-      ? migratedSolidColors
-      : legacySolidColor.length > 0
-        ? [legacySolidColor]
-        : ["#171717"];
-
-  const allowedWallpaperFrequencies = [
-    "constant",
-    "every-tab",
-    "every-hour",
-    "every-day",
-    "daylight"
-  ];
-  if (
-    !(config.wallpaper as any).frequency ||
-    typeof (config.wallpaper as any).frequency !== "string" ||
-    !allowedWallpaperFrequencies.includes((config.wallpaper as any).frequency)
-  ) {
-    (config.wallpaper as any).frequency = "constant";
-  }
-
-  delete (config.wallpaper as any).url;
-  delete (config.wallpaper as any).solidColor;
-
   // if config is before v1.10.4
   // add bookmarks.defaultIconColor and drop redundant node.iconColor when it equals the default
   // only runs when defaultIconColor is missing or invalid to avoid messing with users who have already added this property manually
@@ -232,6 +193,46 @@ export const migrateOldConfig = (config: Config): Config => {
   ) {
     (config.bookmarks as any).maxBookmarkRowsPerPage = 2;
   }
+
+  // if config is before v1.10.8
+  // migrate single wallpaper url/solidColor fields to arrays and add wallpaper.frequency
+  const legacyUrl =
+    typeof (config.wallpaper as any).url === "string" ? (config.wallpaper as any).url.trim() : "";
+  const legacySolidColor =
+    typeof (config.wallpaper as any).solidColor === "string"
+      ? (config.wallpaper as any).solidColor.trim()
+      : "";
+
+  const migratedUrls = toCleanStringArray((config.wallpaper as any).urls);
+  const migratedSolidColors = toCleanStringArray((config.wallpaper as any).solidColors);
+
+  (config.wallpaper as any).urls =
+    migratedUrls.length > 0 ? migratedUrls : legacyUrl.length > 0 ? [legacyUrl] : [];
+
+  (config.wallpaper as any).solidColors =
+    migratedSolidColors.length > 0
+      ? migratedSolidColors
+      : legacySolidColor.length > 0
+        ? [legacySolidColor]
+        : ["#171717"];
+
+  const allowedWallpaperFrequencies = [
+    "constant",
+    "every-tab",
+    "every-hour",
+    "every-day",
+    "daylight"
+  ];
+  if (
+    !(config.wallpaper as any).frequency ||
+    typeof (config.wallpaper as any).frequency !== "string" ||
+    !allowedWallpaperFrequencies.includes((config.wallpaper as any).frequency)
+  ) {
+    (config.wallpaper as any).frequency = "constant";
+  }
+
+  delete (config.wallpaper as any).url;
+  delete (config.wallpaper as any).solidColor;
 
   return config;
 };
