@@ -2,7 +2,7 @@ import {
   wallpaperFileUploadInputEl,
   wallpaperFiltersBlurInputEl,
   wallpaperFiltersBrightnessInputEl,
-  wallpaperFileResetButtonEl,
+  wallpaperResetAllButtonEl,
   wallpaperGalleryEl
 } from "src/options/scripts/ui";
 import {
@@ -20,7 +20,7 @@ import {
   previewWallpaperSolidColor
 } from "src/options/scripts/utils/preview";
 import { getSelectedButton } from "src/options/scripts/utils/get-selected-button";
-import { showInputDialog } from "src/options/scripts/utils/input-dialog";
+import { showActionDialog, showInputDialog } from "src/options/scripts/utils/input-dialog";
 import { logger } from "src/utils/logger";
 
 const wallpaperGalleryWrapperEl = document.getElementById(
@@ -28,6 +28,9 @@ const wallpaperGalleryWrapperEl = document.getElementById(
 ) as HTMLDivElement | null;
 const wallpaperDefaultPreviewSectionEl = document.getElementById(
   "wallpaper-default-preview-section"
+) as HTMLDivElement | null;
+const wallpaperResetAllWrapperEl = document.getElementById(
+  "wallpaper-reset-all-wrapper"
 ) as HTMLDivElement | null;
 
 let wallpaperUrls: string[] = [];
@@ -435,6 +438,30 @@ const renderFileGallery = async (renderNonce: number) => {
   wallpaperGalleryEl.appendChild(addTile);
 };
 
+const resetAllWallpapersForActiveType = async () => {
+  const type = getActiveWallpaperType();
+
+  if (type === "url") {
+    wallpaperUrls = [];
+    selectedURLIndex = -1;
+    await renderWallpaperGallery();
+    return;
+  }
+
+  if (type === "solid-color") {
+    wallpaperSolidColors = [];
+    selectedSolidColorIndex = -1;
+    await renderWallpaperGallery();
+    return;
+  }
+
+  if (type === "file-upload") {
+    await resetUploadedWallpaperFiles();
+    focusedFileId = null;
+    await renderWallpaperGallery();
+  }
+};
+
 export const renderWallpaperGallery = async () => {
   wallpaperGalleryRenderNonce += 1;
   const renderNonce = wallpaperGalleryRenderNonce;
@@ -445,10 +472,12 @@ export const renderWallpaperGallery = async () => {
     wallpaperGalleryEl.style.display = "none";
     if (wallpaperGalleryWrapperEl) wallpaperGalleryWrapperEl.style.display = "none";
     if (wallpaperDefaultPreviewSectionEl) wallpaperDefaultPreviewSectionEl.style.display = "block";
+    if (wallpaperResetAllWrapperEl) wallpaperResetAllWrapperEl.style.display = "none";
   } else {
     wallpaperGalleryEl.style.display = "grid";
     if (wallpaperGalleryWrapperEl) wallpaperGalleryWrapperEl.style.display = "block";
     if (wallpaperDefaultPreviewSectionEl) wallpaperDefaultPreviewSectionEl.style.display = "none";
+    if (wallpaperResetAllWrapperEl) wallpaperResetAllWrapperEl.style.display = "block";
   }
 
   if (type === "url") {
@@ -484,18 +513,18 @@ export const handleWallpaperFileUpload = () => {
     }
   });
 
-  wallpaperFileResetButtonEl.onclick = () => {
-    void resetUploadedWallpaperFiles().then(() => {
-      focusedFileId = null;
-      return renderWallpaperGallery();
-    });
+  wallpaperResetAllButtonEl.onclick = () => {
+    void showActionDialog(
+      "do you want to reset all wallpapers for the selected type? this cannot be undone.",
+      {
+        cancelText: "cancel",
+        actionText: "reset",
+        onAction: async () => {
+          await resetAllWallpapersForActiveType();
+        }
+      }
+    );
   };
-};
-
-export const handWallpaperFileReset = () => {
-  void resetUploadedWallpaperFiles();
-  focusedFileId = null;
-  void renderWallpaperGallery();
 };
 
 const getPreviewMediaEl = () =>

@@ -17,7 +17,6 @@ import { saveConfig } from "src/options/scripts/utils/save-config";
 import { saveAndExportConfig } from "src/options/scripts/utils/export-config";
 import { setDefaultConfig } from "src/options/scripts/utils/set-default-config";
 import { handleCustomFaviconReset } from "src/options/scripts/utils/upload-favicon";
-import { handWallpaperFileReset } from "src/options/scripts/utils/upload-wallpaper";
 import { importConfigAndSave } from "src/options/scripts/utils/import-config";
 import tippy from "tippy.js";
 
@@ -52,10 +51,6 @@ export const listenToInputs = () => {
   // prettier-ignore
   const resetFaviconBtn = document.getElementById("title-custom-favicon-reset-button") as HTMLButtonElement;
   resetFaviconBtn.onclick = () => handleCustomFaviconReset();
-
-  // prettier-ignore
-  const resetWallpaperBtn = document.getElementById("wallpaper-file-upload-reset-button") as HTMLButtonElement;
-  resetWallpaperBtn.onclick = () => handWallpaperFileReset();
 
   const saveBtn = document.getElementById("save-button") as HTMLButtonElement;
   saveBtn.onclick = () => saveConfig();

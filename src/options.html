@@ -368,12 +368,7 @@
                     <br /><br />
                     Note: fileUploads wallpapers are not included when exporting and importing configs due to taking too much space
                   </p>
-                  <div class="grid grid-cols-2 gap-2">
-                    <input type="file" id="wallpaper-file-upload-input" accept="image/*,video/*" multiple class="hidden" />
-                    <button id="wallpaper-file-upload-reset-button" class="w-full cursor-pointer rounded-md bg-rose-500 p-2 transition hover:bg-rose-600">
-                      <span class="text-base text-white">reset all</span>
-                    </button>
-                  </div>
+                  <input type="file" id="wallpaper-file-upload-input" accept="image/*,video/*" multiple class="hidden" />
                 </div>
               </div>
               <div id="wallpaper-solid-color-section">
@@ -389,6 +384,11 @@
                   <div class="grid grid-cols-3 gap-2">
                     <div class="aspect-video rounded-md bg-cover bg-center" style="background-image: url(&quot;./assets/wallpapers/default.jpg&quot;)"></div>
                   </div>
+                </div>
+                <div id="wallpaper-reset-all-wrapper">
+                  <button id="wallpaper-reset-all-button" class="w-full cursor-pointer rounded-md bg-rose-500 p-2 transition hover:bg-rose-600">
+                    <span class="text-base text-white">reset all</span>
+                  </button>
                 </div>
               </div>
               <div id="wallpaper-not-solid-color-section" class="grid gap-4">
