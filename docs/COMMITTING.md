@@ -2,9 +2,15 @@
 
 ## Commit Message
 
-- Keep messages short and specific.
-- Include issue number when relevant.
-- Example: `fix search toggle state (#11)`
+- Use Conventional Commits format:
+  - `type(optional-scope): short summary`
+- Common types: `feat`, `fix`, `docs`, `refactor`, `chore`, `test`.
+- Examples:
+  - `feat(search): add custom engine toggle`
+  - `fix(options): persist wallpaper setting`
+  - `docs(contributing): shorten setup section`
+- Include issue number when relevant:
+  - `feat(search): add custom engine toggle (#11)`
 
 ## Pre-Commit Hook
 
