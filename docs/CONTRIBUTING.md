@@ -1,14 +1,23 @@
-# Developer Documentation
+# Contributing
 
-- This document is a work in progress
-- In this document, anything with a trailing slash is a folder (e.g `src/options/` is a folder but `src/options.ts` is not a folder)
+Use this page as the fast entry point for contributors.
 
-## Table of Contents
+## Quick Start
 
-Before contributing make sure to read about how to setup your environment, coding style, project structure, & how to commit.
+1. Read [Setup](./SETUP.md) and run the project locally.
+2. Follow [Coding Style](./CODING_STYLE.md) while you code.
+3. If you touch options UI/config behavior, read [Options Page](./OPTIONS_PAGE.md).
+4. Check [Project Structure](./PROJECT_STRUCTURE.md) if you are unsure where code belongs.
+5. Use [Committing](./COMMITTING.md) before opening a PR.
 
-1. [Setup](./SETUP.md)
-2. [Coding Style](./CODING_STYLE.md)
-3. [Options Page](./OPTIONS_PAGE.md)
-4. [Project Structure](./PROJECT_STRUCTURE.md)
-5. [Committing](./COMMITTING.md)
+## Useful Things
+
+- Run development build: `bun d`
+- Build release artifacts: `bun build-chrome` and `bun build-firefox`
+- Package zip files: `bun package-chrome` and `bun package-firefox`
+- Formatter is enforced by pre-commit hooks; keep your changes clean before committing.
+
+## Scope Notes
+
+- Paths ending in `/` are directories.
+- Keep PRs focused: one change-set, one clear purpose.

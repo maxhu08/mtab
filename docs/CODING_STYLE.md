@@ -1,66 +1,34 @@
-## Coding Style
-Everything specified here will be applied by Prettier anyway when you commit, but I'm adding it here anyway fore completeness sake.
+# Coding Style
 
-- There are 2 spaces per indent
+Formatting is handled by Prettier on commit. Follow these project-specific rules:
 
-- There are no trailing comma's
-  - Correct: 
-    ```typescript
-    const data = [
-      1,
-      2,
-      3 // <--- Notice how there's no trailing comma
-    ]
-    ```
-  - Incorrect: 
-    ```typescript
-    const data = [
-      1,
-      2,
-      3, // <--- Notice the trailing comma
-    ]
-    ```
+## Core Rules
 
+- Use 2-space indentation.
+- Do not use trailing commas.
+- Use `camelCase` for variables and object keys.
+- Use `PascalCase` for interface names and types.
 
-**Naming variables**
+## Config Key Naming
 
-- Variables are in camelCase
-
-**Naming keys in objects**
-
-- Use present tense (e.g., `search.useCustomEngine` instead of `search.usingCustomEngine`)
-- Keys must be in camelCase
-- For nested keys, avoid using the parent key in the child key's name
+- Use present tense: `search.useCustomEngine`, not `search.usingCustomEngine`.
+- For nested keys, do not repeat the parent name.
+- Prefer:
   - Wrong: `{ search: { useCustomSearchEngine: true } }`
   - Right: `{ search: { useCustomEngine: true } }`
-  - If you are still confused, you can see many examples of this in `src/newtab/scripts/config.ts`
 
-**Union Types**
+Useful reference: `src/newtab/scripts/config.ts`.
 
-- Union types will have each of its choices on a separate line
-- E.g
-  ```typescript
-  type Modes = "normal" | "insert" | "visual";
-  ```
-- The last line of the union type should end with a semicolon
+## TypeScript Patterns
 
-**Interfaces**
+- Keep interface fields one per line and end each with `;`.
+- End type declarations with `;`.
 
-- Use PascalCase for interface names
-- E.g
-  - Correct:
-    ```typescript
-    interface ButtonSwitch {
-      buttons: HTMLButtonElement[];
-      attr: string;
-    }
-    ```
-  - Wrong:
-    ```typescript
-    interface buttonSwitch {
-      buttons: HTMLButtonElement[];
-      attr: string;
-    }
-    ```
-- Each key of the interface should be on a separate line
-- Each key of the interface end with a semicolon
+Example:
+
+```ts
+interface ButtonSwitch {
+  buttons: HTMLButtonElement[];
+  attr: string;
+}
+```
