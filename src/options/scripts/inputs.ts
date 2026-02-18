@@ -64,7 +64,7 @@ export const listenToInputs = () => {
   exportBtn.onclick = () => saveAndExportConfig();
 
   const importBtn = document.getElementById("import-button") as HTMLButtonElement;
-  importBtn.onclick = () => importConfigAndSave();
+  importBtn.onclick = () => void importConfigAndSave();
 
   const base = {
     placement: "top" as const,

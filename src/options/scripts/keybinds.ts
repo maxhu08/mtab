@@ -19,7 +19,7 @@ export const listenToKeys = () => {
     if (e.ctrlKey && e.key === "i") {
       e.preventDefault();
 
-      importConfigAndSave();
+      void importConfigAndSave();
     }
   });
 };

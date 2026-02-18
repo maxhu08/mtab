@@ -3,10 +3,11 @@ import {
   addBookmarkNodeBookmark,
   addBookmarkNodeFolder
 } from "src/options/scripts/utils/bookmarks/handle-bookmark-ui";
+import { showInputDialog } from "src/options/scripts/utils/input-dialog";
 import { BookmarkNode } from "src/utils/config";
 
-export const importBookmarkNode = () => {
-  const dataToImport = prompt("input your bookmark or folder");
+export const importBookmarkNode = async () => {
+  const dataToImport = await showInputDialog("input your bookmark or folder");
 
   if (dataToImport === null) {
     toast.error("could not import your bookmark or folder");

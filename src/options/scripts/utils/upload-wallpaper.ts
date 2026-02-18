@@ -20,6 +20,7 @@ import {
   previewWallpaperSolidColor
 } from "src/options/scripts/utils/preview";
 import { getSelectedButton } from "src/options/scripts/utils/get-selected-button";
+import { showInputDialog } from "src/options/scripts/utils/input-dialog";
 import { logger } from "src/utils/logger";
 
 const wallpaperGalleryWrapperEl = document.getElementById(
@@ -197,7 +198,7 @@ export const addWallpaperForActiveType = async () => {
   const type = getActiveWallpaperType();
 
   if (type === "url") {
-    const value = prompt("Input wallpaper URL");
+    const value = await showInputDialog("Input wallpaper URL");
     if (!value) return;
 
     const normalized = value.trim();
@@ -210,7 +211,7 @@ export const addWallpaperForActiveType = async () => {
   }
 
   if (type === "solid-color") {
-    const value = prompt("Input wallpaper color (e.g. #171717)");
+    const value = await showInputDialog("Input wallpaper color (e.g. #171717)");
     if (!value) return;
 
     const normalized = value.trim();

@@ -1,14 +1,14 @@
 import { countNodes } from "src/options/scripts/utils/bookmarks/count";
 import { setBookmarkNodes } from "src/options/scripts/utils/bookmarks/set-bookmarks";
+import { showInputDialog } from "src/options/scripts/utils/input-dialog";
 import { BookmarkNode } from "src/utils/config";
 
-export const importAllBookmarkNodes = () => {
-  const dataToImport = prompt(
+export const importAllBookmarkNodes = async () => {
+  const dataToImport = await showInputDialog(
     "input your bookmarks and folders to import (THIS WILL OVERWRITE YOUR CURRENT BOOKMARKS AND FOLDERS)"
   );
 
   if (dataToImport === null) {
-    toast.error("could not import your bookmarks and folders");
     return;
   }
 

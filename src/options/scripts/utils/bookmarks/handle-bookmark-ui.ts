@@ -449,9 +449,9 @@ addFolderButtonEl.onclick = () => {
   );
 };
 
-importBookmarkNodeButtonEl.onclick = () => importBookmarkNode();
+importBookmarkNodeButtonEl.onclick = () => void importBookmarkNode();
 exportAllBookmarkNodesButtonEl.onclick = () => exportAllBookmarkNodes();
-importAllBookmarkNodesButtonEl.onclick = () => importAllBookmarkNodes();
+importAllBookmarkNodesButtonEl.onclick = () => void importAllBookmarkNodes();
 
 export const fixBookmarkNodes = () => {
   initSortableForExistingDropzones();
