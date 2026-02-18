@@ -331,46 +331,63 @@
                 </button>
               </div>
             </div>
+            <div id="wallpaper-frequency-section" class="grid gap-2 text-base">
+              <p class="text-white">wallpaper.frequency</p>
+              <div class="grid grid-cols-2 gap-2">
+                <button id="wallpaper-frequency-constant-button" class="rounded-md bg-neutral-800 py-2 outline-none hover:bg-neutral-700">
+                  <span class="text-white">constant</span>
+                </button>
+                <button id="wallpaper-frequency-every-tab-button" class="rounded-md bg-neutral-800 py-2 outline-none hover:bg-neutral-700">
+                  <span class="text-white">every-tab</span>
+                </button>
+                <button id="wallpaper-frequency-every-hour-button" class="rounded-md bg-neutral-800 py-2 outline-none hover:bg-neutral-700">
+                  <span class="text-white">every-hour</span>
+                </button>
+                <button id="wallpaper-frequency-every-day-button" class="rounded-md bg-neutral-800 py-2 outline-none hover:bg-neutral-700">
+                  <span class="text-white">every-day</span>
+                </button>
+                <button id="wallpaper-frequency-daylight-button" class="rounded-md bg-neutral-800 py-2 outline-none hover:bg-neutral-700">
+                  <span class="text-white">daylight</span>
+                </button>
+              </div>
+            </div>
             <div class="grid gap-4">
               <div id="wallpaper-url-section">
                 <div class="grid gap-2">
-                  <p class="text-base text-white">wallpaper.url</p>
+                  <p class="text-base text-white">wallpaper.urls</p>
                   <p class="text-base text-neutral-500">Tip: you can use video file formats like MP4, MOV & more</p>
-                  <div id="wallpaper-url-container" class="grid w-full grid-cols-[max-content_auto] rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base">
-                    <span class="select-none font-semibold text-pink-500">>&nbsp;</span>
-                    <input id="wallpaper-url-input" type="text" autocomplete="off" class="bg-transparent text-white placeholder-neutral-500 outline-none" placeholder="input url..." />
-                  </div>
                 </div>
               </div>
               <div id="wallpaper-file-upload-section">
                 <div class="grid gap-2">
-                  <p class="text-base text-white">wallpaper.fileUpload</p>
+                  <p class="text-base text-white">wallpaper.fileUploads</p>
                   <p class="text-base text-neutral-500">
                     Tip: you can upload PNG, JPG, WEBP, GIF, MP4 file formats & more
                     <br /><br />
                     It is recommended to scale images to match your resolution for faster loading times
                     <br /><br />
-                    Note: the fileUpload wallpaper is not included when exporting and importing configs due to taking too much space
+                    Note: fileUploads wallpapers are not included when exporting and importing configs due to taking too much space
                   </p>
                   <div class="grid grid-cols-2 gap-2">
-                    <input
-                      type="file"
-                      id="wallpaper-file-upload-input"
-                      accept="image/*,video/*"
-                      class="w-full cursor-pointer rounded-md bg-cyan-500 p-2 text-base text-white transition hover:bg-cyan-600"
-                    />
+                    <input type="file" id="wallpaper-file-upload-input" accept="image/*,video/*" multiple class="hidden" />
                     <button id="wallpaper-file-upload-reset-button" class="w-full cursor-pointer rounded-md bg-rose-500 p-2 transition hover:bg-rose-600">
-                      <span class="text-base text-white">reset</span>
+                      <span class="text-base text-white">reset all</span>
                     </button>
                   </div>
                 </div>
               </div>
               <div id="wallpaper-solid-color-section">
                 <div class="grid gap-2">
-                  <p class="text-base text-white">wallpaper.solidColor</p>
-                  <div id="wallpaper-solid-color-container" class="grid w-full grid-cols-[max-content_auto] rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base">
-                    <span class="select-none font-semibold text-pink-500">>&nbsp;</span>
-                    <input id="wallpaper-solid-color-input" type="text" autocomplete="off" class="bg-transparent text-white placeholder-neutral-500 outline-none" placeholder="input color..." />
+                  <p class="text-base text-white">wallpaper.solidColors</p>
+                </div>
+              </div>
+              <div class="grid gap-2">
+                <div id="wallpaper-gallery-wrapper" class="rounded-md bg-neutral-800 p-2">
+                  <div id="wallpaper-gallery" class="grid grid-cols-3 gap-2"></div>
+                </div>
+                <div id="wallpaper-default-preview-section" class="rounded-md bg-neutral-800 p-2">
+                  <div class="grid grid-cols-3 gap-2">
+                    <div class="aspect-video rounded-md bg-cover bg-center" style="background-image: url(&quot;./assets/wallpapers/default.jpg&quot;)"></div>
                   </div>
                 </div>
               </div>
@@ -397,8 +414,6 @@
                 </div>
               </div>
             </div>
-            <p class="text-base text-neutral-500">live preview</p>
-            <div id="live-wallpaper-preview" class="grid aspect-video w-64 place-items-center overflow-hidden rounded-md bg-neutral-800"></div>
           </div>
         </section>
         <!-- ui -->

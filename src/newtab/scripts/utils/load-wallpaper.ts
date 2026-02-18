@@ -2,55 +2,119 @@ import { Config } from "src/utils/config";
 import { wallpaperEl } from "src/newtab/scripts/ui";
 import { hideCover } from "src/newtab/scripts/utils/hide-cover";
 import { logger } from "src/utils/logger";
-import { getStoredWallpaperFile } from "src/utils/wallpaper-file-storage";
+import {
+  UploadedWallpaperFileMeta,
+  getUploadedWallpaperFile,
+  listUploadedWallpaperFiles
+} from "src/utils/wallpaper-file-storage";
+import { resolveWallpaperIndex } from "src/utils/wallpaper-rotation";
+
+const DEFAULT_WALLPAPER_URL = "./wallpapers/default.jpg";
 
 export const loadWallpaper = (wallpaper: Config["wallpaper"]) => {
   if (!wallpaper.enabled) return;
 
   if (wallpaper.type === "file-upload") {
-    getStoredWallpaperFile()
-      .then((wallpaperFile) => {
-        if (wallpaperFile) {
-          applyWallpaper(wallpaperFile, wallpaper.filters.brightness, wallpaper.filters.blur);
-        } else {
-          chrome.storage.local.get(["userUploadedWallpaper"], (data) => {
-            const legacyWallpaper =
-              typeof data.userUploadedWallpaper === "string" ? data.userUploadedWallpaper : "";
-            if (legacyWallpaper) {
-              applyWallpaper(legacyWallpaper, wallpaper.filters.brightness, wallpaper.filters.blur);
-            }
-          });
-        }
-      })
+    loadUploadedFileWallpaper(wallpaper)
       .catch((err) => {
-        logger.log("Error loading wallpaper", err);
-
-        chrome.storage.local.get(["userUploadedWallpaper"], (data) => {
-          const legacyWallpaper =
-            typeof data.userUploadedWallpaper === "string" ? data.userUploadedWallpaper : "";
-          if (legacyWallpaper) {
-            applyWallpaper(legacyWallpaper, wallpaper.filters.brightness, wallpaper.filters.blur);
-          }
-        });
+        logger.log("Error loading file-upload wallpaper", err);
       })
       .finally(() => {
         hideCover();
       });
-  } else if (wallpaper.type === "solid-color") {
-    applySolidColorWallpaper(wallpaper.solidColor);
-    hideCover();
-  } else {
-    applyWallpaper(
-      wallpaper.type === "default" ? "./wallpapers/default.jpg" : wallpaper.url,
-      wallpaper.filters.brightness,
-      wallpaper.filters.blur
-    );
 
-    hideCover();
+    return;
   }
+
+  if (wallpaper.type === "solid-color") {
+    loadSolidColorWallpaper(wallpaper)
+      .catch((err) => {
+        logger.log("Error loading solid-color wallpaper", err);
+      })
+      .finally(() => {
+        hideCover();
+      });
+
+    return;
+  }
+
+  if (wallpaper.type === "default") {
+    applyWallpaper(DEFAULT_WALLPAPER_URL, wallpaper.filters.brightness, wallpaper.filters.blur);
+    hideCover();
+    return;
+  }
+
+  loadURLWallpaper(wallpaper)
+    .catch((err) => {
+      logger.log("Error loading url wallpaper", err);
+    })
+    .finally(() => {
+      hideCover();
+    });
 };
 
-const applyWallpaper = (wallpaper: Blob | string, brightness: string, blur: string) => {
+const loadURLWallpaper = async (wallpaper: Config["wallpaper"]) => {
+  const urls = wallpaper.urls.filter((url) => typeof url === "string" && url.trim().length > 0);
+
+  if (urls.length === 0) return;
+
+  const index = await resolveWallpaperIndex({
+    rotationKey: `wallpaper-url`,
+    frequency: wallpaper.frequency,
+    itemCount: urls.length
+  });
+
+  if (index < 0) return;
+
+  const next = urls[index];
+  applyWallpaper(next, wallpaper.filters.brightness, wallpaper.filters.blur);
+};
+
+const loadSolidColorWallpaper = async (wallpaper: Config["wallpaper"]) => {
+  const colors = wallpaper.solidColors.filter(
+    (color) => typeof color === "string" && color.trim().length > 0
+  );
+
+  if (colors.length === 0) return;
+
+  const index = await resolveWallpaperIndex({
+    rotationKey: `wallpaper-solid-color`,
+    frequency: wallpaper.frequency,
+    itemCount: colors.length
+  });
+
+  if (index < 0) return;
+
+  applySolidColorWallpaper(colors[index]);
+};
+
+const loadUploadedFileWallpaper = async (wallpaper: Config["wallpaper"]) => {
+  const files = await listUploadedWallpaperFiles();
+
+  if (files.length === 0) return;
+
+  const index = await resolveWallpaperIndex({
+    rotationKey: `wallpaper-file-upload`,
+    frequency: wallpaper.frequency,
+    itemCount: files.length
+  });
+
+  if (index < 0) return;
+
+  const selected = files[index];
+  const blob = await getUploadedWallpaperFile(selected.id);
+
+  if (!blob) return;
+
+  applyWallpaper(blob, wallpaper.filters.brightness, wallpaper.filters.blur, selected);
+};
+
+const applyWallpaper = (
+  wallpaper: Blob | string,
+  brightness: string,
+  blur: string,
+  fileMeta?: UploadedWallpaperFileMeta
+) => {
   wallpaperEl.style.transitionDuration = "0ms";
   let src: string;
 
@@ -74,10 +138,25 @@ const applyWallpaper = (wallpaper: Blob | string, brightness: string, blur: stri
     videoEl.autoplay = true;
     videoEl.loop = true;
     videoEl.muted = true;
-    videoEl.playsInline = true; // Ensures proper playback on mobile
+    videoEl.playsInline = true;
+
+    if (fileMeta) {
+      videoEl.playbackRate = fileMeta.videoOptions.playbackRate;
+      mediaEl.style.transform = `scale(${fileMeta.videoOptions.zoom})`;
+      mediaEl.style.transition = `opacity ${fileMeta.videoOptions.fade}s linear`;
+    }
+  } else if (fileMeta) {
+    mediaEl.style.objectPosition = `${fileMeta.imageOptions.x} ${fileMeta.imageOptions.y}`;
+    const sizePercent =
+      fileMeta.imageOptions.size === "cover"
+        ? 100
+        : Number.parseInt(fileMeta.imageOptions.size.replace("%", ""));
+    const safeScale = Number.isFinite(sizePercent) ? sizePercent / 100 : 1;
+    mediaEl.style.transform = `scale(${safeScale})`;
   }
 
   applyWallpaperFilters(mediaEl, brightness, blur);
+  wallpaperEl.innerHTML = "";
   wallpaperEl.appendChild(mediaEl);
 
   if (wallpaper instanceof Blob) {
@@ -104,6 +183,7 @@ export const applySolidColorWallpaper = (color: string) => {
   solidEl.style.height = "100%";
   solidEl.style.backgroundColor = color;
 
+  wallpaperEl.innerHTML = "";
   wallpaperEl.appendChild(solidEl);
   hideCover();
 };

@@ -1,6 +1,14 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Config } from "src/utils/config";
 
+const toCleanStringArray = (value: unknown, fallback: string[] = []) => {
+  if (!Array.isArray(value)) return fallback;
+
+  return value
+    .map((item) => (typeof item === "string" ? item.trim() : ""))
+    .filter((item) => item.length > 0);
+};
+
 export const migrateOldConfig = (config: Config): Config => {
   // if config is before v1.6.5
   // prettier-ignore
@@ -72,8 +80,8 @@ export const migrateOldConfig = (config: Config): Config => {
   if (!config.wallpaper.filters.brightness) config.wallpaper.filters.brightness = "1";
 
   // if config is before v1.8.6
-  if (config.wallpaper.url === "./wallpapers/bg-1.png") {
-    config.wallpaper.url = "./wallpapers/default.png";
+  if ((config.wallpaper as any).url === "./wallpapers/bg-1.png") {
+    (config.wallpaper as any).url = "./wallpapers/default.png";
   }
 
   // if config is before v1.9.2
@@ -100,8 +108,8 @@ export const migrateOldConfig = (config: Config): Config => {
   }
 
   // if config is before v1.9.9
-  if (config.wallpaper.url === "./wallpapers/default.png") {
-    config.wallpaper.url = "";
+  if ((config.wallpaper as any).url === "./wallpapers/default.png") {
+    (config.wallpaper as any).url = "";
 
     if (config.wallpaper.type === "url") config.wallpaper.type = "default";
   }
@@ -113,8 +121,9 @@ export const migrateOldConfig = (config: Config): Config => {
   // if config is before v1.10.1
   if ((config.wallpaper as any).type === "fileUpload")
     (config.wallpaper as any).type = "file-upload";
-  if (typeof (config.wallpaper as any).solidColor !== "string")
+  if (typeof (config.wallpaper as any).solidColor !== "string") {
     (config.wallpaper as any).solidColor = "#171717";
+  }
   if (config.ui && "backgroundColor" in (config.ui as any)) {
     const color = (config.ui as any).backgroundColor;
     if (typeof color === "string" && color.trim() !== "") {
@@ -122,6 +131,45 @@ export const migrateOldConfig = (config: Config): Config => {
     }
     delete (config.ui as any).backgroundColor;
   }
+
+  // migrate single wallpaper url/solidColor fields to arrays
+  const legacyUrl =
+    typeof (config.wallpaper as any).url === "string" ? (config.wallpaper as any).url.trim() : "";
+  const legacySolidColor =
+    typeof (config.wallpaper as any).solidColor === "string"
+      ? (config.wallpaper as any).solidColor.trim()
+      : "";
+
+  const migratedUrls = toCleanStringArray((config.wallpaper as any).urls);
+  const migratedSolidColors = toCleanStringArray((config.wallpaper as any).solidColors);
+
+  (config.wallpaper as any).urls =
+    migratedUrls.length > 0 ? migratedUrls : legacyUrl.length > 0 ? [legacyUrl] : [];
+
+  (config.wallpaper as any).solidColors =
+    migratedSolidColors.length > 0
+      ? migratedSolidColors
+      : legacySolidColor.length > 0
+        ? [legacySolidColor]
+        : ["#171717"];
+
+  const allowedWallpaperFrequencies = [
+    "constant",
+    "every-tab",
+    "every-hour",
+    "every-day",
+    "daylight"
+  ];
+  if (
+    !(config.wallpaper as any).frequency ||
+    typeof (config.wallpaper as any).frequency !== "string" ||
+    !allowedWallpaperFrequencies.includes((config.wallpaper as any).frequency)
+  ) {
+    (config.wallpaper as any).frequency = "constant";
+  }
+
+  delete (config.wallpaper as any).url;
+  delete (config.wallpaper as any).solidColor;
 
   // if config is before v1.10.4
   // add bookmarks.defaultIconColor and drop redundant node.iconColor when it equals the default

@@ -13,6 +13,8 @@ import { handleCustomFaviconUpload } from "src/options/scripts/utils/upload-favi
 import { createCollapseGroups } from "src/options/scripts/utils/collapse-option";
 import { handleControls } from "src/options/scripts/utils/control-utils";
 import { handleWallpaperChange } from "src/options/scripts/utils/handle-wallpaper-change";
+import { getSelectedButton } from "src/options/scripts/utils/get-selected-button";
+import { renderWallpaperGallery } from "src/options/scripts/utils/upload-wallpaper";
 import {
   initDelegatedHandlers,
   initSortableForExistingDropzones,
@@ -53,6 +55,10 @@ handleWallpaperFileUpload();
 handleWallpaperChange();
 
 handleSwitches();
+
+const selectedWallpaperTypeButton = getSelectedButton("wallpaper-type");
+if (selectedWallpaperTypeButton) selectedWallpaperTypeButton.click();
+void renderWallpaperGallery();
 
 listenAllToggleCheckboxSections();
 

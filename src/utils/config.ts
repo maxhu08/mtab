@@ -61,12 +61,13 @@ export const defaultConfig: Config = {
   wallpaper: {
     type: "default",
     enabled: true,
-    url: "",
+    frequency: "constant",
+    urls: [],
     filters: {
       brightness: "1",
       blur: "0px"
     },
-    solidColor: "#171717"
+    solidColors: ["#171717"]
   },
   ui: {
     style: "glass",
@@ -202,6 +203,7 @@ export type FaviconType = "default" | "custom";
 export type UIStyle = "solid" | "glass";
 export type UICornerStyle = "sharp" | "round";
 export type WallpaperType = "url" | "file-upload" | "solid-color" | "default";
+export type WallpaperFrequency = "constant" | "every-tab" | "every-hour" | "every-day" | "daylight";
 export type BookmarkTiming = "left" | "right" | "uniform";
 export type AnimationInitialType =
   | "animate-down-bouncy"
@@ -303,12 +305,13 @@ export interface Config {
   wallpaper: {
     type: WallpaperType;
     enabled: boolean;
-    url: string;
+    frequency: WallpaperFrequency;
+    urls: string[];
     filters: {
       brightness: string;
       blur: string;
     };
-    solidColor: string;
+    solidColors: string[];
   };
   ui: {
     style: UIStyle;

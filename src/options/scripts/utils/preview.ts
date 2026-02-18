@@ -1,6 +1,7 @@
 import { wallpaperTypeDefaultButtonEl } from "src/options/scripts/ui";
 
-const liveWallpaperPreviewEl = document.getElementById("live-wallpaper-preview") as HTMLDivElement;
+const getLiveWallpaperPreviewEl = () =>
+  document.getElementById("live-wallpaper-preview") as HTMLDivElement | null;
 
 export const isWallpaperTypeDefault = () =>
   wallpaperTypeDefaultButtonEl.getAttribute("selected") === "yes";
@@ -10,6 +11,9 @@ export const previewWallpaper = (
   brightness: string,
   blur: string
 ) => {
+  const liveWallpaperPreviewEl = getLiveWallpaperPreviewEl();
+  if (!liveWallpaperPreviewEl) return;
+
   if (isWallpaperTypeDefault()) wallpaper = "./wallpapers/default.jpg";
 
   if (!wallpaper) {
@@ -59,6 +63,9 @@ export const previewWallpaperLegacy = (
   brightness: string,
   blur: string
 ) => {
+  const liveWallpaperPreviewEl = getLiveWallpaperPreviewEl();
+  if (!liveWallpaperPreviewEl) return;
+
   liveWallpaperPreviewEl.style.filter = "";
 
   if (!wallpaperBase64) {
@@ -74,6 +81,9 @@ export const previewWallpaperLegacy = (
 };
 
 export const previewWallpaperSolidColor = (color: string) => {
+  const liveWallpaperPreviewEl = getLiveWallpaperPreviewEl();
+  if (!liveWallpaperPreviewEl) return;
+
   liveWallpaperPreviewEl.style.filter = "";
 
   if (!color) {

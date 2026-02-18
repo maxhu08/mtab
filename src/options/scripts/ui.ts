@@ -35,12 +35,16 @@ export const wallpaperTypeUrlButtonEl = getButton("wallpaper-type-url");
 export const wallpaperTypeFileUploadButtonEl = getButton("wallpaper-type-file-upload");
 export const wallpaperTypeSolidColorButtonEl = getButton("wallpaper-type-solid-color");
 export const wallpaperTypeDefaultButtonEl = getButton("wallpaper-type-default");
-export const [wallpaperUrlContainerEl, wallpaperUrlInputEl] = getContainerAndInput("wallpaper-url");
+export const wallpaperFrequencyConstantButtonEl = getButton("wallpaper-frequency-constant");
+export const wallpaperFrequencyEveryTabButtonEl = getButton("wallpaper-frequency-every-tab");
+export const wallpaperFrequencyEveryHourButtonEl = getButton("wallpaper-frequency-every-hour");
+export const wallpaperFrequencyEveryDayButtonEl = getButton("wallpaper-frequency-every-day");
+export const wallpaperFrequencyDaylightButtonEl = getButton("wallpaper-frequency-daylight");
 export const wallpaperFileUploadInputEl = document.getElementById("wallpaper-file-upload-input") as HTMLInputElement;
 export const wallpaperFileResetButtonEl = getButton("wallpaper-file-upload-reset");
+export const wallpaperGalleryEl = document.getElementById("wallpaper-gallery") as HTMLDivElement;
 export const [wallpaperFiltersBrightnessContainerEl, wallpaperFiltersBrightnessInputEl] = getContainerAndInput("wallpaper-filters-brightness");
 export const [wallpaperFiltersBlurContainerEl, wallpaperFiltersBlurInputEl] = getContainerAndInput("wallpaper-filters-blur");
-export const [wallpaperSolidColorContainerEl, wallpaperSolidColorInputEl] = getContainerAndInput("wallpaper-solid-color");
 
 export const uiStyleSolidButtonEl = getButton("ui-style-solid");
 export const uiStyleGlassButtonEl = getButton("ui-style-glass");
@@ -177,6 +181,16 @@ export const buttonSwitches: ButtonSwitch[] = [
   {
     buttons: [wallpaperTypeUrlButtonEl, wallpaperTypeFileUploadButtonEl, wallpaperTypeSolidColorButtonEl, wallpaperTypeDefaultButtonEl],
     attr: "wallpaper-type"
+  },
+  {
+    buttons: [
+      wallpaperFrequencyConstantButtonEl,
+      wallpaperFrequencyEveryTabButtonEl,
+      wallpaperFrequencyEveryHourButtonEl,
+      wallpaperFrequencyEveryDayButtonEl,
+      wallpaperFrequencyDaylightButtonEl
+    ],
+    attr: "wallpaper-frequency"
   },
   {
     buttons: [uiStyleSolidButtonEl, uiStyleGlassButtonEl],

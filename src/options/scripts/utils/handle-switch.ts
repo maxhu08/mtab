@@ -18,18 +18,12 @@ import {
   titleFaviconTypeDefaultButtonEl,
   uiStyleGlassButtonEl,
   uiStyleSolidButtonEl,
-  wallpaperFiltersBlurInputEl,
-  wallpaperFiltersBrightnessInputEl,
-  wallpaperSolidColorInputEl,
   wallpaperTypeDefaultButtonEl,
   wallpaperTypeFileUploadButtonEl,
   wallpaperTypeSolidColorButtonEl,
-  wallpaperTypeUrlButtonEl,
-  wallpaperUrlInputEl
+  wallpaperTypeUrlButtonEl
 } from "src/options/scripts/ui";
-import { previewWallpaper, previewWallpaperSolidColor } from "src/options/scripts/utils/preview";
-import { logger } from "src/utils/logger";
-import { getStoredWallpaperFile } from "src/utils/wallpaper-file-storage";
+import { renderWallpaperGallery } from "src/options/scripts/utils/upload-wallpaper";
 
 export const handleSwitches = () => {
   handleTitleEffectSwitch();
@@ -166,37 +160,33 @@ const handleWallpaperTypeSwitch = () => {
   const wallpaperNotSolidColorSection = document.getElementById(
     "wallpaper-not-solid-color-section"
   ) as HTMLDivElement;
+  const wallpaperGalleryWrapperSection = document.getElementById(
+    "wallpaper-gallery-wrapper"
+  ) as HTMLDivElement;
+  const wallpaperDefaultPreviewSection = document.getElementById(
+    "wallpaper-default-preview-section"
+  ) as HTMLDivElement;
 
   wallpaperTypeUrlButtonEl.addEventListener("click", () => {
-    previewWallpaper(
-      wallpaperUrlInputEl.value,
-      wallpaperFiltersBrightnessInputEl.value,
-      wallpaperFiltersBlurInputEl.value
-    );
-
     wallpaperFileUploadSection.style.display = "none";
     wallpaperSolidColorSection.style.display = "none";
     wallpaperUrlSection.style.display = "block";
     wallpaperNotSolidColorSection.style.display = "grid";
+    wallpaperGalleryWrapperSection.style.display = "block";
+    wallpaperDefaultPreviewSection.style.display = "none";
+
+    void renderWallpaperGallery();
   });
 
   wallpaperTypeFileUploadButtonEl.addEventListener("click", () => {
-    try {
-      getStoredWallpaperFile().then((file) => {
-        previewWallpaper(
-          file,
-          wallpaperFiltersBrightnessInputEl.value,
-          wallpaperFiltersBlurInputEl.value
-        );
-      });
-    } catch (err) {
-      logger.log("Error storing wallpaper", err);
-    }
-
     wallpaperUrlSection.style.display = "none";
     wallpaperSolidColorSection.style.display = "none";
     wallpaperFileUploadSection.style.display = "block";
     wallpaperNotSolidColorSection.style.display = "grid";
+    wallpaperGalleryWrapperSection.style.display = "block";
+    wallpaperDefaultPreviewSection.style.display = "none";
+
+    void renderWallpaperGallery();
   });
 
   wallpaperTypeSolidColorButtonEl.addEventListener("click", () => {
@@ -204,21 +194,21 @@ const handleWallpaperTypeSwitch = () => {
     wallpaperFileUploadSection.style.display = "none";
     wallpaperNotSolidColorSection.style.display = "none";
     wallpaperSolidColorSection.style.display = "block";
+    wallpaperGalleryWrapperSection.style.display = "block";
+    wallpaperDefaultPreviewSection.style.display = "none";
 
-    previewWallpaperSolidColor(wallpaperSolidColorInputEl.value);
+    void renderWallpaperGallery();
   });
 
   wallpaperTypeDefaultButtonEl.addEventListener("click", () => {
-    previewWallpaper(
-      "",
-      wallpaperFiltersBrightnessInputEl.value,
-      wallpaperFiltersBlurInputEl.value
-    );
-
     wallpaperUrlSection.style.display = "none";
     wallpaperFileUploadSection.style.display = "none";
-    wallpaperSolidColorSection.style.display = "block";
+    wallpaperSolidColorSection.style.display = "none";
     wallpaperNotSolidColorSection.style.display = "grid";
+    wallpaperGalleryWrapperSection.style.display = "none";
+    wallpaperDefaultPreviewSection.style.display = "block";
+
+    void renderWallpaperGallery();
   });
 };
 
