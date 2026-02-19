@@ -111,6 +111,10 @@ html {
   position: relative;
 }
 
+#search-input-buttons:not(.hidden) {
+  padding-left: 0.5rem;
+}
+
 .search-action-button::before {
   content: "";
   position: absolute;
