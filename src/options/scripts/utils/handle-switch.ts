@@ -25,6 +25,10 @@ import {
 } from "src/options/scripts/ui";
 import { renderWallpaperGallery } from "src/options/scripts/utils/upload-wallpaper";
 
+const setSectionVisibility = (el: HTMLElement, isVisible: boolean) => {
+  el.classList.toggle("hidden", !isVisible);
+};
+
 export const handleSwitches = () => {
   handleTitleEffectSwitch();
   handleFaviconTypeSwitch();
@@ -46,11 +50,11 @@ const handleTitleEffectSwitch = () => {
   ) as HTMLDivElement;
 
   titleEffectNoneButtonEl.addEventListener("click", () => {
-    titleEffectTypewriterSection.style.display = "none";
+    setSectionVisibility(titleEffectTypewriterSection, false);
   });
 
   titleEffectTypewriterButtonEl.addEventListener("click", () => {
-    titleEffectTypewriterSection.style.display = "";
+    setSectionVisibility(titleEffectTypewriterSection, true);
   });
 };
 
@@ -60,11 +64,11 @@ const handleFaviconTypeSwitch = () => {
   ) as HTMLDivElement;
 
   titleFaviconTypeDefaultButtonEl.addEventListener("click", () => {
-    faviconCustomSection.style.display = "none";
+    setSectionVisibility(faviconCustomSection, false);
   });
 
   titleFaviconTypeCustomButtonEl.addEventListener("click", () => {
-    faviconCustomSection.style.display = "block";
+    setSectionVisibility(faviconCustomSection, true);
   });
 };
 
@@ -74,11 +78,11 @@ const handleMessageFontTypeSwitch = () => {
   ) as HTMLDivElement;
 
   messageFontTypeDefaultButtonEl.addEventListener("click", () => {
-    messageFontCustomSection.style.display = "none";
+    setSectionVisibility(messageFontCustomSection, false);
   });
 
   messageFontTypeCustomButtonEl.addEventListener("click", () => {
-    messageFontCustomSection.style.display = "block";
+    setSectionVisibility(messageFontCustomSection, true);
   });
 };
 
@@ -88,11 +92,11 @@ const handleSearchFontTypeSwitch = () => {
   ) as HTMLDivElement;
 
   searchFontTypeDefaultButtonEl.addEventListener("click", () => {
-    searchFontCustomSection.style.display = "none";
+    setSectionVisibility(searchFontCustomSection, false);
   });
 
   searchFontTypeCustomButtonEl.addEventListener("click", () => {
-    searchFontCustomSection.style.display = "block";
+    setSectionVisibility(searchFontCustomSection, true);
   });
 };
 
@@ -113,17 +117,17 @@ const handleMessageTypeSwitch = () => {
 
   hideButtons.forEach((id) => {
     (document.getElementById(id) as HTMLButtonElement).addEventListener("click", () => {
-      messageTypeWeatherSection.style.display = "none";
-      messageTypeCustomSection.style.display = "none";
+      setSectionVisibility(messageTypeWeatherSection, false);
+      setSectionVisibility(messageTypeCustomSection, false);
     });
   });
 
   messageTypeWeatherButtonEl.addEventListener("click", () => {
-    messageTypeWeatherSection.style.display = "grid";
+    setSectionVisibility(messageTypeWeatherSection, true);
   });
 
   messageTypeCustomButtonEl.addEventListener("click", () => {
-    messageTypeCustomSection.style.display = "block";
+    setSectionVisibility(messageTypeCustomSection, true);
 
     (document.getElementById("message-custom-text-info") as HTMLParagraphElement).textContent =
       'You can use \\ to represent:\n\n\
@@ -168,45 +172,45 @@ const handleWallpaperTypeSwitch = () => {
   ) as HTMLDivElement;
 
   wallpaperTypeUrlButtonEl.addEventListener("click", () => {
-    wallpaperFileUploadSection.style.display = "none";
-    wallpaperSolidColorSection.style.display = "none";
-    wallpaperUrlSection.style.display = "block";
-    wallpaperNotSolidColorSection.style.display = "grid";
-    wallpaperGalleryWrapperSection.style.display = "block";
-    wallpaperDefaultPreviewSection.style.display = "none";
+    setSectionVisibility(wallpaperFileUploadSection, false);
+    setSectionVisibility(wallpaperSolidColorSection, false);
+    setSectionVisibility(wallpaperUrlSection, true);
+    setSectionVisibility(wallpaperNotSolidColorSection, true);
+    setSectionVisibility(wallpaperGalleryWrapperSection, true);
+    setSectionVisibility(wallpaperDefaultPreviewSection, false);
 
     void renderWallpaperGallery();
   });
 
   wallpaperTypeFileUploadButtonEl.addEventListener("click", () => {
-    wallpaperUrlSection.style.display = "none";
-    wallpaperSolidColorSection.style.display = "none";
-    wallpaperFileUploadSection.style.display = "block";
-    wallpaperNotSolidColorSection.style.display = "grid";
-    wallpaperGalleryWrapperSection.style.display = "block";
-    wallpaperDefaultPreviewSection.style.display = "none";
+    setSectionVisibility(wallpaperUrlSection, false);
+    setSectionVisibility(wallpaperSolidColorSection, false);
+    setSectionVisibility(wallpaperFileUploadSection, true);
+    setSectionVisibility(wallpaperNotSolidColorSection, true);
+    setSectionVisibility(wallpaperGalleryWrapperSection, true);
+    setSectionVisibility(wallpaperDefaultPreviewSection, false);
 
     void renderWallpaperGallery();
   });
 
   wallpaperTypeSolidColorButtonEl.addEventListener("click", () => {
-    wallpaperUrlSection.style.display = "none";
-    wallpaperFileUploadSection.style.display = "none";
-    wallpaperNotSolidColorSection.style.display = "none";
-    wallpaperSolidColorSection.style.display = "block";
-    wallpaperGalleryWrapperSection.style.display = "block";
-    wallpaperDefaultPreviewSection.style.display = "none";
+    setSectionVisibility(wallpaperUrlSection, false);
+    setSectionVisibility(wallpaperFileUploadSection, false);
+    setSectionVisibility(wallpaperNotSolidColorSection, false);
+    setSectionVisibility(wallpaperSolidColorSection, true);
+    setSectionVisibility(wallpaperGalleryWrapperSection, true);
+    setSectionVisibility(wallpaperDefaultPreviewSection, false);
 
     void renderWallpaperGallery();
   });
 
   wallpaperTypeDefaultButtonEl.addEventListener("click", () => {
-    wallpaperUrlSection.style.display = "none";
-    wallpaperFileUploadSection.style.display = "none";
-    wallpaperSolidColorSection.style.display = "none";
-    wallpaperNotSolidColorSection.style.display = "grid";
-    wallpaperGalleryWrapperSection.style.display = "none";
-    wallpaperDefaultPreviewSection.style.display = "block";
+    setSectionVisibility(wallpaperUrlSection, false);
+    setSectionVisibility(wallpaperFileUploadSection, false);
+    setSectionVisibility(wallpaperSolidColorSection, false);
+    setSectionVisibility(wallpaperNotSolidColorSection, true);
+    setSectionVisibility(wallpaperGalleryWrapperSection, false);
+    setSectionVisibility(wallpaperDefaultPreviewSection, true);
 
     void renderWallpaperGallery();
   });
@@ -217,13 +221,13 @@ const handleUIStyleSwitch = () => {
   const uiStyleGlassSection = document.getElementById("ui-style-glass-section") as HTMLDivElement;
 
   uiStyleSolidButtonEl.addEventListener("click", () => {
-    uiStyleGlassSection.style.display = "none";
-    uiStyleSolidSection.style.display = "block";
+    setSectionVisibility(uiStyleGlassSection, false);
+    setSectionVisibility(uiStyleSolidSection, true);
   });
 
   uiStyleGlassButtonEl.addEventListener("click", () => {
-    uiStyleSolidSection.style.display = "none";
-    uiStyleGlassSection.style.display = "block";
+    setSectionVisibility(uiStyleSolidSection, false);
+    setSectionVisibility(uiStyleGlassSection, true);
   });
 };
 
@@ -236,19 +240,19 @@ const handleBookmarksTypeSwitch = () => {
   const hideButtons = ["bookmarks-type-default-button", "bookmarks-type-none-button"];
 
   bookmarksTypeUserDefinedButtonEl.addEventListener("click", () => {
-    bookmarksDefaultBlockySection.style.display = "none";
-    bookmarksUserDefinedSection.style.display = "block";
+    setSectionVisibility(bookmarksDefaultBlockySection, false);
+    setSectionVisibility(bookmarksUserDefinedSection, true);
   });
 
   bookmarksTypeDefaultBlockyButtonEl.addEventListener("click", () => {
-    bookmarksUserDefinedSection.style.display = "none";
-    bookmarksDefaultBlockySection.style.display = "block";
+    setSectionVisibility(bookmarksUserDefinedSection, false);
+    setSectionVisibility(bookmarksDefaultBlockySection, true);
   });
 
   hideButtons.forEach((id) => {
     (document.getElementById(id) as HTMLButtonElement).addEventListener("click", () => {
-      bookmarksUserDefinedSection.style.display = "none";
-      bookmarksDefaultBlockySection.style.display = "none";
+      setSectionVisibility(bookmarksUserDefinedSection, false);
+      setSectionVisibility(bookmarksDefaultBlockySection, false);
     });
   });
 };
@@ -257,8 +261,8 @@ const handleUserDefinedOrDefaultBlockySwitch = () => {
   // prettier-ignore
   const bookmarksUserDefinedOrDefaultBlockySection = document.getElementById("bookmarks-user-defined-or-default-blocky-section") as HTMLDivElement
 
-  const hide = () => (bookmarksUserDefinedOrDefaultBlockySection.style.display = "none");
-  const show = () => (bookmarksUserDefinedOrDefaultBlockySection.style.display = "grid");
+  const hide = () => setSectionVisibility(bookmarksUserDefinedOrDefaultBlockySection, false);
+  const show = () => setSectionVisibility(bookmarksUserDefinedOrDefaultBlockySection, true);
 
   bookmarksTypeUserDefinedButtonEl.addEventListener("click", () => show());
   bookmarksTypeDefaultButtonEl.addEventListener("click", () => hide());
@@ -272,7 +276,7 @@ const handleBookmarksPaginationSwitch = () => {
   ) as HTMLDivElement;
 
   const sync = () => {
-    maxRowsSection.style.display = bookmarksEnablePaginationCheckboxEl.checked ? "grid" : "none";
+    setSectionVisibility(maxRowsSection, bookmarksEnablePaginationCheckboxEl.checked);
   };
 
   bookmarksEnablePaginationCheckboxEl.addEventListener("change", sync);
@@ -284,11 +288,11 @@ const handleBookmarksDefaultBlockyColorTypeSwitch = () => {
   const customColorSection = document.getElementById("bookmarks-default-blocky-color-section") as HTMLDivElement;
 
   bookmarksDefaultBlockyColorTypeRandomButtonEl.addEventListener("click", () => {
-    customColorSection.style.display = "none";
+    setSectionVisibility(customColorSection, false);
   });
 
   bookmarksDefaultBlockyColorTypeCustomButtonEl.addEventListener("click", () => {
-    customColorSection.style.display = "block";
+    setSectionVisibility(customColorSection, true);
   });
 };
 
@@ -296,8 +300,8 @@ const handleBookmarksDefaultOrDefaultBlockySwitch = () => {
   // prettier-ignore
   const bookmarksDefaultOrDefaultBlockySection = document.getElementById("bookmarks-default-or-default-blocky-section") as HTMLDivElement
 
-  const hide = () => (bookmarksDefaultOrDefaultBlockySection.style.display = "none");
-  const show = () => (bookmarksDefaultOrDefaultBlockySection.style.display = "block");
+  const hide = () => setSectionVisibility(bookmarksDefaultOrDefaultBlockySection, false);
+  const show = () => setSectionVisibility(bookmarksDefaultOrDefaultBlockySection, true);
 
   bookmarksTypeUserDefinedButtonEl.addEventListener("click", () => hide());
   bookmarksTypeDefaultButtonEl.addEventListener("click", () => show());
