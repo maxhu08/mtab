@@ -12,7 +12,6 @@ import {
 import { handleCustomFaviconUpload } from "src/options/scripts/utils/upload-favicon";
 import { createCollapseGroups } from "src/options/scripts/utils/collapse-option";
 import { handleControls } from "src/options/scripts/utils/control-utils";
-import { handleWallpaperChange } from "src/options/scripts/utils/handle-wallpaper-change";
 import { getSelectedButton } from "src/options/scripts/utils/get-selected-button";
 import { renderWallpaperGallery } from "src/options/scripts/utils/upload-wallpaper";
 import {
@@ -55,7 +54,6 @@ listenToKeys();
 
 handleCustomFaviconUpload();
 handleWallpaperFileUpload();
-handleWallpaperChange();
 
 handleSwitches();
 
