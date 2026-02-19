@@ -1,4 +1,5 @@
 import Sortable from "sortablejs";
+import { delegate, Instance } from "tippy.js";
 import {
   wallpaperFileUploadInputEl,
   wallpaperFiltersBlurInputEl,
@@ -56,7 +57,10 @@ const galleryAddTileClass =
 const galleryVideoBadgeClass =
   "absolute bottom-1.5 right-1.5 rounded-full bg-black/45 px-1.5 py-0.5 text-[10px] text-white";
 const galleryHandleClass =
-  "wallpaper-gallery-drag-handle absolute left-1.5 top-1.5 hidden h-7 w-7 place-items-center rounded-md bg-black/35 text-white transition hover:bg-black/55 group-hover:grid outline-none";
+  "wallpaper-gallery-drag-handle absolute left-1.5 top-1.5 hidden h-7 w-7 place-items-center rounded-md bg-neutral-500 text-white transition hover:bg-neutral-600 group-hover:grid outline-none";
+const galleryDeleteClass = "wallpaper-gallery-delete-button";
+
+let wallpaperGalleryTooltipDelegate: Instance | null = null;
 
 let wallpaperGallerySortable: Sortable | null = null;
 
@@ -95,6 +99,7 @@ const addTileRepositionHandle = (item: HTMLElement) => {
   const handle = document.createElement("button");
   handle.type = "button";
   handle.className = galleryHandleClass;
+  handle.setAttribute("data-tippy-content", "reorder wallpaper");
   handle.innerHTML = '<i class="ri-draggable"></i>';
 
   handle.addEventListener("click", (event) => {
@@ -115,8 +120,8 @@ const addTileHoverOverlay = (item: HTMLElement) => {
 const addTileDeleteButton = (item: HTMLElement, onDelete: () => void) => {
   const deleteButton = document.createElement("button");
   deleteButton.type = "button";
-  deleteButton.className =
-    "absolute right-1.5 top-1.5 hidden h-7 w-7 place-items-center rounded-md bg-black/35 text-white transition hover:bg-black/55 group-hover:grid outline-none";
+  deleteButton.className = `${galleryDeleteClass} absolute right-1.5 top-1.5 hidden h-7 w-7 place-items-center rounded-md bg-rose-500 text-white transition hover:bg-rose-600 group-hover:grid outline-none`;
+  deleteButton.setAttribute("data-tippy-content", "delete wallpaper");
   deleteButton.innerHTML = '<i class="ri-delete-bin-line"></i>';
 
   deleteButton.addEventListener("click", (event) => {
@@ -126,6 +131,19 @@ const addTileDeleteButton = (item: HTMLElement, onDelete: () => void) => {
   });
 
   item.appendChild(deleteButton);
+};
+
+const initWallpaperGalleryTooltips = () => {
+  if (wallpaperGalleryTooltipDelegate) return;
+
+  wallpaperGalleryTooltipDelegate = delegate(wallpaperGalleryEl, {
+    target: ".wallpaper-gallery-drag-handle, .wallpaper-gallery-delete-button",
+    placement: "top",
+    theme: "dark",
+    animation: "shift-away",
+    duration: [120, 90],
+    delay: [75, 0]
+  });
 };
 
 const remapSelectedIndex = (selectedIndex: number, oldIndex: number, newIndex: number) => {
@@ -580,6 +598,8 @@ const resetAllWallpapersForActiveType = async () => {
 };
 
 export const renderWallpaperGallery = async () => {
+  initWallpaperGalleryTooltips();
+
   wallpaperGalleryRenderNonce += 1;
   const renderNonce = wallpaperGalleryRenderNonce;
 
