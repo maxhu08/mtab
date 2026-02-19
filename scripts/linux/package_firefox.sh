@@ -11,4 +11,7 @@ mkdir -p output &&
 cd dist &&
 mkdir -p "../output/$PACKAGE_DIR_NAME" &&
 cp -a . "../output/$PACKAGE_DIR_NAME/" &&
-zip -r -FS "../output/$PACKAGE_ZIP_NAME" * --exclude "*.git*"
+zip -r -FS "../output/$PACKAGE_ZIP_NAME" * --exclude "*.git*" &&
+echo "Build complete" &&
+echo "Extension: /output/$PACKAGE_DIR_NAME" &&
+echo "Zip: /output/$PACKAGE_ZIP_NAME"

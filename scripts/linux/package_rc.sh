@@ -52,7 +52,3 @@ if [[ "$TARGET" == "chrome" ]]; then
 else
   EXTENSION_VERSION="$BASE_VERSION" EXTENSION_ZIP_VERSION="$RC_VERSION" PACKAGE_DIR_SUFFIX="" PACKAGE_ZIP_SUFFIX="-rc" ./scripts/linux/package_firefox.sh
 fi
-
-echo "RC package complete."
-echo "Manifest version: $BASE_VERSION"
-echo "Display version: $RC_VERSION"
