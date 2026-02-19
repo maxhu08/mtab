@@ -23,9 +23,11 @@ import { titleTypewriterEffect } from "src/newtab/scripts/utils/title/title-effe
 import { initSearchHighlighting } from "src/newtab/scripts/utils/search/handle-search-highlighting";
 
 const manifest = chrome.runtime.getManifest();
+const displayVersion =
+  document.documentElement.getAttribute("data-display-version")?.trim() || manifest.version;
 
 document.documentElement.setAttribute("extension-id", chrome.runtime.id);
-document.documentElement.setAttribute("extension-version", manifest.version);
+document.documentElement.setAttribute("extension-version", displayVersion);
 // @ts-expect-error
 document.documentElement.setAttribute("made-by", manifest.author);
 

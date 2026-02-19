@@ -1,7 +1,14 @@
 #!/usr/bin/env bash
 
-EXTENSION_VERSION=$(cat EXTENSION_VERSION.txt)
+EXTENSION_VERSION="${EXTENSION_VERSION:-$(cat EXTENSION_VERSION.txt)}"
+ZIP_VERSION="${EXTENSION_ZIP_VERSION:-$EXTENSION_VERSION}"
+PACKAGE_DIR_SUFFIX="${PACKAGE_DIR_SUFFIX:-}"
+PACKAGE_ZIP_SUFFIX="${PACKAGE_ZIP_SUFFIX:-$PACKAGE_DIR_SUFFIX}"
+PACKAGE_DIR_NAME="mtab-v$ZIP_VERSION-chrome$PACKAGE_DIR_SUFFIX"
+PACKAGE_ZIP_NAME="mtab-v$ZIP_VERSION-chrome$PACKAGE_ZIP_SUFFIX.zip"
 
 mkdir -p output &&
 cd dist &&
-zip -r -FS ../output/mtab-v$EXTENSION_VERSION-chrome.zip * --exclude "*.git*"
+mkdir -p "../output/$PACKAGE_DIR_NAME" &&
+cp -a . "../output/$PACKAGE_DIR_NAME/" &&
+zip -r -FS "../output/$PACKAGE_ZIP_NAME" * --exclude "*.git*"

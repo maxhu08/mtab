@@ -13,6 +13,8 @@
     "build-firefox-windows": "mkdir -p dist && parcel build src/**/*.html --no-source-maps --no-scope-hoist && ./scripts/win/create_manifest_firefox.bat && ./scripts/win/copy_assets.bat && ./scripts/win/copy_sw.bat",
     "package-chrome": "bun clean && bun build-chrome",
     "package-firefox": "bun clean && bun build-firefox",
+    "package-chrome-rc": "./scripts/linux/package_rc.sh chrome",
+    "package-firefox-rc": "./scripts/linux/package_rc.sh firefox",
     "zip-source": "./scripts/linux/zip_source.sh",
     "clean": "rm -rf .parcel-cache && rm -rf dist",
     "prettier": "prettier --write \"./**/*.{js,jsx,mjs,cjs,ts,tsx,json,html}\"",

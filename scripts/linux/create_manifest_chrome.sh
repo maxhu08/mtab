@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-EXTENSION_VERSION=$(cat EXTENSION_VERSION.txt)
+EXTENSION_VERSION="${EXTENSION_VERSION:-$(cat EXTENSION_VERSION.txt)}"
 
 manifest_content='{
   "manifest_version": 3,

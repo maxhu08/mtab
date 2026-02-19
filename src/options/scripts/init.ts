@@ -42,8 +42,11 @@ getConfig(({ config }) => {
   fixAllToggleCheckboxSections();
 });
 
-(document.getElementById("version-number-text") as HTMLSpanElement).textContent +=
-  chrome.runtime.getManifest().version;
+const manifest = chrome.runtime.getManifest();
+const displayVersion =
+  document.documentElement.getAttribute("data-display-version")?.trim() || manifest.version;
+
+(document.getElementById("version-number-text") as HTMLSpanElement).textContent += displayVersion;
 
 (document.getElementById("user-agent-text") as HTMLSpanElement).textContent += getUserAgent();
 
