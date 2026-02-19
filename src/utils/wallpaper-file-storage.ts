@@ -463,6 +463,26 @@ export const removeUploadedWallpaperFiles = async (ids: string[]) => {
   await setUploadedFilesMeta(next);
 };
 
+export const reorderUploadedWallpaperFiles = async (orderedIds: string[]) => {
+  if (orderedIds.length === 0) return;
+
+  const list = await getUploadedFilesMeta();
+  if (list.length <= 1) return;
+
+  const idToMeta = new Map(list.map((item) => [item.id, item]));
+  const reordered: UploadedWallpaperFileMeta[] = [];
+
+  orderedIds.forEach((id) => {
+    const match = idToMeta.get(id);
+    if (!match) return;
+    reordered.push(match);
+    idToMeta.delete(id);
+  });
+
+  reordered.push(...idToMeta.values());
+  await setUploadedFilesMeta(reordered);
+};
+
 export const resetUploadedWallpaperFiles = async () => {
   const list = await getUploadedFilesMeta();
 

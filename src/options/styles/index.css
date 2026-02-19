@@ -13,6 +13,31 @@
   box-sizing: border-box;
 }
 
+.wallpaper-gallery-ghost-class {
+  opacity: 0.25;
+}
+
+.wallpaper-gallery-chosen-class {
+  opacity: 1 !important;
+  background-color: #ec4899;
+  padding: 2px;
+}
+
+.wallpaper-gallery-item {
+  transition: transform 250ms cubic-bezier(0.42, 0, 0.58, 1);
+  will-change: transform;
+}
+
+#wallpaper-gallery,
+#wallpaper-gallery * {
+  transition-duration: 0ms;
+}
+
+.wallpaper-gallery-item :not(.wallpaper-gallery-item) {
+  transition-duration: 250ms !important;
+}
+
+
 /* for sortable animations to work  */
 #bookmarks-user-defined-list,
 #bookmarks-user-defined-list * {

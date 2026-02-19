@@ -1,3 +1,4 @@
+import Sortable from "sortablejs";
 import {
   wallpaperFileUploadInputEl,
   wallpaperFiltersBlurInputEl,
@@ -11,6 +12,7 @@ import {
   getUploadedWallpaperFile,
   getUploadedWallpaperThumbnail,
   listUploadedWallpaperFiles,
+  reorderUploadedWallpaperFiles,
   removeUploadedWallpaperFiles,
   resetUploadedWallpaperFiles
 } from "src/utils/wallpaper-file-storage";
@@ -42,15 +44,21 @@ let selectedURLIndex = -1;
 let selectedSolidColorIndex = -1;
 let focusedFileId: string | null = null;
 let wallpaperGalleryRenderNonce = 0;
+let wallpaperGallerySuppressClickUntil = 0;
 
 const galleryItemClass =
-  "group relative aspect-video overflow-hidden rounded-md bg-neutral-900 cursor-pointer";
+  "group relative aspect-video overflow-hidden rounded-md bg-neutral-900 cursor-pointer outline-none";
 const galleryItemSelectedClass = "brightness-110";
 const galleryMediaClass = "h-full w-full object-cover";
+const galleryInnerClass = "h-full w-full overflow-hidden rounded-[4px]";
 const galleryAddTileClass =
-  "grid place-items-center text-2xl text-neutral-300 transition hover:bg-neutral-700 hover:text-white";
+  "grid place-items-center text-2xl text-neutral-300 transition hover:bg-neutral-700 hover:text-white outline-none";
 const galleryVideoBadgeClass =
   "absolute bottom-1.5 right-1.5 rounded-full bg-black/45 px-1.5 py-0.5 text-[10px] text-white";
+const galleryHandleClass =
+  "wallpaper-gallery-drag-handle absolute left-1.5 top-1.5 hidden h-7 w-7 place-items-center rounded-md bg-black/35 text-white transition hover:bg-black/55 group-hover:grid outline-none";
+
+let wallpaperGallerySortable: Sortable | null = null;
 
 const getGalleryFilterValue = () =>
   `brightness(${wallpaperFiltersBrightnessInputEl.value}) blur(${wallpaperFiltersBlurInputEl.value})`;
@@ -71,9 +79,30 @@ const applyFiltersToDefaultPreviewMedia = () => {
 const createGalleryItem = (selected: boolean) => {
   const item = document.createElement("button");
   item.type = "button";
-  item.className = galleryItemClass;
+  item.className = `${galleryItemClass} wallpaper-gallery-item`;
   if (selected) item.classList.add(galleryItemSelectedClass);
   return item;
+};
+
+const getGalleryInnerContainer = (item: HTMLElement) => {
+  const inner = document.createElement("div");
+  inner.className = galleryInnerClass;
+  item.appendChild(inner);
+  return inner;
+};
+
+const addTileRepositionHandle = (item: HTMLElement) => {
+  const handle = document.createElement("button");
+  handle.type = "button";
+  handle.className = galleryHandleClass;
+  handle.innerHTML = '<i class="ri-draggable"></i>';
+
+  handle.addEventListener("click", (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+  });
+
+  item.appendChild(handle);
 };
 
 const addTileHoverOverlay = (item: HTMLElement) => {
@@ -87,7 +116,7 @@ const addTileDeleteButton = (item: HTMLElement, onDelete: () => void) => {
   const deleteButton = document.createElement("button");
   deleteButton.type = "button";
   deleteButton.className =
-    "absolute right-1.5 top-1.5 hidden h-7 w-7 place-items-center rounded-md bg-black/35 text-white transition hover:bg-black/55 group-hover:grid";
+    "absolute right-1.5 top-1.5 hidden h-7 w-7 place-items-center rounded-md bg-black/35 text-white transition hover:bg-black/55 group-hover:grid outline-none";
   deleteButton.innerHTML = '<i class="ri-delete-bin-line"></i>';
 
   deleteButton.addEventListener("click", (event) => {
@@ -97,6 +126,76 @@ const addTileDeleteButton = (item: HTMLElement, onDelete: () => void) => {
   });
 
   item.appendChild(deleteButton);
+};
+
+const remapSelectedIndex = (selectedIndex: number, oldIndex: number, newIndex: number) => {
+  if (selectedIndex < 0) return selectedIndex;
+  if (selectedIndex === oldIndex) return newIndex;
+  if (oldIndex < selectedIndex && selectedIndex <= newIndex) return selectedIndex - 1;
+  if (newIndex <= selectedIndex && selectedIndex < oldIndex) return selectedIndex + 1;
+  return selectedIndex;
+};
+
+const destroyWallpaperGallerySortable = () => {
+  wallpaperGallerySortable?.destroy();
+  wallpaperGallerySortable = null;
+};
+
+const shouldIgnoreGalleryClick = () => Date.now() < wallpaperGallerySuppressClickUntil;
+
+const initWallpaperGallerySortable = (
+  type: ReturnType<typeof getActiveWallpaperType>,
+  renderNonce: number
+) => {
+  destroyWallpaperGallerySortable();
+
+  if (type === "default") return;
+
+  wallpaperGallerySortable = new Sortable(wallpaperGalleryEl, {
+    draggable: ".wallpaper-gallery-item",
+    handle: ".wallpaper-gallery-drag-handle",
+    fallbackOnBody: true,
+    swapThreshold: 0.65,
+    invertSwap: false,
+    animation: 250,
+    easing: "cubic-bezier(0.42, 0, 0.58, 1)",
+    ghostClass: "wallpaper-gallery-ghost-class",
+    chosenClass: "wallpaper-gallery-chosen-class",
+    onStart: () => {
+      wallpaperGallerySuppressClickUntil = Date.now() + 350;
+    },
+    onEnd: async ({ oldIndex, newIndex }) => {
+      wallpaperGallerySuppressClickUntil = Date.now() + 350;
+      if (renderNonce !== wallpaperGalleryRenderNonce) return;
+      if (oldIndex == null || newIndex == null || oldIndex === newIndex) return;
+
+      if (type === "url") {
+        const [moved] = wallpaperUrls.splice(oldIndex, 1);
+        if (!moved) return;
+        wallpaperUrls.splice(newIndex, 0, moved);
+        selectedURLIndex = remapSelectedIndex(selectedURLIndex, oldIndex, newIndex);
+        return;
+      }
+
+      if (type === "solid-color") {
+        const [moved] = wallpaperSolidColors.splice(oldIndex, 1);
+        if (!moved) return;
+        wallpaperSolidColors.splice(newIndex, 0, moved);
+        selectedSolidColorIndex = remapSelectedIndex(selectedSolidColorIndex, oldIndex, newIndex);
+        return;
+      }
+
+      if (type === "file-upload") {
+        const orderedFileIds = Array.from(
+          wallpaperGalleryEl.querySelectorAll(".wallpaper-gallery-item")
+        )
+          .map((item) => item.getAttribute("data-wallpaper-file-id"))
+          .filter((id): id is string => typeof id === "string" && id.length > 0);
+
+        await reorderUploadedWallpaperFiles(orderedFileIds);
+      }
+    }
+  });
 };
 
 const getActiveWallpaperType = () => {
@@ -285,6 +384,7 @@ const renderURLGallery = (renderNonce: number) => {
 
   wallpaperUrls.forEach((url, index) => {
     const item = createGalleryItem(index === selectedURLIndex);
+    const inner = getGalleryInnerContainer(item);
 
     const isVideo = /\.(mp4|webm|ogg|mov)(\?.*)?$/i.test(url) || url.startsWith("data:video/");
 
@@ -297,7 +397,7 @@ const renderURLGallery = (renderNonce: number) => {
       video.loop = true;
       video.autoplay = true;
       video.playsInline = true;
-      item.appendChild(video);
+      inner.appendChild(video);
 
       const icon = document.createElement("span");
       icon.className = galleryVideoBadgeClass;
@@ -308,15 +408,17 @@ const renderURLGallery = (renderNonce: number) => {
       img.src = url;
       img.className = galleryMediaClass;
       img.style.filter = getGalleryFilterValue();
-      item.appendChild(img);
+      inner.appendChild(img);
     }
 
+    addTileRepositionHandle(item);
     addTileHoverOverlay(item);
     addTileDeleteButton(item, () => {
       void deleteURLAtIndex(index);
     });
 
     item.addEventListener("click", () => {
+      if (shouldIgnoreGalleryClick()) return;
       if (renderNonce !== wallpaperGalleryRenderNonce) return;
       selectedURLIndex = index;
       void renderWallpaperGallery();
@@ -327,7 +429,7 @@ const renderURLGallery = (renderNonce: number) => {
 
   const addTile = document.createElement("button");
   addTile.type = "button";
-  addTile.className = `${galleryItemClass} ${galleryAddTileClass}`;
+  addTile.className = `${galleryItemClass} ${galleryAddTileClass} wallpaper-gallery-add-tile`;
   addTile.innerHTML = '<i class="ri-add-line"></i>';
   addTile.addEventListener("click", () => {
     if (renderNonce !== wallpaperGalleryRenderNonce) return;
@@ -341,19 +443,22 @@ const renderSolidColorGallery = (renderNonce: number) => {
 
   wallpaperSolidColors.forEach((color, index) => {
     const item = createGalleryItem(index === selectedSolidColorIndex);
+    const inner = getGalleryInnerContainer(item);
 
     const solid = document.createElement("div");
     solid.className = "h-full w-full";
     solid.style.backgroundColor = color;
 
-    item.appendChild(solid);
+    inner.appendChild(solid);
 
+    addTileRepositionHandle(item);
     addTileHoverOverlay(item);
     addTileDeleteButton(item, () => {
       void deleteSolidColorAtIndex(index);
     });
 
     item.addEventListener("click", () => {
+      if (shouldIgnoreGalleryClick()) return;
       if (renderNonce !== wallpaperGalleryRenderNonce) return;
       selectedSolidColorIndex = index;
       void renderWallpaperGallery();
@@ -364,7 +469,7 @@ const renderSolidColorGallery = (renderNonce: number) => {
 
   const addTile = document.createElement("button");
   addTile.type = "button";
-  addTile.className = `${galleryItemClass} ${galleryAddTileClass}`;
+  addTile.className = `${galleryItemClass} ${galleryAddTileClass} wallpaper-gallery-add-tile`;
   addTile.innerHTML = '<i class="ri-add-line"></i>';
   addTile.addEventListener("click", () => {
     if (renderNonce !== wallpaperGalleryRenderNonce) return;
@@ -384,6 +489,8 @@ const renderFileGallery = async (renderNonce: number) => {
   const items = await Promise.all(
     files.map(async (file) => {
       const item = createGalleryItem(focusedFileId === file.id);
+      item.setAttribute("data-wallpaper-file-id", file.id);
+      const inner = getGalleryInnerContainer(item);
 
       const thumb = await getUploadedWallpaperThumbnail(file.id);
 
@@ -399,7 +506,7 @@ const renderFileGallery = async (renderNonce: number) => {
           video.loop = true;
           video.autoplay = true;
           video.playsInline = true;
-          item.appendChild(video);
+          inner.appendChild(video);
 
           const icon = document.createElement("span");
           icon.className = galleryVideoBadgeClass;
@@ -410,16 +517,18 @@ const renderFileGallery = async (renderNonce: number) => {
           img.src = url;
           img.className = galleryMediaClass;
           img.style.filter = getGalleryFilterValue();
-          item.appendChild(img);
+          inner.appendChild(img);
         }
       }
 
+      addTileRepositionHandle(item);
       addTileHoverOverlay(item);
       addTileDeleteButton(item, () => {
         void deleteUploadedFile(file.id);
       });
 
       item.addEventListener("click", () => {
+        if (shouldIgnoreGalleryClick()) return;
         if (renderNonce !== wallpaperGalleryRenderNonce) return;
         focusedFileId = file.id;
         void renderWallpaperGallery();
@@ -437,7 +546,7 @@ const renderFileGallery = async (renderNonce: number) => {
 
   const addTile = document.createElement("button");
   addTile.type = "button";
-  addTile.className = `${galleryItemClass} ${galleryAddTileClass}`;
+  addTile.className = `${galleryItemClass} ${galleryAddTileClass} wallpaper-gallery-add-tile`;
   addTile.innerHTML = '<i class="ri-add-line"></i>';
   addTile.addEventListener("click", () => {
     if (renderNonce !== wallpaperGalleryRenderNonce) return;
@@ -477,6 +586,7 @@ export const renderWallpaperGallery = async () => {
   const type = getActiveWallpaperType();
 
   if (type === "default") {
+    destroyWallpaperGallerySortable();
     wallpaperGalleryEl.style.display = "none";
     if (wallpaperGalleryWrapperEl) wallpaperGalleryWrapperEl.style.display = "none";
     if (wallpaperDefaultPreviewSectionEl) wallpaperDefaultPreviewSectionEl.style.display = "block";
@@ -490,10 +600,13 @@ export const renderWallpaperGallery = async () => {
 
   if (type === "url") {
     renderURLGallery(renderNonce);
+    initWallpaperGallerySortable(type, renderNonce);
   } else if (type === "solid-color") {
     renderSolidColorGallery(renderNonce);
+    initWallpaperGallerySortable(type, renderNonce);
   } else if (type === "file-upload") {
     await renderFileGallery(renderNonce);
+    initWallpaperGallerySortable(type, renderNonce);
   } else {
     wallpaperGalleryEl.innerHTML = "";
   }
