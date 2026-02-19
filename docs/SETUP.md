@@ -44,6 +44,7 @@ fnm use
 - Dev build: `bun d`
 - Production builds: `bun build-chrome`, `bun build-firefox`
 - Package zips: `bun package-chrome`, `bun package-firefox`
+- Format code: `bun prettier`
 
 ## Load Extension Locally
 

@@ -15,7 +15,8 @@ Use this page as the fast entry point for contributors.
 - Run development build: `bun d`
 - Build release artifacts: `bun build-chrome` and `bun build-firefox`
 - Package zip files: `bun package-chrome` and `bun package-firefox`
-- Formatter is enforced by pre-commit hooks; keep your changes clean before committing.
+- Format code before committing: `bun prettier`
+- Formatter is also enforced by pre-commit hooks.
 
 ## Scope Notes
 
