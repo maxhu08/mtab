@@ -52,7 +52,7 @@ export const showInputDialog = (
   inputEl.autocomplete = "off";
   inputEl.className =
     "w-full bg-transparent text-base text-white placeholder-neutral-500 outline-none";
-  inputEl.placeholder = options.placeholder ?? "type here...";
+  inputEl.placeholder = options.placeholder ?? "paste here...";
   inputEl.value = options.defaultValue ?? "";
   inputContainerEl.append(prefixEl, inputEl);
 
