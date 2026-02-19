@@ -23,7 +23,9 @@ chrome.runtime.onMessage.addListener((msg, _sender, sendResponse) => {
       const url = `https://duckduckgo.com/ac/?q=${encodeURIComponent(q)}`;
       const res = await fetch(url);
       if (!res.ok) {
-        sendResponse({ ok: false, suggestions: [] });
+        const error = `Search suggestions request failed: HTTP ${res.status} ${res.statusText}`;
+        console.error(error, { url });
+        sendResponse({ ok: false, suggestions: [], error });
         return;
       }
 
@@ -35,8 +37,10 @@ chrome.runtime.onMessage.addListener((msg, _sender, sendResponse) => {
         : [];
 
       sendResponse({ ok: true, suggestions });
-    } catch {
-      sendResponse({ ok: false, suggestions: [] });
+    } catch (err) {
+      const error = err instanceof Error ? err.message : String(err);
+      console.error("Search suggestions request threw an error", { q, error, err });
+      sendResponse({ ok: false, suggestions: [], error });
     }
   })();
 
