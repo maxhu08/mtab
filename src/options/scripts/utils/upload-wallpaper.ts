@@ -29,6 +29,9 @@ const wallpaperGalleryWrapperEl = document.getElementById(
 const wallpaperDefaultPreviewSectionEl = document.getElementById(
   "wallpaper-default-preview-section"
 ) as HTMLDivElement | null;
+const wallpaperDefaultPreviewMediaEl = document.getElementById(
+  "wallpaper-default-preview-media"
+) as HTMLDivElement | null;
 const wallpaperResetAllWrapperEl = document.getElementById(
   "wallpaper-reset-all-wrapper"
 ) as HTMLDivElement | null;
@@ -58,6 +61,11 @@ const applyFiltersToGalleryMedia = () => {
   mediaEls.forEach((el) => {
     el.style.filter = filter;
   });
+};
+
+const applyFiltersToDefaultPreviewMedia = () => {
+  if (!wallpaperDefaultPreviewMediaEl) return;
+  wallpaperDefaultPreviewMediaEl.style.filter = getGalleryFilterValue();
 };
 
 const createGalleryItem = (selected: boolean) => {
@@ -491,6 +499,7 @@ export const renderWallpaperGallery = async () => {
   }
 
   if (renderNonce !== wallpaperGalleryRenderNonce) return;
+  applyFiltersToDefaultPreviewMedia();
   await previewSelected();
 };
 
@@ -543,6 +552,7 @@ wallpaperFiltersBrightnessInputEl.onchange = () => {
     );
   }
   applyFiltersToGalleryMedia();
+  applyFiltersToDefaultPreviewMedia();
 };
 
 wallpaperFiltersBlurInputEl.onchange = () => {
@@ -555,4 +565,5 @@ wallpaperFiltersBlurInputEl.onchange = () => {
     );
   }
   applyFiltersToGalleryMedia();
+  applyFiltersToDefaultPreviewMedia();
 };
