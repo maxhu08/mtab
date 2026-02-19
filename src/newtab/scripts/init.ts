@@ -24,7 +24,7 @@ import { initSearchHighlighting } from "src/newtab/scripts/utils/search/handle-s
 
 const manifest = chrome.runtime.getManifest();
 const displayVersion =
-  document.documentElement.getAttribute("data-display-version")?.trim() || manifest.version;
+  document.documentElement.getAttribute("rc-version-info")?.trim() || manifest.version;
 
 document.documentElement.setAttribute("extension-id", chrome.runtime.id);
 document.documentElement.setAttribute("extension-version", displayVersion);

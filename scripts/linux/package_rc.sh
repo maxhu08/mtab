@@ -41,9 +41,9 @@ for FILE in dist/options.html dist/index.html; do
   fi
 
   if [[ "$FILE" == "dist/index.html" ]]; then
-    perl -i -pe 'if (!$done) { s/<html\b([^>]*)>/<html$1 data-display-version="'"$RC_VERSION"'" extension-version="'"$RC_VERSION"'">/ and $done = 1 }' "$FILE"
+    perl -i -pe 'if (!$done) { s/<html\b([^>]*)>/<html$1 rc-version-info="'"$RC_VERSION"'" extension-version="'"$RC_VERSION"'">/ and $done = 1 }' "$FILE"
   else
-    perl -i -pe 'if (!$done) { s/<html\b([^>]*)>/<html$1 data-display-version="'"$RC_VERSION"'">/ and $done = 1 }' "$FILE"
+    perl -i -pe 'if (!$done) { s/<html\b([^>]*)>/<html$1 rc-version-info="'"$RC_VERSION"'">/ and $done = 1 }' "$FILE"
   fi
 done
 
