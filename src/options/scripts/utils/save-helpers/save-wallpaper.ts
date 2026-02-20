@@ -18,6 +18,8 @@ export const saveWallpaperSettingsToDraft = (draft: Config) => {
       draft.wallpaper.type = "url";
     } else if (selectedEl.id === "wallpaper-type-file-upload-button") {
       draft.wallpaper.type = "file-upload";
+    } else if (selectedEl.id === "wallpaper-type-random-button") {
+      draft.wallpaper.type = "random";
     } else if (selectedEl.id === "wallpaper-type-solid-color-button") {
       draft.wallpaper.type = "solid-color";
     } else if (selectedEl.id === "wallpaper-type-default-button") {

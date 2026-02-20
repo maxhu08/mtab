@@ -10,6 +10,7 @@ import {
   wallpaperFrequencyEveryTabButtonEl,
   wallpaperTypeDefaultButtonEl,
   wallpaperTypeFileUploadButtonEl,
+  wallpaperTypeRandomButtonEl,
   wallpaperTypeSolidColorButtonEl,
   wallpaperTypeUrlButtonEl
 } from "src/options/scripts/ui";
@@ -48,6 +49,8 @@ export const fillWallpapersInputs = (config: Config) => {
     wallpaperTypeUrlButtonEl.click();
   } else if (config.wallpaper.type === "file-upload") {
     wallpaperTypeFileUploadButtonEl.click();
+  } else if (config.wallpaper.type === "random") {
+    wallpaperTypeRandomButtonEl.click();
   } else if (config.wallpaper.type === "solid-color") {
     wallpaperTypeSolidColorButtonEl.click();
   } else {

@@ -38,6 +38,7 @@ const wallpaperDefaultPreviewMediaEl = document.getElementById(
 const wallpaperResetAllWrapperEl = document.getElementById(
   "wallpaper-reset-all-wrapper"
 ) as HTMLDivElement | null;
+const RANDOM_WALLPAPER_PREVIEW_URL = "https://picsum.photos/seed/mtab-random-preview/1280/720";
 
 let wallpaperUrls: string[] = [];
 let wallpaperSolidColors: string[] = ["#171717"];
@@ -222,6 +223,7 @@ const getActiveWallpaperType = () => {
   if (!selected) return "default";
   if (selected.id === "wallpaper-type-url-button") return "url";
   if (selected.id === "wallpaper-type-file-upload-button") return "file-upload";
+  if (selected.id === "wallpaper-type-random-button") return "random";
   if (selected.id === "wallpaper-type-solid-color-button") return "solid-color";
   return "default";
 };
@@ -316,6 +318,15 @@ const previewSelected = async () => {
       wallpaperFiltersBlurInputEl.value
     );
     applyFileMetaToPreview(selectedMeta);
+    return;
+  }
+
+  if (type === "random") {
+    previewWallpaper(
+      RANDOM_WALLPAPER_PREVIEW_URL,
+      wallpaperFiltersBrightnessInputEl.value,
+      wallpaperFiltersBlurInputEl.value
+    );
     return;
   }
 
@@ -605,11 +616,13 @@ export const renderWallpaperGallery = async () => {
 
   const type = getActiveWallpaperType();
 
-  if (type === "default") {
+  if (type === "default" || type === "random") {
     destroyWallpaperGallerySortable();
     wallpaperGalleryEl.style.display = "none";
     if (wallpaperGalleryWrapperEl) wallpaperGalleryWrapperEl.style.display = "none";
-    if (wallpaperDefaultPreviewSectionEl) wallpaperDefaultPreviewSectionEl.style.display = "block";
+    if (wallpaperDefaultPreviewSectionEl) {
+      wallpaperDefaultPreviewSectionEl.style.display = type === "default" ? "block" : "none";
+    }
     if (wallpaperResetAllWrapperEl) wallpaperResetAllWrapperEl.style.display = "none";
   } else {
     wallpaperGalleryEl.style.display = "grid";

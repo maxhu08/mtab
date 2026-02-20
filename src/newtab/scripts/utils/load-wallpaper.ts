@@ -8,6 +8,7 @@ import {
   listUploadedWallpaperFiles
 } from "src/utils/wallpaper-file-storage";
 import { resolveWallpaperIndex } from "src/utils/wallpaper-rotation";
+import { resolveRandomWallpaperUrl } from "src/newtab/scripts/utils/random-wallpaper";
 
 const DEFAULT_WALLPAPER_URL = "./wallpapers/default.jpg";
 
@@ -44,6 +45,18 @@ export const loadWallpaper = (wallpaper: Config["wallpaper"]) => {
     return;
   }
 
+  if (wallpaper.type === "random") {
+    loadRandomWallpaper(wallpaper)
+      .catch((err) => {
+        logger.log("Error loading random wallpaper", err);
+      })
+      .finally(() => {
+        hideCover();
+      });
+
+    return;
+  }
+
   loadURLWallpaper(wallpaper)
     .catch((err) => {
       logger.log("Error loading url wallpaper", err);
@@ -68,6 +81,14 @@ const loadURLWallpaper = async (wallpaper: Config["wallpaper"]) => {
 
   const next = urls[index];
   applyWallpaper(next, wallpaper.filters.brightness, wallpaper.filters.blur);
+};
+
+const loadRandomWallpaper = async (wallpaper: Config["wallpaper"]) => {
+  const url = await resolveRandomWallpaperUrl(wallpaper.frequency);
+
+  if (!url) return;
+
+  applyWallpaper(url, wallpaper.filters.brightness, wallpaper.filters.blur);
 };
 
 const loadSolidColorWallpaper = async (wallpaper: Config["wallpaper"]) => {
