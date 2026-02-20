@@ -20,7 +20,10 @@ import {
 import { openBookmark } from "src/newtab/scripts/utils/bookmarks/open-bookmark";
 import { getBrowserFlattenedBookmarks } from "src/newtab/scripts/utils/bookmarks/bookmark-data-cache";
 import { flattenBookmarks } from "src/newtab/scripts/utils/bookmarks/flatten-bookmarks";
-import { navigateOpenFolderPagination } from "src/newtab/scripts/utils/bookmarks/bookmark-render-utils";
+import {
+  navigateOpenFolderPagination,
+  navigateOpenFolderParent
+} from "src/newtab/scripts/utils/bookmarks/bookmark-render-utils";
 import { handleSearchResultsNavigation } from "src/newtab/scripts/utils/search/handle-search-results";
 import { recognizeUrl } from "src/newtab/scripts/utils/search/recognize-url";
 import { setSearchValue } from "src/newtab/scripts/utils/search/set-search-value";
@@ -117,6 +120,10 @@ export const listenToKeys = (config: Config) => {
       config.bookmarks.type === "default-blocky"
     ) {
       if (!searchFocused && !bookmarkSearchFocused) {
+        if (key === "0" && navigateOpenFolderParent()) {
+          e.preventDefault();
+          return;
+        }
         if (key === "[" && navigateOpenFolderPagination("prev")) {
           e.preventDefault();
           return;

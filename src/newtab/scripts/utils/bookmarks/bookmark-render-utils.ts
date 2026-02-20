@@ -503,6 +503,17 @@ export const navigateOpenFolderPagination = (direction: "prev" | "next") => {
   return true;
 };
 
+export const navigateOpenFolderParent = () => {
+  if (!renderRuntime) return false;
+
+  const folderUUID = getFolderUUIDFromArea(renderRuntime.currentOpenFolderEl);
+  const meta = renderRuntime.folderMetaByUUID.get(folderUUID);
+  if (!meta) return false;
+
+  openParentFolder(meta.parentFolderUUID);
+  return true;
+};
+
 export const renderBookmarkNodes = (
   bookmarkNodes: BookmarkNode[],
   folderAreaEl: HTMLDivElement,
