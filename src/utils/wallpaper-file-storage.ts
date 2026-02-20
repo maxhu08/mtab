@@ -7,6 +7,7 @@ const WALLPAPER_CACHE_URL = "https://wallpaper.invalid/full";
 const WALLPAPER_IDB_KEY = "userUploadedWallpaper";
 const WALLPAPER_STORAGE_KEY = "userUploadedWallpaper";
 const UPLOADED_WALLPAPER_FILES_KEY = "uploadedWallpaperFiles";
+const UPLOADED_WALLPAPER_BASE64_KEY_PREFIX = "uploadedWallpaperBase64";
 
 export const WALLPAPER_HINT_LOCAL_KEY = "wallpaper-first-paint-hint";
 
@@ -145,18 +146,91 @@ const getWallpaperCache = async () => {
 
 const getCacheKey = (id: string, size: "full" | "thumb") =>
   `https://wallpaper.invalid/files/${encodeURIComponent(id)}/${size}`;
+const getBase64StorageKey = (id: string, size: "full" | "thumb") =>
+  `${UPLOADED_WALLPAPER_BASE64_KEY_PREFIX}:${id}:${size}`;
+
+const blobToDataUrl = async (blob: Blob): Promise<string> =>
+  new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onerror = () => reject(new Error("Failed converting blob to data URL"));
+    reader.onload = () => resolve(String(reader.result ?? ""));
+    reader.readAsDataURL(blob);
+  });
+
+const dataUrlToBlob = async (dataUrl: string): Promise<Blob | undefined> => {
+  try {
+    const response = await fetch(dataUrl);
+    return await response.blob();
+  } catch (err) {
+    logger.log("Error converting base64 wallpaper to blob", err);
+    return undefined;
+  }
+};
+
+const getBase64StoredFile = async (
+  id: string,
+  size: "full" | "thumb"
+): Promise<Blob | undefined> => {
+  const key = getBase64StorageKey(id, size);
+  const data = await getStorageLocal<string>(key);
+
+  if (typeof data !== "string" || data.length === 0) return undefined;
+
+  return await dataUrlToBlob(data);
+};
+
+const setStorageLocalChecked = (key: string, value: unknown): Promise<boolean> =>
+  new Promise((resolve) => {
+    chrome.storage.local.set({ [key]: value }, () => {
+      const runtimeError = chrome.runtime.lastError;
+      if (runtimeError) {
+        logger.log("Error writing to chrome.storage.local", runtimeError.message);
+        resolve(false);
+        return;
+      }
+
+      resolve(true);
+    });
+  });
+
+const setBase64StoredFile = async ({
+  id,
+  size,
+  file
+}: {
+  id: string;
+  size: "full" | "thumb";
+  file: Blob;
+}): Promise<boolean> => {
+  try {
+    const dataUrl = await blobToDataUrl(file);
+    return await setStorageLocalChecked(getBase64StorageKey(id, size), dataUrl);
+  } catch (err) {
+    logger.log("Error serializing wallpaper file to base64", err);
+    return false;
+  }
+};
+
+const deleteBase64StoredFile = async (id: string) => {
+  await setStorageLocal(getBase64StorageKey(id, "full"), null);
+  await setStorageLocal(getBase64StorageKey(id, "thumb"), null);
+};
 
 const getCachedFile = async (id: string, size: "full" | "thumb"): Promise<Blob | undefined> => {
   const cache = await getWallpaperCache();
-  if (!cache) return undefined;
+  if (!cache) return await getBase64StoredFile(id, size);
 
   try {
     const response = await cache.match(getCacheKey(id, size));
-    if (!response) return undefined;
-    return await response.blob();
+    if (!response) return await getBase64StoredFile(id, size);
+
+    const blob = await response.blob();
+    // Backfill base64 storage for files that were uploaded before this feature.
+    void setBase64StoredFile({ id, size, file: blob });
+    return blob;
   } catch (err) {
     logger.log("Error reading wallpaper from CacheStorage", err);
-    return undefined;
+    return await getBase64StoredFile(id, size);
   }
 };
 
@@ -169,8 +243,9 @@ const setCachedFile = async ({
   size: "full" | "thumb";
   file: Blob;
 }): Promise<boolean> => {
+  const storedAsBase64 = await setBase64StoredFile({ id, size, file });
   const cache = await getWallpaperCache();
-  if (!cache) return false;
+  if (!cache) return storedAsBase64;
 
   try {
     const headers = new Headers();
@@ -179,11 +254,13 @@ const setCachedFile = async ({
     return true;
   } catch (err) {
     logger.log("Error writing wallpaper to CacheStorage", err);
-    return false;
+    return storedAsBase64;
   }
 };
 
 const deleteCachedFile = async (id: string) => {
+  await deleteBase64StoredFile(id);
+
   const cache = await getWallpaperCache();
   if (!cache) return;
 
