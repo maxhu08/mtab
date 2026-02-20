@@ -14,8 +14,7 @@
 
 ## Pre-Commit Hook
 
-- Husky runs formatting checks before commit (`bun prettier`).
-- If commit fails, format your changes and retry.
+- Husky formats staged files before commit with Prettier.
 
 ## Before Opening a PR
 
