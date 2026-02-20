@@ -21,6 +21,7 @@ import { snowStorm } from "src/newtab/scripts/utils/extras/snow-effect";
 import { initSW } from "src/newtab/scripts/sw";
 import { titleTypewriterEffect } from "src/newtab/scripts/utils/title/title-effects";
 import { initSearchHighlighting } from "src/newtab/scripts/utils/search/handle-search-highlighting";
+import { setWallpaperCreditTheme } from "src/newtab/scripts/utils/wallpaper-credit";
 
 const manifest = chrome.runtime.getManifest();
 const displayVersion =
@@ -68,6 +69,10 @@ getConfig(({ config }) => {
     config.search.font.type,
     config.search.font.custom
   );
+  setWallpaperCreditTheme({
+    foregroundColor: config.ui.foregroundColor,
+    searchTextColor: config.search.textColor
+  });
 
   styleMessage(
     config.message.textColor,

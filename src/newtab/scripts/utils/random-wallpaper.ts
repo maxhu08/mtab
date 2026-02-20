@@ -4,13 +4,25 @@ import { resolveWallpaperIndex } from "src/utils/wallpaper-rotation";
 const RANDOM_WALLPAPER_QUEUE_KEY = "wallpaperRandomPicsumQueue";
 const RANDOM_WALLPAPER_QUEUE_SIZE = 60;
 const RANDOM_WALLPAPER_PRELOAD_AHEAD = 4;
+const PICSUM_PAGE_SIZE = 100;
+const PICSUM_POOL_MAX_PAGE = 100;
+const PICSUM_FETCH_ATTEMPTS = 8;
 
-type RandomWallpaperQueueState = {
-  seeds: string[];
+type RandomWallpaperItem = {
+  id: string;
+  author: string;
+  url: string;
 };
 
-const createRandomSeed = () =>
-  `${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 12)}`;
+type RandomWallpaperQueueState = {
+  items: RandomWallpaperItem[];
+};
+
+export type RandomWallpaperSelection = {
+  url: string;
+  author: string;
+  authorLink: string;
+};
 
 const getViewportSize = () => {
   const devicePixelRatio = globalThis.devicePixelRatio || 1;
@@ -30,9 +42,9 @@ const getViewportSize = () => {
   };
 };
 
-const buildPicsumUrl = (seed: string) => {
+const buildPicsumUrl = (id: string) => {
   const { width, height } = getViewportSize();
-  return `https://picsum.photos/seed/${encodeURIComponent(seed)}/${width}/${height}`;
+  return `https://picsum.photos/id/${encodeURIComponent(id)}/${width}/${height}`;
 };
 
 const preloadWallpaperUrls = (urls: string[]) => {
@@ -47,15 +59,38 @@ const preloadWallpaperUrls = (urls: string[]) => {
 const readRandomWallpaperQueueState = (): Promise<RandomWallpaperQueueState> =>
   new Promise((resolve) => {
     chrome.storage.local.get([RANDOM_WALLPAPER_QUEUE_KEY], (data) => {
-      const rawState = data[RANDOM_WALLPAPER_QUEUE_KEY] as RandomWallpaperQueueState | undefined;
-      const parsedSeeds = Array.isArray(rawState?.seeds)
-        ? rawState.seeds.filter(
-            (seed: unknown) => typeof seed === "string" && seed.trim().length > 0
-          )
-        : [];
-      const seeds = Array.from(new Set(parsedSeeds)).slice(0, RANDOM_WALLPAPER_QUEUE_SIZE);
+      const rawState = data[RANDOM_WALLPAPER_QUEUE_KEY] as
+        | {
+            items?: unknown;
+            seeds?: unknown;
+          }
+        | undefined;
 
-      resolve({ seeds });
+      const rawItems = Array.isArray(rawState?.items) ? rawState.items : [];
+      const items: RandomWallpaperItem[] = [];
+      const idSet = new Set<string>();
+
+      rawItems.forEach((item) => {
+        const id =
+          typeof (item as RandomWallpaperItem)?.id === "string"
+            ? (item as RandomWallpaperItem).id.trim()
+            : "";
+        const author =
+          typeof (item as RandomWallpaperItem)?.author === "string"
+            ? (item as RandomWallpaperItem).author.trim()
+            : "";
+        const url =
+          typeof (item as RandomWallpaperItem)?.url === "string"
+            ? (item as RandomWallpaperItem).url.trim()
+            : "";
+
+        if (!id || idSet.has(id)) return;
+
+        idSet.add(id);
+        items.push({ id, author, url });
+      });
+
+      resolve({ items: items.slice(0, RANDOM_WALLPAPER_QUEUE_SIZE) });
     });
   });
 
@@ -64,45 +99,111 @@ const writeRandomWallpaperQueueState = (state: RandomWallpaperQueueState): Promi
     chrome.storage.local.set({ [RANDOM_WALLPAPER_QUEUE_KEY]: state }, () => resolve());
   });
 
-const ensureMinimumSeeds = (seeds: string[], minSize: number) => {
-  const nextSeeds = [...seeds];
-  const existing = new Set(nextSeeds);
+const randomPage = () => Math.floor(Math.random() * PICSUM_POOL_MAX_PAGE) + 1;
 
-  while (nextSeeds.length < minSize) {
-    const seed = createRandomSeed();
-    if (existing.has(seed)) continue;
-    existing.add(seed);
-    nextSeeds.push(seed);
+const fetchPicsumItems = async (page: number): Promise<RandomWallpaperItem[]> => {
+  try {
+    const response = await fetch(
+      `https://picsum.photos/v2/list?page=${page}&limit=${PICSUM_PAGE_SIZE}`,
+      { cache: "no-store" }
+    );
+
+    if (!response.ok) return [];
+
+    const json = (await response.json()) as unknown;
+
+    if (!Array.isArray(json)) return [];
+
+    return json
+      .map((item) => {
+        const id =
+          typeof (item as { id?: unknown }).id === "string"
+            ? (item as { id: string }).id.trim()
+            : "";
+        const author =
+          typeof (item as { author?: unknown }).author === "string"
+            ? (item as { author: string }).author.trim()
+            : "";
+        const url =
+          typeof (item as { url?: unknown }).url === "string"
+            ? (item as { url: string }).url.trim()
+            : "";
+
+        if (!id) return undefined;
+
+        return {
+          id,
+          author,
+          url
+        };
+      })
+      .filter((item): item is RandomWallpaperItem => !!item);
+  } catch {
+    return [];
   }
-
-  return nextSeeds;
 };
 
-export const resolveRandomWallpaperUrl = async (frequency: WallpaperFrequency) => {
-  const state = await readRandomWallpaperQueueState();
-  const seeds = ensureMinimumSeeds(state.seeds, RANDOM_WALLPAPER_QUEUE_SIZE);
+const ensureMinimumItems = async (
+  currentItems: RandomWallpaperItem[],
+  minSize: number
+): Promise<RandomWallpaperItem[]> => {
+  const items = [...currentItems];
+  const idSet = new Set(items.map((item) => item.id));
 
-  await writeRandomWallpaperQueueState({ seeds });
+  if (items.length >= minSize) {
+    return items.slice(0, minSize);
+  }
+
+  for (let attempt = 0; attempt < PICSUM_FETCH_ATTEMPTS && items.length < minSize; attempt += 1) {
+    const fetched = await fetchPicsumItems(randomPage());
+
+    for (const item of fetched) {
+      if (idSet.has(item.id)) continue;
+
+      idSet.add(item.id);
+      items.push(item);
+
+      if (items.length >= minSize) {
+        break;
+      }
+    }
+  }
+
+  return items.slice(0, minSize);
+};
+
+export const resolveRandomWallpaper = async (
+  frequency: WallpaperFrequency
+): Promise<RandomWallpaperSelection | undefined> => {
+  const state = await readRandomWallpaperQueueState();
+  const items = await ensureMinimumItems(state.items, RANDOM_WALLPAPER_QUEUE_SIZE);
+
+  await writeRandomWallpaperQueueState({ items });
+
+  if (items.length === 0) return undefined;
 
   const index = await resolveWallpaperIndex({
     rotationKey: "wallpaper-random-picsum",
     frequency,
-    itemCount: seeds.length
+    itemCount: items.length
   });
 
   if (index < 0) return undefined;
 
-  const currentSeed = seeds[index];
-  const currentUrl = buildPicsumUrl(currentSeed);
+  const current = items[index];
 
   const nextUrls: string[] = [];
 
   for (let offset = 1; offset <= RANDOM_WALLPAPER_PRELOAD_AHEAD; offset += 1) {
-    const nextSeed = seeds[(index + offset) % seeds.length];
-    nextUrls.push(buildPicsumUrl(nextSeed));
+    const next = items[(index + offset) % items.length];
+    nextUrls.push(buildPicsumUrl(next.id));
   }
 
   preloadWallpaperUrls(nextUrls);
 
-  return currentUrl;
+  return {
+    url: buildPicsumUrl(current.id),
+    author: current.author,
+    authorLink: current.url
+  };
 };

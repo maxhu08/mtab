@@ -8,12 +8,14 @@ import {
   listUploadedWallpaperFiles
 } from "src/utils/wallpaper-file-storage";
 import { resolveWallpaperIndex } from "src/utils/wallpaper-rotation";
-import { resolveRandomWallpaperUrl } from "src/newtab/scripts/utils/random-wallpaper";
+import { resolveRandomWallpaper } from "src/newtab/scripts/utils/random-wallpaper";
+import { setWallpaperAuthorCredit } from "src/newtab/scripts/utils/wallpaper-credit";
 
 const DEFAULT_WALLPAPER_URL = "./wallpapers/default.jpg";
 
 export const loadWallpaper = (wallpaper: Config["wallpaper"]) => {
   if (!wallpaper.enabled) return;
+  setWallpaperAuthorCredit(undefined);
 
   if (wallpaper.type === "file-upload") {
     loadUploadedFileWallpaper(wallpaper)
@@ -84,11 +86,12 @@ const loadURLWallpaper = async (wallpaper: Config["wallpaper"]) => {
 };
 
 const loadRandomWallpaper = async (wallpaper: Config["wallpaper"]) => {
-  const url = await resolveRandomWallpaperUrl(wallpaper.frequency);
+  const selection = await resolveRandomWallpaper(wallpaper.frequency);
 
-  if (!url) return;
+  if (!selection) return;
 
-  applyWallpaper(url, wallpaper.filters.brightness, wallpaper.filters.blur);
+  setWallpaperAuthorCredit(selection.author, selection.authorLink);
+  applyWallpaper(selection.url, wallpaper.filters.brightness, wallpaper.filters.blur);
 };
 
 const loadSolidColorWallpaper = async (wallpaper: Config["wallpaper"]) => {

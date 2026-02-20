@@ -30,8 +30,48 @@ html {
 }
 
 #content,
-#options-button-container {
+#options-button-container,
+#wallpaper-credit-anchor {
   z-index: 2;
+}
+
+#wallpaper-credit-anchor {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 10rem;
+  height: 8rem;
+}
+
+#wallpaper-credit-text {
+  position: absolute;
+  left: 0.75rem;
+  bottom: 0.75rem;
+  margin: 0;
+  max-width: min(18rem, 80vw);
+  padding: 0.45rem 0.6rem;
+  border-radius: 0.5rem;
+  border: 1px solid rgb(255 255 255 / 0.18);
+  background-color: rgb(0 0 0 / 0.45);
+  color: rgb(255 255 255 / 0.92);
+  font-size: 0.75rem;
+  line-height: 1.25;
+  white-space: nowrap;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  opacity: 0;
+  transform: translateY(0.35rem);
+  transition: opacity 160ms ease, transform 160ms ease;
+  pointer-events: none;
+  text-decoration: none;
+}
+
+#wallpaper-credit-anchor:hover #wallpaper-credit-text,
+#wallpaper-credit-anchor:focus-within #wallpaper-credit-text,
+#wallpaper-credit-anchor.shown #wallpaper-credit-text {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
 }
 
 .top-distance {
