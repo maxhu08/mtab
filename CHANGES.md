@@ -2,7 +2,7 @@
 
 in this release:
 
-- add ability to uses random wallpapers
+- add ability to use random wallpapers
 - improve options page
 - fix issue with uploaded wallpapers not being displayed in private windows
 - fix issue with 0 not working for bookmarks.numberKeys
