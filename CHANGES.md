@@ -1,10 +1,8 @@
-# Changes in 1.10.8
+# Changes in 1.10.9
 
 in this release:
 
-- added ability to add multiple wallpapers
-- added wallpaper rotations
-- improved options page
-- qol improvements
-- performance improvements
-- bug fixes
+- add ability to uses random wallpapers
+- improve options page
+- fix issue with uploaded wallpapers not being displayed in private windows
+- fix issue with 0 not working for bookmarks.numberKeys
