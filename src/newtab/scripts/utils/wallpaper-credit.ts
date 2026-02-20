@@ -1,3 +1,5 @@
+import { UIStyle } from "src/utils/config";
+
 const wallpaperCreditAnchorEl = document.getElementById(
   "wallpaper-credit-anchor"
 ) as HTMLDivElement | null;
@@ -47,17 +49,36 @@ const initCreditHoverBehavior = () => {
 };
 
 export const setWallpaperCreditTheme = ({
+  uiStyle,
   foregroundColor,
+  glassColor,
+  blurStrength,
   searchTextColor
 }: {
+  uiStyle: UIStyle;
   foregroundColor: string;
+  glassColor: string;
+  blurStrength: string;
   searchTextColor: string;
 }) => {
   if (!wallpaperCreditTextEl) return;
 
   wallpaperCreditTextEl.classList.add("font-search");
-  wallpaperCreditTextEl.style.backgroundColor = foregroundColor;
   wallpaperCreditTextEl.style.color = searchTextColor;
+  wallpaperCreditTextEl.style.boxSizing = "border-box";
+
+  if (uiStyle === "glass") {
+    wallpaperCreditTextEl.style.backgroundColor = glassColor;
+    wallpaperCreditTextEl.style.boxShadow = "0 25px 23px rgba(0, 0, 0, 0.15)";
+    wallpaperCreditTextEl.style.backdropFilter = `blur(${blurStrength})`;
+    wallpaperCreditTextEl.style.setProperty("-webkit-backdrop-filter", `blur(${blurStrength})`);
+    return;
+  }
+
+  wallpaperCreditTextEl.style.backgroundColor = foregroundColor;
+  wallpaperCreditTextEl.style.boxShadow = "none";
+  wallpaperCreditTextEl.style.backdropFilter = "none";
+  wallpaperCreditTextEl.style.setProperty("-webkit-backdrop-filter", "none");
 };
 
 export const setWallpaperAuthorCredit = (author?: string, link?: string) => {

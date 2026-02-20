@@ -70,7 +70,10 @@ getConfig(({ config }) => {
     config.search.font.custom
   );
   setWallpaperCreditTheme({
+    uiStyle: config.ui.style,
     foregroundColor: config.ui.foregroundColor,
+    glassColor: config.ui.glassColor,
+    blurStrength: config.ui.blurStrength,
     searchTextColor: config.search.textColor
   });
 

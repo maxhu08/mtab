@@ -51,19 +51,22 @@ html {
   max-width: min(18rem, 80vw);
   padding: 0.45rem 0.6rem;
   border-radius: 0.5rem;
-  border: 1px solid rgb(255 255 255 / 0.18);
-  background-color: rgb(0 0 0 / 0.45);
-  color: rgb(255 255 255 / 0.92);
   font-size: 0.75rem;
   line-height: 1.25;
   white-space: nowrap;
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
   opacity: 0;
   transform: translateY(0.35rem);
   transition: opacity 160ms ease, transform 160ms ease;
   pointer-events: none;
   text-decoration: none;
+  outline: none;
+  border: none;
+}
+
+#wallpaper-credit-text:focus,
+#wallpaper-credit-text:focus-visible {
+  outline: none;
+  box-shadow: none;
 }
 
 #wallpaper-credit-anchor:hover #wallpaper-credit-text,
