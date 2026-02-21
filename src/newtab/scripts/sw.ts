@@ -1,3 +1,3 @@
 export const initSW = () => {
-  chrome.runtime.sendMessage({ type: "warm" });
+  chrome.runtime.sendMessage({ type: "w" });
 };
