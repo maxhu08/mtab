@@ -8,7 +8,6 @@ import {
   wallpaperGalleryEl
 } from "src/options/scripts/ui";
 import {
-  UploadedWallpaperFileMeta,
   addUploadedWallpaperFiles,
   getUploadedWallpaperFile,
   getUploadedWallpaperThumbnail,
@@ -17,6 +16,19 @@ import {
   removeUploadedWallpaperFiles,
   resetUploadedWallpaperFiles
 } from "src/utils/wallpaper-file-storage";
+import {
+  MixedUploadedWallpaperFileMeta,
+  addMixedUploadedWallpaperFiles,
+  addMixedWallpaperSolidColor,
+  addMixedWallpaperURL,
+  getMixedUploadedWallpaperFile,
+  getMixedUploadedWallpaperThumbnail,
+  listMixedUploadedWallpaperFiles,
+  listMixedWallpaperEntries,
+  removeMixedWallpaperEntries,
+  reorderMixedWallpaperEntries,
+  resetMixedWallpaperEntries
+} from "src/utils/mixed-wallpaper-storage";
 import {
   applyWallpaperFilters,
   previewWallpaper,
@@ -40,11 +52,29 @@ const wallpaperResetAllWrapperEl = document.getElementById(
 ) as HTMLDivElement | null;
 const RANDOM_WALLPAPER_PREVIEW_URL = "https://picsum.photos/seed/mtab-random-preview/1280/720";
 
+type ActiveWallpaperType = "url" | "file-upload" | "random" | "solid-color" | "mixed" | "default";
+type MixedAddAction = "url" | "file-upload" | "solid-color";
+
+type PreviewFileMeta = {
+  mimeType: string;
+  imageOptions: {
+    size: string;
+    x: string;
+    y: string;
+  };
+  videoOptions: {
+    zoom: number;
+    playbackRate: number;
+    fade: number;
+  };
+};
+
 let wallpaperUrls: string[] = [];
 let wallpaperSolidColors: string[] = ["#171717"];
 let selectedURLIndex = -1;
 let selectedSolidColorIndex = -1;
 let focusedFileId: string | null = null;
+let focusedMixedEntryId: string | null = null;
 let wallpaperGalleryRenderNonce = 0;
 let wallpaperGallerySuppressClickUntil = 0;
 
@@ -62,7 +92,6 @@ const galleryHandleClass =
 const galleryDeleteClass = "wallpaper-gallery-delete-button";
 
 let wallpaperGalleryTooltipDelegate: Instance | null = null;
-
 let wallpaperGallerySortable: Sortable | null = null;
 
 const getScaledGalleryBlurValue = (rawBlur: string) => {
@@ -172,11 +201,66 @@ const addTileDeleteButton = (item: HTMLElement, onDelete: () => void) => {
   item.appendChild(deleteButton);
 };
 
+const addSimpleAddTile = (renderNonce: number, onClick: () => void) => {
+  const addTile = document.createElement("button");
+  addTile.type = "button";
+  addTile.className = `${galleryItemClass} ${galleryAddTileClass} wallpaper-gallery-add-tile`;
+  addTile.innerHTML = '<i class="ri-add-line"></i>';
+  addTile.addEventListener("click", () => {
+    if (renderNonce !== wallpaperGalleryRenderNonce) return;
+    onClick();
+  });
+
+  wallpaperGalleryEl.appendChild(addTile);
+};
+
+const addMixedAddTile = (renderNonce: number) => {
+  const addTile = document.createElement("div");
+  addTile.className = `${galleryItemClass} wallpaper-gallery-add-mixed-tile text-2xl text-neutral-300`;
+
+  const segments: Array<{ icon: string; action: MixedAddAction; tooltip: string }> = [
+    {
+      icon: "ri-link",
+      action: "url",
+      tooltip: "add url"
+    },
+    {
+      icon: "ri-image-upload-line",
+      action: "file-upload",
+      tooltip: "upload file"
+    },
+    {
+      icon: "ri-palette-line",
+      action: "solid-color",
+      tooltip: "add solid color"
+    }
+  ];
+
+  segments.forEach((segment) => {
+    const segmentButton = document.createElement("button");
+    segmentButton.type = "button";
+    segmentButton.className = "wallpaper-gallery-add-mixed-segment";
+    segmentButton.setAttribute("data-tippy-content", segment.tooltip);
+    segmentButton.innerHTML = `<i class="${segment.icon}"></i>`;
+    segmentButton.addEventListener("click", (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+      if (renderNonce !== wallpaperGalleryRenderNonce) return;
+      void addMixedEntryForAction(segment.action);
+    });
+
+    addTile.appendChild(segmentButton);
+  });
+
+  wallpaperGalleryEl.appendChild(addTile);
+};
+
 const initWallpaperGalleryTooltips = () => {
   if (wallpaperGalleryTooltipDelegate) return;
 
   wallpaperGalleryTooltipDelegate = delegate(wallpaperGalleryEl, {
-    target: ".wallpaper-gallery-drag-handle, .wallpaper-gallery-delete-button",
+    target:
+      ".wallpaper-gallery-drag-handle, .wallpaper-gallery-delete-button, .wallpaper-gallery-add-mixed-segment",
     placement: "top",
     theme: "dark",
     animation: "shift-away",
@@ -200,13 +284,10 @@ const destroyWallpaperGallerySortable = () => {
 
 const shouldIgnoreGalleryClick = () => Date.now() < wallpaperGallerySuppressClickUntil;
 
-const initWallpaperGallerySortable = (
-  type: ReturnType<typeof getActiveWallpaperType>,
-  renderNonce: number
-) => {
+const initWallpaperGallerySortable = (type: ActiveWallpaperType, renderNonce: number) => {
   destroyWallpaperGallerySortable();
 
-  if (type === "default") return;
+  if (type === "default" || type === "random") return;
 
   wallpaperGallerySortable = new Sortable(wallpaperGalleryEl, {
     draggable: ".wallpaper-gallery-item",
@@ -250,12 +331,23 @@ const initWallpaperGallerySortable = (
           .filter((id): id is string => typeof id === "string" && id.length > 0);
 
         await reorderUploadedWallpaperFiles(orderedFileIds);
+        return;
+      }
+
+      if (type === "mixed") {
+        const orderedEntryIds = Array.from(
+          wallpaperGalleryEl.querySelectorAll(".wallpaper-gallery-item")
+        )
+          .map((item) => item.getAttribute("data-wallpaper-mixed-entry-id"))
+          .filter((id): id is string => typeof id === "string" && id.length > 0);
+
+        await reorderMixedWallpaperEntries(orderedEntryIds);
       }
     }
   });
 };
 
-const getActiveWallpaperType = () => {
+const getActiveWallpaperType = (): ActiveWallpaperType => {
   const selected = getSelectedButton("wallpaper-type");
 
   if (!selected) return "default";
@@ -263,6 +355,7 @@ const getActiveWallpaperType = () => {
   if (selected.id === "wallpaper-type-file-upload-button") return "file-upload";
   if (selected.id === "wallpaper-type-random-button") return "random";
   if (selected.id === "wallpaper-type-solid-color-button") return "solid-color";
+  if (selected.id === "wallpaper-type-mixed-button") return "mixed";
   return "default";
 };
 
@@ -285,7 +378,7 @@ export const setWallpaperSolidColorsInState = (colors: string[]) => {
   selectedSolidColorIndex = wallpaperSolidColors.length > 0 ? 0 : -1;
 };
 
-const applyFileMetaToPreview = (meta: UploadedWallpaperFileMeta | undefined) => {
+const applyFileMetaToPreview = (meta: PreviewFileMeta | undefined) => {
   if (!meta) return;
 
   const mediaEl = document.querySelector(
@@ -359,6 +452,61 @@ const previewSelected = async () => {
     return;
   }
 
+  if (type === "mixed") {
+    const [entries, files] = await Promise.all([
+      listMixedWallpaperEntries(),
+      listMixedUploadedWallpaperFiles()
+    ]);
+
+    if (!focusedMixedEntryId && entries[0]) {
+      focusedMixedEntryId = entries[0].id;
+    }
+
+    const selectedEntry = entries.find((entry) => entry.id === focusedMixedEntryId);
+
+    if (!selectedEntry) {
+      previewWallpaper(
+        undefined,
+        wallpaperFiltersBrightnessInputEl.value,
+        wallpaperFiltersBlurInputEl.value
+      );
+      return;
+    }
+
+    if (selectedEntry.kind === "url") {
+      previewWallpaper(
+        selectedEntry.value,
+        wallpaperFiltersBrightnessInputEl.value,
+        wallpaperFiltersBlurInputEl.value
+      );
+      return;
+    }
+
+    if (selectedEntry.kind === "solid-color") {
+      previewWallpaperSolidColor(selectedEntry.value);
+      return;
+    }
+
+    const selectedMeta = files.find((file) => file.id === selectedEntry.value);
+    if (!selectedMeta) {
+      previewWallpaper(
+        undefined,
+        wallpaperFiltersBrightnessInputEl.value,
+        wallpaperFiltersBlurInputEl.value
+      );
+      return;
+    }
+
+    const blob = await getMixedUploadedWallpaperFile(selectedMeta.id);
+    previewWallpaper(
+      blob,
+      wallpaperFiltersBrightnessInputEl.value,
+      wallpaperFiltersBlurInputEl.value
+    );
+    applyFileMetaToPreview(selectedMeta);
+    return;
+  }
+
   if (type === "random") {
     previewWallpaper(
       RANDOM_WALLPAPER_PREVIEW_URL,
@@ -369,6 +517,30 @@ const previewSelected = async () => {
   }
 
   previewWallpaper("", wallpaperFiltersBrightnessInputEl.value, wallpaperFiltersBlurInputEl.value);
+};
+
+const addMixedEntryForAction = async (action: MixedAddAction) => {
+  if (action === "url") {
+    const value = await showInputDialog("Input wallpaper URL");
+    if (!value) return;
+
+    const added = await addMixedWallpaperURL(value);
+    if (added) focusedMixedEntryId = added.id;
+    await renderWallpaperGallery();
+    return;
+  }
+
+  if (action === "solid-color") {
+    const value = await showInputDialog("Input wallpaper color (e.g. #171717)");
+    if (!value) return;
+
+    const added = await addMixedWallpaperSolidColor(value);
+    if (added) focusedMixedEntryId = added.id;
+    await renderWallpaperGallery();
+    return;
+  }
+
+  wallpaperFileUploadInputEl.click();
 };
 
 export const addWallpaperForActiveType = async () => {
@@ -402,6 +574,11 @@ export const addWallpaperForActiveType = async () => {
 
   if (type === "file-upload") {
     wallpaperFileUploadInputEl.click();
+    return;
+  }
+
+  if (type === "mixed") {
+    await addMixedEntryForAction("url");
   }
 };
 
@@ -441,6 +618,17 @@ const deleteUploadedFile = async (id: string) => {
   if (focusedFileId === id) {
     const all = await listUploadedWallpaperFiles();
     focusedFileId = all[0]?.id ?? null;
+  }
+
+  await renderWallpaperGallery();
+};
+
+const deleteMixedEntry = async (id: string) => {
+  await removeMixedWallpaperEntries([id]);
+
+  if (focusedMixedEntryId === id) {
+    const all = await listMixedWallpaperEntries();
+    focusedMixedEntryId = all[0]?.id ?? null;
   }
 
   await renderWallpaperGallery();
@@ -498,15 +686,9 @@ const renderURLGallery = (renderNonce: number) => {
     wallpaperGalleryEl.appendChild(item);
   });
 
-  const addTile = document.createElement("button");
-  addTile.type = "button";
-  addTile.className = `${galleryItemClass} ${galleryAddTileClass} wallpaper-gallery-add-tile`;
-  addTile.innerHTML = '<i class="ri-add-line"></i>';
-  addTile.addEventListener("click", () => {
-    if (renderNonce !== wallpaperGalleryRenderNonce) return;
+  addSimpleAddTile(renderNonce, () => {
     void addWallpaperForActiveType();
   });
-  wallpaperGalleryEl.appendChild(addTile);
 };
 
 const renderSolidColorGallery = (renderNonce: number) => {
@@ -538,15 +720,9 @@ const renderSolidColorGallery = (renderNonce: number) => {
     wallpaperGalleryEl.appendChild(item);
   });
 
-  const addTile = document.createElement("button");
-  addTile.type = "button";
-  addTile.className = `${galleryItemClass} ${galleryAddTileClass} wallpaper-gallery-add-tile`;
-  addTile.innerHTML = '<i class="ri-add-line"></i>';
-  addTile.addEventListener("click", () => {
-    if (renderNonce !== wallpaperGalleryRenderNonce) return;
+  addSimpleAddTile(renderNonce, () => {
     void addWallpaperForActiveType();
   });
-  wallpaperGalleryEl.appendChild(addTile);
 };
 
 const renderFileGallery = async (renderNonce: number) => {
@@ -619,15 +795,142 @@ const renderFileGallery = async (renderNonce: number) => {
     wallpaperGalleryEl.appendChild(item);
   });
 
-  const addTile = document.createElement("button");
-  addTile.type = "button";
-  addTile.className = `${galleryItemClass} ${galleryAddTileClass} wallpaper-gallery-add-tile`;
-  addTile.innerHTML = '<i class="ri-add-line"></i>';
-  addTile.addEventListener("click", () => {
-    if (renderNonce !== wallpaperGalleryRenderNonce) return;
+  addSimpleAddTile(renderNonce, () => {
     wallpaperFileUploadInputEl.click();
   });
-  wallpaperGalleryEl.appendChild(addTile);
+};
+
+const appendMixedEntryMedia = async ({
+  inner,
+  entry,
+  fileMeta
+}: {
+  inner: HTMLDivElement;
+  entry: { kind: "url" | "solid-color" | "file-upload"; value: string };
+  fileMeta?: MixedUploadedWallpaperFileMeta;
+}) => {
+  if (entry.kind === "solid-color") {
+    const solid = document.createElement("div");
+    solid.className = "h-full w-full";
+    solid.style.backgroundColor = entry.value;
+    inner.appendChild(solid);
+    return;
+  }
+
+  if (entry.kind === "url") {
+    const isVideo =
+      /\.(mp4|webm|ogg|mov)(\?.*)?$/i.test(entry.value) || entry.value.startsWith("data:video/");
+
+    if (isVideo) {
+      const video = document.createElement("video");
+      video.src = entry.value;
+      video.className = galleryMediaClass;
+      video.style.filter = getGalleryFilterValue();
+      video.style.transform = getGalleryMediaScaleValue(wallpaperFiltersBlurInputEl.value);
+      video.style.transformOrigin = "center";
+      video.muted = true;
+      video.loop = true;
+      video.autoplay = true;
+      video.playsInline = true;
+      inner.appendChild(video);
+    } else {
+      const img = document.createElement("img");
+      img.src = entry.value;
+      img.className = galleryMediaClass;
+      img.style.filter = getGalleryFilterValue();
+      img.style.transform = getGalleryMediaScaleValue(wallpaperFiltersBlurInputEl.value);
+      img.style.transformOrigin = "center";
+      inner.appendChild(img);
+    }
+
+    return;
+  }
+
+  if (!fileMeta) return;
+
+  const thumb = await getMixedUploadedWallpaperThumbnail(fileMeta.id);
+  if (!thumb) return;
+
+  const url = URL.createObjectURL(thumb);
+
+  if (fileMeta.mimeType.startsWith("video/")) {
+    const video = document.createElement("video");
+    video.src = url;
+    video.className = galleryMediaClass;
+    video.style.filter = getGalleryFilterValue();
+    video.style.transform = getGalleryMediaScaleValue(wallpaperFiltersBlurInputEl.value);
+    video.style.transformOrigin = "center";
+    video.muted = true;
+    video.loop = true;
+    video.autoplay = true;
+    video.playsInline = true;
+    inner.appendChild(video);
+
+    const icon = document.createElement("span");
+    icon.className = galleryVideoBadgeClass;
+    icon.textContent = "video";
+    inner.parentElement?.appendChild(icon);
+  } else {
+    const img = document.createElement("img");
+    img.src = url;
+    img.className = galleryMediaClass;
+    img.style.filter = getGalleryFilterValue();
+    img.style.transform = getGalleryMediaScaleValue(wallpaperFiltersBlurInputEl.value);
+    img.style.transformOrigin = "center";
+    inner.appendChild(img);
+  }
+};
+
+const renderMixedGallery = async (renderNonce: number) => {
+  wallpaperGalleryEl.innerHTML = "";
+
+  const [entries, files] = await Promise.all([
+    listMixedWallpaperEntries(),
+    listMixedUploadedWallpaperFiles()
+  ]);
+
+  if (renderNonce !== wallpaperGalleryRenderNonce) return;
+
+  if (!focusedMixedEntryId && entries[0]) focusedMixedEntryId = entries[0].id;
+
+  const fileMetaMap = new Map(files.map((file) => [file.id, file]));
+
+  const items = await Promise.all(
+    entries.map(async (entry) => {
+      const item = createGalleryItem(focusedMixedEntryId === entry.id);
+      item.setAttribute("data-wallpaper-mixed-entry-id", entry.id);
+      const inner = getGalleryInnerContainer(item);
+
+      await appendMixedEntryMedia({
+        inner,
+        entry,
+        fileMeta: entry.kind === "file-upload" ? fileMetaMap.get(entry.value) : undefined
+      });
+
+      addTileRepositionHandle(item);
+      addTileHoverOverlay(item);
+      addTileDeleteButton(item, () => {
+        void deleteMixedEntry(entry.id);
+      });
+
+      item.addEventListener("click", () => {
+        if (shouldIgnoreGalleryClick()) return;
+        if (renderNonce !== wallpaperGalleryRenderNonce) return;
+        focusedMixedEntryId = entry.id;
+        void renderWallpaperGallery();
+      });
+
+      return item;
+    })
+  );
+
+  if (renderNonce !== wallpaperGalleryRenderNonce) return;
+
+  items.forEach((item) => {
+    wallpaperGalleryEl.appendChild(item);
+  });
+
+  addMixedAddTile(renderNonce);
 };
 
 const resetAllWallpapersForActiveType = async () => {
@@ -650,6 +953,13 @@ const resetAllWallpapersForActiveType = async () => {
   if (type === "file-upload") {
     await resetUploadedWallpaperFiles();
     focusedFileId = null;
+    await renderWallpaperGallery();
+    return;
+  }
+
+  if (type === "mixed") {
+    await resetMixedWallpaperEntries();
+    focusedMixedEntryId = null;
     await renderWallpaperGallery();
   }
 };
@@ -686,6 +996,9 @@ export const renderWallpaperGallery = async () => {
   } else if (type === "file-upload") {
     await renderFileGallery(renderNonce);
     initWallpaperGallerySortable(type, renderNonce);
+  } else if (type === "mixed") {
+    await renderMixedGallery(renderNonce);
+    initWallpaperGallerySortable(type, renderNonce);
   } else {
     wallpaperGalleryEl.innerHTML = "";
   }
@@ -703,14 +1016,23 @@ export const handleWallpaperFileUpload = () => {
     if (!files || files.length === 0) return;
 
     try {
-      await addUploadedWallpaperFiles(files);
+      const type = getActiveWallpaperType();
 
-      const all = await listUploadedWallpaperFiles();
-      focusedFileId = all[all.length - 1]?.id ?? null;
+      if (type === "mixed") {
+        const addedEntries = await addMixedUploadedWallpaperFiles(files);
+        focusedMixedEntryId = addedEntries[addedEntries.length - 1]?.id ?? focusedMixedEntryId;
+      } else {
+        await addUploadedWallpaperFiles(files);
+
+        const all = await listUploadedWallpaperFiles();
+        focusedFileId = all[all.length - 1]?.id ?? null;
+      }
 
       await renderWallpaperGallery();
     } catch (err) {
       logger.log("Error storing wallpaper", err);
+    } finally {
+      input.value = "";
     }
   });
 

@@ -22,6 +22,8 @@ export const saveWallpaperSettingsToDraft = (draft: Config) => {
       draft.wallpaper.type = "random";
     } else if (selectedEl.id === "wallpaper-type-solid-color-button") {
       draft.wallpaper.type = "solid-color";
+    } else if (selectedEl.id === "wallpaper-type-mixed-button") {
+      draft.wallpaper.type = "mixed";
     } else if (selectedEl.id === "wallpaper-type-default-button") {
       draft.wallpaper.type = "default";
     }

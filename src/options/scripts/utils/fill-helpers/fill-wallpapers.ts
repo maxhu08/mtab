@@ -10,6 +10,7 @@ import {
   wallpaperFrequencyEveryTabButtonEl,
   wallpaperTypeDefaultButtonEl,
   wallpaperTypeFileUploadButtonEl,
+  wallpaperTypeMixedButtonEl,
   wallpaperTypeRandomButtonEl,
   wallpaperTypeSolidColorButtonEl,
   wallpaperTypeUrlButtonEl
@@ -53,6 +54,8 @@ export const fillWallpapersInputs = (config: Config) => {
     wallpaperTypeRandomButtonEl.click();
   } else if (config.wallpaper.type === "solid-color") {
     wallpaperTypeSolidColorButtonEl.click();
+  } else if (config.wallpaper.type === "mixed") {
+    wallpaperTypeMixedButtonEl.click();
   } else {
     wallpaperTypeDefaultButtonEl.click();
   }

@@ -49,6 +49,32 @@
   transition-duration: 250ms !important;
 }
 
+.wallpaper-gallery-add-mixed-tile {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0;
+  padding: 0;
+}
+
+.wallpaper-gallery-add-mixed-segment {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  border: 0;
+  color: inherit;
+  outline: none;
+}
+
+.wallpaper-gallery-add-mixed-segment + .wallpaper-gallery-add-mixed-segment {
+  border-left: 1px solid #3f3f46;
+}
+
+.wallpaper-gallery-add-mixed-segment:hover {
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
 
 /* for sortable animations to work  */
 #bookmarks-user-defined-list,

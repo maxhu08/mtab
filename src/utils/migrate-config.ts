@@ -223,7 +223,7 @@ export const migrateOldConfig = (config: Config): Config => {
     "every-day",
     "daylight"
   ];
-  const allowedWallpaperTypes = ["url", "file-upload", "solid-color", "default", "random"];
+  const allowedWallpaperTypes = ["url", "file-upload", "solid-color", "default", "random", "mixed"];
   if (
     !(config.wallpaper as any).type ||
     typeof (config.wallpaper as any).type !== "string" ||

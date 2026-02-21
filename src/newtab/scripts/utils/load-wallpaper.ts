@@ -7,6 +7,11 @@ import {
   getUploadedWallpaperFile,
   listUploadedWallpaperFiles
 } from "src/utils/wallpaper-file-storage";
+import {
+  getMixedUploadedWallpaperFile,
+  listMixedUploadedWallpaperFiles,
+  listMixedWallpaperEntries
+} from "src/utils/mixed-wallpaper-storage";
 import { resolveWallpaperIndex } from "src/utils/wallpaper-rotation";
 import { resolveRandomWallpaper } from "src/newtab/scripts/utils/random-wallpaper";
 import { setWallpaperAuthorCredit } from "src/newtab/scripts/utils/wallpaper-credit";
@@ -44,6 +49,18 @@ export const loadWallpaper = (wallpaper: Config["wallpaper"]) => {
   if (wallpaper.type === "default") {
     applyWallpaper(DEFAULT_WALLPAPER_URL, wallpaper.filters.brightness, wallpaper.filters.blur);
     hideCover();
+    return;
+  }
+
+  if (wallpaper.type === "mixed") {
+    loadMixedWallpaper(wallpaper)
+      .catch((err) => {
+        logger.log("Error loading mixed wallpaper", err);
+      })
+      .finally(() => {
+        hideCover();
+      });
+
     return;
   }
 
@@ -131,6 +148,51 @@ const loadUploadedFileWallpaper = async (wallpaper: Config["wallpaper"]) => {
   if (!blob) return;
 
   applyWallpaper(blob, wallpaper.filters.brightness, wallpaper.filters.blur, selected);
+};
+
+const loadMixedWallpaper = async (wallpaper: Config["wallpaper"]) => {
+  const [entries, files] = await Promise.all([
+    listMixedWallpaperEntries(),
+    listMixedUploadedWallpaperFiles()
+  ]);
+
+  const validEntries = entries.filter((entry) => {
+    if (entry.kind === "file-upload") {
+      return files.some((file) => file.id === entry.value);
+    }
+
+    return typeof entry.value === "string" && entry.value.trim().length > 0;
+  });
+
+  if (validEntries.length === 0) return;
+
+  const index = await resolveWallpaperIndex({
+    rotationKey: "wallpaper-mixed",
+    frequency: wallpaper.frequency,
+    itemCount: validEntries.length
+  });
+
+  if (index < 0) return;
+
+  const selected = validEntries[index];
+
+  if (selected.kind === "url") {
+    applyWallpaper(selected.value, wallpaper.filters.brightness, wallpaper.filters.blur);
+    return;
+  }
+
+  if (selected.kind === "solid-color") {
+    applySolidColorWallpaper(selected.value);
+    return;
+  }
+
+  const fileMeta = files.find((file) => file.id === selected.value);
+  if (!fileMeta) return;
+
+  const blob = await getMixedUploadedWallpaperFile(fileMeta.id);
+  if (!blob) return;
+
+  applyWallpaper(blob, wallpaper.filters.brightness, wallpaper.filters.blur, fileMeta);
 };
 
 const applyWallpaper = (

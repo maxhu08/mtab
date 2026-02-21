@@ -20,6 +20,7 @@ import {
   uiStyleSolidButtonEl,
   wallpaperTypeDefaultButtonEl,
   wallpaperTypeFileUploadButtonEl,
+  wallpaperTypeMixedButtonEl,
   wallpaperTypeRandomButtonEl,
   wallpaperTypeSolidColorButtonEl,
   wallpaperTypeUrlButtonEl
@@ -164,6 +165,9 @@ const handleWallpaperTypeSwitch = () => {
   const wallpaperRandomSection = document.getElementById(
     "wallpaper-random-section"
   ) as HTMLDivElement;
+  const wallpaperMixedSection = document.getElementById(
+    "wallpaper-mixed-section"
+  ) as HTMLDivElement;
 
   const wallpaperNotSolidColorSection = document.getElementById(
     "wallpaper-not-solid-color-section"
@@ -179,6 +183,7 @@ const handleWallpaperTypeSwitch = () => {
     setSectionVisibility(wallpaperFileUploadSection, false);
     setSectionVisibility(wallpaperSolidColorSection, false);
     setSectionVisibility(wallpaperRandomSection, false);
+    setSectionVisibility(wallpaperMixedSection, false);
     setSectionVisibility(wallpaperUrlSection, true);
     setSectionVisibility(wallpaperNotSolidColorSection, true);
     setSectionVisibility(wallpaperGalleryWrapperSection, true);
@@ -191,6 +196,7 @@ const handleWallpaperTypeSwitch = () => {
     setSectionVisibility(wallpaperUrlSection, false);
     setSectionVisibility(wallpaperSolidColorSection, false);
     setSectionVisibility(wallpaperRandomSection, false);
+    setSectionVisibility(wallpaperMixedSection, false);
     setSectionVisibility(wallpaperFileUploadSection, true);
     setSectionVisibility(wallpaperNotSolidColorSection, true);
     setSectionVisibility(wallpaperGalleryWrapperSection, true);
@@ -203,6 +209,7 @@ const handleWallpaperTypeSwitch = () => {
     setSectionVisibility(wallpaperUrlSection, false);
     setSectionVisibility(wallpaperFileUploadSection, false);
     setSectionVisibility(wallpaperSolidColorSection, false);
+    setSectionVisibility(wallpaperMixedSection, false);
     setSectionVisibility(wallpaperRandomSection, true);
     setSectionVisibility(wallpaperNotSolidColorSection, true);
     setSectionVisibility(wallpaperGalleryWrapperSection, false);
@@ -215,8 +222,22 @@ const handleWallpaperTypeSwitch = () => {
     setSectionVisibility(wallpaperUrlSection, false);
     setSectionVisibility(wallpaperFileUploadSection, false);
     setSectionVisibility(wallpaperRandomSection, false);
+    setSectionVisibility(wallpaperMixedSection, false);
     setSectionVisibility(wallpaperNotSolidColorSection, false);
     setSectionVisibility(wallpaperSolidColorSection, true);
+    setSectionVisibility(wallpaperGalleryWrapperSection, true);
+    setSectionVisibility(wallpaperDefaultPreviewSection, false);
+
+    void renderWallpaperGallery();
+  });
+
+  wallpaperTypeMixedButtonEl.addEventListener("click", () => {
+    setSectionVisibility(wallpaperUrlSection, false);
+    setSectionVisibility(wallpaperFileUploadSection, false);
+    setSectionVisibility(wallpaperSolidColorSection, false);
+    setSectionVisibility(wallpaperRandomSection, false);
+    setSectionVisibility(wallpaperMixedSection, true);
+    setSectionVisibility(wallpaperNotSolidColorSection, true);
     setSectionVisibility(wallpaperGalleryWrapperSection, true);
     setSectionVisibility(wallpaperDefaultPreviewSection, false);
 
@@ -228,6 +249,7 @@ const handleWallpaperTypeSwitch = () => {
     setSectionVisibility(wallpaperFileUploadSection, false);
     setSectionVisibility(wallpaperSolidColorSection, false);
     setSectionVisibility(wallpaperRandomSection, false);
+    setSectionVisibility(wallpaperMixedSection, false);
     setSectionVisibility(wallpaperNotSolidColorSection, true);
     setSectionVisibility(wallpaperGalleryWrapperSection, false);
     setSectionVisibility(wallpaperDefaultPreviewSection, true);
