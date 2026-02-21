@@ -1,8 +1,7 @@
-# Changes in 1.10.9
+# Changes in 1.11.0
 
 in this release:
 
-- add ability to use random wallpapers
+- add ability to rotate between wallpapers with different types
+- fix issue with black borders showing on wallpapers when blur is applied
 - improve options page
-- fix issue with uploaded wallpapers not being displayed in private windows
-- fix issue with 0 not working for bookmarks.numberKeys
