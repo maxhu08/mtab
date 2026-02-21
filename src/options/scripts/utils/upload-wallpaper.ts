@@ -65,8 +65,21 @@ let wallpaperGalleryTooltipDelegate: Instance | null = null;
 
 let wallpaperGallerySortable: Sortable | null = null;
 
+const getScaledGalleryBlurValue = (rawBlur: string) => {
+  const trimmed = rawBlur.trim();
+  const match = trimmed.match(/^(-?\d*\.?\d+)\s*([a-z%]*)$/i);
+  if (!match) return trimmed;
+
+  const value = Number.parseFloat(match[1]);
+  if (!Number.isFinite(value)) return trimmed;
+
+  const unit = match[2] || "px";
+  const scaled = Math.max(0, value / 2);
+  return `${scaled}${unit}`;
+};
+
 const getGalleryFilterValue = () =>
-  `brightness(${wallpaperFiltersBrightnessInputEl.value}) blur(${wallpaperFiltersBlurInputEl.value})`;
+  `brightness(${wallpaperFiltersBrightnessInputEl.value}) blur(${getScaledGalleryBlurValue(wallpaperFiltersBlurInputEl.value)})`;
 
 const applyFiltersToGalleryMedia = () => {
   const filter = getGalleryFilterValue();

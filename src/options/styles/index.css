@@ -26,6 +26,18 @@
 .wallpaper-gallery-item {
   transition: transform 250ms cubic-bezier(0.42, 0, 0.58, 1);
   will-change: transform;
+  overflow: hidden;
+  contain: paint;
+}
+
+#wallpaper-default-preview-media {
+  overflow: hidden;
+  contain: paint;
+}
+
+.wallpaper-gallery-item img,
+.wallpaper-gallery-item video {
+  clip-path: inset(0 round 4px);
 }
 
 #wallpaper-gallery,
