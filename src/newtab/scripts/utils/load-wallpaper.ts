@@ -141,6 +141,7 @@ const applyWallpaper = (
 ) => {
   wallpaperEl.style.transitionDuration = "0ms";
   let src: string;
+  let userScale = 1;
 
   if (wallpaper instanceof Blob) src = URL.createObjectURL(wallpaper);
   else src = wallpaper;
@@ -166,7 +167,7 @@ const applyWallpaper = (
 
     if (fileMeta) {
       videoEl.playbackRate = fileMeta.videoOptions.playbackRate;
-      mediaEl.style.transform = `scale(${fileMeta.videoOptions.zoom})`;
+      userScale = fileMeta.videoOptions.zoom;
       mediaEl.style.transition = `opacity ${fileMeta.videoOptions.fade}s linear`;
     }
   } else if (fileMeta) {
@@ -175,11 +176,10 @@ const applyWallpaper = (
       fileMeta.imageOptions.size === "cover"
         ? 100
         : Number.parseInt(fileMeta.imageOptions.size.replace("%", ""));
-    const safeScale = Number.isFinite(sizePercent) ? sizePercent / 100 : 1;
-    mediaEl.style.transform = `scale(${safeScale})`;
+    userScale = Number.isFinite(sizePercent) ? sizePercent / 100 : 1;
   }
 
-  applyWallpaperFilters(mediaEl, brightness, blur);
+  applyWallpaperFilters(mediaEl, brightness, blur, userScale);
   wallpaperEl.innerHTML = "";
   wallpaperEl.appendChild(mediaEl);
 
@@ -188,8 +188,17 @@ const applyWallpaper = (
   }
 };
 
-const applyWallpaperFilters = (element: HTMLElement, brightness: string, blur: string) => {
+const applyWallpaperFilters = (
+  element: HTMLElement,
+  brightness: string,
+  blur: string,
+  userScale: number
+) => {
   element.style.filter = `brightness(${brightness}) blur(${blur})`;
+  const blurValue = Number.parseFloat(blur);
+  const blurScale = Number.isFinite(blurValue) && blurValue > 0 ? 1.1 : 1;
+  const safeScale = Number.isFinite(userScale) && userScale > 0 ? userScale : 1;
+  element.style.transform = `scale(${blurScale * safeScale})`;
 };
 
 export const applyWallpaperLegacy = (url: string, brightness: string, blur: string) => {

@@ -35,6 +35,10 @@ html {
   z-index: 2;
 }
 
+#wallpaper {
+  overflow: hidden;
+}
+
 #wallpaper-credit-anchor {
   position: fixed;
   left: 0;
