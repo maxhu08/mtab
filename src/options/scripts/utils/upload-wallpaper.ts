@@ -49,16 +49,16 @@ let wallpaperGalleryRenderNonce = 0;
 let wallpaperGallerySuppressClickUntil = 0;
 
 const galleryItemClass =
-  "group relative aspect-video overflow-hidden rounded-md bg-neutral-900 cursor-pointer outline-none";
+  "group relative isolate aspect-video overflow-hidden rounded-md bg-neutral-900 cursor-pointer outline-none";
 const galleryItemSelectedClass = "brightness-110";
 const galleryMediaClass = "h-full w-full object-cover";
 const galleryInnerClass = "h-full w-full overflow-hidden rounded-[4px]";
 const galleryAddTileClass =
   "grid place-items-center text-2xl text-neutral-300 transition hover:bg-neutral-700 hover:text-white outline-none";
 const galleryVideoBadgeClass =
-  "absolute bottom-1.5 right-1.5 rounded-full bg-black/45 px-1.5 py-0.5 text-[10px] text-white";
+  "absolute bottom-1.5 right-1.5 z-20 rounded-full bg-black/45 px-1.5 py-0.5 text-[10px] text-white";
 const galleryHandleClass =
-  "wallpaper-gallery-drag-handle absolute left-1.5 top-1.5 hidden h-7 w-7 place-items-center rounded-md bg-neutral-500 text-white transition hover:bg-neutral-600 group-hover:grid outline-none";
+  "wallpaper-gallery-drag-handle absolute left-1.5 top-1.5 z-20 hidden h-7 w-7 place-items-center rounded-md bg-neutral-500 text-white transition hover:bg-neutral-600 group-hover:grid outline-none";
 const galleryDeleteClass = "wallpaper-gallery-delete-button";
 
 let wallpaperGalleryTooltipDelegate: Instance | null = null;
@@ -78,20 +78,45 @@ const getScaledGalleryBlurValue = (rawBlur: string) => {
   return `${scaled}${unit}`;
 };
 
+const getGalleryMediaScaleValue = (rawBlur: string) => {
+  const trimmed = rawBlur.trim();
+  const match = trimmed.match(/^(-?\d*\.?\d+)\s*([a-z%]*)$/i);
+  if (!match) return "scale(1)";
+
+  const value = Number.parseFloat(match[1]);
+  if (!Number.isFinite(value)) return "scale(1)";
+
+  const unit = (match[2] || "px").toLowerCase();
+  if (unit !== "px") return "scale(1)";
+
+  const blurPx = Math.max(0, value / 2);
+  if (blurPx <= 0) return "scale(1)";
+
+  const scale = 1 + Math.min(0.12, blurPx * 0.01);
+  return `scale(${scale})`;
+};
+
 const getGalleryFilterValue = () =>
   `brightness(${wallpaperFiltersBrightnessInputEl.value}) blur(${getScaledGalleryBlurValue(wallpaperFiltersBlurInputEl.value)})`;
 
 const applyFiltersToGalleryMedia = () => {
   const filter = getGalleryFilterValue();
+  const transform = getGalleryMediaScaleValue(wallpaperFiltersBlurInputEl.value);
   const mediaEls = wallpaperGalleryEl.querySelectorAll("img, video") as NodeListOf<HTMLElement>;
   mediaEls.forEach((el) => {
     el.style.filter = filter;
+    el.style.transform = transform;
+    el.style.transformOrigin = "center";
   });
 };
 
 const applyFiltersToDefaultPreviewMedia = () => {
   if (!wallpaperDefaultPreviewMediaEl) return;
   wallpaperDefaultPreviewMediaEl.style.filter = getGalleryFilterValue();
+  wallpaperDefaultPreviewMediaEl.style.transform = getGalleryMediaScaleValue(
+    wallpaperFiltersBlurInputEl.value
+  );
+  wallpaperDefaultPreviewMediaEl.style.transformOrigin = "center";
 };
 
 const createGalleryItem = (selected: boolean) => {
@@ -127,14 +152,14 @@ const addTileRepositionHandle = (item: HTMLElement) => {
 const addTileHoverOverlay = (item: HTMLElement) => {
   const overlay = document.createElement("div");
   overlay.className =
-    "pointer-events-none absolute inset-0 bg-black/0 transition group-hover:bg-black/20";
+    "pointer-events-none absolute inset-0 z-10 bg-black/0 transition group-hover:bg-black/20";
   item.appendChild(overlay);
 };
 
 const addTileDeleteButton = (item: HTMLElement, onDelete: () => void) => {
   const deleteButton = document.createElement("button");
   deleteButton.type = "button";
-  deleteButton.className = `${galleryDeleteClass} absolute right-1.5 top-1.5 hidden h-7 w-7 place-items-center rounded-md bg-rose-500 text-white transition hover:bg-rose-600 group-hover:grid outline-none`;
+  deleteButton.className = `${galleryDeleteClass} absolute right-1.5 top-1.5 z-20 hidden h-7 w-7 place-items-center rounded-md bg-rose-500 text-white transition hover:bg-rose-600 group-hover:grid outline-none`;
   deleteButton.setAttribute("data-tippy-content", "delete wallpaper");
   deleteButton.innerHTML = '<i class="ri-delete-bin-line"></i>';
 
@@ -435,6 +460,8 @@ const renderURLGallery = (renderNonce: number) => {
       video.src = url;
       video.className = galleryMediaClass;
       video.style.filter = getGalleryFilterValue();
+      video.style.transform = getGalleryMediaScaleValue(wallpaperFiltersBlurInputEl.value);
+      video.style.transformOrigin = "center";
       video.muted = true;
       video.loop = true;
       video.autoplay = true;
@@ -450,6 +477,8 @@ const renderURLGallery = (renderNonce: number) => {
       img.src = url;
       img.className = galleryMediaClass;
       img.style.filter = getGalleryFilterValue();
+      img.style.transform = getGalleryMediaScaleValue(wallpaperFiltersBlurInputEl.value);
+      img.style.transformOrigin = "center";
       inner.appendChild(img);
     }
 
@@ -544,6 +573,8 @@ const renderFileGallery = async (renderNonce: number) => {
           video.src = url;
           video.className = galleryMediaClass;
           video.style.filter = getGalleryFilterValue();
+          video.style.transform = getGalleryMediaScaleValue(wallpaperFiltersBlurInputEl.value);
+          video.style.transformOrigin = "center";
           video.muted = true;
           video.loop = true;
           video.autoplay = true;
@@ -559,6 +590,8 @@ const renderFileGallery = async (renderNonce: number) => {
           img.src = url;
           img.className = galleryMediaClass;
           img.style.filter = getGalleryFilterValue();
+          img.style.transform = getGalleryMediaScaleValue(wallpaperFiltersBlurInputEl.value);
+          img.style.transformOrigin = "center";
           inner.appendChild(img);
         }
       }
