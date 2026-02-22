@@ -99,7 +99,7 @@ const galleryHandleClass =
   "wallpaper-gallery-drag-handle absolute left-1.5 top-1.5 z-20 hidden h-7 w-7 place-items-center rounded-md bg-neutral-500 text-white transition hover:bg-neutral-600 group-hover:grid outline-none";
 const galleryDeleteClass = "wallpaper-gallery-delete-button";
 const galleryEditButtonClass = "wallpaper-gallery-edit-button";
-const galleryTypeBadgeClass = `${galleryEditButtonClass} group absolute bottom-1.5 left-1.5 z-20 hidden h-7 w-7 place-items-center overflow-hidden rounded-md bg-neutral-900/85 text-white transition group-hover:grid outline-none`;
+const galleryTypeBadgeClass = `${galleryEditButtonClass} absolute bottom-1.5 left-1.5 z-20 hidden h-7 w-7 place-items-center rounded-md bg-neutral-500 text-white transition hover:bg-neutral-600 group-hover:grid outline-none`;
 
 let wallpaperGalleryTooltipDelegate: Instance | null = null;
 let wallpaperGallerySortable: Sortable | null = null;
@@ -232,21 +232,16 @@ const addTileTypeBadge = (item: HTMLElement, type: EditableWallpaperType, onEdit
     type === "url" ? "edit url" : type === "file-upload" ? "edit file-upload" : "edit solid-color"
   );
 
-  const hoverOverlay = document.createElement("div");
-  hoverOverlay.className =
-    "pointer-events-none absolute inset-0 rounded-md bg-white/0 transition group-hover:bg-white/20";
-
   const icon = document.createElement("i");
 
   if (type === "url") {
-    icon.className = "relative z-10 ri-link-m text-sm";
+    icon.className = "ri-link-m text-sm";
   } else if (type === "file-upload") {
-    icon.className = "relative z-10 ri-image-upload-line text-sm";
+    icon.className = "ri-image-upload-line text-sm";
   } else {
-    icon.className = "relative z-10 ri-palette-line text-sm";
+    icon.className = "ri-palette-line text-sm";
   }
 
-  badge.appendChild(hoverOverlay);
   badge.appendChild(icon);
   badge.addEventListener("click", (event) => {
     event.preventDefault();
