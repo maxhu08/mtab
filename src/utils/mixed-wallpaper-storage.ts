@@ -414,6 +414,33 @@ export const addMixedWallpaperSolidColor = async (
   return next;
 };
 
+export const updateMixedWallpaperEntryValue = async ({
+  entryId,
+  value
+}: {
+  entryId: string;
+  value: string;
+}): Promise<MixedWallpaperEntry | undefined> => {
+  const normalized = value.trim();
+  if (!normalized) return undefined;
+
+  const entries = await getMixedEntries();
+  const index = entries.findIndex((entry) => entry.id === entryId);
+  if (index < 0) return undefined;
+
+  const current = entries[index];
+  if (current.kind === "file-upload") return undefined;
+
+  const next: MixedWallpaperEntry = {
+    ...current,
+    value: normalized
+  };
+
+  entries[index] = next;
+  await setMixedEntries(entries);
+  return next;
+};
+
 export const addMixedUploadedWallpaperFiles = async (
   files: FileList | File[]
 ): Promise<MixedWallpaperEntry[]> => {
@@ -467,6 +494,71 @@ export const addMixedUploadedWallpaperFiles = async (
   await setMixedEntries(entries);
 
   return addedEntries;
+};
+
+export const replaceMixedWallpaperEntryFile = async ({
+  entryId,
+  file
+}: {
+  entryId: string;
+  file: File;
+}): Promise<MixedWallpaperEntry | undefined> => {
+  const entries = await getMixedEntries();
+  const index = entries.findIndex((entry) => entry.id === entryId && entry.kind === "file-upload");
+  if (index < 0) return undefined;
+
+  const currentFiles = await getMixedUploadedFilesMeta();
+  const currentEntry = entries[index];
+  const oldFileId = currentEntry.value;
+
+  const newFileId = genid();
+  const optimized = await optimizeWallpaper(file);
+  const thumb = await createThumbnail(optimized);
+  const now = Date.now();
+
+  const metadata: MixedUploadedWallpaperFileMeta = {
+    id: newFileId,
+    name: file.name,
+    mimeType: optimized.type,
+    createdAt: now,
+    lastUsedAt: now,
+    imageOptions: {
+      size: "cover",
+      x: "50%",
+      y: "50%"
+    },
+    videoOptions: {
+      zoom: 1,
+      playbackRate: 1,
+      fade: 4
+    }
+  };
+
+  await setCachedFile({ id: newFileId, size: "full", file: optimized });
+  await setCachedFile({ id: newFileId, size: "thumb", file: thumb });
+
+  const nextEntry: MixedWallpaperEntry = {
+    ...currentEntry,
+    value: newFileId
+  };
+  entries[index] = nextEntry;
+
+  const oldFileStillUsed = entries.some(
+    (entry, entryIndex) =>
+      entryIndex !== index && entry.kind === "file-upload" && entry.value === oldFileId
+  );
+
+  const nextFiles = [...currentFiles, metadata].filter(
+    (item) => oldFileStillUsed || item.id !== oldFileId
+  );
+
+  if (!oldFileStillUsed) {
+    await deleteCachedFile(oldFileId);
+  }
+
+  await setMixedUploadedFilesMeta(nextFiles);
+  await setMixedEntries(entries);
+  return nextEntry;
 };
 
 export const getMixedUploadedWallpaperFile = async (id: string): Promise<Blob | undefined> =>

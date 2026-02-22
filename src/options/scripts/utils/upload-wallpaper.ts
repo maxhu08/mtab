@@ -12,6 +12,7 @@ import {
   getUploadedWallpaperFile,
   getUploadedWallpaperThumbnail,
   listUploadedWallpaperFiles,
+  replaceUploadedWallpaperFile,
   reorderUploadedWallpaperFiles,
   removeUploadedWallpaperFiles,
   resetUploadedWallpaperFiles
@@ -25,9 +26,11 @@ import {
   getMixedUploadedWallpaperThumbnail,
   listMixedUploadedWallpaperFiles,
   listMixedWallpaperEntries,
+  replaceMixedWallpaperEntryFile,
   removeMixedWallpaperEntries,
   reorderMixedWallpaperEntries,
-  resetMixedWallpaperEntries
+  resetMixedWallpaperEntries,
+  updateMixedWallpaperEntryValue
 } from "src/utils/mixed-wallpaper-storage";
 import {
   applyWallpaperFilters,
@@ -54,6 +57,10 @@ const RANDOM_WALLPAPER_PREVIEW_URL = "https://picsum.photos/seed/mtab-random-pre
 
 type ActiveWallpaperType = "url" | "file-upload" | "random" | "solid-color" | "mixed" | "default";
 type MixedAddAction = "url" | "file-upload" | "solid-color";
+type EditableWallpaperType = "url" | "file-upload" | "solid-color";
+type PendingWallpaperFileReplacement =
+  | { scope: "file-upload"; fileId: string }
+  | { scope: "mixed"; entryId: string };
 
 type PreviewFileMeta = {
   mimeType: string;
@@ -77,6 +84,7 @@ let focusedFileId: string | null = null;
 let focusedMixedEntryId: string | null = null;
 let wallpaperGalleryRenderNonce = 0;
 let wallpaperGallerySuppressClickUntil = 0;
+let pendingWallpaperFileReplacement: PendingWallpaperFileReplacement | null = null;
 
 const galleryItemClass =
   "group relative isolate aspect-video overflow-hidden rounded-md bg-neutral-900 cursor-pointer outline-none";
@@ -90,6 +98,8 @@ const galleryVideoBadgeClass =
 const galleryHandleClass =
   "wallpaper-gallery-drag-handle absolute left-1.5 top-1.5 z-20 hidden h-7 w-7 place-items-center rounded-md bg-neutral-500 text-white transition hover:bg-neutral-600 group-hover:grid outline-none";
 const galleryDeleteClass = "wallpaper-gallery-delete-button";
+const galleryEditButtonClass = "wallpaper-gallery-edit-button";
+const galleryTypeBadgeClass = `${galleryEditButtonClass} group absolute bottom-1.5 left-1.5 z-20 hidden h-7 w-7 place-items-center overflow-hidden rounded-md bg-neutral-900/85 text-white transition group-hover:grid outline-none`;
 
 let wallpaperGalleryTooltipDelegate: Instance | null = null;
 let wallpaperGallerySortable: Sortable | null = null;
@@ -201,6 +211,51 @@ const addTileDeleteButton = (item: HTMLElement, onDelete: () => void) => {
   item.appendChild(deleteButton);
 };
 
+const openWallpaperFilePickerForAdd = () => {
+  pendingWallpaperFileReplacement = null;
+  wallpaperFileUploadInputEl.multiple = true;
+  wallpaperFileUploadInputEl.click();
+};
+
+const openWallpaperFilePickerForReplacement = (replacement: PendingWallpaperFileReplacement) => {
+  pendingWallpaperFileReplacement = replacement;
+  wallpaperFileUploadInputEl.multiple = false;
+  wallpaperFileUploadInputEl.click();
+};
+
+const addTileTypeBadge = (item: HTMLElement, type: EditableWallpaperType, onEdit: () => void) => {
+  const badge = document.createElement("button");
+  badge.type = "button";
+  badge.className = galleryTypeBadgeClass;
+  badge.setAttribute(
+    "data-tippy-content",
+    type === "url" ? "edit url" : type === "file-upload" ? "edit file-upload" : "edit solid-color"
+  );
+
+  const hoverOverlay = document.createElement("div");
+  hoverOverlay.className =
+    "pointer-events-none absolute inset-0 rounded-md bg-white/0 transition group-hover:bg-white/20";
+
+  const icon = document.createElement("i");
+
+  if (type === "url") {
+    icon.className = "relative z-10 ri-link-m text-sm";
+  } else if (type === "file-upload") {
+    icon.className = "relative z-10 ri-image-upload-line text-sm";
+  } else {
+    icon.className = "relative z-10 ri-palette-line text-sm";
+  }
+
+  badge.appendChild(hoverOverlay);
+  badge.appendChild(icon);
+  badge.addEventListener("click", (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+    onEdit();
+  });
+  item.appendChild(badge);
+};
+
 const addSimpleAddTile = (renderNonce: number, onClick: () => void) => {
   const addTile = document.createElement("button");
   addTile.type = "button";
@@ -260,7 +315,7 @@ const initWallpaperGalleryTooltips = () => {
 
   wallpaperGalleryTooltipDelegate = delegate(wallpaperGalleryEl, {
     target:
-      ".wallpaper-gallery-drag-handle, .wallpaper-gallery-delete-button, .wallpaper-gallery-add-mixed-segment",
+      ".wallpaper-gallery-drag-handle, .wallpaper-gallery-delete-button, .wallpaper-gallery-add-mixed-segment, .wallpaper-gallery-edit-button",
     placement: "top",
     theme: "dark",
     animation: "shift-away",
@@ -540,7 +595,7 @@ const addMixedEntryForAction = async (action: MixedAddAction) => {
     return;
   }
 
-  wallpaperFileUploadInputEl.click();
+  openWallpaperFilePickerForAdd();
 };
 
 export const addWallpaperForActiveType = async () => {
@@ -573,7 +628,7 @@ export const addWallpaperForActiveType = async () => {
   }
 
   if (type === "file-upload") {
-    wallpaperFileUploadInputEl.click();
+    openWallpaperFilePickerForAdd();
     return;
   }
 
@@ -634,6 +689,68 @@ const deleteMixedEntry = async (id: string) => {
   await renderWallpaperGallery();
 };
 
+const editURLAtIndex = async (index: number) => {
+  if (index < 0 || index >= wallpaperUrls.length) return;
+
+  const value = await showInputDialog("Edit wallpaper URL", {
+    defaultValue: wallpaperUrls[index],
+    confirmText: "save"
+  });
+  if (value == null) return;
+
+  const normalized = value.trim();
+  if (!normalized) return;
+
+  wallpaperUrls[index] = normalized;
+  selectedURLIndex = index;
+  await renderWallpaperGallery();
+};
+
+const editSolidColorAtIndex = async (index: number) => {
+  if (index < 0 || index >= wallpaperSolidColors.length) return;
+
+  const value = await showInputDialog("Edit wallpaper color (e.g. #171717)", {
+    defaultValue: wallpaperSolidColors[index],
+    confirmText: "save"
+  });
+  if (value == null) return;
+
+  const normalized = value.trim();
+  if (!normalized) return;
+
+  wallpaperSolidColors[index] = normalized;
+  selectedSolidColorIndex = index;
+  await renderWallpaperGallery();
+};
+
+const editMixedEntry = async (entry: {
+  id: string;
+  kind: EditableWallpaperType;
+  value: string;
+}) => {
+  if (entry.kind === "file-upload") {
+    openWallpaperFilePickerForReplacement({ scope: "mixed", entryId: entry.id });
+    return;
+  }
+
+  const prompt =
+    entry.kind === "url" ? "Edit wallpaper URL" : "Edit wallpaper color (e.g. #171717)";
+  const value = await showInputDialog(prompt, {
+    defaultValue: entry.value,
+    confirmText: "save"
+  });
+  if (value == null) return;
+
+  const updated = await updateMixedWallpaperEntryValue({
+    entryId: entry.id,
+    value
+  });
+  if (!updated) return;
+
+  focusedMixedEntryId = updated.id;
+  await renderWallpaperGallery();
+};
+
 const renderURLGallery = (renderNonce: number) => {
   wallpaperGalleryEl.innerHTML = "";
 
@@ -675,6 +792,9 @@ const renderURLGallery = (renderNonce: number) => {
     addTileDeleteButton(item, () => {
       void deleteURLAtIndex(index);
     });
+    addTileTypeBadge(item, "url", () => {
+      void editURLAtIndex(index);
+    });
 
     item.addEventListener("click", () => {
       if (shouldIgnoreGalleryClick()) return;
@@ -708,6 +828,9 @@ const renderSolidColorGallery = (renderNonce: number) => {
     addTileHoverOverlay(item);
     addTileDeleteButton(item, () => {
       void deleteSolidColorAtIndex(index);
+    });
+    addTileTypeBadge(item, "solid-color", () => {
+      void editSolidColorAtIndex(index);
     });
 
     item.addEventListener("click", () => {
@@ -777,6 +900,9 @@ const renderFileGallery = async (renderNonce: number) => {
       addTileDeleteButton(item, () => {
         void deleteUploadedFile(file.id);
       });
+      addTileTypeBadge(item, "file-upload", () => {
+        openWallpaperFilePickerForReplacement({ scope: "file-upload", fileId: file.id });
+      });
 
       item.addEventListener("click", () => {
         if (shouldIgnoreGalleryClick()) return;
@@ -796,7 +922,7 @@ const renderFileGallery = async (renderNonce: number) => {
   });
 
   addSimpleAddTile(renderNonce, () => {
-    wallpaperFileUploadInputEl.click();
+    openWallpaperFilePickerForAdd();
   });
 };
 
@@ -912,6 +1038,9 @@ const renderMixedGallery = async (renderNonce: number) => {
       addTileDeleteButton(item, () => {
         void deleteMixedEntry(entry.id);
       });
+      addTileTypeBadge(item, entry.kind, () => {
+        void editMixedEntry(entry);
+      });
 
       item.addEventListener("click", () => {
         if (shouldIgnoreGalleryClick()) return;
@@ -1012,10 +1141,39 @@ export const handleWallpaperFileUpload = () => {
   wallpaperFileUploadInputEl.addEventListener("change", async (e: Event) => {
     const input = e.currentTarget as HTMLInputElement;
     const files = input.files;
+    const pendingReplacement = pendingWallpaperFileReplacement;
 
-    if (!files || files.length === 0) return;
+    if (!files || files.length === 0) {
+      pendingWallpaperFileReplacement = null;
+      input.multiple = true;
+      return;
+    }
 
     try {
+      if (pendingReplacement) {
+        const replacementFile = files[0];
+        if (!replacementFile) return;
+
+        if (pendingReplacement.scope === "file-upload") {
+          const replaced = await replaceUploadedWallpaperFile({
+            id: pendingReplacement.fileId,
+            file: replacementFile
+          });
+
+          if (replaced) focusedFileId = replaced.id;
+        } else {
+          const replaced = await replaceMixedWallpaperEntryFile({
+            entryId: pendingReplacement.entryId,
+            file: replacementFile
+          });
+
+          if (replaced) focusedMixedEntryId = replaced.id;
+        }
+
+        await renderWallpaperGallery();
+        return;
+      }
+
       const type = getActiveWallpaperType();
 
       if (type === "mixed") {
@@ -1032,6 +1190,8 @@ export const handleWallpaperFileUpload = () => {
     } catch (err) {
       logger.log("Error storing wallpaper", err);
     } finally {
+      pendingWallpaperFileReplacement = null;
+      input.multiple = true;
       input.value = "";
     }
   });

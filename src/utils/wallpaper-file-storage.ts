@@ -511,6 +511,43 @@ export const updateUploadedWallpaperFileOptions = async ({
   await setUploadedFilesMeta(list);
 };
 
+export const replaceUploadedWallpaperFile = async ({ id, file }: { id: string; file: File }) => {
+  await migrateLegacySingleWallpaperIfNeeded();
+
+  const list = await getUploadedFilesMeta();
+  const index = list.findIndex((item) => item.id === id);
+  if (index < 0) return undefined;
+
+  const optimized = await optimizeWallpaper(file);
+  const thumb = await createThumbnail(optimized);
+  const current = list[index];
+  const now = Date.now();
+
+  const next: UploadedWallpaperFileMeta = {
+    ...current,
+    name: file.name,
+    mimeType: optimized.type,
+    lastUsedAt: now,
+    imageOptions: {
+      size: "cover",
+      x: "50%",
+      y: "50%"
+    },
+    videoOptions: {
+      zoom: 1,
+      playbackRate: 1,
+      fade: 4
+    }
+  };
+
+  await setCachedFile({ id, size: "full", file: optimized });
+  await setCachedFile({ id, size: "thumb", file: thumb });
+
+  list[index] = next;
+  await setUploadedFilesMeta(list);
+  return next;
+};
+
 export const markUploadedWallpaperFileUsed = async (id: string) => {
   const list = await getUploadedFilesMeta();
   const index = list.findIndex((file) => file.id === id);
