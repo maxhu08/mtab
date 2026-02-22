@@ -2,5 +2,6 @@
 
 in this release:
 
+- improve options page
 - performance improvements
 - bug fixes
