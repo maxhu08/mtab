@@ -129,7 +129,15 @@
                 <p class="text-base text-white">title.typewriter.speed</p>
                 <div id="title-typewriter-speed-container" class="grid w-full grid-cols-[max-content_auto] rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base">
                   <span class="select-none font-semibold text-pink-500">>&nbsp;</span>
-                  <input id="title-typewriter-speed-input" type="text" autocomplete="off" class="bg-transparent text-white placeholder-neutral-500 outline-none" placeholder="input speed (ms)..." />
+                  <input
+                    id="title-typewriter-speed-input"
+                    type="number"
+                    min="0"
+                    step="1"
+                    autocomplete="off"
+                    class="bg-transparent text-white placeholder-neutral-500 outline-none"
+                    placeholder="input speed (ms)..."
+                  />
                 </div>
               </div>
               <div class="grid gap-2">
@@ -138,7 +146,9 @@
                   <span class="select-none font-semibold text-pink-500">>&nbsp;</span>
                   <input
                     id="title-typewriter-remain-count-input"
-                    type="text"
+                    type="number"
+                    min="1"
+                    step="1"
                     autocomplete="off"
                     class="bg-transparent text-white placeholder-neutral-500 outline-none"
                     placeholder="enter character count..."
@@ -412,7 +422,9 @@
                     <span class="select-none font-semibold text-pink-500">>&nbsp;</span>
                     <input
                       id="wallpaper-filters-brightness-input"
-                      type="text"
+                      type="number"
+                      min="0"
+                      step="any"
                       autocomplete="off"
                       class="bg-transparent text-white placeholder-neutral-500 outline-none"
                       placeholder="input brightness (0.0-1.0)..."
@@ -423,7 +435,15 @@
                   <p class="text-base text-white">wallpaper.filters.blur</p>
                   <div id="wallpaper-filters-blur-container" class="grid w-full grid-cols-[max-content_auto] rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base">
                     <span class="select-none font-semibold text-pink-500">>&nbsp;</span>
-                    <input id="wallpaper-filters-blur-input" type="text" autocomplete="off" class="bg-transparent text-white placeholder-neutral-500 outline-none" placeholder="input blur..." />
+                    <input
+                      id="wallpaper-filters-blur-input"
+                      type="number"
+                      min="0"
+                      step="any"
+                      autocomplete="off"
+                      class="bg-transparent text-white placeholder-neutral-500 outline-none"
+                      placeholder="input blur..."
+                    />
                   </div>
                 </div>
               </div>
@@ -494,7 +514,15 @@
               <p class="text-base text-white">ui.blurStrength</p>
               <div id="ui-blur-strength-container" class="grid w-full grid-cols-[max-content_auto] rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base">
                 <span class="select-none font-semibold text-pink-500">>&nbsp;</span>
-                <input id="ui-blur-strength-input" type="text" autocomplete="off" class="bg-transparent text-white placeholder-neutral-500 outline-none" placeholder="input blur strength..." />
+                <input
+                  id="ui-blur-strength-input"
+                  type="number"
+                  min="0"
+                  step="any"
+                  autocomplete="off"
+                  class="bg-transparent text-white placeholder-neutral-500 outline-none"
+                  placeholder="input blur strength..."
+                />
               </div>
             </div>
           </div>
@@ -1136,7 +1164,9 @@
                 <span class="select-none font-semibold text-pink-500">>&nbsp;</span>
                 <input
                   id="bookmarks-max-bookmark-rows-per-page-input"
-                  type="text"
+                  type="number"
+                  min="1"
+                  step="1"
                   autocomplete="off"
                   class="bg-transparent text-white placeholder-neutral-500 outline-none"
                   placeholder="input number..."
@@ -1190,7 +1220,15 @@
                 <p class="text-base text-white">bookmarks.userDefinedCols</p>
                 <div id="bookmarks-user-defined-cols-container" class="grid w-full grid-cols-[max-content_auto] rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base">
                   <span class="select-none font-semibold text-pink-500">>&nbsp;</span>
-                  <input id="bookmarks-user-defined-cols-input" type="text" autocomplete="off" class="bg-transparent text-white placeholder-neutral-500 outline-none" placeholder="input number..." />
+                  <input
+                    id="bookmarks-user-defined-cols-input"
+                    type="number"
+                    min="1"
+                    step="1"
+                    autocomplete="off"
+                    class="bg-transparent text-white placeholder-neutral-500 outline-none"
+                    placeholder="input number..."
+                  />
                 </div>
               </div>
               <p class="pt-4 text-white">bookmarks.userDefined</p>
@@ -1266,7 +1304,15 @@
                 <p class="text-base text-white">bookmarks.defaultBlockyCols</p>
                 <div id="bookmarks-default-blocky-cols-container" class="grid w-full grid-cols-[max-content_auto] rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base">
                   <span class="select-none font-semibold text-pink-500">>&nbsp;</span>
-                  <input id="bookmarks-default-blocky-cols-input" type="text" autocomplete="off" class="bg-transparent text-white placeholder-neutral-500 outline-none" placeholder="input number..." />
+                  <input
+                    id="bookmarks-default-blocky-cols-input"
+                    type="number"
+                    min="1"
+                    step="1"
+                    autocomplete="off"
+                    class="bg-transparent text-white placeholder-neutral-500 outline-none"
+                    placeholder="input number..."
+                  />
                 </div>
               </div>
               <div class="grid gap-2 text-base">

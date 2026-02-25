@@ -85,6 +85,18 @@
   box-shadow: 0 0 23px rgba(0, 0, 0, 0.5);
 }
 
+/* Hide spinner arrows on number inputs in options forms. */
+input[type="number"] {
+  appearance: textfield;
+  -moz-appearance: textfield;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
 @keyframes fallDown {
   0% {
     transform: translateY(0);

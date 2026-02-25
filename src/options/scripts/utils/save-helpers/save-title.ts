@@ -21,11 +21,13 @@ export const saveTitleSettingsToDraft = (draft: Config) => {
     }
   }
 
-  const speedValue = parseInt(titleTypewriterSpeedInputEl.value);
-  draft.title.typewriter.speed = isNaN(speedValue) ? 500 : speedValue;
+  const speedValue = Number.parseInt(titleTypewriterSpeedInputEl.value, 10);
+  draft.title.typewriter.speed = Number.isNaN(speedValue) ? 500 : Math.max(0, speedValue);
 
-  const remainCountValue = parseInt(titleTypewriterRemainCountInputEl.value);
-  draft.title.typewriter.remainCount = isNaN(remainCountValue) ? 1 : remainCountValue;
+  const remainCountValue = Number.parseInt(titleTypewriterRemainCountInputEl.value, 10);
+  draft.title.typewriter.remainCount = Number.isNaN(remainCountValue)
+    ? 1
+    : Math.max(1, remainCountValue);
 
   const selectedFaviconTypeEl = getSelectedButton("favicon-type");
 

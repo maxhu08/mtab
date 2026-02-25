@@ -10,6 +10,18 @@ import {
   getWallpaperURLsFromState
 } from "src/options/scripts/utils/upload-wallpaper";
 
+const getBrightnessValue = () => {
+  const parsed = Number.parseFloat(wallpaperFiltersBrightnessInputEl.value);
+  if (!Number.isFinite(parsed) || parsed < 0) return "1";
+  return parsed.toString();
+};
+
+const getBlurPxValue = () => {
+  const parsed = Number.parseFloat(wallpaperFiltersBlurInputEl.value);
+  if (!Number.isFinite(parsed) || parsed < 0) return "0px";
+  return `${parsed}px`;
+};
+
 export const saveWallpaperSettingsToDraft = (draft: Config) => {
   const selectedEl = getSelectedButton("wallpaper-type");
 
@@ -48,6 +60,6 @@ export const saveWallpaperSettingsToDraft = (draft: Config) => {
   draft.wallpaper.urls = getWallpaperURLsFromState();
   draft.wallpaper.solidColors = getWallpaperSolidColorsFromState();
 
-  draft.wallpaper.filters.brightness = wallpaperFiltersBrightnessInputEl.value;
-  draft.wallpaper.filters.blur = wallpaperFiltersBlurInputEl.value;
+  draft.wallpaper.filters.brightness = getBrightnessValue();
+  draft.wallpaper.filters.blur = getBlurPxValue();
 };

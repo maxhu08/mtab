@@ -22,14 +22,17 @@ import { getSelectedButton } from "src/options/scripts/utils/get-selected-button
 export const saveBookmarksSettingsToDraft = (draft: Config) => {
   draft.bookmarks.showBookmarkNames = bookmarksShowBookmarkNamesCheckboxEl.checked;
 
-  draft.bookmarks.defaultBlockyCols = parseInt(bookmarksDefaultBlockyColsInputEl.value);
+  draft.bookmarks.defaultBlockyCols = Math.max(
+    1,
+    Number.parseInt(bookmarksDefaultBlockyColsInputEl.value, 10) || 1
+  );
   draft.bookmarks.defaultBlockyColor = bookmarksDefaultBlockyColorInputEl.value;
 
   draft.bookmarks.numberKeys = bookmarksNumberKeysCheckboxEl.checked;
   draft.bookmarks.enablePagination = bookmarksEnablePaginationCheckboxEl.checked;
   draft.bookmarks.maxBookmarkRowsPerPage = Math.max(
     1,
-    parseInt(bookmarksMaxBookmarkRowsPerPageInputEl.value) || 1
+    Number.parseInt(bookmarksMaxBookmarkRowsPerPageInputEl.value, 10) || 1
   );
   draft.bookmarks.defaultIconColor = bookmarksDefaultIconColorInputEl.value;
   draft.bookmarks.defaultFolderIconType = bookmarksDefaultFolderIconTypeInputEl.value;
@@ -93,6 +96,9 @@ export const saveBookmarksSettingsToDraft = (draft: Config) => {
 };
 
 export const saveDefaultBlockyBookmarkSettingsToDraft = (draft: Config) => {
-  draft.bookmarks.defaultBlockyCols = parseInt(bookmarksDefaultBlockyColsInputEl.value);
+  draft.bookmarks.defaultBlockyCols = Math.max(
+    1,
+    Number.parseInt(bookmarksDefaultBlockyColsInputEl.value, 10) || 1
+  );
   draft.bookmarks.defaultBlockyColor = bookmarksDefaultBlockyColorInputEl.value;
 };

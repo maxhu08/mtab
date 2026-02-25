@@ -135,12 +135,24 @@ const getGalleryMediaScaleValue = (rawBlur: string) => {
   return `scale(${scale})`;
 };
 
+const getBrightnessValue = () => {
+  const parsed = Number.parseFloat(wallpaperFiltersBrightnessInputEl.value);
+  if (!Number.isFinite(parsed) || parsed < 0) return "1";
+  return parsed.toString();
+};
+
+const getBlurValueAsPx = () => {
+  const parsed = Number.parseFloat(wallpaperFiltersBlurInputEl.value);
+  if (!Number.isFinite(parsed) || parsed < 0) return "0px";
+  return `${parsed}px`;
+};
+
 const getGalleryFilterValue = () =>
-  `brightness(${wallpaperFiltersBrightnessInputEl.value}) blur(${getScaledGalleryBlurValue(wallpaperFiltersBlurInputEl.value)})`;
+  `brightness(${getBrightnessValue()}) blur(${getScaledGalleryBlurValue(getBlurValueAsPx())})`;
 
 const applyFiltersToGalleryMedia = () => {
   const filter = getGalleryFilterValue();
-  const transform = getGalleryMediaScaleValue(wallpaperFiltersBlurInputEl.value);
+  const transform = getGalleryMediaScaleValue(getBlurValueAsPx());
   const mediaEls = wallpaperGalleryEl.querySelectorAll("img, video") as NodeListOf<HTMLElement>;
   mediaEls.forEach((el) => {
     el.style.filter = filter;
@@ -152,9 +164,7 @@ const applyFiltersToGalleryMedia = () => {
 const applyFiltersToDefaultPreviewMedia = () => {
   if (!wallpaperDefaultPreviewMediaEl) return;
   wallpaperDefaultPreviewMediaEl.style.filter = getGalleryFilterValue();
-  wallpaperDefaultPreviewMediaEl.style.transform = getGalleryMediaScaleValue(
-    wallpaperFiltersBlurInputEl.value
-  );
+  wallpaperDefaultPreviewMediaEl.style.transform = getGalleryMediaScaleValue(getBlurValueAsPx());
   wallpaperDefaultPreviewMediaEl.style.transformOrigin = "center";
 };
 
@@ -453,19 +463,11 @@ const previewSelected = async () => {
 
   if (type === "url") {
     if (selectedURLIndex < 0 || !wallpaperUrls[selectedURLIndex]) {
-      previewWallpaper(
-        undefined,
-        wallpaperFiltersBrightnessInputEl.value,
-        wallpaperFiltersBlurInputEl.value
-      );
+      previewWallpaper(undefined, getBrightnessValue(), getBlurValueAsPx());
       return;
     }
 
-    previewWallpaper(
-      wallpaperUrls[selectedURLIndex],
-      wallpaperFiltersBrightnessInputEl.value,
-      wallpaperFiltersBlurInputEl.value
-    );
+    previewWallpaper(wallpaperUrls[selectedURLIndex], getBrightnessValue(), getBlurValueAsPx());
     return;
   }
 
@@ -481,11 +483,7 @@ const previewSelected = async () => {
 
   if (type === "file-upload") {
     if (!focusedFileId) {
-      previewWallpaper(
-        undefined,
-        wallpaperFiltersBrightnessInputEl.value,
-        wallpaperFiltersBlurInputEl.value
-      );
+      previewWallpaper(undefined, getBrightnessValue(), getBlurValueAsPx());
       return;
     }
 
@@ -493,11 +491,7 @@ const previewSelected = async () => {
     const selectedMeta = files.find((file) => file.id === focusedFileId);
     const blob = await getUploadedWallpaperFile(focusedFileId);
 
-    previewWallpaper(
-      blob,
-      wallpaperFiltersBrightnessInputEl.value,
-      wallpaperFiltersBlurInputEl.value
-    );
+    previewWallpaper(blob, getBrightnessValue(), getBlurValueAsPx());
     applyFileMetaToPreview(selectedMeta);
     return;
   }
@@ -515,20 +509,12 @@ const previewSelected = async () => {
     const selectedEntry = entries.find((entry) => entry.id === focusedMixedEntryId);
 
     if (!selectedEntry) {
-      previewWallpaper(
-        undefined,
-        wallpaperFiltersBrightnessInputEl.value,
-        wallpaperFiltersBlurInputEl.value
-      );
+      previewWallpaper(undefined, getBrightnessValue(), getBlurValueAsPx());
       return;
     }
 
     if (selectedEntry.kind === "url") {
-      previewWallpaper(
-        selectedEntry.value,
-        wallpaperFiltersBrightnessInputEl.value,
-        wallpaperFiltersBlurInputEl.value
-      );
+      previewWallpaper(selectedEntry.value, getBrightnessValue(), getBlurValueAsPx());
       return;
     }
 
@@ -539,34 +525,22 @@ const previewSelected = async () => {
 
     const selectedMeta = files.find((file) => file.id === selectedEntry.value);
     if (!selectedMeta) {
-      previewWallpaper(
-        undefined,
-        wallpaperFiltersBrightnessInputEl.value,
-        wallpaperFiltersBlurInputEl.value
-      );
+      previewWallpaper(undefined, getBrightnessValue(), getBlurValueAsPx());
       return;
     }
 
     const blob = await getMixedUploadedWallpaperFile(selectedMeta.id);
-    previewWallpaper(
-      blob,
-      wallpaperFiltersBrightnessInputEl.value,
-      wallpaperFiltersBlurInputEl.value
-    );
+    previewWallpaper(blob, getBrightnessValue(), getBlurValueAsPx());
     applyFileMetaToPreview(selectedMeta);
     return;
   }
 
   if (type === "random") {
-    previewWallpaper(
-      RANDOM_WALLPAPER_PREVIEW_URL,
-      wallpaperFiltersBrightnessInputEl.value,
-      wallpaperFiltersBlurInputEl.value
-    );
+    previewWallpaper(RANDOM_WALLPAPER_PREVIEW_URL, getBrightnessValue(), getBlurValueAsPx());
     return;
   }
 
-  previewWallpaper("", wallpaperFiltersBrightnessInputEl.value, wallpaperFiltersBlurInputEl.value);
+  previewWallpaper("", getBrightnessValue(), getBlurValueAsPx());
 };
 
 const addMixedEntryForAction = async (action: MixedAddAction) => {
@@ -760,7 +734,7 @@ const renderURLGallery = (renderNonce: number) => {
       video.src = url;
       video.className = galleryMediaClass;
       video.style.filter = getGalleryFilterValue();
-      video.style.transform = getGalleryMediaScaleValue(wallpaperFiltersBlurInputEl.value);
+      video.style.transform = getGalleryMediaScaleValue(getBlurValueAsPx());
       video.style.transformOrigin = "center";
       video.muted = true;
       video.loop = true;
@@ -777,7 +751,7 @@ const renderURLGallery = (renderNonce: number) => {
       img.src = url;
       img.className = galleryMediaClass;
       img.style.filter = getGalleryFilterValue();
-      img.style.transform = getGalleryMediaScaleValue(wallpaperFiltersBlurInputEl.value);
+      img.style.transform = getGalleryMediaScaleValue(getBlurValueAsPx());
       img.style.transformOrigin = "center";
       inner.appendChild(img);
     }
@@ -867,7 +841,7 @@ const renderFileGallery = async (renderNonce: number) => {
           video.src = url;
           video.className = galleryMediaClass;
           video.style.filter = getGalleryFilterValue();
-          video.style.transform = getGalleryMediaScaleValue(wallpaperFiltersBlurInputEl.value);
+          video.style.transform = getGalleryMediaScaleValue(getBlurValueAsPx());
           video.style.transformOrigin = "center";
           video.muted = true;
           video.loop = true;
@@ -884,7 +858,7 @@ const renderFileGallery = async (renderNonce: number) => {
           img.src = url;
           img.className = galleryMediaClass;
           img.style.filter = getGalleryFilterValue();
-          img.style.transform = getGalleryMediaScaleValue(wallpaperFiltersBlurInputEl.value);
+          img.style.transform = getGalleryMediaScaleValue(getBlurValueAsPx());
           img.style.transformOrigin = "center";
           inner.appendChild(img);
         }
@@ -947,7 +921,7 @@ const appendMixedEntryMedia = async ({
       video.src = entry.value;
       video.className = galleryMediaClass;
       video.style.filter = getGalleryFilterValue();
-      video.style.transform = getGalleryMediaScaleValue(wallpaperFiltersBlurInputEl.value);
+      video.style.transform = getGalleryMediaScaleValue(getBlurValueAsPx());
       video.style.transformOrigin = "center";
       video.muted = true;
       video.loop = true;
@@ -959,7 +933,7 @@ const appendMixedEntryMedia = async ({
       img.src = entry.value;
       img.className = galleryMediaClass;
       img.style.filter = getGalleryFilterValue();
-      img.style.transform = getGalleryMediaScaleValue(wallpaperFiltersBlurInputEl.value);
+      img.style.transform = getGalleryMediaScaleValue(getBlurValueAsPx());
       img.style.transformOrigin = "center";
       inner.appendChild(img);
     }
@@ -979,7 +953,7 @@ const appendMixedEntryMedia = async ({
     video.src = url;
     video.className = galleryMediaClass;
     video.style.filter = getGalleryFilterValue();
-    video.style.transform = getGalleryMediaScaleValue(wallpaperFiltersBlurInputEl.value);
+    video.style.transform = getGalleryMediaScaleValue(getBlurValueAsPx());
     video.style.transformOrigin = "center";
     video.muted = true;
     video.loop = true;
@@ -996,7 +970,7 @@ const appendMixedEntryMedia = async ({
     img.src = url;
     img.className = galleryMediaClass;
     img.style.filter = getGalleryFilterValue();
-    img.style.transform = getGalleryMediaScaleValue(wallpaperFiltersBlurInputEl.value);
+    img.style.transform = getGalleryMediaScaleValue(getBlurValueAsPx());
     img.style.transformOrigin = "center";
     inner.appendChild(img);
   }
@@ -1214,11 +1188,7 @@ const getPreviewMediaEl = () =>
 wallpaperFiltersBrightnessInputEl.onchange = () => {
   const mediaEl = getPreviewMediaEl();
   if (mediaEl) {
-    applyWallpaperFilters(
-      mediaEl,
-      wallpaperFiltersBrightnessInputEl.value,
-      wallpaperFiltersBlurInputEl.value
-    );
+    applyWallpaperFilters(mediaEl, getBrightnessValue(), getBlurValueAsPx());
   }
   applyFiltersToGalleryMedia();
   applyFiltersToDefaultPreviewMedia();
@@ -1227,11 +1197,7 @@ wallpaperFiltersBrightnessInputEl.onchange = () => {
 wallpaperFiltersBlurInputEl.onchange = () => {
   const mediaEl = getPreviewMediaEl();
   if (mediaEl) {
-    applyWallpaperFilters(
-      mediaEl,
-      wallpaperFiltersBrightnessInputEl.value,
-      wallpaperFiltersBlurInputEl.value
-    );
+    applyWallpaperFilters(mediaEl, getBrightnessValue(), getBlurValueAsPx());
   }
   applyFiltersToGalleryMedia();
   applyFiltersToDefaultPreviewMedia();
