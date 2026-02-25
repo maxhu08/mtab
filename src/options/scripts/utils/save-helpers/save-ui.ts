@@ -8,12 +8,6 @@ import {
 } from "src/options/scripts/ui";
 import { getSelectedButton } from "src/options/scripts/utils/get-selected-button";
 
-const getBlurStrengthPxValue = () => {
-  const parsed = Number.parseFloat(uiBlurStrengthInputEl.value);
-  if (!Number.isFinite(parsed) || parsed < 0) return "32px";
-  return `${parsed}px`;
-};
-
 export const saveUISettingsToDraft = (draft: Config) => {
   const selectedStyleEl = getSelectedButton("ui-style");
 
@@ -29,7 +23,7 @@ export const saveUISettingsToDraft = (draft: Config) => {
   }
 
   draft.ui.glassColor = uiGlassColorInputEl.value;
-  draft.ui.blurStrength = getBlurStrengthPxValue();
+  draft.ui.blurStrength = uiBlurStrengthInputEl.value;
   draft.ui.foregroundColor = uiForegroundColorInputEl.value;
   draft.ui.highlightColor = uiHighlightColorInputEl.value;
 

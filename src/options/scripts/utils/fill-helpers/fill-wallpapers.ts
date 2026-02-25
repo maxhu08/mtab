@@ -21,11 +21,6 @@ import {
   setWallpaperURLsInState
 } from "src/options/scripts/utils/upload-wallpaper";
 
-const toNumericInputValue = (value: string) => {
-  const parsed = Number.parseFloat(value);
-  return Number.isFinite(parsed) ? parsed.toString() : "";
-};
-
 const selectWallpaperFrequencyButton = (frequency: Config["wallpaper"]["frequency"]) => {
   if (frequency === "every-tab") {
     wallpaperFrequencyEveryTabButtonEl.click();
@@ -72,10 +67,8 @@ export const fillWallpapersInputs = (config: Config) => {
   setWallpaperURLsInState(config.wallpaper.urls);
   setWallpaperSolidColorsInState(config.wallpaper.solidColors);
 
-  wallpaperFiltersBrightnessInputEl.value = toNumericInputValue(
-    config.wallpaper.filters.brightness
-  );
-  wallpaperFiltersBlurInputEl.value = toNumericInputValue(config.wallpaper.filters.blur);
+  wallpaperFiltersBrightnessInputEl.value = config.wallpaper.filters.brightness;
+  wallpaperFiltersBlurInputEl.value = config.wallpaper.filters.blur;
 
   void renderWallpaperGallery();
 };
