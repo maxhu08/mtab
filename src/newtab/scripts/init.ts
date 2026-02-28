@@ -1,27 +1,27 @@
 // config
-import { getConfig } from "src/utils/config";
+import { getConfig } from "~/src/utils/config";
 
 // utils
-import { setUISyle } from "src/newtab/scripts/utils/set-ui-style";
-import { loadWallpaper } from "src/newtab/scripts/utils/load-wallpaper";
-import { styleSearch } from "src/newtab/scripts/utils/style-search";
-import { styleMessage } from "src/newtab/scripts/utils/style-message";
-import { setMessage } from "src/newtab/scripts/utils/messages/set-message";
-import { renderBookmarks } from "src/newtab/scripts/utils/bookmarks/render-bookmarks";
-import { addAnimations } from "src/newtab/scripts/utils/animations";
-import { listenToKeys } from "src/newtab/scripts/keys";
-import { loadFavicon } from "src/newtab/scripts/utils/load-favicon";
-import { fixDisappearingUI } from "src/newtab/scripts/utils/fix-disappearing-ui";
-import { showOptionsButton } from "src/newtab/scripts/utils/show-options-button";
-import { listenBookmarkNumberKeys } from "src/newtab/scripts/utils/bookmarks/listen-bookmark-number-keys";
-import { hideCover } from "src/newtab/scripts/utils/hide-cover";
-import { coverEl } from "src/newtab/scripts/ui";
-import { handleSearchAssist } from "src/newtab/scripts/utils/search/handle-search-assist";
-import { snowStorm } from "src/newtab/scripts/utils/extras/snow-effect";
-import { initSW } from "src/newtab/scripts/sw";
-import { titleTypewriterEffect } from "src/newtab/scripts/utils/title/title-effects";
-import { initSearchHighlighting } from "src/newtab/scripts/utils/search/handle-search-highlighting";
-import { setWallpaperCreditTheme } from "src/newtab/scripts/utils/wallpaper-credit";
+import { setUISyle } from "~/src/newtab/scripts/utils/set-ui-style";
+import { loadWallpaper } from "~/src/newtab/scripts/utils/load-wallpaper";
+import { styleSearch } from "~/src/newtab/scripts/utils/style-search";
+import { styleMessage } from "~/src/newtab/scripts/utils/style-message";
+import { setMessage } from "~/src/newtab/scripts/utils/messages/set-message";
+import { renderBookmarks } from "~/src/newtab/scripts/utils/bookmarks/render-bookmarks";
+import { addAnimations } from "~/src/newtab/scripts/utils/animations";
+import { listenToKeys } from "~/src/newtab/scripts/keys";
+import { loadFavicon } from "~/src/newtab/scripts/utils/load-favicon";
+import { fixDisappearingUI } from "~/src/newtab/scripts/utils/fix-disappearing-ui";
+import { showOptionsButton } from "~/src/newtab/scripts/utils/show-options-button";
+import { listenBookmarkNumberKeys } from "~/src/newtab/scripts/utils/bookmarks/listen-bookmark-number-keys";
+import { hideCover } from "~/src/newtab/scripts/utils/hide-cover";
+import { coverEl } from "~/src/newtab/scripts/ui";
+import { handleSearchAssist } from "~/src/newtab/scripts/utils/search/handle-search-assist";
+import { snowStorm } from "~/src/newtab/scripts/utils/extras/snow-effect";
+import { initSW } from "~/src/newtab/scripts/sw";
+import { titleTypewriterEffect } from "~/src/newtab/scripts/utils/title/title-effects";
+import { initSearchHighlighting } from "~/src/newtab/scripts/utils/search/handle-search-highlighting";
+import { setWallpaperCreditTheme } from "~/src/newtab/scripts/utils/wallpaper-credit";
 
 const manifest = chrome.runtime.getManifest();
 const displayVersion =

@@ -1,4 +1,4 @@
-import { getButton, getCheckbox, getContainerAndInput, getContainerAndTextarea } from "src/options/scripts/utils/ui-helpers";
+import { getButton, getCheckbox, getContainerAndInput, getContainerAndTextarea } from "~/src/options/scripts/utils/ui-helpers";
 
 export const optionsShowOptionsButtonCheckboxEl = getCheckbox("options-show-options-button");
 

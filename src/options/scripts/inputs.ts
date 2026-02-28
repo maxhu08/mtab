@@ -1,5 +1,5 @@
 import { buttonSwitches, hotkeyInputs } from "./ui";
-import { switchButtons } from "src/options/scripts/utils/switch-buttons";
+import { switchButtons } from "~/src/options/scripts/utils/switch-buttons";
 
 import {
   searchEngineDuckduckgoButtonEl,
@@ -11,13 +11,13 @@ import {
   searchEngineStartpageButtonEl,
   searchEngineEcosiaButtonEl,
   searchUseCustomEngineCheckboxEl
-} from "src/options/scripts/ui";
-import { listenToHotkeyInputs } from "src/options/scripts/utils/hotkey-inputs";
-import { saveConfig } from "src/options/scripts/utils/save-config";
-import { saveAndExportConfig } from "src/options/scripts/utils/export-config";
-import { setDefaultConfig } from "src/options/scripts/utils/set-default-config";
-import { handleCustomFaviconReset } from "src/options/scripts/utils/upload-favicon";
-import { importConfigAndSave } from "src/options/scripts/utils/import-config";
+} from "~/src/options/scripts/ui";
+import { listenToHotkeyInputs } from "~/src/options/scripts/utils/hotkey-inputs";
+import { saveConfig } from "~/src/options/scripts/utils/save-config";
+import { saveAndExportConfig } from "~/src/options/scripts/utils/export-config";
+import { setDefaultConfig } from "~/src/options/scripts/utils/set-default-config";
+import { handleCustomFaviconReset } from "~/src/options/scripts/utils/upload-favicon";
+import { importConfigAndSave } from "~/src/options/scripts/utils/import-config";
 import tippy from "tippy.js";
 
 export const listenToInputs = () => {

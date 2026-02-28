@@ -1,13 +1,13 @@
-import { MessageType } from "src/utils/config";
-import { messageEl } from "src/newtab/scripts/ui";
-import { setMorningAfternoonMessage } from "src/newtab/scripts/utils/messages/afternoon-morning";
+import { MessageType } from "~/src/utils/config";
+import { messageEl } from "~/src/newtab/scripts/ui";
+import { setMorningAfternoonMessage } from "~/src/newtab/scripts/utils/messages/afternoon-morning";
 import {
   containsSlashReplacements,
   setCustomMessage
-} from "src/newtab/scripts/utils/messages/custom";
-import { setDateMessage } from "src/newtab/scripts/utils/messages/date";
-import { setTimeMessage } from "src/newtab/scripts/utils/messages/time";
-import { setWeatherMessage } from "src/newtab/scripts/utils/messages/weather";
+} from "~/src/newtab/scripts/utils/messages/custom";
+import { setDateMessage } from "~/src/newtab/scripts/utils/messages/date";
+import { setTimeMessage } from "~/src/newtab/scripts/utils/messages/time";
+import { setWeatherMessage } from "~/src/newtab/scripts/utils/messages/weather";
 
 let messageUpdateIntervalId: number | null = null;
 

@@ -1,4 +1,4 @@
-import { Config, FontType, SearchEngine } from "src/utils/config";
+import { Config, FontType, SearchEngine } from "~/src/utils/config";
 import {
   searchEnabledCheckboxEl,
   searchUseCustomEngineCheckboxEl,
@@ -22,8 +22,8 @@ import {
   searchBookmarkIconColorInputEl,
   searchSelectIconColorInputEl,
   searchLinkTextColorInputEl
-} from "src/options/scripts/ui";
-import { getSelectedButton } from "src/options/scripts/utils/get-selected-button";
+} from "~/src/options/scripts/ui";
+import { getSelectedButton } from "~/src/options/scripts/utils/get-selected-button";
 
 export const saveSearchSettingsToDraft = (draft: Config) => {
   draft.search.enabled = searchEnabledCheckboxEl.checked;

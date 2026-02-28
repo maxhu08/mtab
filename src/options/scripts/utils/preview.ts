@@ -1,4 +1,4 @@
-import { wallpaperTypeDefaultButtonEl } from "src/options/scripts/ui";
+import { wallpaperTypeDefaultButtonEl } from "~/src/options/scripts/ui";
 
 const getLiveWallpaperPreviewEl = () =>
   document.getElementById("live-wallpaper-preview") as HTMLDivElement | null;

@@ -1,7 +1,7 @@
-import { Config, SearchEngine } from "src/utils/config";
-import { searchContainerEl, searchInputEl } from "src/newtab/scripts/ui";
-import { hideSearchResultsSection } from "src/newtab/scripts/utils/search/handle-search-suggestions";
-import { setSearchValue } from "src/newtab/scripts/utils/search/set-search-value";
+import { Config, SearchEngine } from "~/src/utils/config";
+import { searchContainerEl, searchInputEl } from "~/src/newtab/scripts/ui";
+import { hideSearchResultsSection } from "~/src/newtab/scripts/utils/search/handle-search-suggestions";
+import { setSearchValue } from "~/src/newtab/scripts/utils/search/set-search-value";
 
 export const openUrl = (config: Config, url: string, openInNewTab: boolean = false) => {
   if (openInNewTab) {

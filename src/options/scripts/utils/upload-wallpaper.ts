@@ -6,7 +6,7 @@ import {
   wallpaperFiltersBrightnessInputEl,
   wallpaperResetAllButtonEl,
   wallpaperGalleryEl
-} from "src/options/scripts/ui";
+} from "~/src/options/scripts/ui";
 import {
   addUploadedWallpaperFiles,
   getUploadedWallpaperFile,
@@ -16,7 +16,7 @@ import {
   reorderUploadedWallpaperFiles,
   removeUploadedWallpaperFiles,
   resetUploadedWallpaperFiles
-} from "src/utils/wallpaper-file-storage";
+} from "~/src/utils/wallpaper-file-storage";
 import {
   MixedUploadedWallpaperFileMeta,
   addMixedUploadedWallpaperFiles,
@@ -31,15 +31,15 @@ import {
   reorderMixedWallpaperEntries,
   resetMixedWallpaperEntries,
   updateMixedWallpaperEntryValue
-} from "src/utils/mixed-wallpaper-storage";
+} from "~/src/utils/mixed-wallpaper-storage";
 import {
   applyWallpaperFilters,
   previewWallpaper,
   previewWallpaperSolidColor
-} from "src/options/scripts/utils/preview";
-import { getSelectedButton } from "src/options/scripts/utils/get-selected-button";
-import { showActionDialog, showInputDialog } from "src/options/scripts/utils/input-dialog";
-import { logger } from "src/utils/logger";
+} from "~/src/options/scripts/utils/preview";
+import { getSelectedButton } from "~/src/options/scripts/utils/get-selected-button";
+import { showActionDialog, showInputDialog } from "~/src/options/scripts/utils/input-dialog";
+import { logger } from "~/src/utils/logger";
 
 const wallpaperGalleryWrapperEl = document.getElementById(
   "wallpaper-gallery-wrapper"

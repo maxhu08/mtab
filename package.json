@@ -2,6 +2,9 @@
   "name": "mtab",
   "author": "Max Hu",
   "description": "a simple configurable new tab extension",
+  "alias": {
+    "~": "."
+  },
   "keywords": [],
   "scripts": {
     "d": "bun run dev",

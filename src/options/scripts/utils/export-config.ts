@@ -1,5 +1,5 @@
-import { getConfig } from "src/utils/config";
-import { saveConfig } from "src/options/scripts/utils/save-config";
+import { getConfig } from "~/src/utils/config";
+import { saveConfig } from "~/src/options/scripts/utils/save-config";
 
 export const saveAndExportConfig = () => {
   // save and don't notify

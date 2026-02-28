@@ -1,19 +1,19 @@
-import { Config } from "src/utils/config";
-import { searchInputEl } from "src/newtab/scripts/ui";
-import { handleConversion } from "src/newtab/scripts/utils/search/handle-conversion";
-import { handleDate } from "src/newtab/scripts/utils/search/handle-date";
-import { handleDefinition } from "src/newtab/scripts/utils/search/handle-definition";
-import { handleMath } from "src/newtab/scripts/utils/search/handle-math";
+import { Config } from "~/src/utils/config";
+import { searchInputEl } from "~/src/newtab/scripts/ui";
+import { handleConversion } from "~/src/newtab/scripts/utils/search/handle-conversion";
+import { handleDate } from "~/src/newtab/scripts/utils/search/handle-date";
+import { handleDefinition } from "~/src/newtab/scripts/utils/search/handle-definition";
+import { handleMath } from "~/src/newtab/scripts/utils/search/handle-math";
 import {
   AssistItem,
   displayAssist,
   hideAssist
-} from "src/newtab/scripts/utils/search/search-assist-utils";
-import { handleSearchSuggestions } from "src/newtab/scripts/utils/search/handle-search-suggestions";
-import { openUrl, search } from "src/newtab/scripts/utils/search";
-import { recognizeUrl } from "src/newtab/scripts/utils/search/recognize-url";
-import { handlePasswordGenerator } from "src/newtab/scripts/utils/search/handle-password-generator";
-import { handleConversionCurrency } from "src/newtab/scripts/utils/search/handle-conversion-currency";
+} from "~/src/newtab/scripts/utils/search/search-assist-utils";
+import { handleSearchSuggestions } from "~/src/newtab/scripts/utils/search/handle-search-suggestions";
+import { openUrl, search } from "~/src/newtab/scripts/utils/search";
+import { recognizeUrl } from "~/src/newtab/scripts/utils/search/recognize-url";
+import { handlePasswordGenerator } from "~/src/newtab/scripts/utils/search/handle-password-generator";
+import { handleConversionCurrency } from "~/src/newtab/scripts/utils/search/handle-conversion-currency";
 
 export const handleSearchAssist = (config: Config) => {
   if (config.search.suggestions) {

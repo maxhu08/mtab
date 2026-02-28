@@ -1,10 +1,10 @@
-import { bookmarksUserDefinedList } from "src/options/scripts/ui";
+import { bookmarksUserDefinedList } from "~/src/options/scripts/ui";
 import {
   addBookmarkNodeBookmark,
   addBookmarkNodeFolder
-} from "src/options/scripts/utils/bookmarks/handle-bookmark-ui";
-import { showInputDialog } from "src/options/scripts/utils/input-dialog";
-import { BookmarkNode } from "src/utils/config";
+} from "~/src/options/scripts/utils/bookmarks/handle-bookmark-ui";
+import { showInputDialog } from "~/src/options/scripts/utils/input-dialog";
+import { BookmarkNode } from "~/src/utils/config";
 
 export const importBookmarkNode = async () => {
   const dataToImport = await showInputDialog("input your bookmark or folder");

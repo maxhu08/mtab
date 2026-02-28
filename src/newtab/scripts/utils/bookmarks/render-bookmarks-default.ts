@@ -1,7 +1,7 @@
-import { Config } from "src/utils/config";
-import { bookmarksContainerEl } from "src/newtab/scripts/ui";
-import { openBookmark } from "src/newtab/scripts/utils/bookmarks/open-bookmark";
-import { getFaviconURL } from "src/newtab/scripts/utils/favicon-url";
+import { Config } from "~/src/utils/config";
+import { bookmarksContainerEl } from "~/src/newtab/scripts/ui";
+import { openBookmark } from "~/src/newtab/scripts/utils/bookmarks/open-bookmark";
+import { getFaviconURL } from "~/src/newtab/scripts/utils/favicon-url";
 
 export const renderDefaultBookmarks = (config: Config) => {
   switch (config.ui.style) {

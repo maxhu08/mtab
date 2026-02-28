@@ -1,5 +1,5 @@
-import { logger } from "src/utils/logger";
-import { genid } from "src/utils/genid";
+import { logger } from "~/src/utils/logger";
+import { genid } from "~/src/utils/genid";
 
 const MIXED_WALLPAPER_ENTRIES_KEY = "mixedWallpaperEntries";
 const MIXED_UPLOADED_WALLPAPER_FILES_KEY = "mixedUploadedWallpaperFiles";

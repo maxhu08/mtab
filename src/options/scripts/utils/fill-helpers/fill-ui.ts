@@ -1,4 +1,4 @@
-import { Config } from "src/utils/config";
+import { Config } from "~/src/utils/config";
 import {
   uiForegroundColorInputEl,
   uiHighlightColorInputEl,
@@ -9,7 +9,7 @@ import {
   uiCornerStyleRoundButtonEl,
   uiGlassColorInputEl,
   uiBlurStrengthInputEl
-} from "src/options/scripts/ui";
+} from "~/src/options/scripts/ui";
 
 export const fillUIInputs = (config: Config) => {
   if (config.ui.style === "solid") uiStyleSolidButtonEl.click();

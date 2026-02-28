@@ -1,5 +1,5 @@
 import { evaluate, format, isComplex, isConstantNode, isNumber, isOperatorNode } from "mathjs";
-import { AssistMath, hideAssist } from "src/newtab/scripts/utils/search/search-assist-utils";
+import { AssistMath, hideAssist } from "~/src/newtab/scripts/utils/search/search-assist-utils";
 
 export const handleMath = (val: string) => {
   try {

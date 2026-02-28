@@ -1,4 +1,4 @@
-import { BookmarkNode } from "src/utils/config";
+import { BookmarkNode } from "~/src/utils/config";
 
 export const countNodes = (nodes: BookmarkNode[]) => {
   let bookmarks = 0;

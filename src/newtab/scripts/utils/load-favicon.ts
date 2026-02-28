@@ -1,4 +1,4 @@
-import { FaviconType } from "src/utils/config";
+import { FaviconType } from "~/src/utils/config";
 
 export const loadFavicon = (faviconType: FaviconType) => {
   if (faviconType !== "custom") {

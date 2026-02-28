@@ -1,4 +1,4 @@
-import { AssistConversion } from "src/newtab/scripts/utils/search/search-assist-utils";
+import { AssistConversion } from "~/src/newtab/scripts/utils/search/search-assist-utils";
 
 type Category =
   | "length"

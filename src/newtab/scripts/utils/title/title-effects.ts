@@ -1,4 +1,4 @@
-import { searchInputEl } from "src/newtab/scripts/ui";
+import { searchInputEl } from "~/src/newtab/scripts/ui";
 
 export const titleTypewriterEffect = (
   text: string,

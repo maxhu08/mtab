@@ -1,10 +1,10 @@
-import { BookmarkNode } from "src/utils/config";
-import { bookmarksUserDefinedList } from "src/options/scripts/ui";
+import { BookmarkNode } from "~/src/utils/config";
+import { bookmarksUserDefinedList } from "~/src/options/scripts/ui";
 import {
   getBookmarkNodeBookmarkData,
   getBookmarkNodeFolderData
-} from "src/options/scripts/utils/bookmarks/get-bookmark-node-data";
-import { countNodes } from "src/options/scripts/utils/bookmarks/count";
+} from "~/src/options/scripts/utils/bookmarks/get-bookmark-node-data";
+import { countNodes } from "~/src/options/scripts/utils/bookmarks/count";
 
 export const exportAllBookmarkNodes = async () => {
   const extensionVersion = chrome.runtime.getManifest().version;

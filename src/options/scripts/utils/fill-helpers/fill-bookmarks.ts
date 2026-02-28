@@ -5,7 +5,7 @@ import {
   Config,
   DefaultBlockyColorType,
   DefaultFaviconSource
-} from "src/utils/config";
+} from "~/src/utils/config";
 import {
   bookmarksTypeUserDefinedButtonEl,
   bookmarksTypeDefaultButtonEl,
@@ -32,8 +32,8 @@ import {
   bookmarksLineOrientationNoneButtonEl,
   bookmarksDefaultFolderIconTypeInputEl,
   bookmarksDefaultIconColorInputEl
-} from "src/options/scripts/ui";
-import { fillBookmarkNodeBookmarks } from "src/options/scripts/utils/fill-helpers/fill-user-defined-bookmarks";
+} from "~/src/options/scripts/ui";
+import { fillBookmarkNodeBookmarks } from "~/src/options/scripts/utils/fill-helpers/fill-user-defined-bookmarks";
 
 export const fillBookmarksInputs = (config: Config) => {
   bookmarksShowBookmarkNamesCheckboxEl.checked = config.bookmarks.showBookmarkNames;

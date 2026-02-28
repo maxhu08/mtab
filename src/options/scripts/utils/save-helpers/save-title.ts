@@ -1,11 +1,11 @@
-import { Config } from "src/utils/config";
+import { Config } from "~/src/utils/config";
 import {
   titleDefaultTitleInputEl,
   titleDynamicEnabledCheckboxEl,
   titleTypewriterRemainCountInputEl,
   titleTypewriterSpeedInputEl
-} from "src/options/scripts/ui";
-import { getSelectedButton } from "src/options/scripts/utils/get-selected-button";
+} from "~/src/options/scripts/ui";
+import { getSelectedButton } from "~/src/options/scripts/utils/get-selected-button";
 
 export const saveTitleSettingsToDraft = (draft: Config) => {
   draft.title.defaultTitle = titleDefaultTitleInputEl.value;

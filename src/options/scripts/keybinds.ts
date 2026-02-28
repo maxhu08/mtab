@@ -1,6 +1,6 @@
-import { saveConfig } from "src/options/scripts/utils/save-config";
-import { saveAndExportConfig } from "src/options/scripts/utils/export-config";
-import { importConfigAndSave } from "src/options/scripts/utils/import-config";
+import { saveConfig } from "~/src/options/scripts/utils/save-config";
+import { saveAndExportConfig } from "~/src/options/scripts/utils/export-config";
+import { importConfigAndSave } from "~/src/options/scripts/utils/import-config";
 
 export const listenToKeys = () => {
   document.addEventListener("keydown", (e) => {

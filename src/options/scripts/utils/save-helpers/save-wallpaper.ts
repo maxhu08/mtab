@@ -1,14 +1,14 @@
-import { Config } from "src/utils/config";
+import { Config } from "~/src/utils/config";
 import {
   wallpaperEnabledCheckboxEl,
   wallpaperFiltersBrightnessInputEl,
   wallpaperFiltersBlurInputEl
-} from "src/options/scripts/ui";
-import { getSelectedButton } from "src/options/scripts/utils/get-selected-button";
+} from "~/src/options/scripts/ui";
+import { getSelectedButton } from "~/src/options/scripts/utils/get-selected-button";
 import {
   getWallpaperSolidColorsFromState,
   getWallpaperURLsFromState
-} from "src/options/scripts/utils/upload-wallpaper";
+} from "~/src/options/scripts/utils/upload-wallpaper";
 
 export const saveWallpaperSettingsToDraft = (draft: Config) => {
   const selectedEl = getSelectedButton("wallpaper-type");

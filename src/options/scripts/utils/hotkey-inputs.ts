@@ -1,5 +1,5 @@
-import { HotkeyInput } from "src/options/scripts/ui";
-import { focusInput, unfocusInput } from "src/options/scripts/utils/ui-helpers";
+import { HotkeyInput } from "~/src/options/scripts/ui";
+import { focusInput, unfocusInput } from "~/src/options/scripts/utils/ui-helpers";
 
 export const listenToHotkeyInputs = (hotkeyInputs: HotkeyInput[]) => {
   const focusedBorderClass = "border-lime-500";

@@ -1,18 +1,17 @@
 {
   "compilerOptions": {
-    "ignoreDeprecations": "5.0",
     "target": "ES2019",
     "sourceMap": false,
     "module": "ESNext",
-    "strict": true,
-    "paths": {
-      "src/*": ["./src/*"]
-    },
-    "esModuleInterop": true,
     "moduleResolution": "bundler",
+    "paths": {
+      "~/*": ["./*"]
+    },
+    "strict": true,
     "noEmitOnError": true,
     "lib": ["ES2019", "DOM"],
-    "types": ["chrome", "node"]
+    "types": ["chrome", "node"],
+    "esModuleInterop": true
   },
   "include": ["src/**/*.ts", "scripts/**/*.ts"],
   "exclude": ["node_modules"]

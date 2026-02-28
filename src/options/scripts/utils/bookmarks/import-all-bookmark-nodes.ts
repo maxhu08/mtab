@@ -1,7 +1,7 @@
-import { countNodes } from "src/options/scripts/utils/bookmarks/count";
-import { setBookmarkNodes } from "src/options/scripts/utils/bookmarks/set-bookmarks";
-import { showInputDialog } from "src/options/scripts/utils/input-dialog";
-import { BookmarkNode } from "src/utils/config";
+import { countNodes } from "~/src/options/scripts/utils/bookmarks/count";
+import { setBookmarkNodes } from "~/src/options/scripts/utils/bookmarks/set-bookmarks";
+import { showInputDialog } from "~/src/options/scripts/utils/input-dialog";
+import { BookmarkNode } from "~/src/utils/config";
 
 export const importAllBookmarkNodes = async () => {
   const dataToImport = await showInputDialog(

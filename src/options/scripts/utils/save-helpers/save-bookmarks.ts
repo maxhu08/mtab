@@ -5,7 +5,7 @@ import {
   DefaultBlockyColorType,
   DefaultFaviconSource,
   BookmarkLineOrientation
-} from "src/utils/config";
+} from "~/src/utils/config";
 import {
   bookmarksDefaultBlockyColorInputEl,
   bookmarksDefaultBlockyColsInputEl,
@@ -15,9 +15,9 @@ import {
   bookmarksMaxBookmarkRowsPerPageInputEl,
   bookmarksNumberKeysCheckboxEl,
   bookmarksShowBookmarkNamesCheckboxEl
-} from "src/options/scripts/ui";
-import { saveBookmarkNodeBookmarkSettingsToDraft } from "src/options/scripts/utils/save-helpers/save-user-defined-bookmarks";
-import { getSelectedButton } from "src/options/scripts/utils/get-selected-button";
+} from "~/src/options/scripts/ui";
+import { saveBookmarkNodeBookmarkSettingsToDraft } from "~/src/options/scripts/utils/save-helpers/save-user-defined-bookmarks";
+import { getSelectedButton } from "~/src/options/scripts/utils/get-selected-button";
 
 export const saveBookmarksSettingsToDraft = (draft: Config) => {
   draft.bookmarks.showBookmarkNames = bookmarksShowBookmarkNamesCheckboxEl.checked;

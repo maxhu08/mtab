@@ -6,15 +6,15 @@ import {
   BookmarkTiming,
   Config,
   UIStyle
-} from "src/utils/config";
-import { bookmarksContainerEl } from "src/newtab/scripts/ui";
-import { handleAnimation } from "src/newtab/scripts/utils/animations/handle-animation";
-import { getBookmarkIconDetails } from "src/newtab/scripts/utils/bookmarks/bookmark-icon";
-import { openBookmark } from "src/newtab/scripts/utils/bookmarks/open-bookmark";
-import { openFolder } from "src/newtab/scripts/utils/bookmarks/open-folder";
-import { focusElementBorder, unfocusElementBorder } from "src/newtab/scripts/utils/focus-utils";
-import { getTabKeyPressed } from "src/newtab/scripts/utils/tab-key-pressed";
-import { genid } from "src/utils/genid";
+} from "~/src/utils/config";
+import { bookmarksContainerEl } from "~/src/newtab/scripts/ui";
+import { handleAnimation } from "~/src/newtab/scripts/utils/animations/handle-animation";
+import { getBookmarkIconDetails } from "~/src/newtab/scripts/utils/bookmarks/bookmark-icon";
+import { openBookmark } from "~/src/newtab/scripts/utils/bookmarks/open-bookmark";
+import { openFolder } from "~/src/newtab/scripts/utils/bookmarks/open-folder";
+import { focusElementBorder, unfocusElementBorder } from "~/src/newtab/scripts/utils/focus-utils";
+import { getTabKeyPressed } from "~/src/newtab/scripts/utils/tab-key-pressed";
+import { genid } from "~/src/utils/genid";
 
 type RenderedNode = {
   uuid: string;

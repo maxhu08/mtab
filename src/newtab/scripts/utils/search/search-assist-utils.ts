@@ -1,5 +1,5 @@
-import { Config, UIStyle } from "src/utils/config";
-import { assistantContainerEl } from "src/newtab/scripts/ui";
+import { Config, UIStyle } from "~/src/utils/config";
+import { assistantContainerEl } from "~/src/newtab/scripts/ui";
 
 export type AssistItem =
   | AssistDate

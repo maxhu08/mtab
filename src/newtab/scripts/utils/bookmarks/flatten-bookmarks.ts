@@ -1,4 +1,4 @@
-import { BookmarkNode, BookmarkNodeBookmark } from "src/utils/config";
+import { BookmarkNode, BookmarkNodeBookmark } from "~/src/utils/config";
 
 export const flattenBookmarks = (nodes: BookmarkNode[]): BookmarkNodeBookmark[] => {
   const flattened = nodes.flatMap((node) => {

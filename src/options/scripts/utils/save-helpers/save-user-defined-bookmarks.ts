@@ -1,9 +1,12 @@
-import { Config, BookmarkNode } from "src/utils/config";
-import { bookmarksUserDefinedColsInputEl, bookmarksUserDefinedList } from "src/options/scripts/ui";
+import { Config, BookmarkNode } from "~/src/utils/config";
+import {
+  bookmarksUserDefinedColsInputEl,
+  bookmarksUserDefinedList
+} from "~/src/options/scripts/ui";
 import {
   getBookmarkNodeBookmarkData,
   getBookmarkNodeFolderData
-} from "src/options/scripts/utils/bookmarks/get-bookmark-node-data";
+} from "~/src/options/scripts/utils/bookmarks/get-bookmark-node-data";
 
 export const saveBookmarkNodeBookmarkSettingsToDraft = (draft: Config) => {
   draft.bookmarks.userDefinedCols = Math.max(

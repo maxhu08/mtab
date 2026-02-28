@@ -4,9 +4,9 @@ import {
   BookmarkNodeFolder,
   BookmarkNode,
   DefaultFaviconSource
-} from "src/utils/config";
-import { getFaviconURL } from "src/newtab/scripts/utils/favicon-url";
-import { getUserAgent } from "src/utils/user-agent";
+} from "~/src/utils/config";
+import { getFaviconURL } from "~/src/newtab/scripts/utils/favicon-url";
+import { getUserAgent } from "~/src/utils/user-agent";
 
 export const convertBrowserBookmarksToBookmarkNodes = async (
   bookmarksLocationFirefox: BookmarksLocationFirefox,

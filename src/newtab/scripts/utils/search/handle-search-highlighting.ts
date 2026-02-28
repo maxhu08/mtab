@@ -1,5 +1,5 @@
-import { searchInputEl } from "src/newtab/scripts/ui";
-import { recognizeUrl } from "src/newtab/scripts/utils/search/recognize-url";
+import { searchInputEl } from "~/src/newtab/scripts/ui";
+import { recognizeUrl } from "~/src/newtab/scripts/utils/search/recognize-url";
 
 let textColor: string | null = null;
 let linkTextColor: string | null = null;

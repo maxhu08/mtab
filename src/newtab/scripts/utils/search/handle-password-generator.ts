@@ -1,5 +1,5 @@
-import { WORDS } from "src/newtab/scripts/utils/search/password-generator-words";
-import { AssistPasswordGenerator } from "src/newtab/scripts/utils/search/search-assist-utils";
+import { WORDS } from "~/src/newtab/scripts/utils/search/password-generator-words";
+import { AssistPasswordGenerator } from "~/src/newtab/scripts/utils/search/search-assist-utils";
 
 export const handlePasswordGenerator = (val: string) => {
   if (!/^\s*(?:password|pw)\b/i.test(val)) return undefined;

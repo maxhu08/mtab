@@ -1,6 +1,6 @@
-import { searchResultsContainerEl, searchResultsSectionEl } from "src/newtab/scripts/ui";
-import { recognizeUrl } from "src/newtab/scripts/utils/search/recognize-url";
-import { setSearchValue } from "src/newtab/scripts/utils/search/set-search-value";
+import { searchResultsContainerEl, searchResultsSectionEl } from "~/src/newtab/scripts/ui";
+import { recognizeUrl } from "~/src/newtab/scripts/utils/search/recognize-url";
+import { setSearchValue } from "~/src/newtab/scripts/utils/search/set-search-value";
 
 export const SELECTED_INDEX_ATTR = "selected-index";
 export const MAX_RESULTS = 8;

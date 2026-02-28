@@ -4,7 +4,7 @@ import {
   BookmarkTiming,
   AnimationSearchType,
   AnimationBookmarkType
-} from "src/utils/config";
+} from "~/src/utils/config";
 import {
   animationsEnabledCheckboxEl,
   animationsBookmarkTimingLeftButtonEl,
@@ -26,7 +26,7 @@ import {
   animationsBookmarkTypePageScaleButtonEl,
   animationsBookmarkTypePageUpButtonEl,
   animationsBookmarkTypePageDownButtonEl
-} from "src/options/scripts/ui";
+} from "~/src/options/scripts/ui";
 
 export const fillAnimationsInputs = (config: Config) => {
   animationsEnabledCheckboxEl.checked = config.animations.enabled;

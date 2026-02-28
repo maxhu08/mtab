@@ -1,6 +1,6 @@
 import { get as idbGet, set as idbSet } from "idb-keyval";
-import { logger } from "src/utils/logger";
-import { genid } from "src/utils/genid";
+import { logger } from "~/src/utils/logger";
+import { genid } from "~/src/utils/genid";
 
 const WALLPAPER_CACHE_NAME = "local-files";
 const WALLPAPER_CACHE_URL = "https://wallpaper.invalid/full";

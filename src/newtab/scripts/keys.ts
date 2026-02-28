@@ -1,4 +1,4 @@
-import { BookmarkNodeBookmark, Config } from "src/utils/config";
+import { BookmarkNodeBookmark, Config } from "~/src/utils/config";
 import {
   searchClearButtonEl,
   searchInputButtonsEl,
@@ -7,7 +7,7 @@ import {
   bookmarkSearchSectionEl,
   searchInputEl,
   searchResultsSectionEl
-} from "src/newtab/scripts/ui";
+} from "~/src/newtab/scripts/ui";
 
 import { focusSearch, openUrl, search, tryFocusSearch, unfocusSearch } from "./utils/search";
 import {
@@ -16,17 +16,17 @@ import {
   focusBookmarkSearch,
   tryFocusBookmarkSearch,
   unfocusBookmarkSearch
-} from "src/newtab/scripts/utils/bookmarks/bookmark-search-utils";
-import { openBookmark } from "src/newtab/scripts/utils/bookmarks/open-bookmark";
-import { getBrowserFlattenedBookmarks } from "src/newtab/scripts/utils/bookmarks/bookmark-data-cache";
-import { flattenBookmarks } from "src/newtab/scripts/utils/bookmarks/flatten-bookmarks";
+} from "~/src/newtab/scripts/utils/bookmarks/bookmark-search-utils";
+import { openBookmark } from "~/src/newtab/scripts/utils/bookmarks/open-bookmark";
+import { getBrowserFlattenedBookmarks } from "~/src/newtab/scripts/utils/bookmarks/bookmark-data-cache";
+import { flattenBookmarks } from "~/src/newtab/scripts/utils/bookmarks/flatten-bookmarks";
 import {
   navigateOpenFolderPagination,
   navigateOpenFolderParent
-} from "src/newtab/scripts/utils/bookmarks/bookmark-render-utils";
-import { handleSearchResultsNavigation } from "src/newtab/scripts/utils/search/handle-search-results";
-import { recognizeUrl } from "src/newtab/scripts/utils/search/recognize-url";
-import { setSearchValue } from "src/newtab/scripts/utils/search/set-search-value";
+} from "~/src/newtab/scripts/utils/bookmarks/bookmark-render-utils";
+import { handleSearchResultsNavigation } from "~/src/newtab/scripts/utils/search/handle-search-results";
+import { recognizeUrl } from "~/src/newtab/scripts/utils/search/recognize-url";
+import { setSearchValue } from "~/src/newtab/scripts/utils/search/set-search-value";
 
 export const listenToKeys = (config: Config) => {
   let bookmarks: BookmarkNodeBookmark[] | null = null;

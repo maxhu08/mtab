@@ -1,4 +1,4 @@
-import { Config } from "src/utils/config";
+import { Config } from "~/src/utils/config";
 import {
   wallpaperEnabledCheckboxEl,
   wallpaperFiltersBlurInputEl,
@@ -14,12 +14,12 @@ import {
   wallpaperTypeRandomButtonEl,
   wallpaperTypeSolidColorButtonEl,
   wallpaperTypeUrlButtonEl
-} from "src/options/scripts/ui";
+} from "~/src/options/scripts/ui";
 import {
   renderWallpaperGallery,
   setWallpaperSolidColorsInState,
   setWallpaperURLsInState
-} from "src/options/scripts/utils/upload-wallpaper";
+} from "~/src/options/scripts/utils/upload-wallpaper";
 
 const selectWallpaperFrequencyButton = (frequency: Config["wallpaper"]["frequency"]) => {
   if (frequency === "every-tab") {

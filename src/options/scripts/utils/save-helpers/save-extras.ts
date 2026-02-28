@@ -1,5 +1,5 @@
-import { Config, SnowEnabledType } from "src/utils/config";
-import { getSelectedButton } from "src/options/scripts/utils/get-selected-button";
+import { Config, SnowEnabledType } from "~/src/utils/config";
+import { getSelectedButton } from "~/src/options/scripts/utils/get-selected-button";
 
 export const saveExtrasSettingsToDraft = (draft: Config) => {
   const selectedEnabledEl = getSelectedButton("extras-snow-enabled");

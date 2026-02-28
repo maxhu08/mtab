@@ -1,8 +1,8 @@
 import {
   getBookmarkNodeBookmarkData,
   getBookmarkNodeFolderData
-} from "src/options/scripts/utils/bookmarks/get-bookmark-node-data";
-import { BookmarkNode } from "src/utils/config";
+} from "~/src/options/scripts/utils/bookmarks/get-bookmark-node-data";
+import { BookmarkNode } from "~/src/utils/config";
 
 export const exportBookmarkNode = async (uuid: string) => {
   const extensionVersion = chrome.runtime.getManifest().version;

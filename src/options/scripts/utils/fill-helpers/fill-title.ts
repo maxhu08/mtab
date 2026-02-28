@@ -1,4 +1,4 @@
-import { Config } from "src/utils/config";
+import { Config } from "~/src/utils/config";
 import {
   titleDefaultTitleInputEl,
   titleDynamicEnabledCheckboxEl,
@@ -8,8 +8,8 @@ import {
   titleFaviconTypeDefaultButtonEl,
   titleTypewriterRemainCountInputEl,
   titleTypewriterSpeedInputEl
-} from "src/options/scripts/ui";
-import { previewFavicon } from "src/options/scripts/utils/preview";
+} from "~/src/options/scripts/ui";
+import { previewFavicon } from "~/src/options/scripts/utils/preview";
 
 export const fillTitleInputs = (config: Config) => {
   titleDefaultTitleInputEl.value = config.title.defaultTitle;

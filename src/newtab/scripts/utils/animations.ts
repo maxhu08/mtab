@@ -1,7 +1,7 @@
-import { insertCSS } from "src/newtab/scripts/utils/insert-css";
-import { Config } from "src/utils/config";
-import { messageEl, searchContainerEl } from "src/newtab/scripts/ui";
-import { handleAnimation } from "src/newtab/scripts/utils/animations/handle-animation";
+import { insertCSS } from "~/src/newtab/scripts/utils/insert-css";
+import { Config } from "~/src/utils/config";
+import { messageEl, searchContainerEl } from "~/src/newtab/scripts/ui";
+import { handleAnimation } from "~/src/newtab/scripts/utils/animations/handle-animation";
 
 export const addAnimations = (animations: Config["animations"]) => {
   if (!animations.enabled) {

@@ -1,4 +1,4 @@
-import { UIStyle } from "src/utils/config";
+import { UIStyle } from "~/src/utils/config";
 
 const wallpaperCreditAnchorEl = document.getElementById(
   "wallpaper-credit-anchor"

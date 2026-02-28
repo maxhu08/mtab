@@ -1,4 +1,4 @@
-import { BookmarkNode, BookmarkNodeBookmark, BookmarkNodeFolder } from "src/utils/config";
+import { BookmarkNode, BookmarkNodeBookmark, BookmarkNodeFolder } from "~/src/utils/config";
 
 // prettier-ignore
 export const getBookmarkNodeBookmarkData = (uuid: string) => {

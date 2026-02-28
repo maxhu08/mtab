@@ -1,13 +1,13 @@
-import { UIStyle, FontType } from "src/utils/config";
+import { UIStyle, FontType } from "~/src/utils/config";
 import {
   bookmarkSearchContainerEl,
   bookmarkSearchInputEl,
   searchResultsContainerEl,
   searchContainerEl,
   searchInputEl
-} from "src/newtab/scripts/ui";
-import { getFontNameFromURL } from "src/newtab/scripts/utils/get-font-name";
-import { insertCSS } from "src/newtab/scripts/utils/insert-css";
+} from "~/src/newtab/scripts/ui";
+import { getFontNameFromURL } from "~/src/newtab/scripts/utils/get-font-name";
+import { insertCSS } from "~/src/newtab/scripts/utils/insert-css";
 
 export const styleSearch = (
   style: UIStyle,

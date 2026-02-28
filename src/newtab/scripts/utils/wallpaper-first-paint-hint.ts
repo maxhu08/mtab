@@ -1,6 +1,6 @@
-import { WALLPAPER_HINT_LOCAL_KEY } from "src/utils/wallpaper-file-storage";
-import { wallpaperEl } from "src/newtab/scripts/ui";
-import { logger } from "src/utils/logger";
+import { WALLPAPER_HINT_LOCAL_KEY } from "~/src/utils/wallpaper-file-storage";
+import { wallpaperEl } from "~/src/newtab/scripts/ui";
+import { logger } from "~/src/utils/logger";
 
 export const applyWallpaperFirstPaintHint = (): boolean => {
   try {

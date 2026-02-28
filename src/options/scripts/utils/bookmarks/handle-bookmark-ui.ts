@@ -3,16 +3,16 @@ import {
   bookmarksUserDefinedList,
   Input,
   toggleCollapseAllBookmarkNodesButtonEl
-} from "src/options/scripts/ui";
-import { exportBookmarkNode } from "src/options/scripts/utils/bookmarks/export-bookmark-node";
-import { getRandomColor } from "src/options/scripts/utils/random-color";
-import { focusInput, unfocusInput } from "src/options/scripts/utils/ui-helpers";
-import { BookmarkNodeBookmark, BookmarkNodeFolder } from "src/utils/config";
+} from "~/src/options/scripts/ui";
+import { exportBookmarkNode } from "~/src/options/scripts/utils/bookmarks/export-bookmark-node";
+import { getRandomColor } from "~/src/options/scripts/utils/random-color";
+import { focusInput, unfocusInput } from "~/src/options/scripts/utils/ui-helpers";
+import { BookmarkNodeBookmark, BookmarkNodeFolder } from "~/src/utils/config";
 import tippy, { Instance, delegate } from "tippy.js";
-import { genid } from "src/utils/genid";
-import { importBookmarkNode } from "src/options/scripts/utils/bookmarks/import-bookmark-node";
-import { exportAllBookmarkNodes } from "src/options/scripts/utils/bookmarks/export-all-bookmark-nodes";
-import { importAllBookmarkNodes } from "src/options/scripts/utils/bookmarks/import-all-bookmark-nodes";
+import { genid } from "~/src/utils/genid";
+import { importBookmarkNode } from "~/src/options/scripts/utils/bookmarks/import-bookmark-node";
+import { exportAllBookmarkNodes } from "~/src/options/scripts/utils/bookmarks/export-all-bookmark-nodes";
+import { importAllBookmarkNodes } from "~/src/options/scripts/utils/bookmarks/import-all-bookmark-nodes";
 
 const sortableMap = new WeakMap<HTMLDivElement, Sortable>();
 

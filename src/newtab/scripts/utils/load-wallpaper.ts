@@ -1,20 +1,20 @@
-import { Config } from "src/utils/config";
-import { wallpaperEl } from "src/newtab/scripts/ui";
-import { hideCover } from "src/newtab/scripts/utils/hide-cover";
-import { logger } from "src/utils/logger";
+import { Config } from "~/src/utils/config";
+import { wallpaperEl } from "~/src/newtab/scripts/ui";
+import { hideCover } from "~/src/newtab/scripts/utils/hide-cover";
+import { logger } from "~/src/utils/logger";
 import {
   UploadedWallpaperFileMeta,
   getUploadedWallpaperFile,
   listUploadedWallpaperFiles
-} from "src/utils/wallpaper-file-storage";
+} from "~/src/utils/wallpaper-file-storage";
 import {
   getMixedUploadedWallpaperFile,
   listMixedUploadedWallpaperFiles,
   listMixedWallpaperEntries
-} from "src/utils/mixed-wallpaper-storage";
-import { resolveWallpaperIndex } from "src/utils/wallpaper-rotation";
-import { resolveRandomWallpaper } from "src/newtab/scripts/utils/random-wallpaper";
-import { setWallpaperAuthorCredit } from "src/newtab/scripts/utils/wallpaper-credit";
+} from "~/src/utils/mixed-wallpaper-storage";
+import { resolveWallpaperIndex } from "~/src/utils/wallpaper-rotation";
+import { resolveRandomWallpaper } from "~/src/newtab/scripts/utils/random-wallpaper";
+import { setWallpaperAuthorCredit } from "~/src/newtab/scripts/utils/wallpaper-credit";
 
 const DEFAULT_WALLPAPER_URL = "./wallpapers/default.jpg";
 

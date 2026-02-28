@@ -1,12 +1,12 @@
-import { Config } from "src/utils/config";
-import { bookmarksContainerEl } from "src/newtab/scripts/ui";
+import { Config } from "~/src/utils/config";
+import { bookmarksContainerEl } from "~/src/newtab/scripts/ui";
 import {
   createFolderArea,
   initBookmarkRenderRuntime,
   renderBookmarkNodes
-} from "src/newtab/scripts/utils/bookmarks/bookmark-render-utils";
-import { insertCSS } from "src/newtab/scripts/utils/insert-css";
-import { genid } from "src/utils/genid";
+} from "~/src/newtab/scripts/utils/bookmarks/bookmark-render-utils";
+import { insertCSS } from "~/src/newtab/scripts/utils/insert-css";
+import { genid } from "~/src/utils/genid";
 
 // animations handled separately
 export const renderBookmarkNodeBookmarks = (config: Config) => {

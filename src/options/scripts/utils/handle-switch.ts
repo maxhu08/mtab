@@ -24,8 +24,8 @@ import {
   wallpaperTypeRandomButtonEl,
   wallpaperTypeSolidColorButtonEl,
   wallpaperTypeUrlButtonEl
-} from "src/options/scripts/ui";
-import { renderWallpaperGallery } from "src/options/scripts/utils/upload-wallpaper";
+} from "~/src/options/scripts/ui";
+import { renderWallpaperGallery } from "~/src/options/scripts/utils/upload-wallpaper";
 
 const setSectionVisibility = (el: HTMLElement, isVisible: boolean) => {
   el.classList.toggle("hidden", !isVisible);

@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Config } from "src/utils/config";
+import { Config } from "~/src/utils/config";
 
 const toCleanStringArray = (value: unknown, fallback: string[] = []) => {
   if (!Array.isArray(value)) return fallback;

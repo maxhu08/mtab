@@ -8,7 +8,7 @@ import {
   searchEngineStartpageButtonEl,
   searchEngineEcosiaButtonEl,
   searchUseCustomEngineCheckboxEl
-} from "src/options/scripts/ui";
+} from "~/src/options/scripts/ui";
 
 const checkboxSections = [
   ["message-enabled-checkbox", "message-enabled-section"],

@@ -1,4 +1,4 @@
-import { AssistDefinition } from "src/newtab/scripts/utils/search/search-assist-utils";
+import { AssistDefinition } from "~/src/newtab/scripts/utils/search/search-assist-utils";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type DefinitionData = any;

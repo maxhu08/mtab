@@ -3,14 +3,14 @@ import {
   RenderSearchResultsOptions,
   SearchResultItem,
   SELECTED_INDEX_ATTR
-} from "src/newtab/scripts/utils/search/handle-search-results";
+} from "~/src/newtab/scripts/utils/search/handle-search-results";
 import { fetchSearchSuggestions } from "./suggestions";
 import {
   bookmarksContainerEl,
   searchResultsContainerEl,
   searchResultsSectionEl
-} from "src/newtab/scripts/ui";
-import { recognizeUrl } from "src/newtab/scripts/utils/search/recognize-url";
+} from "~/src/newtab/scripts/ui";
+import { recognizeUrl } from "~/src/newtab/scripts/utils/search/recognize-url";
 
 const debounce = (fn: () => void, ms: number) => {
   let t: number | undefined;

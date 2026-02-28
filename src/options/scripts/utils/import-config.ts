@@ -1,11 +1,11 @@
-import { fillInputs } from "src/options/scripts/utils/fill-inputs";
-import { saveConfig } from "src/options/scripts/utils/save-config";
-import { fixAllToggleCheckboxSections } from "src/options/scripts/utils/toggle-checkbox";
-import { defaultConfig } from "src/utils/config";
-import { deepMerge } from "src/utils/deep-merge";
-import { logger } from "src/utils/logger";
-import { migrateOldConfig } from "src/utils/migrate-config";
-import { showInputDialog } from "src/options/scripts/utils/input-dialog";
+import { fillInputs } from "~/src/options/scripts/utils/fill-inputs";
+import { saveConfig } from "~/src/options/scripts/utils/save-config";
+import { fixAllToggleCheckboxSections } from "~/src/options/scripts/utils/toggle-checkbox";
+import { defaultConfig } from "~/src/utils/config";
+import { deepMerge } from "~/src/utils/deep-merge";
+import { logger } from "~/src/utils/logger";
+import { migrateOldConfig } from "~/src/utils/migrate-config";
+import { showInputDialog } from "~/src/options/scripts/utils/input-dialog";
 
 export const importConfigAndSave = async () => {
   const dataToImport = await showInputDialog(

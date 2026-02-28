@@ -1,5 +1,5 @@
-import { WallpaperFrequency } from "src/utils/config";
-import { resolveWallpaperIndex } from "src/utils/wallpaper-rotation";
+import { WallpaperFrequency } from "~/src/utils/config";
+import { resolveWallpaperIndex } from "~/src/utils/wallpaper-rotation";
 
 const RANDOM_WALLPAPER_QUEUE_KEY = "wallpaperRandomPicsumQueue";
 const RANDOM_WALLPAPER_QUEUE_SIZE = 60;

@@ -1,7 +1,7 @@
-import { FontType } from "src/utils/config";
-import { messageEl } from "src/newtab/scripts/ui";
-import { getFontNameFromURL } from "src/newtab/scripts/utils/get-font-name";
-import { insertCSS } from "src/newtab/scripts/utils/insert-css";
+import { FontType } from "~/src/utils/config";
+import { messageEl } from "~/src/newtab/scripts/ui";
+import { getFontNameFromURL } from "~/src/newtab/scripts/utils/get-font-name";
+import { insertCSS } from "~/src/newtab/scripts/utils/insert-css";
 
 export const styleMessage = (
   textColor: string,

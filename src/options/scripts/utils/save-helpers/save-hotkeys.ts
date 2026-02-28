@@ -1,10 +1,10 @@
-import { Config } from "src/utils/config";
+import { Config } from "~/src/utils/config";
 import {
   hotkeysEnabledCheckboxEl,
   hotkeysActivationKeyInputEl,
   hotkeysClosePageKeyInputEl,
   hotkeysSearchBookmarksKeyInputEl
-} from "src/options/scripts/ui";
+} from "~/src/options/scripts/ui";
 
 export const saveHotkeysSettingsToDraft = (draft: Config) => {
   draft.hotkeys.enabled = hotkeysEnabledCheckboxEl.checked;

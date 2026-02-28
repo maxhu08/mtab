@@ -1,4 +1,4 @@
-import { Config } from "src/utils/config";
+import { Config } from "~/src/utils/config";
 import {
   hotkeysEnabledCheckboxEl,
   hotkeysActivationKeyInputEl,
@@ -7,7 +7,7 @@ import {
   hotkeysActivationKeyStatusEl,
   hotkeysClosePageKeyStatusEl,
   hotkeysSearchBookmarksKeyStatusEl
-} from "src/options/scripts/ui";
+} from "~/src/options/scripts/ui";
 
 export const fillHotkeysInputs = (config: Config) => {
   hotkeysEnabledCheckboxEl.checked = config.hotkeys.enabled;

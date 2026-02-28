@@ -1,4 +1,4 @@
-import { AnimationBookmarkType, BookmarkNodeBookmark } from "src/utils/config";
+import { AnimationBookmarkType, BookmarkNodeBookmark } from "~/src/utils/config";
 import {
   bookmarksContainerEl,
   bookmarkSearchContainerEl,
@@ -7,17 +7,17 @@ import {
   bookmarkSearchSectionEl,
   searchContainerEl,
   searchSectionEl
-} from "src/newtab/scripts/ui";
+} from "~/src/newtab/scripts/ui";
 
 import {
   renderSearchResults,
   SearchResultItem
-} from "src/newtab/scripts/utils/search/handle-search-results";
-import { openBookmark } from "src/newtab/scripts/utils/bookmarks/open-bookmark";
+} from "~/src/newtab/scripts/utils/search/handle-search-results";
+import { openBookmark } from "~/src/newtab/scripts/utils/bookmarks/open-bookmark";
 import {
   showSearchResultsSection,
   hideSearchResultsSection
-} from "src/newtab/scripts/utils/search/handle-search-suggestions";
+} from "~/src/newtab/scripts/utils/search/handle-search-suggestions";
 
 export const tryFocusBookmarkSearch = (focusedBorderColor: string, e: KeyboardEvent) => {
   if (bookmarkSearchInputEl.matches(":focus")) return;

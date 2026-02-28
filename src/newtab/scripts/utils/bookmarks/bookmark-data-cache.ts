@@ -4,9 +4,9 @@ import {
   BookmarksLocationFirefox,
   DefaultBlockyColorType,
   DefaultFaviconSource
-} from "src/utils/config";
-import { convertBrowserBookmarksToBookmarkNodes } from "src/newtab/scripts/utils/bookmarks/convert-browser-bookmarks";
-import { flattenBookmarks } from "src/newtab/scripts/utils/bookmarks/flatten-bookmarks";
+} from "~/src/utils/config";
+import { convertBrowserBookmarksToBookmarkNodes } from "~/src/newtab/scripts/utils/bookmarks/convert-browser-bookmarks";
+import { flattenBookmarks } from "~/src/newtab/scripts/utils/bookmarks/flatten-bookmarks";
 
 type BrowserBookmarkCacheKey = {
   bookmarksLocationFirefox: BookmarksLocationFirefox;

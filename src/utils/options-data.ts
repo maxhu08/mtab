@@ -1,4 +1,4 @@
-import { deepMerge } from "src/utils/deep-merge";
+import { deepMerge } from "~/src/utils/deep-merge";
 
 const migrateOldOptionsData = (optionsData: OptionsData): OptionsData => {
   return optionsData;

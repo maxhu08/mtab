@@ -1,12 +1,12 @@
-import { Config } from "src/utils/config";
+import { Config } from "~/src/utils/config";
 import {
   uiForegroundColorInputEl,
   uiHighlightColorInputEl,
   uiCustomCSSTextareaEl,
   uiGlassColorInputEl,
   uiBlurStrengthInputEl
-} from "src/options/scripts/ui";
-import { getSelectedButton } from "src/options/scripts/utils/get-selected-button";
+} from "~/src/options/scripts/ui";
+import { getSelectedButton } from "~/src/options/scripts/utils/get-selected-button";
 
 export const saveUISettingsToDraft = (draft: Config) => {
   const selectedStyleEl = getSelectedButton("ui-style");

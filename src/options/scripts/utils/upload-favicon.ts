@@ -1,5 +1,5 @@
-import { titleCustomFaviconInputEl } from "src/options/scripts/ui";
-import { previewFavicon } from "src/options/scripts/utils/preview";
+import { titleCustomFaviconInputEl } from "~/src/options/scripts/ui";
+import { previewFavicon } from "~/src/options/scripts/utils/preview";
 
 export const handleCustomFaviconUpload = () => {
   titleCustomFaviconInputEl.addEventListener("change", (event: Event) => {

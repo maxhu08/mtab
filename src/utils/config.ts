@@ -1,5 +1,5 @@
-import { deepMerge } from "src/utils/deep-merge";
-import { migrateOldConfig } from "src/utils/migrate-config";
+import { deepMerge } from "~/src/utils/deep-merge";
+import { migrateOldConfig } from "~/src/utils/migrate-config";
 
 export const getConfig = (f: ({ config }: { config: Config }) => void) => {
   chrome.storage.local.get(["config"], (data) => {

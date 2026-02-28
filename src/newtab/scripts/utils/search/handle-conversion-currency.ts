@@ -1,4 +1,4 @@
-import { CURRENCY_ALIASES } from "src/newtab/scripts/utils/search/currency-aliases";
+import { CURRENCY_ALIASES } from "~/src/newtab/scripts/utils/search/currency-aliases";
 
 type ConversionCurrencyResult = {
   type: "conversion-currency";

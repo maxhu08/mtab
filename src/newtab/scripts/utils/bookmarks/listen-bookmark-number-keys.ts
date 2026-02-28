@@ -1,6 +1,10 @@
-import { BookmarksType } from "src/utils/config";
-import { bookmarksContainerEl, bookmarkSearchInputEl, searchInputEl } from "src/newtab/scripts/ui";
-import { getOpenFolderVisibleBookmarkButtons } from "src/newtab/scripts/utils/bookmarks/bookmark-render-utils";
+import { BookmarksType } from "~/src/utils/config";
+import {
+  bookmarksContainerEl,
+  bookmarkSearchInputEl,
+  searchInputEl
+} from "~/src/newtab/scripts/ui";
+import { getOpenFolderVisibleBookmarkButtons } from "~/src/newtab/scripts/utils/bookmarks/bookmark-render-utils";
 
 export const listenBookmarkNumberKeys = (listen: boolean, bookmarksType: BookmarksType) => {
   if (bookmarksType !== "user-defined" && bookmarksType !== "default-blocky") return;

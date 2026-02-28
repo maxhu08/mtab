@@ -4,9 +4,9 @@ import {
   AnimationSearchType,
   BookmarkTiming,
   Config
-} from "src/utils/config";
-import { animationsEnabledCheckboxEl } from "src/options/scripts/ui";
-import { getSelectedButton } from "src/options/scripts/utils/get-selected-button";
+} from "~/src/utils/config";
+import { animationsEnabledCheckboxEl } from "~/src/options/scripts/ui";
+import { getSelectedButton } from "~/src/options/scripts/utils/get-selected-button";
 
 export const saveAnimationsToDraft = (draft: Config) => {
   draft.animations.enabled = animationsEnabledCheckboxEl.checked;

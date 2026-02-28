@@ -1,5 +1,5 @@
-import { Config } from "src/utils/config";
-import { insertCSS } from "src/newtab/scripts/utils/insert-css";
+import { Config } from "~/src/utils/config";
+import { insertCSS } from "~/src/newtab/scripts/utils/insert-css";
 
 export const setUISyle = (ui: Config["ui"]) => {
   // custom css

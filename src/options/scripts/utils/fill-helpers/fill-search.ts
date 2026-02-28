@@ -1,4 +1,4 @@
-import { Config, FontType, SearchEngine } from "src/utils/config";
+import { Config, FontType, SearchEngine } from "~/src/utils/config";
 import {
   searchEnabledCheckboxEl,
   searchEngineDuckduckgoButtonEl,
@@ -33,7 +33,7 @@ import {
   searchBookmarkIconColorInputEl,
   searchSelectIconColorInputEl,
   searchLinkTextColorInputEl
-} from "src/options/scripts/ui";
+} from "~/src/options/scripts/ui";
 
 export const fillSearchInputs = (config: Config) => {
   searchEnabledCheckboxEl.checked = config.search.enabled;

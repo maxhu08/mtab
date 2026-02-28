@@ -1,4 +1,4 @@
-import { oconfig } from "src/options/scripts/oconfig";
+import { oconfig } from "~/src/options/scripts/oconfig";
 
 export const getContainerAndInput = (baseId: string) => {
   const container = document.getElementById(`${baseId}-container`) as HTMLDivElement;

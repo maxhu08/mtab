@@ -1,5 +1,5 @@
-import { getOptionsData } from "src/utils/options-data";
-import { modifyNestedObject } from "src/utils/modify";
+import { getOptionsData } from "~/src/utils/options-data";
+import { modifyNestedObject } from "~/src/utils/modify";
 
 export const createCollapseGroups = () => {
   getOptionsData(({ optionsData }) => {

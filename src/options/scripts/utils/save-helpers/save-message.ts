@@ -1,12 +1,12 @@
-import { Config, FontType, MessageType } from "src/utils/config";
+import { Config, FontType, MessageType } from "~/src/utils/config";
 import {
   messageEnabledCheckboxEl,
   messageTextColorInputEl,
   messageCustomTextInputEl,
   messageFontCustomInputEl,
   messageTextSizeInputEl
-} from "src/options/scripts/ui";
-import { getSelectedButton } from "src/options/scripts/utils/get-selected-button";
+} from "~/src/options/scripts/ui";
+import { getSelectedButton } from "~/src/options/scripts/utils/get-selected-button";
 
 export const saveMessageSettingsToDraft = (draft: Config) => {
   draft.message.enabled = messageEnabledCheckboxEl.checked;

@@ -1,4 +1,4 @@
-import { Config, FontType, MessageType } from "src/utils/config";
+import { Config, FontType, MessageType } from "~/src/utils/config";
 import {
   messageCustomTextInputEl,
   messageEnabledCheckboxEl,
@@ -14,7 +14,7 @@ import {
   messageTypeTime24ButtonEl,
   messageTypeWeatherButtonEl,
   messageWeatherUnitsTypeFButton
-} from "src/options/scripts/ui";
+} from "~/src/options/scripts/ui";
 
 export const fillMessageInputs = (config: Config) => {
   messageEnabledCheckboxEl.checked = config.message.enabled;

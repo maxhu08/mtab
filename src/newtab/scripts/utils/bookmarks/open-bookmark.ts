@@ -1,5 +1,5 @@
-import { AnimationBookmarkType } from "src/utils/config";
-import { bookmarkSearchInputEl, contentEl } from "src/newtab/scripts/ui";
+import { AnimationBookmarkType } from "~/src/utils/config";
+import { bookmarkSearchInputEl, contentEl } from "~/src/newtab/scripts/ui";
 
 export const openBookmark = (
   bookmarkUrl: string,

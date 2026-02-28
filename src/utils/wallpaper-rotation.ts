@@ -1,4 +1,4 @@
-import { WallpaperFrequency } from "src/utils/config";
+import { WallpaperFrequency } from "~/src/utils/config";
 
 export type DaylightPeriod = "night" | "noon" | "day" | "evening";
 
