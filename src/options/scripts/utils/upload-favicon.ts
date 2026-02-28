@@ -2,14 +2,20 @@ import { titleCustomFaviconInputEl } from "src/options/scripts/ui";
 import { previewFavicon } from "src/options/scripts/utils/preview";
 
 export const handleCustomFaviconUpload = () => {
-  titleCustomFaviconInputEl.addEventListener("change", (e: any) => {
-    const file = e.target.files[0];
+  titleCustomFaviconInputEl.addEventListener("change", (event: Event) => {
+    const file = (event.target as HTMLInputElement | null)?.files?.[0];
 
     if (file) {
       const reader = new FileReader();
-      reader.onload = (e: any) => {
-        chrome.storage.local.set({ userUploadedFavicon: e.target.result });
-        previewFavicon(e.target.result);
+      reader.onload = (loadEvent: ProgressEvent<FileReader>) => {
+        const result = loadEvent.target?.result;
+
+        if (typeof result !== "string") {
+          return;
+        }
+
+        chrome.storage.local.set({ userUploadedFavicon: result });
+        previewFavicon(result);
       };
       reader.readAsDataURL(file);
     }

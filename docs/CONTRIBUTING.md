@@ -12,10 +12,13 @@ Use this page as the fast entry point for contributors.
 
 ## Useful Things
 
-- Run development build: `bun d`
-- Build release artifacts: `bun build-chrome` and `bun build-firefox`
-- Package zip files: `bun package-chrome` and `bun package-firefox`
-- Format code before committing: `bun prettier`
+- Run development build: `bun run dev` or `bun run dev:firefox`
+- Build release artifacts: `bun run build:chrome` and `bun run build:firefox`
+- Package zip files: `bun run package:chrome` and `bun run package:firefox`
+- Build release candidate artifacts: `bun run rc:chrome` and `bun run rc:firefox`
+- Package the source tree: `bun run package:source`
+- Validate changes before committing: `bun run check`
+- Format code before committing: `bun run format`
 - Formatter is also enforced by pre-commit hooks.
 
 ## Scope Notes

@@ -9,7 +9,7 @@ const wallpaperCreditTextEl = document.getElementById(
 const CREDIT_PERSIST_MS = 10000;
 
 let creditInitialized = false;
-let hideCreditTimeout: number | undefined;
+let hideCreditTimeout: ReturnType<typeof globalThis.setTimeout> | undefined;
 
 const showCredit = () => {
   if (!wallpaperCreditAnchorEl) return;

@@ -41,10 +41,13 @@ fnm use
 
 ## Common Commands
 
-- Dev build: `bun d`
-- Production builds: `bun build-chrome`, `bun build-firefox`
-- Package zips: `bun package-chrome`, `bun package-firefox`
-- Format code: `bun prettier`
+- Dev build: `bun run dev` or `bun run dev:firefox`
+- Production builds: `bun run build:chrome`, `bun run build:firefox`
+- Package zips: `bun run package:chrome`, `bun run package:firefox`
+- Release candidate packages: `bun run rc:chrome`, `bun run rc:firefox`
+- Source package zip: `bun run package:source`
+- Validate changes: `bun run check`
+- Format code: `bun run format`
 
 ## Load Extension Locally
 

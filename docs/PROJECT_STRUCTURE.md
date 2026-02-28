@@ -9,7 +9,7 @@ Use this map to decide where new code should go.
 - `src/popup/`: extension popup implementation.
 - `src/utils/`: shared, reusable utilities.
 - `src/assets/`: icons, wallpapers, fonts, and UI assets.
-- `src/scripts/`: build and packaging scripts (platform-specific).
+- `scripts/`: build and packaging tasks.
 
 ## New Tab
 
@@ -27,9 +27,9 @@ Use this map to decide where new code should go.
 
 ## Build Scripts
 
-- Linux scripts: `src/scripts/linux/`
-- Windows scripts: `src/scripts/win/`
-- These scripts generate manifests and copy assets during build/package commands.
+- Task runner: `scripts/tasks.ts`
+- This file handles `clean`, `dev`, `build`, `package`, `rc`, and `source` tasks.
+- It generates manifests, copies assets, and creates build/package artifacts.
 
 ## Useful Rule of Thumb
 

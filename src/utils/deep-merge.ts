@@ -1,22 +1,28 @@
-export const deepMerge = (target: any, source: any): any => {
-  const isObject = (obj: any) => obj && typeof obj === "object";
+type Mergeable = Record<string, unknown>;
+
+const isObject = (value: unknown): value is Mergeable => {
+  return typeof value === "object" && value !== null && !Array.isArray(value);
+};
+
+export const deepMerge = <T extends object>(target: T, source: unknown): T => {
+  const output = target as Mergeable;
 
   if (!isObject(target) || !isObject(source)) {
-    return source;
+    return source as T;
   }
 
   Object.keys(source).forEach((key) => {
-    const targetValue = target[key];
+    const targetValue = output[key];
     const sourceValue = source[key];
 
     if (Array.isArray(targetValue) && Array.isArray(sourceValue)) {
-      target[key] = sourceValue;
+      output[key] = sourceValue;
     } else if (isObject(targetValue) && isObject(sourceValue)) {
-      target[key] = deepMerge({ ...targetValue }, sourceValue);
+      output[key] = deepMerge({ ...targetValue }, sourceValue);
     } else {
-      target[key] = sourceValue;
+      output[key] = sourceValue;
     }
   });
 
-  return target;
+  return output as T;
 };

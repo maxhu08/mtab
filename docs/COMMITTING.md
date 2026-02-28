@@ -19,5 +19,5 @@
 ## Before Opening a PR
 
 1. Ensure the feature works locally.
-2. Ensure formatting passes.
+2. Run `bun run check`.
 3. Push your branch and open a PR with a clear change summary.

@@ -12,8 +12,8 @@
     "moduleResolution": "bundler",
     "noEmitOnError": true,
     "lib": ["ES2019", "DOM"],
-    "types": ["chrome"]
+    "types": ["chrome", "node"]
   },
-  "include": ["src/**/*.ts"],
+  "include": ["src/**/*.ts", "scripts/**/*.ts"],
   "exclude": ["node_modules"]
 }
