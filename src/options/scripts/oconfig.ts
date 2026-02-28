@@ -1,3 +1,3 @@
 export const oconfig = {
-  inputBorderClass: "border-pink-500"
+  inputBorderClass: "border-sky-500"
 };

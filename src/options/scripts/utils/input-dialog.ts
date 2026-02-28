@@ -41,11 +41,7 @@ export const showInputDialog = (
 
   const inputContainerEl = document.createElement("div");
   inputContainerEl.className =
-    "grid w-full grid-cols-[max-content_auto] rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base focus-within:border-pink-500";
-
-  const prefixEl = document.createElement("span");
-  prefixEl.className = "select-none font-semibold text-pink-500";
-  prefixEl.textContent = ">\u00a0";
+    "w-full rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base focus-within:border-sky-500";
 
   const inputEl = document.createElement("input");
   inputEl.type = "text";
@@ -54,7 +50,7 @@ export const showInputDialog = (
     "w-full bg-transparent text-base text-white placeholder-neutral-500 outline-none";
   inputEl.placeholder = options.placeholder ?? "paste here...";
   inputEl.value = options.defaultValue ?? "";
-  inputContainerEl.append(prefixEl, inputEl);
+  inputContainerEl.append(inputEl);
 
   const actions = document.createElement("div");
   actions.className = "mt-4 grid grid-cols-2 gap-2";

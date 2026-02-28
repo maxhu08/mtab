@@ -73,9 +73,8 @@
         <section id="user-section" class="mb-20 grid grid-flow-row gap-4">
           <div class="grid gap-2">
             <p class="text-base text-white">user.name</p>
-            <div id="username-container" class="grid w-full grid-cols-[max-content_auto] rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base">
-              <span class="select-none font-semibold text-pink-500">>&nbsp;</span>
-              <input id="username-input" type="text" autocomplete="off" class="bg-transparent text-white placeholder-neutral-500 outline-none" placeholder="input name..." />
+            <div id="username-container" class="w-full rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base">
+              <input id="username-input" type="text" autocomplete="off" class="w-full bg-transparent text-white placeholder-neutral-500 outline-none" placeholder="input name..." />
             </div>
           </div>
         </section>
@@ -93,9 +92,8 @@
         <section id="title-section" class="mb-20 grid grid-flow-row gap-4">
           <div class="grid gap-2">
             <p class="text-base text-white">title.defaultTitle</p>
-            <div id="title-default-title-container" class="grid w-full grid-cols-[max-content_auto] rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base">
-              <span class="select-none font-semibold text-pink-500">>&nbsp;</span>
-              <input id="title-default-title-input" type="text" autocomplete="off" class="bg-transparent text-white placeholder-neutral-500 outline-none" placeholder="input title..." />
+            <div id="title-default-title-container" class="w-full rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base">
+              <input id="title-default-title-input" type="text" autocomplete="off" class="w-full bg-transparent text-white placeholder-neutral-500 outline-none" placeholder="input title..." />
             </div>
           </div>
           <div class="grid gap-2">
@@ -127,30 +125,28 @@
             <div class="grid gap-4">
               <div class="grid gap-2">
                 <p class="text-base text-white">title.typewriter.speed</p>
-                <div id="title-typewriter-speed-container" class="grid w-full grid-cols-[max-content_auto] rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base">
-                  <span class="select-none font-semibold text-pink-500">>&nbsp;</span>
+                <div id="title-typewriter-speed-container" class="w-full rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base">
                   <input
                     id="title-typewriter-speed-input"
                     type="number"
                     min="0"
                     step="1"
                     autocomplete="off"
-                    class="bg-transparent text-white placeholder-neutral-500 outline-none"
+                    class="w-full bg-transparent text-white placeholder-neutral-500 outline-none"
                     placeholder="input speed (ms)..."
                   />
                 </div>
               </div>
               <div class="grid gap-2">
                 <p class="text-base text-white">title.typewriter.remainCount</p>
-                <div id="title-typewriter-remain-count-container" class="grid w-full grid-cols-[max-content_auto] rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base">
-                  <span class="select-none font-semibold text-pink-500">>&nbsp;</span>
+                <div id="title-typewriter-remain-count-container" class="w-full rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base">
                   <input
                     id="title-typewriter-remain-count-input"
                     type="number"
                     min="1"
                     step="1"
                     autocomplete="off"
-                    class="bg-transparent text-white placeholder-neutral-500 outline-none"
+                    class="w-full bg-transparent text-white placeholder-neutral-500 outline-none"
                     placeholder="enter character count..."
                   />
                 </div>
@@ -225,24 +221,28 @@
                   Use a google font url to choose a font<br />
                   Example: https://fonts.googleapis.com/css2?family=Anton+SC&display=swap
                 </p>
-                <div id="message-font-custom-container" class="grid w-full grid-cols-[max-content_auto] rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base">
-                  <span class="select-none font-semibold text-pink-500">>&nbsp;</span>
-                  <input id="message-font-custom-input" type="text" autocomplete="off" class="bg-transparent text-white placeholder-neutral-500 outline-none" placeholder="input font url..." />
+                <div id="message-font-custom-container" class="w-full rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base">
+                  <input id="message-font-custom-input" type="text" autocomplete="off" class="w-full bg-transparent text-white placeholder-neutral-500 outline-none" placeholder="input font url..." />
                 </div>
               </div>
             </div>
             <div class="grid gap-2">
               <p class="text-base text-white">message.textColor</p>
-              <div id="message-text-color-container" class="grid w-full grid-cols-[max-content_auto] rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base">
-                <span class="select-none font-semibold text-pink-500">>&nbsp;</span>
-                <input id="message-text-color-input" type="text" autocomplete="off" class="bg-transparent text-white placeholder-neutral-500 outline-none" placeholder="input color..." />
+              <div id="message-text-color-container" class="w-full rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base">
+                <input id="message-text-color-input" type="text" autocomplete="off" class="w-full bg-transparent text-white placeholder-neutral-500 outline-none" placeholder="input color..." />
               </div>
             </div>
             <div class="grid gap-2">
               <p class="text-base text-white">message.textSize</p>
-              <div id="message-text-size-container" class="grid w-full grid-cols-[max-content_auto] rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base">
-                <span class="select-none font-semibold text-pink-500">>&nbsp;</span>
-                <input id="message-text-size-input" type="number" step="any" autocomplete="off" class="bg-transparent text-white placeholder-neutral-500 outline-none" placeholder="input size..." />
+              <div id="message-text-size-container" class="w-full rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base">
+                <input
+                  id="message-text-size-input"
+                  type="number"
+                  step="any"
+                  autocomplete="off"
+                  class="w-full bg-transparent text-white placeholder-neutral-500 outline-none"
+                  placeholder="input size..."
+                />
               </div>
             </div>
             <div class="grid gap-2 text-base">
@@ -292,9 +292,8 @@
               <div class="grid gap-2 text-base">
                 <p class="text-white">message.customText</p>
                 <p id="message-custom-text-info" class="whitespace-pre-line text-base text-neutral-500"></p>
-                <div id="message-custom-text-container" class="grid w-full grid-cols-[max-content_auto] rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base">
-                  <span class="select-none font-semibold text-pink-500">>&nbsp;</span>
-                  <input id="message-custom-text-input" type="text" autocomplete="off" class="bg-transparent text-white placeholder-neutral-500 outline-none" placeholder="input text..." />
+                <div id="message-custom-text-container" class="w-full rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base">
+                  <input id="message-custom-text-input" type="text" autocomplete="off" class="w-full bg-transparent text-white placeholder-neutral-500 outline-none" placeholder="input text..." />
                 </div>
               </div>
             </div>
@@ -418,24 +417,22 @@
               <div id="wallpaper-not-solid-color-section" class="grid gap-4">
                 <div class="grid gap-2">
                   <p class="text-base text-white">wallpaper.filters.brightness</p>
-                  <div id="wallpaper-filters-brightness-container" class="grid w-full grid-cols-[max-content_auto] rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base">
-                    <span class="select-none font-semibold text-pink-500">>&nbsp;</span>
+                  <div id="wallpaper-filters-brightness-container" class="w-full rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base">
                     <input
                       id="wallpaper-filters-brightness-input"
                       type="number"
                       min="0"
                       step="any"
                       autocomplete="off"
-                      class="bg-transparent text-white placeholder-neutral-500 outline-none"
+                      class="w-full bg-transparent text-white placeholder-neutral-500 outline-none"
                       placeholder="input brightness (0.0-1.0)..."
                     />
                   </div>
                 </div>
                 <div class="grid gap-2">
                   <p class="text-base text-white">wallpaper.filters.blur</p>
-                  <div id="wallpaper-filters-blur-container" class="grid w-full grid-cols-[max-content_auto] rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base">
-                    <span class="select-none font-semibold text-pink-500">>&nbsp;</span>
-                    <input id="wallpaper-filters-blur-input" type="text" autocomplete="off" class="bg-transparent text-white placeholder-neutral-500 outline-none" placeholder="input blur..." />
+                  <div id="wallpaper-filters-blur-container" class="w-full rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base">
+                    <input id="wallpaper-filters-blur-input" type="text" autocomplete="off" class="w-full bg-transparent text-white placeholder-neutral-500 outline-none" placeholder="input blur..." />
                   </div>
                 </div>
               </div>
@@ -488,34 +485,30 @@
           <div id="ui-style-solid-section" class="grid grid-flow-row gap-4">
             <div class="grid gap-2">
               <p class="text-base text-white">ui.foregroundColor</p>
-              <div id="ui-foreground-color-container" class="grid w-full grid-cols-[max-content_auto] rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base">
-                <span class="select-none font-semibold text-pink-500">>&nbsp;</span>
-                <input id="ui-foreground-color-input" type="text" autocomplete="off" class="bg-transparent text-white placeholder-neutral-500 outline-none" placeholder="input color..." />
+              <div id="ui-foreground-color-container" class="w-full rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base">
+                <input id="ui-foreground-color-input" type="text" autocomplete="off" class="w-full bg-transparent text-white placeholder-neutral-500 outline-none" placeholder="input color..." />
               </div>
             </div>
           </div>
           <div id="ui-style-glass-section" class="grid grid-flow-row gap-4">
             <div class="grid gap-2">
               <p class="text-base text-white">ui.glassColor</p>
-              <div id="ui-glass-color-container" class="grid w-full grid-cols-[max-content_auto] rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base">
-                <span class="select-none font-semibold text-pink-500">>&nbsp;</span>
-                <input id="ui-glass-color-input" type="text" autocomplete="off" class="bg-transparent text-white placeholder-neutral-500 outline-none" placeholder="input color..." />
+              <div id="ui-glass-color-container" class="w-full rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base">
+                <input id="ui-glass-color-input" type="text" autocomplete="off" class="w-full bg-transparent text-white placeholder-neutral-500 outline-none" placeholder="input color..." />
               </div>
             </div>
             <div class="grid gap-2 pt-4">
               <p class="text-base text-white">ui.blurStrength</p>
-              <div id="ui-blur-strength-container" class="grid w-full grid-cols-[max-content_auto] rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base">
-                <span class="select-none font-semibold text-pink-500">>&nbsp;</span>
-                <input id="ui-blur-strength-input" type="text" autocomplete="off" class="bg-transparent text-white placeholder-neutral-500 outline-none" placeholder="input blur strength..." />
+              <div id="ui-blur-strength-container" class="w-full rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base">
+                <input id="ui-blur-strength-input" type="text" autocomplete="off" class="w-full bg-transparent text-white placeholder-neutral-500 outline-none" placeholder="input blur strength..." />
               </div>
             </div>
           </div>
 
           <div class="grid gap-2">
             <p class="text-base text-white">ui.highlightColor</p>
-            <div id="ui-highlight-color-container" class="grid w-full grid-cols-[max-content_auto] rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base">
-              <span class="select-none font-semibold text-pink-500">>&nbsp;</span>
-              <input id="ui-highlight-color-input" type="text" autocomplete="off" class="bg-transparent text-white placeholder-neutral-500 outline-none" placeholder="input color..." />
+            <div id="ui-highlight-color-container" class="w-full rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base">
+              <input id="ui-highlight-color-input" type="text" autocomplete="off" class="w-full bg-transparent text-white placeholder-neutral-500 outline-none" placeholder="input color..." />
             </div>
           </div>
           <div class="grid gap-2 text-base">
@@ -739,33 +732,36 @@
             <div id="search-use-custom-engine-section" class="grid gap-2">
               <p class="text-base text-white">search.customEngineURL</p>
               <span class="text-base text-neutral-500">Use {} to represent the search query<br />Example: https://www.google.com/search?q={}</span>
-              <div id="search-custom-engine-url-container" class="grid w-full grid-cols-[max-content_auto] rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base">
-                <span class="select-none font-semibold text-pink-500">>&nbsp;</span>
+              <div id="search-custom-engine-url-container" class="w-full rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base">
                 <input
                   id="search-custom-engine-url-input"
                   type="text"
                   autocomplete="off"
-                  class="bg-transparent text-white placeholder-neutral-500 outline-none"
+                  class="w-full bg-transparent text-white placeholder-neutral-500 outline-none"
                   placeholder="E.g https://www.google.com/search?q={}"
                 />
               </div>
             </div>
             <div class="grid gap-2">
               <p class="text-base text-white">search.placeholderText</p>
-              <div id="search-placeholder-text-container" class="grid w-full grid-cols-[max-content_auto] rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base">
-                <span class="select-none font-semibold text-pink-500">>&nbsp;</span>
-                <input id="search-placeholder-text-input" type="text" autocomplete="off" class="bg-transparent text-white placeholder-neutral-500 outline-none" placeholder="input placeholder..." />
+              <div id="search-placeholder-text-container" class="w-full rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base">
+                <input
+                  id="search-placeholder-text-input"
+                  type="text"
+                  autocomplete="off"
+                  class="w-full bg-transparent text-white placeholder-neutral-500 outline-none"
+                  placeholder="input placeholder..."
+                />
               </div>
             </div>
             <div class="grid gap-2">
               <p class="text-base text-white">search.bookmarkPlaceholderText</p>
-              <div id="search-bookmark-placeholder-text-container" class="grid w-full grid-cols-[max-content_auto] rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base">
-                <span class="select-none font-semibold text-pink-500">>&nbsp;</span>
+              <div id="search-bookmark-placeholder-text-container" class="w-full rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base">
                 <input
                   id="search-bookmark-placeholder-text-input"
                   type="text"
                   autocomplete="off"
-                  class="bg-transparent text-white placeholder-neutral-500 outline-none"
+                  class="w-full bg-transparent text-white placeholder-neutral-500 outline-none"
                   placeholder="input placeholder..."
                 />
               </div>
@@ -941,9 +937,14 @@
             <div class="grid gap-2">
               <p class="text-base text-white">search.focusedBorderColor</p>
               <span class="text-base text-neutral-500">(use #00000000 for none)</span>
-              <div id="search-focused-border-color-container" class="grid w-full grid-cols-[max-content_auto] rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base">
-                <span class="select-none font-semibold text-pink-500">>&nbsp;</span>
-                <input id="search-focused-border-color-input" type="text" autocomplete="off" class="bg-transparent text-white placeholder-neutral-500 outline-none" placeholder="input color..." />
+              <div id="search-focused-border-color-container" class="w-full rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base">
+                <input
+                  id="search-focused-border-color-input"
+                  type="text"
+                  autocomplete="off"
+                  class="w-full bg-transparent text-white placeholder-neutral-500 outline-none"
+                  placeholder="input color..."
+                />
               </div>
             </div>
             <div class="grid gap-2 text-base">
@@ -964,56 +965,61 @@
                   Use a google font url to choose a font<br />
                   Example: https://fonts.googleapis.com/css2?family=Anton+SC&display=swap
                 </p>
-                <div id="search-font-custom-container" class="grid w-full grid-cols-[max-content_auto] rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base">
-                  <span class="select-none font-semibold text-pink-500">>&nbsp;</span>
-                  <input id="search-font-custom-input" type="text" autocomplete="off" class="bg-transparent text-white placeholder-neutral-500 outline-none" placeholder="input font url..." />
+                <div id="search-font-custom-container" class="w-full rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base">
+                  <input id="search-font-custom-input" type="text" autocomplete="off" class="w-full bg-transparent text-white placeholder-neutral-500 outline-none" placeholder="input font url..." />
                 </div>
               </div>
             </div>
             <div class="grid gap-2">
               <p class="text-base text-white">search.textColor</p>
-              <div id="search-text-color-container" class="grid w-full grid-cols-[max-content_auto] rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base">
-                <span class="select-none font-semibold text-pink-500">>&nbsp;</span>
-                <input id="search-text-color-input" type="text" autocomplete="off" class="bg-transparent text-white placeholder-neutral-500 outline-none" placeholder="input color..." />
+              <div id="search-text-color-container" class="w-full rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base">
+                <input id="search-text-color-input" type="text" autocomplete="off" class="w-full bg-transparent text-white placeholder-neutral-500 outline-none" placeholder="input color..." />
               </div>
             </div>
             <div class="grid gap-2">
               <p class="text-base text-white">search.placeholderTextColor</p>
-              <div id="search-placeholder-text-color-container" class="grid w-full grid-cols-[max-content_auto] rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base">
-                <span class="select-none font-semibold text-pink-500">>&nbsp;</span>
-                <input id="search-placeholder-text-color-input" type="text" autocomplete="off" class="bg-transparent text-white placeholder-neutral-500 outline-none" placeholder="input color..." />
+              <div id="search-placeholder-text-color-container" class="w-full rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base">
+                <input
+                  id="search-placeholder-text-color-input"
+                  type="text"
+                  autocomplete="off"
+                  class="w-full bg-transparent text-white placeholder-neutral-500 outline-none"
+                  placeholder="input color..."
+                />
               </div>
             </div>
             <div class="grid gap-2">
               <p class="text-base text-white">search.searchIconColor</p>
               <p class="text-base text-neutral-500">This changes the -> color</p>
-              <div id="search-search-icon-color-container" class="grid w-full grid-cols-[max-content_auto] rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base">
-                <span class="select-none font-semibold text-pink-500">>&nbsp;</span>
-                <input id="search-search-icon-color-input" type="text" autocomplete="off" class="bg-transparent text-white placeholder-neutral-500 outline-none" placeholder="input color..." />
+              <div id="search-search-icon-color-container" class="w-full rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base">
+                <input id="search-search-icon-color-input" type="text" autocomplete="off" class="w-full bg-transparent text-white placeholder-neutral-500 outline-none" placeholder="input color..." />
               </div>
             </div>
             <div class="grid gap-2">
               <p class="text-base text-white">search.bookmarkIconColor</p>
               <p class="text-base text-neutral-500">This changes the // color</p>
-              <div id="search-bookmark-icon-color-container" class="grid w-full grid-cols-[max-content_auto] rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base">
-                <span class="select-none font-semibold text-pink-500">>&nbsp;</span>
-                <input id="search-bookmark-icon-color-input" type="text" autocomplete="off" class="bg-transparent text-white placeholder-neutral-500 outline-none" placeholder="input color..." />
+              <div id="search-bookmark-icon-color-container" class="w-full rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base">
+                <input
+                  id="search-bookmark-icon-color-input"
+                  type="text"
+                  autocomplete="off"
+                  class="w-full bg-transparent text-white placeholder-neutral-500 outline-none"
+                  placeholder="input color..."
+                />
               </div>
             </div>
             <div class="grid gap-2">
               <p class="text-base text-white">search.selectIconColor</p>
               <p class="text-base text-neutral-500">This changes the > color</p>
-              <div id="search-select-icon-color-container" class="grid w-full grid-cols-[max-content_auto] rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base">
-                <span class="select-none font-semibold text-pink-500">>&nbsp;</span>
-                <input id="search-select-icon-color-input" type="text" autocomplete="off" class="bg-transparent text-white placeholder-neutral-500 outline-none" placeholder="input color..." />
+              <div id="search-select-icon-color-container" class="w-full rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base">
+                <input id="search-select-icon-color-input" type="text" autocomplete="off" class="w-full bg-transparent text-white placeholder-neutral-500 outline-none" placeholder="input color..." />
               </div>
             </div>
             <div id="search-recognize-links-section" class="grid gap-2">
               <div class="grid gap-2">
                 <p class="text-base text-white">search.linkTextColor</p>
-                <div id="search-link-text-color-container" class="grid w-full grid-cols-[max-content_auto] rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base">
-                  <span class="select-none font-semibold text-pink-500">>&nbsp;</span>
-                  <input id="search-link-text-color-input" type="text" autocomplete="off" class="bg-transparent text-white placeholder-neutral-500 outline-none" placeholder="input color..." />
+                <div id="search-link-text-color-container" class="w-full rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base">
+                  <input id="search-link-text-color-input" type="text" autocomplete="off" class="w-full bg-transparent text-white placeholder-neutral-500 outline-none" placeholder="input color..." />
                 </div>
               </div>
             </div>
@@ -1047,7 +1053,7 @@
               <div class="grid grid-cols-[max-content_auto_max-content]">
                 <p class="my-auto text-base text-white">hotkeys.activationKey&nbsp;</p>
                 <span id="hotkeys-activation-key-status" class="my-auto text-base text-neutral-500">(none)</span>
-                <div id="hotkeys-activation-key-container" class="grid w-full grid-cols-[max-content_auto] rounded-md border-2 border-transparent bg-neutral-900 p-1 text-base">
+                <div id="hotkeys-activation-key-container" class="w-full rounded-md border-2 border-transparent bg-neutral-900 p-1 text-base">
                   <input id="hotkeys-activation-key-input" type="text" autocomplete="off" class="w-[1ch] bg-transparent text-white placeholder-neutral-500 outline-none" />
                 </div>
               </div>
@@ -1055,7 +1061,7 @@
               <div class="grid grid-cols-[max-content_auto_max-content]">
                 <p class="my-auto text-base text-white">hotkeys.closePageKey&nbsp;</p>
                 <span id="hotkeys-close-page-key-status" class="my-auto text-base text-neutral-500">(none)</span>
-                <div id="hotkeys-close-page-key-container" class="grid w-full grid-cols-[max-content_auto] rounded-md border-2 border-transparent bg-neutral-900 p-1 text-base">
+                <div id="hotkeys-close-page-key-container" class="w-full rounded-md border-2 border-transparent bg-neutral-900 p-1 text-base">
                   <input id="hotkeys-close-page-key-input" type="text" autocomplete="off" class="w-[1ch] bg-transparent text-white placeholder-neutral-500 outline-none" />
                 </div>
               </div>
@@ -1063,7 +1069,7 @@
               <div class="grid grid-cols-[max-content_auto_max-content]">
                 <p class="my-auto text-base text-white">hotkeys.searchBookmarksKey&nbsp;</p>
                 <span id="hotkeys-search-bookmarks-key-status" class="my-auto text-base text-neutral-500">(none)</span>
-                <div id="hotkeys-search-bookmarks-key-container" class="grid w-full grid-cols-[max-content_auto] rounded-md border-2 border-transparent bg-neutral-900 p-1 text-base">
+                <div id="hotkeys-search-bookmarks-key-container" class="w-full rounded-md border-2 border-transparent bg-neutral-900 p-1 text-base">
                   <input id="hotkeys-search-bookmarks-key-input" type="text" autocomplete="off" class="w-[1ch] bg-transparent text-white placeholder-neutral-500 outline-none" />
                 </div>
               </div>
@@ -1144,15 +1150,14 @@
             </div>
             <div id="bookmarks-max-bookmark-rows-per-page-section" class="grid gap-2">
               <p class="text-base text-white">bookmarks.maxBookmarkRowsPerPage</p>
-              <div id="bookmarks-max-bookmark-rows-per-page-container" class="grid w-full grid-cols-[max-content_auto] rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base">
-                <span class="select-none font-semibold text-pink-500">>&nbsp;</span>
+              <div id="bookmarks-max-bookmark-rows-per-page-container" class="w-full rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base">
                 <input
                   id="bookmarks-max-bookmark-rows-per-page-input"
                   type="number"
                   min="1"
                   step="1"
                   autocomplete="off"
-                  class="bg-transparent text-white placeholder-neutral-500 outline-none"
+                  class="w-full bg-transparent text-white placeholder-neutral-500 outline-none"
                   placeholder="input number..."
                 />
               </div>
@@ -1179,20 +1184,24 @@
             </div>
             <div class="grid gap-2">
               <p class="text-base text-white">bookmarks.defaultIconColor</p>
-              <div id="bookmarks-default-icon-color-container" class="grid w-full grid-cols-[max-content_auto] rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base">
-                <span class="select-none font-semibold text-pink-500">>&nbsp;</span>
-                <input id="bookmarks-default-icon-color-input" type="text" autocomplete="off" class="bg-transparent text-white placeholder-neutral-500 outline-none" placeholder="input color..." />
+              <div id="bookmarks-default-icon-color-container" class="w-full rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base">
+                <input
+                  id="bookmarks-default-icon-color-input"
+                  type="text"
+                  autocomplete="off"
+                  class="w-full bg-transparent text-white placeholder-neutral-500 outline-none"
+                  placeholder="input color..."
+                />
               </div>
             </div>
             <div class="grid gap-2">
               <p class="text-base text-white">bookmarks.defaultFolderIconType</p>
-              <div id="bookmarks-default-folder-icon-type-container" class="grid w-full grid-cols-[max-content_auto] rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base">
-                <span class="select-none font-semibold text-pink-500">>&nbsp;</span>
+              <div id="bookmarks-default-folder-icon-type-container" class="w-full rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base">
                 <input
                   id="bookmarks-default-folder-icon-type-input"
                   type="text"
                   autocomplete="off"
-                  class="bg-transparent text-white placeholder-neutral-500 outline-none"
+                  class="w-full bg-transparent text-white placeholder-neutral-500 outline-none"
                   placeholder="input icon-type..."
                 />
               </div>
@@ -1202,15 +1211,14 @@
             <div class="grid gap-2 text-base">
               <div class="grid gap-2">
                 <p class="text-base text-white">bookmarks.userDefinedCols</p>
-                <div id="bookmarks-user-defined-cols-container" class="grid w-full grid-cols-[max-content_auto] rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base">
-                  <span class="select-none font-semibold text-pink-500">>&nbsp;</span>
+                <div id="bookmarks-user-defined-cols-container" class="w-full rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base">
                   <input
                     id="bookmarks-user-defined-cols-input"
                     type="number"
                     min="1"
                     step="1"
                     autocomplete="off"
-                    class="bg-transparent text-white placeholder-neutral-500 outline-none"
+                    class="w-full bg-transparent text-white placeholder-neutral-500 outline-none"
                     placeholder="input number..."
                   />
                 </div>
@@ -1286,15 +1294,14 @@
             <div class="grid gap-4 text-base">
               <div class="grid gap-2">
                 <p class="text-base text-white">bookmarks.defaultBlockyCols</p>
-                <div id="bookmarks-default-blocky-cols-container" class="grid w-full grid-cols-[max-content_auto] rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base">
-                  <span class="select-none font-semibold text-pink-500">>&nbsp;</span>
+                <div id="bookmarks-default-blocky-cols-container" class="w-full rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base">
                   <input
                     id="bookmarks-default-blocky-cols-input"
                     type="number"
                     min="1"
                     step="1"
                     autocomplete="off"
-                    class="bg-transparent text-white placeholder-neutral-500 outline-none"
+                    class="w-full bg-transparent text-white placeholder-neutral-500 outline-none"
                     placeholder="input number..."
                   />
                 </div>
@@ -1313,13 +1320,12 @@
               <div id="bookmarks-default-blocky-color-section" class="grid">
                 <div class="grid gap-2">
                   <p class="text-base text-white">bookmarks.defaultBlockyColor</p>
-                  <div id="bookmarks-default-blocky-color-container" class="grid w-full grid-cols-[max-content_auto] rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base">
-                    <span class="select-none font-semibold text-pink-500">>&nbsp;</span>
+                  <div id="bookmarks-default-blocky-color-container" class="w-full rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base">
                     <input
                       id="bookmarks-default-blocky-color-input"
                       type="text"
                       autocomplete="off"
-                      class="bg-transparent text-white placeholder-neutral-500 outline-none"
+                      class="w-full bg-transparent text-white placeholder-neutral-500 outline-none"
                       placeholder="input color..."
                     />
                   </div>

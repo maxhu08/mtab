@@ -51,7 +51,7 @@ const getUuid = (nodeEl: HTMLDivElement | null) =>
   nodeEl?.getAttribute("bookmark-node-uuid") ?? null;
 
 export const initDelegatedHandlers = () => {
-  const bookmarkInputBorderClass = "border-pink-500";
+  const bookmarkInputBorderClass = "border-sky-500";
 
   document.addEventListener("click", (e) => {
     const target = e.target as HTMLElement;
@@ -222,7 +222,7 @@ export const initTooltipsDelegated = () => {
 
 export const handleBookmarkSettings = (uuid: string) => {
   // * handle focus stuff start
-  const bookmarkInputBorderClass = "border-pink-500";
+  const bookmarkInputBorderClass = "border-sky-500";
 
   const nameInput = document.getElementById(`bookmark-${uuid}-name-input`) as HTMLInputElement;
   const colorInput = document.getElementById(`bookmark-${uuid}-color-input`) as HTMLInputElement;
@@ -627,17 +627,13 @@ export const addBookmarkNodeBookmark = (
     const inputContainer = document.createElement("div");
     inputContainer.id = `bookmark-${uuid}-${id}-container`;
     inputContainer.className =
-      "grid grid-cols-[max-content_auto] text-base bg-neutral-900 w-full p-1 rounded-md border-2 border-transparent";
-
-    const inputPrefix = document.createElement("span");
-    inputPrefix.className = "text-pink-500 font-semibold select-none";
-    inputPrefix.innerHTML = ">&nbsp;";
+      "text-base bg-neutral-900 w-full p-1 rounded-md border-2 border-transparent";
 
     const input = document.createElement("input");
     input.id = `bookmark-${uuid}-${id}-input`;
     input.type = "text";
     input.autocomplete = "off";
-    input.className = "outline-none bg-transparent text-white placeholder-neutral-500";
+    input.className = "w-full outline-none bg-transparent text-white placeholder-neutral-500";
 
     const placeholderMap: Record<string, string> = {
       "icon-color": "input color... (leave empty for bookmarks.defaultIconColor)",
@@ -648,7 +644,7 @@ export const addBookmarkNodeBookmark = (
 
     input.value = value ?? "";
 
-    inputContainer.append(inputPrefix, input);
+    inputContainer.append(input);
     fieldGroup.append(labelP, inputContainer);
     collapsibleContent.appendChild(fieldGroup);
   });
@@ -831,17 +827,13 @@ export const addBookmarkNodeFolder = (
     const inputContainer = document.createElement("div");
     inputContainer.id = `bookmark-${uuid}-${id}-container`;
     inputContainer.className =
-      "grid grid-cols-[max-content_auto] text-base bg-neutral-900 w-full p-1 rounded-md border-2 border-transparent";
-
-    const inputPrefix = document.createElement("span");
-    inputPrefix.className = "text-pink-500 font-semibold select-none";
-    inputPrefix.innerHTML = ">&nbsp;";
+      "text-base bg-neutral-900 w-full p-1 rounded-md border-2 border-transparent";
 
     const input = document.createElement("input");
     input.id = `bookmark-${uuid}-${id}-input`;
     input.type = "text";
     input.autocomplete = "off";
-    input.className = "outline-none bg-transparent text-white placeholder-neutral-500";
+    input.className = "w-full outline-none bg-transparent text-white placeholder-neutral-500";
 
     const placeholderMap: Record<string, string> = {
       "icon-type": "input icon-type... (leave empty for bookmarks.defaultFolderIconType)",
@@ -853,7 +845,7 @@ export const addBookmarkNodeFolder = (
 
     input.value = value ?? "";
 
-    inputContainer.append(inputPrefix, input);
+    inputContainer.append(input);
     fieldGroup.append(labelP, inputContainer);
     collapsibleContent.appendChild(fieldGroup);
   });

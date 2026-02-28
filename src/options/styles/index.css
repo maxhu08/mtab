@@ -9,7 +9,7 @@
 
 .bookmark-node-chosen-class {
   opacity: 1 !important;
-  border: 2px solid #ec4899;
+  border: 2px solid #0ea5e9;
   box-sizing: border-box;
 }
 
@@ -19,7 +19,7 @@
 
 .wallpaper-gallery-chosen-class {
   opacity: 1 !important;
-  background-color: #ec4899;
+  background-color: #0ea5e9;
   padding: 2px;
 }
 
