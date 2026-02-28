@@ -85,6 +85,20 @@
   box-shadow: 0 0 23px rgba(0, 0, 0, 0.5);
 }
 
+.controls-hidden {
+  visibility: hidden;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(100%);
+}
+
+#controls-container {
+  transition:
+    opacity 250ms ease-out,
+    transform 250ms ease-out,
+    visibility 250ms ease-out;
+}
+
 /* Hide spinner arrows on number inputs in options forms. */
 input[type="number"] {
   appearance: textfield;

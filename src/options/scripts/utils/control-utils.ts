@@ -5,30 +5,7 @@ const mainEl = document.querySelector("main") as HTMLElement;
 const FLOATING_BOTTOM_OFFSET_PX = 10;
 
 const measureControlsHeight = () => {
-  const currentHeight = controlsContainerEl.getBoundingClientRect().height;
-  if (currentHeight > 0) return currentHeight;
-
-  const wasHidden = controlsContainerEl.classList.contains("hidden");
-  const previousVisibility = controlsContainerEl.style.visibility;
-  const previousPointerEvents = controlsContainerEl.style.pointerEvents;
-  const previousTransform = controlsContainerEl.style.transform;
-  const previousOpacity = controlsContainerEl.style.opacity;
-
-  if (wasHidden) controlsContainerEl.classList.remove("hidden");
-  controlsContainerEl.style.visibility = "hidden";
-  controlsContainerEl.style.pointerEvents = "none";
-  controlsContainerEl.style.removeProperty("transform");
-  controlsContainerEl.style.removeProperty("opacity");
-
-  const measuredHeight = controlsContainerEl.getBoundingClientRect().height;
-
-  if (wasHidden) controlsContainerEl.classList.add("hidden");
-  controlsContainerEl.style.visibility = previousVisibility;
-  controlsContainerEl.style.pointerEvents = previousPointerEvents;
-  controlsContainerEl.style.transform = previousTransform;
-  controlsContainerEl.style.opacity = previousOpacity;
-
-  return measuredHeight;
+  return controlsContainerEl.getBoundingClientRect().height;
 };
 
 const reserveControlsPlaceholderHeight = () => {
@@ -39,10 +16,8 @@ const reserveControlsPlaceholderHeight = () => {
   }
 };
 
-const resetFloatingControlsAnimationState = () => {
-  controlsContainerEl.classList.remove("falling-up", "falling-down");
-  controlsContainerEl.style.removeProperty("transform");
-  controlsContainerEl.style.removeProperty("opacity");
+const setControlsVisibility = (isVisible: boolean) => {
+  controlsContainerEl.classList.toggle("controls-hidden", !isVisible);
 };
 
 export const showControls = () => {
@@ -50,7 +25,7 @@ export const showControls = () => {
   controlsContainerEl.style.left = `${left}px`;
   controlsContainerEl.style.width = `${width}px`;
 
-  controlsContainerEl.classList.remove("hidden");
+  setControlsVisibility(true);
 };
 
 const updateFloatingControlsPosition = () => {
@@ -76,15 +51,14 @@ export const handleControls = () => {
     const shouldDock = placeholderTop <= dockThreshold;
 
     if (shouldDock) {
-      resetFloatingControlsAnimationState();
       controlsContainerEl.style.removeProperty("width");
-      controlsContainerEl.style.bottom = "0";
-      controlsContainerEl.style.left = "0";
+      controlsContainerEl.style.removeProperty("bottom");
+      controlsContainerEl.style.removeProperty("left");
       controlsContainerEl.classList.replace("fixed", "relative");
       controlsContainerEl.classList.remove("drop-shadow");
+      setControlsVisibility(true);
     } else {
       updateFloatingControlsPosition();
-      resetFloatingControlsAnimationState();
       controlsContainerEl.classList.replace("relative", "fixed");
       controlsContainerEl.classList.add("drop-shadow");
     }
@@ -107,21 +81,21 @@ export const handleControls = () => {
   window.addEventListener("scroll", () => {
     if (window.scrollY === 0) {
       syncControlsDockState();
-      controlsContainerEl.classList.remove("falling-up");
-      controlsContainerEl.classList.add("falling-down");
+
+      if (!isDocked) {
+        setControlsVisibility(false);
+      }
+
+      return;
+    }
+
+    syncControlsDockState();
+
+    if (isDocked) {
       return;
     }
 
     showControls();
-    syncControlsDockState();
-
-    if (isDocked) {
-      resetFloatingControlsAnimationState();
-      return;
-    }
-
-    // Keep controls visible immediately while scrolling (no hidden->visible animation flicker).
-    resetFloatingControlsAnimationState();
   });
 
   syncControlsDockState();
