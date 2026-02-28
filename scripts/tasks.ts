@@ -132,7 +132,7 @@ async function main() {
 
       clean();
       buildBundle(target, release.baseVersion);
-      annotateRcBuild(release.rcVersion);
+      annotateRcBuild(target, release.rcVersion);
       packageBundle(target, {
         packageVersion: release.rcVersion,
         zipVersion: release.rcVersion
@@ -188,10 +188,11 @@ function syncStaticFiles() {
   copyDirectoryContents(STATIC_DIR, DIST_DIR);
 }
 
-function writeManifest(target: BrowserTarget, version = readVersion()) {
+function writeManifest(target: BrowserTarget, version = readVersion(), versionName?: string) {
   const manifest = {
     ...MANIFESTS[target],
-    version
+    version,
+    ...(versionName ? { version_name: versionName } : {})
   };
 
   writeFileSync(resolve(DIST_DIR, "manifest.json"), `${JSON.stringify(manifest, null, 2)}\n`);
@@ -335,7 +336,8 @@ function collectHtmlEntries(directory: string, baseDir = directory): string[] {
   return entries;
 }
 
-function annotateRcBuild(rcVersion: string) {
+function annotateRcBuild(target: BrowserTarget, rcVersion: string) {
+  writeManifest(target, parseRcVersion(rcVersion).baseVersion, rcVersion);
   annotateHtml(resolve(DIST_DIR, "index.html"), {
     "rc-version-info": rcVersion,
     "extension-version": rcVersion
