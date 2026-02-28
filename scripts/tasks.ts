@@ -378,7 +378,7 @@ function parseRcVersion(value: string) {
   const match = /^([0-9]+\.[0-9]+\.[0-9]+)-rc([0-9A-Za-z.-]*)$/.exec(rcVersion);
 
   if (!match) {
-    throw new Error("Invalid RC version. Expected format like 1.10.8-rc1.");
+    throw new Error("Invalid RC version. Expected format like 0.0.1-rc1.");
   }
 
   return {
