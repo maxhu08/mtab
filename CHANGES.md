@@ -1,4 +1,4 @@
-# Changes in 1.11.1
+# Changes in 1.11.2
 
 in this release:
 
