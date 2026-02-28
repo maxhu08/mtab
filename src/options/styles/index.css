@@ -1,6 +1,16 @@
 /* fix to prevent border transition */
 .bookmark-user-defined-item {
+  width: 100%;
+  min-width: 0;
   transition-duration: border 0ms !important;
+}
+
+.bookmark-user-defined-item > * {
+  min-width: 0;
+}
+
+.bookmark-user-defined-item input {
+  min-width: 0;
 }
 
 .bookmark-node-ghost-class {

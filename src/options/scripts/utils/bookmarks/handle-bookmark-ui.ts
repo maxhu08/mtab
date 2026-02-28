@@ -529,7 +529,7 @@ export const addBookmarkNodeBookmark = (
   // container div
   const containerDiv = document.createElement("div");
   containerDiv.className =
-    "bookmark-user-defined-item bg-neutral-800 grid grid-cols-[max-content_auto] rounded-md overflow-hidden";
+    "bookmark-user-defined-item bg-neutral-800 grid w-full min-w-0 grid-cols-[max-content_minmax(0,1fr)] rounded-md overflow-hidden";
   containerDiv.setAttribute("node-type", "bookmark");
   containerDiv.setAttribute("bookmark-node-uuid", uuid);
 
@@ -541,22 +541,24 @@ export const addBookmarkNodeBookmark = (
 
   // content container
   const contentDiv = document.createElement("div");
-  contentDiv.className = "p-2 grid grid-flow-row gap-4";
+  contentDiv.className = "grid min-w-0 grid-flow-row gap-4 p-2";
 
   // header row
   const headerDiv = document.createElement("div");
-  headerDiv.className = "grid grid-cols-[max-content_auto_max-content] place-items-center";
+  headerDiv.className =
+    "grid min-w-0 grid-cols-[max-content_minmax(0,1fr)_max-content] items-center gap-2";
 
   const bookmarkIcon = document.createElement("i");
   bookmarkIcon.className = "text-white ri-bookmark-fill";
 
   const titleSpan = document.createElement("span");
   titleSpan.id = `bookmark-${uuid}-user-defined-useless-title`;
-  titleSpan.className = "text-white text-base my-auto mr-auto ml-2";
+  titleSpan.className =
+    "block min-w-0 overflow-hidden text-ellipsis whitespace-nowrap text-left text-base text-white";
   titleSpan.textContent = bookmark.name;
 
   const buttonGroup = document.createElement("div");
-  buttonGroup.className = "grid grid-cols-4 gap-2";
+  buttonGroup.className = "grid grid-cols-4 gap-2 justify-self-end";
 
   const buttons = [
     {
@@ -601,7 +603,7 @@ export const addBookmarkNodeBookmark = (
   const collapsibleContent = document.createElement("div");
   collapsibleContent.id = `bookmark-${uuid}-collapsible-content`;
   collapsibleContent.setAttribute("state", "expanded");
-  collapsibleContent.className = "grid grid-flow-row gap-4";
+  collapsibleContent.className = "grid min-w-0 grid-flow-row gap-4";
 
   const separator = document.createElement("div");
   separator.className = "bg-neutral-500 h-[1px] rounded-md my-auto";
@@ -618,7 +620,7 @@ export const addBookmarkNodeBookmark = (
 
   fields.forEach(({ label, id, value }) => {
     const fieldGroup = document.createElement("div");
-    fieldGroup.className = "grid gap-2";
+    fieldGroup.className = "grid min-w-0 gap-2";
 
     const labelP = document.createElement("p");
     labelP.className = "text-white text-base";
@@ -627,13 +629,14 @@ export const addBookmarkNodeBookmark = (
     const inputContainer = document.createElement("div");
     inputContainer.id = `bookmark-${uuid}-${id}-container`;
     inputContainer.className =
-      "text-base bg-neutral-900 w-full p-1 rounded-md border-2 border-transparent";
+      "w-full min-w-0 rounded-md border-2 border-transparent bg-neutral-900 p-1 text-base";
 
     const input = document.createElement("input");
     input.id = `bookmark-${uuid}-${id}-input`;
     input.type = "text";
     input.autocomplete = "off";
-    input.className = "w-full outline-none bg-transparent text-white placeholder-neutral-500";
+    input.className =
+      "w-full min-w-0 bg-transparent text-white outline-none placeholder-neutral-500";
 
     const placeholderMap: Record<string, string> = {
       "icon-color": "input color... (leave empty for bookmarks.defaultIconColor)",
@@ -724,7 +727,7 @@ export const addBookmarkNodeFolder = (
   // container div
   const containerDiv = document.createElement("div");
   containerDiv.className =
-    "bookmark-user-defined-item bg-neutral-800 grid grid-cols-[max-content_auto] rounded-md overflow-hidden";
+    "bookmark-user-defined-item bg-neutral-800 grid w-full min-w-0 grid-cols-[max-content_minmax(0,1fr)] rounded-md overflow-hidden";
   containerDiv.setAttribute("node-type", "folder");
   containerDiv.setAttribute("bookmark-node-uuid", uuid);
 
@@ -736,22 +739,24 @@ export const addBookmarkNodeFolder = (
 
   // content container
   const contentDiv = document.createElement("div");
-  contentDiv.className = "p-2 grid grid-flow-row gap-2";
+  contentDiv.className = "grid min-w-0 grid-flow-row gap-2 p-2";
 
   // header row
   const headerDiv = document.createElement("div");
-  headerDiv.className = "grid grid-cols-[max-content_auto_max-content] place-items-center";
+  headerDiv.className =
+    "grid min-w-0 grid-cols-[max-content_minmax(0,1fr)_max-content] items-center gap-2";
 
   const folderIcon = document.createElement("i");
   folderIcon.className = "text-white ri-folder-fill";
 
   const titleSpan = document.createElement("span");
   titleSpan.id = `bookmark-${uuid}-user-defined-useless-title`;
-  titleSpan.className = "text-white text-base my-auto mr-auto ml-2";
+  titleSpan.className =
+    "block min-w-0 overflow-hidden text-ellipsis whitespace-nowrap text-left text-base text-white";
   titleSpan.textContent = folder.name;
 
   const buttonGroup = document.createElement("div");
-  buttonGroup.className = "grid grid-cols-5 gap-2";
+  buttonGroup.className = "grid grid-cols-5 gap-2 justify-self-end";
 
   const buttons = [
     {
@@ -802,7 +807,7 @@ export const addBookmarkNodeFolder = (
   const collapsibleContent = document.createElement("div");
   collapsibleContent.id = `bookmark-${uuid}-collapsible-content`;
   collapsibleContent.setAttribute("state", "expanded");
-  collapsibleContent.className = "grid grid-flow-row gap-4";
+  collapsibleContent.className = "grid min-w-0 grid-flow-row gap-4";
 
   const separator = document.createElement("div");
   separator.className = "bg-neutral-500 h-[1px] rounded-md my-auto";
@@ -818,7 +823,7 @@ export const addBookmarkNodeFolder = (
 
   fields.forEach(({ label, id, value }) => {
     const fieldGroup = document.createElement("div");
-    fieldGroup.className = "grid gap-2";
+    fieldGroup.className = "grid min-w-0 gap-2";
 
     const labelP = document.createElement("p");
     labelP.className = "text-white text-base";
@@ -827,13 +832,14 @@ export const addBookmarkNodeFolder = (
     const inputContainer = document.createElement("div");
     inputContainer.id = `bookmark-${uuid}-${id}-container`;
     inputContainer.className =
-      "text-base bg-neutral-900 w-full p-1 rounded-md border-2 border-transparent";
+      "w-full min-w-0 rounded-md border-2 border-transparent bg-neutral-900 p-1 text-base";
 
     const input = document.createElement("input");
     input.id = `bookmark-${uuid}-${id}-input`;
     input.type = "text";
     input.autocomplete = "off";
-    input.className = "w-full outline-none bg-transparent text-white placeholder-neutral-500";
+    input.className =
+      "w-full min-w-0 bg-transparent text-white outline-none placeholder-neutral-500";
 
     const placeholderMap: Record<string, string> = {
       "icon-type": "input icon-type... (leave empty for bookmarks.defaultFolderIconType)",
@@ -858,7 +864,7 @@ export const addBookmarkNodeFolder = (
   const contentsContainer = document.createElement("div");
   contentsContainer.id = `bookmark-${uuid}-contents-container`;
   contentsContainer.className =
-    "bookmarks-user-defined-dropzone grid grid-flow-row gap-2 bg-neutral-900 rounded-md p-2 min-h-14";
+    "bookmarks-user-defined-dropzone grid min-w-0 grid-flow-row gap-2 rounded-md bg-neutral-900 p-2 min-h-14";
   contentsContainer.setAttribute("node-type", "folder-contents-dropzone");
 
   contentsContainer.setAttribute("state", isExpanded ? "expanded" : "collapsed");
