@@ -1,5 +1,5 @@
 // config
-import { getConfig } from "../../utils/config";
+import { getConfig } from "src/utils/config";
 
 // utils
 import { setUISyle } from "src/newtab/scripts/utils/set-ui-style";

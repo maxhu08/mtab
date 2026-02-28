@@ -1,5 +1,5 @@
 import { Config, SearchEngine } from "src/utils/config";
-import { searchContainerEl, searchInputEl } from "../ui";
+import { searchContainerEl, searchInputEl } from "src/newtab/scripts/ui";
 import { hideSearchResultsSection } from "src/newtab/scripts/utils/search/handle-search-suggestions";
 import { setSearchValue } from "src/newtab/scripts/utils/search/set-search-value";
 
