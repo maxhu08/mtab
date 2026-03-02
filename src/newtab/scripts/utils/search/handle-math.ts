@@ -8,6 +8,8 @@ export const handleMath = (val: string) => {
     if (derivativeMatch) {
       const expression = derivativeMatch[1];
       val = `derivative("${expression}", "x")`;
+    } else {
+      val = normalizeMultiplicationInput(val);
     }
 
     const result = evaluate(val);
@@ -27,6 +29,10 @@ export const handleMath = (val: string) => {
   } catch {
     if (val.trim() !== "date") hideAssist();
   }
+};
+
+const normalizeMultiplicationInput = (expression: string): string => {
+  return expression.replace(/(?<=\d|\))\s*[xX×]\s*(?=\d|\()/g, "*");
 };
 
 const betterFormat = (expression: string): string => {
