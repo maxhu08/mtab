@@ -56,6 +56,6 @@ See [CONTRIBUTING.md](./docs/CONTRIBUTING.md).
 
 ## setup
 
-Find how to setup [here](./docs/SETUP.md).
+See [SETUP.md](./docs/SETUP.md).
 
 </div>
