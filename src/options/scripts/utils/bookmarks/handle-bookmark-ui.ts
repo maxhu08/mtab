@@ -13,6 +13,7 @@ import { genid } from "~/src/utils/genid";
 import { importBookmarkNode } from "~/src/options/scripts/utils/bookmarks/import-bookmark-node";
 import { exportAllBookmarkNodes } from "~/src/options/scripts/utils/bookmarks/export-all-bookmark-nodes";
 import { importAllBookmarkNodes } from "~/src/options/scripts/utils/bookmarks/import-all-bookmark-nodes";
+import { registerColorInputControl } from "~/src/options/scripts/utils/color-inputs";
 
 const sortableMap = new WeakMap<HTMLDivElement, Sortable>();
 
@@ -285,6 +286,13 @@ export const handleBookmarkSettings = (uuid: string) => {
         e
       })
     );
+  });
+
+  [{ id: "color" }, { id: "icon-color" }, { id: "fill" }].forEach(({ id }) => {
+    registerColorInputControl({
+      container: document.getElementById(`bookmark-${uuid}-${id}-container`) as HTMLDivElement,
+      input: document.getElementById(`bookmark-${uuid}-${id}-input`) as HTMLInputElement
+    });
   });
 
   // prettier-ignore
@@ -655,6 +663,13 @@ export const addBookmarkNodeBookmark = (
   contentDiv.append(headerDiv, collapsibleContent);
   containerDiv.append(accentDiv, contentDiv);
   targetDivEl.appendChild(containerDiv);
+
+  ["color", "icon-color", "fill"].forEach((id) => {
+    registerColorInputControl({
+      container: containerDiv.querySelector(`#bookmark-${uuid}-${id}-container`) as HTMLDivElement,
+      input: containerDiv.querySelector(`#bookmark-${uuid}-${id}-input`) as HTMLInputElement
+    });
+  });
 };
 
 export const addBookmarkNodeFolder = (
@@ -874,6 +889,13 @@ export const addBookmarkNodeFolder = (
 
   containerDiv.append(accentDiv, contentDiv);
   targetDivEl.appendChild(containerDiv);
+
+  ["color", "icon-color", "fill"].forEach((id) => {
+    registerColorInputControl({
+      container: containerDiv.querySelector(`#bookmark-${uuid}-${id}-container`) as HTMLDivElement,
+      input: containerDiv.querySelector(`#bookmark-${uuid}-${id}-input`) as HTMLInputElement
+    });
+  });
 
   initSortableForDropzone(contentsContainer);
 

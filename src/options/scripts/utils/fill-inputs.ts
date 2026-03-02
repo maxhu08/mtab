@@ -10,6 +10,7 @@ import { fillTitleInputs } from "~/src/options/scripts/utils/fill-helpers/fill-t
 import { fillUIInputs } from "~/src/options/scripts/utils/fill-helpers/fill-ui";
 import { fillUserInputs } from "~/src/options/scripts/utils/fill-helpers/fill-user";
 import { fillWallpapersInputs } from "~/src/options/scripts/utils/fill-helpers/fill-wallpapers";
+import { syncAllColorInputControls } from "~/src/options/scripts/utils/color-inputs";
 
 export const fillInputs = (config: Config) => {
   fillOptionsInputs(config);
@@ -33,4 +34,6 @@ export const fillInputs = (config: Config) => {
   fillBookmarksInputs(config);
 
   fillExtrasInputs(config);
+
+  syncAllColorInputControls();
 };

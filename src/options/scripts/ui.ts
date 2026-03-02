@@ -160,6 +160,22 @@ export interface Input {
   input: HTMLInputElement | HTMLTextAreaElement;
 }
 
+export const colorInputs = [
+  { container: messageTextColorContainerEl, input: messageTextColorInputEl },
+  { container: uiGlassColorContainerEl, input: uiGlassColorInputEl },
+  { container: uiForegroundColorContainerEl, input: uiForegroundColorInputEl },
+  { container: uiHighlightColorContainerEl, input: uiHighlightColorInputEl },
+  { container: searchFocusedBorderColorContainerEl, input: searchFocusedBorderColorInputEl },
+  { container: searchTextColorContainerEl, input: searchTextColorInputEl },
+  { container: searchPlaceholderTextColorContainerEl, input: searchPlaceholderTextColorInputEl },
+  { container: searchSearchIconColorContainerEl, input: searchSearchIconColorInputEl },
+  { container: searchBookmarkIconColorContainerEl, input: searchBookmarkIconColorInputEl },
+  { container: searchSelectIconColorContainerEl, input: searchSelectIconColorInputEl },
+  { container: searchLinkTextColorContainerEl, input: searchLinkTextColorInputEl },
+  { container: bookmarksDefaultIconColorContainerEl, input: bookmarksDefaultIconColorInputEl },
+  { container: bookmarksDefaultBlockyColorContainerEl, input: bookmarksDefaultBlockyColorInputEl }
+] as const satisfies Array<{ container: HTMLDivElement; input: HTMLInputElement }>;
+
 export const buttonSwitches: ButtonSwitch[] = [
   {
     buttons: [titleEffectNoneButtonEl, titleEffectTypewriterButtonEl],
