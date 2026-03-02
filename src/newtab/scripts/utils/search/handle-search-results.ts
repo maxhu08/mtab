@@ -227,23 +227,59 @@ const getMatchedNameHtml = (
   linkTextColor: string,
   directLink: boolean
 ) => {
-  let result = "";
-  let searchIndex = 0;
   const matchColor = directLink ? linkTextColor : textColor;
+  const highlightRanges = getHighlightRanges(name, searchValue);
 
-  for (let i = 0; i < name.length; i++) {
-    if (
-      searchIndex < searchValue.length &&
-      name[i].toLowerCase() === searchValue[searchIndex].toLowerCase()
-    ) {
-      result += `<span style="color:${matchColor};">${name[i]}</span>`;
-      searchIndex++;
-    } else {
-      result += `<span style="color:${placeholderTextColor};">${name[i]}</span>`;
-    }
-  }
-  return result;
+  return Array.from(name)
+    .map((char, index) => {
+      const color = highlightRanges[index] ? matchColor : placeholderTextColor;
+      return `<span style="color:${color};">${escapeHtml(char)}</span>`;
+    })
+    .join("");
 };
+
+const getHighlightRanges = (name: string, searchValue: string) => {
+  const ranges: boolean[] = Array.from(name, () => false);
+  const query = searchValue.trim().toLowerCase();
+
+  if (!query) return ranges;
+
+  const nameLower = name.toLowerCase();
+  const directMatchIndex = nameLower.indexOf(query);
+
+  if (directMatchIndex !== -1) {
+    for (let i = directMatchIndex; i < directMatchIndex + query.length; i++) {
+      ranges[i] = true;
+    }
+
+    return ranges;
+  }
+
+  let searchStart = 0;
+
+  for (const part of query.split(/\s+/)) {
+    if (!part) continue;
+
+    const matchIndex = nameLower.indexOf(part, searchStart);
+    if (matchIndex === -1) return ranges;
+
+    for (let i = matchIndex; i < matchIndex + part.length; i++) {
+      ranges[i] = true;
+    }
+
+    searchStart = matchIndex + part.length;
+  }
+
+  return ranges;
+};
+
+const escapeHtml = (value: string) =>
+  value
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#39;");
 
 const fuzzySearch = (search: string, items: SearchResultItem[]) => {
   if (search === "") return items;

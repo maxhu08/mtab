@@ -145,7 +145,9 @@ export const listenToKeys = (config: Config) => {
     const inBookmarkSearch = bookmarkSearchSectionEl.classList.contains("grid");
     const searchResultsVisible = searchResultsSectionEl.classList.contains("block");
     const activeHotkeyMappings: Partial<Record<string, MtabHotkeyAction>> = {
-      ...(activationKey ? { [activationKey]: "activation" as const } : {})
+      ...(!searchFocused && !bookmarkSearchFocused && activationKey
+        ? { [activationKey]: "activation" as const }
+        : {})
     };
 
     if (!searchFocused && !bookmarkSearchFocused && closePageKey) {
