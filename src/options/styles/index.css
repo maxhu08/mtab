@@ -111,21 +111,22 @@
 
 .options-color-field {
   position: relative;
-  display: flex;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
   align-items: center;
   gap: 0.5rem;
 }
 
 .options-color-field > input[type="text"] {
   min-width: 0;
-  flex: 1;
+  width: 100%;
 }
 
 .options-color-picker-shell {
   position: relative;
-  flex-shrink: 0;
   width: 1.75rem;
   height: 1.75rem;
+  transition: none !important;
 }
 
 .options-color-picker {
@@ -172,6 +173,7 @@
   overflow: hidden;
   outline: none;
   pointer-events: none;
+  transition: none !important;
 }
 
 .options-color-picker-input-overlay {
@@ -179,6 +181,7 @@
   inset: 0;
   cursor: pointer;
   opacity: 0;
+  transition: none !important;
 }
 
 /* Hide spinner arrows on number inputs in options forms. */
