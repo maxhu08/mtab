@@ -4,7 +4,7 @@
 
 ## a simple configurable new tab extension
 
-[website](https://get-mtab.vercel.app) · [discord](https://maxhu.dev/redirect/discord/mtab)
+[website](https://mtab.maxhu.dev) · [discord](https://maxhu.dev/redirect/discord/mtab)
 
 </div>
 
