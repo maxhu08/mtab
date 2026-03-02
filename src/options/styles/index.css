@@ -150,3 +150,99 @@ input[type="number"]::-webkit-inner-spin-button {
 .falling-up {
   animation: fallUp 250ms ease-out forwards;
 }
+
+.custom-css-editor {
+  display: grid;
+}
+
+.custom-css-highlight,
+.custom-css-textarea {
+  grid-area: 1 / 1;
+  width: 100%;
+  height: 652px;
+  margin: 0;
+  padding: 0.25rem;
+  font-family: inherit;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  tab-size: 2;
+  white-space: pre;
+  word-wrap: normal;
+  overflow: auto;
+}
+
+.custom-css-highlight {
+  pointer-events: none;
+  color: #e5e5e5;
+}
+
+.custom-css-textarea {
+  position: relative;
+  z-index: 1;
+  color: transparent !important;
+  caret-color: #ffffff;
+}
+
+.custom-css-textarea::selection {
+  background-color: rgba(14, 165, 233, 0.3);
+}
+
+.custom-css-highlight::-webkit-scrollbar,
+.custom-css-textarea::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.custom-css-highlight::-webkit-scrollbar-thumb,
+.custom-css-textarea::-webkit-scrollbar-thumb {
+  border-radius: 2008px;
+  background: #10b981;
+}
+
+.custom-css-highlight::-webkit-scrollbar-corner,
+.custom-css-textarea::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+.custom-css-token-selector {
+  color: #d7ba7d;
+}
+
+.custom-css-token-property {
+  color: #9cdcfe;
+}
+
+.custom-css-token-value,
+.custom-css-token-string {
+  color: #ce9178;
+}
+
+.custom-css-token-number,
+.custom-css-token-unit {
+  color: #b5cea8;
+}
+
+.custom-css-token-function {
+  color: #dcdcaa;
+}
+
+.custom-css-token-custom-property {
+  color: #4fc1ff;
+}
+
+.custom-css-token-important,
+.custom-css-token-at-rule {
+  color: #c586c0;
+}
+
+.custom-css-token-comment {
+  color: #737373;
+}
+
+.custom-css-token-punctuation {
+  color: #d4d4d4;
+}
+
+.custom-css-token-bracket {
+  color: #cccccc;
+}

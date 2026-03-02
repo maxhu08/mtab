@@ -10,6 +10,7 @@ import {
   uiGlassColorInputEl,
   uiBlurStrengthInputEl
 } from "~/src/options/scripts/ui";
+import { refreshCustomCSSHighlight } from "~/src/options/scripts/utils/custom-css-highlight";
 
 export const fillUIInputs = (config: Config) => {
   if (config.ui.style === "solid") uiStyleSolidButtonEl.click();
@@ -24,4 +25,5 @@ export const fillUIInputs = (config: Config) => {
   else if (config.ui.cornerStyle === "round") uiCornerStyleRoundButtonEl.click();
 
   uiCustomCSSTextareaEl.value = config.ui.customCSS;
+  refreshCustomCSSHighlight();
 };

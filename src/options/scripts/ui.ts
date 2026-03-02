@@ -57,6 +57,7 @@ export const [uiHighlightColorContainerEl, uiHighlightColorInputEl] = getContain
 export const uiCornerStyleSharpButtonEl = getButton("ui-corner-style-sharp");
 export const uiCornerStyleRoundButtonEl = getButton("ui-corner-style-round");
 export const [uiCustomCSSContainerEl, uiCustomCSSTextareaEl] = getContainerAndTextarea("ui-custom-css");
+export const uiCustomCSSHighlightEl = document.getElementById("ui-custom-css-highlight") as HTMLPreElement;
 
 export const animationsEnabledCheckboxEl = getCheckbox("animations-enabled");
 export const animationsBookmarkTimingLeftButtonEl = getButton("animations-bookmark-timing-left");

@@ -19,6 +19,7 @@ import {
   initSortableForExistingDropzones,
   initTooltipsDelegated
 } from "~/src/options/scripts/utils/bookmarks/handle-bookmark-ui";
+import { initCustomCSSHighlight } from "~/src/options/scripts/utils/custom-css-highlight";
 
 const logo = document.getElementById("mtab-logo") as HTMLImageElement;
 logo.classList.add("animate-up-bouncy");
@@ -34,6 +35,7 @@ logo.addEventListener(
 );
 
 createCollapseGroups();
+initCustomCSSHighlight();
 
 getConfig(({ config }) => {
   fillInputs(config);

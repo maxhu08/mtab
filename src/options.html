@@ -524,7 +524,18 @@
           <div class="grid gap-2">
             <p class="text-base text-white">ui.customCSS</p>
             <div id="ui-custom-css-container" class="w-full rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base">
-              <textarea id="ui-custom-css-textarea" type="text" autocomplete="off" rows="16" class="w-full resize-none bg-transparent text-white placeholder-neutral-500 outline-none"></textarea>
+              <div class="custom-css-editor">
+                <pre id="ui-custom-css-highlight" aria-hidden="true" class="custom-css-highlight"></pre>
+                <textarea
+                  id="ui-custom-css-textarea"
+                  type="text"
+                  autocomplete="off"
+                  spellcheck="false"
+                  wrap="off"
+                  rows="16"
+                  class="custom-css-textarea w-full resize-none bg-transparent text-white placeholder-neutral-500 outline-none"
+                ></textarea>
+              </div>
             </div>
           </div>
         </section>
