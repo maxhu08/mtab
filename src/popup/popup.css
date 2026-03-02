@@ -1,6 +1,11 @@
+@font-face {
+  font-family: "Jetbrains-Mono-Regular-Fixed";
+  src: url("../assets/fonts/JetBrainsMonoNerdFontMono-Regular.ttf") format("truetype");
+}
+
 * {
   /* font-family: "Fira Code", monospace; */
-  font-family: "Jetbrains Mono", monospace;
+  font-family: "Jetbrains-Mono-Regular-Fixed", monospace;
   transition-duration: 250ms;
 }
 
