@@ -1047,6 +1047,10 @@
           <div class="h-[1px] flex-grow rounded-md bg-neutral-500"></div>
         </div>
         <section id="hotkeys-section" class="mb-20 grid grid-flow-row gap-4">
+          <p class="text-base text-neutral-500">
+            Modifier keys are specified as `&lt;c-x&gt;`, `&lt;m-x&gt;`, and `&lt;a-x&gt;` for ctrl+x, meta+x, and alt+x. Combined modifiers are written like `&lt;c-a-x&gt;` or `&lt;c-m-x&gt;`. Use
+            `&lt;space&gt;` for the space key.
+          </p>
           <div class="grid w-full grid-cols-[max-content_auto] place-items-center">
             <p class="text-base text-white">hotkeys.enabled</p>
             <div class="ml-auto">
@@ -1064,7 +1068,7 @@
                 <p class="my-auto text-base text-white">hotkeys.activationKey&nbsp;</p>
                 <span id="hotkeys-activation-key-status" class="my-auto text-base text-neutral-500">(none)</span>
                 <div id="hotkeys-activation-key-container" class="w-full rounded-md border-2 border-transparent bg-neutral-900 p-1 text-base">
-                  <input id="hotkeys-activation-key-input" type="text" autocomplete="off" class="w-[1ch] bg-transparent text-white placeholder-neutral-500 outline-none" />
+                  <input id="hotkeys-activation-key-input" type="text" autocomplete="off" spellcheck="false" class="w-full bg-transparent px-2 py-1 text-white placeholder-neutral-500 outline-none" />
                 </div>
               </div>
               <div class="my-auto h-[1px] rounded-md bg-neutral-500"></div>
@@ -1072,7 +1076,7 @@
                 <p class="my-auto text-base text-white">hotkeys.closePageKey&nbsp;</p>
                 <span id="hotkeys-close-page-key-status" class="my-auto text-base text-neutral-500">(none)</span>
                 <div id="hotkeys-close-page-key-container" class="w-full rounded-md border-2 border-transparent bg-neutral-900 p-1 text-base">
-                  <input id="hotkeys-close-page-key-input" type="text" autocomplete="off" class="w-[1ch] bg-transparent text-white placeholder-neutral-500 outline-none" />
+                  <input id="hotkeys-close-page-key-input" type="text" autocomplete="off" spellcheck="false" class="w-full bg-transparent px-2 py-1 text-white placeholder-neutral-500 outline-none" />
                 </div>
               </div>
               <div class="my-auto h-[1px] rounded-md bg-neutral-500"></div>
@@ -1080,7 +1084,13 @@
                 <p class="my-auto text-base text-white">hotkeys.searchBookmarksKey&nbsp;</p>
                 <span id="hotkeys-search-bookmarks-key-status" class="my-auto text-base text-neutral-500">(none)</span>
                 <div id="hotkeys-search-bookmarks-key-container" class="w-full rounded-md border-2 border-transparent bg-neutral-900 p-1 text-base">
-                  <input id="hotkeys-search-bookmarks-key-input" type="text" autocomplete="off" class="w-[1ch] bg-transparent text-white placeholder-neutral-500 outline-none" />
+                  <input
+                    id="hotkeys-search-bookmarks-key-input"
+                    type="text"
+                    autocomplete="off"
+                    spellcheck="false"
+                    class="w-full bg-transparent px-2 py-1 text-white placeholder-neutral-500 outline-none"
+                  />
                 </div>
               </div>
             </div>

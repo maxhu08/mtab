@@ -1,4 +1,5 @@
 import { Config } from "~/src/utils/config";
+import { normalizeStoredHotkey } from "~/src/utils/hotkeys";
 import {
   hotkeysEnabledCheckboxEl,
   hotkeysActivationKeyInputEl,
@@ -30,9 +31,10 @@ export const fillHotkeysInputs = (config: Config) => {
 };
 
 const fillHotkeyHelper = (input: HTMLInputElement, status: HTMLSpanElement, val: string) => {
-  input.value = val;
+  const normalizedValue = normalizeStoredHotkey(val);
 
-  if (val === "") status.textContent = ` (none)`;
-  else if (val === " ") status.textContent = ` (Space)`;
-  else status.textContent = ` (${val})`;
+  input.value = normalizedValue;
+
+  if (normalizedValue === "") status.textContent = ` (none)`;
+  else status.textContent = ` (${normalizedValue})`;
 };

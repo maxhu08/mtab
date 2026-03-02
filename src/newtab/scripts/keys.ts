@@ -27,10 +27,85 @@ import {
 import { handleSearchResultsNavigation } from "~/src/newtab/scripts/utils/search/handle-search-results";
 import { recognizeUrl } from "~/src/newtab/scripts/utils/search/recognize-url";
 import { setSearchValue } from "~/src/newtab/scripts/utils/search/set-search-value";
+import {
+  createHotkeyPrefixes,
+  getKeyToken,
+  KEY_SEQUENCE_TIMEOUT_MS,
+  type MtabHotkeyAction,
+  normalizeStoredHotkey
+} from "~/src/utils/hotkeys";
 
 export const listenToKeys = (config: Config) => {
   let bookmarks: BookmarkNodeBookmark[] | null = null;
   let bookmarksPromise: Promise<BookmarkNodeBookmark[]> | null = null;
+  let pendingSequence = "";
+  let pendingSequenceTimer: number | null = null;
+
+  const activationKey = normalizeStoredHotkey(config.hotkeys.activationKey);
+  const closePageKey = normalizeStoredHotkey(config.hotkeys.closePageKey);
+  const searchBookmarksKey = normalizeStoredHotkey(config.hotkeys.searchBookmarksKey);
+
+  const clearPendingSequence = () => {
+    pendingSequence = "";
+
+    if (pendingSequenceTimer !== null) {
+      window.clearTimeout(pendingSequenceTimer);
+      pendingSequenceTimer = null;
+    }
+  };
+
+  const setPendingSequence = (sequence: string) => {
+    clearPendingSequence();
+    pendingSequence = sequence;
+    pendingSequenceTimer = window.setTimeout(clearPendingSequence, KEY_SEQUENCE_TIMEOUT_MS);
+  };
+
+  const trySequence = (
+    sequence: string,
+    mappings: Partial<Record<string, MtabHotkeyAction>>,
+    prefixes: Partial<Record<string, true>>
+  ): { action: MtabHotkeyAction | null; consumed: boolean } => {
+    const action = mappings[sequence];
+
+    if (action) {
+      clearPendingSequence();
+      return {
+        action,
+        consumed: true
+      };
+    }
+
+    if (prefixes[sequence]) {
+      setPendingSequence(sequence);
+      return {
+        action: null,
+        consumed: true
+      };
+    }
+
+    return {
+      action: null,
+      consumed: false
+    };
+  };
+
+  const getSequenceMatch = (
+    token: string,
+    mappings: Partial<Record<string, MtabHotkeyAction>>,
+    prefixes: Partial<Record<string, true>>
+  ): { action: MtabHotkeyAction | null; consumed: boolean } => {
+    if (pendingSequence) {
+      const continued = trySequence(`${pendingSequence}${token}`, mappings, prefixes);
+
+      if (continued.consumed) {
+        return continued;
+      }
+
+      clearPendingSequence();
+    }
+
+    return trySequence(token, mappings, prefixes);
+  };
 
   const ensureBookmarksLoaded = () => {
     if (bookmarks) return Promise.resolve(bookmarks);
@@ -67,25 +142,64 @@ export const listenToKeys = (config: Config) => {
     if (key === "escape") unfocusSearch();
     const searchFocused = document.activeElement === searchInputEl;
     const bookmarkSearchFocused = document.activeElement === bookmarkSearchInputEl;
+    const inBookmarkSearch = bookmarkSearchSectionEl.classList.contains("grid");
+    const searchResultsVisible = searchResultsSectionEl.classList.contains("block");
+    const activeHotkeyMappings: Partial<Record<string, MtabHotkeyAction>> = {
+      ...(activationKey ? { [activationKey]: "activation" as const } : {})
+    };
 
-    if (key === config.hotkeys.activationKey.toLowerCase()) {
-      if (bookmarkSearchSectionEl.classList.contains("grid")) {
-        tryFocusBookmarkSearch(config.search.focusedBorderColor, e);
-      } else {
-        tryFocusSearch(config, e);
-      }
+    if (!searchFocused && !bookmarkSearchFocused && closePageKey) {
+      activeHotkeyMappings[closePageKey] = "close-page";
     }
 
     if (
-      key === config.hotkeys.closePageKey.toLowerCase() &&
       !searchFocused &&
-      !bookmarkSearchFocused
+      !bookmarkSearchFocused &&
+      !bookmarkSearchSectionEl.classList.contains("grid") &&
+      searchBookmarksKey
     ) {
-      window.close();
+      activeHotkeyMappings[searchBookmarksKey] = "search-bookmarks";
     }
 
-    const inBookmarkSearch = bookmarkSearchSectionEl.classList.contains("grid");
-    const searchResultsVisible = searchResultsSectionEl.classList.contains("block");
+    const activeHotkeyPrefixes = createHotkeyPrefixes(activeHotkeyMappings);
+    const keyToken = getKeyToken(e);
+
+    if (keyToken) {
+      const hotkeyMatch = getSequenceMatch(keyToken, activeHotkeyMappings, activeHotkeyPrefixes);
+
+      if (hotkeyMatch.consumed) {
+        e.preventDefault();
+
+        if (hotkeyMatch.action === "activation") {
+          if (bookmarkSearchSectionEl.classList.contains("grid")) {
+            tryFocusBookmarkSearch(config.search.focusedBorderColor, e);
+          } else {
+            tryFocusSearch(config, e);
+          }
+        } else if (hotkeyMatch.action === "close-page") {
+          window.close();
+        } else if (hotkeyMatch.action === "search-bookmarks") {
+          void ensureBookmarksLoaded()
+            .then((loadedBookmarks) => {
+              enableSearchBookmark(
+                loadedBookmarks,
+                config.search.textColor,
+                config.search.placeholderTextColor,
+                config.animations.enabled,
+                config.animations.bookmarkType,
+                "",
+                false
+              );
+              tryFocusBookmarkSearch(config.search.focusedBorderColor, e);
+            })
+            .catch(() => {});
+        }
+
+        return;
+      }
+    } else {
+      clearPendingSequence();
+    }
 
     // normal search suggestions navigation
     if (searchFocused && searchResultsVisible) {
@@ -136,32 +250,11 @@ export const listenToKeys = (config: Config) => {
 
       if (bookmarkSearchSectionEl.classList.contains("grid")) {
         if (key === "escape") {
+          clearPendingSequence();
           unfocusBookmarkSearch(config.animations.initialType);
           disableSearchBookmark();
           bookmarkSearchInputEl.value = "";
         }
-      }
-
-      if (
-        key === config.hotkeys.searchBookmarksKey.toLowerCase() &&
-        !searchFocused &&
-        !bookmarkSearchFocused &&
-        !bookmarkSearchSectionEl.classList.contains("grid")
-      ) {
-        void ensureBookmarksLoaded()
-          .then((loadedBookmarks) => {
-            enableSearchBookmark(
-              loadedBookmarks,
-              config.search.textColor,
-              config.search.placeholderTextColor,
-              config.animations.enabled,
-              config.animations.bookmarkType,
-              "",
-              false
-            );
-            tryFocusBookmarkSearch(config.search.focusedBorderColor, e);
-          })
-          .catch(() => {});
       }
     }
   });

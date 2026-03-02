@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Config } from "~/src/utils/config";
+import { normalizeStoredHotkey } from "~/src/utils/hotkeys";
 
 const toCleanStringArray = (value: unknown, fallback: string[] = []) => {
   if (!Array.isArray(value)) return fallback;
@@ -241,6 +242,10 @@ export const migrateOldConfig = (config: Config): Config => {
 
   delete (config.wallpaper as any).url;
   delete (config.wallpaper as any).solidColor;
+
+  config.hotkeys.activationKey = normalizeStoredHotkey(config.hotkeys.activationKey);
+  config.hotkeys.closePageKey = normalizeStoredHotkey(config.hotkeys.closePageKey);
+  config.hotkeys.searchBookmarksKey = normalizeStoredHotkey(config.hotkeys.searchBookmarksKey);
 
   return config;
 };

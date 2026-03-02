@@ -119,7 +119,7 @@ export const defaultConfig: Config = {
   },
   hotkeys: {
     enabled: true,
-    activationKey: " ",
+    activationKey: "<space>",
     closePageKey: "x",
     searchBookmarksKey: "b"
   },

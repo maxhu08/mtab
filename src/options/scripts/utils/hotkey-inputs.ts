@@ -1,4 +1,5 @@
 import { HotkeyInput } from "~/src/options/scripts/ui";
+import { normalizeStoredHotkey } from "~/src/utils/hotkeys";
 import { focusInput, unfocusInput } from "~/src/options/scripts/utils/ui-helpers";
 
 export const listenToHotkeyInputs = (hotkeyInputs: HotkeyInput[]) => {
@@ -25,14 +26,18 @@ export const listenToHotkeyInputs = (hotkeyInputs: HotkeyInput[]) => {
     );
 
     input.input.addEventListener("input", () => {
-      const val = input.input.value;
+      const val = normalizeStoredHotkey(input.input.value);
+
+      if (input.input.value !== val) {
+        const selectionStart = input.input.selectionStart ?? val.length;
+        input.input.value = val;
+        input.input.setSelectionRange(selectionStart, selectionStart);
+      }
 
       if (val === "") {
         input.status.textContent = ` (none)`;
-      } else if (val === " ") {
-        input.status.textContent = ` (Space)`;
       } else {
-        input.status.textContent = ` (${input.input.value})`;
+        input.status.textContent = ` (${val})`;
       }
     });
   });
