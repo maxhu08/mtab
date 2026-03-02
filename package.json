@@ -39,7 +39,8 @@
     "parcel": "2.16.3",
     "sortablejs": "^1.15.7",
     "tippy.js": "^6.3.7",
-    "uuid": "^11.1.0"
+    "uuid": "^11.1.0",
+    "vanilla-colorful": "^0.7.2"
   },
   "devDependencies": {
     "@commitlint/cli": "^20.4.2",

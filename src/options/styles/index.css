@@ -127,6 +127,7 @@
   width: 1.75rem;
   height: 1.75rem;
   transition: none !important;
+  overflow: visible;
 }
 
 .options-color-picker {
@@ -137,15 +138,14 @@
   border: 0;
   border-radius: 0.25rem;
   background-image:
-    linear-gradient(var(--options-color-preview, transparent), var(--options-color-preview, transparent)),
-    linear-gradient(#404040, #404040),
-    linear-gradient(#262626, #262626),
-    linear-gradient(#404040, #404040),
-    linear-gradient(#262626, #262626),
-    linear-gradient(#404040, #404040),
-    linear-gradient(#262626, #262626),
-    linear-gradient(#404040, #404040),
-    linear-gradient(#262626, #262626),
+    linear-gradient(
+      var(--options-color-preview, transparent),
+      var(--options-color-preview, transparent)
+    ),
+    linear-gradient(#404040, #404040), linear-gradient(#262626, #262626),
+    linear-gradient(#404040, #404040), linear-gradient(#262626, #262626),
+    linear-gradient(#404040, #404040), linear-gradient(#262626, #262626),
+    linear-gradient(#404040, #404040), linear-gradient(#262626, #262626),
     linear-gradient(#404040, #404040);
   background-size:
     100% 100%,
@@ -172,16 +172,59 @@
   background-repeat: no-repeat;
   overflow: hidden;
   outline: none;
-  pointer-events: none;
+  cursor: pointer;
   transition: none !important;
 }
 
-.options-color-picker-input-overlay {
+.options-color-picker:focus-visible {
+  outline: 2px solid #0ea5e9;
+  outline-offset: 2px;
+}
+
+.options-color-picker-popup {
   position: absolute;
-  inset: 0;
-  cursor: pointer;
-  opacity: 0;
-  transition: none !important;
+  top: calc(100% + 0.5rem);
+  right: 0;
+  z-index: 20;
+  width: 14rem;
+  padding: 0.625rem;
+  border: 1px solid #404040;
+  border-radius: 0.5rem;
+  background: #171717;
+  box-shadow:
+    0 12px 24px rgb(0 0 0 / 0.35),
+    0 0 0 1px rgb(255 255 255 / 0.02) inset;
+}
+
+.options-color-picker-popup[hidden] {
+  display: none;
+}
+
+.options-color-picker-popup hex-alpha-color-picker {
+  width: 100%;
+  height: 12rem;
+}
+
+.options-color-picker-popup hex-alpha-color-picker::part(saturation) {
+  border-radius: 0.375rem;
+  margin-bottom: 0.5rem;
+}
+
+.options-color-picker-popup hex-alpha-color-picker::part(hue),
+.options-color-picker-popup hex-alpha-color-picker::part(alpha) {
+  height: 0.875rem;
+  border-radius: 0.375rem;
+}
+
+.options-color-picker-popup hex-alpha-color-picker::part(hue) {
+  margin-bottom: 0.5rem;
+}
+
+.options-color-picker-popup hex-alpha-color-picker::part(hue-pointer),
+.options-color-picker-popup hex-alpha-color-picker::part(alpha-pointer) {
+  width: 0.875rem;
+  height: 0.875rem;
+  border-radius: 0.375rem;
 }
 
 /* Hide spinner arrows on number inputs in options forms. */
