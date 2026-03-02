@@ -294,11 +294,11 @@ const getFuzzyMatchRanges = (name: string, searchValue: string) => {
 
 const escapeHtml = (value: string) =>
   value
-    .replaceAll("&", "&amp;")
-    .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;")
-    .replaceAll('"', "&quot;")
-    .replaceAll("'", "&#39;");
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
 
 const fuzzySearch = (search: string, items: SearchResultItem[]) => {
   if (search === "") return items;
