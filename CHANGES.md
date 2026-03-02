@@ -1,5 +1,6 @@
-# Changes in 1.11.5
+# Changes in 1.11.6
 
 in this release:
 
-- fix bug with favicon not showing up on options page
+- improve color picker on options page
+- bug fixes
