@@ -25,6 +25,7 @@
     "format": "prettier --write \"./**/*.{js,jsx,mjs,cjs,ts,tsx,json,html}\"",
     "format:check": "prettier --check \"./**/*.{js,jsx,mjs,cjs,ts,tsx,json,html}\"",
     "prettier": "bun run format",
+    "commitlint": "commitlint",
     "lint": "eslint src scripts --ext .js,.jsx,.mjs,.cjs,.ts,.tsx --ignore-pattern dist --ignore-pattern output",
     "lint:fix": "bun run lint --fix",
     "check": "bun run format:check && bun run lint && bun run typecheck",
@@ -41,6 +42,8 @@
     "uuid": "^11.1.0"
   },
   "devDependencies": {
+    "@commitlint/cli": "^20.4.2",
+    "@commitlint/config-conventional": "^20.4.2",
     "@parcel/config-default": "2.16.3",
     "@parcel/core": "2.16.3",
     "@parcel/resolver-default": "2.16.3",

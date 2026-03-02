@@ -1,0 +1,4 @@
+#!/usr/bin/env sh
+set -e
+
+bunx commitlint --edit "$1"
