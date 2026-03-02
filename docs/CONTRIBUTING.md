@@ -20,6 +20,7 @@ Use this page as the fast entry point for contributors.
 - Validate changes before committing: `bun run check`
 - Format code before committing: `bun run format`
 - Formatter is also enforced by pre-commit hooks.
+- Commit messages are also checked by `commitlint` in the `commit-msg` hook. See [Committing](./COMMITTING.md).
 
 ## Scope Notes
 
