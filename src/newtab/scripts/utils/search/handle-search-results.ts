@@ -239,36 +239,55 @@ const getMatchedNameHtml = (
 };
 
 const getHighlightRanges = (name: string, searchValue: string) => {
+  const contiguousMatch = getContiguousMatchRanges(name, searchValue);
+  if (contiguousMatch) return contiguousMatch;
+
+  return getFuzzyMatchRanges(name, searchValue) ?? Array.from(name, () => false);
+};
+
+const getContiguousMatchRanges = (name: string, searchValue: string) => {
   const ranges: boolean[] = Array.from(name, () => false);
   const query = searchValue.trim().toLowerCase();
 
-  if (!query) return ranges;
+  if (!query) return null;
 
   const nameLower = name.toLowerCase();
   const directMatchIndex = nameLower.indexOf(query);
 
-  if (directMatchIndex !== -1) {
-    for (let i = directMatchIndex; i < directMatchIndex + query.length; i++) {
-      ranges[i] = true;
-    }
+  if (directMatchIndex === -1) return null;
 
-    return ranges;
+  for (let i = directMatchIndex; i < directMatchIndex + query.length; i++) {
+    ranges[i] = true;
   }
 
-  let searchStart = 0;
+  return ranges;
+};
 
-  for (const part of query.split(/\s+/)) {
-    if (!part) continue;
+const getFuzzyMatchRanges = (name: string, searchValue: string) => {
+  const ranges: boolean[] = Array.from(name, () => false);
+  const query = searchValue.toLowerCase();
+  const trimmedQuery = query.trim();
 
-    const matchIndex = nameLower.indexOf(part, searchStart);
-    if (matchIndex === -1) return ranges;
+  if (!trimmedQuery) return null;
 
-    for (let i = matchIndex; i < matchIndex + part.length; i++) {
-      ranges[i] = true;
-    }
+  const nameLower = name.toLowerCase();
+  let queryIndex = 0;
+  let matchedChars = 0;
 
-    searchStart = matchIndex + part.length;
+  for (let i = 0; i < nameLower.length && queryIndex < query.length; i++) {
+    while (query[queryIndex] === " ") queryIndex++;
+    if (queryIndex >= query.length) break;
+
+    if (nameLower[i] !== query[queryIndex]) continue;
+
+    ranges[i] = true;
+    queryIndex++;
+    matchedChars++;
   }
+
+  while (query[queryIndex] === " ") queryIndex++;
+
+  if (queryIndex !== query.length || matchedChars === 0) return null;
 
   return ranges;
 };
@@ -284,18 +303,7 @@ const escapeHtml = (value: string) =>
 const fuzzySearch = (search: string, items: SearchResultItem[]) => {
   if (search === "") return items;
 
-  return items.filter((item) => {
-    let searchIndex = 0;
-    const name = item.name;
-
-    for (let i = 0; i < name.length; i++) {
-      if (name[i].toLowerCase() === search[searchIndex]?.toLowerCase()) {
-        searchIndex++;
-      }
-      if (searchIndex === search.length) return true;
-    }
-    return false;
-  });
+  return items.filter((item) => getFuzzyMatchRanges(item.name, search) !== null);
 };
 
 type HandleSearchResultsNavigationOptions = {
@@ -334,6 +342,6 @@ export const handleSearchResultsNavigation = (
     if (!selectedEl) return;
     const url = selectedEl.getAttribute(resultUrlAttr);
     if (!url) return;
-    onOpen(url, e.ctrlKey);
+    onOpen(url, e.ctrlKey || e.metaKey);
   }
 };

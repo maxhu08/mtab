@@ -7,7 +7,7 @@ export const openBookmark = (
   animationsType: AnimationBookmarkType,
   openInNewTab: boolean = false
 ) => {
-  if (!/^https?:\/\//i.test(bookmarkUrl) && !/^about:/i.test(bookmarkUrl)) {
+  if (!/^[a-z][a-z\d+.-]*:/i.test(bookmarkUrl)) {
     bookmarkUrl = `https://${bookmarkUrl}`;
   }
 
