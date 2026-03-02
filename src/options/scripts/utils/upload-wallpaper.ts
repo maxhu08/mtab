@@ -141,6 +141,10 @@ const getBrightnessValue = () => {
   return parsed.toString();
 };
 
+if (wallpaperDefaultPreviewMediaEl) {
+  wallpaperDefaultPreviewMediaEl.style.backgroundImage = 'url("./wallpapers/default.jpg")';
+}
+
 const getBlurValue = () => {
   const value = wallpaperFiltersBlurInputEl.value.trim();
   return value.length > 0 ? value : "0px";

@@ -19,7 +19,6 @@ const ROOT = process.cwd();
 const DIST_DIR = resolve(ROOT, "dist");
 const OUTPUT_DIR = resolve(ROOT, "output");
 const SRC_DIR = resolve(ROOT, "src");
-const ASSETS_DIR = resolve(SRC_DIR, "assets");
 const STATIC_DIR = resolve(SRC_DIR, "static");
 const VERSION_FILE = resolve(ROOT, "EXTENSION_VERSION.txt");
 
@@ -184,7 +183,6 @@ function ensureDist() {
 }
 
 function syncStaticFiles() {
-  copyDirectoryContents(ASSETS_DIR, DIST_DIR);
   copyDirectoryContents(STATIC_DIR, DIST_DIR);
 }
 
