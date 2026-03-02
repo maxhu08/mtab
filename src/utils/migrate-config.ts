@@ -243,6 +243,7 @@ export const migrateOldConfig = (config: Config): Config => {
   delete (config.wallpaper as any).url;
   delete (config.wallpaper as any).solidColor;
 
+  // if config is before v1.11.3
   config.hotkeys.activationKey = normalizeStoredHotkey(config.hotkeys.activationKey);
   config.hotkeys.closePageKey = normalizeStoredHotkey(config.hotkeys.closePageKey);
   config.hotkeys.searchBookmarksKey = normalizeStoredHotkey(config.hotkeys.searchBookmarksKey);
