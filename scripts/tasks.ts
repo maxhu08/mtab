@@ -206,7 +206,7 @@ function runParcel(mode: "build" | "watch") {
   const args = ["x", "parcel"];
 
   if (mode === "build") {
-    args.push("build", ...entries, "--no-source-maps", "--no-scope-hoist");
+    args.push("build", ...entries, "--no-source-maps");
     runCommand(bunExecutable, args);
     return;
   }
