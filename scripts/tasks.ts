@@ -86,7 +86,7 @@ const MANIFESTS: Record<BrowserTarget, Record<string, unknown>> = {
     },
     browser_specific_settings: {
       gecko: {
-        id: "mtab-extension@maxhu.dev"
+        id: "contact@maxhu.dev"
       }
     }
   }
