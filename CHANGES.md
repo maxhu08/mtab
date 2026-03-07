@@ -1,6 +1,6 @@
-# Changes in 1.11.8
+# Changes in 1.11.9
 
 in this release:
 
-- accessibility improvements with aria labels and roles
 - performance improvements
+- bug fixes
