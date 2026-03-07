@@ -81,6 +81,15 @@ const getItemsPerPage = (config: Config) => {
   return rows * cols;
 };
 
+const getAccessibleNodeLabel = (type: "bookmark" | "folder", name: string) => {
+  const trimmedName = name.trim();
+  if (trimmedName.length > 0) {
+    return type === "folder" ? `Open folder ${trimmedName}` : `Open bookmark ${trimmedName}`;
+  }
+
+  return type === "folder" ? "Open folder" : "Open bookmark";
+};
+
 const handleBookmarkAction = (actionButtonEl: HTMLButtonElement, openInNewTab: boolean) => {
   if (!renderRuntime) return;
 
@@ -320,10 +329,12 @@ const createPaginationNavButton = (
   uiStyle: UIStyle,
   messageTextColor: string,
   iconType: string,
+  ariaLabel: string,
   onClick: () => void
 ) => {
   const buttonEl = document.createElement("button");
   buttonEl.type = "button";
+  buttonEl.setAttribute("aria-label", ariaLabel);
   buttonEl.setAttribute("data-bookmark-action", "pagination-nav");
   buttonEl.className = `relative duration-[250ms] ease-out bg-foreground cursor-pointer ${uiStyle === "glass" ? "glass-effect " : ""}corner-style h-9 md:h-12 aspect-square overflow-hidden outline-none`;
   buttonEl.addEventListener("click", onClick);
@@ -342,6 +353,7 @@ const createPaginationNavButton = (
 
   const iconEl = document.createElement("i");
   iconEl.className = iconType;
+  iconEl.setAttribute("aria-hidden", "true");
   iconWrapper.appendChild(iconEl);
 
   buttonEl.appendChild(borderDiv);
@@ -365,6 +377,7 @@ const buildPaginationControls = (
     uiStyle,
     messageTextColor,
     "ri-arrow-left-s-line",
+    "Previous bookmarks page",
     () => {
       updatePage(paginationState.currentPage - 1);
     }
@@ -374,6 +387,7 @@ const buildPaginationControls = (
     uiStyle,
     messageTextColor,
     "ri-arrow-right-s-line",
+    "Next bookmarks page",
     () => {
       updatePage(paginationState.currentPage + 1);
     }
@@ -677,6 +691,7 @@ export const renderBlockBookmark = (
   const button = document.createElement("button");
   button.id = `bookmark-node-${uuid}`;
   button.setAttribute("node-type", "bookmark");
+  button.setAttribute("aria-label", getAccessibleNodeLabel("bookmark", bookmarkName));
   button.className = `relative duration-[250ms] ease-out ${bookmarkFill.length === 0 ? "bg-foreground " : ""}cursor-pointer ${uiStyle === "glass" ? "glass-effect" : ""} corner-style h-bookmark overflow-hidden ${animationsEnabled ? `${animationsInitialType} opacity-0` : ""} outline-none`;
   if (bookmarkFill.length > 0) button.style.backgroundColor = bookmarkFill;
   if (animationsEnabled) button.style.animationDelay = `${delay}ms`;
@@ -698,6 +713,7 @@ export const renderBlockBookmark = (
   const iconDiv = document.createElement("div");
   iconDiv.className = `bookmark-node-icon${iconSizeClass ? " " + iconSizeClass : ""}`;
   iconDiv.style.color = iconColor;
+  iconDiv.setAttribute("aria-hidden", "true");
   iconDiv.innerHTML = iconHTML;
 
   let nameSpan: HTMLSpanElement | null = null;
@@ -749,6 +765,7 @@ export const renderBlockFolder = (
   const button = document.createElement("button");
   button.id = `bookmark-node-${uuid}`;
   button.setAttribute("node-type", "folder");
+  button.setAttribute("aria-label", getAccessibleNodeLabel("folder", folderName));
   button.className = `relative duration-[250ms] ease-out ${folderFill.length === 0 ? "bg-foreground " : ""}cursor-pointer ${uiStyle === "glass" ? "glass-effect" : ""} corner-style h-bookmark overflow-hidden ${animationsEnabled ? `${animationsInitialType} opacity-0 ` : ""}outline-none`;
   if (folderFill.length > 0) button.style.backgroundColor = folderFill;
   if (animationsEnabled) button.style.animationDelay = `${delay}ms`;
@@ -770,6 +787,7 @@ export const renderBlockFolder = (
   const iconDiv = document.createElement("div");
   iconDiv.className = `bookmark-node-icon${iconSizeClass ? " " + iconSizeClass : ""}`;
   iconDiv.style.color = iconColor;
+  iconDiv.setAttribute("aria-hidden", "true");
   iconDiv.innerHTML = iconHTML;
 
   let nameSpan: HTMLSpanElement | null = null;
@@ -802,6 +820,8 @@ export const addFolderBackButton = (
 ): RenderedBackButton => {
   const backButton = document.createElement("button");
   backButton.id = `folder-back-button-${uuid}`;
+  backButton.type = "button";
+  backButton.setAttribute("aria-label", "Back to parent folder");
   backButton.className = `relative duration-[250ms] ease-out bg-foreground cursor-pointer ${uiStyle === "glass" ? "glass-effect " : ""}corner-style h-9 md:h-12 px-1 md:px-2 overflow-hidden ${animationsEnabled ? `${animationsInitialType} opacity-0 ` : ""}outline-none`;
   if (animationsEnabled) {
     backButton.style.animationDelay = `${delay}ms`;
@@ -822,6 +842,7 @@ export const addFolderBackButton = (
 
   const icon = document.createElement("i");
   icon.className = "ri-arrow-left-line";
+  icon.setAttribute("aria-hidden", "true");
 
   const span = document.createElement("span");
   span.textContent = "Back";

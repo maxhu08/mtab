@@ -17,12 +17,17 @@ export const showOptionsButton = (
 
   const buttonEl = document.createElement("button");
   buttonEl.id = "options-button";
+  buttonEl.type = "button";
+  buttonEl.setAttribute("aria-label", "Open options");
+  buttonEl.title = "Open options";
   buttonEl.className = `${uiStyle === "glass" ? "glass-effect" : ""} ${animationsEnabled ? `${animationsInitialType} opacity-0 outline-none` : ""} bg-foreground cursor-pointer corner-style grid place-items-center w-10 h-10 overflow-hidden`;
 
   const divEl = document.createElement("div");
+  divEl.setAttribute("aria-hidden", "true");
   divEl.className = "absolute w-full h-full hover:bg-white/20 corner-style overflow-hidden";
 
   const iconEl = document.createElement("i");
+  iconEl.setAttribute("aria-hidden", "true");
   iconEl.className = "ri-equalizer-line text-2xl";
   iconEl.style.color = textColor;
 

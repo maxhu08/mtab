@@ -44,10 +44,18 @@ export const renderDefaultBookmarks = (config: Config) => {
       buttonEl.className =
         "overflow-hidden w-16 md:w-20 aspect-square grid grid-rows-[auto_max-content] place-items-center cursor-pointer";
       buttonEl.setAttribute("data-bookmark-url", bookmark.url);
+      buttonEl.setAttribute(
+        "aria-label",
+        bookmark.title && bookmark.title.trim().length > 0
+          ? `Open bookmark ${bookmark.title}`
+          : `Open bookmark ${bookmark.url}`
+      );
 
       const imgEl = document.createElement("img");
       imgEl.className = "w-10 md:w-14";
       imgEl.src = getFaviconURL(bookmark.url, config.bookmarks.defaultFaviconSource);
+      imgEl.alt = "";
+      imgEl.setAttribute("aria-hidden", "true");
       buttonEl.appendChild(imgEl);
 
       const spanEl = document.createElement("span");
