@@ -103,6 +103,7 @@
 }
 
 #controls-container {
+  z-index: 30;
   transition:
     opacity 250ms ease-out,
     transform 250ms ease-out,
