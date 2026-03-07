@@ -191,6 +191,7 @@ const addTileRepositionHandle = (item: HTMLElement) => {
   handle.type = "button";
   handle.className = galleryHandleClass;
   handle.setAttribute("data-tippy-content", "reorder wallpaper");
+  handle.setAttribute("aria-label", "reorder wallpaper");
   handle.innerHTML = '<i class="ri-draggable"></i>';
 
   handle.addEventListener("click", (event) => {
@@ -213,6 +214,7 @@ const addTileDeleteButton = (item: HTMLElement, onDelete: () => void) => {
   deleteButton.type = "button";
   deleteButton.className = `${galleryDeleteClass} absolute right-1.5 top-1.5 z-20 hidden h-7 w-7 place-items-center rounded-md bg-rose-500 text-white transition hover:bg-rose-600 group-hover:grid outline-none`;
   deleteButton.setAttribute("data-tippy-content", "delete wallpaper");
+  deleteButton.setAttribute("aria-label", "delete wallpaper");
   deleteButton.innerHTML = '<i class="ri-delete-bin-line"></i>';
 
   deleteButton.addEventListener("click", (event) => {
@@ -240,10 +242,10 @@ const addTileTypeBadge = (item: HTMLElement, type: EditableWallpaperType, onEdit
   const badge = document.createElement("button");
   badge.type = "button";
   badge.className = galleryTypeBadgeClass;
-  badge.setAttribute(
-    "data-tippy-content",
-    type === "url" ? "edit url" : type === "file-upload" ? "edit file-upload" : "edit solid-color"
-  );
+  const editLabel =
+    type === "url" ? "edit url" : type === "file-upload" ? "edit file upload" : "edit solid color";
+  badge.setAttribute("data-tippy-content", editLabel);
+  badge.setAttribute("aria-label", editLabel);
 
   const icon = document.createElement("i");
 
@@ -268,6 +270,7 @@ const addSimpleAddTile = (renderNonce: number, onClick: () => void) => {
   const addTile = document.createElement("button");
   addTile.type = "button";
   addTile.className = `${galleryItemClass} ${galleryAddTileClass} wallpaper-gallery-add-tile`;
+  addTile.setAttribute("aria-label", "add wallpaper");
   addTile.innerHTML = '<i class="ri-add-line"></i>';
   addTile.addEventListener("click", () => {
     if (renderNonce !== wallpaperGalleryRenderNonce) return;
@@ -304,6 +307,7 @@ const addMixedAddTile = (renderNonce: number) => {
     segmentButton.type = "button";
     segmentButton.className = "wallpaper-gallery-add-mixed-segment";
     segmentButton.setAttribute("data-tippy-content", segment.tooltip);
+    segmentButton.setAttribute("aria-label", segment.tooltip);
     segmentButton.innerHTML = `<i class="${segment.icon}"></i>`;
     segmentButton.addEventListener("click", (event) => {
       event.preventDefault();
