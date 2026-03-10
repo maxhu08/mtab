@@ -1,6 +1,5 @@
-# Changes in 1.11.9
+# Changes in 1.12.0
 
 in this release:
 
-- performance improvements
-- bug fixes
+- fix issue with math search assist not loading
