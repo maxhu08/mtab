@@ -1,13 +1,66 @@
 import { AssistMath, hideAssist } from "~/src/newtab/scripts/utils/search/search-assist-utils";
 
-type MathJS = typeof import("mathjs");
+type MathJSGlobal = {
+  evaluate: (expression: string) => unknown;
+  format: (expression: unknown) => string;
+  isConstantNode: (value: unknown) => boolean;
+  isComplex: (value: unknown) => boolean;
+  isOperatorNode: (value: unknown) => boolean;
+  isNumber: (value: unknown) => boolean;
+};
 
-let mathJSPromise: Promise<MathJS> | null = null;
+let mathJSPromise: Promise<MathJSGlobal> | null = null;
+
+const getMathGlobal = (): MathJSGlobal | null => {
+  const maybeMath = (globalThis as typeof globalThis & { math?: MathJSGlobal }).math;
+  if (
+    maybeMath &&
+    typeof maybeMath.evaluate === "function" &&
+    typeof maybeMath.format === "function" &&
+    typeof maybeMath.isConstantNode === "function" &&
+    typeof maybeMath.isComplex === "function" &&
+    typeof maybeMath.isOperatorNode === "function" &&
+    typeof maybeMath.isNumber === "function"
+  ) {
+    return maybeMath;
+  }
+
+  return null;
+};
 
 const loadMathJS = () => {
-  if (!mathJSPromise) {
-    mathJSPromise = import("mathjs");
-  }
+  if (mathJSPromise) return mathJSPromise;
+
+  mathJSPromise = new Promise<MathJSGlobal>((resolve, reject) => {
+    const existingMath = getMathGlobal();
+    if (existingMath) {
+      resolve(existingMath);
+      return;
+    }
+
+    const script = document.createElement("script");
+    script.src =
+      typeof chrome !== "undefined" && chrome.runtime?.getURL
+        ? chrome.runtime.getURL("vendor/mathjs/math.js")
+        : "/vendor/mathjs/math.js";
+    script.async = true;
+
+    script.onload = () => {
+      const loadedMath = getMathGlobal();
+      if (!loadedMath) {
+        reject(new Error("mathjs loaded but global `math` is unavailable"));
+        return;
+      }
+
+      resolve(loadedMath);
+    };
+
+    script.onerror = () => {
+      reject(new Error("Failed to load mathjs vendor script"));
+    };
+
+    document.head.appendChild(script);
+  });
 
   return mathJSPromise;
 };
@@ -36,7 +89,7 @@ export const handleMath = async (val: string) => {
       val = normalizeMultiplicationInput(val);
     }
 
-    const result = math.evaluate(val);
+    const result = math.evaluate(val) as { re?: unknown; im?: unknown };
 
     // allow imaginary numbers
     // prevent returning a function val is a function like `atan` or `derivative`
@@ -59,7 +112,7 @@ const normalizeMultiplicationInput = (expression: string): string => {
   return expression.replace(/(?<=\d|\))\s*[xX×]\s*(?=\d|\()/g, "*");
 };
 
-const betterFormat = (math: MathJS, expression: unknown): string => {
+const betterFormat = (math: MathJSGlobal, expression: unknown): string => {
   return math
     .format(expression)
     .replace(/\s*\*\s*\(/g, "(") // remove '* (' to '('

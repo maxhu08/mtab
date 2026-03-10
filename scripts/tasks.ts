@@ -184,6 +184,7 @@ function ensureDist() {
 
 function syncStaticFiles() {
   copyDirectoryContents(STATIC_DIR, DIST_DIR);
+  syncMathjsVendor();
 }
 
 function writeManifest(target: BrowserTarget, version = readVersion(), versionName?: string) {
@@ -313,6 +314,21 @@ function copyDirectoryContents(sourceDir: string, destinationDir: string) {
       recursive: true
     });
   }
+}
+
+function syncMathjsVendor() {
+  const sourceDir = resolve(ROOT, "node_modules", "mathjs", "lib", "browser");
+  const destinationDir = resolve(DIST_DIR, "vendor", "mathjs");
+
+  mkdirSync(destinationDir, { recursive: true });
+  cpSync(resolve(sourceDir, "math.js"), resolve(destinationDir, "math.js"), { force: true });
+  cpSync(
+    resolve(sourceDir, "math.js.LICENSE.txt"),
+    resolve(destinationDir, "math.js.LICENSE.txt"),
+    {
+      force: true
+    }
+  );
 }
 
 function collectHtmlEntries(directory: string, baseDir = directory): string[] {
