@@ -71,40 +71,42 @@ const handleUseCustomEngineChecked = () => {
     if (searchUseCustomEngineCheckboxEl.checked) {
       // if the checkbox is checked, the previously selected search engine should be unselected (visually)
       const selectedSearchEngineEl = document.querySelector(
-        `button[btn-option-type="search-engine"][selected="yes"]`
+        `button[btn-option-type="search-engine"][aria-pressed="true"]`
       ) as HTMLButtonElement;
+
+      if (!selectedSearchEngineEl) return;
 
       switch (selectedSearchEngineEl.id) {
         case "search-engine-duckduckgo-button": {
-          searchEngineDuckduckgoButtonEl.setAttribute("selected", "no");
+          searchEngineDuckduckgoButtonEl.setAttribute("aria-pressed", "false");
           break;
         }
         case "search-engine-google-button": {
-          searchEngineGoogleButtonEl.setAttribute("selected", "no");
+          searchEngineGoogleButtonEl.setAttribute("aria-pressed", "false");
           break;
         }
         case "search-engine-bing-button": {
-          searchEngineBingButtonEl.setAttribute("selected", "no");
+          searchEngineBingButtonEl.setAttribute("aria-pressed", "false");
           break;
         }
         case "search-engine-brave-button": {
-          searchEngineBraveButtonEl.setAttribute("selected", "no");
+          searchEngineBraveButtonEl.setAttribute("aria-pressed", "false");
           break;
         }
         case "search-engine-yahoo-button": {
-          searchEngineYahooButtonEl.setAttribute("selected", "no");
+          searchEngineYahooButtonEl.setAttribute("aria-pressed", "false");
           break;
         }
         case "search-engine-yandex-button": {
-          searchEngineYandexButtonEl.setAttribute("selected", "no");
+          searchEngineYandexButtonEl.setAttribute("aria-pressed", "false");
           break;
         }
         case "search-engine-startpage-button": {
-          searchEngineStartpageButtonEl.setAttribute("selected", "no");
+          searchEngineStartpageButtonEl.setAttribute("aria-pressed", "false");
           break;
         }
         case "search-engine-ecosia-button": {
-          searchEngineEcosiaButtonEl.setAttribute("selected", "no");
+          searchEngineEcosiaButtonEl.setAttribute("aria-pressed", "false");
           break;
         }
       }

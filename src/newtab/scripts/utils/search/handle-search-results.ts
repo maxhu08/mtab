@@ -41,13 +41,17 @@ const updateSelectedRow = (inputEl: HTMLInputElement, nextIndex: number) => {
 
   for (let i = 0; i < buttons.length; i++) {
     const el = buttons[i];
-    if (i === clamped) el.classList.add("bg-white/20");
+    const selected = i === clamped;
+    if (selected) el.classList.add("bg-white/20");
     else el.classList.remove("bg-white/20");
+    el.setAttribute("aria-selected", selected ? "true" : "false");
 
     const iconEl = el.querySelector(`.${ICON_CLASS}`) as HTMLElement | null;
-    if (iconEl) iconEl.textContent = i === clamped ? " > " : "   ";
+    if (iconEl) iconEl.textContent = selected ? " > " : "   ";
 
-    if (i === clamped && inputEl.id !== "bookmark-search-input") {
+    if (selected) searchResultsContainerEl.setAttribute("aria-activedescendant", el.id);
+
+    if (selected && inputEl.id !== "bookmark-search-input") {
       setSearchValue(el.getAttribute("search-result-value") || "", false);
     }
   }
@@ -75,6 +79,11 @@ export const renderSearchResults = (
   } = opts;
 
   const frag = document.createDocumentFragment();
+  searchResultsContainerEl.setAttribute("role", "listbox");
+  searchResultsContainerEl.setAttribute(
+    "aria-label",
+    inputEl.id === "bookmark-search-input" ? "Bookmark search results" : "Search results"
+  );
 
   searchResultsContainerEl.onmousedown = (e) => {
     const target = e.target as HTMLElement | null;
@@ -133,6 +142,10 @@ export const renderSearchResults = (
 
     const buttonEl = document.createElement("button");
     buttonEl.type = "button";
+    const optionId = `${inputEl.id}-result-${index}`;
+    buttonEl.id = optionId;
+    buttonEl.setAttribute("role", "option");
+    buttonEl.setAttribute("aria-selected", index === selectedIndex ? "true" : "false");
     buttonEl.setAttribute(resultUrlAttr, item.value);
     buttonEl.setAttribute("search-result-value", item.name);
 
@@ -179,6 +192,15 @@ export const renderSearchResults = (
     frag.appendChild(buttonEl);
   });
 
+  const activeOptionEl = frag.querySelector?.(
+    `button[aria-selected="true"]`
+  ) as HTMLButtonElement | null;
+  if (activeOptionEl) {
+    searchResultsContainerEl.setAttribute("aria-activedescendant", activeOptionEl.id);
+  } else {
+    searchResultsContainerEl.removeAttribute("aria-activedescendant");
+  }
+
   if (isBookmarkInput && overflow > 0) {
     const moreEl = document.createElement("div");
     moreEl.className = [
@@ -207,6 +229,8 @@ export const renderSearchResults = (
   if (visible.length === 0) {
     const pEl = document.createElement("p");
     pEl.className = "px-2 py-2 text-center select-none";
+    pEl.setAttribute("role", "status");
+    pEl.setAttribute("aria-live", "polite");
     pEl.textContent = "No results!";
     pEl.addEventListener("mousedown", (e) => {
       e.preventDefault();

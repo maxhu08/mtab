@@ -56,7 +56,8 @@ export const handleSearchAssist = (config: Config) => {
     }
 
     if (config.search.assist.math) {
-      const mathResult = handleMath(val);
+      const mathResult = await handleMath(val);
+      if (currentRunId !== assistRunId) return;
       if (mathResult !== undefined) assistItems.push(mathResult);
     }
 

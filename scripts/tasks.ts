@@ -86,7 +86,7 @@ const MANIFESTS: Record<BrowserTarget, Record<string, unknown>> = {
     },
     browser_specific_settings: {
       gecko: {
-        id: "mtab-extension@maxhu.dev"
+        id: "contact@maxhu.dev"
       }
     }
   }
@@ -184,6 +184,7 @@ function ensureDist() {
 
 function syncStaticFiles() {
   copyDirectoryContents(STATIC_DIR, DIST_DIR);
+  syncMathjsVendor();
 }
 
 function writeManifest(target: BrowserTarget, version = readVersion(), versionName?: string) {
@@ -206,7 +207,7 @@ function runParcel(mode: "build" | "watch") {
   const args = ["x", "parcel"];
 
   if (mode === "build") {
-    args.push("build", ...entries, "--no-source-maps", "--no-scope-hoist");
+    args.push("build", ...entries, "--no-source-maps");
     runCommand(bunExecutable, args);
     return;
   }
@@ -313,6 +314,21 @@ function copyDirectoryContents(sourceDir: string, destinationDir: string) {
       recursive: true
     });
   }
+}
+
+function syncMathjsVendor() {
+  const sourceDir = resolve(ROOT, "node_modules", "mathjs", "lib", "browser");
+  const destinationDir = resolve(DIST_DIR, "vendor", "mathjs");
+
+  mkdirSync(destinationDir, { recursive: true });
+  cpSync(resolve(sourceDir, "math.js"), resolve(destinationDir, "math.js"), { force: true });
+  cpSync(
+    resolve(sourceDir, "math.js.LICENSE.txt"),
+    resolve(destinationDir, "math.js.LICENSE.txt"),
+    {
+      force: true
+    }
+  );
 }
 
 function collectHtmlEntries(directory: string, baseDir = directory): string[] {

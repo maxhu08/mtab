@@ -4,7 +4,7 @@ const getLiveWallpaperPreviewEl = () =>
   document.getElementById("live-wallpaper-preview") as HTMLDivElement | null;
 
 export const isWallpaperTypeDefault = () =>
-  wallpaperTypeDefaultButtonEl.getAttribute("selected") === "yes";
+  wallpaperTypeDefaultButtonEl.getAttribute("aria-pressed") === "true";
 
 export const previewWallpaper = (
   wallpaper: Blob | string | undefined,

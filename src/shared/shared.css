@@ -75,7 +75,7 @@
   }
 }
 
-button[selected="yes"] {
+button[aria-pressed="true"] {
   background-color: #10b981 !important;
 }
 

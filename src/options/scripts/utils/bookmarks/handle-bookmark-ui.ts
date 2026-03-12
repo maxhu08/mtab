@@ -599,6 +599,7 @@ export const addBookmarkNodeBookmark = (
     if (id) button.id = id;
     button.className = `${buttonClass} transition w-10 aspect-square rounded-md cursor-pointer`;
     button.setAttribute("data-tippy-content", tooltip);
+    button.setAttribute("aria-label", tooltip);
     const buttonIcon = document.createElement("i");
     buttonIcon.className = `text-white ${icon}`;
     button.appendChild(buttonIcon);
@@ -810,6 +811,7 @@ export const addBookmarkNodeFolder = (
     if (id) button.id = id;
     button.className = `${buttonClass} transition w-10 aspect-square rounded-md cursor-pointer`;
     button.setAttribute("data-tippy-content", tooltip);
+    button.setAttribute("aria-label", tooltip);
     const buttonIcon = document.createElement("i");
     buttonIcon.className = `text-white ${icon}`;
     button.appendChild(buttonIcon);

@@ -114,6 +114,10 @@ function renderToaster() {
   ol.outerHTML = `
     <ol
       data-sonner-toaster="true"
+      role="status"
+      aria-live="polite"
+      aria-atomic="false"
+      aria-label="Notifications"
       data-theme="light"
       data-x-position="${x}"
       data-y-position="${y}"
@@ -297,7 +301,7 @@ function renderToast(list, content, { description, type, action, position } = {}
   const actionHtml = actionData ? createActionButton(actionData) : "";
 
   toastEl.innerHTML = `
-    ${asset ? `<div data-icon="">${asset}</div>` : ""}
+    ${asset ? `<div data-icon="" aria-hidden="true">${asset}</div>` : ""}
     <div data-content="">
       <div data-title="">${content}</div>
       ${description ? `<div data-description="">${description}</div>` : ""}
@@ -318,8 +322,20 @@ function renderToast(list, content, { description, type, action, position } = {}
       list.getAttribute("data-y-position") || (position || "bottom-right").split("-")[0],
     "data-x-position":
       list.getAttribute("data-x-position") || (position || "bottom-right").split("-")[1],
+    role: t === "error" || t === "warning" ? "alert" : "status",
+    "aria-live": t === "error" || t === "warning" ? "assertive" : "polite",
+    "aria-atomic": "true",
     style: `--index: 0; --toasts-before: 0; --z-index: ${count}; --offset: 0px; --initial-height: 0px; cursor: pointer;`
   });
+
+  const actionBtn = toastEl.querySelector('button[data-toast-action="true"]');
+  if (actionBtn && !actionBtn.getAttribute("aria-label")) {
+    const actionText = actionBtn.textContent?.trim();
+    actionBtn.setAttribute(
+      "aria-label",
+      actionText && actionText.length > 0 ? actionText : "Toast action"
+    );
+  }
 
   list.prepend(toastEl);
   applyToastClasses(toastEl, t);

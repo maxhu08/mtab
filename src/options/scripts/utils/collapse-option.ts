@@ -35,13 +35,19 @@ export const bindCollapseOptionButton = (
   collapseButton: HTMLButtonElement,
   optionSection: HTMLElement
 ) => {
+  const setExpandedState = (isExpanded: boolean) => {
+    collapseButton.setAttribute("aria-expanded", isExpanded ? "true" : "false");
+  };
+
   collapseButton.addEventListener("click", () => {
     if (optionSection.classList.contains("grid")) {
       collapseButton.children[0].className = "ri-expand-horizontal-s-line";
       collapseOptionSection(optionSection);
+      setExpandedState(false);
     } else {
       collapseButton.children[0].className = "ri-collapse-horizontal-line";
       expandOptionSection(optionSection);
+      setExpandedState(true);
     }
 
     getOptionsData(({ optionsData }) => {
@@ -64,6 +70,8 @@ export const newCollapseGroup = (buttonId: string, sectionId: string, expanded: 
   const collapseButton = document.getElementById(buttonId) as HTMLButtonElement;
   const optionSection = document.getElementById(sectionId) as HTMLElement;
 
+  collapseButton.setAttribute("aria-controls", sectionId);
+  collapseButton.setAttribute("aria-expanded", expanded ? "true" : "false");
   bindCollapseOptionButton(collapseButton, optionSection);
   if (!expanded) collapseButton.click();
 };

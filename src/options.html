@@ -36,7 +36,7 @@
         <!-- options -->
         <div class="mb-4 grid grid-cols-[1fr_max-content_1fr] items-center gap-2">
           <div class="grid grid-cols-[max-content_auto] items-center gap-2">
-            <button id="options-collapse-button" class="text-xl text-neutral-500">
+            <button id="options-collapse-button" class="text-xl text-neutral-500" aria-label="toggle options section">
               <i class="ri-collapse-horizontal-line"></i>
             </button>
             <div class="h-[1px] flex-grow rounded-md bg-neutral-500"></div>
@@ -49,7 +49,7 @@
             <p class="text-base text-white">options.showOptionsButton</p>
             <div class="ml-auto">
               <label class="relative inline-flex cursor-pointer items-center">
-                <input id="options-show-options-button-checkbox" type="checkbox" value="" class="peer sr-only" />
+                <input id="options-show-options-button-checkbox" type="checkbox" value="" class="peer sr-only" aria-label="options show options button" />
                 <div
                   class="peer h-6 w-11 rounded-full bg-neutral-800 outline-none after:absolute after:left-[4px] after:top-[3px] after:aspect-square after:h-[1.15rem] after:rounded-full after:border-none after:bg-neutral-700 after:transition-all after:content-[''] peer-checked:bg-emerald-500 peer-checked:after:translate-x-full peer-checked:after:bg-white"
                 ></div>
@@ -61,7 +61,7 @@
         <!-- user -->
         <div class="mb-4 grid grid-cols-[1fr_max-content_1fr] items-center gap-2">
           <div class="grid grid-cols-[max-content_auto] items-center gap-2">
-            <button id="user-collapse-button" class="text-xl text-neutral-500">
+            <button id="user-collapse-button" class="text-xl text-neutral-500" aria-label="toggle user section">
               <i class="ri-collapse-horizontal-line"></i>
             </button>
             <div class="h-[1px] flex-grow rounded-md bg-neutral-500"></div>
@@ -80,7 +80,7 @@
         <!-- title -->
         <div class="mb-4 grid grid-cols-[1fr_max-content_1fr] items-center gap-2">
           <div class="grid grid-cols-[max-content_auto] items-center gap-2">
-            <button id="title-collapse-button" class="text-xl text-neutral-500">
+            <button id="title-collapse-button" class="text-xl text-neutral-500" aria-label="toggle title section">
               <i class="ri-collapse-horizontal-line"></i>
             </button>
             <div class="h-[1px] flex-grow rounded-md bg-neutral-500"></div>
@@ -100,7 +100,7 @@
               <p class="text-base text-white">title.dynamic.enabled</p>
               <div class="ml-auto">
                 <label class="relative inline-flex cursor-pointer items-center">
-                  <input id="title-dynamic-enabled-checkbox" type="checkbox" value="" class="peer sr-only" />
+                  <input id="title-dynamic-enabled-checkbox" type="checkbox" value="" class="peer sr-only" aria-label="title dynamic enabled" />
                   <div
                     class="peer h-6 w-11 rounded-full bg-neutral-800 outline-none after:absolute after:left-[4px] after:top-[3px] after:aspect-square after:h-[1.15rem] after:rounded-full after:border-none after:bg-neutral-700 after:transition-all after:content-[''] peer-checked:bg-emerald-500 peer-checked:after:translate-x-full peer-checked:after:bg-white"
                   ></div>
@@ -181,7 +181,7 @@
         <!-- message -->
         <div class="mb-4 grid grid-cols-[1fr_max-content_1fr] items-center gap-2">
           <div class="grid grid-cols-[max-content_auto] items-center gap-2">
-            <button id="message-collapse-button" class="text-xl text-neutral-500">
+            <button id="message-collapse-button" class="text-xl text-neutral-500" aria-label="toggle message section">
               <i class="ri-collapse-horizontal-line"></i>
             </button>
             <div class="h-[1px] flex-grow rounded-md bg-neutral-500"></div>
@@ -194,7 +194,7 @@
             <p class="text-base text-white">message.enabled</p>
             <div class="ml-auto">
               <label class="relative inline-flex cursor-pointer items-center">
-                <input id="message-enabled-checkbox" type="checkbox" value="" class="peer sr-only" />
+                <input id="message-enabled-checkbox" type="checkbox" value="" class="peer sr-only" aria-label="message enabled" />
                 <div
                   class="peer h-6 w-11 rounded-full bg-neutral-800 outline-none after:absolute after:left-[4px] after:top-[3px] after:aspect-square after:h-[1.15rem] after:rounded-full after:border-none after:bg-neutral-700 after:transition-all after:content-[''] peer-checked:bg-emerald-500 peer-checked:after:translate-x-full peer-checked:after:bg-white"
                 ></div>
@@ -301,7 +301,7 @@
         <!-- wallpaper -->
         <div class="mb-4 grid grid-cols-[1fr_max-content_1fr] items-center gap-2">
           <div class="grid grid-cols-[max-content_auto] items-center gap-2">
-            <button id="wallpaper-collapse-button" class="text-xl text-neutral-500">
+            <button id="wallpaper-collapse-button" class="text-xl text-neutral-500" aria-label="toggle wallpaper section">
               <i class="ri-collapse-horizontal-line"></i>
             </button>
             <div class="h-[1px] flex-grow rounded-md bg-neutral-500"></div>
@@ -314,7 +314,7 @@
             <p class="text-base text-white">wallpaper.enabled</p>
             <div class="ml-auto">
               <label class="relative inline-flex cursor-pointer items-center">
-                <input id="wallpaper-enabled-checkbox" type="checkbox" value="" class="peer sr-only" />
+                <input id="wallpaper-enabled-checkbox" type="checkbox" value="" class="peer sr-only" aria-label="wallpaper enabled" />
                 <div
                   class="peer h-6 w-11 rounded-full bg-neutral-800 outline-none after:absolute after:left-[4px] after:top-[3px] after:aspect-square after:h-[1.15rem] after:rounded-full after:border-none after:bg-neutral-700 after:transition-all after:content-[''] peer-checked:bg-emerald-500 peer-checked:after:translate-x-full peer-checked:after:bg-white"
                 ></div>
@@ -461,7 +461,7 @@
         <!-- ui -->
         <div class="mb-4 grid grid-cols-[1fr_max-content_1fr] items-center gap-2">
           <div class="grid grid-cols-[max-content_auto] items-center gap-2">
-            <button id="ui-collapse-button" class="text-xl text-neutral-500">
+            <button id="ui-collapse-button" class="text-xl text-neutral-500" aria-label="toggle ui section">
               <i class="ri-collapse-horizontal-line"></i>
             </button>
             <div class="h-[1px] flex-grow rounded-md bg-neutral-500"></div>
@@ -542,7 +542,7 @@
         <!-- animations -->
         <div class="mb-4 grid grid-cols-[1fr_max-content_1fr] items-center gap-2">
           <div class="grid grid-cols-[max-content_auto] items-center gap-2">
-            <button id="animations-collapse-button" class="text-xl text-neutral-500">
+            <button id="animations-collapse-button" class="text-xl text-neutral-500" aria-label="toggle animations section">
               <i class="ri-collapse-horizontal-line"></i>
             </button>
             <div class="h-[1px] flex-grow rounded-md bg-neutral-500"></div>
@@ -555,7 +555,7 @@
             <p class="text-base text-white">animations.enabled</p>
             <div class="ml-auto">
               <label class="relative inline-flex cursor-pointer items-center">
-                <input id="animations-enabled-checkbox" type="checkbox" value="" class="peer sr-only" />
+                <input id="animations-enabled-checkbox" type="checkbox" value="" class="peer sr-only" aria-label="animations enabled" />
                 <div
                   class="peer h-6 w-11 rounded-full bg-neutral-800 outline-none after:absolute after:left-[4px] after:top-[3px] after:aspect-square after:h-[1.15rem] after:rounded-full after:border-none after:bg-neutral-700 after:transition-all after:content-[''] peer-checked:bg-emerald-500 peer-checked:after:translate-x-full peer-checked:after:bg-white"
                 ></div>
@@ -645,7 +645,7 @@
         <!-- search -->
         <div class="mb-4 grid grid-cols-[1fr_max-content_1fr] items-center gap-2">
           <div class="grid grid-cols-[max-content_auto] items-center gap-2">
-            <button id="search-collapse-button" class="text-xl text-neutral-500">
+            <button id="search-collapse-button" class="text-xl text-neutral-500" aria-label="toggle search section">
               <i class="ri-collapse-horizontal-line"></i>
             </button>
             <div class="h-[1px] flex-grow rounded-md bg-neutral-500"></div>
@@ -659,7 +659,7 @@
               <p class="text-base text-white">search.enabled</p>
               <div class="ml-auto">
                 <label class="relative inline-flex cursor-pointer items-center">
-                  <input id="search-enabled-checkbox" type="checkbox" value="" class="peer sr-only" />
+                  <input id="search-enabled-checkbox" type="checkbox" value="" class="peer sr-only" aria-label="search enabled" />
                   <div
                     class="peer h-6 w-11 rounded-full bg-neutral-800 outline-none after:absolute after:left-[4px] after:top-[3px] after:aspect-square after:h-[1.15rem] after:rounded-full after:border-none after:bg-neutral-700 after:transition-all after:content-[''] peer-checked:bg-emerald-500 peer-checked:after:translate-x-full peer-checked:after:bg-white"
                   ></div>
@@ -722,7 +722,7 @@
                 </button>
                 <button id="search-engine-kagi-button" class="grid place-items-center rounded-md bg-neutral-800 py-2 outline-none hover:bg-neutral-700">
                   <div class="grid grid-cols-[24px_max-content] gap-2">
-                    <img src="assets/search-engines/kagi.png" alt="ecosia" />
+                    <img src="assets/search-engines/kagi.png" alt="kagi" />
                     <span class="text-white">kagi</span>
                   </div>
                 </button>
@@ -732,7 +732,7 @@
               <p class="text-base text-white">search.useCustomEngine</p>
               <div class="ml-auto">
                 <label class="relative inline-flex cursor-pointer items-center">
-                  <input id="search-use-custom-engine-checkbox" type="checkbox" value="" class="peer sr-only" />
+                  <input id="search-use-custom-engine-checkbox" type="checkbox" value="" class="peer sr-only" aria-label="search use custom engine" />
                   <div
                     class="peer h-6 w-11 rounded-full bg-neutral-800 outline-none after:absolute after:left-[4px] after:top-[3px] after:aspect-square after:h-[1.15rem] after:rounded-full after:border-none after:bg-neutral-700 after:transition-all after:content-[''] peer-checked:bg-emerald-500 peer-checked:after:translate-x-full peer-checked:after:bg-white"
                   ></div>
@@ -781,7 +781,7 @@
                 <p class="text-base text-white">search.buttons.clear</p>
                 <div class="ml-auto">
                   <label class="relative inline-flex cursor-pointer items-center">
-                    <input id="search-buttons-clear-checkbox" type="checkbox" value="" class="peer sr-only" />
+                    <input id="search-buttons-clear-checkbox" type="checkbox" value="" class="peer sr-only" aria-label="search buttons clear" />
                     <div
                       class="peer h-6 w-11 rounded-full bg-neutral-800 outline-none after:absolute after:left-[4px] after:top-[3px] after:aspect-square after:h-[1.15rem] after:rounded-full after:border-none after:bg-neutral-700 after:transition-all after:content-[''] peer-checked:bg-emerald-500 peer-checked:after:translate-x-full peer-checked:after:bg-white"
                     ></div>
@@ -795,7 +795,7 @@
                 <p class="text-base text-white">search.buttons.search</p>
                 <div class="ml-auto">
                   <label class="relative inline-flex cursor-pointer items-center">
-                    <input id="search-buttons-search-checkbox" type="checkbox" value="" class="peer sr-only" />
+                    <input id="search-buttons-search-checkbox" type="checkbox" value="" class="peer sr-only" aria-label="search buttons search" />
                     <div
                       class="peer h-6 w-11 rounded-full bg-neutral-800 outline-none after:absolute after:left-[4px] after:top-[3px] after:aspect-square after:h-[1.15rem] after:rounded-full after:border-none after:bg-neutral-700 after:transition-all after:content-[''] peer-checked:bg-emerald-500 peer-checked:after:translate-x-full peer-checked:after:bg-white"
                     ></div>
@@ -809,7 +809,7 @@
                 <p class="text-base text-white">search.recognizeLinks</p>
                 <div class="ml-auto">
                   <label class="relative inline-flex cursor-pointer items-center">
-                    <input id="search-recognize-links-checkbox" type="checkbox" value="" class="peer sr-only" />
+                    <input id="search-recognize-links-checkbox" type="checkbox" value="" class="peer sr-only" aria-label="search recognize links" />
                     <div
                       class="peer h-6 w-11 rounded-full bg-neutral-800 outline-none after:absolute after:left-[4px] after:top-[3px] after:aspect-square after:h-[1.15rem] after:rounded-full after:border-none after:bg-neutral-700 after:transition-all after:content-[''] peer-checked:bg-emerald-500 peer-checked:after:translate-x-full peer-checked:after:bg-white"
                     ></div>
@@ -827,7 +827,7 @@
                 <p class="text-base text-white">search.suggestions</p>
                 <div class="ml-auto">
                   <label class="relative inline-flex cursor-pointer items-center">
-                    <input id="search-suggestions-checkbox" type="checkbox" value="" class="peer sr-only" />
+                    <input id="search-suggestions-checkbox" type="checkbox" value="" class="peer sr-only" aria-label="search suggestions" />
                     <div
                       class="peer h-6 w-11 rounded-full bg-neutral-800 outline-none after:absolute after:left-[4px] after:top-[3px] after:aspect-square after:h-[1.15rem] after:rounded-full after:border-none after:bg-neutral-700 after:transition-all after:content-[''] peer-checked:bg-emerald-500 peer-checked:after:translate-x-full peer-checked:after:bg-white"
                     ></div>
@@ -845,7 +845,7 @@
                 <p class="text-base text-white">search.assist.date</p>
                 <div class="ml-auto">
                   <label class="relative inline-flex cursor-pointer items-center">
-                    <input id="search-assist-date-checkbox" type="checkbox" value="" class="peer sr-only" />
+                    <input id="search-assist-date-checkbox" type="checkbox" value="" class="peer sr-only" aria-label="search assist date" />
                     <div
                       class="peer h-6 w-11 rounded-full bg-neutral-800 outline-none after:absolute after:left-[4px] after:top-[3px] after:aspect-square after:h-[1.15rem] after:rounded-full after:border-none after:bg-neutral-700 after:transition-all after:content-[''] peer-checked:bg-emerald-500 peer-checked:after:translate-x-full peer-checked:after:bg-white"
                     ></div>
@@ -859,7 +859,7 @@
                 <p class="text-base text-white">search.assist.math</p>
                 <div class="ml-auto">
                   <label class="relative inline-flex cursor-pointer items-center">
-                    <input id="search-assist-math-checkbox" type="checkbox" value="" class="peer sr-only" />
+                    <input id="search-assist-math-checkbox" type="checkbox" value="" class="peer sr-only" aria-label="search assist math" />
                     <div
                       class="peer h-6 w-11 rounded-full bg-neutral-800 outline-none after:absolute after:left-[4px] after:top-[3px] after:aspect-square after:h-[1.15rem] after:rounded-full after:border-none after:bg-neutral-700 after:transition-all after:content-[''] peer-checked:bg-emerald-500 peer-checked:after:translate-x-full peer-checked:after:bg-white"
                     ></div>
@@ -875,7 +875,7 @@
                 <p class="text-base text-white">search.assist.definitions</p>
                 <div class="ml-auto">
                   <label class="relative inline-flex cursor-pointer items-center">
-                    <input id="search-assist-definitions-checkbox" type="checkbox" value="" class="peer sr-only" />
+                    <input id="search-assist-definitions-checkbox" type="checkbox" value="" class="peer sr-only" aria-label="search assist definitions" />
                     <div
                       class="peer h-6 w-11 rounded-full bg-neutral-800 outline-none after:absolute after:left-[4px] after:top-[3px] after:aspect-square after:h-[1.15rem] after:rounded-full after:border-none after:bg-neutral-700 after:transition-all after:content-[''] peer-checked:bg-emerald-500 peer-checked:after:translate-x-full peer-checked:after:bg-white"
                     ></div>
@@ -898,7 +898,7 @@
                 <p class="text-base text-white">search.assist.conversions</p>
                 <div class="ml-auto">
                   <label class="relative inline-flex cursor-pointer items-center">
-                    <input id="search-assist-conversions-checkbox" type="checkbox" value="" class="peer sr-only" />
+                    <input id="search-assist-conversions-checkbox" type="checkbox" value="" class="peer sr-only" aria-label="search assist conversions" />
                     <div
                       class="peer h-6 w-11 rounded-full bg-neutral-800 outline-none after:absolute after:left-[4px] after:top-[3px] after:aspect-square after:h-[1.15rem] after:rounded-full after:border-none after:bg-neutral-700 after:transition-all after:content-[''] peer-checked:bg-emerald-500 peer-checked:after:translate-x-full peer-checked:after:bg-white"
                     ></div>
@@ -921,7 +921,7 @@
                 <p class="text-base text-white">search.assist.passwordGenerator</p>
                 <div class="ml-auto">
                   <label class="relative inline-flex cursor-pointer items-center">
-                    <input id="search-assist-password-generator-checkbox" type="checkbox" value="" class="peer sr-only" />
+                    <input id="search-assist-password-generator-checkbox" type="checkbox" value="" class="peer sr-only" aria-label="search assist password generator" />
                     <div
                       class="peer h-6 w-11 rounded-full bg-neutral-800 outline-none after:absolute after:left-[4px] after:top-[3px] after:aspect-square after:h-[1.15rem] after:rounded-full after:border-none after:bg-neutral-700 after:transition-all after:content-[''] peer-checked:bg-emerald-500 peer-checked:after:translate-x-full peer-checked:after:bg-white"
                     ></div>
@@ -1038,7 +1038,7 @@
         <!-- hotkeys -->
         <div class="mb-4 grid grid-cols-[1fr_max-content_1fr] items-center gap-2">
           <div class="grid grid-cols-[max-content_auto] items-center gap-2">
-            <button id="hotkeys-collapse-button" class="text-xl text-neutral-500">
+            <button id="hotkeys-collapse-button" class="text-xl text-neutral-500" aria-label="toggle hotkeys section">
               <i class="ri-collapse-horizontal-line"></i>
             </button>
             <div class="h-[1px] flex-grow rounded-md bg-neutral-500"></div>
@@ -1055,7 +1055,7 @@
             <p class="text-base text-white">hotkeys.enabled</p>
             <div class="ml-auto">
               <label class="relative inline-flex cursor-pointer items-center">
-                <input id="hotkeys-enabled-checkbox" type="checkbox" value="" class="peer sr-only" />
+                <input id="hotkeys-enabled-checkbox" type="checkbox" value="" class="peer sr-only" aria-label="hotkeys enabled" />
                 <div
                   class="peer h-6 w-11 rounded-full bg-neutral-800 outline-none after:absolute after:left-[4px] after:top-[3px] after:aspect-square after:h-[1.15rem] after:rounded-full after:border-none after:bg-neutral-700 after:transition-all after:content-[''] peer-checked:bg-emerald-500 peer-checked:after:translate-x-full peer-checked:after:bg-white"
                 ></div>
@@ -1099,7 +1099,7 @@
         <!-- bookmarks -->
         <div class="mb-4 grid grid-cols-[1fr_max-content_1fr] items-center gap-2">
           <div class="grid grid-cols-[max-content_auto] items-center gap-2">
-            <button id="bookmarks-collapse-button" class="text-xl text-neutral-500">
+            <button id="bookmarks-collapse-button" class="text-xl text-neutral-500" aria-label="toggle bookmarks section">
               <i class="ri-collapse-horizontal-line"></i>
             </button>
             <div class="h-[1px] flex-grow rounded-md bg-neutral-500"></div>
@@ -1132,7 +1132,7 @@
                 <p class="text-base text-white">bookmarks.showBookmarkNames</p>
                 <div class="ml-auto">
                   <label class="relative inline-flex cursor-pointer items-center">
-                    <input id="bookmarks-show-bookmark-names-checkbox" type="checkbox" value="" class="peer sr-only" />
+                    <input id="bookmarks-show-bookmark-names-checkbox" type="checkbox" value="" class="peer sr-only" aria-label="bookmarks show bookmark names" />
                     <div
                       class="peer h-6 w-11 rounded-full bg-neutral-800 outline-none after:absolute after:left-[4px] after:top-[3px] after:aspect-square after:h-[1.15rem] after:rounded-full after:border-none after:bg-neutral-700 after:transition-all after:content-[''] peer-checked:bg-emerald-500 peer-checked:after:translate-x-full peer-checked:after:bg-white"
                     ></div>
@@ -1145,7 +1145,7 @@
                 <p class="text-base text-white">bookmarks.numberKeys</p>
                 <div class="ml-auto">
                   <label class="relative inline-flex cursor-pointer items-center">
-                    <input id="bookmarks-number-keys-checkbox" type="checkbox" value="" class="peer sr-only" />
+                    <input id="bookmarks-number-keys-checkbox" type="checkbox" value="" class="peer sr-only" aria-label="bookmarks number keys" />
                     <div
                       class="peer h-6 w-11 rounded-full bg-neutral-800 outline-none after:absolute after:left-[4px] after:top-[3px] after:aspect-square after:h-[1.15rem] after:rounded-full after:border-none after:bg-neutral-700 after:transition-all after:content-[''] peer-checked:bg-emerald-500 peer-checked:after:translate-x-full peer-checked:after:bg-white"
                     ></div>
@@ -1159,7 +1159,7 @@
                 <p class="text-base text-white">bookmarks.enablePagination</p>
                 <div class="ml-auto">
                   <label class="relative inline-flex cursor-pointer items-center">
-                    <input id="bookmarks-enable-pagination-checkbox" type="checkbox" value="" class="peer sr-only" />
+                    <input id="bookmarks-enable-pagination-checkbox" type="checkbox" value="" class="peer sr-only" aria-label="bookmarks enable pagination" />
                     <div
                       class="peer h-6 w-11 rounded-full bg-neutral-800 outline-none after:absolute after:left-[4px] after:top-[3px] after:aspect-square after:h-[1.15rem] after:rounded-full after:border-none after:bg-neutral-700 after:transition-all after:content-[''] peer-checked:bg-emerald-500 peer-checked:after:translate-x-full peer-checked:after:bg-white"
                     ></div>
@@ -1386,7 +1386,7 @@
         <!-- extras -->
         <div class="mb-4 grid grid-cols-[1fr_max-content_1fr] items-center gap-2">
           <div class="grid grid-cols-[max-content_auto] items-center gap-2">
-            <button id="extras-collapse-button" class="text-xl text-neutral-500">
+            <button id="extras-collapse-button" class="text-xl text-neutral-500" aria-label="toggle extras section">
               <i class="ri-collapse-horizontal-line"></i>
             </button>
             <div class="h-[1px] flex-grow rounded-md bg-neutral-500"></div>

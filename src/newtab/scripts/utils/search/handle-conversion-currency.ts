@@ -8,6 +8,13 @@ type ConversionCurrencyResult = {
 };
 
 const DEFAULT_TO = "USD";
+const RATE_CACHE_TTL_MS = 10 * 60 * 1000;
+
+type CachedRate = {
+  mid: number;
+  timestampMs?: number;
+  fetchedAt: number;
+};
 
 const normalizeInput = (s: string) => s.trim().replace(/\s+/g, " ");
 
@@ -77,6 +84,11 @@ const parseHexaTimestampMs = (ts?: string): number | undefined => {
   return Number.isFinite(ms) ? ms : undefined;
 };
 
+const conversionRateCache = new Map<string, CachedRate>();
+const conversionRateInFlight = new Map<string, Promise<{ mid: number; timestampMs?: number }>>();
+
+const getRateCacheKey = (from: string, to: string) => `${from}->${to}`;
+
 const getHexaRateLatest = async (
   from: string,
   to: string
@@ -101,6 +113,41 @@ const getHexaRateLatest = async (
   }
 
   return { mid, timestampMs: parseHexaTimestampMs(json.data?.timestamp) };
+};
+
+const getHexaRateLatestCached = async (
+  from: string,
+  to: string
+): Promise<{ mid: number; timestampMs?: number }> => {
+  const cacheKey = getRateCacheKey(from, to);
+  const now = Date.now();
+
+  const cached = conversionRateCache.get(cacheKey);
+  if (cached && now - cached.fetchedAt < RATE_CACHE_TTL_MS) {
+    return {
+      mid: cached.mid,
+      timestampMs: cached.timestampMs
+    };
+  }
+
+  const inFlight = conversionRateInFlight.get(cacheKey);
+  if (inFlight) return inFlight;
+
+  const fetchPromise = getHexaRateLatest(from, to)
+    .then((rate) => {
+      conversionRateCache.set(cacheKey, {
+        mid: rate.mid,
+        timestampMs: rate.timestampMs,
+        fetchedAt: Date.now()
+      });
+      return rate;
+    })
+    .finally(() => {
+      conversionRateInFlight.delete(cacheKey);
+    });
+
+  conversionRateInFlight.set(cacheKey, fetchPromise);
+  return fetchPromise;
 };
 
 export const handleConversionCurrency = async (
@@ -152,7 +199,7 @@ export const handleConversionCurrency = async (
   }
 
   try {
-    const { mid, timestampMs } = await getHexaRateLatest(fromCode, toCode);
+    const { mid, timestampMs } = await getHexaRateLatestCached(fromCode, toCode);
     const converted = leftParsed.amount * mid;
 
     return {

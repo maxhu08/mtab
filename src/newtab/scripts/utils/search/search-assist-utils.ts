@@ -350,6 +350,8 @@ export const displayAssist = (items: AssistItem[], config: Config) => {
       assistItemWrapperEl.classList.add("pb-2");
 
       const resultBtn = document.createElement("button");
+      resultBtn.type = "button";
+      resultBtn.setAttribute("aria-label", "Copy generated password to clipboard");
       resultBtn.className =
         "w-full text-left hover:bg-white/20 cursor-pointer px-2 pt-2 pb-1 grid gap-2 duration-0 focus-visible:bg-white/20 outline-none focus-visible:outline-none";
 

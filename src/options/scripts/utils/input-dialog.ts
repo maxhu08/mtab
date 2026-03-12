@@ -30,6 +30,9 @@ export const showInputDialog = (
   const dialog = document.createElement("div");
   dialog.className =
     "w-full max-w-xl rounded-md border-2 border-emerald-500 bg-neutral-900 p-4 text-base shadow-2xl";
+  dialog.setAttribute("role", "dialog");
+  dialog.setAttribute("aria-modal", "true");
+  dialog.setAttribute("aria-label", text);
   dialog.style.opacity = "0";
   dialog.style.transform = "translateY(8px) scale(0.96)";
   dialog.style.transition =
@@ -143,6 +146,9 @@ export const showActionDialog = (text: string, options: ActionDialogOptions): Pr
   const dialog = document.createElement("div");
   dialog.className =
     "w-full max-w-xl rounded-md border-2 border-rose-500 bg-neutral-900 p-4 text-base shadow-2xl";
+  dialog.setAttribute("role", "dialog");
+  dialog.setAttribute("aria-modal", "true");
+  dialog.setAttribute("aria-label", text);
   dialog.style.opacity = "0";
   dialog.style.transform = "translateY(8px) scale(0.96)";
   dialog.style.transition =
