@@ -1,4 +1,0 @@
-interface:
-  display_name: "Generate Commit Message"
-  short_description: "Draft Conventional Commit subjects from repo rules"
-  default_prompt: "Use docs/COMMITTING.md to produce a compliant Conventional Commit message for the described change."
