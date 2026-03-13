@@ -1,6 +1,6 @@
 # Coding Style
 
-Formatting is handled by Prettier on commit. Follow these project-specific rules:
+Formatting is handled by oxfmt on commit. Follow these project-specific rules:
 
 ## Core Rules
 
