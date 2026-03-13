@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+/* oxlint-disable typescript/no-explicit-any */
 import { Config } from "~/src/utils/config";
 import { normalizeStoredHotkey } from "~/src/utils/hotkeys";
 

@@ -1,4 +1,4 @@
-// eslint-disable-next-line no-undef
+// oxlint-disable-next-line no-undef
 chrome.runtime.onMessage.addListener((msg, _sender, sendResponse) => {
   // w - warmup (stop cold start)
   // s - suggestion request

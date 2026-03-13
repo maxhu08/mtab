@@ -11,36 +11,85 @@
     <script src="newtab/scripts/init.ts" type="module" defer></script>
   </head>
 
-  <body dir="ltr" class="grid min-h-screen place-items-center overflow-x-hidden overflow-y-scroll bg-black">
+  <body
+    dir="ltr"
+    class="grid min-h-screen place-items-center overflow-x-hidden overflow-y-scroll bg-black"
+  >
     <div id="cover" aria-hidden="true" class="fixed left-0 top-0 h-screen w-screen bg-black"></div>
     <div id="wallpaper" aria-hidden="true" class="fixed top-0 z-[-1] h-screen w-screen"></div>
-    <main id="content" class="m-padding-bottom top-distance absolute grid w-[95%] max-w-[50rem] place-items-center gap-2 md:w-[80%]">
+    <main
+      id="content"
+      class="m-padding-bottom top-distance absolute grid w-[95%] max-w-[50rem] place-items-center gap-2 md:w-[80%]"
+    >
       <div class="grid w-full grid-flow-row place-items-center gap-2 md:gap-4">
-        <p id="message" role="status" aria-live="polite" class="font-message text-size-message overflow-hidden whitespace-pre-wrap text-center font-semibold text-white"></p>
+        <p
+          id="message"
+          role="status"
+          aria-live="polite"
+          class="font-message text-size-message overflow-hidden whitespace-pre-wrap text-center font-semibold text-white"
+        ></p>
         <div class="grid w-full gap-2">
-          <section id="search-section" aria-label="Search" class="grid w-full grid-flow-row place-items-center gap-2">
+          <section
+            id="search-section"
+            aria-label="Search"
+            class="grid w-full grid-flow-row place-items-center gap-2"
+          >
             <div
               id="search-container"
               role="search"
               class="font-search corner-style grid w-full grid-cols-[max-content_auto_max-content] border-2 border-transparent p-1 text-base opacity-0 md:p-2 md:text-2xl"
             >
-              <span aria-hidden="true" class="search-search-icon-color select-none font-semibold">->&nbsp;</span>
-              <input id="search-input" type="text" autocomplete="off" aria-label="Search the web" class="font-search placeholder-color-search text-transition-none bg-transparent outline-none" />
+              <span aria-hidden="true" class="search-search-icon-color select-none font-semibold"
+                >->&nbsp;</span
+              >
+              <input
+                id="search-input"
+                type="text"
+                autocomplete="off"
+                aria-label="Search the web"
+                class="font-search placeholder-color-search text-transition-none bg-transparent outline-none"
+              />
               <div id="search-input-buttons" class="hidden items-center gap-3 px-1">
-                <button id="search-clear-button" type="button" aria-label="Clear search" class="search-action-button corner-style hidden h-[1em] w-[1em] place-items-center text-[1em] leading-none">
-                  <i aria-hidden="true" class="ri-close-large-line search-action-icon-color block leading-none"></i>
+                <button
+                  id="search-clear-button"
+                  type="button"
+                  aria-label="Clear search"
+                  class="search-action-button corner-style hidden h-[1em] w-[1em] place-items-center text-[1em] leading-none"
+                >
+                  <i
+                    aria-hidden="true"
+                    class="ri-close-large-line search-action-icon-color block leading-none"
+                  ></i>
                 </button>
-                <button id="search-submit-button" type="button" aria-label="Submit search" class="search-action-button corner-style hidden h-[1em] w-[1em] place-items-center text-[1em] leading-none">
-                  <i aria-hidden="true" class="ri-search-line search-action-icon-color block leading-none"></i>
+                <button
+                  id="search-submit-button"
+                  type="button"
+                  aria-label="Submit search"
+                  class="search-action-button corner-style hidden h-[1em] w-[1em] place-items-center text-[1em] leading-none"
+                >
+                  <i
+                    aria-hidden="true"
+                    class="ri-search-line search-action-icon-color block leading-none"
+                  ></i>
                 </button>
               </div>
             </div>
-            <div id="assistant-container" role="region" aria-label="Search assistant" class="hidden w-full gap-2"></div>
+            <div
+              id="assistant-container"
+              role="region"
+              aria-label="Search assistant"
+              class="hidden w-full gap-2"
+            ></div>
             <div id="bookmarks-container" role="region" aria-label="Bookmarks"></div>
           </section>
           <section id="bookmark-search-section" aria-label="Bookmark search" class="hidden w-full">
-            <div id="bookmark-search-container" class="font-search corner-style grid w-full grid-cols-[max-content_auto] border-2 border-transparent p-1 text-base md:p-2 md:text-2xl">
-              <span aria-hidden="true" class="search-bookmark-icon-color select-none font-semibold">//&nbsp;</span>
+            <div
+              id="bookmark-search-container"
+              class="font-search corner-style grid w-full grid-cols-[max-content_auto] border-2 border-transparent p-1 text-base md:p-2 md:text-2xl"
+            >
+              <span aria-hidden="true" class="search-bookmark-icon-color select-none font-semibold"
+                >//&nbsp;</span
+              >
               <input
                 id="bookmark-search-input"
                 type="text"
@@ -63,8 +112,18 @@
       </div>
     </main>
     <div id="wallpaper-credit-anchor" class="hidden">
-      <a id="wallpaper-credit-text" class="corner-style" target="_blank" rel="noopener noreferrer"></a>
+      <a
+        id="wallpaper-credit-text"
+        class="corner-style"
+        target="_blank"
+        rel="noopener noreferrer"
+      ></a>
     </div>
-    <div id="options-button-container" role="region" aria-label="Quick actions" class="fixed bottom-4 right-4"></div>
+    <div
+      id="options-button-container"
+      role="region"
+      aria-label="Quick actions"
+      class="fixed bottom-4 right-4"
+    ></div>
   </body>
 </html>

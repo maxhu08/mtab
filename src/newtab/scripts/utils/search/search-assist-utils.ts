@@ -20,7 +20,7 @@ export interface AssistMath {
 
 export interface AssistDefinition {
   type: "definition";
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  // oxlint-disable-next-line typescript/no-explicit-any
   result: any;
 }
 
@@ -179,7 +179,7 @@ export const displayAssist = (items: AssistItem[], config: Config) => {
         assistItemWrapperEl.appendChild(warnEl);
       }
     } else if (item.type === "definition") {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      // oxlint-disable-next-line typescript/no-explicit-any
       item.result.definitions.slice(0, 3).forEach((def: any) => {
         // <div class="grid grid-cols-[max-content_auto]">
         //   <span class="font-semibold select-none" style="color: ${config.search.placeholderTextColor}">&nbsp;-&nbsp;</span>

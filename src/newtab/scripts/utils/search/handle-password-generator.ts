@@ -20,7 +20,7 @@ export const handlePasswordGenerator = (val: string) => {
   const memorable = flags.has("m");
 
   const cryptoObj: Crypto | undefined =
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    // oxlint-disable-next-line typescript/no-explicit-any
     typeof crypto !== "undefined" ? crypto : (globalThis as any).crypto;
 
   const randInt = (maxExclusive: number) => {

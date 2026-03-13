@@ -1,6 +1,6 @@
 import { AssistDefinition } from "~/src/newtab/scripts/utils/search/search-assist-utils";
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
+// oxlint-disable-next-line typescript/no-explicit-any
 type DefinitionData = any;
 
 const definitionCache = new Map<string, DefinitionData | null>();

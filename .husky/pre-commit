@@ -9,7 +9,7 @@ old_ifs=$IFS
 IFS='
 '
 for file in $staged_files; do
-  bunx prettier --write "$file"
+  bunx oxfmt --write "$file"
   git add "$file"
 done
 IFS=$old_ifs

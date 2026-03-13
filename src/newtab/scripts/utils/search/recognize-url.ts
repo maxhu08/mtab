@@ -32,13 +32,13 @@ export const recognizeUrl = (input: string): string | null => {
 };
 
 const hasUrlParse =
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  // oxlint-disable-next-line typescript/no-explicit-any
   typeof (URL as any).parse === "function";
 
 const tryParseHttpUrl = (raw: string): string | null => {
   try {
     const u = hasUrlParse
-      ? // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      ? // oxlint-disable-next-line typescript/no-explicit-any
         (URL as any).parse(raw)
       : new URL(raw);
 

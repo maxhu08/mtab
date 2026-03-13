@@ -1,0 +1,13 @@
+{
+  "plugins": ["typescript", "oxc"],
+  "env": {
+    "browser": true,
+    "node": true,
+    "es2021": true
+  },
+  "ignorePatterns": ["node_modules", "dist", "output", ".parcel-cache", "ui.ts"],
+  "rules": {
+    "typescript/ban-ts-comment": "off",
+    "typescript/no-explicit-any": "error"
+  }
+}
