@@ -9,6 +9,7 @@ Use this page as the fast entry point for contributors.
 3. If you touch options UI/config behavior, read [Options Page](./OPTIONS_PAGE.md).
 4. Check [Project Structure](./PROJECT_STRUCTURE.md) if you are unsure where code belongs.
 5. Use [Committing](./COMMITTING.md) before opening a PR.
+6. Use [Issue Reporting](./ISSUE_REPORTING.md) when filing bugs or feature requests.
 
 ## Useful Things
 
