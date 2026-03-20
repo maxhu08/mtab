@@ -9,7 +9,10 @@ import {
 } from "~/src/utils/config";
 import { bookmarksContainerEl } from "~/src/newtab/scripts/ui";
 import { handleAnimation } from "~/src/newtab/scripts/utils/animations/handle-animation";
-import { getBookmarkIconDetails } from "~/src/newtab/scripts/utils/bookmarks/bookmark-icon";
+import {
+  getBookmarkIconDetails,
+  preloadBookmarkIconAsset
+} from "~/src/newtab/scripts/utils/bookmarks/bookmark-icon";
 import { openBookmark } from "~/src/newtab/scripts/utils/bookmarks/open-bookmark";
 import { openFolder } from "~/src/newtab/scripts/utils/bookmarks/open-folder";
 import { focusElementBorder, unfocusElementBorder } from "~/src/newtab/scripts/utils/focus-utils";
@@ -50,6 +53,8 @@ type PaginationState = {
   nextButtonEl: HTMLButtonElement | null;
 };
 
+const PRELOAD_CHILD_FOLDER_DEPTH = 2;
+
 let renderRuntime: RenderRuntime | null = null;
 let delegatedHandlersRegistered = false;
 
@@ -88,6 +93,25 @@ const getAccessibleNodeLabel = (type: "bookmark" | "folder", name: string) => {
   }
 
   return type === "folder" ? "Open folder" : "Open bookmark";
+};
+
+const preloadBookmarkNodeIconAssets = (
+  bookmarkNodes: BookmarkNode[],
+  defaultFolderIconType: string,
+  depth: number
+) => {
+  for (const bookmarkNode of bookmarkNodes) {
+    const iconType =
+      bookmarkNode.type === "folder"
+        ? (bookmarkNode.iconType ?? defaultFolderIconType)
+        : bookmarkNode.iconType;
+
+    preloadBookmarkIconAsset(iconType);
+
+    if (bookmarkNode.type === "folder" && depth > 0) {
+      preloadBookmarkNodeIconAssets(bookmarkNode.contents, defaultFolderIconType, depth - 1);
+    }
+  }
 };
 
 const handleBookmarkAction = (actionButtonEl: HTMLButtonElement, openInNewTab: boolean) => {
@@ -212,15 +236,60 @@ const openParentFolder = (parentFolderUUID: string) => {
   renderRuntime.currentOpenFolderEl = openFolderAreaEl;
 };
 
-const openFolderByUUID = (folderUUID: string) => {
-  if (!renderRuntime) return;
+const getChildFolderUUIDs = (parentFolderUUID: string) => {
+  if (!renderRuntime) return [] as string[];
+
+  const childFolderUUIDs: string[] = [];
+
+  for (const [folderUUID, meta] of renderRuntime.folderMetaByUUID.entries()) {
+    if (meta.parentFolderUUID === parentFolderUUID) {
+      childFolderUUIDs.push(folderUUID);
+    }
+  }
+
+  return childFolderUUIDs;
+};
+
+const preloadChildFolders = (parentFolderUUID: string, depth: number) => {
+  if (!renderRuntime || depth <= 0) return;
+
+  for (const childFolderUUID of getChildFolderUUIDs(parentFolderUUID)) {
+    ensureFolderAreaRendered(childFolderUUID, depth - 1);
+  }
+};
+
+const scheduleChildFolderPreload = (parentFolderUUID: string, depth: number) => {
+  if (depth <= 0) return;
+
+  const preload = () => {
+    preloadChildFolders(parentFolderUUID, depth);
+  };
+
+  if (typeof window.requestAnimationFrame === "function") {
+    window.requestAnimationFrame(() => {
+      preload();
+    });
+    return;
+  }
+
+  window.setTimeout(preload, 0);
+};
+
+const ensureFolderAreaRendered = (folderUUID: string, preloadDepth: number) => {
+  if (!renderRuntime) return null;
 
   const meta = renderRuntime.folderMetaByUUID.get(folderUUID);
-  if (!meta) return;
+  if (!meta) return null;
 
   if (!meta.folderAreaEl) {
     const folderAreaEl = createFolderArea(folderUUID);
     const folderActionsAreaEl = folderAreaEl.children[1] as HTMLDivElement;
+
+    preloadBookmarkNodeIconAssets(
+      meta.node.contents,
+      renderRuntime.config.bookmarks.defaultFolderIconType,
+      preloadDepth
+    );
 
     renderRuntime.folderAreaByUUID.set(folderUUID, folderAreaEl);
     meta.folderAreaEl = folderAreaEl;
@@ -249,11 +318,22 @@ const openFolderByUUID = (folderUUID: string) => {
     bookmarksContainerEl.appendChild(folderFrag);
   }
 
-  const targetFolderAreaEl = meta.folderAreaEl;
+  if (preloadDepth > 0) {
+    scheduleChildFolderPreload(folderUUID, preloadDepth);
+  }
+
+  return meta.folderAreaEl;
+};
+
+const openFolderByUUID = (folderUUID: string) => {
+  if (!renderRuntime) return;
+
+  const targetFolderAreaEl = ensureFolderAreaRendered(folderUUID, 0);
   if (!targetFolderAreaEl) return;
 
   openFolder(renderRuntime.currentOpenFolderEl, targetFolderAreaEl);
   renderRuntime.currentOpenFolderEl = targetFolderAreaEl;
+  scheduleChildFolderPreload(folderUUID, PRELOAD_CHILD_FOLDER_DEPTH);
 };
 
 const initializeRenderedButton = (borderEl: HTMLDivElement) => {
@@ -272,6 +352,10 @@ export const initBookmarkRenderRuntime = (rootFolderAreaEl: HTMLDivElement, conf
     paginationStateByFolderUUID: new Map(),
     currentOpenFolderEl: rootFolderAreaEl
   };
+};
+
+export const scheduleFolderChildPreload = (folderUUID: string, depth: number = 1) => {
+  scheduleChildFolderPreload(folderUUID, depth);
 };
 
 const updatePaginationControls = (
@@ -551,6 +635,12 @@ export const renderBookmarkNodes = (
 
   const itemsContainerEl = folderAreaEl.children[0] as HTMLDivElement;
   const parentFolderUUID = getFolderUUIDFromArea(folderAreaEl);
+
+  preloadBookmarkNodeIconAssets(
+    bookmarkNodes,
+    bookmarksDefaultFolderIconType,
+    PRELOAD_CHILD_FOLDER_DEPTH
+  );
 
   const frag = document.createDocumentFragment();
   const nodesToAnimate: HTMLButtonElement[] = [];

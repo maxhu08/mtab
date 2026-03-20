@@ -4,6 +4,8 @@ interface BookmarkIconResult {
   iconColor: string;
 }
 
+const preloadedBookmarkIconUrls = new Set<string>();
+
 export const getBookmarkIconDetails = (
   bookmarkIconType: string,
   bookmarkIconColor: string | null | undefined,
@@ -77,6 +79,38 @@ export const getBookmarkIconDetails = (
   }
 
   return { iconHTML: "", iconSizeClass: "", iconColor: "" };
+};
+
+export const getBookmarkIconAssetUrl = (bookmarkIconType: string) => {
+  if (bookmarkIconType.startsWith("fa-")) {
+    const space = bookmarkIconType.indexOf(" ");
+    if (space !== -1 && bookmarkIconType.startsWith("fa-", space + 1)) {
+      const first = bookmarkIconType.slice(3, space);
+      const second = bookmarkIconType.slice(space + 4);
+      return `/icons/fontawesome/svgs/${first}/${second}.svg`;
+    }
+  }
+
+  if (bookmarkIconType.startsWith("si-")) {
+    return `/icons/simpleicons/${bookmarkIconType.slice(3)}.svg`;
+  }
+
+  if (bookmarkIconType.startsWith("url-")) {
+    return bookmarkIconType.slice(4);
+  }
+
+  return null;
+};
+
+export const preloadBookmarkIconAsset = (bookmarkIconType: string) => {
+  const assetUrl = getBookmarkIconAssetUrl(bookmarkIconType);
+  if (!assetUrl || preloadedBookmarkIconUrls.has(assetUrl)) return;
+
+  preloadedBookmarkIconUrls.add(assetUrl);
+
+  const img = new Image();
+  img.decoding = "async";
+  img.src = assetUrl;
 };
 
 const isSvgUrl = (src: string) => /\.svg($|\?|#)/i.test(src);

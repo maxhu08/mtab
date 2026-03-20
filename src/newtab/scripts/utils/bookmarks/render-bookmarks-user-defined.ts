@@ -3,7 +3,8 @@ import { bookmarksContainerEl } from "~/src/newtab/scripts/ui";
 import {
   createFolderArea,
   initBookmarkRenderRuntime,
-  renderBookmarkNodes
+  renderBookmarkNodes,
+  scheduleFolderChildPreload
 } from "~/src/newtab/scripts/utils/bookmarks/bookmark-render-utils";
 import { insertCSS } from "~/src/newtab/scripts/utils/insert-css";
 import { genid } from "~/src/utils/genid";
@@ -42,4 +43,5 @@ export const renderBookmarkNodeBookmarks = (config: Config) => {
     config.animations.enabled,
     config
   );
+  scheduleFolderChildPreload(rootFolderUUID, 2);
 };

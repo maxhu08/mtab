@@ -3,7 +3,8 @@ import { bookmarksContainerEl } from "~/src/newtab/scripts/ui";
 import {
   createFolderArea,
   initBookmarkRenderRuntime,
-  renderBookmarkNodes
+  renderBookmarkNodes,
+  scheduleFolderChildPreload
 } from "~/src/newtab/scripts/utils/bookmarks/bookmark-render-utils";
 import { getBrowserBookmarkNodes } from "~/src/newtab/scripts/utils/bookmarks/bookmark-data-cache";
 import { insertCSS } from "~/src/newtab/scripts/utils/insert-css";
@@ -44,5 +45,6 @@ export const renderDefaultBlockyBookmarks = (config: Config) => {
     defaultFaviconSource: config.bookmarks.defaultFaviconSource
   }).then((bookmarkNodes) => {
     renderBookmarkNodes(bookmarkNodes, rootFolderAreaEl, config.animations.enabled, config);
+    scheduleFolderChildPreload(rootFolderUUID, 2);
   });
 };
