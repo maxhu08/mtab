@@ -39,6 +39,7 @@ type FolderMeta = {
 type RenderRuntime = {
   config: Config;
   folderMetaByUUID: Map<string, FolderMeta>;
+  childFolderUUIDsByParentUUID: Map<string, Set<string>>;
   folderAreaByUUID: Map<string, HTMLDivElement>;
   paginationStateByFolderUUID: Map<string, PaginationState>;
   currentOpenFolderEl: HTMLDivElement;
@@ -239,15 +240,7 @@ const openParentFolder = (parentFolderUUID: string) => {
 const getChildFolderUUIDs = (parentFolderUUID: string) => {
   if (!renderRuntime) return [] as string[];
 
-  const childFolderUUIDs: string[] = [];
-
-  for (const [folderUUID, meta] of renderRuntime.folderMetaByUUID.entries()) {
-    if (meta.parentFolderUUID === parentFolderUUID) {
-      childFolderUUIDs.push(folderUUID);
-    }
-  }
-
-  return childFolderUUIDs;
+  return Array.from(renderRuntime.childFolderUUIDsByParentUUID.get(parentFolderUUID) ?? []);
 };
 
 const preloadChildFolders = (parentFolderUUID: string, depth: number) => {
@@ -348,6 +341,7 @@ export const initBookmarkRenderRuntime = (rootFolderAreaEl: HTMLDivElement, conf
   renderRuntime = {
     config,
     folderMetaByUUID: new Map(),
+    childFolderUUIDsByParentUUID: new Map(),
     folderAreaByUUID: new Map([[rootFolderUUID, rootFolderAreaEl]]),
     paginationStateByFolderUUID: new Map(),
     currentOpenFolderEl: rootFolderAreaEl
@@ -702,6 +696,10 @@ export const renderBookmarkNodes = (
       parentFolderUUID,
       folderAreaEl: null
     });
+    const childFolderUUIDs = renderRuntime?.childFolderUUIDsByParentUUID.get(parentFolderUUID);
+    if (childFolderUUIDs) childFolderUUIDs.add(rendered.uuid);
+    else
+      renderRuntime?.childFolderUUIDsByParentUUID.set(parentFolderUUID, new Set([rendered.uuid]));
 
     frag.appendChild(rendered.buttonEl);
   });

@@ -672,7 +672,7 @@ const editURLAtIndex = async (index: number) => {
     defaultValue: wallpaperUrls[index],
     confirmText: "save"
   });
-  if (value == null) return;
+  if (value === null) return;
 
   const normalized = value.trim();
   if (!normalized) return;
@@ -689,7 +689,7 @@ const editSolidColorAtIndex = async (index: number) => {
     defaultValue: wallpaperSolidColors[index],
     confirmText: "save"
   });
-  if (value == null) return;
+  if (value === null) return;
 
   const normalized = value.trim();
   if (!normalized) return;
@@ -715,7 +715,7 @@ const editMixedEntry = async (entry: {
     defaultValue: entry.value,
     confirmText: "save"
   });
-  if (value == null) return;
+  if (value === null) return;
 
   const updated = await updateMixedWallpaperEntryValue({
     entryId: entry.id,

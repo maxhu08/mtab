@@ -6,11 +6,9 @@ const escapeHtml = (value: string): string =>
 const wrapToken = (className: string, value: string): string =>
   `<span class="${className}">${escapeHtml(value)}</span>`;
 
-const isDigit = (char: string | undefined): boolean => char !== undefined && /[0-9]/.test(char);
-const isIdentifierStart = (char: string | undefined): boolean =>
-  char !== undefined && /[A-Za-z_-]/.test(char);
-const isIdentifierChar = (char: string | undefined): boolean =>
-  char !== undefined && /[A-Za-z0-9_-]/.test(char);
+const isDigit = (char: string | undefined): boolean => /[0-9]/.test(char ?? "");
+const isIdentifierStart = (char: string | undefined): boolean => /[A-Za-z_-]/.test(char ?? "");
+const isIdentifierChar = (char: string | undefined): boolean => /[A-Za-z0-9_-]/.test(char ?? "");
 
 const cssValueKeywords = new Set([
   "absolute",
@@ -219,7 +217,7 @@ const tokenizeIdentifier = (
 };
 
 const tokenizeSelectorTokenAt = (value: string, start: number): { html: string; end: number } => {
-  const char = value[start];
+  const char = value[start]!;
 
   if (value.startsWith("/*", start)) return tokenizeComment(value, start);
   if (char === '"' || char === "'") return tokenizeString(value, start);
@@ -261,7 +259,7 @@ const tokenizeSelectorTokenAt = (value: string, start: number): { html: string; 
     };
   }
 
-  if (char !== undefined && ":,>+~=*".includes(char)) {
+  if (":,>+~=*".includes(char)) {
     return {
       html: wrapToken("custom-css-token-punctuation", char),
       end: start + 1
@@ -279,7 +277,7 @@ const tokenizeSelectorTokenAt = (value: string, start: number): { html: string; 
 };
 
 const tokenizeValueTokenAt = (value: string, start: number): { html: string; end: number } => {
-  const char = value[start];
+  const char = value[start]!;
 
   if (value.startsWith("/*", start)) return tokenizeComment(value, start);
   if (char === '"' || char === "'") return tokenizeString(value, start);
@@ -326,7 +324,7 @@ const tokenizeValueTokenAt = (value: string, start: number): { html: string; end
     };
   }
 
-  if (char !== undefined && ":,/".includes(char)) {
+  if (":,/".includes(char)) {
     return {
       html: wrapToken("custom-css-token-punctuation", char),
       end: start + 1

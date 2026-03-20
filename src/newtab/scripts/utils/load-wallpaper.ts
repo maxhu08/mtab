@@ -155,10 +155,11 @@ const loadMixedWallpaper = async (wallpaper: Config["wallpaper"]) => {
     listMixedWallpaperEntries(),
     listMixedUploadedWallpaperFiles()
   ]);
+  const filesById = new Map(files.map((file) => [file.id, file]));
 
   const validEntries = entries.filter((entry) => {
     if (entry.kind === "file-upload") {
-      return files.some((file) => file.id === entry.value);
+      return filesById.has(entry.value);
     }
 
     return typeof entry.value === "string" && entry.value.trim().length > 0;
@@ -186,7 +187,7 @@ const loadMixedWallpaper = async (wallpaper: Config["wallpaper"]) => {
     return;
   }
 
-  const fileMeta = files.find((file) => file.id === selected.value);
+  const fileMeta = filesById.get(selected.value);
   if (!fileMeta) return;
 
   const blob = await getMixedUploadedWallpaperFile(fileMeta.id);

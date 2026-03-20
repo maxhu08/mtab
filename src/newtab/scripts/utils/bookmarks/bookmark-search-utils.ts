@@ -19,6 +19,20 @@ import {
   hideSearchResultsSection
 } from "~/src/newtab/scripts/utils/search/handle-search-suggestions";
 
+const bookmarkSearchItemsCache = new WeakMap<BookmarkNodeBookmark[], SearchResultItem[]>();
+
+const getBookmarkSearchItems = (bookmarks: BookmarkNodeBookmark[]): SearchResultItem[] => {
+  const cached = bookmarkSearchItemsCache.get(bookmarks);
+  if (cached) return cached;
+
+  const searchItems = bookmarks
+    .filter((bm) => bm.type === "bookmark")
+    .map((bm) => ({ name: bm.name, value: bm.url, directLink: false }) satisfies SearchResultItem);
+
+  bookmarkSearchItemsCache.set(bookmarks, searchItems);
+  return searchItems;
+};
+
 export const tryFocusBookmarkSearch = (focusedBorderColor: string, e: KeyboardEvent) => {
   if (bookmarkSearchInputEl.matches(":focus")) return;
   focusBookmarkSearch(focusedBorderColor, e);
@@ -91,9 +105,7 @@ export const refreshBookmarkSearchResults = (
   linkTextColor: string,
   recognizeLinks: boolean
 ) => {
-  const bookmarkWithoutFolders = bookmarks
-    .filter((bm) => bm.type === "bookmark")
-    .map((bm) => ({ name: bm.name, value: bm.url, directLink: false }) satisfies SearchResultItem);
+  const bookmarkWithoutFolders = getBookmarkSearchItems(bookmarks);
 
   if (bookmarkWithoutFolders.length === 0) {
     searchResultsContainerEl.innerHTML = "";

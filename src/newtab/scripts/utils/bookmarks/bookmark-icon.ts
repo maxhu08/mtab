@@ -11,7 +11,7 @@ export const getBookmarkIconDetails = (
   bookmarkIconColor: string | null | undefined,
   bookmarksDefaultIconColor: string
 ): BookmarkIconResult => {
-  const trimmed = bookmarkIconColor == null ? undefined : bookmarkIconColor.trim() || undefined;
+  const trimmed = bookmarkIconColor?.trim() || undefined;
 
   const iconColor = trimmed ?? bookmarksDefaultIconColor;
 
@@ -39,10 +39,9 @@ export const getBookmarkIconDetails = (
       const url = `/icons/fontawesome/svgs/${first}/${second}.svg`;
 
       return {
-        iconHTML:
-          trimmed !== undefined
-            ? maskSpanHTML(url, trimmed)
-            : `<img class="w-10 md:w-14" src="${url}" alt="icon" />`,
+        iconHTML: trimmed
+          ? maskSpanHTML(url, trimmed)
+          : `<img class="w-10 md:w-14" src="${url}" alt="icon" />`,
         iconSizeClass: "",
         iconColor
       };
@@ -63,7 +62,7 @@ export const getBookmarkIconDetails = (
   if (bookmarkIconType.startsWith("url-")) {
     const src = bookmarkIconType.slice(4);
 
-    if (!isSvgUrl(src) || trimmed === undefined) {
+    if (!isSvgUrl(src) || !trimmed) {
       return {
         iconHTML: `<img class="w-10 md:w-14" src="${src}" alt="icon" />`,
         iconSizeClass: "",

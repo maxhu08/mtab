@@ -33,9 +33,8 @@ const rgbStringToHexAlpha = (value: string): string | null => {
   if (!matches || matches.length < 3) return null;
 
   const [r, g, b] = matches.slice(0, 3).map(Number);
-  const alpha = matches[3] === undefined ? null : Number(matches[3]);
-  const alphaHex =
-    alpha === null || Number.isNaN(alpha) ? "" : toHexPart(Math.max(0, Math.min(1, alpha)) * 255);
+  const alpha = Number(matches[3]);
+  const alphaHex = Number.isNaN(alpha) ? "" : toHexPart(Math.max(0, Math.min(1, alpha)) * 255);
 
   return `#${toHexPart(r)}${toHexPart(g)}${toHexPart(b)}${alphaHex}`;
 };

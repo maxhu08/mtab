@@ -89,7 +89,7 @@ export const handleSearchSuggestions = (
         return { name: s, value: s, directLink: false };
       }
       const recognized = recognizeUrl(s);
-      return { name: s, value: recognized ?? s, directLink: recognized !== null };
+      return { name: s, value: recognized ?? s, directLink: Boolean(recognized) };
     });
 
     searchResultsContainerEl.setAttribute(SELECTED_INDEX_ATTR, "0");
@@ -115,7 +115,7 @@ export const handleSearchSuggestions = (
     const first: SearchResultItem = {
       name: raw,
       value: recognized ?? raw,
-      directLink: recognized !== null
+      directLink: Boolean(recognized)
     };
 
     if (items.length === 0) items = [first];

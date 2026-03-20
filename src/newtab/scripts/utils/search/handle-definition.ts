@@ -7,8 +7,7 @@ const definitionCache = new Map<string, DefinitionData | null>();
 const inFlight = new Map<string, Promise<DefinitionData | null>>();
 
 const getDefinition = async (word: string) => {
-  const cached = definitionCache.get(word);
-  if (cached !== undefined) return cached;
+  if (definitionCache.has(word)) return definitionCache.get(word)!;
 
   const existing = inFlight.get(word);
   if (existing) return existing;

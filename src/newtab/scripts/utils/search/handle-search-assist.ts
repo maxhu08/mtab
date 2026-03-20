@@ -52,33 +52,33 @@ export const handleSearchAssist = (config: Config) => {
 
     if (config.search.assist.date) {
       const dateResult = handleDate(val);
-      if (dateResult !== undefined) assistItems.push(dateResult);
+      if (dateResult) assistItems.push(dateResult);
     }
 
     if (config.search.assist.math) {
       const mathResult = await handleMath(val);
       if (currentRunId !== assistRunId) return;
-      if (mathResult !== undefined) assistItems.push(mathResult);
+      if (mathResult) assistItems.push(mathResult);
     }
 
     if (config.search.assist.definitions) {
       const definitionResult = await handleDefinition(val);
       if (currentRunId !== assistRunId) return;
-      if (definitionResult !== undefined) assistItems.push(definitionResult);
+      if (definitionResult) assistItems.push(definitionResult);
     }
 
     if (config.search.assist.conversions) {
       const conversionResult = handleConversion(val);
-      if (conversionResult !== undefined) assistItems.push(conversionResult);
+      if (conversionResult) assistItems.push(conversionResult);
 
       const conversionCurrencyResult = await handleConversionCurrency(val);
       if (currentRunId !== assistRunId) return;
-      if (conversionCurrencyResult !== undefined) assistItems.push(conversionCurrencyResult);
+      if (conversionCurrencyResult) assistItems.push(conversionCurrencyResult);
     }
 
     if (config.search.assist.passwordGenerator) {
       const passwordGeneratorResult = handlePasswordGenerator(val);
-      if (passwordGeneratorResult !== undefined) assistItems.push(passwordGeneratorResult);
+      if (passwordGeneratorResult) assistItems.push(passwordGeneratorResult);
     }
 
     if (assistItems.length > 0) displayAssist(assistItems, config);

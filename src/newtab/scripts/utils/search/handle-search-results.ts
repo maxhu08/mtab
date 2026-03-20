@@ -17,6 +17,13 @@ export type RenderSearchResultsOptions = {
   onOpen: (url: string, openInNewTab: boolean) => void;
 };
 
+type AnalyzedSearchResultItem = {
+  item: SearchResultItem;
+  trimmedNameLower: string;
+  directStartsWithQuery: boolean;
+  highlightRanges: boolean[];
+};
+
 const ICON_CLASS = "sr-icon";
 
 const getButtons = () => {
@@ -98,22 +105,23 @@ export const renderSearchResults = (
   const rawValue = inputEl.value;
   const isBookmarkInput = inputEl.id === "bookmark-search-input";
 
-  let filtered = fuzzySearch(searchValue, items).sort((a, b) => {
-    const aContains = a.name.toLowerCase().startsWith(searchValue);
-    const bContains = b.name.toLowerCase().startsWith(searchValue);
-    return aContains === bContains ? 0 : aContains ? -1 : 1;
-  });
+  let filtered = analyzeSearchResults(searchValue, items);
 
   if (!isBookmarkInput) {
     const q = rawValue.trim();
     if (q) {
       const qLower = q.toLowerCase();
-      filtered = filtered.filter((it) => it.name.trim().toLowerCase() !== qLower);
+      filtered = filtered.filter((entry) => entry.trimmedNameLower !== qLower);
       const recognized = recognizeLinks ? recognizeUrl(q) : null;
       filtered.unshift({
-        name: q,
-        value: recognized ?? q,
-        directLink: recognized !== null
+        item: {
+          name: q,
+          value: recognized ?? q,
+          directLink: Boolean(recognized)
+        },
+        trimmedNameLower: qLower,
+        directStartsWithQuery: true,
+        highlightRanges: getHighlightRanges(q, searchValue)
       });
     }
   }
@@ -130,14 +138,14 @@ export const renderSearchResults = (
 
   const totalRows = visible.length + (isBookmarkInput && overflow > 0 ? 1 : 0);
 
-  visible.forEach((item, index) => {
+  visible.forEach(({ item, highlightRanges }, index) => {
     const matchedNameHtml = getMatchedNameHtml(
       item.name,
-      searchValue,
       textColor,
       placeholderTextColor,
       linkTextColor,
-      item.directLink
+      item.directLink,
+      highlightRanges
     );
 
     const buttonEl = document.createElement("button");
@@ -245,14 +253,13 @@ export const renderSearchResults = (
 
 const getMatchedNameHtml = (
   name: string,
-  searchValue: string,
   textColor: string,
   placeholderTextColor: string,
   linkTextColor: string,
-  directLink: boolean
+  directLink: boolean,
+  highlightRanges: boolean[]
 ) => {
   const matchColor = directLink ? linkTextColor : textColor;
-  const highlightRanges = getHighlightRanges(name, searchValue);
 
   return Array.from(name)
     .map((char, index) => {
@@ -324,10 +331,89 @@ const escapeHtml = (value: string) =>
     .replace(/"/g, "&quot;")
     .replace(/'/g, "&#39;");
 
-const fuzzySearch = (search: string, items: SearchResultItem[]) => {
-  if (search === "") return items;
+const analyzeSearchResults = (
+  searchValue: string,
+  items: SearchResultItem[]
+): AnalyzedSearchResultItem[] => {
+  if (searchValue === "") {
+    return items.map((item) => ({
+      item,
+      trimmedNameLower: item.name.trim().toLowerCase(),
+      directStartsWithQuery: true,
+      highlightRanges: Array.from(item.name, () => false)
+    }));
+  }
 
-  return items.filter((item) => getFuzzyMatchRanges(item.name, search) !== null);
+  const analyzed: AnalyzedSearchResultItem[] = [];
+
+  for (const item of items) {
+    const nameLower = item.name.toLowerCase();
+    const highlightRanges = getFuzzyMatchRangesFromLowerName(nameLower, searchValue);
+    if (!highlightRanges) continue;
+
+    analyzed.push({
+      item,
+      trimmedNameLower: item.name.trim().toLowerCase(),
+      directStartsWithQuery: nameLower.startsWith(searchValue),
+      highlightRanges:
+        getContiguousMatchRangesFromLowerName(nameLower, searchValue) ?? highlightRanges
+    });
+  }
+
+  analyzed.sort((a, b) => {
+    return a.directStartsWithQuery === b.directStartsWithQuery
+      ? 0
+      : a.directStartsWithQuery
+        ? -1
+        : 1;
+  });
+
+  return analyzed;
+};
+
+const getContiguousMatchRangesFromLowerName = (nameLower: string, searchValue: string) => {
+  const ranges: boolean[] = Array.from(nameLower, () => false);
+  const query = searchValue.trim();
+
+  if (!query) return null;
+
+  const directMatchIndex = nameLower.indexOf(query);
+
+  if (directMatchIndex === -1) return null;
+
+  for (let i = directMatchIndex; i < directMatchIndex + query.length; i++) {
+    ranges[i] = true;
+  }
+
+  return ranges;
+};
+
+const getFuzzyMatchRangesFromLowerName = (nameLower: string, searchValue: string) => {
+  const ranges: boolean[] = Array.from(nameLower, () => false);
+  const query = searchValue;
+  const trimmedQuery = query.trim();
+
+  if (!trimmedQuery) return null;
+
+  let queryIndex = 0;
+  let matchedChars = 0;
+
+  for (let i = 0; i < nameLower.length && queryIndex < query.length; i++) {
+    while (query[queryIndex] === " ") queryIndex++;
+    if (queryIndex >= query.length) break;
+
+    if (nameLower[i] !== query[queryIndex]) continue;
+
+    ranges[i] = true;
+    queryIndex++;
+    matchedChars++;
+  }
+
+  while (query[queryIndex] === " ") queryIndex++;
+
+  if (queryIndex !== query.length || matchedChars === 0) return null;
+
+  return ranges;
 };
 
 type HandleSearchResultsNavigationOptions = {
