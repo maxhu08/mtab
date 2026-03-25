@@ -121,6 +121,11 @@ html {
   .h-bookmark {
     height: 5rem !important;
   }
+
+  .bookmarks-cols .visibilty-bookmark-name {
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+  }
 }
 
 @media (max-height: 400px) {
