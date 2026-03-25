@@ -454,7 +454,8 @@ const syncCustomCSSMetrics = () => {
 
 const syncCustomCSSHighlight = () => {
   const value = uiCustomCSSTextareaEl.value;
-  uiCustomCSSHighlightEl.innerHTML = renderCustomCSSValue(value.length > 0 ? value : " ");
+  const displayValue = value.length === 0 || value.endsWith("\n") ? `${value} ` : value;
+  uiCustomCSSHighlightEl.innerHTML = renderCustomCSSValue(displayValue);
 };
 
 export const syncCustomCSSHighlightScroll = () => {
