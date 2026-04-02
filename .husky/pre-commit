@@ -1,15 +1,11 @@
 #!/usr/bin/env sh
 set -e
 
-staged_files=$(git diff --cached --name-only --diff-filter=ACMR -- '*.js' '*.jsx' '*.mjs' '*.cjs' '*.ts' '*.tsx' '*.json' '*.html')
+git diff --cached --name-only -z --diff-filter=ACMR -- '*.js' '*.jsx' '*.mjs' '*.cjs' '*.ts' '*.tsx' '*.json' '*.html' |
+  xargs -0 -r bunx oxfmt --write --
 
-[ -z "$staged_files" ] && exit 0
+git diff --cached --name-only -z --diff-filter=ACMR -- '*.js' '*.jsx' '*.mjs' '*.cjs' '*.ts' '*.tsx' '*.json' '*.html' |
+  xargs -0 -r git add --
 
-old_ifs=$IFS
-IFS='
-'
-for file in $staged_files; do
-  bunx oxfmt --write "$file"
-  git add "$file"
-done
-IFS=$old_ifs
+
+
