@@ -1,5 +1,5 @@
-# Changes in 1.12.1
+# Changes in 1.12.2
 
 in this release:
 
-- performance improvements
+- visual improvements
