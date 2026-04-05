@@ -303,7 +303,7 @@ input[type="number"]::-webkit-inner-spin-button {
 }
 
 .custom-css-textarea::selection {
-  background-color: rgba(14, 165, 233, 0.3);
+  background-color: #ffffff20;
 }
 
 .custom-css-highlight::-webkit-scrollbar,
