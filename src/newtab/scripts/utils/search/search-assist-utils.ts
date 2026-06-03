@@ -81,6 +81,46 @@ const showWrapper = (el: HTMLElement) => {
   if (el.classList.contains("hidden")) el.classList.remove("hidden");
 };
 
+const appendAssistTextRow = ({
+  parent,
+  marker,
+  markerColor,
+  contentClassName,
+  contentColor,
+  textContent,
+  html
+}: {
+  parent: HTMLElement;
+  marker: string;
+  markerColor: string;
+  contentClassName: string;
+  contentColor: string;
+  textContent?: string;
+  html?: string;
+}) => {
+  const rowEl = document.createElement("div");
+  rowEl.className = "w-full grid grid-cols-[max-content_auto]";
+
+  const markerEl = document.createElement("span");
+  markerEl.className = "font-semibold select-none";
+  markerEl.style.color = markerColor;
+  markerEl.innerHTML = marker;
+
+  const contentEl = document.createElement("div");
+  contentEl.className = contentClassName;
+  contentEl.style.color = contentColor;
+
+  if (html !== undefined) {
+    contentEl.innerHTML = html;
+  } else {
+    contentEl.textContent = textContent ?? "";
+  }
+
+  rowEl.appendChild(markerEl);
+  rowEl.appendChild(contentEl);
+  parent.appendChild(rowEl);
+};
+
 export const displayAssist = (items: AssistItem[], config: Config) => {
   assistantContainerEl.innerHTML = "";
   assistantContainerEl.classList.replace("hidden", "grid");
@@ -101,27 +141,19 @@ export const displayAssist = (items: AssistItem[], config: Config) => {
       //   </div>
       // </div>
 
-      const gridContainerEl = document.createElement("div");
-      gridContainerEl.className = "w-full grid grid-cols-[max-content_auto]";
-
-      const spanEl = document.createElement("span");
-      spanEl.className = "font-semibold select-none";
-      spanEl.style.color = config.search.placeholderTextColor;
-      spanEl.innerHTML = "&nbsp;=&nbsp;";
-
-      const dateTextEl = document.createElement("div");
-      dateTextEl.className = "text-ellipsis overflow-hidden whitespace-nowrap w-full";
-      dateTextEl.style.color = config.search.textColor;
-      dateTextEl.textContent = new Intl.DateTimeFormat("en-US", {
-        year: "numeric",
-        month: "long",
-        day: "numeric",
-        weekday: "long"
-      }).format(new Date());
-
-      gridContainerEl.appendChild(spanEl);
-      gridContainerEl.appendChild(dateTextEl);
-      assistItemWrapperEl.appendChild(gridContainerEl);
+      appendAssistTextRow({
+        parent: assistItemWrapperEl,
+        marker: "&nbsp;=&nbsp;",
+        markerColor: config.search.placeholderTextColor,
+        contentClassName: "text-ellipsis overflow-hidden whitespace-nowrap w-full",
+        contentColor: config.search.textColor,
+        textContent: new Intl.DateTimeFormat("en-US", {
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+          weekday: "long"
+        }).format(new Date())
+      });
       showWrapper(assistItemWrapperEl);
     } else if (item.type === "math") {
       // <div class="w-full grid grid-cols-[max-content_auto]">
@@ -131,22 +163,14 @@ export const displayAssist = (items: AssistItem[], config: Config) => {
       //   </div>
       // </div>
 
-      const gridContainerEl = document.createElement("div");
-      gridContainerEl.className = "w-full grid grid-cols-[max-content_auto]";
-
-      const spanEl = document.createElement("span");
-      spanEl.className = "font-semibold select-none";
-      spanEl.style.color = config.search.placeholderTextColor;
-      spanEl.innerHTML = "&nbsp;=&nbsp;";
-
-      const resultTextEl = document.createElement("div");
-      resultTextEl.className = "text-ellipsis overflow-hidden whitespace-nowrap w-full";
-      resultTextEl.style.color = config.search.textColor;
-      resultTextEl.textContent = item.result;
-
-      gridContainerEl.appendChild(spanEl);
-      gridContainerEl.appendChild(resultTextEl);
-      assistItemWrapperEl.appendChild(gridContainerEl);
+      appendAssistTextRow({
+        parent: assistItemWrapperEl,
+        marker: "&nbsp;=&nbsp;",
+        markerColor: config.search.placeholderTextColor,
+        contentClassName: "text-ellipsis overflow-hidden whitespace-nowrap w-full",
+        contentColor: config.search.textColor,
+        textContent: item.result
+      });
       showWrapper(assistItemWrapperEl);
 
       const resultAsNum = parseFloat(item.result);
@@ -161,22 +185,14 @@ export const displayAssist = (items: AssistItem[], config: Config) => {
         //   </div>
         // </div>
 
-        const warnEl = document.createElement("div");
-        warnEl.className = "w-full grid grid-cols-[max-content_auto]";
-
-        const warnSpanEl = document.createElement("span");
-        warnSpanEl.className = "font-semibold select-none";
-        warnSpanEl.style.color = config.search.placeholderTextColor;
-        warnSpanEl.innerHTML = "&nbsp;*&nbsp;";
-
-        const warnTextEl = document.createElement("div");
-        warnTextEl.className = "text-ellipsis overflow-hidden whitespace-nowrap w-full";
-        warnTextEl.style.color = config.search.placeholderTextColor;
-        warnTextEl.textContent = "reduced precision";
-
-        warnEl.appendChild(warnSpanEl);
-        warnEl.appendChild(warnTextEl);
-        assistItemWrapperEl.appendChild(warnEl);
+        appendAssistTextRow({
+          parent: assistItemWrapperEl,
+          marker: "&nbsp;*&nbsp;",
+          markerColor: config.search.placeholderTextColor,
+          contentClassName: "text-ellipsis overflow-hidden whitespace-nowrap w-full",
+          contentColor: config.search.placeholderTextColor,
+          textContent: "reduced precision"
+        });
       }
     } else if (item.type === "definition") {
       // oxlint-disable-next-line typescript/no-explicit-any
@@ -188,22 +204,14 @@ export const displayAssist = (items: AssistItem[], config: Config) => {
         //   </div>
         // </div>
 
-        const gridContainerEl = document.createElement("div");
-        gridContainerEl.className = "w-full grid grid-cols-[max-content_auto]";
-
-        const spanEl = document.createElement("span");
-        spanEl.className = "font-semibold select-none";
-        spanEl.style.color = config.search.placeholderTextColor;
-        spanEl.innerHTML = "&nbsp;-&nbsp;";
-
-        const definitionEl = document.createElement("div");
-        definitionEl.className = "w-full";
-        definitionEl.style.color = config.search.textColor;
-        definitionEl.innerHTML = `${def.definition} <span style="color: ${config.search.placeholderTextColor}">(${def.pos})</span>`;
-
-        gridContainerEl.appendChild(spanEl);
-        gridContainerEl.appendChild(definitionEl);
-        assistItemWrapperEl.appendChild(gridContainerEl);
+        appendAssistTextRow({
+          parent: assistItemWrapperEl,
+          marker: "&nbsp;-&nbsp;",
+          markerColor: config.search.placeholderTextColor,
+          contentClassName: "w-full",
+          contentColor: config.search.textColor,
+          html: `${def.definition} <span style="color: ${config.search.placeholderTextColor}">(${def.pos})</span>`
+        });
         showWrapper(assistItemWrapperEl);
       });
     } else if (item.type === "conversion") {

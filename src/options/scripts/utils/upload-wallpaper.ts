@@ -186,20 +186,42 @@ const getGalleryInnerContainer = (item: HTMLElement) => {
   return inner;
 };
 
-const addTileRepositionHandle = (item: HTMLElement) => {
-  const handle = document.createElement("button");
-  handle.type = "button";
-  handle.className = galleryHandleClass;
-  handle.setAttribute("data-tippy-content", "reorder wallpaper");
-  handle.setAttribute("aria-label", "reorder wallpaper");
-  handle.innerHTML = '<i class="ri-draggable"></i>';
-
-  handle.addEventListener("click", (event) => {
+const appendGalleryActionButton = ({
+  parent,
+  className,
+  tooltip,
+  html,
+  onClick
+}: {
+  parent: HTMLElement;
+  className: string;
+  tooltip: string;
+  html: string;
+  onClick: (event: MouseEvent) => void;
+}) => {
+  const button = document.createElement("button");
+  button.type = "button";
+  button.className = className;
+  button.setAttribute("data-tippy-content", tooltip);
+  button.setAttribute("aria-label", tooltip);
+  button.innerHTML = html;
+  button.addEventListener("click", (event) => {
     event.preventDefault();
     event.stopPropagation();
+    onClick(event);
   });
+  parent.appendChild(button);
+  return button;
+};
 
-  item.appendChild(handle);
+const addTileRepositionHandle = (item: HTMLElement) => {
+  appendGalleryActionButton({
+    parent: item,
+    className: galleryHandleClass,
+    tooltip: "reorder wallpaper",
+    html: '<i class="ri-draggable"></i>',
+    onClick: () => {}
+  });
 };
 
 const addTileHoverOverlay = (item: HTMLElement) => {
@@ -210,20 +232,15 @@ const addTileHoverOverlay = (item: HTMLElement) => {
 };
 
 const addTileDeleteButton = (item: HTMLElement, onDelete: () => void) => {
-  const deleteButton = document.createElement("button");
-  deleteButton.type = "button";
-  deleteButton.className = `${galleryDeleteClass} absolute right-1.5 top-1.5 z-20 hidden h-7 w-7 place-items-center rounded-md bg-rose-500 text-white transition hover:bg-rose-600 group-hover:grid outline-none`;
-  deleteButton.setAttribute("data-tippy-content", "delete wallpaper");
-  deleteButton.setAttribute("aria-label", "delete wallpaper");
-  deleteButton.innerHTML = '<i class="ri-delete-bin-line"></i>';
-
-  deleteButton.addEventListener("click", (event) => {
-    event.preventDefault();
-    event.stopPropagation();
-    onDelete();
+  appendGalleryActionButton({
+    parent: item,
+    className: `${galleryDeleteClass} absolute right-1.5 top-1.5 z-20 hidden h-7 w-7 place-items-center rounded-md bg-rose-500 text-white transition hover:bg-rose-600 group-hover:grid outline-none`,
+    tooltip: "delete wallpaper",
+    html: '<i class="ri-delete-bin-line"></i>',
+    onClick: () => {
+      onDelete();
+    }
   });
-
-  item.appendChild(deleteButton);
 };
 
 const openWallpaperFilePickerForAdd = () => {
@@ -239,31 +256,24 @@ const openWallpaperFilePickerForReplacement = (replacement: PendingWallpaperFile
 };
 
 const addTileTypeBadge = (item: HTMLElement, type: EditableWallpaperType, onEdit: () => void) => {
-  const badge = document.createElement("button");
-  badge.type = "button";
-  badge.className = galleryTypeBadgeClass;
   const editLabel =
     type === "url" ? "edit url" : type === "file-upload" ? "edit file upload" : "edit solid color";
-  badge.setAttribute("data-tippy-content", editLabel);
-  badge.setAttribute("aria-label", editLabel);
+  const iconClass =
+    type === "url"
+      ? "ri-link-m text-sm"
+      : type === "file-upload"
+        ? "ri-image-upload-line text-sm"
+        : "ri-palette-line text-sm";
 
-  const icon = document.createElement("i");
-
-  if (type === "url") {
-    icon.className = "ri-link-m text-sm";
-  } else if (type === "file-upload") {
-    icon.className = "ri-image-upload-line text-sm";
-  } else {
-    icon.className = "ri-palette-line text-sm";
-  }
-
-  badge.appendChild(icon);
-  badge.addEventListener("click", (event) => {
-    event.preventDefault();
-    event.stopPropagation();
-    onEdit();
+  appendGalleryActionButton({
+    parent: item,
+    className: galleryTypeBadgeClass,
+    tooltip: editLabel,
+    html: `<i class="${iconClass}"></i>`,
+    onClick: () => {
+      onEdit();
+    }
   });
-  item.appendChild(badge);
 };
 
 const addSimpleAddTile = (renderNonce: number, onClick: () => void) => {
@@ -303,20 +313,16 @@ const addMixedAddTile = (renderNonce: number) => {
   ];
 
   segments.forEach((segment) => {
-    const segmentButton = document.createElement("button");
-    segmentButton.type = "button";
-    segmentButton.className = "wallpaper-gallery-add-mixed-segment";
-    segmentButton.setAttribute("data-tippy-content", segment.tooltip);
-    segmentButton.setAttribute("aria-label", segment.tooltip);
-    segmentButton.innerHTML = `<i class="${segment.icon}"></i>`;
-    segmentButton.addEventListener("click", (event) => {
-      event.preventDefault();
-      event.stopPropagation();
-      if (renderNonce !== wallpaperGalleryRenderNonce) return;
-      void addMixedEntryForAction(segment.action);
+    appendGalleryActionButton({
+      parent: addTile,
+      className: "wallpaper-gallery-add-mixed-segment",
+      tooltip: segment.tooltip,
+      html: `<i class="${segment.icon}"></i>`,
+      onClick: () => {
+        if (renderNonce !== wallpaperGalleryRenderNonce) return;
+        void addMixedEntryForAction(segment.action);
+      }
     });
-
-    addTile.appendChild(segmentButton);
   });
 
   wallpaperGalleryEl.appendChild(addTile);

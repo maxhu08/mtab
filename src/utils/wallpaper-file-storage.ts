@@ -1,6 +1,7 @@
 import { get as idbGet, set as idbSet } from "idb-keyval";
 import { logger } from "~/src/utils/logger";
 import { genid } from "~/src/utils/genid";
+import { cacheWallpaperFiles, createWallpaperFileMeta } from "~/src/utils/wallpaper-storage-shared";
 
 const WALLPAPER_CACHE_NAME = "local-files";
 const WALLPAPER_CACHE_URL = "https://wallpaper.invalid/full";
@@ -395,27 +396,16 @@ const migrateLegacySingleWallpaperIfNeeded = async () => {
   const optimized = await optimizeWallpaper(blob);
   const thumb = await createThumbnail(optimized);
 
-  await setCachedFile({ id, size: "full", file: optimized });
-  await setCachedFile({ id, size: "thumb", file: thumb });
+  await cacheWallpaperFiles(setCachedFile, id, optimized, thumb);
 
   const now = Date.now();
-  const metadata: UploadedWallpaperFileMeta = {
+  const metadata: UploadedWallpaperFileMeta = createWallpaperFileMeta({
     id,
     name: "legacy-wallpaper",
     mimeType: optimized.type,
     createdAt: now,
-    lastUsedAt: now,
-    imageOptions: {
-      size: "cover",
-      x: "50%",
-      y: "50%"
-    },
-    videoOptions: {
-      zoom: 1,
-      playbackRate: 1,
-      fade: 4
-    }
-  };
+    lastUsedAt: now
+  });
 
   await setUploadedFilesMeta([metadata]);
 };
@@ -438,26 +428,15 @@ export const addUploadedWallpaperFiles = async (files: FileList | File[]) => {
     const thumb = await createThumbnail(optimized);
     const now = Date.now();
 
-    const metadata: UploadedWallpaperFileMeta = {
+    const metadata: UploadedWallpaperFileMeta = createWallpaperFileMeta({
       id,
       name: file.name,
       mimeType: optimized.type,
       createdAt: now,
-      lastUsedAt: now,
-      imageOptions: {
-        size: "cover",
-        x: "50%",
-        y: "50%"
-      },
-      videoOptions: {
-        zoom: 1,
-        playbackRate: 1,
-        fade: 4
-      }
-    };
+      lastUsedAt: now
+    });
 
-    await setCachedFile({ id, size: "full", file: optimized });
-    await setCachedFile({ id, size: "thumb", file: thumb });
+    await cacheWallpaperFiles(setCachedFile, id, optimized, thumb);
 
     current.push(metadata);
   }
@@ -523,25 +502,14 @@ export const replaceUploadedWallpaperFile = async ({ id, file }: { id: string; f
   const current = list[index];
   const now = Date.now();
 
-  const next: UploadedWallpaperFileMeta = {
+  const next: UploadedWallpaperFileMeta = createWallpaperFileMeta({
     ...current,
     name: file.name,
     mimeType: optimized.type,
-    lastUsedAt: now,
-    imageOptions: {
-      size: "cover",
-      x: "50%",
-      y: "50%"
-    },
-    videoOptions: {
-      zoom: 1,
-      playbackRate: 1,
-      fade: 4
-    }
-  };
+    lastUsedAt: now
+  });
 
-  await setCachedFile({ id, size: "full", file: optimized });
-  await setCachedFile({ id, size: "thumb", file: thumb });
+  await cacheWallpaperFiles(setCachedFile, id, optimized, thumb);
 
   list[index] = next;
   await setUploadedFilesMeta(list);

@@ -68,6 +68,12 @@ const getFolderUUIDFromArea = (folderAreaEl: HTMLDivElement) =>
 const getBorderEl = (buttonEl: HTMLButtonElement) =>
   buttonEl.querySelector(`[${BORDER_ROLE_ATTR}='border']`) as HTMLDivElement | null;
 
+const getDelegatedActionButton = (target: EventTarget | null) => {
+  if (!(target instanceof HTMLElement)) return null;
+
+  return target.closest(`button[${BOOKMARK_ACTION_ATTR}]`) as HTMLButtonElement | null;
+};
+
 const sanitizePositiveInt = (value: number, fallback: number) =>
   Number.isFinite(value) && value > 0 ? Math.floor(value) : fallback;
 
@@ -155,12 +161,7 @@ const ensureDelegatedHandlers = () => {
   bookmarksContainerEl.addEventListener("mouseup", (e) => {
     if (!renderRuntime) return;
 
-    const target = e.target as HTMLElement | null;
-    if (!target) return;
-
-    const actionButtonEl = target.closest(
-      `button[${BOOKMARK_ACTION_ATTR}]`
-    ) as HTMLButtonElement | null;
+    const actionButtonEl = getDelegatedActionButton(e.target);
     if (!actionButtonEl) return;
 
     if (e.button !== 0 && e.button !== 1) return;
@@ -171,12 +172,7 @@ const ensureDelegatedHandlers = () => {
     if (!renderRuntime) return;
     if (e.key !== "Enter") return;
 
-    const target = e.target as HTMLElement | null;
-    if (!target) return;
-
-    const actionButtonEl = target.closest(
-      `button[${BOOKMARK_ACTION_ATTR}]`
-    ) as HTMLButtonElement | null;
+    const actionButtonEl = getDelegatedActionButton(e.target);
     if (!actionButtonEl) return;
 
     handleBookmarkAction(actionButtonEl, e.ctrlKey || e.metaKey);
@@ -187,12 +183,7 @@ const ensureDelegatedHandlers = () => {
     (e) => {
       if (!renderRuntime) return;
 
-      const target = e.target as HTMLElement | null;
-      if (!target) return;
-
-      const actionButtonEl = target.closest(
-        `button[${BOOKMARK_ACTION_ATTR}]`
-      ) as HTMLButtonElement | null;
+      const actionButtonEl = getDelegatedActionButton(e.target);
       if (!actionButtonEl) return;
 
       const borderEl = getBorderEl(actionButtonEl);
@@ -208,12 +199,7 @@ const ensureDelegatedHandlers = () => {
   bookmarksContainerEl.addEventListener(
     "focusout",
     (e) => {
-      const target = e.target as HTMLElement | null;
-      if (!target) return;
-
-      const actionButtonEl = target.closest(
-        `button[${BOOKMARK_ACTION_ATTR}]`
-      ) as HTMLButtonElement | null;
+      const actionButtonEl = getDelegatedActionButton(e.target);
       if (!actionButtonEl) return;
 
       const borderEl = getBorderEl(actionButtonEl);

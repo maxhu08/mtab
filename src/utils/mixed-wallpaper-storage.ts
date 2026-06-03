@@ -1,5 +1,6 @@
 import { logger } from "~/src/utils/logger";
 import { genid } from "~/src/utils/genid";
+import { cacheWallpaperFiles, createWallpaperFileMeta } from "~/src/utils/wallpaper-storage-shared";
 
 const MIXED_WALLPAPER_ENTRIES_KEY = "mixedWallpaperEntries";
 const MIXED_UPLOADED_WALLPAPER_FILES_KEY = "mixedUploadedWallpaperFiles";
@@ -457,26 +458,15 @@ export const addMixedUploadedWallpaperFiles = async (
     const thumb = await createThumbnail(optimized);
     const now = Date.now();
 
-    const metadata: MixedUploadedWallpaperFileMeta = {
+    const metadata: MixedUploadedWallpaperFileMeta = createWallpaperFileMeta({
       id: fileId,
       name: file.name,
       mimeType: optimized.type,
       createdAt: now,
-      lastUsedAt: now,
-      imageOptions: {
-        size: "cover",
-        x: "50%",
-        y: "50%"
-      },
-      videoOptions: {
-        zoom: 1,
-        playbackRate: 1,
-        fade: 4
-      }
-    };
+      lastUsedAt: now
+    });
 
-    await setCachedFile({ id: fileId, size: "full", file: optimized });
-    await setCachedFile({ id: fileId, size: "thumb", file: thumb });
+    await cacheWallpaperFiles(setCachedFile, fileId, optimized, thumb);
     currentFiles.push(metadata);
 
     const entry: MixedWallpaperEntry = {
@@ -516,26 +506,15 @@ export const replaceMixedWallpaperEntryFile = async ({
   const thumb = await createThumbnail(optimized);
   const now = Date.now();
 
-  const metadata: MixedUploadedWallpaperFileMeta = {
+  const metadata: MixedUploadedWallpaperFileMeta = createWallpaperFileMeta({
     id: newFileId,
     name: file.name,
     mimeType: optimized.type,
     createdAt: now,
-    lastUsedAt: now,
-    imageOptions: {
-      size: "cover",
-      x: "50%",
-      y: "50%"
-    },
-    videoOptions: {
-      zoom: 1,
-      playbackRate: 1,
-      fade: 4
-    }
-  };
+    lastUsedAt: now
+  });
 
-  await setCachedFile({ id: newFileId, size: "full", file: optimized });
-  await setCachedFile({ id: newFileId, size: "thumb", file: thumb });
+  await cacheWallpaperFiles(setCachedFile, newFileId, optimized, thumb);
 
   const nextEntry: MixedWallpaperEntry = {
     ...currentEntry,
