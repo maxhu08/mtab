@@ -308,6 +308,130 @@
   -webkit-mask: var(--icon-mask) no-repeat center / contain;
 }
 
+.options-icon-picker-results {
+  display: grid;
+  align-content: start;
+  gap: 2rem;
+  min-height: 0;
+  overflow: auto;
+  overscroll-behavior: contain;
+  scroll-behavior: smooth;
+  padding: 0.25rem 0.5rem 0.25rem 0;
+}
+
+.options-icon-picker-section {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.options-icon-picker-section-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.options-icon-picker-section-title {
+  margin: 0;
+  color: #fff;
+  font-size: 1.125rem;
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+.options-icon-picker-section-count {
+  min-width: 1.75rem;
+  padding: 0.125rem 0.5rem;
+  border-radius: 0.375rem;
+  background: #262626;
+  color: #a3a3a3;
+  font-size: 0.8125rem;
+  line-height: 1.25;
+  text-align: center;
+}
+
+.options-icon-picker-section-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(5.5rem, 1fr));
+  column-gap: 1.25rem;
+  row-gap: 1.75rem;
+}
+
+.options-icon-picker-result {
+  appearance: none;
+  display: grid;
+  justify-items: center;
+  align-content: start;
+  gap: 0.5rem;
+  min-width: 0;
+  padding: 0.5rem 0.25rem;
+  border: 0;
+  border-radius: 0.5rem;
+  background: transparent;
+  color: #fff;
+  text-align: center;
+  outline: none;
+  cursor: pointer;
+  transition: background-color 150ms ease;
+}
+
+.options-icon-picker-result:hover,
+.options-icon-picker-result.is-selected {
+  background: #404040;
+}
+
+.options-icon-picker-result:focus-visible {
+  outline: 2px solid #0ea5e9;
+  outline-offset: 0.25rem;
+}
+
+.options-icon-picker-modal-icon {
+  display: grid;
+  width: 3rem;
+  height: 3rem;
+  place-items: center;
+  overflow: hidden;
+  color: currentColor;
+  line-height: 1;
+}
+
+.options-icon-picker-modal-icon i {
+  font-size: 2rem;
+  line-height: 1;
+}
+
+.options-icon-picker-modal-icon img,
+.options-icon-picker-modal-icon .bookmark-mask {
+  display: block;
+  width: 2rem;
+  height: 2rem;
+  max-width: 2rem;
+  max-height: 2rem;
+}
+
+.options-icon-picker-modal-icon img {
+  object-fit: contain;
+}
+
+.options-icon-picker-modal-icon .bookmark-mask {
+  pointer-events: none;
+  background-color: currentColor;
+  mask: var(--icon-mask) no-repeat center / contain;
+  -webkit-mask: var(--icon-mask) no-repeat center / contain;
+}
+
+.options-icon-picker-result-name {
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  color: #a3a3a3;
+  font-size: 0.8125rem;
+  line-height: 1.15;
+  overflow-wrap: anywhere;
+}
+
 /* Hide spinner arrows on number inputs in options forms. */
 input[type="number"] {
   appearance: textfield;

@@ -74,7 +74,15 @@ const createIconControl = ({ container, input, getFallbackIconType }: IconFieldI
   });
 
   previewEl.addEventListener("click", () => {
-    void showIconPickerModal();
+    const currentValue = input.value.trim() || getFallbackIconType?.()?.trim() || "";
+
+    void showIconPickerModal(currentValue).then((iconType) => {
+      if (!iconType) return;
+
+      input.value = iconType;
+      input.dispatchEvent(new Event("input", { bubbles: true }));
+      syncIconInputControl(input);
+    });
   });
 };
 

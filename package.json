@@ -20,6 +20,7 @@
     "package:firefox": "bun run ./scripts/tasks.ts package firefox",
     "rc:chrome": "bun run ./scripts/tasks.ts rc chrome",
     "rc:firefox": "bun run ./scripts/tasks.ts rc firefox",
+    "icons": "bun run ./scripts/tasks.ts icons",
     "package:source": "bun run ./scripts/tasks.ts source",
     "clean": "bun run ./scripts/tasks.ts clean",
     "format": "oxfmt --write \"./**/*.{js,jsx,mjs,cjs,ts,tsx,json,html}\"",
