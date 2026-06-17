@@ -199,14 +199,14 @@ export const handleConversionCurrency = async (
   }
 
   try {
-    const { mid, timestampMs } = await getHexaRateLatestCached(fromCode, toCode);
-    const converted = leftParsed.amount * mid;
+    const rate = await getHexaRateLatestCached(fromCode, toCode);
+    const converted = leftParsed.amount * rate.mid;
 
     return {
       type: "conversion-currency",
       before: `${amountStr} ${fromCode}`,
       after: `${fmtAmount(converted)} ${toCode}`,
-      timestamp: timestampMs!
+      timestamp: rate.timestampMs!
     } satisfies ConversionCurrencyResult;
   } catch {
     return undefined;

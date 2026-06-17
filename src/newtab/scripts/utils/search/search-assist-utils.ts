@@ -9,35 +9,41 @@ export type AssistItem =
   | AssistConversionCurrency
   | AssistPasswordGenerator;
 
-export interface AssistDate {
+export type AssistDate = {
   type: "date";
-}
+};
 
-export interface AssistMath {
+export type AssistMath = {
   type: "math";
   result: string;
-}
+};
 
-export interface AssistDefinition {
+export type DefinitionData = {
+  definitions: {
+    definition: string;
+    pos: string;
+  }[];
+};
+
+export type AssistDefinition = {
   type: "definition";
-  // oxlint-disable-next-line typescript/no-explicit-any
-  result: any;
-}
+  result: DefinitionData;
+};
 
-export interface AssistConversion {
+export type AssistConversion = {
   type: "conversion";
   before: string;
   after: string[];
-}
+};
 
-export interface AssistConversionCurrency {
+export type AssistConversionCurrency = {
   type: "conversion-currency";
   before: string;
   after: string;
   timestamp: number;
-}
+};
 
-export interface AssistPasswordGenerator {
+export type AssistPasswordGenerator = {
   type: "password-generator";
   result: string;
   flags: {
@@ -47,7 +53,7 @@ export interface AssistPasswordGenerator {
     allowSymbols: boolean;
     memorable: boolean;
   };
-}
+};
 
 export const hideAssist = () => {
   assistantContainerEl.innerHTML = "";
@@ -81,15 +87,7 @@ const showWrapper = (el: HTMLElement) => {
   if (el.classList.contains("hidden")) el.classList.remove("hidden");
 };
 
-const appendAssistTextRow = ({
-  parent,
-  marker,
-  markerColor,
-  contentClassName,
-  contentColor,
-  textContent,
-  html
-}: {
+const appendAssistTextRow = (params: {
   parent: HTMLElement;
   marker: string;
   markerColor: string;
@@ -103,22 +101,22 @@ const appendAssistTextRow = ({
 
   const markerEl = document.createElement("span");
   markerEl.className = "font-semibold select-none";
-  markerEl.style.color = markerColor;
-  markerEl.innerHTML = marker;
+  markerEl.style.color = params.markerColor;
+  markerEl.innerHTML = params.marker;
 
   const contentEl = document.createElement("div");
-  contentEl.className = contentClassName;
-  contentEl.style.color = contentColor;
+  contentEl.className = params.contentClassName;
+  contentEl.style.color = params.contentColor;
 
-  if (html !== undefined) {
-    contentEl.innerHTML = html;
+  if (params.html !== undefined) {
+    contentEl.innerHTML = params.html;
   } else {
-    contentEl.textContent = textContent ?? "";
+    contentEl.textContent = params.textContent ?? "";
   }
 
   rowEl.appendChild(markerEl);
   rowEl.appendChild(contentEl);
-  parent.appendChild(rowEl);
+  params.parent.appendChild(rowEl);
 };
 
 export const displayAssist = (items: AssistItem[], config: Config) => {
@@ -195,8 +193,7 @@ export const displayAssist = (items: AssistItem[], config: Config) => {
         });
       }
     } else if (item.type === "definition") {
-      // oxlint-disable-next-line typescript/no-explicit-any
-      item.result.definitions.slice(0, 3).forEach((def: any) => {
+      item.result.definitions.slice(0, 3).forEach((def) => {
         // <div class="grid grid-cols-[max-content_auto]">
         //   <span class="font-semibold select-none" style="color: ${config.search.placeholderTextColor}">&nbsp;-&nbsp;</span>
         //   <div class="w-full" style="color: ${config.search.textColor}">

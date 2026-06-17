@@ -1,10 +1,10 @@
 import { createBookmarkIcon, getBookmarkIconAssetUrl } from "~/src/utils/bookmark-icon";
 
-interface NewtabBookmarkIconResult {
+type NewtabBookmarkIconResult = {
   iconEl: HTMLElement | null;
   iconSizeClass: string;
   iconColor: string;
-}
+};
 
 const preloadedBookmarkIconUrls = new Set<string>();
 
@@ -16,13 +16,13 @@ export const createNewtabBookmarkIcon = (
   const icon = createBookmarkIcon(bookmarkIconType, bookmarkIconColor, bookmarksDefaultIconColor);
   if (!icon) return { iconEl: null, iconSizeClass: "", iconColor: "" };
 
-  let iconSizeClass = "";
+  const iconSizeClass = bookmarkIconType.startsWith("ri-")
+    ? "text-4xl md:text-6xl"
+    : bookmarkIconType.startsWith("nf-")
+      ? "text-5xl md:text-7xl"
+      : "";
 
-  if (bookmarkIconType.startsWith("ri-")) {
-    iconSizeClass = "text-4xl md:text-6xl";
-  } else if (bookmarkIconType.startsWith("nf-")) {
-    iconSizeClass = "text-5xl md:text-7xl";
-  } else if (icon.iconEl instanceof HTMLImageElement) {
+  if (icon.iconEl instanceof HTMLImageElement) {
     icon.iconEl.className = "w-10 md:w-14";
   }
 

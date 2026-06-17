@@ -2,8 +2,8 @@ import { getOptionsData } from "~/src/utils/options-data";
 import { modifyNestedObject } from "~/src/utils/modify";
 
 export const createCollapseGroups = () => {
-  getOptionsData(({ optionsData }) => {
-    const sectionsExpanded = optionsData.sectionsExpanded;
+  getOptionsData((data) => {
+    const sectionsExpanded = data.optionsData.sectionsExpanded;
 
     newCollapseGroup("options-collapse-button", "options-section", sectionsExpanded.options);
     newCollapseGroup("user-collapse-button", "user-section", sectionsExpanded.user);
@@ -50,10 +50,10 @@ export const bindCollapseOptionButton = (
       setExpandedState(true);
     }
 
-    getOptionsData(({ optionsData }) => {
-      const draft = modifyNestedObject(optionsData, (draft) => {
+    getOptionsData((data) => {
+      const draft = modifyNestedObject(data.optionsData, (draft) => {
         // prettier-ignore
-        const sectionKey = optionSection.id.split("-")[0] as keyof typeof optionsData.sectionsExpanded;
+        const sectionKey = optionSection.id.split("-")[0] as keyof typeof data.optionsData.sectionsExpanded;
         draft.sectionsExpanded[sectionKey] = optionSection.classList.contains("grid");
 
         return draft;

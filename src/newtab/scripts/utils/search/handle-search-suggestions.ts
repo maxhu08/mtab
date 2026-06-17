@@ -47,14 +47,12 @@ export const handleSearchSuggestions = (
   recognizeLinks: boolean,
   opts: RenderSearchResultsOptions
 ) => {
-  const { inputEl } = opts;
-
   let abort: AbortController | null = null;
   let items: SearchResultItem[] = [];
   let refreshRunId = 0;
 
   const refresh = async () => {
-    const q = inputEl.value.trim();
+    const q = opts.inputEl.value.trim();
     const runId = ++refreshRunId;
 
     if (q === "") {
@@ -72,7 +70,7 @@ export const handleSearchSuggestions = (
     const suggestions = await fetchSearchSuggestions(q).catch(() => []);
     if (signal.aborted) return;
     if (runId !== refreshRunId) return;
-    if (inputEl.value.trim() !== q) return;
+    if (opts.inputEl.value.trim() !== q) return;
 
     const merged = uniq([q, ...suggestions]);
 
@@ -98,10 +96,10 @@ export const handleSearchSuggestions = (
 
   const debouncedRefresh = debounce(refresh, 120);
 
-  inputEl.addEventListener("input", () => {
+  opts.inputEl.addEventListener("input", () => {
     showSearchResultsSection();
 
-    const raw = inputEl.value.trim();
+    const raw = opts.inputEl.value.trim();
     if (raw === "") {
       refreshRunId++;
       abort?.abort();
@@ -127,15 +125,15 @@ export const handleSearchSuggestions = (
     debouncedRefresh();
   });
 
-  inputEl.addEventListener("focus", () => {
-    if (inputEl.value.trim() !== "" && items.length > 0) {
+  opts.inputEl.addEventListener("focus", () => {
+    if (opts.inputEl.value.trim() !== "" && items.length > 0) {
       searchResultsContainerEl.setAttribute(SELECTED_INDEX_ATTR, "0");
       showSearchResultsSection();
       renderSearchResults(items, opts);
     }
   });
 
-  inputEl.addEventListener("blur", () => {
+  opts.inputEl.addEventListener("blur", () => {
     if (!document.hasFocus()) return;
     hideSearchResultsSection();
   });

@@ -1,6 +1,5 @@
-/* oxlint-disable typescript/no-explicit-any */
 export const logger = {
-  log: (...args: any[]) => {
+  log: (...args: unknown[]) => {
     console.log("[MTAB]", ...args);
   }
 };

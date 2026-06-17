@@ -2,7 +2,6 @@ import {
   getBookmarkNodeBookmarkData,
   getBookmarkNodeFolderData
 } from "~/src/options/scripts/utils/bookmarks/get-bookmark-node-data";
-import { BookmarkNode } from "~/src/utils/config";
 
 export const exportBookmarkNode = async (uuid: string) => {
   const extensionVersion = chrome.runtime.getManifest().version;
@@ -12,16 +11,18 @@ export const exportBookmarkNode = async (uuid: string) => {
   if (!nodeEl) return;
 
   const nodeType = nodeEl.getAttribute("node-type");
-  let result: BookmarkNode | null = null;
-  let prefix = "";
-
-  if (nodeType === "bookmark") {
-    result = getBookmarkNodeBookmarkData(uuid);
-    prefix = `MTAB_USER_DEFINED_BOOKMARK_FORMAT_v${extensionVersion}_`;
-  } else if (nodeType === "folder") {
-    result = getBookmarkNodeFolderData(uuid);
-    prefix = `MTAB_USER_DEFINED_FOLDER_FORMAT_v${extensionVersion}_`;
-  }
+  const result =
+    nodeType === "bookmark"
+      ? getBookmarkNodeBookmarkData(uuid)
+      : nodeType === "folder"
+        ? getBookmarkNodeFolderData(uuid)
+        : null;
+  const prefix =
+    nodeType === "bookmark"
+      ? `MTAB_USER_DEFINED_BOOKMARK_FORMAT_v${extensionVersion}_`
+      : nodeType === "folder"
+        ? `MTAB_USER_DEFINED_FOLDER_FORMAT_v${extensionVersion}_`
+        : "";
 
   if (!result) return;
 

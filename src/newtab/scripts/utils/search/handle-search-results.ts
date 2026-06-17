@@ -75,21 +75,11 @@ export const renderSearchResults = (
   items: SearchResultItem[],
   opts: RenderSearchResultsOptions
 ) => {
-  const {
-    inputEl,
-    textColor,
-    placeholderTextColor,
-    linkTextColor,
-    recognizeLinks,
-    resultUrlAttr = "search-result-url",
-    onOpen
-  } = opts;
-
   const frag = document.createDocumentFragment();
   searchResultsContainerEl.setAttribute("role", "listbox");
   searchResultsContainerEl.setAttribute(
     "aria-label",
-    inputEl.id === "bookmark-search-input" ? "Bookmark search results" : "Search results"
+    opts.inputEl.id === "bookmark-search-input" ? "Bookmark search results" : "Search results"
   );
 
   searchResultsContainerEl.onmousedown = (e) => {
@@ -101,61 +91,60 @@ export const renderSearchResults = (
     }
   };
 
-  const searchValue = inputEl.value.toLowerCase();
-  const rawValue = inputEl.value;
-  const isBookmarkInput = inputEl.id === "bookmark-search-input";
+  const searchValue = opts.inputEl.value.toLowerCase();
+  const rawValue = opts.inputEl.value;
+  const isBookmarkInput = opts.inputEl.id === "bookmark-search-input";
 
-  let filtered = analyzeSearchResults(searchValue, items);
-
-  if (!isBookmarkInput) {
-    const q = rawValue.trim();
-    if (q) {
-      const qLower = q.toLowerCase();
-      filtered = filtered.filter((entry) => entry.trimmedNameLower !== qLower);
-      const recognized = recognizeLinks ? recognizeUrl(q) : null;
-      filtered.unshift({
-        item: {
-          name: q,
-          value: recognized ?? q,
-          directLink: Boolean(recognized)
-        },
-        trimmedNameLower: qLower,
-        directStartsWithQuery: true,
-        highlightRanges: getHighlightRanges(q, searchValue)
-      });
-    }
-  }
+  const q = rawValue.trim();
+  const qLower = q.toLowerCase();
+  const recognized = !isBookmarkInput && q && opts.recognizeLinks ? recognizeUrl(q) : null;
+  const analyzed = analyzeSearchResults(searchValue, items);
+  const filtered =
+    !isBookmarkInput && q
+      ? [
+          {
+            item: {
+              name: q,
+              value: recognized ?? q,
+              directLink: Boolean(recognized)
+            },
+            trimmedNameLower: qLower,
+            directStartsWithQuery: true,
+            highlightRanges: getHighlightRanges(q, searchValue)
+          },
+          ...analyzed.filter((entry) => entry.trimmedNameLower !== qLower)
+        ]
+      : analyzed;
 
   const overflow = Math.max(0, filtered.length - MAX_RESULTS);
   const visible = filtered.slice(0, MAX_RESULTS);
 
-  let selectedIndex = parseInt(
-    searchResultsContainerEl.getAttribute(SELECTED_INDEX_ATTR) || "0",
-    10
+  const selectedIndex = clampIndex(
+    parseInt(searchResultsContainerEl.getAttribute(SELECTED_INDEX_ATTR) || "0", 10),
+    visible.length
   );
-  selectedIndex = clampIndex(selectedIndex, visible.length);
   searchResultsContainerEl.setAttribute(SELECTED_INDEX_ATTR, selectedIndex.toString());
 
   const totalRows = visible.length + (isBookmarkInput && overflow > 0 ? 1 : 0);
 
-  visible.forEach(({ item, highlightRanges }, index) => {
+  visible.forEach((entry, index) => {
     const matchedNameHtml = getMatchedNameHtml(
-      item.name,
-      textColor,
-      placeholderTextColor,
-      linkTextColor,
-      item.directLink,
-      highlightRanges
+      entry.item.name,
+      opts.textColor,
+      opts.placeholderTextColor,
+      opts.linkTextColor,
+      entry.item.directLink,
+      entry.highlightRanges
     );
 
     const buttonEl = document.createElement("button");
     buttonEl.type = "button";
-    const optionId = `${inputEl.id}-result-${index}`;
+    const optionId = `${opts.inputEl.id}-result-${index}`;
     buttonEl.id = optionId;
     buttonEl.setAttribute("role", "option");
     buttonEl.setAttribute("aria-selected", index === selectedIndex ? "true" : "false");
-    buttonEl.setAttribute(resultUrlAttr, item.value);
-    buttonEl.setAttribute("search-result-value", item.name);
+    buttonEl.setAttribute(opts.resultUrlAttr, entry.item.value);
+    buttonEl.setAttribute("search-result-value", entry.item.name);
 
     buttonEl.className = [
       "grid grid-cols-[3ch_auto] cursor-pointer select-none text-left hover:bg-white/20 focus-visible:bg-white/20 outline-none focus-visible:outline-none duration-0",
@@ -170,15 +159,14 @@ export const renderSearchResults = (
       e.preventDefault();
       e.stopPropagation();
       const openInNewTab = me.button === 1 || me.ctrlKey || me.metaKey;
-      onOpen(item.value, openInNewTab);
+      opts.onOpen(entry.item.value, openInNewTab);
     });
 
     const stopMiddlePaste = (e: MouseEvent) => {
       if (e.button !== 1) return;
       e.preventDefault();
       e.stopPropagation();
-      // @ts-ignore
-      e.stopImmediatePropagation?.();
+      e.stopImmediatePropagation();
     };
 
     buttonEl.addEventListener("mousedown", stopMiddlePaste);
@@ -191,7 +179,7 @@ export const renderSearchResults = (
 
     const contentDivEl = document.createElement("div");
     contentDivEl.className = "truncate";
-    contentDivEl.style.color = placeholderTextColor;
+    contentDivEl.style.color = opts.placeholderTextColor;
     contentDivEl.innerHTML = matchedNameHtml;
 
     buttonEl.appendChild(iconEl);
@@ -225,7 +213,7 @@ export const renderSearchResults = (
 
     const textEl = document.createElement("div");
     textEl.className = "truncate";
-    textEl.style.color = placeholderTextColor;
+    textEl.style.color = opts.placeholderTextColor;
     textEl.textContent = `+${overflow} more`;
 
     moreEl.appendChild(iconElSpacer);
@@ -426,7 +414,6 @@ export const handleSearchResultsNavigation = (
   e: KeyboardEvent,
   opts: HandleSearchResultsNavigationOptions
 ) => {
-  const { onOpen, resultUrlAttr } = opts;
   const buttons = getButtons();
   const count = buttons.length;
   if (count === 0) return;
@@ -450,8 +437,8 @@ export const handleSearchResultsNavigation = (
     const idx = clampIndex(prevIndex, count);
     const selectedEl = buttons[idx];
     if (!selectedEl) return;
-    const url = selectedEl.getAttribute(resultUrlAttr);
+    const url = selectedEl.getAttribute(opts.resultUrlAttr);
     if (!url) return;
-    onOpen(url, e.ctrlKey || e.metaKey);
+    opts.onOpen(url, e.ctrlKey || e.metaKey);
   }
 };

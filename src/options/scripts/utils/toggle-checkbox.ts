@@ -22,9 +22,7 @@ const checkboxSections = [
 
 // attaches a listener to listen for change and hide/show the section the checkbox controls
 export const listenAllToggleCheckboxSections = () => {
-  for (let i = 0; i < checkboxSections.length; i++) {
-    listenToggleCheckboxSection(checkboxSections[i][0], checkboxSections[i][1]);
-  }
+  checkboxSections.forEach((section) => listenToggleCheckboxSection(section[0], section[1]));
 
   // Special case for using a custom search engine
   // when the checkbox is checked, I want the currently selected search engine to be unselected
@@ -33,9 +31,7 @@ export const listenAllToggleCheckboxSections = () => {
 
 // sets the intial state of the section the checkbox controls (hide the section if the checkbox is off, and show the section is the checkbox is on)
 export const fixAllToggleCheckboxSections = () => {
-  for (let i = 0; i < checkboxSections.length; i++) {
-    fixToggleCheckboxSection(checkboxSections[i][0], checkboxSections[i][1]);
-  }
+  checkboxSections.forEach((section) => fixToggleCheckboxSection(section[0], section[1]));
 };
 
 const listenToggleCheckboxSection = (checkboxId: string, sectionId: string) => {

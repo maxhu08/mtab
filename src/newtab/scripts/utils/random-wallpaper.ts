@@ -28,13 +28,13 @@ const getViewportSize = () => {
   const devicePixelRatio = globalThis.devicePixelRatio || 1;
   const density = Math.max(1, Math.min(devicePixelRatio, 2));
 
-  let width = Math.round((globalThis.screen?.width ?? 1920) * density);
-  let height = Math.round((globalThis.screen?.height ?? 1080) * density);
+  const rawWidth = Math.round((globalThis.screen?.width ?? 1920) * density);
+  const rawHeight = Math.round((globalThis.screen?.height ?? 1080) * density);
 
-  const ratio = width / height;
+  const ratio = rawWidth / rawHeight;
 
-  if (ratio >= 2) width = height * 2;
-  if (ratio <= 0.5) height = width * 2;
+  const width = ratio >= 2 ? rawHeight * 2 : rawWidth;
+  const height = ratio <= 0.5 ? rawWidth * 2 : rawHeight;
 
   return {
     width: Math.max(640, width),
@@ -43,8 +43,8 @@ const getViewportSize = () => {
 };
 
 const buildPicsumUrl = (id: string) => {
-  const { width, height } = getViewportSize();
-  return `https://picsum.photos/id/${encodeURIComponent(id)}/${width}/${height}`;
+  const viewport = getViewportSize();
+  return `https://picsum.photos/id/${encodeURIComponent(id)}/${viewport.width}/${viewport.height}`;
 };
 
 const preloadWallpaperUrls = (urls: string[]) => {

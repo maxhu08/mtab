@@ -1,7 +1,7 @@
-import { AssistDefinition } from "~/src/newtab/scripts/utils/search/search-assist-utils";
-
-// oxlint-disable-next-line typescript/no-explicit-any
-type DefinitionData = any;
+import {
+  AssistDefinition,
+  DefinitionData
+} from "~/src/newtab/scripts/utils/search/search-assist-utils";
 
 const definitionCache = new Map<string, DefinitionData | null>();
 const inFlight = new Map<string, Promise<DefinitionData | null>>();

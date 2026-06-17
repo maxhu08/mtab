@@ -83,9 +83,7 @@ const loadOnCanvas = async (url: string, options: CompressOptions): Promise<HTML
 
   await new Promise((resolve) => {
     img.onload = () => {
-      const { size, square, raw } = options;
-
-      if (raw || !size) {
+      if (options.raw || !options.size) {
         canvas.width = img.width;
         canvas.height = img.height;
         ctx.drawImage(img, 0, 0);
@@ -96,34 +94,34 @@ const loadOnCanvas = async (url: string, options: CompressOptions): Promise<HTML
       }
 
       const isLandscape = img.width > img.height;
-      let sx = 0;
-      let sy = 0;
-      let sWidth = img.width;
-      let sHeight = img.height;
-      let dWidth = size;
-      let dHeight = size;
+      const source = options.square
+        ? {
+            x: isLandscape ? (img.width - img.height) / 2 : 0,
+            y: isLandscape ? 0 : (img.height - img.width) / 2,
+            width: isLandscape ? img.height : img.width,
+            height: isLandscape ? img.height : img.width
+          }
+        : { x: 0, y: 0, width: img.width, height: img.height };
+      const target = options.square
+        ? { width: options.size, height: options.size }
+        : {
+            width: isLandscape ? (img.width / img.height) * options.size : options.size,
+            height: isLandscape ? options.size : (img.height / img.width) * options.size
+          };
 
-      if (!square) {
-        if (isLandscape) {
-          dHeight = size;
-          dWidth = (img.width / img.height) * size;
-        } else {
-          dWidth = size;
-          dHeight = (img.height / img.width) * size;
-        }
-      } else {
-        if (isLandscape) {
-          sx = (img.width - img.height) / 2;
-          sWidth = sHeight = img.height;
-        } else {
-          sy = (img.height - img.width) / 2;
-          sWidth = sHeight = img.width;
-        }
-      }
-
-      canvas.width = dWidth;
-      canvas.height = dHeight;
-      ctx.drawImage(img, sx, sy, sWidth, sHeight, 0, 0, dWidth, dHeight);
+      canvas.width = target.width;
+      canvas.height = target.height;
+      ctx.drawImage(
+        img,
+        source.x,
+        source.y,
+        source.width,
+        source.height,
+        0,
+        0,
+        target.width,
+        target.height
+      );
 
       img.remove();
       resolve(true);

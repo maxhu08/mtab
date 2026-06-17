@@ -2,11 +2,8 @@ export const setMorningAfternoonMessage = (messageEl: HTMLParagraphElement, name
   const currentTime = new Date();
   const currentHour = currentTime.getHours();
 
-  let greeting;
-
-  if (currentHour < 12) greeting = "Good morning";
-  else if (currentHour < 18) greeting = "Good afternoon";
-  else greeting = "Good evening";
+  const greeting =
+    currentHour < 12 ? "Good morning" : currentHour < 18 ? "Good afternoon" : "Good evening";
 
   messageEl.textContent = `${greeting}, ${name}`;
 };

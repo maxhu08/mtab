@@ -1,16 +1,14 @@
-import {
-  cpSync,
-  existsSync,
-  mkdirSync,
-  readdirSync,
-  readFileSync,
-  rmSync,
-  writeFileSync
-} from "node:fs";
+import { cpSync, existsSync, mkdirSync, readdirSync, rmSync, writeFileSync } from "node:fs";
 import { join, resolve } from "node:path";
 import { spawn, spawnSync } from "node:child_process";
 import { createInterface } from "node:readline/promises";
 import { stdin as input, stdout as output } from "node:process";
+
+declare const Bun: {
+  file: (path: string) => {
+    text: () => Promise<string>;
+  };
+};
 
 type BrowserTarget = "chrome" | "firefox";
 type TaskName = "clean" | "dev" | "build" | "package" | "rc" | "source" | "icons";
@@ -103,12 +101,12 @@ async function main() {
   }
 
   if (task === "source") {
-    packageSource();
+    await packageSource();
     return;
   }
 
   if (task === "icons") {
-    generateIconLists();
+    await generateIconLists();
     return;
   }
 
@@ -119,26 +117,26 @@ async function main() {
       clean();
       ensureDist();
       syncStaticFiles();
-      writeManifest(target);
+      await writeManifest(target);
       runParcel("watch");
       return;
     case "build":
       clean();
-      buildBundle(target);
+      await buildBundle(target);
       return;
     case "package":
       clean();
-      buildBundle(target);
-      packageBundle(target);
+      await buildBundle(target);
+      await packageBundle(target);
       return;
     case "rc": {
       const rcVersion = versionArg ?? (await promptForRcVersion());
       const release = parseRcVersion(rcVersion);
 
       clean();
-      buildBundle(target, release.baseVersion);
-      annotateRcBuild(target, release.rcVersion);
-      packageBundle(target, {
+      await buildBundle(target, release.baseVersion);
+      await annotateRcBuild(target, release.rcVersion);
+      await packageBundle(target, {
         packageVersion: release.rcVersion,
         zipVersion: release.rcVersion
       });
@@ -178,11 +176,11 @@ function clean() {
   rmSync(DIST_DIR, { force: true, recursive: true });
 }
 
-function buildBundle(target: BrowserTarget, version = readVersion()) {
+async function buildBundle(target: BrowserTarget, version?: string) {
   ensureDist();
   runParcel("build");
   syncStaticFiles();
-  writeManifest(target, version);
+  await writeManifest(target, version);
 }
 
 function ensureDist() {
@@ -194,18 +192,18 @@ function syncStaticFiles() {
   syncMathjsVendor();
 }
 
-function writeManifest(target: BrowserTarget, version = readVersion(), versionName?: string) {
+async function writeManifest(target: BrowserTarget, version?: string, versionName?: string) {
   const manifest = {
     ...MANIFESTS[target],
-    version,
+    version: version ?? (await readVersion()),
     ...(versionName ? { version_name: versionName } : {})
   };
 
   writeFileSync(resolve(DIST_DIR, "manifest.json"), `${JSON.stringify(manifest, null, 2)}\n`);
 }
 
-function readVersion() {
-  return readFileSync(VERSION_FILE, "utf8").trim();
+async function readVersion() {
+  return (await Bun.file(VERSION_FILE).text()).trim();
 }
 
 function runParcel(mode: "build" | "watch") {
@@ -239,7 +237,7 @@ function getHtmlEntries() {
   return entries;
 }
 
-function packageBundle(
+async function packageBundle(
   target: BrowserTarget,
   options: {
     packageVersion?: string;
@@ -248,7 +246,7 @@ function packageBundle(
     zipSuffix?: string;
   } = {}
 ) {
-  const packageVersion = options.packageVersion ?? readVersion();
+  const packageVersion = options.packageVersion ?? (await readVersion());
   const zipVersion = options.zipVersion ?? packageVersion;
   const dirSuffix = options.dirSuffix ?? "";
   const zipSuffix = options.zipSuffix ?? dirSuffix;
@@ -272,8 +270,8 @@ function packageBundle(
   console.log(`Build complete\nExtension: ${packageDir}\nZip: ${zipPath}`);
 }
 
-function packageSource() {
-  const version = readVersion();
+async function packageSource() {
+  const version = await readVersion();
   const zipPath = resolve(OUTPUT_DIR, `mtab-v${version}-source.zip`);
 
   mkdirSync(OUTPUT_DIR, { recursive: true });
@@ -303,14 +301,17 @@ function packageSource() {
   console.log(`Source package complete\nZip: ${zipPath}`);
 }
 
-function generateIconLists() {
+async function generateIconLists() {
   mkdirSync(ICON_LISTS_DIR, { recursive: true });
 
-  const remixicons = extractCssIconClasses(
+  const remixicons = await extractCssIconClasses(
     resolve(SRC_DIR, "assets", "icons", "remixicon", "remixicon.css"),
     "ri"
   );
-  const nerdfonts = extractCssIconClasses(resolve(SRC_DIR, "shared", "nerdfont-webfont.css"), "nf");
+  const nerdfonts = await extractCssIconClasses(
+    resolve(SRC_DIR, "shared", "nerdfont-webfont.css"),
+    "nf"
+  );
   const fontawesome = readFontawesomeIcons(resolve(STATIC_DIR, "icons", "fontawesome", "svgs"));
   const simpleicons = readSvgIconNames(resolve(STATIC_DIR, "icons", "simpleicons"));
 
@@ -332,8 +333,8 @@ function generateIconLists() {
   );
 }
 
-function extractCssIconClasses(filePath: string, prefix: "ri" | "nf") {
-  const css = readFileSync(filePath, "utf8");
+async function extractCssIconClasses(filePath: string, prefix: "ri" | "nf") {
+  const css = await Bun.file(filePath).text();
   const icons = new Set<string>();
   const classPattern = new RegExp(`\\.${prefix}-([A-Za-z0-9_-]+):before\\s*\\{`, "g");
 
@@ -437,23 +438,23 @@ function collectHtmlEntries(directory: string, baseDir = directory): string[] {
   return entries;
 }
 
-function annotateRcBuild(target: BrowserTarget, rcVersion: string) {
-  writeManifest(target, parseRcVersion(rcVersion).baseVersion, rcVersion);
-  annotateHtml(resolve(DIST_DIR, "index.html"), {
+async function annotateRcBuild(target: BrowserTarget, rcVersion: string) {
+  await writeManifest(target, parseRcVersion(rcVersion).baseVersion, rcVersion);
+  await annotateHtml(resolve(DIST_DIR, "index.html"), {
     "rc-version-info": rcVersion,
     "extension-version": rcVersion
   });
-  annotateHtml(resolve(DIST_DIR, "options.html"), {
+  await annotateHtml(resolve(DIST_DIR, "options.html"), {
     "rc-version-info": rcVersion
   });
 }
 
-function annotateHtml(filePath: string, attributes: Record<string, string>) {
+async function annotateHtml(filePath: string, attributes: Record<string, string>) {
   if (!existsSync(filePath)) {
     throw new Error(`Missing expected build output: ${filePath}`);
   }
 
-  const file = readFileSync(filePath, "utf8");
+  const file = await Bun.file(filePath).text();
   const attributesString = Object.entries(attributes)
     .map(([key, value]) => `${key}="${value}"`)
     .join(" ");

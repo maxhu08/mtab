@@ -32,7 +32,9 @@ document.documentElement.setAttribute("extension-version", displayVersion);
 // @ts-expect-error
 document.documentElement.setAttribute("made-by", manifest.author);
 
-getConfig(({ config }) => {
+getConfig((data) => {
+  const config = data.config;
+
   initSW();
 
   document.title = config.title.defaultTitle;

@@ -30,8 +30,7 @@ export const setUISyle = (ui: Config["ui"]) => {
     );
   }
 
-  let borderRadius = "0";
-  if (ui.cornerStyle === "round") borderRadius = "0.375rem";
+  const borderRadius = ui.cornerStyle === "round" ? "0.375rem" : "0";
 
   // const uiCornerStyleCss = `
   // .corner-style {

@@ -1,6 +1,6 @@
 import { logger } from "~/src/utils/logger";
 
-interface OpenMeteoResponse {
+type OpenMeteoResponse = {
   latitude: number;
   longitude: number;
   generationtime_ms: number;
@@ -26,7 +26,7 @@ interface OpenMeteoResponse {
     is_day: number;
     weathercode: number;
   };
-}
+};
 
 export const setWeatherMessage = (messageEl: HTMLParagraphElement, unitsType: "f" | "c") => {
   messageEl.textContent = "...";
@@ -44,11 +44,9 @@ export const setWeatherMessage = (messageEl: HTMLParagraphElement, unitsType: "f
 
   navigator.geolocation.getCurrentPosition(
     async (position) => {
-      const { latitude, longitude } = position.coords;
-
       try {
         const response = await fetch(
-          `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current_weather=true`
+          `https://api.open-meteo.com/v1/forecast?latitude=${position.coords.latitude}&longitude=${position.coords.longitude}&current_weather=true`
         );
 
         if (!response.ok) throw new Error();
@@ -71,16 +69,14 @@ export const setWeatherMessage = (messageEl: HTMLParagraphElement, unitsType: "f
 };
 
 const getWeatherMessage = (data: OpenMeteoResponse, unitsType: "f" | "c"): string => {
-  let temperature = data.current_weather.temperature;
-  let unitSymbol = "°C";
+  const temperature =
+    unitsType === "f"
+      ? (data.current_weather.temperature * 9) / 5 + 32
+      : data.current_weather.temperature;
+  const unitSymbol = unitsType === "f" ? "°F" : "°C";
   const weatherCode = data.current_weather.weathercode;
   const emoji = getWeatherEmoji(weatherCode);
   const description = getWeatherDescription(weatherCode);
-
-  if (unitsType === "f") {
-    temperature = (temperature * 9) / 5 + 32;
-    unitSymbol = "°F";
-  }
 
   return `${emoji} ${description} ${Math.round(temperature)} ${unitSymbol}`;
 };

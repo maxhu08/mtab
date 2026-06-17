@@ -28,8 +28,8 @@ export const saveConfig = (notify: boolean = true) => {
     }
   }
 
-  getConfig(({ config }) => {
-    const draft = modifyNestedObject(config, (draft) => {
+  getConfig((data) => {
+    const draft = modifyNestedObject(data.config, (draft) => {
       saveOptionsSettingsToDraft(draft);
 
       saveNameToDraft(draft);

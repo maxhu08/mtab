@@ -117,9 +117,9 @@ const createColorControl = ({ container, input }: ColorFieldInput): void => {
   };
 
   const positionPopup = (): void => {
-    const { left, top } = getViewportPosition(previewEl, popupEl);
-    popupEl.style.left = `${left}px`;
-    popupEl.style.top = `${top}px`;
+    const position = getViewportPosition(previewEl, popupEl);
+    popupEl.style.left = `${position.left}px`;
+    popupEl.style.top = `${position.top}px`;
   };
 
   const closePopup = (commit: boolean): void => {
@@ -244,7 +244,7 @@ export const syncColorInputControl = (input: HTMLInputElement) => {
 };
 
 export const syncAllColorInputControls = () => {
-  colorInputs.forEach(({ input }) => {
-    syncColorInputControl(input);
+  colorInputs.forEach((field) => {
+    syncColorInputControl(field.input);
   });
 };

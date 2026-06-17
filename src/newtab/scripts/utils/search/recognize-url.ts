@@ -31,16 +31,17 @@ export const recognizeUrl = (input: string): string | null => {
   return tryParseHttpUrl(`https://${host}${rest}`);
 };
 
-const hasUrlParse =
-  // oxlint-disable-next-line typescript/no-explicit-any
-  typeof (URL as any).parse === "function";
+type URLWithParse = typeof URL & {
+  parse?: (raw: string) => URL | null;
+};
+
+const url = URL as URLWithParse;
+const hasUrlParse = typeof url.parse === "function";
 
 const tryParseHttpUrl = (raw: string): string | null => {
   try {
-    const u = hasUrlParse
-      ? // oxlint-disable-next-line typescript/no-explicit-any
-        (URL as any).parse(raw)
-      : new URL(raw);
+    const u = hasUrlParse ? url.parse!(raw) : new URL(raw);
+    if (!u) return null;
 
     const p = u.protocol;
     if (p !== "http:" && p !== "https:") return null;

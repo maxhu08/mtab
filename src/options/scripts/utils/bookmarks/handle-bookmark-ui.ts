@@ -299,10 +299,12 @@ export const handleBookmarkSettings = (uuid: string) => {
     );
   });
 
-  [{ id: "color" }, { id: "icon-color" }, { id: "fill" }].forEach(({ id }) => {
+  [{ id: "color" }, { id: "icon-color" }, { id: "fill" }].forEach((field) => {
     registerColorInputControl({
-      container: document.getElementById(`bookmark-${uuid}-${id}-container`) as HTMLDivElement,
-      input: document.getElementById(`bookmark-${uuid}-${id}-input`) as HTMLInputElement
+      container: document.getElementById(
+        `bookmark-${uuid}-${field.id}-container`
+      ) as HTMLDivElement,
+      input: document.getElementById(`bookmark-${uuid}-${field.id}-input`) as HTMLInputElement
     });
   });
 
@@ -605,14 +607,14 @@ export const addBookmarkNodeBookmark = (
     }
   ];
 
-  buttons.forEach(({ id, icon, class: buttonClass, tooltip }) => {
+  buttons.forEach((item) => {
     const button = document.createElement("button");
-    if (id) button.id = id;
-    button.className = `${buttonClass} transition w-10 aspect-square rounded-md cursor-pointer`;
-    button.setAttribute("data-tippy-content", tooltip);
-    button.setAttribute("aria-label", tooltip);
+    if (item.id) button.id = item.id;
+    button.className = `${item.class} transition w-10 aspect-square rounded-md cursor-pointer`;
+    button.setAttribute("data-tippy-content", item.tooltip);
+    button.setAttribute("aria-label", item.tooltip);
     const buttonIcon = document.createElement("i");
-    buttonIcon.className = `text-white ${icon}`;
+    buttonIcon.className = `text-white ${item.icon}`;
     button.appendChild(buttonIcon);
     buttonGroup.appendChild(button);
   });
@@ -638,21 +640,21 @@ export const addBookmarkNodeBookmark = (
     { label: "bookmark.fill", id: "fill", value: bookmark.fill ?? "" }
   ];
 
-  fields.forEach(({ label, id, value }) => {
+  fields.forEach((field) => {
     const fieldGroup = document.createElement("div");
     fieldGroup.className = "grid min-w-0 gap-2";
 
     const labelP = document.createElement("p");
     labelP.className = "text-white text-base";
-    labelP.textContent = label;
+    labelP.textContent = field.label;
 
     const inputContainer = document.createElement("div");
-    inputContainer.id = `bookmark-${uuid}-${id}-container`;
+    inputContainer.id = `bookmark-${uuid}-${field.id}-container`;
     inputContainer.className =
       "w-full min-w-0 rounded-md border-2 border-transparent bg-neutral-900 p-1 text-base";
 
     const input = document.createElement("input");
-    input.id = `bookmark-${uuid}-${id}-input`;
+    input.id = `bookmark-${uuid}-${field.id}-input`;
     input.type = "text";
     input.autocomplete = "off";
     input.className =
@@ -663,9 +665,9 @@ export const addBookmarkNodeBookmark = (
       fill: "input color... (leave empty for default)"
     };
 
-    input.placeholder = placeholderMap[id] ?? `input ${id}...`;
+    input.placeholder = placeholderMap[field.id] ?? `input ${field.id}...`;
 
-    input.value = value ?? "";
+    input.value = field.value ?? "";
 
     inputContainer.append(input);
     fieldGroup.append(labelP, inputContainer);
@@ -824,14 +826,14 @@ export const addBookmarkNodeFolder = (
     }
   ];
 
-  buttons.forEach(({ id, icon, class: buttonClass, tooltip }) => {
+  buttons.forEach((item) => {
     const button = document.createElement("button");
-    if (id) button.id = id;
-    button.className = `${buttonClass} transition w-10 aspect-square rounded-md cursor-pointer`;
-    button.setAttribute("data-tippy-content", tooltip);
-    button.setAttribute("aria-label", tooltip);
+    if (item.id) button.id = item.id;
+    button.className = `${item.class} transition w-10 aspect-square rounded-md cursor-pointer`;
+    button.setAttribute("data-tippy-content", item.tooltip);
+    button.setAttribute("aria-label", item.tooltip);
     const buttonIcon = document.createElement("i");
-    buttonIcon.className = `text-white ${icon}`;
+    buttonIcon.className = `text-white ${item.icon}`;
     button.appendChild(buttonIcon);
     buttonGroup.appendChild(button);
   });
@@ -856,21 +858,21 @@ export const addBookmarkNodeFolder = (
     { label: "folder.fill", id: "fill", value: folder.fill ?? "" }
   ];
 
-  fields.forEach(({ label, id, value }) => {
+  fields.forEach((field) => {
     const fieldGroup = document.createElement("div");
     fieldGroup.className = "grid min-w-0 gap-2";
 
     const labelP = document.createElement("p");
     labelP.className = "text-white text-base";
-    labelP.textContent = label;
+    labelP.textContent = field.label;
 
     const inputContainer = document.createElement("div");
-    inputContainer.id = `bookmark-${uuid}-${id}-container`;
+    inputContainer.id = `bookmark-${uuid}-${field.id}-container`;
     inputContainer.className =
       "w-full min-w-0 rounded-md border-2 border-transparent bg-neutral-900 p-1 text-base";
 
     const input = document.createElement("input");
-    input.id = `bookmark-${uuid}-${id}-input`;
+    input.id = `bookmark-${uuid}-${field.id}-input`;
     input.type = "text";
     input.autocomplete = "off";
     input.className =
@@ -882,9 +884,9 @@ export const addBookmarkNodeFolder = (
       fill: "input color... (leave empty for default)"
     };
 
-    input.placeholder = placeholderMap[id] ?? `input ${id}...`;
+    input.placeholder = placeholderMap[field.id] ?? `input ${field.id}...`;
 
-    input.value = value ?? "";
+    input.value = field.value ?? "";
 
     inputContainer.append(input);
     fieldGroup.append(labelP, inputContainer);

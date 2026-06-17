@@ -754,7 +754,7 @@ export const renderBlockBookmark = (
 ): RenderedNode => {
   const delay = calcDelay(bookmarkTiming, bookmarksLength, bookmarkIndex);
 
-  const { iconEl, iconSizeClass, iconColor } = createNewtabBookmarkIcon(
+  const icon = createNewtabBookmarkIcon(
     bookmarkIconType,
     bookmarkIconColor,
     bookmarksDefaultIconColor
@@ -785,10 +785,10 @@ export const renderBlockBookmark = (
   gridDiv.className = "p-1 md:p-2 grid place-items-center h-full";
 
   const iconDiv = document.createElement("div");
-  iconDiv.className = `bookmark-node-icon${iconSizeClass ? " " + iconSizeClass : ""}`;
-  iconDiv.style.color = iconColor;
+  iconDiv.className = `bookmark-node-icon${icon.iconSizeClass ? " " + icon.iconSizeClass : ""}`;
+  iconDiv.style.color = icon.iconColor;
   iconDiv.setAttribute("aria-hidden", "true");
-  if (iconEl) iconDiv.appendChild(iconEl);
+  if (icon.iconEl) iconDiv.appendChild(icon.iconEl);
 
   let nameSpan: HTMLSpanElement | null = null;
   if (showName) {
@@ -828,11 +828,7 @@ export const renderBlockFolder = (
 ): RenderedNode => {
   const delay = calcDelay(bookmarkTiming, nodesLength, nodeIndex);
 
-  const { iconEl, iconSizeClass, iconColor } = createNewtabBookmarkIcon(
-    folderIconType,
-    folderIconColor,
-    bookmarksDefaultIconColor
-  );
+  const icon = createNewtabBookmarkIcon(folderIconType, folderIconColor, bookmarksDefaultIconColor);
 
   const uuid = genid();
 
@@ -859,10 +855,10 @@ export const renderBlockFolder = (
   gridDiv.className = "p-1 md:p-2 grid place-items-center h-full";
 
   const iconDiv = document.createElement("div");
-  iconDiv.className = `bookmark-node-icon${iconSizeClass ? " " + iconSizeClass : ""}`;
-  iconDiv.style.color = iconColor;
+  iconDiv.className = `bookmark-node-icon${icon.iconSizeClass ? " " + icon.iconSizeClass : ""}`;
+  iconDiv.style.color = icon.iconColor;
   iconDiv.setAttribute("aria-hidden", "true");
-  if (iconEl) iconDiv.appendChild(iconEl);
+  if (icon.iconEl) iconDiv.appendChild(icon.iconEl);
 
   let nameSpan: HTMLSpanElement | null = null;
   if (showName) {

@@ -41,8 +41,8 @@ initCustomCSSHighlight();
 initColorInputControls();
 initIconInputControls();
 
-getConfig(({ config }) => {
-  fillInputs(config);
+getConfig((data) => {
+  fillInputs(data.config);
 
   fixAllToggleCheckboxSections();
 });

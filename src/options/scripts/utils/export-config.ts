@@ -5,10 +5,10 @@ export const saveAndExportConfig = () => {
   // save and don't notify
   saveConfig(false);
 
-  getConfig(({ config }) => {
+  getConfig((data) => {
     const extensionVersion = chrome.runtime.getManifest().version;
 
-    const formattedExportedSave = `MTAB_SAVE_FORMAT_v${extensionVersion}_${JSON.stringify(config)}`;
+    const formattedExportedSave = `MTAB_SAVE_FORMAT_v${extensionVersion}_${JSON.stringify(data.config)}`;
 
     navigator.clipboard
       .writeText(formattedExportedSave)

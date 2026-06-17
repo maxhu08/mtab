@@ -19,9 +19,7 @@ export const handlePasswordGenerator = (val: string) => {
 
   const memorable = flags.has("m");
 
-  const cryptoObj: Crypto | undefined =
-    // oxlint-disable-next-line typescript/no-explicit-any
-    typeof crypto !== "undefined" ? crypto : (globalThis as any).crypto;
+  const cryptoObj = typeof crypto !== "undefined" ? crypto : globalThis.crypto;
 
   const randInt = (maxExclusive: number) => {
     if (maxExclusive <= 0) return 0;
