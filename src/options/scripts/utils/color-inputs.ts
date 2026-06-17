@@ -56,6 +56,26 @@ const setPreviewColor = (previewEl: HTMLButtonElement, value: string): void => {
   previewEl.style.setProperty("--options-color-preview", value || "transparent");
 };
 
+const getViewportPosition = (previewEl: HTMLButtonElement, popupEl: HTMLDivElement) => {
+  const previewRect = previewEl.getBoundingClientRect();
+  const viewportGap = 8;
+  const popupWidth = popupEl.offsetWidth;
+  const popupHeight = popupEl.offsetHeight;
+  const maxLeft = window.innerWidth - popupWidth - viewportGap;
+  const left = Math.max(viewportGap, Math.min(maxLeft, previewRect.right - popupWidth));
+  const bottomTop = previewRect.bottom + viewportGap;
+  const top =
+    bottomTop + popupHeight > window.innerHeight - viewportGap &&
+    previewRect.top - popupHeight - viewportGap >= viewportGap
+      ? previewRect.top - popupHeight - viewportGap
+      : bottomTop;
+
+  return {
+    left,
+    top: Math.max(viewportGap, top)
+  };
+};
+
 const createColorControl = ({ container, input }: ColorFieldInput): void => {
   if (controls.has(input)) return;
 
@@ -81,8 +101,9 @@ const createColorControl = ({ container, input }: ColorFieldInput): void => {
 
   const pickerEl = document.createElement("hex-alpha-color-picker") as HexAlphaColorPickerElement;
   popupEl.append(pickerEl);
-  shellEl.append(previewEl, popupEl);
+  shellEl.append(previewEl);
   container.append(shellEl);
+  document.body.append(popupEl);
 
   let pendingValue = input.value.trim();
   let isOpen = false;
@@ -92,6 +113,12 @@ const createColorControl = ({ container, input }: ColorFieldInput): void => {
 
     input.value = pendingValue;
     syncColorInputControl(input);
+  };
+
+  const positionPopup = (): void => {
+    const { left, top } = getViewportPosition(previewEl, popupEl);
+    popupEl.style.left = `${left}px`;
+    popupEl.style.top = `${top}px`;
   };
 
   const closePopup = (commit: boolean): void => {
@@ -105,6 +132,8 @@ const createColorControl = ({ container, input }: ColorFieldInput): void => {
     document.removeEventListener("pointerdown", handleDocumentPointerDown);
     document.removeEventListener("pointerup", handleDocumentPointerUp);
     document.removeEventListener("keydown", handleDocumentKeyDown);
+    document.removeEventListener("scroll", positionPopup, true);
+    window.removeEventListener("resize", positionPopup);
 
     if (commit) {
       commitPendingValue();
@@ -120,6 +149,7 @@ const createColorControl = ({ container, input }: ColorFieldInput): void => {
     isOpen = true;
     pendingValue = input.value.trim();
     popupEl.hidden = false;
+    positionPopup();
     shellEl.classList.add("is-open");
     previewEl.setAttribute("aria-expanded", "true");
 
@@ -131,10 +161,12 @@ const createColorControl = ({ container, input }: ColorFieldInput): void => {
     document.addEventListener("pointerdown", handleDocumentPointerDown);
     document.addEventListener("pointerup", handleDocumentPointerUp);
     document.addEventListener("keydown", handleDocumentKeyDown);
+    document.addEventListener("scroll", positionPopup, true);
+    window.addEventListener("resize", positionPopup);
   };
 
   function handleDocumentPointerDown(event: PointerEvent): void {
-    if (shellEl.contains(event.target as Node)) return;
+    if (shellEl.contains(event.target as Node) || popupEl.contains(event.target as Node)) return;
 
     closePopup(true);
   }

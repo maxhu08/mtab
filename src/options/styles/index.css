@@ -131,6 +131,10 @@
   overflow: visible;
 }
 
+.options-color-picker-shell.is-open {
+  z-index: 2147483647;
+}
+
 .options-color-picker {
   appearance: none;
   width: 100%;
@@ -183,10 +187,8 @@
 }
 
 .options-color-picker-popup {
-  position: absolute;
-  top: calc(100% + 0.5rem);
-  right: 0;
-  z-index: 20;
+  position: fixed;
+  z-index: 2147483647;
   width: 14rem;
   padding: 0.625rem;
   border: 1px solid #404040;
