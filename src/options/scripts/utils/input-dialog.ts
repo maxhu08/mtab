@@ -23,7 +23,7 @@ type ActionDialogOptions = {
 const OVERLAY_ID = "mtab-input-dialog-overlay";
 const ACTION_OVERLAY_ID = "mtab-action-dialog-overlay";
 const ICON_PICKER_OVERLAY_ID = "mtab-icon-picker-overlay";
-const ICON_PICKER_SECTION_RENDER_LIMIT = 120;
+const ICON_PICKER_RENDER_LIMIT = 100;
 const ICON_PICKER_PREVIEW_COLOR = "currentColor";
 
 type IconPickerItem = {
@@ -419,19 +419,27 @@ export const showIconPickerModal = (currentValue = ""): Promise<string | null> =
     const renderResults = () => {
       const terms = searchInputEl.value.trim().toLowerCase().split(/\s+/).filter(Boolean);
       const fragment = document.createDocumentFragment();
-      let totalMatches = 0;
+      const sectionMatches = ICON_PICKER_SECTIONS.map((section) => {
+        const matches = terms.length
+          ? section.items.filter((item) => terms.every((term) => item.search.includes(term)))
+          : section.items;
+        return { section, matches };
+      }).filter((sectionMatch) => sectionMatch.matches.length > 0);
+      const totalMatches = sectionMatches.reduce(
+        (total, sectionMatch) => total + sectionMatch.matches.length,
+        0
+      );
       let totalVisible = 0;
 
       resultsEl.replaceChildren();
 
-      for (const section of ICON_PICKER_SECTIONS) {
-        const matches = terms.length
-          ? section.items.filter((item) => terms.every((term) => item.search.includes(term)))
-          : section.items;
-        if (matches.length === 0) continue;
+      for (const sectionMatch of sectionMatches) {
+        const visibleMatches = sectionMatch.matches.slice(
+          0,
+          ICON_PICKER_RENDER_LIMIT - totalVisible
+        );
+        if (visibleMatches.length === 0) break;
 
-        const visibleMatches = matches.slice(0, ICON_PICKER_SECTION_RENDER_LIMIT);
-        totalMatches += matches.length;
         totalVisible += visibleMatches.length;
 
         const sectionEl = document.createElement("section");
@@ -442,11 +450,11 @@ export const showIconPickerModal = (currentValue = ""): Promise<string | null> =
 
         const sectionTitleEl = document.createElement("h3");
         sectionTitleEl.className = "options-icon-picker-section-title";
-        sectionTitleEl.textContent = section.title;
+        sectionTitleEl.textContent = sectionMatch.section.title;
 
         const sectionCountEl = document.createElement("span");
         sectionCountEl.className = "options-icon-picker-section-count";
-        sectionCountEl.textContent = String(matches.length);
+        sectionCountEl.textContent = String(sectionMatch.matches.length);
 
         sectionHeaderEl.append(sectionTitleEl, sectionCountEl);
 
