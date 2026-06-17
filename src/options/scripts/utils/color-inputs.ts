@@ -94,6 +94,7 @@ const createColorControl = ({ container, input }: ColorFieldInput): void => {
   );
   previewEl.setAttribute("aria-haspopup", "dialog");
   previewEl.setAttribute("aria-expanded", "false");
+  previewEl.setAttribute("data-tippy-content", "choose color");
 
   const popupEl = document.createElement("div");
   popupEl.className = "options-color-picker-popup";

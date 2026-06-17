@@ -211,15 +211,24 @@ export const refreshHandleTooltips = () => {
 };
 
 export const initTooltipsDelegated = () => {
-  delegate(bookmarksUserDefinedList, {
-    target:
-      ".toggle-collapse-bookmark-button, .reposition-bookmark-button, .delete-bookmark-button, .export-bookmark-button, " +
-      ".toggle-collapse-folder-button, .toggle-collapse-folder-contents-button, .reposition-folder-button, .delete-folder-button, .export-folder-button",
-    placement: "top",
+  const base = {
+    placement: "top" as const,
     theme: "dark",
     animation: "shift-away",
-    duration: [120, 90],
-    delay: [75, 0]
+    duration: [120, 90] as [number, number],
+    delay: [75, 0] as [number, number]
+  };
+
+  delegate(bookmarksUserDefinedList, {
+    ...base,
+    target:
+      ".toggle-collapse-bookmark-button, .reposition-bookmark-button, .delete-bookmark-button, .export-bookmark-button, " +
+      ".toggle-collapse-folder-button, .toggle-collapse-folder-contents-button, .reposition-folder-button, .delete-folder-button, .export-folder-button"
+  });
+
+  delegate(document.body, {
+    ...base,
+    target: ".options-color-picker, .options-icon-picker"
   });
 };
 

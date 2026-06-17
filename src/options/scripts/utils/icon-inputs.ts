@@ -59,6 +59,7 @@ const createIconControl = ({ container, input, getFallbackIconType }: IconFieldI
     `${input.id.replace(/-input$/, "").replace(/-/g, " ")} icon picker`
   );
   previewEl.setAttribute("aria-haspopup", "dialog");
+  previewEl.setAttribute("data-tippy-content", "choose icon");
 
   shellEl.append(previewEl);
   container.append(shellEl);
