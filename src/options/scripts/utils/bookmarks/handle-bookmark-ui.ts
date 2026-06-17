@@ -1,5 +1,6 @@
 import Sortable from "sortablejs";
 import {
+  bookmarksDefaultFolderIconTypeInputEl,
   bookmarksUserDefinedList,
   Input,
   toggleCollapseAllBookmarkNodesButtonEl
@@ -14,6 +15,7 @@ import { importBookmarkNode } from "~/src/options/scripts/utils/bookmarks/import
 import { exportAllBookmarkNodes } from "~/src/options/scripts/utils/bookmarks/export-all-bookmark-nodes";
 import { importAllBookmarkNodes } from "~/src/options/scripts/utils/bookmarks/import-all-bookmark-nodes";
 import { registerColorInputControl } from "~/src/options/scripts/utils/color-inputs";
+import { registerIconInputControl } from "~/src/options/scripts/utils/icon-inputs";
 
 const sortableMap = new WeakMap<HTMLDivElement, Sortable>();
 
@@ -671,6 +673,13 @@ export const addBookmarkNodeBookmark = (
       input: containerDiv.querySelector(`#bookmark-${uuid}-${id}-input`) as HTMLInputElement
     });
   });
+
+  registerIconInputControl({
+    container: containerDiv.querySelector(
+      `#bookmark-${uuid}-icon-type-container`
+    ) as HTMLDivElement,
+    input: containerDiv.querySelector(`#bookmark-${uuid}-icon-type-input`) as HTMLInputElement
+  });
 };
 
 export const addBookmarkNodeFolder = (
@@ -897,6 +906,14 @@ export const addBookmarkNodeFolder = (
       container: containerDiv.querySelector(`#bookmark-${uuid}-${id}-container`) as HTMLDivElement,
       input: containerDiv.querySelector(`#bookmark-${uuid}-${id}-input`) as HTMLInputElement
     });
+  });
+
+  registerIconInputControl({
+    container: containerDiv.querySelector(
+      `#bookmark-${uuid}-icon-type-container`
+    ) as HTMLDivElement,
+    input: containerDiv.querySelector(`#bookmark-${uuid}-icon-type-input`) as HTMLInputElement,
+    getFallbackIconType: () => bookmarksDefaultFolderIconTypeInputEl.value
   });
 
   initSortableForDropzone(contentsContainer);

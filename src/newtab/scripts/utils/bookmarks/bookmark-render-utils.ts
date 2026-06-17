@@ -10,7 +10,7 @@ import {
 import { bookmarksContainerEl } from "~/src/newtab/scripts/ui";
 import { handleAnimation } from "~/src/newtab/scripts/utils/animations/handle-animation";
 import {
-  getBookmarkIconDetails,
+  createNewtabBookmarkIcon,
   preloadBookmarkIconAsset
 } from "~/src/newtab/scripts/utils/bookmarks/bookmark-icon";
 import { openBookmark } from "~/src/newtab/scripts/utils/bookmarks/open-bookmark";
@@ -754,7 +754,7 @@ export const renderBlockBookmark = (
 ): RenderedNode => {
   const delay = calcDelay(bookmarkTiming, bookmarksLength, bookmarkIndex);
 
-  const { iconHTML, iconSizeClass, iconColor } = getBookmarkIconDetails(
+  const { iconEl, iconSizeClass, iconColor } = createNewtabBookmarkIcon(
     bookmarkIconType,
     bookmarkIconColor,
     bookmarksDefaultIconColor
@@ -788,7 +788,7 @@ export const renderBlockBookmark = (
   iconDiv.className = `bookmark-node-icon${iconSizeClass ? " " + iconSizeClass : ""}`;
   iconDiv.style.color = iconColor;
   iconDiv.setAttribute("aria-hidden", "true");
-  iconDiv.innerHTML = iconHTML;
+  if (iconEl) iconDiv.appendChild(iconEl);
 
   let nameSpan: HTMLSpanElement | null = null;
   if (showName) {
@@ -828,7 +828,7 @@ export const renderBlockFolder = (
 ): RenderedNode => {
   const delay = calcDelay(bookmarkTiming, nodesLength, nodeIndex);
 
-  const { iconHTML, iconSizeClass, iconColor } = getBookmarkIconDetails(
+  const { iconEl, iconSizeClass, iconColor } = createNewtabBookmarkIcon(
     folderIconType,
     folderIconColor,
     bookmarksDefaultIconColor
@@ -862,7 +862,7 @@ export const renderBlockFolder = (
   iconDiv.className = `bookmark-node-icon${iconSizeClass ? " " + iconSizeClass : ""}`;
   iconDiv.style.color = iconColor;
   iconDiv.setAttribute("aria-hidden", "true");
-  iconDiv.innerHTML = iconHTML;
+  if (iconEl) iconDiv.appendChild(iconEl);
 
   let nameSpan: HTMLSpanElement | null = null;
   if (showName) {

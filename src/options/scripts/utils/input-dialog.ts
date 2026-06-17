@@ -233,3 +233,63 @@ export const showActionDialog = (text: string, options: ActionDialogOptions): Pr
     });
   });
 };
+
+export const showIconPickerModal = (): Promise<void> => {
+  const existingOverlay = document.getElementById(ACTION_OVERLAY_ID);
+  if (existingOverlay) existingOverlay.remove();
+
+  const overlay = document.createElement("div");
+  overlay.id = ACTION_OVERLAY_ID;
+  overlay.className =
+    "fixed inset-0 z-[1000000000] grid place-items-center bg-black/60 p-4 backdrop-blur-sm";
+  overlay.style.opacity = "0";
+  overlay.style.transition = "opacity 160ms ease";
+
+  const dialog = document.createElement("div");
+  dialog.className =
+    "w-full max-w-xl rounded-md border-2 border-emerald-500 bg-neutral-900 p-4 text-base shadow-2xl";
+  dialog.setAttribute("role", "dialog");
+  dialog.setAttribute("aria-modal", "true");
+  dialog.setAttribute("aria-label", "Icon picker");
+  dialog.style.opacity = "0";
+  dialog.style.transform = "translateY(8px) scale(0.96)";
+  dialog.style.transition =
+    "opacity 180ms cubic-bezier(0.16, 1, 0.3, 1), transform 180ms cubic-bezier(0.16, 1, 0.3, 1)";
+
+  overlay.appendChild(dialog);
+  document.body.appendChild(overlay);
+
+  requestAnimationFrame(() => {
+    overlay.style.opacity = "1";
+    dialog.style.opacity = "1";
+    dialog.style.transform = "translateY(0) scale(1)";
+  });
+
+  return new Promise((resolve) => {
+    let isClosing = false;
+
+    const cleanup = async () => {
+      if (isClosing) return;
+      isClosing = true;
+      document.removeEventListener("keydown", onKeydown);
+      overlay.style.opacity = "0";
+      dialog.style.opacity = "0";
+      dialog.style.transform = "translateY(8px) scale(0.96)";
+      await new Promise((done) => setTimeout(done, 160));
+      overlay.remove();
+      resolve();
+    };
+
+    const onKeydown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        event.preventDefault();
+        void cleanup();
+      }
+    };
+
+    document.addEventListener("keydown", onKeydown);
+    overlay.addEventListener("click", (event) => {
+      if (event.target === overlay) void cleanup();
+    });
+  });
+};
