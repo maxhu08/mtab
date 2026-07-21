@@ -2,6 +2,7 @@ import {
   getBookmarkNodeBookmarkData,
   getBookmarkNodeFolderData
 } from "~/src/options/scripts/utils/bookmarks/get-bookmark-node-data";
+import { t } from "~/src/options/scripts/i18n";
 
 export const exportBookmarkNode = async (uuid: string) => {
   const extensionVersion = chrome.runtime.getManifest().version;
@@ -31,8 +32,8 @@ export const exportBookmarkNode = async (uuid: string) => {
   await navigator.clipboard.writeText(formattedExport);
 
   if (nodeType === "bookmark") {
-    toast.success("bookmark copied to clipboard");
+    toast.success(t("bookmark copied to clipboard"));
   } else if (nodeType === "folder") {
-    toast.success("folder and contents copied to clipboard");
+    toast.success(t("folder and contents copied to clipboard"));
   }
 };

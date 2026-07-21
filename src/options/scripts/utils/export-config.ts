@@ -1,5 +1,6 @@
 import { getConfig } from "~/src/utils/config";
 import { saveConfig } from "~/src/options/scripts/utils/save-config";
+import { t } from "~/src/options/scripts/i18n";
 
 export const saveAndExportConfig = () => {
   // save and don't notify
@@ -13,10 +14,10 @@ export const saveAndExportConfig = () => {
     navigator.clipboard
       .writeText(formattedExportedSave)
       .then(() => {
-        toast.success("config saved & copied to clipboard");
+        toast.success(t("config saved & copied to clipboard"));
       })
       .catch(() => {
-        toast.error("could not save config to clipboard");
+        toast.error(t("could not save config to clipboard"));
       });
   });
 };

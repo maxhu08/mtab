@@ -2,10 +2,13 @@ import { countNodes } from "~/src/options/scripts/utils/bookmarks/count";
 import { setBookmarkNodes } from "~/src/options/scripts/utils/bookmarks/set-bookmarks";
 import { showInputDialog } from "~/src/options/scripts/utils/input-dialog";
 import { BookmarkNode } from "~/src/utils/config";
+import { t } from "~/src/options/scripts/i18n";
 
 export const importAllBookmarkNodes = async () => {
   const dataToImport = await showInputDialog(
-    "input your bookmarks and folders to import (THIS WILL OVERWRITE YOUR CURRENT BOOKMARKS AND FOLDERS)"
+    t(
+      "input your bookmarks and folders to import (THIS WILL OVERWRITE YOUR CURRENT BOOKMARKS AND FOLDERS)"
+    )
   );
 
   if (dataToImport === null) {
@@ -15,7 +18,7 @@ export const importAllBookmarkNodes = async () => {
   const trimmed = dataToImport.trim();
 
   if (trimmed === "") {
-    toast.info("input was empty, nothing imported");
+    toast.info(t("input was empty, nothing imported"));
     return;
   }
 
@@ -24,7 +27,7 @@ export const importAllBookmarkNodes = async () => {
   const headerMatch = trimmed.match(/^(MTAB_USER_USER_DEFINED_BOOKMARKS_FORMAT_v[^_]+)_(.+)$/);
 
   if (!headerMatch) {
-    toast.error("incorrect format, expected MTAB_USER_USER_DEFINED_BOOKMARKS_FORMAT_v#.#.#_");
+    toast.error(t("incorrect format, expected MTAB_USER_USER_DEFINED_BOOKMARKS_FORMAT_v#.#.#_"));
     return;
   }
 
@@ -35,12 +38,17 @@ export const importAllBookmarkNodes = async () => {
   try {
     bookmarksNodesToImport = JSON.parse(rawPayload);
   } catch {
-    toast.error("invalid bookmark data");
+    toast.error(t("invalid bookmark data"));
     return;
   }
 
   setBookmarkNodes(bookmarksNodesToImport);
 
   const counts = countNodes(bookmarksNodesToImport);
-  toast.success(`imported ${counts[0]} bookmarks and ${counts[1]} folders`);
+  toast.success(
+    t("imported {bookmarks} bookmarks and {folders} folders", {
+      bookmarks: counts[0],
+      folders: counts[1]
+    })
+  );
 };

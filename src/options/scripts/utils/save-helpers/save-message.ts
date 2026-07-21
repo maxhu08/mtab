@@ -7,6 +7,7 @@ import {
   messageTextSizeInputEl
 } from "~/src/options/scripts/ui";
 import { getSelectedButton } from "~/src/options/scripts/utils/get-selected-button";
+import { normalizeDefaultValue } from "~/src/i18n";
 
 export const saveMessageSettingsToDraft = (draft: Config) => {
   draft.message.enabled = messageEnabledCheckboxEl.checked;
@@ -46,5 +47,8 @@ export const saveMessageSettingsToDraft = (draft: Config) => {
     draft.message.weather.unitsType = weatherUnitTypePairs[selectedWeatherUnitsTypeEl.id];
   }
 
-  draft.message.customText = messageCustomTextInputEl.value;
+  draft.message.customText = normalizeDefaultValue(
+    messageCustomTextInputEl.value,
+    "your custom text"
+  );
 };

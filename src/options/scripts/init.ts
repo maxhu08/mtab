@@ -22,55 +22,60 @@ import {
 import { initCustomCSSHighlight } from "~/src/options/scripts/utils/custom-css-highlight";
 import { initColorInputControls } from "~/src/options/scripts/utils/color-inputs";
 import { initIconInputControls } from "~/src/options/scripts/utils/icon-inputs";
+import { initializeI18n } from "~/src/options/scripts/i18n";
 
-const logo = document.getElementById("mtab-logo") as HTMLImageElement;
-logo.classList.add("animate-up-bouncy");
+const initialize = () => {
+  const logo = document.getElementById("mtab-logo") as HTMLImageElement;
+  logo.classList.add("animate-up-bouncy");
 
-logo.addEventListener(
-  "animationend",
-  () => {
-    logo.classList.replace("animate-up-bouncy", "animate-float");
-  },
-  {
-    once: true
-  }
-);
+  logo.addEventListener(
+    "animationend",
+    () => {
+      logo.classList.replace("animate-up-bouncy", "animate-float");
+    },
+    {
+      once: true
+    }
+  );
 
-createCollapseGroups();
-initCustomCSSHighlight();
-initColorInputControls();
-initIconInputControls();
+  createCollapseGroups();
+  initCustomCSSHighlight();
+  initColorInputControls();
+  initIconInputControls();
 
-getConfig((data) => {
-  fillInputs(data.config);
+  getConfig((data) => {
+    fillInputs(data.config);
 
-  fixAllToggleCheckboxSections();
-});
+    fixAllToggleCheckboxSections();
+  });
 
-const manifest = chrome.runtime.getManifest();
-const displayVersion =
-  document.documentElement.getAttribute("rc-version-info")?.trim() || manifest.version;
+  const manifest = chrome.runtime.getManifest();
+  const displayVersion =
+    document.documentElement.getAttribute("rc-version-info")?.trim() || manifest.version;
 
-(document.getElementById("version-number-text") as HTMLSpanElement).textContent += displayVersion;
+  (document.getElementById("version-number-text") as HTMLSpanElement).textContent += displayVersion;
 
-(document.getElementById("user-agent-text") as HTMLSpanElement).textContent += getUserAgent();
+  (document.getElementById("user-agent-text") as HTMLSpanElement).textContent += getUserAgent();
 
-listenToInputs();
-listenToKeys();
+  listenToInputs();
+  listenToKeys();
 
-handleCustomFaviconUpload();
-handleWallpaperFileUpload();
+  handleCustomFaviconUpload();
+  handleWallpaperFileUpload();
 
-handleSwitches();
+  handleSwitches();
 
-const selectedWallpaperTypeButton = getSelectedButton("wallpaper-type");
-if (selectedWallpaperTypeButton) selectedWallpaperTypeButton.click();
-void renderWallpaperGallery();
+  const selectedWallpaperTypeButton = getSelectedButton("wallpaper-type");
+  if (selectedWallpaperTypeButton) selectedWallpaperTypeButton.click();
+  void renderWallpaperGallery();
 
-listenAllToggleCheckboxSections();
+  listenAllToggleCheckboxSections();
 
-handleControls();
+  handleControls();
 
-initDelegatedHandlers();
-initTooltipsDelegated();
-initSortableForExistingDropzones();
+  initDelegatedHandlers();
+  initTooltipsDelegated();
+  initSortableForExistingDropzones();
+};
+
+void initializeI18n().then(initialize);

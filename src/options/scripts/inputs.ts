@@ -19,6 +19,7 @@ import { setDefaultConfig } from "~/src/options/scripts/utils/set-default-config
 import { handleCustomFaviconReset } from "~/src/options/scripts/utils/upload-favicon";
 import { importConfigAndSave } from "~/src/options/scripts/utils/import-config";
 import tippy from "tippy.js";
+import { t } from "~/src/options/scripts/i18n";
 
 export const listenToInputs = () => {
   buttonSwitches.forEach((btnSwitch) => {
@@ -71,17 +72,17 @@ export const listenToInputs = () => {
 
   tippy("#save-button", {
     ...base,
-    content: "save (ctrl+s)"
+    content: t("save (ctrl+s)")
   });
 
   tippy("#export-button", {
     ...base,
-    content: "save & export (ctrl+e)"
+    content: t("save & export (ctrl+e)")
   });
 
   tippy("#import-button", {
     ...base,
-    content: "import & save (ctrl+i)"
+    content: t("import & save (ctrl+i)")
   });
 
   const resetToDefaultBtn = document.getElementById("reset-to-default-button") as HTMLButtonElement;

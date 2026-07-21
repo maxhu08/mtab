@@ -22,6 +22,7 @@ import { initSW } from "~/src/newtab/scripts/sw";
 import { titleTypewriterEffect } from "~/src/newtab/scripts/utils/title/title-effects";
 import { initSearchHighlighting } from "~/src/newtab/scripts/utils/search/handle-search-highlighting";
 import { setWallpaperCreditTheme } from "~/src/newtab/scripts/utils/wallpaper-credit";
+import { initializeDocumentI18n, localizeDefaultValue } from "~/src/i18n";
 
 const manifest = chrome.runtime.getManifest();
 const displayVersion =
@@ -32,7 +33,7 @@ document.documentElement.setAttribute("extension-version", displayVersion);
 // @ts-expect-error
 document.documentElement.setAttribute("made-by", manifest.author);
 
-getConfig((data) => {
+const initialize: Parameters<typeof getConfig>[0] = (data) => {
   const config = data.config;
 
   initSW();
@@ -66,8 +67,8 @@ getConfig((data) => {
     config.search.searchIconColor,
     config.search.bookmarkIconColor,
     config.search.selectIconColor,
-    config.search.placeholderText,
-    config.search.bookmarkPlaceholderText,
+    localizeDefaultValue(config.search.placeholderText, "search..."),
+    localizeDefaultValue(config.search.bookmarkPlaceholderText, "find bookmark..."),
     config.search.font.type,
     config.search.font.custom
   );
@@ -88,8 +89,8 @@ getConfig((data) => {
   setMessage(
     config.message.enabled,
     config.message.type,
-    config.message.customText,
-    config.user.name,
+    localizeDefaultValue(config.message.customText, "your custom text"),
+    localizeDefaultValue(config.user.name, "user"),
     config.message.weather.unitsType
   );
 
@@ -116,4 +117,6 @@ getConfig((data) => {
     if (config.extras.snow.enabled === "on") snowStorm();
     else if (config.extras.snow.enabled === "winter" && new Date().getMonth() === 11) snowStorm();
   }
-});
+};
+
+void initializeDocumentI18n().then(() => getConfig(initialize));

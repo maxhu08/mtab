@@ -117,7 +117,7 @@ function renderToaster() {
       role="status"
       aria-live="polite"
       aria-atomic="false"
-      aria-label="Notifications"
+      aria-label="${window.optionsT("Notifications")}"
       data-theme="light"
       data-x-position="${x}"
       data-y-position="${y}"
@@ -333,7 +333,7 @@ function renderToast(list, content, { description, type, action, position } = {}
     const actionText = actionBtn.textContent?.trim();
     actionBtn.setAttribute(
       "aria-label",
-      actionText && actionText.length > 0 ? actionText : "Toast action"
+      actionText && actionText.length > 0 ? actionText : window.optionsT("Toast action")
     );
   }
 

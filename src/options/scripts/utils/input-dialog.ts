@@ -7,6 +7,7 @@ import { NERDFONTS_LIST } from "~/src/options/scripts/utils/icons/nerdfonts";
 import { REMIXICONS_LIST } from "~/src/options/scripts/utils/icons/remixicons";
 import { SIMPLEICONS_LIST } from "~/src/options/scripts/utils/icons/simpleicons";
 import { createBookmarkIcon } from "~/src/utils/bookmark-icon";
+import { t } from "~/src/options/scripts/i18n";
 
 type InputDialogOptions = {
   placeholder?: string;
@@ -112,7 +113,7 @@ export const showInputDialog = (
   inputEl.autocomplete = "off";
   inputEl.className =
     "w-full bg-transparent text-base text-white placeholder-neutral-500 outline-none";
-  inputEl.placeholder = options.placeholder ?? "paste here...";
+  inputEl.placeholder = options.placeholder ?? t("paste here...");
   inputEl.value = options.defaultValue ?? "";
   inputContainerEl.append(inputEl);
 
@@ -123,13 +124,13 @@ export const showInputDialog = (
   cancelButton.type = "button";
   cancelButton.className =
     "cursor-pointer rounded-md bg-neutral-800 px-3 py-2 text-base text-white transition hover:bg-neutral-700";
-  cancelButton.textContent = options.cancelText ?? "cancel";
+  cancelButton.textContent = options.cancelText ?? t("cancel");
 
   const confirmButton = document.createElement("button");
   confirmButton.type = "button";
   confirmButton.className =
     "cursor-pointer rounded-md bg-emerald-500 px-3 py-2 text-base text-white transition hover:bg-emerald-600";
-  confirmButton.textContent = options.confirmText ?? "ok";
+  confirmButton.textContent = options.confirmText ?? t("ok");
 
   actions.append(cancelButton, confirmButton);
   dialog.append(textEl, inputContainerEl, actions);
@@ -226,13 +227,13 @@ export const showActionDialog = (text: string, options: ActionDialogOptions): Pr
   cancelButton.type = "button";
   cancelButton.className =
     "cursor-pointer rounded-md bg-neutral-800 px-3 py-2 text-base text-white transition hover:bg-neutral-700";
-  cancelButton.textContent = options.cancelText ?? "cancel";
+  cancelButton.textContent = options.cancelText ?? t("cancel");
 
   const actionButton = document.createElement("button");
   actionButton.type = "button";
   actionButton.className =
     "cursor-pointer rounded-md bg-rose-500 px-3 py-2 text-base text-white transition hover:bg-rose-600";
-  actionButton.textContent = options.actionText ?? "confirm";
+  actionButton.textContent = options.actionText ?? t("confirm");
 
   actions.append(cancelButton, actionButton);
   dialog.append(textEl, actions);
@@ -311,7 +312,7 @@ export const showIconPickerModal = (currentValue = ""): Promise<string | null> =
     "grid max-h-[min(48rem,calc(100vh-2rem))] w-full max-w-6xl grid-rows-[auto_auto_minmax(0,1fr)_auto] gap-3 rounded-md border-2 border-emerald-500 bg-neutral-900 p-4 text-base shadow-2xl";
   dialog.setAttribute("role", "dialog");
   dialog.setAttribute("aria-modal", "true");
-  dialog.setAttribute("aria-label", "Icon picker");
+  dialog.setAttribute("aria-label", t("Icon picker"));
   dialog.style.opacity = "0";
   dialog.style.transform = "translateY(8px) scale(0.96)";
   dialog.style.transition =
@@ -322,11 +323,11 @@ export const showIconPickerModal = (currentValue = ""): Promise<string | null> =
 
   const titleEl = document.createElement("p");
   titleEl.className = "text-base text-white";
-  titleEl.textContent = "choose icon";
+  titleEl.textContent = t("choose icon");
 
   const helperEl = document.createElement("p");
   helperEl.className = "text-sm text-neutral-500";
-  helperEl.textContent = "Search by icon name, family, or full icon type.";
+  helperEl.textContent = t("Search by icon name, family, or full icon type.");
 
   headerEl.append(titleEl, helperEl);
 
@@ -339,7 +340,7 @@ export const showIconPickerModal = (currentValue = ""): Promise<string | null> =
   searchInputEl.autocomplete = "off";
   searchInputEl.className =
     "w-full bg-transparent text-base text-white placeholder-neutral-500 outline-none";
-  searchInputEl.placeholder = "search icons...";
+  searchInputEl.placeholder = t("search icons...");
   searchContainerEl.append(searchInputEl);
 
   const resultsEl = document.createElement("div");
@@ -358,13 +359,13 @@ export const showIconPickerModal = (currentValue = ""): Promise<string | null> =
   cancelButton.type = "button";
   cancelButton.className =
     "cursor-pointer rounded-md bg-neutral-800 px-3 py-2 text-base text-white transition hover:bg-neutral-700";
-  cancelButton.textContent = "cancel";
+  cancelButton.textContent = t("cancel");
 
   const okButton = document.createElement("button");
   okButton.type = "button";
   okButton.className =
     "cursor-pointer rounded-md bg-emerald-500 px-3 py-2 text-base text-white transition hover:bg-emerald-600";
-  okButton.textContent = "ok";
+  okButton.textContent = t("ok");
 
   actionsEl.append(cancelButton, okButton);
   footerEl.append(countEl, actionsEl);
@@ -503,14 +504,17 @@ export const showIconPickerModal = (currentValue = ""): Promise<string | null> =
       resultsEl.append(fragment);
 
       if (totalMatches === 0) {
-        countEl.textContent = "no icons found";
+        countEl.textContent = t("no icons found");
         return;
       }
 
       countEl.textContent =
         totalMatches > totalVisible
-          ? `showing ${totalVisible} of ${totalMatches} icons; search to narrow results`
-          : `showing ${totalMatches} icons`;
+          ? t("showing {visible} of {total} icons; search to narrow results", {
+              visible: totalVisible,
+              total: totalMatches
+            })
+          : t("showing {total} icons", { total: totalMatches });
     };
 
     const onKeydown = (event: KeyboardEvent) => {

@@ -1,3 +1,7 @@
+import { initializeDocumentI18n } from "~/src/i18n";
+
+void initializeDocumentI18n();
+
 const logo = document.getElementById("mtab-logo") as HTMLImageElement;
 
 logo.classList.add("animate-up-bouncy");

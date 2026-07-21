@@ -7,6 +7,7 @@ import {
   uiBlurStrengthInputEl
 } from "~/src/options/scripts/ui";
 import { getSelectedButton } from "~/src/options/scripts/utils/get-selected-button";
+import { normalizeDefaultValue } from "~/src/i18n";
 
 export const saveUISettingsToDraft = (draft: Config) => {
   const selectedStyleEl = getSelectedButton("ui-style");
@@ -37,5 +38,8 @@ export const saveUISettingsToDraft = (draft: Config) => {
     }
   }
 
-  draft.ui.customCSS = uiCustomCSSTextareaEl.value;
+  draft.ui.customCSS = normalizeDefaultValue(
+    uiCustomCSSTextareaEl.value,
+    "/* input custom css... */"
+  );
 };

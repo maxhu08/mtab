@@ -1,6 +1,7 @@
 import { HotkeyInput } from "~/src/options/scripts/ui";
 import { normalizeStoredHotkey } from "~/src/utils/hotkeys";
 import { focusInput, unfocusInput } from "~/src/options/scripts/utils/ui-helpers";
+import { t } from "~/src/options/scripts/i18n";
 
 export const listenToHotkeyInputs = (hotkeyInputs: HotkeyInput[]) => {
   const focusedBorderClass = "border-lime-500";
@@ -35,7 +36,7 @@ export const listenToHotkeyInputs = (hotkeyInputs: HotkeyInput[]) => {
       }
 
       if (val === "") {
-        input.status.textContent = ` (none)`;
+        input.status.textContent = ` ${t("(none)")}`;
       } else {
         input.status.textContent = ` (${val})`;
       }

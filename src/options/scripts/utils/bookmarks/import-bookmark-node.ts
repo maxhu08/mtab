@@ -5,18 +5,19 @@ import {
 } from "~/src/options/scripts/utils/bookmarks/handle-bookmark-ui";
 import { showInputDialog } from "~/src/options/scripts/utils/input-dialog";
 import { BookmarkNode } from "~/src/utils/config";
+import { t } from "~/src/options/scripts/i18n";
 
 export const importBookmarkNode = async () => {
-  const dataToImport = await showInputDialog("input your bookmark or folder");
+  const dataToImport = await showInputDialog(t("input your bookmark or folder"));
 
   if (dataToImport === null) {
-    toast.error("could not import your bookmark or folder");
+    toast.error(t("could not import your bookmark or folder"));
     return;
   }
 
   const trimmed = dataToImport.trim();
   if (trimmed === "") {
-    toast.info("input was empty, nothing imported");
+    toast.info(t("input was empty, nothing imported"));
     return;
   }
 
@@ -29,7 +30,9 @@ export const importBookmarkNode = async () => {
 
   if (!headerMatch) {
     toast.error(
-      "incorrect format, expected MTAB_USER_DEFINED_BOOKMARK_FORMAT_v#.#.#_ or MTAB_USER_DEFINED_FOLDER_FORMAT_v#.#.#_"
+      t(
+        "incorrect format, expected MTAB_USER_DEFINED_BOOKMARK_FORMAT_v#.#.#_ or MTAB_USER_DEFINED_FOLDER_FORMAT_v#.#.#_"
+      )
     );
     return;
   }
@@ -41,7 +44,7 @@ export const importBookmarkNode = async () => {
   try {
     bookmarkNode = JSON.parse(rawPayload);
   } catch {
-    toast.error("invalid bookmark data");
+    toast.error(t("invalid bookmark data"));
     return;
   }
 
@@ -57,6 +60,6 @@ export const importBookmarkNode = async () => {
       false
     );
   } else {
-    toast.error("invalid bookmark data");
+    toast.error(t("invalid bookmark data"));
   }
 };

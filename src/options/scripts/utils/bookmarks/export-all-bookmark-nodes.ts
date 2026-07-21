@@ -5,6 +5,7 @@ import {
   getBookmarkNodeFolderData
 } from "~/src/options/scripts/utils/bookmarks/get-bookmark-node-data";
 import { countNodes } from "~/src/options/scripts/utils/bookmarks/count";
+import { t } from "~/src/options/scripts/i18n";
 
 export const exportAllBookmarkNodes = async () => {
   const extensionVersion = chrome.runtime.getManifest().version;
@@ -30,5 +31,10 @@ export const exportAllBookmarkNodes = async () => {
   await navigator.clipboard.writeText(formattedExport);
 
   const counts = countNodes(bookmarkNodesToExport);
-  toast.success(`${counts[0]} bookmarks and ${counts[1]} folders copied to clipboard`);
+  toast.success(
+    t("{bookmarks} bookmarks and {folders} folders copied to clipboard", {
+      bookmarks: counts[0],
+      folders: counts[1]
+    })
+  );
 };

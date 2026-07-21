@@ -1,5 +1,6 @@
 import { Config, UIStyle } from "~/src/utils/config";
 import { assistantContainerEl } from "~/src/newtab/scripts/ui";
+import { getLanguage, t } from "~/src/i18n";
 
 export type AssistItem =
   | AssistDate
@@ -145,7 +146,7 @@ export const displayAssist = (items: AssistItem[], config: Config) => {
         markerColor: config.search.placeholderTextColor,
         contentClassName: "text-ellipsis overflow-hidden whitespace-nowrap w-full",
         contentColor: config.search.textColor,
-        textContent: new Intl.DateTimeFormat("en-US", {
+        textContent: new Intl.DateTimeFormat(getLanguage(), {
           year: "numeric",
           month: "long",
           day: "numeric",
@@ -189,7 +190,7 @@ export const displayAssist = (items: AssistItem[], config: Config) => {
           markerColor: config.search.placeholderTextColor,
           contentClassName: "text-ellipsis overflow-hidden whitespace-nowrap w-full",
           contentColor: config.search.placeholderTextColor,
-          textContent: "reduced precision"
+          textContent: t("reduced precision")
         });
       }
     } else if (item.type === "definition") {
@@ -356,11 +357,13 @@ export const displayAssist = (items: AssistItem[], config: Config) => {
 
       const resultBtn = document.createElement("button");
       resultBtn.type = "button";
-      resultBtn.setAttribute("aria-label", "Copy generated password to clipboard");
+      resultBtn.setAttribute("aria-label", t("Copy generated password to clipboard"));
       resultBtn.className =
         "w-full text-left hover:bg-white/20 cursor-pointer px-2 pt-2 pb-1 grid gap-2 duration-0 focus-visible:bg-white/20 outline-none focus-visible:outline-none";
 
-      const originalCopyText = `click to copy (${item.result.length} chars)`;
+      const originalCopyText = t("click to copy ({count} chars)", {
+        count: item.result.length
+      });
 
       const copyHintEl = document.createElement("div");
       copyHintEl.className = "select-none";
@@ -369,7 +372,7 @@ export const displayAssist = (items: AssistItem[], config: Config) => {
 
       resultBtn.onclick = () => {
         navigator.clipboard.writeText(item.result);
-        copyHintEl.innerHTML = "&nbsp;&nbsp;&nbsp;copied!";
+        copyHintEl.innerHTML = `&nbsp;&nbsp;&nbsp;${t("copied!")}`;
         setTimeout(() => {
           copyHintEl.innerHTML = `&nbsp;&nbsp;&nbsp;${originalCopyText}`;
         }, 3000);
@@ -434,11 +437,11 @@ export const displayAssist = (items: AssistItem[], config: Config) => {
         flagGridEl.appendChild(rowEl);
       };
 
-      makeFlagRow("lowercase", "l", item.flags.allowLowercase);
-      makeFlagRow("uppercase", "u", item.flags.allowUppercase);
-      makeFlagRow("numbers", "n", item.flags.allowNumbers);
-      makeFlagRow("symbols", "s", item.flags.allowSymbols);
-      makeFlagRow("memorable", "m", item.flags.memorable);
+      makeFlagRow(t("lowercase"), "l", item.flags.allowLowercase);
+      makeFlagRow(t("uppercase"), "u", item.flags.allowUppercase);
+      makeFlagRow(t("numbers"), "n", item.flags.allowNumbers);
+      makeFlagRow(t("symbols"), "s", item.flags.allowSymbols);
+      makeFlagRow(t("memorable"), "m", item.flags.memorable);
 
       assistItemWrapperEl.appendChild(flagGridEl);
 
@@ -456,18 +459,18 @@ const splitNumberAndUnit = (value: string) => {
 
 const fmtSinceAgo = (timestamp: number) => {
   const diffMs = Date.now() - timestamp;
-  if (!Number.isFinite(diffMs) || diffMs < 0) return "now";
+  if (!Number.isFinite(diffMs) || diffMs < 0) return t("now");
 
   const s = Math.floor(diffMs / 1000);
-  if (s < 10) return "since just now";
-  if (s < 60) return `since ${s}s ago`;
+  if (s < 10) return t("since just now");
+  if (s < 60) return t("since {count}s ago", { count: s });
 
   const m = Math.floor(s / 60);
-  if (m < 60) return `since ${m}m ago`;
+  if (m < 60) return t("since {count}m ago", { count: m });
 
   const h = Math.floor(m / 60);
-  if (h < 24) return `since ${h}h ago`;
+  if (h < 24) return t("since {count}h ago", { count: h });
 
   const d = Math.floor(h / 24);
-  return `since ${d}d ago`;
+  return t("since {count}d ago", { count: d });
 };
