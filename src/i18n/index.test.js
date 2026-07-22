@@ -3,9 +3,13 @@ import { resolveLanguage, translate } from "./index.ts";
 import { de } from "./locales/de.ts";
 import { es } from "./locales/es.ts";
 import { fr } from "./locales/fr.ts";
+import { it } from "./locales/it.ts";
+import { ja } from "./locales/ja.ts";
+import { ko } from "./locales/ko.ts";
+import { ptBR } from "./locales/pt-br.ts";
 import { zhCN } from "./locales/zh-cn.ts";
 
-const messages = { de, es, fr, "zh-CN": zhCN };
+const messages = { de, es, fr, it, ja, ko, "pt-BR": ptBR, "zh-CN": zhCN };
 
 const normalize = (value) => value.replace(/\s+/g, " ").trim();
 
@@ -82,6 +86,10 @@ const findMissingStaticText = async (path) => {
 describe("options language resolution", () => {
   test("uses a stored supported language first", () => {
     expect(resolveLanguage("en", "zh-CN")).toBe("en");
+    expect(resolveLanguage("it", "en-US")).toBe("it");
+    expect(resolveLanguage("ja", "en-US")).toBe("ja");
+    expect(resolveLanguage("ko", "en-US")).toBe("ko");
+    expect(resolveLanguage("pt-BR", "en-US")).toBe("pt-BR");
     expect(resolveLanguage("zh-CN", "en-US")).toBe("zh-CN");
   });
 
@@ -95,12 +103,21 @@ describe("options language resolution", () => {
     expect(resolveLanguage(undefined, "de-DE")).toBe("de");
     expect(resolveLanguage(undefined, "es-419")).toBe("es");
     expect(resolveLanguage(undefined, "fr-CA")).toBe("fr");
+    expect(resolveLanguage(undefined, "it-IT")).toBe("it");
+    expect(resolveLanguage(undefined, "ja-JP")).toBe("ja");
+    expect(resolveLanguage(undefined, "ko-KR")).toBe("ko");
+  });
+
+  test("uses Brazilian Portuguese for Portuguese browser locales", () => {
+    expect(resolveLanguage(undefined, "pt")).toBe("pt-BR");
+    expect(resolveLanguage(undefined, "pt-BR")).toBe("pt-BR");
+    expect(resolveLanguage(undefined, "pt_PT")).toBe("pt-BR");
   });
 
   test("falls back to English", () => {
     expect(resolveLanguage(undefined, "en-US")).toBe("en");
-    expect(resolveLanguage("invalid", "it-IT")).toBe("en");
-    expect(resolveLanguage("toString", "it-IT")).toBe("en");
+    expect(resolveLanguage("invalid", "nl-NL")).toBe("en");
+    expect(resolveLanguage("toString", "nl-NL")).toBe("en");
   });
 });
 
@@ -109,7 +126,11 @@ describe("translations", () => {
     expect(translate("en", "changes saved")).toBe("changes saved");
     expect(translate("de", "changes saved")).toBe("Änderungen gespeichert");
     expect(translate("es", "changes saved")).toBe("cambios guardados");
-    expect(translate("fr", "changes saved")).toBe("modifications enregistrées");
+    expect(translate("fr", "changes saved")).toBe("Modifications enregistrées");
+    expect(translate("it", "changes saved")).toBe("modifiche salvate");
+    expect(translate("ja", "changes saved")).toBe("変更を保存しました");
+    expect(translate("ko", "changes saved")).toBe("변경 사항이 저장되었습니다");
+    expect(translate("pt-BR", "changes saved")).toBe("alterações salvas");
     expect(translate("zh-CN", "changes saved")).toBe("更改已保存");
   });
 
@@ -151,6 +172,41 @@ describe("translations", () => {
         expect(tokens(locale[key])).toEqual(tokens(key));
         expect(locale[key]).not.toContain("[[[");
       });
+    });
+  });
+
+  test("preserves functional command and shortcut literals in every locale", () => {
+    const requiredLiterals = {
+      "Shows the current date when you type 'date'": ["date"],
+      "e.g., `morning def` or `morning definition`": ["morning def", "morning definition"],
+      "Type `pw <length> <flags>` or `password <length> <flags>` to generate a password": [
+        "pw",
+        "password"
+      ],
+      "e.g., `password 16 luns` generates a 16 character password with lowercase letters, uppercase letters, numbers, and symbols":
+        ["password 16 luns"],
+      "if no arguments are specified, defaults to `16 luns`": ["16 luns"],
+      "Modifier keys are specified as `<c-x>`, `<m-x>`, and `<a-x>` for `ctrl+x`, `meta+x`, and `alt+x`. Combined modifiers are written like `<c-a-x>` or `<c-m-x>`. Use `<space>` for the space key.":
+        ["<c-x>", "<m-x>", "<a-x>", "ctrl+x", "meta+x", "alt+x", "<c-a-x>", "<c-m-x>", "<space>"],
+      "`l` - lowercase letters": ["`l`"],
+      "`u` - uppercase letters": ["`u`"],
+      "`n` - numbers": ["`n`"],
+      "`s` - symbols": ["`s`"],
+      "`m` - memorable": ["`m`"]
+    };
+
+    Object.values(messages).forEach((locale) => {
+      Object.entries(requiredLiterals).forEach((entry) => {
+        entry[1].forEach((literal) => {
+          expect(locale[entry[0]]).toContain(literal);
+        });
+      });
+
+      const pagination =
+        locale[
+          "When enabled, bookmark rows beyond maxBookmarkRowsPerPage are split into extra pages. Use the Prev/Next buttons or [ and ] keys to move between pages."
+        ];
+      expect(pagination.replaceAll("`", "")).toMatch(/\[\s+\S+\s+\]/u);
     });
   });
 

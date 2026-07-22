@@ -1,6 +1,10 @@
 import { de } from "~/src/i18n/locales/de";
 import { es } from "~/src/i18n/locales/es";
 import { fr } from "~/src/i18n/locales/fr";
+import { it } from "~/src/i18n/locales/it";
+import { ja } from "~/src/i18n/locales/ja";
+import { ko } from "~/src/i18n/locales/ko";
+import { ptBR } from "~/src/i18n/locales/pt-br";
 import { zhCN } from "~/src/i18n/locales/zh-cn";
 
 const locales = {
@@ -18,6 +22,22 @@ const locales = {
   fr: {
     label: "Français",
     messages: fr
+  },
+  it: {
+    label: "Italiano",
+    messages: it
+  },
+  ja: {
+    label: "日本語",
+    messages: ja
+  },
+  ko: {
+    label: "한국어",
+    messages: ko
+  },
+  "pt-BR": {
+    label: "Português (Brasil)",
+    messages: ptBR
   },
   "zh-CN": {
     label: "简体中文",
@@ -37,8 +57,12 @@ export const isLanguage = (value: unknown): value is Language =>
 
 export const resolveLanguage = (storedLanguage: unknown, browserLanguage: string): Language => {
   if (isLanguage(storedLanguage)) return storedLanguage;
-  const browserBaseLanguage = browserLanguage.toLowerCase().split("-")[0];
+
+  const normalizedBrowserLanguage = browserLanguage.replace("_", "-").toLowerCase();
+  const browserBaseLanguage = normalizedBrowserLanguage.split("-")[0];
+
   if (browserBaseLanguage === "zh") return "zh-CN";
+  if (browserBaseLanguage === "pt") return "pt-BR";
   if (isLanguage(browserBaseLanguage)) return browserBaseLanguage;
   return "en";
 };
