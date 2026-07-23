@@ -26,6 +26,8 @@ import {
   wallpaperTypeUrlButtonEl
 } from "~/src/options/scripts/ui";
 import { renderWallpaperGallery } from "~/src/options/scripts/utils/upload-wallpaper";
+import { t } from "~/src/options/scripts/i18n";
+import { customMessageHelp } from "~/src/i18n/messages";
 
 const setSectionVisibility = (el: HTMLElement, isVisible: boolean) => {
   el.classList.toggle("hidden", !isVisible);
@@ -132,25 +134,7 @@ const handleMessageTypeSwitch = () => {
     setSectionVisibility(messageTypeCustomSection, true);
 
     (document.getElementById("message-custom-text-info") as HTMLParagraphElement).textContent =
-      'You can use \\ to represent:\n\n\
-                - Date components\n\
-                - \\yyyy -> Full year (e.g., "2020")\n\
-                - \\yy -> Last two digits of the year (e.g., "20")\n\
-                - \\M -> Full month name (e.g., "October")\n\
-                - \\m -> Abbreviated month name (e.g., "Oct")\n\
-                - \\m$ -> Month of year as number (e.g., "11")\n\
-                - \\D -> Full day of the week name (e.g., "Monday")\n\
-                - \\d -> Abbreviated day of the week (e.g., "Mon")\n\n\
-                - \\d$ -> Day of month as number (e.g., "08")\n\
-                - Time components\n\
-                - \\h% -> Hours (12 hour format, e.g., "01")\n\
-                - \\hh -> Hours (with padding, e.g., "01")\n\
-                - \\mm -> Minutes (with padding, e.g., "02")\n\
-                - \\ss -> Seconds (with padding, e.g., "03")\n\n\
-                - Meridian components\n\
-                - \\md -> Lowercase meridian (e.g., "am" or "pm")\n\
-                - \\MD -> Uppercase meridian (e.g., "AM" or "PM")\n\
-                - \\n -> New line';
+      t(customMessageHelp);
   });
 };
 

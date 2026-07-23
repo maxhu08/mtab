@@ -11,6 +11,7 @@ import {
   uiBlurStrengthInputEl
 } from "~/src/options/scripts/ui";
 import { refreshCustomCSSHighlight } from "~/src/options/scripts/utils/custom-css-highlight";
+import { fillLocalizedDefaultValue } from "~/src/i18n";
 
 export const fillUIInputs = (config: Config) => {
   if (config.ui.style === "solid") uiStyleSolidButtonEl.click();
@@ -24,6 +25,10 @@ export const fillUIInputs = (config: Config) => {
   if (config.ui.cornerStyle === "sharp") uiCornerStyleSharpButtonEl.click();
   else if (config.ui.cornerStyle === "round") uiCornerStyleRoundButtonEl.click();
 
-  uiCustomCSSTextareaEl.value = config.ui.customCSS;
+  fillLocalizedDefaultValue(
+    uiCustomCSSTextareaEl,
+    config.ui.customCSS,
+    "/* input custom css... */"
+  );
   refreshCustomCSSHighlight();
 };

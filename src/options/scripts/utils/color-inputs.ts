@@ -1,5 +1,6 @@
 import "vanilla-colorful/hex-alpha-color-picker.js";
 import { colorInputs } from "~/src/options/scripts/ui";
+import { t } from "~/src/options/scripts/i18n";
 
 type ColorFieldInput = {
   container: HTMLDivElement;
@@ -90,11 +91,13 @@ const createColorControl = ({ container, input }: ColorFieldInput): void => {
   previewEl.className = "options-color-picker";
   previewEl.setAttribute(
     "aria-label",
-    `${input.id.replace(/-input$/, "").replace(/-/g, " ")} color picker`
+    t("choose color for {field}", {
+      field: input.id.replace(/-input$/, "").replace(/-/g, " ")
+    })
   );
   previewEl.setAttribute("aria-haspopup", "dialog");
   previewEl.setAttribute("aria-expanded", "false");
-  previewEl.setAttribute("data-tippy-content", "choose color");
+  previewEl.setAttribute("data-tippy-content", t("choose color"));
 
   const popupEl = document.createElement("div");
   popupEl.className = "options-color-picker-popup";

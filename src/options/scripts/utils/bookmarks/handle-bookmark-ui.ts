@@ -16,6 +16,7 @@ import { exportAllBookmarkNodes } from "~/src/options/scripts/utils/bookmarks/ex
 import { importAllBookmarkNodes } from "~/src/options/scripts/utils/bookmarks/import-all-bookmark-nodes";
 import { registerColorInputControl } from "~/src/options/scripts/utils/color-inputs";
 import { registerIconInputControl } from "~/src/options/scripts/utils/icon-inputs";
+import { t } from "~/src/options/scripts/i18n";
 
 const sortableMap = new WeakMap<HTMLDivElement, Sortable>();
 
@@ -161,7 +162,7 @@ export const initDelegatedHandlers = () => {
       ) as HTMLSpanElement | null;
 
       if (uselessTitle)
-        uselessTitle.textContent = input.value.length === 0 ? "Untitled" : input.value;
+        uselessTitle.textContent = input.value.length === 0 ? t("Untitled") : input.value;
       return;
     }
 
@@ -194,19 +195,19 @@ export const refreshHandleTooltips = () => {
     // bookmark buttons
     ...tippy(".toggle-collapse-bookmark-button", {
       ...base,
-      content: "toggle collapse bookmark settings"
+      content: t("toggle collapse bookmark settings")
     }),
-    ...tippy(".reposition-bookmark-button", { ...base, content: "reposition bookmark" }),
-    ...tippy(".delete-bookmark-button", { ...base, content: "delete bookmark" }),
-    ...tippy(".export-bookmark-button", { ...base, content: "export bookmark" }),
+    ...tippy(".reposition-bookmark-button", { ...base, content: t("reposition bookmark") }),
+    ...tippy(".delete-bookmark-button", { ...base, content: t("delete bookmark") }),
+    ...tippy(".export-bookmark-button", { ...base, content: t("export bookmark") }),
     // folder buttons
     ...tippy(".toggle-collapse-folder-button", {
       ...base,
-      content: "toggle collapse folder settings"
+      content: t("toggle collapse folder settings")
     }),
-    ...tippy(".reposition-folder-button", { ...base, content: "reposition folder" }),
-    ...tippy(".delete-folder-button", { ...base, content: "delete folder" }),
-    ...tippy(".export-folder-button", { ...base, content: "export folder" })
+    ...tippy(".reposition-folder-button", { ...base, content: t("reposition folder") }),
+    ...tippy(".delete-folder-button", { ...base, content: t("delete folder") }),
+    ...tippy(".export-folder-button", { ...base, content: t("export folder") })
   );
 };
 
@@ -243,7 +244,7 @@ export const handleBookmarkSettings = (uuid: string) => {
   const accent = document.getElementById(`bookmark-${uuid}-user-defined-accent`) as HTMLDivElement;
 
   nameInput.addEventListener("input", () => {
-    if (nameInput.value.length === 0) uselessTitle.textContent = "Untitled";
+    if (nameInput.value.length === 0) uselessTitle.textContent = t("Untitled");
     else uselessTitle.textContent = nameInput.value;
   });
 
@@ -423,10 +424,10 @@ toggleCollapseAllBookmarkNodesButtonEl.onclick = () => {
   });
 
   toggleCollapseAllBookmarkNodesButtonEl.setAttribute("last-action", mode);
-  toggleCollapseAllBookmarkNodesButtonEl.innerHTML =
-    mode === "expand"
-      ? `<span class="text-white text-base">collapse all</span>`
-      : `<span class="text-white text-base">expand all</span>`;
+  const label = document.createElement("span");
+  label.className = "text-white text-base";
+  label.textContent = mode === "expand" ? t("collapse all") : t("expand all");
+  toggleCollapseAllBookmarkNodesButtonEl.replaceChildren(label);
 };
 
 // prettier-ignore
@@ -444,7 +445,7 @@ addBookmarkButtonEl.onclick = () => {
   addBookmarkNodeBookmark(
     {
       type: "bookmark",
-      name: "New Bookmark",
+      name: t("New Bookmark"),
       url: "about:blank",
       color: "#ffffff",
       iconType: "ri-bookmark-fill",
@@ -460,7 +461,7 @@ addFolderButtonEl.onclick = () => {
   addBookmarkNodeFolder(
     {
       type: "folder",
-      name: "New Folder",
+      name: t("New Folder"),
       color: randomColor,
       iconColor: randomColor,
       contents: []
@@ -586,24 +587,24 @@ export const addBookmarkNodeBookmark = (
       id: `bookmark-${uuid}-export-button`,
       icon: "ri-share-2-line",
       class: "export-bookmark-button bg-indigo-500 hover:bg-indigo-600",
-      tooltip: "export bookmark"
+      tooltip: t("export bookmark")
     },
     {
       id: `bookmark-${uuid}-toggle-collapse-button`,
       icon: "ri-collapse-horizontal-line",
       class: "toggle-collapse-bookmark-button bg-neutral-500 hover:bg-neutral-600",
-      tooltip: "toggle collapse bookmark settings"
+      tooltip: t("toggle collapse bookmark settings")
     },
     {
       icon: "ri-draggable",
       class: "reposition-bookmark-button bookmark-node-handle bg-neutral-500 hover:bg-neutral-600",
-      tooltip: "reposition bookmark"
+      tooltip: t("reposition bookmark")
     },
     {
       id: `bookmark-${uuid}-delete-button`,
       icon: "ri-delete-bin-6-line",
       class: "delete-bookmark-button bg-rose-500 hover:bg-rose-600",
-      tooltip: "delete bookmark"
+      tooltip: t("delete bookmark")
     }
   ];
 
@@ -632,12 +633,12 @@ export const addBookmarkNodeBookmark = (
   collapsibleContent.appendChild(separator);
 
   const fields = [
-    { label: "bookmark.name", id: "name", value: bookmark.name },
-    { label: "bookmark.url", id: "url", value: bookmark.url },
-    { label: "bookmark.color", id: "color", value: bookmark.color },
-    { label: "bookmark.iconType", id: "icon-type", value: bookmark.iconType },
-    { label: "bookmark.iconColor", id: "icon-color", value: bookmark.iconColor },
-    { label: "bookmark.fill", id: "fill", value: bookmark.fill ?? "" }
+    { label: t("bookmark.name"), id: "name", value: bookmark.name },
+    { label: t("bookmark.url"), id: "url", value: bookmark.url },
+    { label: t("bookmark.color"), id: "color", value: bookmark.color },
+    { label: t("bookmark.iconType"), id: "icon-type", value: bookmark.iconType },
+    { label: t("bookmark.iconColor"), id: "icon-color", value: bookmark.iconColor },
+    { label: t("bookmark.fill"), id: "fill", value: bookmark.fill ?? "" }
   ];
 
   fields.forEach((field) => {
@@ -661,11 +662,15 @@ export const addBookmarkNodeBookmark = (
       "w-full min-w-0 bg-transparent text-white outline-none placeholder-neutral-500";
 
     const placeholderMap: Record<string, string> = {
-      "icon-color": "input color... (leave empty for bookmarks.defaultIconColor)",
-      fill: "input color... (leave empty for default)"
+      name: t("input name..."),
+      url: t("input url..."),
+      color: t("input color..."),
+      "icon-type": t("input icon-type..."),
+      "icon-color": t("input color... (leave empty for bookmarks.defaultIconColor)"),
+      fill: t("input color... (leave empty for default)")
     };
 
-    input.placeholder = placeholderMap[field.id] ?? `input ${field.id}...`;
+    input.placeholder = placeholderMap[field.id];
 
     input.value = field.value ?? "";
 
@@ -799,30 +804,30 @@ export const addBookmarkNodeFolder = (
       id: `bookmark-${uuid}-export-button`,
       icon: "ri-share-2-line",
       class: "export-folder-button bg-indigo-500 hover:bg-indigo-600",
-      tooltip: "export folder"
+      tooltip: t("export folder")
     },
     {
       id: `bookmark-${uuid}-toggle-collapse-button`,
       icon: "ri-collapse-horizontal-line",
       class: "toggle-collapse-folder-button bg-neutral-500 hover:bg-neutral-600",
-      tooltip: "toggle collapse folder settings"
+      tooltip: t("toggle collapse folder settings")
     },
     {
       id: `bookmark-${uuid}-toggle-collapse-contents-button`,
       icon: isExpanded ? "ri-folder-reduce-line" : "ri-folder-add-line",
       class: "toggle-collapse-folder-contents-button bg-neutral-500 hover:bg-neutral-600",
-      tooltip: "toggle collapse folder contents"
+      tooltip: t("toggle collapse folder contents")
     },
     {
       class: "reposition-folder-button bookmark-node-handle bg-neutral-500 hover:bg-neutral-600",
       icon: "ri-draggable",
-      tooltip: "reposition folder"
+      tooltip: t("reposition folder")
     },
     {
       id: `bookmark-${uuid}-delete-button`,
       icon: "ri-delete-bin-6-line",
       class: "delete-folder-button bg-rose-500 hover:bg-rose-600",
-      tooltip: "delete folder"
+      tooltip: t("delete folder")
     }
   ];
 
@@ -851,11 +856,11 @@ export const addBookmarkNodeFolder = (
   collapsibleContent.appendChild(separator);
 
   const fields = [
-    { label: "folder.name", id: "name", value: folder.name },
-    { label: "folder.color", id: "color", value: folder.color },
-    { label: "folder.iconType", id: "icon-type", value: folder.iconType ?? "" },
-    { label: "folder.iconColor", id: "icon-color", value: folder.iconColor },
-    { label: "folder.fill", id: "fill", value: folder.fill ?? "" }
+    { label: t("folder.name"), id: "name", value: folder.name },
+    { label: t("folder.color"), id: "color", value: folder.color },
+    { label: t("folder.iconType"), id: "icon-type", value: folder.iconType ?? "" },
+    { label: t("folder.iconColor"), id: "icon-color", value: folder.iconColor },
+    { label: t("folder.fill"), id: "fill", value: folder.fill ?? "" }
   ];
 
   fields.forEach((field) => {
@@ -879,12 +884,14 @@ export const addBookmarkNodeFolder = (
       "w-full min-w-0 bg-transparent text-white outline-none placeholder-neutral-500";
 
     const placeholderMap: Record<string, string> = {
-      "icon-type": "input icon-type... (leave empty for bookmarks.defaultFolderIconType)",
-      "icon-color": "input color... (leave empty for bookmarks.defaultIconColor)",
-      fill: "input color... (leave empty for default)"
+      name: t("input name..."),
+      color: t("input color..."),
+      "icon-type": t("input icon-type... (leave empty for bookmarks.defaultFolderIconType)"),
+      "icon-color": t("input color... (leave empty for bookmarks.defaultIconColor)"),
+      fill: t("input color... (leave empty for default)")
     };
 
-    input.placeholder = placeholderMap[field.id] ?? `input ${field.id}...`;
+    input.placeholder = placeholderMap[field.id];
 
     input.value = field.value ?? "";
 
@@ -895,7 +902,7 @@ export const addBookmarkNodeFolder = (
 
   const contentsLabel = document.createElement("p");
   contentsLabel.className = "text-white text-base";
-  contentsLabel.textContent = "folder.contents";
+  contentsLabel.textContent = t("folder.contents");
   collapsibleContent.appendChild(contentsLabel);
 
   const contentsContainer = document.createElement("div");

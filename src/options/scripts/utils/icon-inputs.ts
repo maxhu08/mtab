@@ -4,6 +4,7 @@ import {
 } from "~/src/options/scripts/ui";
 import { showIconPickerModal } from "~/src/options/scripts/utils/input-dialog";
 import { createBookmarkIcon } from "~/src/utils/bookmark-icon";
+import { t } from "~/src/options/scripts/i18n";
 
 type IconFieldInput = {
   container: HTMLDivElement;
@@ -56,10 +57,12 @@ const createIconControl = ({ container, input, getFallbackIconType }: IconFieldI
   previewEl.className = "options-icon-picker";
   previewEl.setAttribute(
     "aria-label",
-    `${input.id.replace(/-input$/, "").replace(/-/g, " ")} icon picker`
+    t("choose icon for {field}", {
+      field: input.id.replace(/-input$/, "").replace(/-/g, " ")
+    })
   );
   previewEl.setAttribute("aria-haspopup", "dialog");
-  previewEl.setAttribute("data-tippy-content", "choose icon");
+  previewEl.setAttribute("data-tippy-content", t("choose icon"));
 
   shellEl.append(previewEl);
   container.append(shellEl);

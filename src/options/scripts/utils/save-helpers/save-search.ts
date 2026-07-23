@@ -24,6 +24,7 @@ import {
   searchLinkTextColorInputEl
 } from "~/src/options/scripts/ui";
 import { getSelectedButton } from "~/src/options/scripts/utils/get-selected-button";
+import { normalizeDefaultValue } from "~/src/i18n";
 
 export const saveSearchSettingsToDraft = (draft: Config) => {
   draft.search.enabled = searchEnabledCheckboxEl.checked;
@@ -62,8 +63,16 @@ export const saveSearchSettingsToDraft = (draft: Config) => {
   draft.search.assist.conversions = searchAssistConversionsCheckboxEl.checked;
   draft.search.assist.passwordGenerator = searchAssistPasswordGeneratorCheckboxEl.checked;
 
-  draft.search.placeholderText = searchPlaceholderTextInputEl.value;
-  draft.search.bookmarkPlaceholderText = searchBookmarkPlaceholderTextInputEl.value;
+  draft.search.placeholderText = normalizeDefaultValue(
+    searchPlaceholderTextInputEl.value,
+    "search...",
+    searchPlaceholderTextInputEl.dataset.localizedDefault
+  );
+  draft.search.bookmarkPlaceholderText = normalizeDefaultValue(
+    searchBookmarkPlaceholderTextInputEl.value,
+    "find bookmark...",
+    searchBookmarkPlaceholderTextInputEl.dataset.localizedDefault
+  );
   draft.search.focusedBorderColor = searchFocusedBorderColorInputEl.value;
 
   const selectedFontTypeEl = getSelectedButton("search-font-type");

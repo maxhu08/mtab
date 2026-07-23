@@ -34,6 +34,7 @@ import {
   searchSelectIconColorInputEl,
   searchLinkTextColorInputEl
 } from "~/src/options/scripts/ui";
+import { fillLocalizedDefaultValue } from "~/src/i18n";
 
 export const fillSearchInputs = (config: Config) => {
   searchEnabledCheckboxEl.checked = config.search.enabled;
@@ -68,8 +69,16 @@ export const fillSearchInputs = (config: Config) => {
   searchAssistConversionsCheckboxEl.checked = config.search.assist.conversions;
   searchAssistPasswordGeneratorCheckboxEl.checked = config.search.assist.passwordGenerator;
 
-  searchPlaceholderTextInputEl.value = config.search.placeholderText;
-  searchBookmarkPlaceholderTextInputEl.value = config.search.bookmarkPlaceholderText;
+  fillLocalizedDefaultValue(
+    searchPlaceholderTextInputEl,
+    config.search.placeholderText,
+    "search..."
+  );
+  fillLocalizedDefaultValue(
+    searchBookmarkPlaceholderTextInputEl,
+    config.search.bookmarkPlaceholderText,
+    "find bookmark..."
+  );
   searchFocusedBorderColorInputEl.value = config.search.focusedBorderColor;
 
   const searchFontTypePairs: Record<FontType, HTMLButtonElement> = {

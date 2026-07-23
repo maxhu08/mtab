@@ -1,6 +1,7 @@
 import { Config } from "~/src/utils/config";
 import { usernameInputEl } from "~/src/options/scripts/ui";
+import { fillLocalizedDefaultValue } from "~/src/i18n";
 
 export const fillUserInputs = (config: Config) => {
-  usernameInputEl.value = config.user.name;
+  fillLocalizedDefaultValue(usernameInputEl, config.user.name, "user");
 };

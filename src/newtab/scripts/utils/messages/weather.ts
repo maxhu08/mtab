@@ -1,4 +1,5 @@
 import { logger } from "~/src/utils/logger";
+import { t } from "~/src/i18n";
 
 type OpenMeteoResponse = {
   latitude: number;
@@ -57,12 +58,12 @@ export const setWeatherMessage = (messageEl: HTMLParagraphElement, unitsType: "f
 
         messageEl.textContent = getWeatherMessage(data, unitsType);
       } catch (err) {
-        messageEl.textContent = "Failed to fetch weather data";
+        messageEl.textContent = t("Failed to fetch weather data");
         logger.log(`SET_WEATHER_MESSAGE: ${err}`);
       }
     },
     (err) => {
-      messageEl.textContent = "Location Access Denied";
+      messageEl.textContent = t("Location Access Denied");
       logger.log(`SET_WEATHER_MESSAGE: ${err}`);
     }
   );
@@ -104,20 +105,21 @@ const getWeatherEmoji = (weatherCode: number): string => {
 };
 
 const getWeatherDescription = (weatherCode: number): string => {
-  if (weatherCode === 0) return "Clear sky";
-  else if (weatherCode === 1 || weatherCode === 2) return "Mainly clear";
-  else if (weatherCode === 3) return "Overcast";
-  else if (weatherCode === 45 || weatherCode === 48) return "Fog";
-  else if (weatherCode === 51 || weatherCode === 53 || weatherCode === 55) return "Light drizzle";
-  else if (weatherCode === 56 || weatherCode === 57) return "Freezing drizzle";
-  else if (weatherCode === 61 || weatherCode === 63 || weatherCode === 65) return "Light rain";
-  else if (weatherCode === 66 || weatherCode === 67) return "Freezing rain";
-  else if (weatherCode === 71 || weatherCode === 73 || weatherCode === 75) return "Light snow";
-  else if (weatherCode === 77 || weatherCode === 79) return "Snow grains";
+  if (weatherCode === 0) return t("Clear sky");
+  else if (weatherCode === 1 || weatherCode === 2) return t("Mainly clear");
+  else if (weatherCode === 3) return t("Overcast");
+  else if (weatherCode === 45 || weatherCode === 48) return t("Fog");
+  else if (weatherCode === 51 || weatherCode === 53 || weatherCode === 55)
+    return t("Light drizzle");
+  else if (weatherCode === 56 || weatherCode === 57) return t("Freezing drizzle");
+  else if (weatherCode === 61 || weatherCode === 63 || weatherCode === 65) return t("Light rain");
+  else if (weatherCode === 66 || weatherCode === 67) return t("Freezing rain");
+  else if (weatherCode === 71 || weatherCode === 73 || weatherCode === 75) return t("Light snow");
+  else if (weatherCode === 77 || weatherCode === 79) return t("Snow grains");
   else if (weatherCode === 80 || weatherCode === 81 || weatherCode === 82)
-    return "Heavy rain showers";
-  else if (weatherCode === 85 || weatherCode === 86) return "Heavy snow showers";
-  else if (weatherCode === 95) return "Thunderstorms";
-  else if (weatherCode === 96 || weatherCode === 99) return "Thunderstorm with hail";
-  else return "Unknown";
+    return t("Heavy rain showers");
+  else if (weatherCode === 85 || weatherCode === 86) return t("Heavy snow showers");
+  else if (weatherCode === 95) return t("Thunderstorms");
+  else if (weatherCode === 96 || weatherCode === 99) return t("Thunderstorm with hail");
+  else return t("Unknown");
 };

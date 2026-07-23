@@ -1,5 +1,6 @@
 import { AnimationInitialType, UIStyle } from "~/src/utils/config";
 import { optionsButtonContainerEl } from "~/src/newtab/scripts/ui";
+import { t } from "~/src/i18n";
 
 export const showOptionsButton = (
   showOptionsButton: boolean,
@@ -18,8 +19,8 @@ export const showOptionsButton = (
   const buttonEl = document.createElement("button");
   buttonEl.id = "options-button";
   buttonEl.type = "button";
-  buttonEl.setAttribute("aria-label", "Open options");
-  buttonEl.title = "Open options";
+  buttonEl.setAttribute("aria-label", t("Open options"));
+  buttonEl.title = t("Open options");
   buttonEl.className = `${uiStyle === "glass" ? "glass-effect" : ""} ${animationsEnabled ? `${animationsInitialType} opacity-0 outline-none` : ""} bg-foreground cursor-pointer corner-style grid place-items-center w-10 h-10 overflow-hidden`;
 
   const divEl = document.createElement("div");

@@ -6,10 +6,11 @@ import { deepMerge } from "~/src/utils/deep-merge";
 import { logger } from "~/src/utils/logger";
 import { migrateOldConfig } from "~/src/utils/migrate-config";
 import { showInputDialog } from "~/src/options/scripts/utils/input-dialog";
+import { t } from "~/src/options/scripts/i18n";
 
 export const importConfigAndSave = async () => {
   const dataToImport = await showInputDialog(
-    "input your save (THIS WILL OVERWRITE YOUR CURRENT CONFIG)"
+    t("input your save (THIS WILL OVERWRITE YOUR CURRENT CONFIG)")
   );
 
   if (dataToImport === null) {
@@ -17,7 +18,7 @@ export const importConfigAndSave = async () => {
   }
 
   if (dataToImport.trim() === "") {
-    toast.info("input was empty, nothing imported");
+    toast.info(t("input was empty, nothing imported"));
     return;
   }
 
@@ -26,14 +27,16 @@ export const importConfigAndSave = async () => {
 
   if (!dataToImport.startsWith(legacyPrefix)) {
     toast.error(
-      `incorrect save format, use MTAB_SAVE_FORMAT_v#.#.#_ or ${legacyPrefix} for legacy saves`
+      t("incorrect save format, use MTAB_SAVE_FORMAT_v#.#.#_ or {legacyPrefix} for legacy saves", {
+        legacyPrefix
+      })
     );
     return;
   }
 
   // looks like new format but header is invalid
   if (dataToImport.startsWith("MTAB_SAVE_FORMAT_v") && !newHeaderRegex.test(dataToImport)) {
-    toast.error("invalid save format, expected MTAB_SAVE_FORMAT_v#.#.#_");
+    toast.error(t("invalid save format, expected MTAB_SAVE_FORMAT_v#.#.#_"));
     return;
   }
 
@@ -43,7 +46,7 @@ export const importConfigAndSave = async () => {
   const versionedMatch = dataToImport.match(/^MTAB_SAVE_FORMAT_v[^_]+_(.+)$/);
 
   if (dataToImport.startsWith("MTAB_SAVE_FORMAT_v") && !versionedMatch) {
-    toast.error("incorrect save format");
+    toast.error(t("incorrect save format"));
     return;
   }
 
@@ -56,7 +59,7 @@ export const importConfigAndSave = async () => {
         decodeURIComponent(window.atob(dataToImport.replace(legacyPrefix, "")))
       );
     } catch {
-      toast.error("failed to parse legacy save format");
+      toast.error(t("failed to parse legacy save format"));
       return;
     }
   }
@@ -65,7 +68,7 @@ export const importConfigAndSave = async () => {
   try {
     importedConfig = JSON.parse(rawPayload);
   } catch {
-    toast.error("invalid config data");
+    toast.error(t("invalid config data"));
     return;
   }
 

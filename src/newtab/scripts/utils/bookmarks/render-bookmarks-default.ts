@@ -2,6 +2,7 @@ import { Config } from "~/src/utils/config";
 import { bookmarksContainerEl } from "~/src/newtab/scripts/ui";
 import { openBookmark } from "~/src/newtab/scripts/utils/bookmarks/open-bookmark";
 import { getFaviconURL } from "~/src/newtab/scripts/utils/favicon-url";
+import { t } from "~/src/i18n";
 
 export const renderDefaultBookmarks = (config: Config) => {
   switch (config.ui.style) {
@@ -82,7 +83,7 @@ export const renderDefaultBookmarks = (config: Config) => {
       textSpanEl.className =
         "text-search text-base md:text-2xl font-message w-full text-center text-ellipsis overflow-hidden whitespace-nowrap";
       textSpanEl.style.color = config.search.textColor;
-      textSpanEl.textContent = "No bookmarks yet";
+      textSpanEl.textContent = t("No bookmarks yet");
 
       containerDivEl.appendChild(textSpanEl);
       frag.appendChild(containerDivEl);

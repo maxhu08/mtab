@@ -1,4 +1,5 @@
 import { UIStyle } from "~/src/utils/config";
+import { t } from "~/src/i18n";
 
 const wallpaperCreditAnchorEl = document.getElementById(
   "wallpaper-credit-anchor"
@@ -101,7 +102,7 @@ export const setWallpaperAuthorCredit = (author?: string, link?: string) => {
     return;
   }
 
-  wallpaperCreditTextEl.textContent = `photo by ${cleanAuthor}`;
+  wallpaperCreditTextEl.textContent = t("photo by {author}", { author: cleanAuthor });
   if (cleanLink) {
     wallpaperCreditTextEl.href = cleanLink;
   } else {

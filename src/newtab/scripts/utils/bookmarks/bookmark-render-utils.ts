@@ -18,6 +18,7 @@ import { openFolder } from "~/src/newtab/scripts/utils/bookmarks/open-folder";
 import { focusElementBorder, unfocusElementBorder } from "~/src/newtab/scripts/utils/focus-utils";
 import { getTabKeyPressed } from "~/src/newtab/scripts/utils/tab-key-pressed";
 import { genid } from "~/src/utils/genid";
+import { t } from "~/src/i18n";
 
 type RenderedNode = {
   uuid: string;
@@ -96,10 +97,12 @@ const getItemsPerPage = (config: Config) => {
 const getAccessibleNodeLabel = (type: "bookmark" | "folder", name: string) => {
   const trimmedName = name.trim();
   if (trimmedName.length > 0) {
-    return type === "folder" ? `Open folder ${trimmedName}` : `Open bookmark ${trimmedName}`;
+    return type === "folder"
+      ? t("Open folder {name}", { name: trimmedName })
+      : t("Open bookmark {name}", { name: trimmedName });
   }
 
-  return type === "folder" ? "Open folder" : "Open bookmark";
+  return type === "folder" ? t("Open folder") : t("Open bookmark");
 };
 
 const preloadBookmarkNodeIconAssets = (
@@ -441,7 +444,7 @@ const buildPaginationControls = (
     uiStyle,
     messageTextColor,
     "ri-arrow-left-s-line",
-    "Previous bookmarks page",
+    t("Previous bookmarks page"),
     () => {
       updatePage(paginationState.currentPage - 1);
     }
@@ -451,7 +454,7 @@ const buildPaginationControls = (
     uiStyle,
     messageTextColor,
     "ri-arrow-right-s-line",
-    "Next bookmarks page",
+    t("Next bookmarks page"),
     () => {
       updatePage(paginationState.currentPage + 1);
     }
@@ -891,7 +894,7 @@ export const addFolderBackButton = (
   const backButton = document.createElement("button");
   backButton.id = `folder-back-button-${uuid}`;
   backButton.type = "button";
-  backButton.setAttribute("aria-label", "Back to parent folder");
+  backButton.setAttribute("aria-label", t("Back to parent folder"));
   backButton.className = `relative duration-[250ms] ease-out bg-foreground cursor-pointer ${uiStyle === "glass" ? "glass-effect " : ""}corner-style h-9 md:h-12 px-1 md:px-2 overflow-hidden ${animationsEnabled ? `${animationsInitialType} opacity-0 ` : ""}outline-none`;
   if (animationsEnabled) {
     backButton.style.animationDelay = `${delay}ms`;
@@ -915,7 +918,7 @@ export const addFolderBackButton = (
   icon.setAttribute("aria-hidden", "true");
 
   const span = document.createElement("span");
-  span.textContent = "Back";
+  span.textContent = t("Back");
 
   gridDiv.appendChild(icon);
   gridDiv.appendChild(span);

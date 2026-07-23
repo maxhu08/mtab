@@ -1,6 +1,7 @@
 import { searchResultsContainerEl, searchResultsSectionEl } from "~/src/newtab/scripts/ui";
 import { recognizeUrl } from "~/src/newtab/scripts/utils/search/recognize-url";
 import { setSearchValue } from "~/src/newtab/scripts/utils/search/set-search-value";
+import { t } from "~/src/i18n";
 
 export const SELECTED_INDEX_ATTR = "selected-index";
 export const MAX_RESULTS = 8;
@@ -79,7 +80,7 @@ export const renderSearchResults = (
   searchResultsContainerEl.setAttribute("role", "listbox");
   searchResultsContainerEl.setAttribute(
     "aria-label",
-    opts.inputEl.id === "bookmark-search-input" ? "Bookmark search results" : "Search results"
+    opts.inputEl.id === "bookmark-search-input" ? t("Bookmark search results") : t("Search results")
   );
 
   searchResultsContainerEl.onmousedown = (e) => {
@@ -214,7 +215,7 @@ export const renderSearchResults = (
     const textEl = document.createElement("div");
     textEl.className = "truncate";
     textEl.style.color = opts.placeholderTextColor;
-    textEl.textContent = `+${overflow} more`;
+    textEl.textContent = t("+{count} more", { count: overflow });
 
     moreEl.appendChild(iconElSpacer);
     moreEl.appendChild(textEl);
@@ -227,7 +228,7 @@ export const renderSearchResults = (
     pEl.className = "px-2 py-2 text-center select-none";
     pEl.setAttribute("role", "status");
     pEl.setAttribute("aria-live", "polite");
-    pEl.textContent = "No results!";
+    pEl.textContent = t("No results!");
     pEl.addEventListener("mousedown", (e) => {
       e.preventDefault();
       e.stopPropagation();

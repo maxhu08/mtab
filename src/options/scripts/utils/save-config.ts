@@ -19,11 +19,12 @@ import {
 import { saveOptionsSettingsToDraft } from "~/src/options/scripts/utils/save-helpers/save-options";
 import { saveExtrasSettingsToDraft } from "~/src/options/scripts/utils/save-helpers/save-extras";
 import { logger } from "~/src/utils/logger";
+import { t } from "~/src/options/scripts/i18n";
 
 export const saveConfig = (notify: boolean = true) => {
   if (searchUseCustomEngineCheckboxEl.checked) {
     if (!searchCustomEngineURLInputEl.value.includes("{}")) {
-      toast.error("search.customEngineURL must contain {}, aborting save");
+      toast.error(t("search.customEngineURL must contain {}, aborting save"));
       return;
     }
   }
@@ -62,7 +63,7 @@ export const saveConfig = (notify: boolean = true) => {
         config: draft
       })
       .then(() => {
-        if (notify) toast.success("changes saved");
+        if (notify) toast.success(t("changes saved"));
       });
 
     fixAllToggleCheckboxSections();

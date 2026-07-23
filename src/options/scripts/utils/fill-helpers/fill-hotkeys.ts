@@ -9,6 +9,7 @@ import {
   hotkeysClosePageKeyStatusEl,
   hotkeysSearchBookmarksKeyStatusEl
 } from "~/src/options/scripts/ui";
+import { t } from "~/src/options/scripts/i18n";
 
 export const fillHotkeysInputs = (config: Config) => {
   hotkeysEnabledCheckboxEl.checked = config.hotkeys.enabled;
@@ -35,6 +36,6 @@ const fillHotkeyHelper = (input: HTMLInputElement, status: HTMLSpanElement, val:
 
   input.value = normalizedValue;
 
-  if (normalizedValue === "") status.textContent = ` (none)`;
+  if (normalizedValue === "") status.textContent = ` ${t("(none)")}`;
   else status.textContent = ` (${normalizedValue})`;
 };
