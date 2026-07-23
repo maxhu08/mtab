@@ -309,7 +309,7 @@ export const showIconPickerModal = (currentValue = ""): Promise<string | null> =
 
   const dialog = document.createElement("div");
   dialog.className =
-    "grid max-h-[min(48rem,calc(100vh-2rem))] w-full max-w-6xl grid-rows-[auto_auto_minmax(0,1fr)_auto] gap-3 rounded-md border-2 border-emerald-500 bg-neutral-900 p-4 text-base shadow-2xl";
+    "options-icon-picker-dialog grid max-h-[min(48rem,calc(100vh-2rem))] w-full max-w-6xl grid-rows-[auto_auto_minmax(0,1fr)_auto] gap-3 rounded-md border-2 border-emerald-500 bg-neutral-900 p-4 text-base shadow-2xl";
   dialog.setAttribute("role", "dialog");
   dialog.setAttribute("aria-modal", "true");
   dialog.setAttribute("aria-label", t("Icon picker"));
@@ -326,7 +326,7 @@ export const showIconPickerModal = (currentValue = ""): Promise<string | null> =
   titleEl.textContent = t("choose icon");
 
   const helperEl = document.createElement("p");
-  helperEl.className = "text-sm text-neutral-500";
+  helperEl.className = "text-base text-neutral-500";
   helperEl.textContent = t("Search by icon name, family, or full icon type.");
 
   headerEl.append(titleEl, helperEl);
@@ -346,11 +346,14 @@ export const showIconPickerModal = (currentValue = ""): Promise<string | null> =
   const resultsEl = document.createElement("div");
   resultsEl.className = "options-icon-picker-results";
 
+  const hoverIndicatorEl = document.createElement("div");
+  hoverIndicatorEl.className = "options-icon-picker-hover-indicator";
+
   const footerEl = document.createElement("div");
   footerEl.className = "grid gap-2";
 
   const countEl = document.createElement("p");
-  countEl.className = "text-sm text-neutral-500";
+  countEl.className = "text-base text-neutral-500";
 
   const actionsEl = document.createElement("div");
   actionsEl.className = "grid grid-cols-2 gap-2";
@@ -389,6 +392,7 @@ export const showIconPickerModal = (currentValue = ""): Promise<string | null> =
     let isClosing = false;
     let selectedValue: string | null = currentValue || null;
     let lastTouchY: number | null = null;
+    let hoveredButton: HTMLButtonElement | null = null;
 
     const cleanup = async (result: string | null) => {
       if (isClosing) return;
@@ -417,6 +421,20 @@ export const showIconPickerModal = (currentValue = ""): Promise<string | null> =
       updateSelectedResult();
     };
 
+    const moveHoverIndicator = (button: HTMLButtonElement) => {
+      const isPositioned = hoverIndicatorEl.classList.contains("is-positioned");
+      const resultsRect = resultsEl.getBoundingClientRect();
+      const buttonRect = button.getBoundingClientRect();
+      hoverIndicatorEl.style.width = `${buttonRect.width}px`;
+      hoverIndicatorEl.style.height = `${buttonRect.height}px`;
+      hoverIndicatorEl.style.transform = `translate3d(${buttonRect.left - resultsRect.left + resultsEl.scrollLeft}px, ${buttonRect.top - resultsRect.top + resultsEl.scrollTop}px, 0)`;
+      hoverIndicatorEl.classList.add("is-positioned", "is-visible");
+      if (!isPositioned) {
+        void hoverIndicatorEl.offsetWidth;
+        hoverIndicatorEl.classList.add("is-animated");
+      }
+    };
+
     const renderResults = () => {
       const terms = searchInputEl.value.trim().toLowerCase().split(/\s+/).filter(Boolean);
       const fragment = document.createDocumentFragment();
@@ -432,6 +450,8 @@ export const showIconPickerModal = (currentValue = ""): Promise<string | null> =
       );
       let totalVisible = 0;
 
+      hoveredButton = null;
+      hoverIndicatorEl.classList.remove("is-animated", "is-positioned", "is-visible");
       resultsEl.replaceChildren();
 
       for (const sectionMatch of sectionMatches) {
@@ -450,11 +470,11 @@ export const showIconPickerModal = (currentValue = ""): Promise<string | null> =
         sectionHeaderEl.className = "options-icon-picker-section-header";
 
         const sectionTitleEl = document.createElement("h3");
-        sectionTitleEl.className = "options-icon-picker-section-title";
+        sectionTitleEl.className = "options-icon-picker-section-title text-base";
         sectionTitleEl.textContent = sectionMatch.section.title;
 
         const sectionCountEl = document.createElement("span");
-        sectionCountEl.className = "options-icon-picker-section-count";
+        sectionCountEl.className = "options-icon-picker-section-count text-base";
         sectionCountEl.textContent = String(sectionMatch.matches.length);
 
         sectionHeaderEl.append(sectionTitleEl, sectionCountEl);
@@ -486,13 +506,33 @@ export const showIconPickerModal = (currentValue = ""): Promise<string | null> =
           if (icon) iconWrapperEl.append(icon.iconEl);
 
           const nameEl = document.createElement("span");
-          nameEl.className = "options-icon-picker-result-name";
+          nameEl.className = "options-icon-picker-result-name text-base";
           nameEl.textContent = item.name;
 
           button.append(iconWrapperEl, nameEl);
           button.addEventListener("click", () => {
             selectIcon(item.value);
           });
+          button.addEventListener("pointerenter", () => {
+            hoveredButton = button;
+            moveHoverIndicator(button);
+          });
+          button.addEventListener("pointerleave", (event) => {
+            if (
+              event.relatedTarget instanceof Element &&
+              event.relatedTarget.closest(".options-icon-picker-result")
+            ) {
+              return;
+            }
+
+            hoveredButton = null;
+            const focusedButton = resultsEl.querySelector<HTMLButtonElement>(
+              ".options-icon-picker-result:focus"
+            );
+            if (focusedButton) moveHoverIndicator(focusedButton);
+            else hoverIndicatorEl.classList.remove("is-visible");
+          });
+          button.addEventListener("focus", () => moveHoverIndicator(button));
 
           sectionGridEl.append(button);
         }
@@ -501,7 +541,7 @@ export const showIconPickerModal = (currentValue = ""): Promise<string | null> =
         fragment.append(sectionEl);
       }
 
-      resultsEl.append(fragment);
+      resultsEl.append(fragment, hoverIndicatorEl);
 
       if (totalMatches === 0) {
         countEl.textContent = t("no icons found");
@@ -516,6 +556,19 @@ export const showIconPickerModal = (currentValue = ""): Promise<string | null> =
             })
           : t("showing {total} icons", { total: totalMatches });
     };
+
+    resultsEl.addEventListener("pointerleave", () => {
+      hoveredButton = null;
+      if (!resultsEl.contains(document.activeElement)) {
+        hoverIndicatorEl.classList.remove("is-visible");
+      }
+    });
+
+    resultsEl.addEventListener("focusout", (event) => {
+      if (event.relatedTarget instanceof Node && resultsEl.contains(event.relatedTarget)) return;
+      if (hoveredButton) moveHoverIndicator(hoveredButton);
+      else hoverIndicatorEl.classList.remove("is-visible");
+    });
 
     const onKeydown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
