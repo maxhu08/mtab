@@ -15,7 +15,7 @@ import {
   messageTypeWeatherButtonEl,
   messageWeatherUnitsTypeFButton
 } from "~/src/options/scripts/ui";
-import { localizeDefaultValue } from "~/src/i18n";
+import { fillLocalizedDefaultValue } from "~/src/i18n";
 
 export const fillMessageInputs = (config: Config) => {
   messageEnabledCheckboxEl.checked = config.message.enabled;
@@ -47,7 +47,8 @@ export const fillMessageInputs = (config: Config) => {
   };
   messageWeatherUnitTypePairs[config.message.weather.unitsType].click();
 
-  messageCustomTextInputEl.value = localizeDefaultValue(
+  fillLocalizedDefaultValue(
+    messageCustomTextInputEl,
     config.message.customText,
     "your custom text"
   );

@@ -424,10 +424,10 @@ toggleCollapseAllBookmarkNodesButtonEl.onclick = () => {
   });
 
   toggleCollapseAllBookmarkNodesButtonEl.setAttribute("last-action", mode);
-  toggleCollapseAllBookmarkNodesButtonEl.innerHTML =
-    mode === "expand"
-      ? `<span class="text-white text-base">${t("collapse all")}</span>`
-      : `<span class="text-white text-base">${t("expand all")}</span>`;
+  const label = document.createElement("span");
+  label.className = "text-white text-base";
+  label.textContent = mode === "expand" ? t("collapse all") : t("expand all");
+  toggleCollapseAllBookmarkNodesButtonEl.replaceChildren(label);
 };
 
 // prettier-ignore

@@ -1,12 +1,6 @@
-import { getLanguages, initializeDocumentI18n, isLanguage, t } from "~/src/i18n";
+import { getLanguages, initializeDocumentI18n, isLanguage } from "~/src/i18n";
 
 export { t } from "~/src/i18n";
-
-declare global {
-  interface Window {
-    optionsT: typeof t;
-  }
-}
 
 const initializeLanguageSelect = () => {
   const select = document.getElementById("options-language-select") as HTMLSelectElement;
@@ -28,6 +22,5 @@ const initializeLanguageSelect = () => {
 
 export const initializeI18n = async () => {
   await initializeDocumentI18n();
-  window.optionsT = t;
   initializeLanguageSelect();
 };

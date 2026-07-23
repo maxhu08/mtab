@@ -368,13 +368,13 @@ export const displayAssist = (items: AssistItem[], config: Config) => {
       const copyHintEl = document.createElement("div");
       copyHintEl.className = "select-none";
       copyHintEl.style.color = config.search.placeholderTextColor;
-      copyHintEl.innerHTML = `&nbsp;&nbsp;&nbsp;${originalCopyText}`;
+      copyHintEl.textContent = `\u00a0\u00a0\u00a0${originalCopyText}`;
 
       resultBtn.onclick = () => {
         navigator.clipboard.writeText(item.result);
-        copyHintEl.innerHTML = `&nbsp;&nbsp;&nbsp;${t("copied!")}`;
+        copyHintEl.textContent = `\u00a0\u00a0\u00a0${t("copied!")}`;
         setTimeout(() => {
-          copyHintEl.innerHTML = `&nbsp;&nbsp;&nbsp;${originalCopyText}`;
+          copyHintEl.textContent = `\u00a0\u00a0\u00a0${originalCopyText}`;
         }, 3000);
       };
 

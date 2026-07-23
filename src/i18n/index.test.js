@@ -1,5 +1,10 @@
 import { describe, expect, test } from "bun:test";
-import { resolveLanguage, translate } from "./index.ts";
+import {
+  fillLocalizedDefaultValue,
+  normalizeDefaultValue,
+  resolveLanguage,
+  translate
+} from "./index.ts";
 import { de } from "./locales/de.ts";
 import { es } from "./locales/es.ts";
 import { fr } from "./locales/fr.ts";
@@ -122,6 +127,31 @@ describe("options language resolution", () => {
 });
 
 describe("translations", () => {
+  test("only normalizes values known to originate from a default", () => {
+    let handleInput;
+    const input = {
+      value: "",
+      dataset: {},
+      addEventListener: (_event, listener) => {
+        handleInput = listener;
+      }
+    };
+
+    fillLocalizedDefaultValue(input, "user", "user");
+    expect(input.value).toBe("user");
+    expect(input.dataset.localizedDefault).toBe("user");
+
+    handleInput();
+    expect(input.dataset.localizedDefault).toBeUndefined();
+
+    fillLocalizedDefaultValue(input, "Benutzer", "user");
+    expect(input.value).toBe("Benutzer");
+    expect(input.dataset.localizedDefault).toBeUndefined();
+    expect(normalizeDefaultValue("Benutzer", "user")).toBe("Benutzer");
+    expect(normalizeDefaultValue("Benutzer", "user", "Benutzer")).toBe("user");
+    expect(normalizeDefaultValue("custom", "user", "Benutzer")).toBe("custom");
+  });
+
   test("keeps English and translates every supported language", () => {
     expect(translate("en", "changes saved")).toBe("changes saved");
     expect(translate("de", "changes saved")).toBe("Änderungen gespeichert");

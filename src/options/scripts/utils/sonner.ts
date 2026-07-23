@@ -1,6 +1,8 @@
 // @ts-nocheck
 // based off https://github.com/JeanxPereira/sonner-js/blob/main/sonner-js/sonner.js
 
+import { t as translate } from "~/src/options/scripts/i18n";
+
 function getAsset(type) {
   const ICONS = {
     success: `
@@ -117,7 +119,6 @@ function renderToaster() {
       role="status"
       aria-live="polite"
       aria-atomic="false"
-      aria-label="${window.optionsT("Notifications")}"
       data-theme="light"
       data-x-position="${x}"
       data-y-position="${y}"
@@ -130,6 +131,7 @@ function renderToaster() {
         x
       )}">
     </ol>`;
+  document.getElementById("toaster-list").setAttribute("aria-label", translate("Notifications"));
 
   registerMouseOver();
   registerDelegatedClicks();
@@ -333,7 +335,7 @@ function renderToast(list, content, { description, type, action, position } = {}
     const actionText = actionBtn.textContent?.trim();
     actionBtn.setAttribute(
       "aria-label",
-      actionText && actionText.length > 0 ? actionText : window.optionsT("Toast action")
+      actionText && actionText.length > 0 ? actionText : translate("Toast action")
     );
   }
 
@@ -418,6 +420,16 @@ const toast = {
   warning: (message, options = {}) => basicToast(message, { ...options, type: "warning" }),
   error: (message, options = {}) => basicToast(message, { ...options, type: "error" })
 };
+
+type Toast = typeof toast;
+
+declare global {
+  const toast: Toast;
+
+  interface Window {
+    toast: Toast;
+  }
+}
 
 window.toast = toast;
 

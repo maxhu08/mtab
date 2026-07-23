@@ -95,8 +95,27 @@ export const t = (key: TranslationKey, values: Record<string, string | number> =
 export const localizeDefaultValue = (value: string, key: TranslationKey) =>
   value === key ? t(key) : value;
 
-export const normalizeDefaultValue = (value: string, key: TranslationKey) =>
-  value === t(key) ? key : value;
+const localizedDefaultInputs = new WeakSet<HTMLInputElement | HTMLTextAreaElement>();
+
+export const fillLocalizedDefaultValue = (
+  input: HTMLInputElement | HTMLTextAreaElement,
+  value: string,
+  key: TranslationKey
+) => {
+  input.value = localizeDefaultValue(value, key);
+  if (value === key) input.dataset.localizedDefault = input.value;
+  else delete input.dataset.localizedDefault;
+
+  if (localizedDefaultInputs.has(input)) return;
+  input.addEventListener("input", () => delete input.dataset.localizedDefault);
+  localizedDefaultInputs.add(input);
+};
+
+export const normalizeDefaultValue = (
+  value: string,
+  key: TranslationKey,
+  localizedDefault?: string
+) => (value === localizedDefault ? key : value);
 
 const isTranslationKey = (value: string): value is TranslationKey =>
   Object.prototype.hasOwnProperty.call(zhCN, value);

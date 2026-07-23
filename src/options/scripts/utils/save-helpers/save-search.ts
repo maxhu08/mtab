@@ -65,11 +65,13 @@ export const saveSearchSettingsToDraft = (draft: Config) => {
 
   draft.search.placeholderText = normalizeDefaultValue(
     searchPlaceholderTextInputEl.value,
-    "search..."
+    "search...",
+    searchPlaceholderTextInputEl.dataset.localizedDefault
   );
   draft.search.bookmarkPlaceholderText = normalizeDefaultValue(
     searchBookmarkPlaceholderTextInputEl.value,
-    "find bookmark..."
+    "find bookmark...",
+    searchBookmarkPlaceholderTextInputEl.dataset.localizedDefault
   );
   draft.search.focusedBorderColor = searchFocusedBorderColorInputEl.value;
 

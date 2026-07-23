@@ -49,6 +49,7 @@ export const saveMessageSettingsToDraft = (draft: Config) => {
 
   draft.message.customText = normalizeDefaultValue(
     messageCustomTextInputEl.value,
-    "your custom text"
+    "your custom text",
+    messageCustomTextInputEl.dataset.localizedDefault
   );
 };

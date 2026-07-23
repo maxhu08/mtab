@@ -40,6 +40,7 @@ export const saveUISettingsToDraft = (draft: Config) => {
 
   draft.ui.customCSS = normalizeDefaultValue(
     uiCustomCSSTextareaEl.value,
-    "/* input custom css... */"
+    "/* input custom css... */",
+    uiCustomCSSTextareaEl.dataset.localizedDefault
   );
 };
