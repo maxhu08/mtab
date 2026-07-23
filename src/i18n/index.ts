@@ -9,37 +9,46 @@ import { zhCN } from "~/src/i18n/locales/zh-cn";
 
 const locales = {
   en: {
+    flag: "🇺🇸",
     label: "English"
   },
   de: {
+    flag: "🇩🇪",
     label: "Deutsch",
     messages: de
   },
   es: {
+    flag: "🇪🇸",
     label: "Español",
     messages: es
   },
   fr: {
+    flag: "🇫🇷",
     label: "Français",
     messages: fr
   },
   it: {
+    flag: "🇮🇹",
     label: "Italiano",
     messages: it
   },
   ja: {
+    flag: "🇯🇵",
     label: "日本語",
     messages: ja
   },
   ko: {
+    flag: "🇰🇷",
     label: "한국어",
     messages: ko
   },
   "pt-BR": {
+    flag: "🇧🇷",
     label: "Português (Brasil)",
     messages: ptBR
   },
   "zh-CN": {
+    flag: "🇨🇳",
     label: "简体中文",
     messages: zhCN
   }
@@ -72,6 +81,7 @@ export const getLanguage = () => language;
 export const getLanguages = () =>
   Object.keys(locales).map((value) => ({
     value: value as Language,
+    flag: locales[value as Language].flag,
     label: locales[value as Language].label
   }));
 

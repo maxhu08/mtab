@@ -8,7 +8,7 @@ const initializeLanguageSelect = () => {
   getLanguages().forEach((locale) => {
     const option = document.createElement("option");
     option.value = locale.value;
-    option.textContent = locale.label;
+    option.textContent = `${locale.flag}  ${locale.label}`;
     option.selected = document.documentElement.lang === locale.value;
     select.appendChild(option);
   });

@@ -70,11 +70,14 @@
         <section id="options-section" class="mb-20 grid grid-flow-row gap-4">
           <div class="grid w-full grid-cols-[max-content_auto] place-items-center">
             <p class="text-base text-white">options.language</p>
-            <select
-              id="options-language-select"
-              class="ml-auto cursor-pointer rounded-md bg-neutral-800 px-3 py-2 text-base text-white outline-none"
-              aria-label="options language"
-            ></select>
+            <div class="options-language-select ml-auto">
+              <select
+                id="options-language-select"
+                class="cursor-pointer rounded-md bg-neutral-800 px-3 py-2 text-base text-white"
+                aria-label="options language"
+              ></select>
+              <i class="options-language-select-arrow ri-arrow-down-s-line" aria-hidden="true"></i>
+            </div>
           </div>
           <div class="grid w-full grid-cols-[max-content_auto] place-items-center">
             <p class="text-base text-white">options.showOptionsButton</p>

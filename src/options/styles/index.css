@@ -110,6 +110,37 @@
     visibility 250ms ease-out;
 }
 
+.options-language-select {
+  position: relative;
+  border-radius: 0.375rem;
+}
+
+.options-language-select:focus-within {
+  box-shadow: 0 0 0 2px #0ea5e9;
+}
+
+.options-language-select select {
+  appearance: none;
+  padding-right: 2.5rem;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.options-language-select-arrow {
+  position: absolute;
+  top: 50%;
+  right: 0.625rem;
+  display: grid;
+  width: 1.25rem;
+  height: 1.25rem;
+  place-items: center;
+  color: #fff;
+  font-size: 1.25rem;
+  line-height: 1;
+  pointer-events: none;
+  transform: translateY(-50%);
+}
+
 .options-color-field {
   position: relative;
   display: grid;
