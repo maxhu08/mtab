@@ -1,6 +1,5 @@
-# Changes in 1.12.6
+# Changes in 1.12.7
 
 in this release:
 
-- add localizations
-- improve icon picker
+- fix icon picker hover animation
