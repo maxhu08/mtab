@@ -393,6 +393,7 @@ export const showIconPickerModal = (currentValue = ""): Promise<string | null> =
     let selectedValue: string | null = currentValue || null;
     let lastTouchY: number | null = null;
     let hoveredButton: HTMLButtonElement | null = null;
+    let isOpening = true;
 
     const cleanup = async (result: string | null) => {
       if (isClosing) return;
@@ -428,12 +429,34 @@ export const showIconPickerModal = (currentValue = ""): Promise<string | null> =
       hoverIndicatorEl.style.width = `${buttonRect.width}px`;
       hoverIndicatorEl.style.height = `${buttonRect.height}px`;
       hoverIndicatorEl.style.transform = `translate3d(${buttonRect.left - resultsRect.left + resultsEl.scrollLeft}px, ${buttonRect.top - resultsRect.top + resultsEl.scrollTop}px, 0)`;
-      hoverIndicatorEl.classList.add("is-positioned", "is-visible");
+      hoverIndicatorEl.classList.add("is-positioned");
+      if (isOpening) return;
+
+      hoverIndicatorEl.classList.add("is-visible");
       if (!isPositioned) {
         void hoverIndicatorEl.offsetWidth;
         hoverIndicatorEl.classList.add("is-animated");
       }
     };
+
+    const onDialogOpened = (event: TransitionEvent) => {
+      if (event.target !== dialog || event.propertyName !== "transform") return;
+
+      dialog.removeEventListener("transitionend", onDialogOpened);
+      hoverIndicatorEl.classList.remove("is-animated");
+      const button =
+        hoveredButton ??
+        resultsEl.querySelector<HTMLButtonElement>(".options-icon-picker-result:hover");
+      if (button) moveHoverIndicator(button);
+      isOpening = false;
+      if (hoverIndicatorEl.classList.contains("is-positioned")) {
+        hoverIndicatorEl.classList.add("is-visible");
+        void hoverIndicatorEl.offsetWidth;
+        hoverIndicatorEl.classList.add("is-animated");
+      }
+    };
+
+    dialog.addEventListener("transitionend", onDialogOpened);
 
     const renderResults = () => {
       const terms = searchInputEl.value.trim().toLowerCase().split(/\s+/).filter(Boolean);
