@@ -2,4 +2,4 @@
 
 in this release:
 
-- add right click context menu to bookmaks
+- add right click context menu to bookmarks
