@@ -13,7 +13,10 @@ import {
   createNewtabBookmarkIcon,
   preloadBookmarkIconAsset
 } from "~/src/newtab/scripts/utils/bookmarks/bookmark-icon";
-import { openBookmark } from "~/src/newtab/scripts/utils/bookmarks/open-bookmark";
+import {
+  normalizeBookmarkUrl,
+  openBookmark
+} from "~/src/newtab/scripts/utils/bookmarks/open-bookmark";
 import { openFolder } from "~/src/newtab/scripts/utils/bookmarks/open-folder";
 import { focusElementBorder, unfocusElementBorder } from "~/src/newtab/scripts/utils/focus-utils";
 import { getTabKeyPressed } from "~/src/newtab/scripts/utils/tab-key-pressed";
@@ -22,7 +25,7 @@ import { t } from "~/src/i18n";
 
 type RenderedNode = {
   uuid: string;
-  buttonEl: HTMLButtonElement;
+  buttonEl: HTMLElement;
   borderEl: HTMLDivElement;
 };
 
@@ -66,13 +69,13 @@ const BORDER_ROLE_ATTR = "data-bookmark-role";
 const getFolderUUIDFromArea = (folderAreaEl: HTMLDivElement) =>
   folderAreaEl.getAttribute("data-folder-uuid") ?? "";
 
-const getBorderEl = (buttonEl: HTMLButtonElement) =>
+const getBorderEl = (buttonEl: HTMLElement) =>
   buttonEl.querySelector(`[${BORDER_ROLE_ATTR}='border']`) as HTMLDivElement | null;
 
 const getDelegatedActionButton = (target: EventTarget | null) => {
   if (!(target instanceof HTMLElement)) return null;
 
-  return target.closest(`button[${BOOKMARK_ACTION_ATTR}]`) as HTMLButtonElement | null;
+  return target.closest(`[${BOOKMARK_ACTION_ATTR}]`) as HTMLElement | null;
 };
 
 const sanitizePositiveInt = (value: number, fallback: number) =>
@@ -124,7 +127,7 @@ const preloadBookmarkNodeIconAssets = (
   }
 };
 
-const handleBookmarkAction = (actionButtonEl: HTMLButtonElement, openInNewTab: boolean) => {
+const handleBookmarkAction = (actionButtonEl: HTMLElement, openInNewTab: boolean) => {
   if (!renderRuntime) return;
 
   const action = actionButtonEl.getAttribute("data-bookmark-action");
@@ -169,6 +172,16 @@ const ensureDelegatedHandlers = () => {
 
     if (e.button !== 0 && e.button !== 1) return;
     handleBookmarkAction(actionButtonEl, e.ctrlKey || e.metaKey || e.button === 1);
+  });
+
+  bookmarksContainerEl.addEventListener("click", (e) => {
+    const actionEl = getDelegatedActionButton(e.target);
+    if (actionEl instanceof HTMLAnchorElement) e.preventDefault();
+  });
+
+  bookmarksContainerEl.addEventListener("auxclick", (e) => {
+    const actionEl = getDelegatedActionButton(e.target);
+    if (actionEl instanceof HTMLAnchorElement) e.preventDefault();
   });
 
   bookmarksContainerEl.addEventListener("keydown", (e) => {
@@ -626,7 +639,7 @@ export const renderBookmarkNodes = (
   );
 
   const frag = document.createDocumentFragment();
-  const nodesToAnimate: HTMLButtonElement[] = [];
+  const nodesToAnimate: HTMLElement[] = [];
 
   bookmarkNodes.forEach((bookmarkNode, index) => {
     if (bookmarkNode.type === "bookmark") {
@@ -651,6 +664,7 @@ export const renderBookmarkNodes = (
       initializeRenderedButton(rendered.borderEl);
       rendered.buttonEl.setAttribute("data-bookmark-action", "bookmark");
       rendered.buttonEl.setAttribute("data-bookmark-url", bookmarkNode.url);
+      rendered.buttonEl.setAttribute("href", normalizeBookmarkUrl(bookmarkNode.url));
       if (withAnimations) nodesToAnimate.push(rendered.buttonEl);
 
       frag.appendChild(rendered.buttonEl);
@@ -765,11 +779,11 @@ export const renderBlockBookmark = (
 
   const uuid = genid();
 
-  const button = document.createElement("button");
+  const button = document.createElement("a");
   button.id = `bookmark-node-${uuid}`;
   button.setAttribute("node-type", "bookmark");
   button.setAttribute("aria-label", getAccessibleNodeLabel("bookmark", bookmarkName));
-  button.className = `relative duration-[250ms] ease-out ${bookmarkFill.length === 0 ? "bg-foreground " : ""}cursor-pointer ${uiStyle === "glass" ? "glass-effect" : ""} corner-style h-bookmark overflow-hidden ${animationsEnabled ? `${animationsInitialType} opacity-0` : ""} outline-none`;
+  button.className = `relative duration-[250ms] ease-out ${bookmarkFill.length === 0 ? "bg-foreground " : ""}cursor-pointer ${uiStyle === "glass" ? "glass-effect" : ""} corner-style h-bookmark overflow-hidden no-underline ${animationsEnabled ? `${animationsInitialType} opacity-0` : ""} outline-none`;
   if (bookmarkFill.length > 0) button.style.backgroundColor = bookmarkFill;
   if (animationsEnabled) button.style.animationDelay = `${delay}ms`;
 
@@ -797,7 +811,7 @@ export const renderBlockBookmark = (
   if (showName) {
     nameSpan = document.createElement("span");
     nameSpan.className =
-      "visibilty-bookmark-name w-full font-message font-semibold text-base text-ellipsis overflow-hidden whitespace-nowrap";
+      "visibilty-bookmark-name w-full text-center font-message font-semibold text-base text-ellipsis overflow-hidden whitespace-nowrap";
     nameSpan.style.color = nameTextColor;
     nameSpan.textContent = bookmarkName;
   }

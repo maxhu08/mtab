@@ -1,6 +1,9 @@
 import { Config } from "~/src/utils/config";
 import { bookmarksContainerEl } from "~/src/newtab/scripts/ui";
-import { openBookmark } from "~/src/newtab/scripts/utils/bookmarks/open-bookmark";
+import {
+  normalizeBookmarkUrl,
+  openBookmark
+} from "~/src/newtab/scripts/utils/bookmarks/open-bookmark";
 import { getFaviconURL } from "~/src/newtab/scripts/utils/favicon-url";
 import { t } from "~/src/i18n";
 
@@ -41,9 +44,10 @@ export const renderDefaultBookmarks = (config: Config) => {
       if (bookmark.dateGroupModified || !bookmark.url) continue;
       hasRenderableBookmarks = true;
 
-      const buttonEl = document.createElement("button");
+      const buttonEl = document.createElement("a");
       buttonEl.className =
-        "overflow-hidden w-16 md:w-20 aspect-square grid grid-rows-[auto_max-content] place-items-center cursor-pointer";
+        "overflow-hidden w-16 md:w-20 aspect-square grid grid-rows-[auto_max-content] place-items-center cursor-pointer no-underline";
+      buttonEl.href = normalizeBookmarkUrl(bookmark.url);
       buttonEl.setAttribute("data-bookmark-url", bookmark.url);
       buttonEl.setAttribute(
         "aria-label",
@@ -96,9 +100,10 @@ export const renderDefaultBookmarks = (config: Config) => {
     innerBookmarkContainer.appendChild(frag);
 
     innerBookmarkContainer.addEventListener("click", (e) => {
+      e.preventDefault();
       const target = e.target as HTMLElement | null;
       if (!target) return;
-      const buttonEl = target.closest("button[data-bookmark-url]") as HTMLButtonElement | null;
+      const buttonEl = target.closest("a[data-bookmark-url]");
       if (!buttonEl) return;
 
       const url = buttonEl.getAttribute("data-bookmark-url");
@@ -114,9 +119,10 @@ export const renderDefaultBookmarks = (config: Config) => {
 
     innerBookmarkContainer.addEventListener("auxclick", (e) => {
       if (e.button !== 1) return;
+      e.preventDefault();
       const target = e.target as HTMLElement | null;
       if (!target) return;
-      const buttonEl = target.closest("button[data-bookmark-url]") as HTMLButtonElement | null;
+      const buttonEl = target.closest("a[data-bookmark-url]");
       if (!buttonEl) return;
 
       const url = buttonEl.getAttribute("data-bookmark-url");
