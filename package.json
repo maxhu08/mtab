@@ -29,7 +29,8 @@
     "commitlint": "commitlint",
     "lint": "oxlint src scripts --deny-warnings",
     "lint:fix": "bun run lint --fix",
-    "check": "bun run format:check && bun run lint && bun run typecheck",
+    "test": "bun test",
+    "check": "bun run format:check && bun run lint && bun run typecheck && bun run test",
     "prepare": "husky",
     "typecheck": "tsc -p tsconfig.json --noEmit"
   },
