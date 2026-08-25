@@ -1,5 +1,5 @@
-# Changes in 1.12.7
+# Changes in 1.12.8
 
 in this release:
 
-- fix icon picker hover animation
+- add right click context menu to bookmaks
