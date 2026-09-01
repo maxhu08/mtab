@@ -35,7 +35,7 @@
     "typecheck": "tsc -p tsconfig.json --noEmit"
   },
   "dependencies": {
-    "caniuse-lite": "^1.0.30001806",
+    "caniuse-lite": "^1.0.30001810",
     "idb-keyval": "^6.3.0",
     "mathjs": "^13.2.3",
     "parcel": "2.16.3",
@@ -55,8 +55,8 @@
     "@types/sortablejs": "^1.15.9",
     "husky": "^9.1.7",
     "oxfmt": "^0.40.0",
-    "oxlint": "^1.75.0",
-    "postcss": "^8.5.22",
+    "oxlint": "^1.80.0",
+    "postcss": "^8.5.26",
     "tailwindcss": "^3.4.19"
   }
 }
