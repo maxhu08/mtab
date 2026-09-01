@@ -309,7 +309,7 @@ export const showIconPickerModal = (currentValue = ""): Promise<string | null> =
 
   const dialog = document.createElement("div");
   dialog.className =
-    "options-icon-picker-dialog grid max-h-[min(48rem,calc(100vh-2rem))] w-full max-w-6xl grid-rows-[auto_auto_minmax(0,1fr)_auto] gap-3 rounded-md border-2 border-emerald-500 bg-neutral-900 p-4 text-base shadow-2xl";
+    "options-icon-picker-dialog grid h-[min(48rem,calc(100vh-2rem))] w-full max-w-6xl grid-rows-[auto_auto_minmax(0,1fr)_auto] gap-3 rounded-md border-2 border-emerald-500 bg-neutral-900 p-4 text-base shadow-2xl";
   dialog.setAttribute("role", "dialog");
   dialog.setAttribute("aria-modal", "true");
   dialog.setAttribute("aria-label", t("Icon picker"));
@@ -348,6 +348,23 @@ export const showIconPickerModal = (currentValue = ""): Promise<string | null> =
 
   const hoverIndicatorEl = document.createElement("div");
   hoverIndicatorEl.className = "options-icon-picker-hover-indicator";
+
+  const emptyStateEl = document.createElement("div");
+  emptyStateEl.className = "options-icon-picker-empty text-neutral-500";
+
+  const emptyStateIconEl = document.createElement("span");
+  emptyStateIconEl.className = "options-icon-picker-empty-icon";
+  const emptyStateIcon = createBookmarkIcon(
+    "ri-emotion-sad-line",
+    ICON_PICKER_PREVIEW_COLOR,
+    ICON_PICKER_PREVIEW_COLOR
+  );
+  if (emptyStateIcon) emptyStateIconEl.append(emptyStateIcon.iconEl);
+
+  const emptyStateTextEl = document.createElement("p");
+  emptyStateTextEl.className = "text-base";
+  emptyStateTextEl.textContent = t("no icons found");
+  emptyStateEl.append(emptyStateIconEl, emptyStateTextEl);
 
   const footerEl = document.createElement("div");
   footerEl.className = "grid gap-2";
@@ -567,10 +584,12 @@ export const showIconPickerModal = (currentValue = ""): Promise<string | null> =
       resultsEl.append(fragment, hoverIndicatorEl);
 
       if (totalMatches === 0) {
-        countEl.textContent = t("no icons found");
+        resultsEl.prepend(emptyStateEl);
+        countEl.classList.add("hidden");
         return;
       }
 
+      countEl.classList.remove("hidden");
       countEl.textContent =
         totalMatches > totalVisible
           ? t("showing {visible} of {total} icons; search to narrow results", {

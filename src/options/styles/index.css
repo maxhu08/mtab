@@ -437,6 +437,27 @@
   opacity: 1;
 }
 
+.options-icon-picker-empty {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: 1rem;
+}
+
+.options-icon-picker-empty-icon {
+  display: grid;
+  width: 4rem;
+  height: 4rem;
+  place-items: center;
+  line-height: 1;
+}
+
+.options-icon-picker-empty-icon i {
+  font-size: 3rem;
+}
+
 .options-icon-picker-result:focus-visible {
   outline: 2px solid #0ea5e9;
   outline-offset: 0.25rem;
