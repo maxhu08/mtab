@@ -254,6 +254,14 @@ export const ptBR = {
   "bookmarks.defaultBlockyCols": "Colunas dos blocos padrão",
   "bookmarks.defaultBlockyColorType": "Tipo de cor dos blocos padrão",
   "bookmarks.defaultBlockyColor": "Cor dos blocos padrão",
+  "bookmarks.bookmarksLocationChromium": "Local dos favoritos do Chromium",
+  "(only applies to chromium based browsers)":
+    "(aplica-se apenas a navegadores baseados em Chromium)",
+  root: "Raiz",
+  "Selecting root displays every top-level bookmark folder.":
+    "Selecionar a raiz exibe todas as pastas de favoritos de nível superior.",
+  "bookmarks bar": "Barra de favoritos",
+  mobile: "Dispositivos móveis",
   "bookmarks.bookmarksLocationFirefox": "Local dos favoritos no Firefox",
   "(only applies to firefox based browsers)":
     "(aplica-se apenas a navegadores baseados no Firefox)",

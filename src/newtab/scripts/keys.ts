@@ -119,6 +119,7 @@ export const listenToKeys = (config: Config) => {
     }
 
     bookmarksPromise = getBrowserFlattenedBookmarks({
+      bookmarksLocationChromium: config.bookmarks.bookmarksLocationChromium,
       bookmarksLocationFirefox: config.bookmarks.bookmarksLocationFirefox,
       defaultBlockyColorType: config.bookmarks.defaultBlockyColorType,
       defaultBlockyColor: config.bookmarks.defaultBlockyColor,

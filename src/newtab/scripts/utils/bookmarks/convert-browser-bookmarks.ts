@@ -1,7 +1,7 @@
 import {
+  BookmarksLocationChromium,
   BookmarksLocationFirefox,
   DefaultBlockyColorType,
-  BookmarkNodeFolder,
   BookmarkNode,
   DefaultFaviconSource
 } from "~/src/utils/config";
@@ -9,6 +9,7 @@ import { getFaviconURL } from "~/src/newtab/scripts/utils/favicon-url";
 import { getUserAgent } from "~/src/utils/user-agent";
 
 export const convertBrowserBookmarksToBookmarkNodes = async (
+  bookmarksLocationChromium: BookmarksLocationChromium,
   bookmarksLocationFirefox: BookmarksLocationFirefox,
   defaultBlockyColorType: DefaultBlockyColorType,
   defaultBlockyColor: string,
@@ -70,6 +71,11 @@ export const convertBrowserBookmarksToBookmarkNodes = async (
           return;
         }
 
+        if (bookmarksLocationFirefox === "root") {
+          resolve(root.children);
+          return;
+        }
+
         let folderId: string = "";
         if (bookmarksLocationFirefox === "menu") folderId = "menu________";
         else if (bookmarksLocationFirefox === "toolbar") folderId = "toolbar_____";
@@ -78,25 +84,26 @@ export const convertBrowserBookmarksToBookmarkNodes = async (
         const targetFolder = root.children.find((folder) => folder.id === folderId);
         resolve(targetFolder?.children ?? []);
       } else {
-        // other browsers
-        resolve(bookmarkTree);
+        const roots = bookmarkTree.flatMap((node) => node.children ?? []);
+        if (bookmarksLocationChromium === "root") {
+          resolve(roots);
+          return;
+        }
+
+        const legacyIds: Record<Exclude<BookmarksLocationChromium, "root">, string> = {
+          "bookmarks-bar": "1",
+          other: "2",
+          mobile: "3"
+        };
+        const targetFolder =
+          roots.find((folder) => folder.folderType === bookmarksLocationChromium) ??
+          roots.find((folder) => folder.id === legacyIds[bookmarksLocationChromium]);
+        resolve(targetFolder?.children ?? []);
       }
     });
   });
 
-  const bookmarkNodes = rootBookmarks.flatMap(getBookmarkNodes);
-
-  if (userAgent === "firefox") {
-    return bookmarkNodes;
-  } else {
-    // use the folder with name "Bookmarks"
-    const bookmarksFolder = (bookmarkNodes[0] as BookmarkNodeFolder).contents.find(
-      (node) => node.type === "folder" && node.name === "Bookmarks"
-    ) as BookmarkNodeFolder;
-
-    if (bookmarksFolder) return bookmarksFolder.contents;
-    else return [];
-  }
+  return rootBookmarks.flatMap(getBookmarkNodes);
 };
 
 export const getColorFromString = (val: string) => {

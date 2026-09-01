@@ -248,6 +248,13 @@ export const ko = {
   "bookmarks.defaultBlockyCols": "기본 블록형 열 수",
   "bookmarks.defaultBlockyColorType": "기본 블록형 색상 유형",
   "bookmarks.defaultBlockyColor": "기본 블록형 색상",
+  "bookmarks.bookmarksLocationChromium": "Chromium 북마크 위치",
+  "(only applies to chromium based browsers)": "(Chromium 기반 브라우저에만 적용)",
+  root: "루트",
+  "Selecting root displays every top-level bookmark folder.":
+    "루트를 선택하면 모든 최상위 북마크 폴더가 표시됩니다.",
+  "bookmarks bar": "북마크바",
+  mobile: "모바일",
   "bookmarks.bookmarksLocationFirefox": "Firefox 북마크 위치",
   "(only applies to firefox based browsers)": "(Firefox 기반 브라우저에만 적용)",
   menu: "메뉴",

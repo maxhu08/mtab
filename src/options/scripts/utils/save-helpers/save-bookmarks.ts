@@ -1,6 +1,7 @@
 import {
   Config,
   BookmarksType,
+  BookmarksLocationChromium,
   BookmarksLocationFirefox,
   DefaultBlockyColorType,
   DefaultFaviconSource,
@@ -70,8 +71,21 @@ export const saveBookmarksSettingsToDraft = (draft: Config) => {
       bookmarksDefaultBlockyColorTypePairs[selectedDefaultBlockyColorType.id];
   }
 
+  const selectedLocationChromiumEl = getSelectedButton("bookmarks-location-chromium");
+  const bookmarksLocationChromiumPairs: Record<string, BookmarksLocationChromium> = {
+    "bookmarks-location-chromium-root-button": "root",
+    "bookmarks-location-chromium-bookmarks-bar-button": "bookmarks-bar",
+    "bookmarks-location-chromium-other-button": "other",
+    "bookmarks-location-chromium-mobile-button": "mobile"
+  };
+  if (selectedLocationChromiumEl) {
+    draft.bookmarks.bookmarksLocationChromium =
+      bookmarksLocationChromiumPairs[selectedLocationChromiumEl.id];
+  }
+
   const selectedLocationFirefoxEl = getSelectedButton("bookmarks-location-firefox");
   const bookmarksLocationFirefoxPairs: Record<string, BookmarksLocationFirefox> = {
+    "bookmarks-location-firefox-root-button": "root",
     "bookmarks-location-firefox-menu-button": "menu",
     "bookmarks-location-firefox-toolbar-button": "toolbar",
     "bookmarks-location-firefox-other-button": "other"

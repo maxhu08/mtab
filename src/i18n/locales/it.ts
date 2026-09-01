@@ -254,6 +254,13 @@ export const it = {
   "bookmarks.defaultBlockyCols": "Colonne blocchi predefinite",
   "bookmarks.defaultBlockyColorType": "Tipo di colore blocchi predefinito",
   "bookmarks.defaultBlockyColor": "Colore blocchi predefinito",
+  "bookmarks.bookmarksLocationChromium": "Posizione segnalibri Chromium",
+  "(only applies to chromium based browsers)": "(si applica solo ai browser basati su Chromium)",
+  root: "Radice",
+  "Selecting root displays every top-level bookmark folder.":
+    "Selezionando radice vengono mostrate tutte le cartelle dei segnalibri di primo livello.",
+  "bookmarks bar": "Barra dei segnalibri",
+  mobile: "Dispositivi mobili",
   "bookmarks.bookmarksLocationFirefox": "Posizione segnalibri Firefox",
   "(only applies to firefox based browsers)": "(vale solo per browser basati su Firefox)",
   menu: "Menu",

@@ -256,6 +256,13 @@ export const es = {
   "bookmarks.defaultBlockyCols": "Número predeterminado de columnas de bloques",
   "bookmarks.defaultBlockyColorType": "Tipo de color de bloque predeterminado",
   "bookmarks.defaultBlockyColor": "Color de bloque predeterminado",
+  "bookmarks.bookmarksLocationChromium": "Ubicación de marcadores de Chromium",
+  "(only applies to chromium based browsers)": "(solo se aplica a navegadores basados en Chromium)",
+  root: "Raíz",
+  "Selecting root displays every top-level bookmark folder.":
+    "Seleccionar raíz muestra todas las carpetas de marcadores de nivel superior.",
+  "bookmarks bar": "Barra de marcadores",
+  mobile: "Móvil",
   "bookmarks.bookmarksLocationFirefox": "Ubicación de marcadores en Firefox",
   "(only applies to firefox based browsers)": "(solo se aplica a navegadores basados en Firefox)",
   menu: "Menú",

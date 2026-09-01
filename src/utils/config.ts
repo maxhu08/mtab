@@ -188,6 +188,7 @@ export const defaultConfig: Config = {
     defaultBlockyCols: 4,
     defaultBlockyColorType: "custom",
     defaultBlockyColor: "#ffffff",
+    bookmarksLocationChromium: "root",
     bookmarksLocationFirefox: "toolbar",
     defaultFaviconSource: "duckduckgo"
   },
@@ -265,7 +266,8 @@ export type BookmarkNodeBookmark = {
 };
 export type DefaultBlockyColorType = "random" | "custom";
 export type DefaultFaviconSource = "google" | "duckduckgo";
-export type BookmarksLocationFirefox = "menu" | "toolbar" | "other";
+export type BookmarksLocationFirefox = "root" | "menu" | "toolbar" | "other";
+export type BookmarksLocationChromium = "root" | "bookmarks-bar" | "other" | "mobile";
 export type FontType = "default" | "custom";
 export type SnowEnabledType = "on" | "off" | "winter";
 
@@ -381,6 +383,7 @@ export interface Config {
     defaultBlockyCols: number;
     defaultBlockyColorType: DefaultBlockyColorType;
     defaultBlockyColor: string;
+    bookmarksLocationChromium: BookmarksLocationChromium;
     bookmarksLocationFirefox: BookmarksLocationFirefox;
     defaultFaviconSource: DefaultFaviconSource;
   };

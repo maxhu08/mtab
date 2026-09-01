@@ -255,6 +255,13 @@ export const de = {
   "bookmarks.defaultBlockyCols": "Standardspaltenzahl für Blöcke",
   "bookmarks.defaultBlockyColorType": "Standard-Farbtyp für Blöcke",
   "bookmarks.defaultBlockyColor": "Standardfarbe für Blöcke",
+  "bookmarks.bookmarksLocationChromium": "Speicherort der Chromium-Lesezeichen",
+  "(only applies to chromium based browsers)": "(gilt nur für Chromium-basierte Browser)",
+  root: "Stammordner",
+  "Selecting root displays every top-level bookmark folder.":
+    "Mit „Stammordner“ werden alle Lesezeichenordner der obersten Ebene angezeigt.",
+  "bookmarks bar": "Lesezeichenleiste",
+  mobile: "Mobil",
   "bookmarks.bookmarksLocationFirefox": "Speicherort der Firefox-Lesezeichen",
   "(only applies to firefox based browsers)": "(gilt nur für Firefox-basierte Browser)",
   menu: "Menü",

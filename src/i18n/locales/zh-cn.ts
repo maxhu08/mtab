@@ -246,6 +246,13 @@ export const zhCN = {
   "bookmarks.defaultBlockyCols": "默认方块列数",
   "bookmarks.defaultBlockyColorType": "默认方块颜色类型",
   "bookmarks.defaultBlockyColor": "默认方块颜色",
+  "bookmarks.bookmarksLocationChromium": "Chromium 书签位置",
+  "(only applies to chromium based browsers)": "（仅适用于基于 Chromium 的浏览器）",
+  root: "根目录",
+  "Selecting root displays every top-level bookmark folder.":
+    "选择根目录会显示所有顶层书签文件夹。",
+  "bookmarks bar": "书签栏",
+  mobile: "移动设备",
   "bookmarks.bookmarksLocationFirefox": "Firefox 书签位置",
   "(only applies to firefox based browsers)": "（仅适用于 Firefox 系浏览器）",
   menu: "菜单",

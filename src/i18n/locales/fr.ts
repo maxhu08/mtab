@@ -259,6 +259,14 @@ export const fr = {
   "bookmarks.defaultBlockyCols": "Nombre de colonnes par défaut des blocs",
   "bookmarks.defaultBlockyColorType": "Type de couleur par défaut des blocs",
   "bookmarks.defaultBlockyColor": "Couleur par défaut des blocs",
+  "bookmarks.bookmarksLocationChromium": "Emplacement des favoris Chromium",
+  "(only applies to chromium based browsers)":
+    "(s’applique uniquement aux navigateurs basés sur Chromium)",
+  root: "Racine",
+  "Selecting root displays every top-level bookmark folder.":
+    "Sélectionner la racine affiche tous les dossiers de favoris de premier niveau.",
+  "bookmarks bar": "Barre de favoris",
+  mobile: "Mobile",
   "bookmarks.bookmarksLocationFirefox": "Emplacement des favoris Firefox",
   "(only applies to firefox based browsers)":
     "(s’applique uniquement aux navigateurs basés sur Firefox)",

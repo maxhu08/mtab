@@ -251,6 +251,13 @@ export const ja = {
   "bookmarks.defaultBlockyCols": "デフォルトブロックの列数",
   "bookmarks.defaultBlockyColorType": "デフォルトブロックの色タイプ",
   "bookmarks.defaultBlockyColor": "デフォルトブロックの色",
+  "bookmarks.bookmarksLocationChromium": "Chromium ブックマークの場所",
+  "(only applies to chromium based browsers)": "（Chromium ベースのブラウザーにのみ適用）",
+  root: "ルート",
+  "Selecting root displays every top-level bookmark folder.":
+    "ルートを選択すると、最上位のブックマークフォルダーがすべて表示されます。",
+  "bookmarks bar": "ブックマーク バー",
+  mobile: "モバイル",
   "bookmarks.bookmarksLocationFirefox": "Firefox ブックマークの場所",
   "(only applies to firefox based browsers)": "（Firefox ベースのブラウザーにのみ適用）",
   menu: "メニュー",

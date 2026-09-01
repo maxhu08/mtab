@@ -39,6 +39,7 @@ export const renderDefaultBlockyBookmarks = (config: Config) => {
   initBookmarkRenderRuntime(rootFolderAreaEl, config);
 
   getBrowserBookmarkNodes({
+    bookmarksLocationChromium: config.bookmarks.bookmarksLocationChromium,
     bookmarksLocationFirefox: config.bookmarks.bookmarksLocationFirefox,
     defaultBlockyColorType: config.bookmarks.defaultBlockyColorType,
     defaultBlockyColor: config.bookmarks.defaultBlockyColor,

@@ -147,6 +147,11 @@ export const [bookmarksDefaultBlockyColorContainerEl, bookmarksDefaultBlockyColo
 export const bookmarksLocationFirefoxMenuButtonEl = getButton("bookmarks-location-firefox-menu");
 export const bookmarksLocationFirefoxToolbarButtonEl = getButton("bookmarks-location-firefox-toolbar");
 export const bookmarksLocationFirefoxOtherButtonEl = getButton("bookmarks-location-firefox-other");
+export const bookmarksLocationFirefoxRootButtonEl = getButton("bookmarks-location-firefox-root");
+export const bookmarksLocationChromiumRootButtonEl = getButton("bookmarks-location-chromium-root");
+export const bookmarksLocationChromiumBookmarksBarButtonEl = getButton("bookmarks-location-chromium-bookmarks-bar");
+export const bookmarksLocationChromiumOtherButtonEl = getButton("bookmarks-location-chromium-other");
+export const bookmarksLocationChromiumMobileButtonEl = getButton("bookmarks-location-chromium-mobile");
 export const bookmarksDefaultFaviconSourceGoogleButton = getButton("bookmarks-default-favicon-source-google");
 export const bookmarksDefaultFaviconSourceDuckduckgoButton = getButton("bookmarks-default-favicon-source-duckduckgo");
 export const bookmarksUserDefinedList = document.getElementById("bookmarks-user-defined-list") as HTMLDivElement;
@@ -263,7 +268,11 @@ export const buttonSwitches: ButtonSwitch[] = [
     attr: "bookmarks-default-blocky-color-type"
   },
   {
-    buttons: [bookmarksLocationFirefoxMenuButtonEl, bookmarksLocationFirefoxToolbarButtonEl, bookmarksLocationFirefoxOtherButtonEl],
+    buttons: [bookmarksLocationChromiumRootButtonEl, bookmarksLocationChromiumBookmarksBarButtonEl, bookmarksLocationChromiumOtherButtonEl, bookmarksLocationChromiumMobileButtonEl],
+    attr: "bookmarks-location-chromium"
+  },
+  {
+    buttons: [bookmarksLocationFirefoxRootButtonEl, bookmarksLocationFirefoxMenuButtonEl, bookmarksLocationFirefoxToolbarButtonEl, bookmarksLocationFirefoxOtherButtonEl],
     attr: "bookmarks-location-firefox"
   },
   {
