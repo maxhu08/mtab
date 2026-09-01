@@ -38,6 +38,7 @@ import { fillBookmarkNodeBookmarks } from "~/src/options/scripts/utils/fill-help
 export const fillBookmarksInputs = (config: Config) => {
   bookmarksShowBookmarkNamesCheckboxEl.checked = config.bookmarks.showBookmarkNames;
 
+  bookmarksUserDefinedColsInputEl.value = config.bookmarks.userDefinedCols.toString();
   bookmarksDefaultBlockyColsInputEl.value = config.bookmarks.defaultBlockyCols.toString();
   bookmarksDefaultBlockyColorInputEl.value = config.bookmarks.defaultBlockyColor;
 
@@ -50,10 +51,7 @@ export const fillBookmarksInputs = (config: Config) => {
 
   // prettier-ignore
   const bookmarksTypePairs: Record<BookmarksType, () => void> = {
-    "user-defined": () => {
-      bookmarksUserDefinedColsInputEl.value = config.bookmarks.userDefinedCols.toString();
-      bookmarksTypeUserDefinedButtonEl.click();
-    },
+    "user-defined": () => bookmarksTypeUserDefinedButtonEl.click(),
     "default": () => bookmarksTypeDefaultButtonEl.click(),
     "default-blocky": () => bookmarksTypeDefaultBlockyButtonEl.click(),
     "none": () => bookmarksTypeNoneButtonEl.click()

@@ -32,11 +32,16 @@ const initSortableForDropzone = (dropzone: HTMLDivElement) => {
     fallbackOnBody: true,
     swapThreshold: 0.65,
     invertSwap: false,
+    draggable: ".bookmark-user-defined-item",
     handle: ".bookmark-node-handle",
     animation: 250,
     easing: "cubic-bezier(0.42, 0, 0.58, 1)",
     ghostClass: "bookmark-node-ghost-class",
-    chosenClass: "bookmark-node-chosen-class"
+    chosenClass: "bookmark-node-chosen-class",
+    onEnd: (event) => {
+      const addButtons = event.to.querySelector(":scope > .bookmarks-user-defined-add-buttons");
+      if (addButtons) event.to.appendChild(addButtons);
+    }
   });
 
   sortableMap.set(dropzone, sortable);
@@ -947,4 +952,56 @@ export const addBookmarkNodeFolder = (
   });
 
   contentsContainer.appendChild(frag);
+
+  const addButtons = document.createElement("div");
+  addButtons.className = "bookmarks-user-defined-add-buttons grid gap-2 lg:grid-cols-2";
+
+  const addBookmarkButton = document.createElement("button");
+  addBookmarkButton.className =
+    "w-full cursor-pointer rounded-md bg-emerald-500 p-2 transition hover:bg-emerald-600";
+  const addBookmarkLabel = document.createElement("span");
+  addBookmarkLabel.className = "text-base text-white";
+  addBookmarkLabel.textContent = t("add bookmark");
+  addBookmarkButton.appendChild(addBookmarkLabel);
+  addBookmarkButton.onclick = () => {
+    addBookmarkNodeBookmark(
+      {
+        type: "bookmark",
+        name: t("New Bookmark"),
+        url: "about:blank",
+        color: "#ffffff",
+        iconType: "ri-bookmark-fill",
+        iconColor: undefined
+      },
+      contentsContainer
+    );
+    contentsContainer.appendChild(addButtons);
+  };
+
+  const addFolderButton = document.createElement("button");
+  addFolderButton.className =
+    "w-full cursor-pointer rounded-md bg-emerald-500 p-2 transition hover:bg-emerald-600";
+  const addFolderLabel = document.createElement("span");
+  addFolderLabel.className = "text-base text-white";
+  addFolderLabel.textContent = t("add folder");
+  addFolderButton.appendChild(addFolderLabel);
+  addFolderButton.onclick = () => {
+    const randomColor = getRandomColor();
+
+    addBookmarkNodeFolder(
+      {
+        type: "folder",
+        name: t("New Folder"),
+        color: randomColor,
+        iconColor: randomColor,
+        contents: []
+      },
+      contentsContainer,
+      true
+    );
+    contentsContainer.appendChild(addButtons);
+  };
+
+  addButtons.append(addBookmarkButton, addFolderButton);
+  contentsContainer.appendChild(addButtons);
 };

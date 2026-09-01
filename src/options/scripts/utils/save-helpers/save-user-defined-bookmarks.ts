@@ -9,10 +9,10 @@ import {
 } from "~/src/options/scripts/utils/bookmarks/get-bookmark-node-data";
 
 export const saveBookmarkNodeBookmarkSettingsToDraft = (draft: Config) => {
-  draft.bookmarks.userDefinedCols = Math.max(
-    1,
-    Number.parseInt(bookmarksUserDefinedColsInputEl.value, 10) || 1
-  );
+  const cols = Number.parseInt(bookmarksUserDefinedColsInputEl.value, 10);
+  draft.bookmarks.userDefinedCols = Number.isFinite(cols)
+    ? Math.max(1, cols)
+    : draft.bookmarks.userDefinedCols;
 
   const bookmarksNodesToSave: BookmarkNode[] = [];
 
