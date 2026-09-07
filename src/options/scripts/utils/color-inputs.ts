@@ -116,6 +116,7 @@ const createColorControl = ({ container, input }: ColorFieldInput): void => {
     if (!pendingValue || input.value === pendingValue) return;
 
     input.value = pendingValue;
+    input.dispatchEvent(new Event("input", { bubbles: true }));
     syncColorInputControl(input);
   };
 
