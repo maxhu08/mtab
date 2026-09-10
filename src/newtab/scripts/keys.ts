@@ -146,7 +146,7 @@ export const listenToKeys = (config: Config) => {
     const inBookmarkSearch = bookmarkSearchSectionEl.classList.contains("grid");
     const searchResultsVisible = searchResultsSectionEl.classList.contains("block");
     const activeHotkeyMappings: Partial<Record<string, MtabHotkeyAction>> = {
-      ...(!searchFocused && !bookmarkSearchFocused && activationKey
+      ...(!searchFocused && !bookmarkSearchFocused && config.search.enabled && activationKey
         ? { [activationKey]: "activation" as const }
         : {})
     };
@@ -237,7 +237,7 @@ export const listenToKeys = (config: Config) => {
       config.bookmarks.type === "default-blocky"
     ) {
       if (!searchFocused && !bookmarkSearchFocused) {
-        if (key === "0" && navigateOpenFolderParent()) {
+        if (config.bookmarks.numberKeys && key === "0" && navigateOpenFolderParent()) {
           e.preventDefault();
           return;
         }

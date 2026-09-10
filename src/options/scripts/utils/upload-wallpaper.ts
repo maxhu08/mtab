@@ -932,7 +932,7 @@ const appendMixedEntryMedia = async ({
 
   if (entry.kind === "url") {
     const isVideo =
-      /\.(mp4|webm|ogg|mov)(\?.*)?$/i.test(entry.value) || entry.value.startsWith("data:video/");
+      /\.(mp4|webm|ogg|mov)([?#].*)?$/i.test(entry.value) || entry.value.startsWith("data:video/");
 
     if (isVideo) {
       const video = document.createElement("video");

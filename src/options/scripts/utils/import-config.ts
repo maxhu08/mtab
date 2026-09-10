@@ -73,7 +73,7 @@ export const importConfigAndSave = async () => {
   }
 
   const mergedConfig = deepMerge(structuredClone(defaultConfig), importedConfig);
-  const finalizedConfig = migrateOldConfig(mergedConfig);
+  const finalizedConfig = migrateOldConfig(mergedConfig, importedConfig);
 
   logger.log("[IMPORT_DEBUG]", finalizedConfig);
   fillInputs(finalizedConfig);

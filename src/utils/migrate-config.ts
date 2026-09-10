@@ -59,8 +59,16 @@ const toCleanStringArray = (value: unknown, fallback: string[] = []) => {
     .filter((item) => item.length > 0);
 };
 
-export const migrateOldConfig = (config: Config): Config => {
+export const migrateOldConfig = (config: Config, source?: unknown): Config => {
   const legacy = config as LegacyConfig;
+  const sourceWallpaper =
+    source && typeof source === "object" && "wallpaper" in source
+      ? (source.wallpaper as unknown)
+      : undefined;
+  const sourceHasSolidColors =
+    sourceWallpaper !== null &&
+    typeof sourceWallpaper === "object" &&
+    Object.prototype.hasOwnProperty.call(sourceWallpaper, "solidColors");
 
   // if config is before v1.6.5
   // prettier-ignore
@@ -254,12 +262,13 @@ export const migrateOldConfig = (config: Config): Config => {
   legacy.wallpaper.urls =
     migratedUrls.length > 0 ? migratedUrls : legacyUrl.length > 0 ? [legacyUrl] : [];
 
-  legacy.wallpaper.solidColors =
-    migratedSolidColors.length > 0
+  legacy.wallpaper.solidColors = !sourceHasSolidColors
+    ? legacySolidColor.length > 0
+      ? [legacySolidColor]
+      : ["#171717"]
+    : migratedSolidColors.length > 0
       ? migratedSolidColors
-      : legacySolidColor.length > 0
-        ? [legacySolidColor]
-        : ["#171717"];
+      : ["#171717"];
 
   const allowedWallpaperFrequencies = [
     "constant",

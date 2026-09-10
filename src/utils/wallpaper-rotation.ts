@@ -78,7 +78,7 @@ const shouldAdvance = ({
   return entry.lastDaylightPeriod !== currentPeriod;
 };
 
-export const resolveWallpaperIndex = async ({
+const resolveWallpaperIndexLocked = async ({
   rotationKey,
   frequency,
   itemCount
@@ -150,6 +150,18 @@ export const resolveWallpaperIndex = async ({
   state[rotationKey] = entry;
   await saveRotationState(state);
   return entry.activeIndex;
+};
+
+export const resolveWallpaperIndex = (
+  params: Parameters<typeof resolveWallpaperIndexLocked>[0]
+): Promise<number> => {
+  return new Promise((resolve, reject) => {
+    navigator.locks
+      .request(WALLPAPER_ROTATION_STATE_KEY, async () => {
+        resolve(await resolveWallpaperIndexLocked(params));
+      })
+      .catch(reject);
+  });
 };
 
 export const resolveWallpaperIndexStateless = ({

@@ -1,4 +1,4 @@
-import { getConfig } from "~/src/utils/config";
+import { Config, getConfig } from "~/src/utils/config";
 import { modifyNestedObject } from "~/src/utils/modify";
 
 // save helpers
@@ -21,51 +21,54 @@ import { saveExtrasSettingsToDraft } from "~/src/options/scripts/utils/save-help
 import { logger } from "~/src/utils/logger";
 import { t } from "~/src/options/scripts/i18n";
 
-export const saveConfig = (notify: boolean = true) => {
+export const saveConfig = (notify: boolean = true): Promise<Config | undefined> => {
   if (searchUseCustomEngineCheckboxEl.checked) {
     if (!searchCustomEngineURLInputEl.value.includes("{}")) {
       toast.error(t("search.customEngineURL must contain {}, aborting save"));
-      return;
+      return Promise.resolve(undefined);
     }
   }
 
-  getConfig((data) => {
-    const draft = modifyNestedObject(data.config, (draft) => {
-      saveOptionsSettingsToDraft(draft);
+  return new Promise((resolve) => {
+    getConfig((data) => {
+      const draft = modifyNestedObject(data.config, (draft) => {
+        saveOptionsSettingsToDraft(draft);
 
-      saveNameToDraft(draft);
+        saveNameToDraft(draft);
 
-      saveTitleSettingsToDraft(draft);
+        saveTitleSettingsToDraft(draft);
 
-      saveMessageSettingsToDraft(draft);
+        saveMessageSettingsToDraft(draft);
 
-      saveWallpaperSettingsToDraft(draft);
+        saveWallpaperSettingsToDraft(draft);
 
-      saveAnimationsToDraft(draft);
+        saveAnimationsToDraft(draft);
 
-      saveUISettingsToDraft(draft);
+        saveUISettingsToDraft(draft);
 
-      saveSearchSettingsToDraft(draft);
+        saveSearchSettingsToDraft(draft);
 
-      saveHotkeysSettingsToDraft(draft);
+        saveHotkeysSettingsToDraft(draft);
 
-      saveBookmarksSettingsToDraft(draft);
+        saveBookmarksSettingsToDraft(draft);
 
-      saveExtrasSettingsToDraft(draft);
+        saveExtrasSettingsToDraft(draft);
 
-      return draft;
-    });
-
-    logger.log("[CONFIG_DEBUG]", draft);
-
-    chrome.storage.local
-      .set({
-        config: draft
-      })
-      .then(() => {
-        if (notify) toast.success(t("changes saved"));
+        return draft;
       });
 
-    fixAllToggleCheckboxSections();
+      logger.log("[CONFIG_DEBUG]", draft);
+
+      chrome.storage.local
+        .set({
+          config: draft
+        })
+        .then(() => {
+          if (notify) toast.success(t("changes saved"));
+          resolve(draft);
+        });
+
+      fixAllToggleCheckboxSections();
+    });
   });
 };

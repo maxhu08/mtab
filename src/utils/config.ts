@@ -17,7 +17,7 @@ export const getConfig = (f: ({ config }: { config: Config }) => void) => {
     // fill empty properties
     const mergedConfig = deepMerge(structuredClone(defaultConfig), data.config);
     // migrate old config to new version
-    const finalizedConfig = migrateOldConfig(mergedConfig);
+    const finalizedConfig = migrateOldConfig(mergedConfig, data.config);
 
     f({
       config: finalizedConfig

@@ -4,6 +4,24 @@ import { showInputDialog } from "~/src/options/scripts/utils/input-dialog";
 import { BookmarkNode } from "~/src/utils/config";
 import { t } from "~/src/options/scripts/i18n";
 
+const isBookmarkNode = (value: unknown): value is BookmarkNode => {
+  if (!value || typeof value !== "object") return false;
+
+  const node = value as Record<string, unknown>;
+  if (typeof node.name !== "string" || typeof node.color !== "string") return false;
+  if (node.iconColor !== undefined && typeof node.iconColor !== "string") return false;
+  if (node.fill !== undefined && typeof node.fill !== "string") return false;
+
+  if (node.type === "bookmark") {
+    return typeof node.url === "string" && typeof node.iconType === "string";
+  }
+
+  if (node.iconType !== undefined && typeof node.iconType !== "string") return false;
+  return (
+    node.type === "folder" && Array.isArray(node.contents) && node.contents.every(isBookmarkNode)
+  );
+};
+
 export const importAllBookmarkNodes = async () => {
   const dataToImport = await showInputDialog(
     t(
@@ -38,6 +56,11 @@ export const importAllBookmarkNodes = async () => {
   try {
     bookmarksNodesToImport = JSON.parse(rawPayload);
   } catch {
+    toast.error(t("invalid bookmark data"));
+    return;
+  }
+
+  if (!Array.isArray(bookmarksNodesToImport) || !bookmarksNodesToImport.every(isBookmarkNode)) {
     toast.error(t("invalid bookmark data"));
     return;
   }

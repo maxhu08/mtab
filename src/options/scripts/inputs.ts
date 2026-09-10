@@ -10,6 +10,7 @@ import {
   searchEngineYandexButtonEl,
   searchEngineStartpageButtonEl,
   searchEngineEcosiaButtonEl,
+  searchEngineKagiButtonEl,
   searchUseCustomEngineCheckboxEl
 } from "~/src/options/scripts/ui";
 import { listenToHotkeyInputs } from "~/src/options/scripts/utils/hotkey-inputs";
@@ -38,7 +39,8 @@ export const listenToInputs = () => {
     searchEngineYahooButtonEl,
     searchEngineYandexButtonEl,
     searchEngineStartpageButtonEl,
-    searchEngineEcosiaButtonEl
+    searchEngineEcosiaButtonEl,
+    searchEngineKagiButtonEl
   ];
 
   arrayOfSearchEngines.forEach((searchEngine) => {
