@@ -346,7 +346,7 @@ const renderCustomCSSValue = (value: string): string => {
   let inBlock = false;
   let context: "selector" | "property" | "value" = "selector";
 
-  for (let index = 0; index < value.length; ) {
+  for (let index = 0; index < value.length;) {
     const char = value[index];
 
     if (value.startsWith("/*", index)) {

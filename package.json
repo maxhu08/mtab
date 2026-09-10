@@ -41,7 +41,6 @@
     "parcel": "2.16.3",
     "sortablejs": "^1.15.7",
     "tippy.js": "^6.3.7",
-    "uuid": "^11.1.1",
     "vanilla-colorful": "^0.7.2"
   },
   "devDependencies": {
@@ -51,12 +50,12 @@
     "@parcel/core": "2.16.3",
     "@parcel/resolver-default": "2.16.3",
     "@types/chrome": "^0.1.43",
-    "@types/node": "^25.9.5",
+    "@types/node": "^25.9.6",
     "@types/sortablejs": "^1.15.9",
     "husky": "^9.1.7",
-    "oxfmt": "^0.40.0",
-    "oxlint": "^1.80.0",
-    "postcss": "^8.5.26",
+    "oxfmt": "^0.67.0",
+    "oxlint": "^1.82.0",
+    "postcss": "^8.5.28",
     "tailwindcss": "^3.4.19"
   }
 }
