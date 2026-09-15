@@ -21,6 +21,11 @@ html {
   transition-property: none;
 }
 
+#search-input,
+#bookmark-search-input {
+  font-variant-ligatures: none;
+}
+
 #cover {
   z-index: 0;
   pointer-events: none;
