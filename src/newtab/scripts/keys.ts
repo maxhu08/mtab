@@ -312,7 +312,7 @@ export const listenToKeys = (config: Config) => {
   searchInputEl.addEventListener("keydown", (e) => {
     if (e.key === "Enter" && !e.repeat) {
       e.preventDefault();
-      runSearchFromInput(e.ctrlKey);
+      runSearchFromInput(e.ctrlKey || (e.metaKey && navigator.platform.startsWith("Mac")));
     }
   });
 

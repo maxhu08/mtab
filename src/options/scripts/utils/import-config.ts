@@ -72,6 +72,15 @@ export const importConfigAndSave = async () => {
     return;
   }
 
+  if (
+    typeof importedConfig !== "object" ||
+    importedConfig === null ||
+    Array.isArray(importedConfig)
+  ) {
+    toast.error(t("invalid config data"));
+    return;
+  }
+
   const mergedConfig = deepMerge(structuredClone(defaultConfig), importedConfig);
   const finalizedConfig = migrateOldConfig(mergedConfig, importedConfig);
 
