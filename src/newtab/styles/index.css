@@ -22,7 +22,8 @@ html {
 }
 
 #search-input,
-#bookmark-search-input {
+#bookmark-search-input,
+#search-results-container {
   font-variant-ligatures: none;
 }
 
