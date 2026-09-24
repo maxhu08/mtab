@@ -10,10 +10,7 @@ import { t } from "~/src/options/scripts/i18n";
 export const importBookmarkNode = async (target = bookmarksUserDefinedList) => {
   const dataToImport = await showInputDialog(t("input your bookmark or folder"));
 
-  if (dataToImport === null) {
-    toast.error(t("could not import your bookmark or folder"));
-    return;
-  }
+  if (dataToImport === null) return;
 
   const trimmed = dataToImport.trim();
   if (trimmed === "") {
