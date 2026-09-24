@@ -240,6 +240,10 @@ export const ko = {
   "You can also use the icon picker on the right of each icon input.":
     "각 아이콘 입력란 오른쪽의 아이콘 선택기도 사용할 수 있습니다.",
   "collapse all": "모두 접기",
+  "collapse contents": "내용 접기",
+  "collapse folder contents": "폴더 내용 접기",
+  "expand contents": "내용 펼치기",
+  "expand folder contents": "폴더 내용 펼치기",
   "add bookmark": "북마크 추가",
   "add folder": "폴더 추가",
   "import bookmark or folder": "북마크 또는 폴더 가져오기",

@@ -246,6 +246,10 @@ export const ptBR = {
   "You can also use the icon picker on the right of each icon input.":
     "Você também pode usar o seletor de ícones à direita de cada campo de ícone.",
   "collapse all": "Recolher tudo",
+  "collapse contents": "Recolher conteúdo",
+  "collapse folder contents": "Recolher conteúdo da pasta",
+  "expand contents": "Expandir conteúdo",
+  "expand folder contents": "Expandir conteúdo da pasta",
   "add bookmark": "Adicionar favorito",
   "add folder": "Adicionar pasta",
   "import bookmark or folder": "Importar favorito ou pasta",

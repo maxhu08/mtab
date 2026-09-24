@@ -243,6 +243,10 @@ export const ja = {
   "You can also use the icon picker on the right of each icon input.":
     "各アイコン入力欄の右側にあるアイコンピッカーも使えます。",
   "collapse all": "すべて折りたたむ",
+  "collapse contents": "内容を折りたたむ",
+  "collapse folder contents": "フォルダーの内容を折りたたむ",
+  "expand contents": "内容を展開",
+  "expand folder contents": "フォルダーの内容を展開",
   "add bookmark": "ブックマークを追加",
   "add folder": "フォルダーを追加",
   "import bookmark or folder": "ブックマークまたはフォルダーをインポート",

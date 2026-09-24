@@ -20,6 +20,16 @@ import { t } from "~/src/options/scripts/i18n";
 
 const sortableMap = new WeakMap<HTMLDivElement, Sortable>();
 
+const updateFolderContentsCount = (dropzone: HTMLElement) => {
+  const folderEl = dropzone.closest('[node-type="folder"]');
+  const uuid = folderEl?.getAttribute("bookmark-node-uuid");
+  const countEl = uuid ? folderEl?.querySelector(`#bookmark-${uuid}-contents-count`) : null;
+
+  if (countEl) {
+    countEl.textContent = `(${dropzone.querySelectorAll(":scope > .bookmark-user-defined-item").length})`;
+  }
+};
+
 const initSortableForDropzone = (dropzone: HTMLDivElement) => {
   if (sortableMap.has(dropzone)) return;
 
@@ -41,6 +51,8 @@ const initSortableForDropzone = (dropzone: HTMLDivElement) => {
     onEnd: (event) => {
       const addButtons = event.to.querySelector(":scope > .bookmarks-user-defined-add-buttons");
       if (addButtons) event.to.appendChild(addButtons);
+      updateFolderContentsCount(event.from);
+      updateFolderContentsCount(event.to);
     }
   });
 
@@ -72,7 +84,9 @@ export const initDelegatedHandlers = () => {
     if (!uuid) return;
 
     if (target.closest(".delete-bookmark-button") || target.closest(".delete-folder-button")) {
+      const dropzone = nodeEl?.parentElement;
       nodeEl?.remove();
+      if (dropzone) updateFolderContentsCount(dropzone);
       return;
     }
 
@@ -371,8 +385,19 @@ const toggleCollapseFolderContents = (
   mode: "toggle" | "collapse" | "expand"
 ) => {
   const iconEl = toggleButtonEl.querySelector("i") as HTMLElement | null;
+  const fullLabelEl = toggleButtonEl.querySelector(".folder-contents-label-full");
+  const compactLabelEl = toggleButtonEl.querySelector(".folder-contents-label-compact");
 
   const setCollapsed = (collapsed: boolean) => {
+    contentsContainerEl.setAttribute("state", collapsed ? "collapsed" : "expanded");
+    toggleButtonEl.setAttribute("aria-expanded", String(!collapsed));
+    if (fullLabelEl && compactLabelEl) {
+      fullLabelEl.textContent = collapsed
+        ? t("expand folder contents")
+        : t("collapse folder contents");
+      compactLabelEl.textContent = collapsed ? t("expand contents") : t("collapse contents");
+    }
+
     if (collapsed) {
       contentsContainerEl.classList.add("hidden");
       if (iconEl) iconEl.className = "text-white ri-folder-add-line";
@@ -802,7 +827,7 @@ export const addBookmarkNodeFolder = (
   titleSpan.textContent = folder.name;
 
   const buttonGroup = document.createElement("div");
-  buttonGroup.className = "grid grid-cols-5 gap-2 justify-self-end";
+  buttonGroup.className = "grid grid-cols-4 gap-2 justify-self-end";
 
   const buttons = [
     {
@@ -816,12 +841,6 @@ export const addBookmarkNodeFolder = (
       icon: "ri-collapse-horizontal-line",
       class: "toggle-collapse-folder-button bg-neutral-500 hover:bg-neutral-600",
       tooltip: t("toggle collapse folder settings")
-    },
-    {
-      id: `bookmark-${uuid}-toggle-collapse-contents-button`,
-      icon: isExpanded ? "ri-folder-reduce-line" : "ri-folder-add-line",
-      class: "toggle-collapse-folder-contents-button bg-neutral-500 hover:bg-neutral-600",
-      tooltip: t("toggle collapse folder contents")
     },
     {
       class: "reposition-folder-button bookmark-node-handle bg-neutral-500 hover:bg-neutral-600",
@@ -905,10 +924,52 @@ export const addBookmarkNodeFolder = (
     collapsibleContent.appendChild(fieldGroup);
   });
 
+  const contentsHeading = document.createElement("div");
+  contentsHeading.className = "flex items-center gap-2 text-base";
+
+  const contentsSeparator = document.createElement("div");
+  contentsSeparator.className = "bg-neutral-500 h-[1px] rounded-md my-auto";
+
   const contentsLabel = document.createElement("p");
-  contentsLabel.className = "text-white text-base";
+  contentsLabel.className = "text-white";
   contentsLabel.textContent = t("folder.contents");
-  collapsibleContent.appendChild(contentsLabel);
+
+  const contentsCount = document.createElement("span");
+  contentsCount.id = `bookmark-${uuid}-contents-count`;
+  contentsCount.className = "text-neutral-500";
+  contentsCount.textContent = `(${folder.contents.length})`;
+
+  contentsHeading.append(contentsLabel, contentsCount);
+
+  const toggleContentsButton = document.createElement("button");
+  toggleContentsButton.id = `bookmark-${uuid}-toggle-collapse-contents-button`;
+  toggleContentsButton.className =
+    "toggle-collapse-folder-contents-button flex w-full cursor-pointer items-center justify-center gap-2 rounded-md bg-neutral-500 p-2 transition hover:bg-neutral-600";
+  toggleContentsButton.setAttribute("data-tippy-content", t("toggle collapse folder contents"));
+  toggleContentsButton.setAttribute("aria-label", t("toggle collapse folder contents"));
+  toggleContentsButton.setAttribute("aria-expanded", String(isExpanded));
+
+  const toggleContentsIcon = document.createElement("i");
+  toggleContentsIcon.className = `text-white ${isExpanded ? "ri-folder-reduce-line" : "ri-folder-add-line"}`;
+
+  const toggleContentsFullLabel = document.createElement("span");
+  toggleContentsFullLabel.className =
+    "folder-contents-label-full hidden text-base text-white md:inline";
+  toggleContentsFullLabel.textContent = isExpanded
+    ? t("collapse folder contents")
+    : t("expand folder contents");
+
+  const toggleContentsCompactLabel = document.createElement("span");
+  toggleContentsCompactLabel.className =
+    "folder-contents-label-compact text-base text-white md:hidden";
+  toggleContentsCompactLabel.textContent = isExpanded
+    ? t("collapse contents")
+    : t("expand contents");
+  toggleContentsButton.append(
+    toggleContentsIcon,
+    toggleContentsFullLabel,
+    toggleContentsCompactLabel
+  );
 
   const contentsContainer = document.createElement("div");
   contentsContainer.id = `bookmark-${uuid}-contents-container`;
@@ -919,7 +980,14 @@ export const addBookmarkNodeFolder = (
   contentsContainer.setAttribute("state", isExpanded ? "expanded" : "collapsed");
   contentsContainer.classList.toggle("hidden", !isExpanded);
 
-  contentDiv.append(headerDiv, collapsibleContent, contentsContainer);
+  contentDiv.append(
+    headerDiv,
+    collapsibleContent,
+    contentsSeparator,
+    contentsHeading,
+    toggleContentsButton,
+    contentsContainer
+  );
 
   containerDiv.append(accentDiv, contentDiv);
   targetDivEl.appendChild(containerDiv);
@@ -976,6 +1044,7 @@ export const addBookmarkNodeFolder = (
       contentsContainer
     );
     contentsContainer.appendChild(addButtons);
+    updateFolderContentsCount(contentsContainer);
   };
 
   const addFolderButton = document.createElement("button");
@@ -1000,8 +1069,10 @@ export const addBookmarkNodeFolder = (
       true
     );
     contentsContainer.appendChild(addButtons);
+    updateFolderContentsCount(contentsContainer);
   };
 
   addButtons.append(addBookmarkButton, addFolderButton);
   contentsContainer.appendChild(addButtons);
+  updateFolderContentsCount(contentsContainer);
 };

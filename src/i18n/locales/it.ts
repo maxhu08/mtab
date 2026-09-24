@@ -246,6 +246,10 @@ export const it = {
   "You can also use the icon picker on the right of each icon input.":
     "Puoi anche usare il selettore di icone a destra di ogni campo icona.",
   "collapse all": "Comprimi tutto",
+  "collapse contents": "Comprimi contenuti",
+  "collapse folder contents": "Comprimi il contenuto della cartella",
+  "expand contents": "Espandi contenuti",
+  "expand folder contents": "Espandi il contenuto della cartella",
   "add bookmark": "Aggiungi segnalibro",
   "add folder": "Aggiungi cartella",
   "import bookmark or folder": "Importa segnalibro o cartella",

@@ -251,6 +251,10 @@ export const fr = {
   "You can also use the icon picker on the right of each icon input.":
     "Vous pouvez également utiliser le sélecteur d’icônes à droite de chaque champ d’icône.",
   "collapse all": "Tout réduire",
+  "collapse contents": "Réduire le contenu",
+  "collapse folder contents": "Réduire le contenu du dossier",
+  "expand contents": "Développer le contenu",
+  "expand folder contents": "Développer le contenu du dossier",
   "add bookmark": "Ajouter un favori",
   "add folder": "Ajouter un dossier",
   "import bookmark or folder": "Importer un favori ou un dossier",

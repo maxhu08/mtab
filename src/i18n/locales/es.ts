@@ -248,6 +248,10 @@ export const es = {
   "You can also use the icon picker on the right of each icon input.":
     "También puedes usar el selector de iconos a la derecha de cada campo de icono.",
   "collapse all": "Contraer todo",
+  "collapse contents": "Contraer contenido",
+  "collapse folder contents": "Contraer contenido de la carpeta",
+  "expand contents": "Expandir contenido",
+  "expand folder contents": "Expandir contenido de la carpeta",
   "add bookmark": "Añadir marcador",
   "add folder": "Añadir carpeta",
   "import bookmark or folder": "Importar marcador o carpeta",

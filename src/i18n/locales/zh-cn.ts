@@ -238,6 +238,10 @@ export const zhCN = {
   "You can also use the icon picker on the right of each icon input.":
     "也可以使用每个图标输入框右侧的图标选择器。",
   "collapse all": "全部折叠",
+  "collapse contents": "折叠内容",
+  "collapse folder contents": "折叠文件夹内容",
+  "expand contents": "展开内容",
+  "expand folder contents": "展开文件夹内容",
   "add bookmark": "添加书签",
   "add folder": "添加文件夹",
   "import bookmark or folder": "导入书签或文件夹",

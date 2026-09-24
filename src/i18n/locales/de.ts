@@ -247,6 +247,10 @@ export const de = {
   "You can also use the icon picker on the right of each icon input.":
     "Du kannst auch die Symbolauswahl rechts neben jedem Symbolfeld verwenden.",
   "collapse all": "Alle einklappen",
+  "collapse contents": "Inhalte einklappen",
+  "collapse folder contents": "Ordnerinhalte einklappen",
+  "expand contents": "Inhalte ausklappen",
+  "expand folder contents": "Ordnerinhalte ausklappen",
   "add bookmark": "Lesezeichen hinzufügen",
   "add folder": "Ordner hinzufügen",
   "import bookmark or folder": "Lesezeichen oder Ordner importieren",
