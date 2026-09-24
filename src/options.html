@@ -24,7 +24,9 @@
       data-expand="false"
       data-position="top-center"
     ></div>
-    <div class="mx-auto grid w-[95%] grid-flow-row sm:w-[80%] md:w-[60%] lg:w-[50%] xl:w-[40%]">
+    <div
+      class="options-page-layout mx-auto grid w-[95%] min-w-0 grid-flow-row sm:w-[80%] md:w-[60%] lg:w-[50%] xl:w-[40%]"
+    >
       <div class="grid place-items-center gap-4 p-4">
         <img
           id="mtab-logo"
@@ -51,7 +53,7 @@
           <span id="user-agent-text" class="text-orange-500"></span>
         </p>
       </div>
-      <main class="grid grid-flow-row pt-16">
+      <main class="grid min-w-0 grid-flow-row pt-16">
         <!-- options -->
         <div class="mb-4 grid grid-cols-[1fr_max-content_1fr] items-center gap-2">
           <div class="grid grid-cols-[max-content_auto] items-center gap-2">
@@ -68,12 +70,14 @@
           <div class="h-[1px] flex-grow rounded-md bg-neutral-500"></div>
         </div>
         <section id="options-section" class="mb-20 grid grid-flow-row gap-4">
-          <div class="grid w-full grid-cols-[max-content_auto] place-items-center">
+          <div
+            class="grid w-full min-w-0 gap-2 sm:grid-cols-[max-content_minmax(0,1fr)] sm:place-items-center"
+          >
             <p class="text-base text-white">options.language</p>
-            <div class="options-language-select ml-auto">
+            <div class="options-language-select w-full min-w-0 sm:ml-auto sm:w-auto sm:max-w-full">
               <select
                 id="options-language-select"
-                class="cursor-pointer rounded-md bg-neutral-800 px-3 py-2 text-base text-white"
+                class="w-full min-w-0 cursor-pointer rounded-md bg-neutral-800 px-3 py-2 text-base text-white sm:w-auto sm:max-w-full"
                 aria-label="options language"
               ></select>
               <i class="options-language-select-arrow ri-arrow-down-s-line" aria-hidden="true"></i>
@@ -1660,45 +1664,51 @@
           </div>
           <div id="hotkeys-enabled-section">
             <div class="grid grid-flow-row gap-2 rounded-md bg-neutral-800 p-2">
-              <div class="grid grid-cols-[max-content_auto_max-content]">
+              <div
+                class="grid grid-cols-[minmax(0,1fr)_max-content] gap-2 sm:grid-cols-[max-content_auto_max-content] sm:gap-0"
+              >
                 <p class="my-auto text-base text-white">hotkeys.activationKey&nbsp;</p>
                 <span id="hotkeys-activation-key-status" class="my-auto text-base text-neutral-500"
                   >(none)</span
                 >
                 <div
                   id="hotkeys-activation-key-container"
-                  class="w-full rounded-md border-2 border-transparent bg-neutral-900 p-1 text-base"
+                  class="col-span-2 w-full min-w-0 rounded-md border-2 border-transparent bg-neutral-900 p-1 text-base sm:col-span-1"
                 >
                   <input
                     id="hotkeys-activation-key-input"
                     type="text"
                     autocomplete="off"
                     spellcheck="false"
-                    class="w-full bg-transparent px-2 py-1 text-white placeholder-neutral-500 outline-none"
+                    class="w-full min-w-0 bg-transparent px-2 py-1 text-white placeholder-neutral-500 outline-none"
                   />
                 </div>
               </div>
               <div class="my-auto h-[1px] rounded-md bg-neutral-500"></div>
-              <div class="grid grid-cols-[max-content_auto_max-content]">
+              <div
+                class="grid grid-cols-[minmax(0,1fr)_max-content] gap-2 sm:grid-cols-[max-content_auto_max-content] sm:gap-0"
+              >
                 <p class="my-auto text-base text-white">hotkeys.closePageKey&nbsp;</p>
                 <span id="hotkeys-close-page-key-status" class="my-auto text-base text-neutral-500"
                   >(none)</span
                 >
                 <div
                   id="hotkeys-close-page-key-container"
-                  class="w-full rounded-md border-2 border-transparent bg-neutral-900 p-1 text-base"
+                  class="col-span-2 w-full min-w-0 rounded-md border-2 border-transparent bg-neutral-900 p-1 text-base sm:col-span-1"
                 >
                   <input
                     id="hotkeys-close-page-key-input"
                     type="text"
                     autocomplete="off"
                     spellcheck="false"
-                    class="w-full bg-transparent px-2 py-1 text-white placeholder-neutral-500 outline-none"
+                    class="w-full min-w-0 bg-transparent px-2 py-1 text-white placeholder-neutral-500 outline-none"
                   />
                 </div>
               </div>
               <div class="my-auto h-[1px] rounded-md bg-neutral-500"></div>
-              <div class="grid grid-cols-[max-content_auto_max-content]">
+              <div
+                class="grid grid-cols-[minmax(0,1fr)_max-content] gap-2 sm:grid-cols-[max-content_auto_max-content] sm:gap-0"
+              >
                 <p class="my-auto text-base text-white">hotkeys.searchBookmarksKey&nbsp;</p>
                 <span
                   id="hotkeys-search-bookmarks-key-status"
@@ -1707,14 +1717,14 @@
                 >
                 <div
                   id="hotkeys-search-bookmarks-key-container"
-                  class="w-full rounded-md border-2 border-transparent bg-neutral-900 p-1 text-base"
+                  class="col-span-2 w-full min-w-0 rounded-md border-2 border-transparent bg-neutral-900 p-1 text-base sm:col-span-1"
                 >
                   <input
                     id="hotkeys-search-bookmarks-key-input"
                     type="text"
                     autocomplete="off"
                     spellcheck="false"
-                    class="w-full bg-transparent px-2 py-1 text-white placeholder-neutral-500 outline-none"
+                    class="w-full min-w-0 bg-transparent px-2 py-1 text-white placeholder-neutral-500 outline-none"
                   />
                 </div>
               </div>

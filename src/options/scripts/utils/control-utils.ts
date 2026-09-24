@@ -99,4 +99,5 @@ export const handleControls = () => {
   });
 
   syncControlsDockState();
+  if (!isDocked) setControlsVisibility(window.scrollY > 0);
 };

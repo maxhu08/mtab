@@ -1,3 +1,10 @@
+.options-page-layout,
+.options-page-layout > main,
+.options-page-layout > main > section {
+  grid-template-columns: minmax(0, 1fr);
+  min-width: 0;
+}
+
 /* fix to prevent border transition */
 .bookmark-user-defined-item {
   width: 100%;

@@ -26,7 +26,7 @@ export const renderDefaultBlockyBookmarks = (config: Config) => {
   // }`;
 
   insertCSS(
-    `.bookmarks-cols{grid-template-columns:1fr 1fr;}@media (min-width: 768px){.bookmarks-cols{grid-template-columns:repeat(${config.bookmarks.defaultBlockyCols}, minmax(0, 1fr));}}`,
+    `.bookmarks-cols{grid-template-columns:repeat(2,minmax(0,1fr));}@media (min-width: 768px){.bookmarks-cols{grid-template-columns:repeat(${config.bookmarks.defaultBlockyCols}, minmax(0, 1fr));}}`,
     "bookmarks-cols-style"
   );
 
