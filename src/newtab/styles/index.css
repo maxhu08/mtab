@@ -45,6 +45,14 @@ html {
   overflow: hidden;
 }
 
+@media (min-width: 768px) {
+  #message.message-single-line {
+    width: max-content;
+    max-width: 95vw;
+    white-space: nowrap;
+  }
+}
+
 #wallpaper-credit-anchor {
   position: fixed;
   left: 0;

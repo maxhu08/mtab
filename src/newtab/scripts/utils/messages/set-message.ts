@@ -26,6 +26,7 @@ export const setMessage = (
   weatherUnitsType: "f" | "c"
 ) => {
   clearMessageUpdateInterval();
+  messageEl.classList.toggle("message-single-line", type !== "custom");
 
   if (!enabled || (type === "custom" && customText.length === 0)) {
     messageEl.textContent = "\n";
