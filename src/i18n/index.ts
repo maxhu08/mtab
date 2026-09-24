@@ -5,6 +5,7 @@ import { it } from "~/src/i18n/locales/it";
 import { ja } from "~/src/i18n/locales/ja";
 import { ko } from "~/src/i18n/locales/ko";
 import { ptBR } from "~/src/i18n/locales/pt-br";
+import { ru } from "~/src/i18n/locales/ru";
 import { zhCN } from "~/src/i18n/locales/zh-cn";
 
 const locales = {
@@ -46,6 +47,11 @@ const locales = {
     flag: "🇧🇷",
     label: "Português (Brasil)",
     messages: ptBR
+  },
+  ru: {
+    flag: "🇷🇺",
+    label: "Русский",
+    messages: ru
   },
   "zh-CN": {
     flag: "🇨🇳",
