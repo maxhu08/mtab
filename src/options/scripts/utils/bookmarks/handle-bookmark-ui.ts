@@ -1072,7 +1072,20 @@ export const addBookmarkNodeFolder = (
     updateFolderContentsCount(contentsContainer);
   };
 
-  addButtons.append(addBookmarkButton, addFolderButton);
+  const importButton = document.createElement("button");
+  importButton.className =
+    "w-full cursor-pointer rounded-md bg-indigo-500 p-2 transition hover:bg-indigo-600 lg:col-span-2";
+  const importLabel = document.createElement("span");
+  importLabel.className = "text-base text-white";
+  importLabel.textContent = t("import bookmark or folder");
+  importButton.appendChild(importLabel);
+  importButton.onclick = async () => {
+    await importBookmarkNode(contentsContainer);
+    contentsContainer.appendChild(addButtons);
+    updateFolderContentsCount(contentsContainer);
+  };
+
+  addButtons.append(addBookmarkButton, addFolderButton, importButton);
   contentsContainer.appendChild(addButtons);
   updateFolderContentsCount(contentsContainer);
 };

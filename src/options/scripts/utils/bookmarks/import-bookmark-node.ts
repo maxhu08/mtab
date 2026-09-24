@@ -7,7 +7,7 @@ import { showInputDialog } from "~/src/options/scripts/utils/input-dialog";
 import { BookmarkNode } from "~/src/utils/config";
 import { t } from "~/src/options/scripts/i18n";
 
-export const importBookmarkNode = async () => {
+export const importBookmarkNode = async (target = bookmarksUserDefinedList) => {
   const dataToImport = await showInputDialog(t("input your bookmark or folder"));
 
   if (dataToImport === null) {
@@ -49,14 +49,14 @@ export const importBookmarkNode = async () => {
   }
 
   if (bookmarkNode?.type === "bookmark") {
-    addBookmarkNodeBookmark(bookmarkNode, bookmarksUserDefinedList);
+    addBookmarkNodeBookmark(bookmarkNode, target);
   } else if (bookmarkNode?.type === "folder") {
     addBookmarkNodeFolder(
       {
         ...bookmarkNode,
         iconType: bookmarkNode.iconType
       },
-      bookmarksUserDefinedList,
+      target,
       false
     );
   } else {
