@@ -1,6 +1,5 @@
-# Changes in 1.13.1
+# Changes in 1.13.2
 
 in this release:
 
-- performance improvements
-- bug fixes
+- improve options ui
