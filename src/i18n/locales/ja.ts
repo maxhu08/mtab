@@ -1,6 +1,16 @@
 import { customMessageHelp } from "~/src/i18n/messages";
 
 export const ja = {
+  "download wallpaper": "壁紙をダウンロード",
+  "could not download wallpaper": "壁紙をダウンロードできませんでした",
+  export: "エクスポート",
+  "download config": "設定をダウンロード",
+  "download wallpapers": "壁紙をダウンロード",
+  "wallpapers are not included in the config because they can be too large. you can download them separately as a zip file.":
+    "壁紙はファイルサイズが大きくなる場合があるため、設定には含まれません。ZIP ファイルとして別途ダウンロードできます。",
+  "no uploaded wallpapers to download": "ダウンロードできるアップロード済みの壁紙はありません",
+  "could not export wallpapers": "壁紙をエクスポートできませんでした",
+  "could not export config": "設定をエクスポートできませんでした",
   "options ヽ(・ω・*)": "設定 ヽ(・ω・*)",
   logo: "ロゴ",
   options: "設定",

@@ -1,6 +1,16 @@
 import { customMessageHelp } from "~/src/i18n/messages";
 
 export const ptBR = {
+  "download wallpaper": "baixar papel de parede",
+  "could not download wallpaper": "não foi possível baixar o papel de parede",
+  export: "exportar",
+  "download config": "baixar configuração",
+  "download wallpapers": "baixar papéis de parede",
+  "wallpapers are not included in the config because they can be too large. you can download them separately as a zip file.":
+    "Os papéis de parede não são incluídos na configuração porque podem ser muito grandes. Você pode baixá-los separadamente em um arquivo ZIP.",
+  "no uploaded wallpapers to download": "nenhum papel de parede enviado para baixar",
+  "could not export wallpapers": "não foi possível exportar os papéis de parede",
+  "could not export config": "não foi possível exportar a configuração",
   "options ヽ(・ω・*)": "Opções ヽ(・ω・*)",
   logo: "Logotipo",
   options: "Opções",

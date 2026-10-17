@@ -36,6 +36,7 @@
   },
   "dependencies": {
     "caniuse-lite": "^1.0.30001810",
+    "fflate": "^0.8.3",
     "idb-keyval": "^6.3.0",
     "mathjs": "^13.2.3",
     "parcel": "2.16.3",

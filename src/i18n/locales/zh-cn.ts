@@ -1,6 +1,16 @@
 import { customMessageHelp } from "~/src/i18n/messages";
 
 export const zhCN = {
+  "download wallpaper": "下载壁纸",
+  "could not download wallpaper": "无法下载壁纸",
+  export: "导出",
+  "download config": "下载配置",
+  "download wallpapers": "下载壁纸",
+  "wallpapers are not included in the config because they can be too large. you can download them separately as a zip file.":
+    "壁纸文件可能过大，因此不包含在配置中。你可以将壁纸单独下载为 ZIP 文件。",
+  "no uploaded wallpapers to download": "没有可下载的已上传壁纸",
+  "could not export wallpapers": "无法导出壁纸",
+  "could not export config": "无法导出配置",
   "options ヽ(・ω・*)": "设置 ヽ(・ω・*)",
   logo: "徽标",
   options: "设置",

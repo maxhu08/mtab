@@ -1,6 +1,16 @@
 import { customMessageHelp } from "~/src/i18n/messages";
 
 export const it = {
+  "download wallpaper": "scarica sfondo",
+  "could not download wallpaper": "impossibile scaricare lo sfondo",
+  export: "esporta",
+  "download config": "scarica configurazione",
+  "download wallpapers": "scarica sfondi",
+  "wallpapers are not included in the config because they can be too large. you can download them separately as a zip file.":
+    "Gli sfondi non sono inclusi nella configurazione perché possono essere troppo grandi. Puoi scaricarli separatamente come file ZIP.",
+  "no uploaded wallpapers to download": "nessuno sfondo caricato da scaricare",
+  "could not export wallpapers": "impossibile esportare gli sfondi",
+  "could not export config": "impossibile esportare la configurazione",
   "options ヽ(・ω・*)": "Opzioni ヽ(・ω・*)",
   logo: "Logo",
   options: "Opzioni",

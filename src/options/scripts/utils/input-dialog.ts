@@ -19,6 +19,15 @@ type ActionDialogOptions = {
   cancelText?: string;
   actionText?: string;
   onAction: () => void | Promise<void>;
+
+  description?: string;
+  variant?: "export";
+
+  secondaryAction?: {
+    text: string;
+    disabled: boolean;
+    onAction: () => void | Promise<void>;
+  };
 };
 
 const OVERLAY_ID = "mtab-input-dialog-overlay";
@@ -206,8 +215,7 @@ export const showActionDialog = (text: string, options: ActionDialogOptions): Pr
   overlay.style.transition = "opacity 160ms ease";
 
   const dialog = document.createElement("div");
-  dialog.className =
-    "w-full max-w-xl rounded-md border-2 border-rose-500 bg-neutral-900 p-4 text-base shadow-2xl";
+  dialog.className = `w-full max-w-xl rounded-md border-2 ${options.variant === "export" ? "border-emerald-500" : "border-rose-500"} bg-neutral-900 p-4 text-base shadow-2xl`;
   dialog.setAttribute("role", "dialog");
   dialog.setAttribute("aria-modal", "true");
   dialog.setAttribute("aria-label", text);
@@ -231,12 +239,43 @@ export const showActionDialog = (text: string, options: ActionDialogOptions): Pr
 
   const actionButton = document.createElement("button");
   actionButton.type = "button";
-  actionButton.className =
-    "cursor-pointer rounded-md bg-rose-500 px-3 py-2 text-base text-white transition hover:bg-rose-600";
+  actionButton.className = `cursor-pointer rounded-md ${options.variant === "export" ? "bg-emerald-500 hover:bg-emerald-600" : "bg-rose-500 hover:bg-rose-600"} px-3 py-2 text-base text-white transition`;
   actionButton.textContent = options.actionText ?? t("confirm");
 
-  actions.append(cancelButton, actionButton);
-  dialog.append(textEl, actions);
+  const secondaryButton = options.secondaryAction ? document.createElement("button") : null;
+
+  if (secondaryButton && options.secondaryAction) {
+    secondaryButton.type = "button";
+    secondaryButton.className =
+      "cursor-pointer rounded-md bg-emerald-500 px-3 py-2 text-base text-white transition hover:bg-emerald-600 disabled:cursor-not-allowed disabled:opacity-50";
+    secondaryButton.textContent = options.secondaryAction.text;
+    secondaryButton.disabled = options.secondaryAction.disabled;
+
+    actions.className = "mt-4 grid grid-cols-1 gap-2";
+    cancelButton.classList.add("mt-2");
+    actions.append(actionButton, secondaryButton, cancelButton);
+    dialog.append(textEl);
+  } else {
+    actions.append(cancelButton, actionButton);
+    dialog.append(textEl);
+  }
+
+  if (options.description) {
+    const description = document.createElement("p");
+    description.id = "mtab-action-dialog-description";
+    description.className = "mt-3 whitespace-pre-line text-base text-neutral-400";
+    description.textContent = options.description;
+
+    dialog.setAttribute("aria-describedby", description.id);
+
+    if (secondaryButton) {
+      actions.insertBefore(description, secondaryButton);
+    } else {
+      dialog.append(description);
+    }
+  }
+
+  dialog.append(actions);
   overlay.appendChild(dialog);
   document.body.appendChild(overlay);
 
@@ -265,9 +304,11 @@ export const showActionDialog = (text: string, options: ActionDialogOptions): Pr
       resolve(false);
     };
 
-    const runAction = async () => {
+    const runAction = async (action = options.onAction) => {
+      if (isClosing) return;
+
       await cleanup();
-      await options.onAction();
+      await action();
       resolve(true);
     };
 
@@ -277,9 +318,26 @@ export const showActionDialog = (text: string, options: ActionDialogOptions): Pr
         void cancel();
       }
 
-      if (event.key === "Enter") {
+      if (event.key === "Enter" && !(event.target instanceof HTMLButtonElement)) {
         event.preventDefault();
         void runAction();
+      }
+
+      if (event.key === "Tab") {
+        const buttons = Array.from(dialog.querySelectorAll("button")).filter(
+          (button) => !button.disabled
+        );
+
+        const first = buttons[0];
+        const last = buttons[buttons.length - 1];
+
+        if (event.shiftKey && document.activeElement === first) {
+          event.preventDefault();
+          last?.focus();
+        } else if (!event.shiftKey && document.activeElement === last) {
+          event.preventDefault();
+          first?.focus();
+        }
       }
     };
 
@@ -293,6 +351,12 @@ export const showActionDialog = (text: string, options: ActionDialogOptions): Pr
     actionButton.addEventListener("click", () => {
       void runAction();
     });
+
+    secondaryButton?.addEventListener("click", () => {
+      if (options.secondaryAction) void runAction(options.secondaryAction.onAction);
+    });
+
+    actionButton.focus();
   });
 };
 

@@ -1,6 +1,16 @@
 import { customMessageHelp } from "~/src/i18n/messages";
 
 export const ko = {
+  "download wallpaper": "배경화면 다운로드",
+  "could not download wallpaper": "배경화면을 다운로드하지 못했습니다",
+  export: "내보내기",
+  "download config": "설정 다운로드",
+  "download wallpapers": "배경화면 다운로드",
+  "wallpapers are not included in the config because they can be too large. you can download them separately as a zip file.":
+    "배경화면은 파일 크기가 클 수 있어 설정에 포함되지 않습니다. ZIP 파일로 별도로 다운로드할 수 있습니다.",
+  "no uploaded wallpapers to download": "다운로드할 업로드된 배경화면이 없습니다",
+  "could not export wallpapers": "배경화면을 내보내지 못했습니다",
+  "could not export config": "설정을 내보내지 못했습니다",
   "options ヽ(・ω・*)": "설정 ヽ(・ω・*)",
   logo: "로고",
   options: "설정",
