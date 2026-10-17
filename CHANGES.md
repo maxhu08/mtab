@@ -1,5 +1,5 @@
-# Changes in 1.13.2
+# Changes in 1.13.3
 
 in this release:
 
-- improve options ui
+- add ability to export wallpapers
