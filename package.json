@@ -35,7 +35,7 @@
     "typecheck": "tsc -p tsconfig.json --noEmit"
   },
   "dependencies": {
-    "caniuse-lite": "^1.0.30001810",
+    "caniuse-lite": "^1.0.30001816",
     "fflate": "^0.8.3",
     "idb-keyval": "^6.3.0",
     "mathjs": "^13.2.3",
@@ -51,12 +51,12 @@
     "@parcel/core": "2.16.3",
     "@parcel/resolver-default": "2.16.3",
     "@types/chrome": "^0.1.43",
-    "@types/node": "^25.9.8",
+    "@types/node": "^25.9.9",
     "@types/sortablejs": "^1.15.9",
     "husky": "^9.1.7",
     "oxfmt": "^0.67.0",
-    "oxlint": "^1.85.0",
-    "postcss": "^8.5.28",
+    "oxlint": "^1.88.0",
+    "postcss": "^8.5.30",
     "tailwindcss": "^3.4.19"
   }
 }
