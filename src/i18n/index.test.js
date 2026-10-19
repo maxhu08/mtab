@@ -12,9 +12,10 @@ import { it } from "./locales/it.ts";
 import { ja } from "./locales/ja.ts";
 import { ko } from "./locales/ko.ts";
 import { ptBR } from "./locales/pt-br.ts";
+import { ru } from "./locales/ru.ts";
 import { zhCN } from "./locales/zh-cn.ts";
 
-const messages = { de, es, fr, it, ja, ko, "pt-BR": ptBR, "zh-CN": zhCN };
+const messages = { de, es, fr, it, ja, ko, "pt-BR": ptBR, ru, "zh-CN": zhCN };
 
 const normalize = (value) => value.replace(/\s+/g, " ").trim();
 
@@ -95,6 +96,7 @@ describe("options language resolution", () => {
     expect(resolveLanguage("ja", "en-US")).toBe("ja");
     expect(resolveLanguage("ko", "en-US")).toBe("ko");
     expect(resolveLanguage("pt-BR", "en-US")).toBe("pt-BR");
+    expect(resolveLanguage("ru", "en-US")).toBe("ru");
     expect(resolveLanguage("zh-CN", "en-US")).toBe("zh-CN");
   });
 
@@ -111,6 +113,7 @@ describe("options language resolution", () => {
     expect(resolveLanguage(undefined, "it-IT")).toBe("it");
     expect(resolveLanguage(undefined, "ja-JP")).toBe("ja");
     expect(resolveLanguage(undefined, "ko-KR")).toBe("ko");
+    expect(resolveLanguage(undefined, "ru-RU")).toBe("ru");
   });
 
   test("uses Brazilian Portuguese for Portuguese browser locales", () => {
@@ -161,6 +164,7 @@ describe("translations", () => {
     expect(translate("ja", "changes saved")).toBe("変更を保存しました");
     expect(translate("ko", "changes saved")).toBe("변경 사항이 저장되었습니다");
     expect(translate("pt-BR", "changes saved")).toBe("alterações salvas");
+    expect(translate("ru", "changes saved")).toBe("изменения сохранены");
     expect(translate("zh-CN", "changes saved")).toBe("更改已保存");
   });
 
