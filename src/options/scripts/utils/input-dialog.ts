@@ -131,7 +131,7 @@ export const showInputDialog = (
   inputEl.autocomplete = "off";
   inputEl.className =
     "w-full bg-transparent text-base text-white placeholder-neutral-500 outline-none";
-  inputEl.placeholder = options.placeholder ?? t("paste here...");
+  inputEl.placeholder = options.placeholder ?? t("Paste here...");
   inputEl.value = options.defaultValue ?? "";
   inputContainerEl.append(inputEl);
 
@@ -177,7 +177,7 @@ export const showInputDialog = (
         inputEl.value = await file.text();
         inputEl.focus();
       } catch {
-        toast.error(t("could not read file"));
+        toast.error(t("Could not read file."));
       }
       fileInput.value = "";
     });
@@ -447,7 +447,7 @@ export const showIconPickerModal = (currentValue = ""): Promise<string | null> =
 
   const titleEl = document.createElement("p");
   titleEl.className = "text-base text-white";
-  titleEl.textContent = t("choose icon");
+  titleEl.textContent = t("Choose icon");
 
   const helperEl = document.createElement("p");
   helperEl.className = "text-base text-neutral-500";
@@ -464,7 +464,7 @@ export const showIconPickerModal = (currentValue = ""): Promise<string | null> =
   searchInputEl.autocomplete = "off";
   searchInputEl.className =
     "w-full bg-transparent text-base text-white placeholder-neutral-500 outline-none";
-  searchInputEl.placeholder = t("search icons...");
+  searchInputEl.placeholder = t("Search icons...");
   searchContainerEl.append(searchInputEl);
 
   const resultsEl = document.createElement("div");
@@ -487,7 +487,7 @@ export const showIconPickerModal = (currentValue = ""): Promise<string | null> =
 
   const emptyStateTextEl = document.createElement("p");
   emptyStateTextEl.className = "text-base";
-  emptyStateTextEl.textContent = t("no icons found");
+  emptyStateTextEl.textContent = t("No icons found.");
   emptyStateEl.append(emptyStateIconEl, emptyStateTextEl);
 
   const footerEl = document.createElement("div");
@@ -716,11 +716,11 @@ export const showIconPickerModal = (currentValue = ""): Promise<string | null> =
       countEl.classList.remove("hidden");
       countEl.textContent =
         totalMatches > totalVisible
-          ? t("showing {visible} of {total} icons; search to narrow results", {
+          ? t("Showing {visible} of {total} icons; search to narrow results.", {
               visible: totalVisible,
               total: totalMatches
             })
-          : t("showing {total} icons", { total: totalMatches });
+          : t("Showing {total} icons.", { total: totalMatches });
     };
 
     resultsEl.addEventListener("pointerleave", () => {

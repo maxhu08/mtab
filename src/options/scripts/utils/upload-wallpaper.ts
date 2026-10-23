@@ -263,7 +263,7 @@ const addTileDownloadButton = (
 
         downloadFile(file, wallpaperFilename(name, file.type));
       } catch {
-        toast.error(t("could not download wallpaper"));
+        toast.error(t("Could not download wallpaper."));
       }
     }
   });
@@ -591,7 +591,7 @@ const previewSelected = async () => {
 
 const addMixedEntryForAction = async (action: MixedAddAction) => {
   if (action === "url") {
-    const value = await showInputDialog(t("Input wallpaper URL"));
+    const value = await showInputDialog(t("Input wallpaper URL."));
     if (!value) return;
 
     const added = await addMixedWallpaperURL(value);
@@ -601,7 +601,7 @@ const addMixedEntryForAction = async (action: MixedAddAction) => {
   }
 
   if (action === "solid-color") {
-    const value = await showInputDialog(t("Input wallpaper color (e.g. #171717)"));
+    const value = await showInputDialog(t("Input wallpaper color (e.g. #171717)."));
     if (!value) return;
 
     const added = await addMixedWallpaperSolidColor(value);
@@ -617,7 +617,7 @@ export const addWallpaperForActiveType = async () => {
   const type = getActiveWallpaperType();
 
   if (type === "url") {
-    const value = await showInputDialog(t("Input wallpaper URL"));
+    const value = await showInputDialog(t("Input wallpaper URL."));
     if (!value) return;
 
     const normalized = value.trim();
@@ -630,7 +630,7 @@ export const addWallpaperForActiveType = async () => {
   }
 
   if (type === "solid-color") {
-    const value = await showInputDialog(t("Input wallpaper color (e.g. #171717)"));
+    const value = await showInputDialog(t("Input wallpaper color (e.g. #171717)."));
     if (!value) return;
 
     const normalized = value.trim();
@@ -707,7 +707,7 @@ const deleteMixedEntry = async (id: string) => {
 const editURLAtIndex = async (index: number) => {
   if (index < 0 || index >= wallpaperUrls.length) return;
 
-  const value = await showInputDialog(t("Edit wallpaper URL"), {
+  const value = await showInputDialog(t("Edit wallpaper URL."), {
     defaultValue: wallpaperUrls[index],
     confirmText: t("save")
   });
@@ -724,7 +724,7 @@ const editURLAtIndex = async (index: number) => {
 const editSolidColorAtIndex = async (index: number) => {
   if (index < 0 || index >= wallpaperSolidColors.length) return;
 
-  const value = await showInputDialog(t("Edit wallpaper color (e.g. #171717)"), {
+  const value = await showInputDialog(t("Edit wallpaper color (e.g. #171717)."), {
     defaultValue: wallpaperSolidColors[index],
     confirmText: t("save")
   });
@@ -749,7 +749,7 @@ const editMixedEntry = async (entry: {
   }
 
   const prompt =
-    entry.kind === "url" ? t("Edit wallpaper URL") : t("Edit wallpaper color (e.g. #171717)");
+    entry.kind === "url" ? t("Edit wallpaper URL.") : t("Edit wallpaper color (e.g. #171717).");
   const value = await showInputDialog(prompt, {
     defaultValue: entry.value,
     confirmText: t("save")
@@ -1219,7 +1219,7 @@ export const handleWallpaperFileUpload = () => {
 
   wallpaperResetAllButtonEl.onclick = () => {
     void showActionDialog(
-      t("do you want to reset all wallpapers for the selected type? this cannot be undone."),
+      t("Do you want to reset all wallpapers for the selected type? This cannot be undone."),
       {
         cancelText: t("cancel"),
         actionText: t("reset"),

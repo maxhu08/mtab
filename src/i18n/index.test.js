@@ -153,24 +153,24 @@ describe("translations", () => {
   });
 
   test("keeps English and translates every supported language", () => {
-    expect(translate("en", "changes saved")).toBe("changes saved");
-    expect(translate("de", "changes saved")).toBe("Änderungen gespeichert");
-    expect(translate("es", "changes saved")).toBe("cambios guardados");
-    expect(translate("fr", "changes saved")).toBe("Modifications enregistrées");
-    expect(translate("it", "changes saved")).toBe("modifiche salvate");
-    expect(translate("ja", "changes saved")).toBe("変更を保存しました");
-    expect(translate("ko", "changes saved")).toBe("변경 사항이 저장되었습니다");
-    expect(translate("pt-BR", "changes saved")).toBe("alterações salvas");
-    expect(translate("zh-CN", "changes saved")).toBe("更改已保存");
+    expect(translate("en", "Changes saved.")).toBe("Changes saved.");
+    expect(translate("de", "Changes saved.")).toBe("Änderungen gespeichert.");
+    expect(translate("es", "Changes saved.")).toBe("Cambios guardados.");
+    expect(translate("fr", "Changes saved.")).toBe("Modifications enregistrées.");
+    expect(translate("it", "Changes saved.")).toBe("Modifiche salvate.");
+    expect(translate("ja", "Changes saved.")).toBe("変更を保存しました。");
+    expect(translate("ko", "Changes saved.")).toBe("변경 사항이 저장되었습니다.");
+    expect(translate("pt-BR", "Changes saved.")).toBe("Alterações salvas.");
+    expect(translate("zh-CN", "Changes saved.")).toBe("更改已保存。");
   });
 
   test("substitutes all message values", () => {
     expect(
-      translate("zh-CN", "imported {bookmarks} bookmarks and {folders} folders", {
+      translate("zh-CN", "Imported {bookmarks} bookmarks and {folders} folders.", {
         bookmarks: 2,
         folders: 1
       })
-    ).toBe("已导入 2 个书签和 1 个文件夹");
+    ).toBe("已导入 2 个书签和 1 个文件夹。");
   });
 
   test("keeps every locale complete and non-empty", () => {
@@ -193,7 +193,11 @@ describe("translations", () => {
 
   test("preserves technical tokens in every locale", () => {
     const tokens = (value) =>
-      [...value.matchAll(/https?:\/\/[^\s)`]+|MTAB_[A-Za-z0-9_.#]+|\\[A-Za-z]+[$%]?|\{\}/g)]
+      [
+        ...value.matchAll(
+          /https?:\/\/[^\s)`]+|MTAB_[A-Za-z0-9_.#]*[A-Za-z0-9_#]|\\[A-Za-z]+[$%]?|\{\}/g
+        )
+      ]
         .map((match) => match[0])
         .sort();
 
@@ -207,22 +211,22 @@ describe("translations", () => {
 
   test("preserves functional command and shortcut literals in every locale", () => {
     const requiredLiterals = {
-      "Shows the current date when you type 'date'": ["date"],
-      "e.g., `morning def` or `morning definition`": ["morning def", "morning definition"],
-      "Type `pw <length> <flags>` or `password <length> <flags>` to generate a password": [
+      "Shows the current date when you type 'date'.": ["date"],
+      "E.g., `morning def` or `morning definition`.": ["morning def", "morning definition"],
+      "Type `pw <length> <flags>` or `password <length> <flags>` to generate a password.": [
         "pw",
         "password"
       ],
-      "e.g., `password 16 luns` generates a 16 character password with lowercase letters, uppercase letters, numbers, and symbols":
+      "E.g., `password 16 luns` generates a 16 character password with lowercase letters, uppercase letters, numbers, and symbols.":
         ["password 16 luns"],
-      "if no arguments are specified, defaults to `16 luns`": ["16 luns"],
+      "If no arguments are specified, defaults to `16 luns`.": ["16 luns"],
       "Modifier keys are specified as `<c-x>`, `<m-x>`, and `<a-x>` for `ctrl+x`, `meta+x`, and `alt+x`. Combined modifiers are written like `<c-a-x>` or `<c-m-x>`. Use `<space>` for the space key.":
         ["<c-x>", "<m-x>", "<a-x>", "ctrl+x", "meta+x", "alt+x", "<c-a-x>", "<c-m-x>", "<space>"],
-      "`l` - lowercase letters": ["`l`"],
-      "`u` - uppercase letters": ["`u`"],
-      "`n` - numbers": ["`n`"],
-      "`s` - symbols": ["`s`"],
-      "`m` - memorable": ["`m`"]
+      "`l` - lowercase letters.": ["`l`"],
+      "`u` - uppercase letters.": ["`u`"],
+      "`n` - numbers.": ["`n`"],
+      "`s` - symbols.": ["`s`"],
+      "`m` - memorable.": ["`m`"]
     };
 
     Object.values(messages).forEach((locale) => {

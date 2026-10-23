@@ -20,12 +20,12 @@ const exportConfig = async (copy = false) => {
     const text = `MTAB_SAVE_FORMAT_v${chrome.runtime.getManifest().version}_${JSON.stringify(config)}`;
     if (copy) {
       await navigator.clipboard.writeText(text);
-      toast.success(t("config saved & copied to clipboard"));
+      toast.success(t("Config saved & copied to clipboard."));
     } else {
       downloadFile(new Blob([text], { type: "text/plain;charset=utf-8" }), "config.txt");
     }
   } catch {
-    toast.error(t(copy ? "could not save config to clipboard" : "could not export config"));
+    toast.error(t(copy ? "Could not save config to clipboard." : "Could not export config."));
   }
 };
 
@@ -39,12 +39,12 @@ export const saveAndExportConfig = async () => {
 
   const empty = !uploads.length && !mixed.length;
 
-  await showActionDialog(t("export"), {
+  await showActionDialog(t("Export"), {
     variant: "export",
     description:
       t(
-        "wallpapers are not included in the config because they can be too large. you can download them separately as a zip file."
-      ) + (empty ? `\n\n${t("no uploaded wallpapers to download")}` : ""),
+        "Wallpapers are not included in the config because they can be too large. You can download them separately as a ZIP file."
+      ) + (empty ? `\n\n${t("No uploaded wallpapers to download.")}` : ""),
     actionText: t("download config"),
     onAction: () => exportConfig(),
     additionalAction: {
@@ -73,7 +73,7 @@ export const saveAndExportConfig = async () => {
 
           downloadFile(await createWallpaperArchive(files), "wallpapers.zip");
         } catch {
-          toast.error(t("could not export wallpapers"));
+          toast.error(t("Could not export wallpapers."));
         }
       }
     }

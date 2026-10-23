@@ -692,12 +692,12 @@ export const addBookmarkNodeBookmark = (
       "w-full min-w-0 bg-transparent text-white outline-none placeholder-neutral-500";
 
     const placeholderMap: Record<string, string> = {
-      name: t("input name..."),
-      url: t("input url..."),
-      color: t("input color..."),
-      "icon-type": t("input icon-type..."),
-      "icon-color": t("input color... (leave empty for bookmarks.defaultIconColor)"),
-      fill: t("input color... (leave empty for default)")
+      name: t("Input name..."),
+      url: t("Input URL..."),
+      color: t("Input color..."),
+      "icon-type": t("Input icon-type..."),
+      "icon-color": t("Input color... (leave empty for bookmarks.defaultIconColor)"),
+      fill: t("Input color... (leave empty for default)")
     };
 
     input.placeholder = placeholderMap[field.id];
@@ -908,11 +908,11 @@ export const addBookmarkNodeFolder = (
       "w-full min-w-0 bg-transparent text-white outline-none placeholder-neutral-500";
 
     const placeholderMap: Record<string, string> = {
-      name: t("input name..."),
-      color: t("input color..."),
-      "icon-type": t("input icon-type... (leave empty for bookmarks.defaultFolderIconType)"),
-      "icon-color": t("input color... (leave empty for bookmarks.defaultIconColor)"),
-      fill: t("input color... (leave empty for default)")
+      name: t("Input name..."),
+      color: t("Input color..."),
+      "icon-type": t("Input icon-type... (leave empty for bookmarks.defaultFolderIconType)"),
+      "icon-color": t("Input color... (leave empty for bookmarks.defaultIconColor)"),
+      fill: t("Input color... (leave empty for default)")
     };
 
     input.placeholder = placeholderMap[field.id];

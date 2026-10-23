@@ -8,13 +8,13 @@ import { BookmarkNode } from "~/src/utils/config";
 import { t } from "~/src/options/scripts/i18n";
 
 export const importBookmarkNode = async (target = bookmarksUserDefinedList) => {
-  const dataToImport = await showInputDialog(t("input your bookmark or folder"));
+  const dataToImport = await showInputDialog(t("Input your bookmark or folder."));
 
   if (dataToImport === null) return;
 
   const trimmed = dataToImport.trim();
   if (trimmed === "") {
-    toast.info(t("input was empty, nothing imported"));
+    toast.info(t("Input was empty, nothing imported."));
     return;
   }
 
@@ -28,7 +28,7 @@ export const importBookmarkNode = async (target = bookmarksUserDefinedList) => {
   if (!headerMatch) {
     toast.error(
       t(
-        "incorrect format, expected MTAB_USER_DEFINED_BOOKMARK_FORMAT_v#.#.#_ or MTAB_USER_DEFINED_FOLDER_FORMAT_v#.#.#_"
+        "Incorrect format, expected MTAB_USER_DEFINED_BOOKMARK_FORMAT_v#.#.#_ or MTAB_USER_DEFINED_FOLDER_FORMAT_v#.#.#_."
       )
     );
     return;
@@ -41,7 +41,7 @@ export const importBookmarkNode = async (target = bookmarksUserDefinedList) => {
   try {
     bookmarkNode = JSON.parse(rawPayload);
   } catch {
-    toast.error(t("invalid bookmark data"));
+    toast.error(t("Invalid bookmark data."));
     return;
   }
 
@@ -57,6 +57,6 @@ export const importBookmarkNode = async (target = bookmarksUserDefinedList) => {
       false
     );
   } else {
-    toast.error(t("invalid bookmark data"));
+    toast.error(t("Invalid bookmark data."));
   }
 };

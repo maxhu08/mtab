@@ -2,33 +2,33 @@ import { customMessageHelp } from "~/src/i18n/messages";
 
 export const zhCN = {
   "download wallpaper": "下载壁纸",
-  "could not download wallpaper": "无法下载壁纸",
-  export: "导出",
+  "Could not download wallpaper.": "无法下载壁纸。",
+  Export: "导出",
   "copy to clipboard": "复制到剪贴板",
   or: "或",
   "upload config": "上传配置",
-  "could not read file": "无法读取文件",
+  "Could not read file.": "无法读取文件。",
   "download config": "下载配置",
   "download wallpapers": "下载壁纸",
-  "wallpapers are not included in the config because they can be too large. you can download them separately as a zip file.":
+  "Wallpapers are not included in the config because they can be too large. You can download them separately as a ZIP file.":
     "壁纸文件可能过大，因此不包含在配置中。你可以将壁纸单独下载为 ZIP 文件。",
-  "no uploaded wallpapers to download": "没有可下载的已上传壁纸",
-  "could not export wallpapers": "无法导出壁纸",
-  "could not export config": "无法导出配置",
+  "No uploaded wallpapers to download.": "没有可下载的已上传壁纸。",
+  "Could not export wallpapers.": "无法导出壁纸。",
+  "Could not export config.": "无法导出配置。",
   "options ヽ(・ω・*)": "设置 ヽ(・ω・*)",
   logo: "徽标",
   options: "设置",
   "options.language": "语言",
   "options.showOptionsButton": "显示设置按钮",
-  "Tip: you can still access the options by pressing `extensions > mtab > options`":
-    "提示：你仍可通过“扩展程序 > mtab > 选项”进入设置页面",
+  "Tip: you can still access the options by pressing `extensions > mtab > options`.":
+    "提示：你仍可通过“扩展程序 > mtab > 选项”进入设置页面。",
   user: "用户",
   "user.name": "用户名",
   title: "标题",
   "title.defaultTitle": "默认标题",
   "title.dynamic.enabled": "启用动态标题",
-  "When enabled, the page title changes to match what is in the search bar":
-    "启用后，页面标题将与搜索栏中的内容保持一致",
+  "When enabled, the page title changes to match what is in the search bar.":
+    "启用后，页面标题将与搜索栏中的内容保持一致。",
   "title.effect": "标题效果",
   none: "无",
   typewriter: "打字机",
@@ -38,17 +38,17 @@ export const zhCN = {
   default: "默认",
   custom: "自定义",
   "title.customFavicon": "自定义网站图标",
-  "Note: customFavicon is not included when exporting and importing configs due to taking too much space":
-    "注意：自定义网站图标占用空间较大，不包含在配置的导入和导出中",
+  "Note: customFavicon is not included when exporting and importing configs due to taking too much space.":
+    "注意：自定义网站图标占用空间较大，不包含在配置的导入和导出中。",
   reset: "重置",
-  "live preview": "实时预览",
+  "Live preview": "实时预览",
   message: "消息",
   "message.enabled": "启用消息",
   "message.font.type": "字体类型",
   "message.font.custom": "自定义字体",
-  "Use a Google Fonts URL to choose a font": "使用 Google Fonts URL 选择字体",
-  "Example: `https://fonts.googleapis.com/css2?family=Anton+SC&display=swap`":
-    "示例：`https://fonts.googleapis.com/css2?family=Anton+SC&display=swap`",
+  "Use a Google Fonts URL to choose a font.": "使用 Google Fonts URL 选择字体。",
+  "Example: `https://fonts.googleapis.com/css2?family=Anton+SC&display=swap`.":
+    "示例：`https://fonts.googleapis.com/css2?family=Anton+SC&display=swap`。",
   "message.textColor": "文字颜色",
   "message.textSize": "文字大小",
   "message.type": "消息类型",
@@ -57,11 +57,11 @@ export const zhCN = {
   "time-12": "12 小时制时间",
   "time-24": "24 小时制时间",
   weather: "天气",
-  "Note: you need to have location permissions set to `allow` for weather messages to work":
-    "注意：需要将位置权限设为“允许”，天气消息才能正常工作",
-  "Weather data may be delayed due to being cached in 5 minutes intervals for faster load times":
-    "为加快加载速度，天气数据每 5 分钟缓存一次，因此可能存在延迟",
-  "All weather data from": "天气数据来自",
+  "Note: you need to have location permissions set to `allow` for weather messages to work.":
+    "注意：需要将位置权限设为“允许”，天气消息才能正常工作。",
+  "Weather data may be delayed due to being cached in 5 minutes intervals for faster load times.":
+    "为加快加载速度，天气数据每 5 分钟缓存一次，因此可能存在延迟。",
+  "All weather data from:": "天气数据来自：",
   "message.weather.unitsType": "天气温度单位",
   "message.customText": "自定义消息",
   wallpaper: "壁纸",
@@ -73,22 +73,22 @@ export const zhCN = {
   "solid-color": "纯色",
   mixed: "混合",
   "wallpaper.urls": "壁纸 URL",
-  "Tip: you can use video file formats like MP4, MOV, and more":
-    "提示：可以使用 MP4、MOV 等视频格式",
-  "To use URLs as wallpapers (right click > copy image address)":
-    "使用 URL 作为壁纸（右键 > 复制图片地址）",
+  "Tip: you can use video file formats like MP4, MOV, and more.":
+    "提示：可以使用 MP4、MOV 等视频格式。",
+  "To use URLs as wallpapers (right click > copy image address).":
+    "使用 URL 作为壁纸（右键 > 复制图片地址）。",
   "wallpaper.fileUploads": "上传的壁纸文件",
-  "Tip: you can upload PNG, JPG, WEBP, GIF, MP4, and more":
-    "提示：可以上传 PNG、JPG、WEBP、GIF、MP4 等格式",
-  "It is recommended to scale images to match your resolution for faster loading times":
-    "建议将图片缩放至与屏幕分辨率匹配，以提升加载速度",
-  "Note: fileUploads wallpapers are not included when exporting and importing configs due to taking too much space":
-    "注意：上传的壁纸文件占用空间较大，不包含在配置的导入和导出中",
+  "Tip: you can upload PNG, JPG, WEBP, GIF, MP4, and more.":
+    "提示：可以上传 PNG、JPG、WEBP、GIF、MP4 等格式。",
+  "It is recommended to scale images to match your resolution for faster loading times.":
+    "建议将图片缩放至与屏幕分辨率匹配，以提升加载速度。",
+  "Note: fileUploads wallpapers are not included when exporting and importing configs due to taking too much space.":
+    "注意：上传的壁纸文件占用空间较大，不包含在配置的导入和导出中。",
   "wallpaper.solidColors": "纯色壁纸",
   "wallpaper.random": "随机壁纸",
   "You can hover your cursor in the bottom-left corner on the new tab page to see wallpaper credits.":
     "可将鼠标悬停在新标签页左下角查看壁纸来源。",
-  "Random wallpapers are sourced from": "随机壁纸来自",
+  "Random wallpapers are sourced from:": "随机壁纸来自：",
   "wallpaper.mixed": "混合壁纸",
   "Mix URL, file-upload, and solid-color items in one rotation list.":
     "在同一个轮换列表中混合使用 URL、上传文件和纯色壁纸。",
@@ -138,13 +138,13 @@ export const zhCN = {
   "animations.bookmarkType": "书签动画",
   search: "搜索",
   "search.enabled": "启用搜索",
-  "Tip: press `Ctrl+Enter` to open your search in a new tab":
-    "提示：按 `Ctrl+Enter` 可在新标签页中打开搜索结果",
+  "Tip: press `Ctrl+Enter` to open your search in a new tab.":
+    "提示：按 `Ctrl+Enter` 可在新标签页中打开搜索结果。",
   "search.engine": "搜索引擎",
   "search.useCustomEngine": "使用自定义搜索引擎",
   "search.customEngineURL": "自定义搜索引擎 URL",
-  "Use `{}` to represent the search query": "使用 `{}` 表示搜索内容",
-  "Example: `https://www.google.com/search?q={}`": "示例：`https://www.google.com/search?q={}`",
+  "Use `{}` to represent the search query.": "使用 `{}` 表示搜索内容。",
+  "Example: `https://www.google.com/search?q={}`.": "示例：`https://www.google.com/search?q={}`。",
   "search.placeholderText": "搜索占位文本",
   "search.bookmarkPlaceholderText": "书签搜索占位文本",
   "search.buttons.clear": "显示清空按钮",
@@ -153,61 +153,61 @@ export const zhCN = {
   "search.buttons.search": "显示搜索按钮",
   "When enabled, shows a button to submit your search.": "启用后，显示用于提交搜索的按钮。",
   "search.recognizeLinks": "识别链接",
-  "Automatically detects links in search results and opens them directly instead of running a search":
-    "自动识别搜索内容中的链接并直接打开，而不是执行搜索",
-  "e.g., typing `example.com` navigates directly to `https://example.com` instead of performing a search":
-    "例如，输入 `example.com` 将直接打开 `https://example.com`，而不是执行搜索",
+  "Automatically detects links in search results and opens them directly instead of running a search.":
+    "自动识别搜索内容中的链接并直接打开，而不是执行搜索。",
+  "E.g., typing `example.com` navigates directly to `https://example.com` instead of performing a search.":
+    "例如，输入 `example.com` 将直接打开 `https://example.com`，而不是执行搜索。",
   "search.suggestions": "搜索建议",
-  "Shows live query suggestions as you type": "输入时实时显示查询建议",
-  "Suggestions are sourced from DuckDuckGo's public autocomplete suggestions API and are not based on your personal search history. Requests are sent directly from your browser to DuckDuckGo and do not include cookies, accounts, extension identifiers, or other personal data":
-    "搜索建议来自 DuckDuckGo 的公共自动补全 API，不基于个人搜索历史。请求由浏览器直接发送至 DuckDuckGo，不包含 Cookie、账号、扩展标识符或其他个人数据",
+  "Shows live query suggestions as you type.": "输入时实时显示查询建议。",
+  "Suggestions are sourced from DuckDuckGo's public autocomplete suggestions API and are not based on your personal search history. Requests are sent directly from your browser to DuckDuckGo and do not include cookies, accounts, extension identifiers, or other personal data.":
+    "搜索建议来自 DuckDuckGo 的公共自动补全 API，不基于个人搜索历史。请求由浏览器直接发送至 DuckDuckGo，不包含 Cookie、账号、扩展标识符或其他个人数据。",
   "search.assist.date": "日期助手",
-  "Shows the current date when you type 'date'": "输入 'date' 时显示当前日期",
+  "Shows the current date when you type 'date'.": "输入 'date' 时显示当前日期。",
   "search.assist.math": "数学助手",
-  "Automatically evaluates math expressions typed into the search input":
-    "自动计算搜索框中输入的数学表达式",
-  "e.g., `cos(pi / 6) * (3^2 - 4) + sin(45deg) + sqrt(20) = 9.50936975510832`":
-    "例如：`cos(pi / 6) * (3^2 - 4) + sin(45deg) + sqrt(20) = 9.50936975510832`",
+  "Automatically evaluates math expressions typed into the search input.":
+    "自动计算搜索框中输入的数学表达式。",
+  "E.g., `cos(pi / 6) * (3^2 - 4) + sin(45deg) + sqrt(20) = 9.50936975510832`.":
+    "例如：`cos(pi / 6) * (3^2 - 4) + sin(45deg) + sqrt(20) = 9.50936975510832`。",
   "search.assist.definitions": "词典助手",
-  "Shows word definitions when you include definition keywords in the search input":
-    "在搜索框中输入释义关键词时显示单词定义",
-  "e.g., `morning def` or `morning definition`": "例如：`morning def` 或 `morning definition`",
-  "Definitions are sourced from": "词典数据来自",
+  "Shows word definitions when you include definition keywords in the search input.":
+    "在搜索框中输入释义关键词时显示单词定义。",
+  "E.g., `morning def` or `morning definition`.": "例如：`morning def` 或 `morning definition`。",
+  "Definitions are sourced from:": "词典数据来自：",
   "search.assist.conversions": "换算助手",
-  "Converts units directly from the search input": "直接在搜索框中换算单位",
-  "e.g., `1 ft => 0.3048 m`": "例如：`1 ft => 0.3048 m`",
-  "Supports length, weight, temperature, time, volume, area, speed, angle, data, and 170+ currencies":
-    "支持长度、重量、温度、时间、体积、面积、速度、角度、数据单位以及 170 多种货币",
-  "Currency conversion rates are sourced from": "货币汇率来自",
+  "Converts units directly from the search input.": "直接在搜索框中换算单位。",
+  "E.g., `1 ft => 0.3048 m`.": "例如：`1 ft => 0.3048 m`。",
+  "Supports length, weight, temperature, time, volume, area, speed, angle, data, and 170+ currencies.":
+    "支持长度、重量、温度、时间、体积、面积、速度、角度、数据单位以及 170 多种货币。",
+  "Currency conversion rates are sourced from:": "货币汇率来自：",
   "search.assist.passwordGenerator": "密码生成器",
-  "Generates passwords directly from the search input, entirely locally":
-    "直接在搜索框中生成密码，整个过程完全在本地完成",
-  "No data is sent anywhere; password generation happens on your device":
-    "不会向任何位置发送数据；密码在你的设备上生成",
-  "Type `pw <length> <flags>` or `password <length> <flags>` to generate a password":
-    "输入 `pw <长度> <标志>` 或 `password <长度> <标志>` 生成密码",
-  "e.g., `password 16 luns` generates a 16 character password with lowercase letters, uppercase letters, numbers, and symbols":
-    "例如，`password 16 luns` 会生成包含小写字母、大写字母、数字和符号的 16 位密码",
-  flags: "标志",
-  "`l` - lowercase letters": "`l` - 小写字母",
-  "`u` - uppercase letters": "`u` - 大写字母",
-  "`n` - numbers": "`n` - 数字",
-  "`s` - symbols": "`s` - 符号",
-  "`m` - memorable": "`m` - 易记模式",
-  "if no arguments are specified, defaults to `16 luns`": "未指定参数时，默认使用 `16 luns`",
-  "Order of arguments and flags does not matter": "参数和标志的顺序不受限制",
+  "Generates passwords directly from the search input, entirely locally.":
+    "直接在搜索框中生成密码，整个过程完全在本地完成。",
+  "No data is sent anywhere; password generation happens on your device.":
+    "不会向任何位置发送数据；密码在你的设备上生成。",
+  "Type `pw <length> <flags>` or `password <length> <flags>` to generate a password.":
+    "输入 `pw <长度> <标志>` 或 `password <长度> <标志>` 生成密码。",
+  "E.g., `password 16 luns` generates a 16 character password with lowercase letters, uppercase letters, numbers, and symbols.":
+    "例如，`password 16 luns` 会生成包含小写字母、大写字母、数字和符号的 16 位密码。",
+  "Flags:": "标志：",
+  "`l` - lowercase letters.": "`l` - 小写字母。",
+  "`u` - uppercase letters.": "`u` - 大写字母。",
+  "`n` - numbers.": "`n` - 数字。",
+  "`s` - symbols.": "`s` - 符号。",
+  "`m` - memorable.": "`m` - 易记模式。",
+  "If no arguments are specified, defaults to `16 luns`.": "未指定参数时，默认使用 `16 luns`。",
+  "Order of arguments and flags does not matter.": "参数和标志的顺序不受限制。",
   "search.focusedBorderColor": "聚焦边框颜色",
-  "(use #00000000 for none)": "（使用 #00000000 表示无颜色）",
+  "(Use #00000000 for none.)": "（使用 #00000000 表示无颜色。）",
   "search.font.type": "搜索字体类型",
   "search.font.custom": "自定义搜索字体",
   "search.textColor": "搜索文字颜色",
   "search.placeholderTextColor": "占位文本颜色",
   "search.searchIconColor": "搜索图标颜色",
-  "This changes the -> color": "此项更改 -> 的颜色",
+  "This changes the -> color.": "此项更改 -> 的颜色。",
   "search.bookmarkIconColor": "书签图标颜色",
-  "This changes the // color": "此项更改 // 的颜色",
+  "This changes the // color.": "此项更改 // 的颜色。",
   "search.selectIconColor": "选择图标颜色",
-  "This changes the > color": "此项更改 > 的颜色",
+  "This changes the > color.": "此项更改 > 的颜色。",
   "search.linkTextColor": "链接文字颜色",
   hotkeys: "快捷键",
   "Modifier keys are specified as `<c-x>`, `<m-x>`, and `<a-x>` for `ctrl+x`, `meta+x`, and `alt+x`. Combined modifiers are written like `<c-a-x>` or `<c-m-x>`. Use `<space>` for the space key.":
@@ -221,12 +221,12 @@ export const zhCN = {
   "bookmarks.type": "书签类型",
   "user-defined": "用户定义",
   "default-blocky": "默认方块",
-  "Tip: `Ctrl+click` or `Middle click` to open a bookmark in a new tab":
-    "提示：使用 `Ctrl+单击` 或鼠标中键可在新标签页打开书签",
+  "Tip: `Ctrl+click` or `Middle click` to open a bookmark in a new tab.":
+    "提示：使用 `Ctrl+单击` 或鼠标中键可在新标签页打开书签。",
   "bookmarks.showBookmarkNames": "显示书签名称",
   "bookmarks.numberKeys": "启用数字键",
-  "Enabling numberKeys -> makes it so that pressing 1 opens first bookmark, 2 opens second bookmark, and so on (0 activates the back button)":
-    "按 1 打开第一个书签，按 2 打开第二个书签，以此类推（0 用于返回）",
+  "Enabling numberKeys -> makes it so that pressing 1 opens first bookmark, 2 opens second bookmark, and so on (0 activates the back button).":
+    "按 1 打开第一个书签，按 2 打开第二个书签，以此类推（0 用于返回）。",
   "bookmarks.enablePagination": "启用分页",
   "When enabled, bookmark rows beyond maxBookmarkRowsPerPage are split into extra pages. Use the Prev/Next buttons or [ and ] keys to move between pages.":
     "启用后，超出每页最大书签行数的内容将分到其他页面。使用上一页/下一页按钮或 [ 和 ] 键切换页面。",
@@ -239,16 +239,16 @@ export const zhCN = {
   "bookmarks.userDefinedCols": "用户定义书签列数",
   "bookmarks.userDefined": "用户定义书签",
   "Valid icon types you can use:": "可用的图标类型：",
-  "Find available icon types at": "可在此查找可用图标类型",
-  "remixicon icon types should be formatted as": "Remix Icon 图标类型格式应为",
-  "You can also use Nerd Font icons. Check the cheat sheet at":
-    "也可以使用 Nerd Font 图标。速查表位于",
-  "nerdfont icon types should be formatted as": "Nerd Font 图标类型格式应为",
-  "fontawesome icon types should be formatted as": "Font Awesome 图标类型格式应为",
-  "simpleicons icon types should be formatted as": "Simple Icons 图标类型格式应为",
-  "`url` icon types should be formatted as": "`url` 图标类型格式应为",
-  "You can use URLs as icon types (right click > copy image address)":
-    "可以使用 URL 作为图标类型（右键 > 复制图片地址）",
+  "Find available icon types at:": "可在此查找可用图标类型：",
+  "Remix Icon types should be formatted as:": "Remix Icon 图标类型格式应为：",
+  "You can also use Nerd Font icons. Check the cheat sheet at:":
+    "也可以使用 Nerd Font 图标。速查表位于：",
+  "Nerd Font icon types should be formatted as:": "Nerd Font 图标类型格式应为：",
+  "Font Awesome icon types should be formatted as:": "Font Awesome 图标类型格式应为：",
+  "Simple Icons types should be formatted as:": "Simple Icons 图标类型格式应为：",
+  "`url` icon types should be formatted as:": "`url` 图标类型格式应为：",
+  "You can use URLs as icon types (right click > copy image address).":
+    "可以使用 URL 作为图标类型（右键 > 复制图片地址）。",
   "You can also use the icon picker on the right of each icon input.":
     "也可以使用每个图标输入框右侧的图标选择器。",
   "collapse all": "全部折叠",
@@ -265,23 +265,23 @@ export const zhCN = {
   "bookmarks.defaultBlockyColorType": "默认方块颜色类型",
   "bookmarks.defaultBlockyColor": "默认方块颜色",
   "bookmarks.bookmarksLocationChromium": "Chromium 书签位置",
-  "(only applies to chromium based browsers)": "（仅适用于基于 Chromium 的浏览器）",
+  "(Only applies to Chromium-based browsers.)": "（仅适用于基于 Chromium 的浏览器。）",
   root: "根目录",
   "Selecting root displays every top-level bookmark folder.":
     "选择根目录会显示所有顶层书签文件夹。",
   "bookmarks bar": "书签栏",
   mobile: "移动设备",
   "bookmarks.bookmarksLocationFirefox": "Firefox 书签位置",
-  "(only applies to firefox based browsers)": "（仅适用于 Firefox 系浏览器）",
+  "(Only applies to Firefox-based browsers.)": "（仅适用于 Firefox 系浏览器。）",
   menu: "菜单",
   toolbar: "工具栏",
   other: "其他",
   "bookmarks.defaultFaviconSource": "默认网站图标来源",
-  "(determines where bookmark favicons are fetched from)": "（决定从何处获取书签网站图标）",
+  "(Determines where bookmark favicons are fetched from.)": "（决定从何处获取书签网站图标。）",
   extras: "额外功能",
   "extras.snow.enabled": "雪花效果",
-  "Fun snow effect": "有趣的雪花效果",
-  "Winter mode enables snow during december": "冬季模式会在十二月启用雪花效果",
+  "Fun snow effect.": "有趣的雪花效果。",
+  "Winter mode enables snow during December.": "冬季模式会在十二月启用雪花效果。",
   on: "开启",
   winter: "冬季模式",
   off: "关闭",
@@ -296,31 +296,31 @@ export const zhCN = {
   "options language": "设置语言",
   "options show options button": "显示设置按钮",
   "toggle user section": "展开或折叠用户区域",
-  "input name...": "输入名称...",
+  "Input name...": "输入名称...",
   "toggle title section": "展开或折叠标题区域",
-  "input title...": "输入标题...",
+  "Input title...": "输入标题...",
   "title dynamic enabled": "启用动态标题",
-  "input speed (ms)...": "输入速度（毫秒）...",
+  "Input speed (ms)...": "输入速度（毫秒）...",
   "enter character count...": "输入字符数...",
   "toggle message section": "展开或折叠消息区域",
   "message enabled": "启用消息",
-  "input font url...": "输入字体 URL...",
-  "input color...": "输入颜色...",
-  "input size...": "输入大小...",
-  "input text...": "输入文本...",
+  "Input font URL...": "输入字体 URL...",
+  "Input color...": "输入颜色...",
+  "Input size...": "输入大小...",
+  "Input text...": "输入文本...",
   "toggle wallpaper section": "展开或折叠壁纸区域",
   "wallpaper enabled": "启用壁纸",
-  "input brightness (0.0-1.0)...": "输入亮度（0.0-1.0）...",
-  "input blur...": "输入模糊值...",
+  "Input brightness (0.0-1.0)...": "输入亮度（0.0-1.0）...",
+  "Input blur...": "输入模糊值...",
   "toggle ui section": "展开或折叠界面区域",
-  "input blur strength...": "输入模糊强度...",
+  "Input blur strength...": "输入模糊强度...",
   "toggle animations section": "展开或折叠动画区域",
   "animations enabled": "启用动画",
   "toggle search section": "展开或折叠搜索区域",
   "search enabled": "启用搜索",
   "search use custom engine": "使用自定义搜索引擎",
-  "E.g https://www.google.com/search?q={}": "例如 https://www.google.com/search?q={}",
-  "input placeholder...": "输入占位文本...",
+  "E.g., https://www.google.com/search?q={}": "例如 https://www.google.com/search?q={}",
+  "Input placeholder...": "输入占位文本...",
   "search buttons clear": "显示清空按钮",
   "search buttons search": "显示搜索按钮",
   "search recognize links": "识别链接",
@@ -336,85 +336,85 @@ export const zhCN = {
   "bookmarks show bookmark names": "显示书签名称",
   "bookmarks number keys": "启用书签数字键",
   "bookmarks enable pagination": "启用书签分页",
-  "input number...": "输入数字...",
-  "input icon-type...": "输入图标类型...",
+  "Input number...": "输入数字...",
+  "Input icon-type...": "输入图标类型...",
   "toggle extras section": "展开或折叠额外功能区域",
-  "save (ctrl+s)": "保存（ctrl+s）",
-  "save & export (ctrl+e)": "保存并导出（ctrl+e）",
-  "import & save (ctrl+i)": "导入并保存（ctrl+i）",
-  "input your save (THIS WILL OVERWRITE YOUR CURRENT CONFIG)":
-    "输入要导入的配置（这将覆盖当前配置）",
-  "input was empty, nothing imported": "输入为空，未导入任何内容",
-  "incorrect save format, use MTAB_SAVE_FORMAT_v#.#.#_ or {legacyPrefix} for legacy saves":
-    "配置格式不正确，请使用 MTAB_SAVE_FORMAT_v#.#.#_，旧版配置请使用 {legacyPrefix}",
-  "invalid save format, expected MTAB_SAVE_FORMAT_v#.#.#_":
-    "配置格式无效，应为 MTAB_SAVE_FORMAT_v#.#.#_",
-  "incorrect save format": "配置格式不正确",
-  "failed to parse legacy save format": "无法解析旧版配置格式",
-  "invalid config data": "配置数据无效",
-  "config saved & copied to clipboard": "配置已保存并复制到剪贴板",
-  "could not save config to clipboard": "无法将配置复制到剪贴板",
-  "search.customEngineURL must contain {}, aborting save":
-    "search.customEngineURL 必须包含 {}，已取消保存",
-  "changes saved": "更改已保存",
-  "do you want to reset your options to default? this cannot be undone.":
+  "Save (Ctrl+S)": "保存（ctrl+s）",
+  "Save & export (Ctrl+E)": "保存并导出（ctrl+e）",
+  "Import & save (Ctrl+I)": "导入并保存（ctrl+i）",
+  "Input your save. This will overwrite your current config.":
+    "输入要导入的配置（这将覆盖当前配置）。",
+  "Input was empty, nothing imported.": "输入为空，未导入任何内容。",
+  "Incorrect save format, use MTAB_SAVE_FORMAT_v#.#.#_ or {legacyPrefix} for legacy saves.":
+    "配置格式不正确，请使用 MTAB_SAVE_FORMAT_v#.#.#_，旧版配置请使用 {legacyPrefix}。",
+  "Invalid save format, expected MTAB_SAVE_FORMAT_v#.#.#_.":
+    "配置格式无效，应为 MTAB_SAVE_FORMAT_v#.#.#_。",
+  "Incorrect save format.": "配置格式不正确。",
+  "Failed to parse legacy save format.": "无法解析旧版配置格式。",
+  "Invalid config data.": "配置数据无效。",
+  "Config saved & copied to clipboard.": "配置已保存并复制到剪贴板。",
+  "Could not save config to clipboard.": "无法将配置复制到剪贴板。",
+  "The search.customEngineURL must contain {}; aborting save.":
+    "search.customEngineURL 必须包含 {}，已取消保存。",
+  "Changes saved.": "更改已保存。",
+  "Do you want to reset your options to default? This cannot be undone.":
     "是否要将设置恢复为默认值？此操作无法撤销。",
   cancel: "取消",
-  "options reset to default": "设置已恢复为默认值",
-  "you selected no, options did not reset": "已取消，设置未重置",
-  "input your bookmark or folder": "输入要导入的书签或文件夹数据",
-  "could not import your bookmark or folder": "无法导入书签或文件夹",
-  "incorrect format, expected MTAB_USER_DEFINED_BOOKMARK_FORMAT_v#.#.#_ or MTAB_USER_DEFINED_FOLDER_FORMAT_v#.#.#_":
-    "格式不正确，应为 MTAB_USER_DEFINED_BOOKMARK_FORMAT_v#.#.#_ 或 MTAB_USER_DEFINED_FOLDER_FORMAT_v#.#.#_",
-  "invalid bookmark data": "书签数据无效",
-  "input your bookmarks and folders to import (THIS WILL OVERWRITE YOUR CURRENT BOOKMARKS AND FOLDERS)":
-    "输入要导入的书签和文件夹数据（这将覆盖当前书签和文件夹）",
-  "incorrect format, expected MTAB_USER_USER_DEFINED_BOOKMARKS_FORMAT_v#.#.#_":
-    "格式不正确，应为 MTAB_USER_USER_DEFINED_BOOKMARKS_FORMAT_v#.#.#_",
-  "imported {bookmarks} bookmarks and {folders} folders":
-    "已导入 {bookmarks} 个书签和 {folders} 个文件夹",
-  "bookmark copied to clipboard": "书签已复制到剪贴板",
-  "folder and contents copied to clipboard": "文件夹及其内容已复制到剪贴板",
-  "{bookmarks} bookmarks and {folders} folders copied to clipboard":
-    "已将 {bookmarks} 个书签和 {folders} 个文件夹复制到剪贴板",
-  "paste here...": "粘贴到此处...",
+  "Options reset to default.": "设置已恢复为默认值。",
+  "You selected no, options did not reset.": "已取消，设置未重置。",
+  "Input your bookmark or folder.": "输入要导入的书签或文件夹数据。",
+  "Could not import your bookmark or folder.": "无法导入书签或文件夹。",
+  "Incorrect format, expected MTAB_USER_DEFINED_BOOKMARK_FORMAT_v#.#.#_ or MTAB_USER_DEFINED_FOLDER_FORMAT_v#.#.#_.":
+    "格式不正确，应为 MTAB_USER_DEFINED_BOOKMARK_FORMAT_v#.#.#_ 或 MTAB_USER_DEFINED_FOLDER_FORMAT_v#.#.#_。",
+  "Invalid bookmark data.": "书签数据无效。",
+  "Input your bookmarks and folders to import. This will overwrite your current bookmarks and folders.":
+    "输入要导入的书签和文件夹数据（这将覆盖当前书签和文件夹）。",
+  "Incorrect format, expected MTAB_USER_USER_DEFINED_BOOKMARKS_FORMAT_v#.#.#_.":
+    "格式不正确，应为 MTAB_USER_USER_DEFINED_BOOKMARKS_FORMAT_v#.#.#_。",
+  "Imported {bookmarks} bookmarks and {folders} folders.":
+    "已导入 {bookmarks} 个书签和 {folders} 个文件夹。",
+  "Bookmark copied to clipboard.": "书签已复制到剪贴板。",
+  "Folder and contents copied to clipboard.": "文件夹及其内容已复制到剪贴板。",
+  "{bookmarks} bookmarks and {folders} folders copied to clipboard.":
+    "已将 {bookmarks} 个书签和 {folders} 个文件夹复制到剪贴板。",
+  "Paste here...": "粘贴到此处...",
   ok: "确定",
   confirm: "确认",
   "Icon picker": "图标选择器",
-  "choose icon": "选择图标",
+  "Choose icon": "选择图标",
   "Search by icon name, family, or full icon type.": "可按图标名称、图标系列或完整图标类型搜索。",
-  "search icons...": "搜索图标...",
-  "no icons found": "未找到图标",
-  "showing {visible} of {total} icons; search to narrow results":
-    "正在显示 {total} 个图标中的 {visible} 个；请搜索以缩小结果范围",
-  "showing {total} icons": "正在显示 {total} 个图标",
-  "choose color": "选择颜色",
-  "choose color for {field}": "为 {field} 选择颜色",
-  "choose icon for {field}": "为 {field} 选择图标",
+  "Search icons...": "搜索图标...",
+  "No icons found.": "未找到图标。",
+  "Showing {visible} of {total} icons; search to narrow results.":
+    "正在显示 {total} 个图标中的 {visible} 个；请搜索以缩小结果范围。",
+  "Showing {total} icons.": "正在显示 {total} 个图标。",
+  "Choose color": "选择颜色",
+  "Choose color for {field}": "为 {field} 选择颜色",
+  "Choose icon for {field}": "为 {field} 选择图标",
   Notifications: "通知",
   "Toast action": "通知操作",
   [customMessageHelp]: `可以使用 \\ 表示：
 
-- 日期部分
-- \\yyyy -> 完整年份（例如 "2020"）
-- \\yy -> 年份的后两位（例如 "20"）
-- \\M -> 完整月份名称（例如 "October"）
-- \\m -> 月份缩写（例如 "Oct"）
-- \\m$ -> 数字月份（例如 "11"）
-- \\D -> 完整星期名称（例如 "Monday"）
-- \\d -> 星期缩写（例如 "Mon"）
+- 日期部分：
+- \\yyyy -> 完整年份（例如 "2020"）。
+- \\yy -> 年份的后两位（例如 "20"）。
+- \\M -> 完整月份名称（例如 "October"）。
+- \\m -> 月份缩写（例如 "Oct"）。
+- \\m$ -> 数字月份（例如 "11"）。
+- \\D -> 完整星期名称（例如 "Monday"）。
+- \\d -> 星期缩写（例如 "Mon"）。
 
-- \\d$ -> 月份中的日期（例如 "08"）
-- 时间部分
-- \\h% -> 小时（12 小时制，例如 "01"）
-- \\hh -> 补零后的小时（例如 "01"）
-- \\mm -> 补零后的分钟（例如 "02"）
-- \\ss -> 补零后的秒（例如 "03"）
+- \\d$ -> 月份中的日期（例如 "08"）。
+- 时间部分：
+- \\h% -> 小时（12 小时制，例如 "01"）。
+- \\hh -> 补零后的小时（例如 "01"）。
+- \\mm -> 补零后的分钟（例如 "02"）。
+- \\ss -> 补零后的秒（例如 "03"）。
 
-- 上下午部分
-- \\md -> 小写上下午标识（例如 "am" 或 "pm"）
-- \\MD -> 大写上下午标识（例如 "AM" 或 "PM"）
-- \\n -> 换行`,
+- 上下午部分：
+- \\md -> 小写上下午标识（例如 "am" 或 "pm"）。
+- \\MD -> 大写上下午标识（例如 "AM" 或 "PM"）。
+- \\n -> 换行。`,
   Untitled: "未命名",
   "toggle collapse bookmark settings": "展开或折叠书签设置",
   "reposition bookmark": "移动书签",
@@ -438,11 +438,11 @@ export const zhCN = {
   "folder.iconColor": "文件夹图标颜色",
   "folder.fill": "文件夹填充颜色",
   "folder.contents": "文件夹内容",
-  "input url...": "输入 URL...",
-  "input color... (leave empty for bookmarks.defaultIconColor)":
+  "Input URL...": "输入 URL...",
+  "Input color... (leave empty for bookmarks.defaultIconColor)":
     "输入颜色...（留空则使用 bookmarks.defaultIconColor）",
-  "input color... (leave empty for default)": "输入颜色...（留空则使用默认值）",
-  "input icon-type... (leave empty for bookmarks.defaultFolderIconType)":
+  "Input color... (leave empty for default)": "输入颜色...（留空则使用默认值）",
+  "Input icon-type... (leave empty for bookmarks.defaultFolderIconType)":
     "输入图标类型...（留空则使用 bookmarks.defaultFolderIconType）",
   "reorder wallpaper": "调整壁纸顺序",
   "delete wallpaper": "删除壁纸",
@@ -453,12 +453,12 @@ export const zhCN = {
   "add url": "添加 URL",
   "upload file": "上传文件",
   "add solid color": "添加纯色",
-  "Input wallpaper URL": "输入壁纸 URL",
-  "Input wallpaper color (e.g. #171717)": "输入壁纸颜色（例如 #171717）",
-  "Edit wallpaper URL": "编辑壁纸 URL",
-  "Edit wallpaper color (e.g. #171717)": "编辑壁纸颜色（例如 #171717）",
+  "Input wallpaper URL.": "输入壁纸 URL。",
+  "Input wallpaper color (e.g. #171717).": "输入壁纸颜色（例如 #171717）。",
+  "Edit wallpaper URL.": "编辑壁纸 URL。",
+  "Edit wallpaper color (e.g. #171717).": "编辑壁纸颜色（例如 #171717）。",
   video: "视频",
-  "do you want to reset all wallpapers for the selected type? this cannot be undone.":
+  "Do you want to reset all wallpapers for the selected type? This cannot be undone.":
     "是否要重置当前所选类型的全部壁纸？此操作无法撤销。",
   Search: "搜索",
   "Search the web": "搜索网页",

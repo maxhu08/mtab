@@ -6,7 +6,7 @@ import { logger } from "~/src/utils/logger";
 import { t } from "~/src/options/scripts/i18n";
 
 export const setDefaultConfig = () => {
-  void showActionDialog(t("do you want to reset your options to default? this cannot be undone."), {
+  void showActionDialog(t("Do you want to reset your options to default? This cannot be undone."), {
     cancelText: t("cancel"),
     actionText: t("reset"),
     onAction: async () => {
@@ -14,11 +14,11 @@ export const setDefaultConfig = () => {
       logger.log("[RESET_DEBUG]", clonedDefaultConfig);
       fillInputs(clonedDefaultConfig);
       saveConfig(false);
-      toast.success(t("options reset to default"));
+      toast.success(t("Options reset to default."));
     }
   }).then((confirmed) => {
     if (!confirmed) {
-      toast.info(t("you selected no, options did not reset"));
+      toast.info(t("You selected no, options did not reset."));
     }
   });
 };

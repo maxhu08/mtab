@@ -24,7 +24,7 @@ import { t } from "~/src/options/scripts/i18n";
 export const saveConfig = (notify: boolean = true): Promise<Config | undefined> => {
   if (searchUseCustomEngineCheckboxEl.checked) {
     if (!searchCustomEngineURLInputEl.value.includes("{}")) {
-      toast.error(t("search.customEngineURL must contain {}, aborting save"));
+      toast.error(t("The search.customEngineURL must contain {}; aborting save."));
       return Promise.resolve(undefined);
     }
   }
@@ -64,7 +64,7 @@ export const saveConfig = (notify: boolean = true): Promise<Config | undefined> 
           config: draft
         })
         .then(() => {
-          if (notify) toast.success(t("changes saved"));
+          if (notify) toast.success(t("Changes saved."));
           resolve(draft);
         });
 

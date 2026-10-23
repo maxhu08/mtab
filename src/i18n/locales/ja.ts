@@ -2,33 +2,33 @@ import { customMessageHelp } from "~/src/i18n/messages";
 
 export const ja = {
   "download wallpaper": "壁紙をダウンロード",
-  "could not download wallpaper": "壁紙をダウンロードできませんでした",
-  export: "エクスポート",
+  "Could not download wallpaper.": "壁紙をダウンロードできませんでした。",
+  Export: "エクスポート",
   "copy to clipboard": "クリップボードにコピー",
   or: "または",
   "upload config": "設定をアップロード",
-  "could not read file": "ファイルを読み取れませんでした",
+  "Could not read file.": "ファイルを読み取れませんでした。",
   "download config": "設定をダウンロード",
   "download wallpapers": "壁紙をダウンロード",
-  "wallpapers are not included in the config because they can be too large. you can download them separately as a zip file.":
+  "Wallpapers are not included in the config because they can be too large. You can download them separately as a ZIP file.":
     "壁紙はファイルサイズが大きくなる場合があるため、設定には含まれません。ZIP ファイルとして別途ダウンロードできます。",
-  "no uploaded wallpapers to download": "ダウンロードできるアップロード済みの壁紙はありません",
-  "could not export wallpapers": "壁紙をエクスポートできませんでした",
-  "could not export config": "設定をエクスポートできませんでした",
+  "No uploaded wallpapers to download.": "ダウンロードできるアップロード済みの壁紙はありません。",
+  "Could not export wallpapers.": "壁紙をエクスポートできませんでした。",
+  "Could not export config.": "設定をエクスポートできませんでした。",
   "options ヽ(・ω・*)": "設定 ヽ(・ω・*)",
   logo: "ロゴ",
   options: "設定",
   "options.language": "言語",
   "options.showOptionsButton": "設定ボタンを表示",
-  "Tip: you can still access the options by pressing `extensions > mtab > options`":
-    "ヒント：`extensions > mtab > options` からでも設定を開けます",
+  "Tip: you can still access the options by pressing `extensions > mtab > options`.":
+    "ヒント：`extensions > mtab > options` からでも設定を開けます。",
   user: "ユーザー",
   "user.name": "ユーザー名",
   title: "タイトル",
   "title.defaultTitle": "デフォルトタイトル",
   "title.dynamic.enabled": "動的タイトルを有効化",
-  "When enabled, the page title changes to match what is in the search bar":
-    "有効にすると、ページタイトルが検索バーの内容に合わせて変わります",
+  "When enabled, the page title changes to match what is in the search bar.":
+    "有効にすると、ページタイトルが検索バーの内容に合わせて変わります。",
   "title.effect": "タイトル効果",
   none: "なし",
   typewriter: "タイプライター",
@@ -38,17 +38,17 @@ export const ja = {
   default: "デフォルト",
   custom: "カスタム",
   "title.customFavicon": "カスタムファビコン",
-  "Note: customFavicon is not included when exporting and importing configs due to taking too much space":
-    "注意：customFavicon は容量が大きいため、設定のエクスポート／インポートには含まれません",
+  "Note: customFavicon is not included when exporting and importing configs due to taking too much space.":
+    "注意：customFavicon は容量が大きいため、設定のエクスポート／インポートには含まれません。",
   reset: "リセット",
-  "live preview": "ライブプレビュー",
+  "Live preview": "ライブプレビュー",
   message: "メッセージ",
   "message.enabled": "メッセージを有効化",
   "message.font.type": "フォントの種類",
   "message.font.custom": "カスタムフォント",
-  "Use a Google Fonts URL to choose a font": "Google Fonts URL でフォントを指定します",
-  "Example: `https://fonts.googleapis.com/css2?family=Anton+SC&display=swap`":
-    "例：`https://fonts.googleapis.com/css2?family=Anton+SC&display=swap`",
+  "Use a Google Fonts URL to choose a font.": "Google Fonts URL でフォントを指定します。",
+  "Example: `https://fonts.googleapis.com/css2?family=Anton+SC&display=swap`.":
+    "例：`https://fonts.googleapis.com/css2?family=Anton+SC&display=swap`。",
   "message.textColor": "文字色",
   "message.textSize": "文字サイズ",
   "message.type": "メッセージの種類",
@@ -57,11 +57,11 @@ export const ja = {
   "time-12": "12時間表示",
   "time-24": "24時間表示",
   weather: "天気",
-  "Note: you need to have location permissions set to `allow` for weather messages to work":
-    "注意：天気メッセージを使うには、位置情報の権限を `allow` に設定する必要があります",
-  "Weather data may be delayed due to being cached in 5 minutes intervals for faster load times":
-    "読み込みを速くするため天気データは5分間隔でキャッシュされるため、表示が遅れる場合があります",
-  "All weather data from": "天気データ提供元",
+  "Note: you need to have location permissions set to `allow` for weather messages to work.":
+    "注意：天気メッセージを使うには、位置情報の権限を `allow` に設定する必要があります。",
+  "Weather data may be delayed due to being cached in 5 minutes intervals for faster load times.":
+    "読み込みを速くするため天気データは5分間隔でキャッシュされるため、表示が遅れる場合があります。",
+  "All weather data from:": "天気データ提供元：",
   "message.weather.unitsType": "気温の単位",
   "message.customText": "カスタムメッセージ",
   wallpaper: "壁紙",
@@ -73,22 +73,22 @@ export const ja = {
   "solid-color": "単色",
   mixed: "ミックス",
   "wallpaper.urls": "壁紙 URL",
-  "Tip: you can use video file formats like MP4, MOV, and more":
-    "ヒント：MP4、MOV などの動画形式も使えます",
-  "To use URLs as wallpapers (right click > copy image address)":
-    "URL を壁紙として使う場合（右クリック > 画像アドレスをコピー）",
+  "Tip: you can use video file formats like MP4, MOV, and more.":
+    "ヒント：MP4、MOV などの動画形式も使えます。",
+  "To use URLs as wallpapers (right click > copy image address).":
+    "URL を壁紙として使う場合（右クリック > 画像アドレスをコピー）。",
   "wallpaper.fileUploads": "アップロードした壁紙ファイル",
-  "Tip: you can upload PNG, JPG, WEBP, GIF, MP4, and more":
-    "ヒント：PNG、JPG、WEBP、GIF、MP4 などをアップロードできます",
-  "It is recommended to scale images to match your resolution for faster loading times":
-    "読み込みを速くするため、画像は画面解像度に合わせてリサイズすることをおすすめします",
-  "Note: fileUploads wallpapers are not included when exporting and importing configs due to taking too much space":
-    "注意：アップロードした壁紙ファイルは容量が大きいため、設定のエクスポート／インポートには含まれません",
+  "Tip: you can upload PNG, JPG, WEBP, GIF, MP4, and more.":
+    "ヒント：PNG、JPG、WEBP、GIF、MP4 などをアップロードできます。",
+  "It is recommended to scale images to match your resolution for faster loading times.":
+    "読み込みを速くするため、画像は画面解像度に合わせてリサイズすることをおすすめします。",
+  "Note: fileUploads wallpapers are not included when exporting and importing configs due to taking too much space.":
+    "注意：アップロードした壁紙ファイルは容量が大きいため、設定のエクスポート／インポートには含まれません。",
   "wallpaper.solidColors": "単色の壁紙",
   "wallpaper.random": "ランダム壁紙",
   "You can hover your cursor in the bottom-left corner on the new tab page to see wallpaper credits.":
     "新しいタブページの左下にカーソルを合わせると、壁紙のクレジットを確認できます。",
-  "Random wallpapers are sourced from": "ランダム壁紙の提供元",
+  "Random wallpapers are sourced from:": "ランダム壁紙の提供元：",
   "wallpaper.mixed": "ミックス壁紙",
   "Mix URL, file-upload, and solid-color items in one rotation list.":
     "URL、ファイルアップロード、単色の項目を1つのローテーションリストに混在できます。",
@@ -138,13 +138,13 @@ export const ja = {
   "animations.bookmarkType": "ブックマークアニメーション",
   search: "検索",
   "search.enabled": "検索を有効化",
-  "Tip: press `Ctrl+Enter` to open your search in a new tab":
-    "ヒント：`Ctrl+Enter` を押すと検索結果を新しいタブで開けます",
+  "Tip: press `Ctrl+Enter` to open your search in a new tab.":
+    "ヒント：`Ctrl+Enter` を押すと検索結果を新しいタブで開けます。",
   "search.engine": "検索エンジン",
   "search.useCustomEngine": "カスタム検索エンジンを使う",
   "search.customEngineURL": "カスタム検索エンジン URL",
-  "Use `{}` to represent the search query": "検索語句を表すには `{}` を使います",
-  "Example: `https://www.google.com/search?q={}`": "例：`https://www.google.com/search?q={}`",
+  "Use `{}` to represent the search query.": "検索語句を表すには `{}` を使います。",
+  "Example: `https://www.google.com/search?q={}`.": "例：`https://www.google.com/search?q={}`。",
   "search.placeholderText": "検索プレースホルダー",
   "search.bookmarkPlaceholderText": "ブックマーク検索プレースホルダー",
   "search.buttons.clear": "クリアボタンを表示",
@@ -154,62 +154,62 @@ export const ja = {
   "When enabled, shows a button to submit your search.":
     "有効にすると、検索を実行するボタンを表示します。",
   "search.recognizeLinks": "リンクを認識",
-  "Automatically detects links in search results and opens them directly instead of running a search":
-    "検索内容内のリンクを自動で検出し、検索せずに直接開きます",
-  "e.g., typing `example.com` navigates directly to `https://example.com` instead of performing a search":
-    "例：`example.com` と入力すると、検索せずに `https://example.com` へ直接移動します",
+  "Automatically detects links in search results and opens them directly instead of running a search.":
+    "検索内容内のリンクを自動で検出し、検索せずに直接開きます。",
+  "E.g., typing `example.com` navigates directly to `https://example.com` instead of performing a search.":
+    "例：`example.com` と入力すると、検索せずに `https://example.com` へ直接移動します。",
   "search.suggestions": "検索候補",
-  "Shows live query suggestions as you type": "入力中に検索候補をリアルタイムで表示します",
-  "Suggestions are sourced from DuckDuckGo's public autocomplete suggestions API and are not based on your personal search history. Requests are sent directly from your browser to DuckDuckGo and do not include cookies, accounts, extension identifiers, or other personal data":
-    "検索候補は DuckDuckGo の公開オートコンプリート候補 API から取得され、個人の検索履歴には基づきません。リクエストはブラウザーから DuckDuckGo へ直接送信され、Cookie、アカウント、拡張機能の識別子、その他の個人データは含まれません",
+  "Shows live query suggestions as you type.": "入力中に検索候補をリアルタイムで表示します。",
+  "Suggestions are sourced from DuckDuckGo's public autocomplete suggestions API and are not based on your personal search history. Requests are sent directly from your browser to DuckDuckGo and do not include cookies, accounts, extension identifiers, or other personal data.":
+    "検索候補は DuckDuckGo の公開オートコンプリート候補 API から取得され、個人の検索履歴には基づきません。リクエストはブラウザーから DuckDuckGo へ直接送信され、Cookie、アカウント、拡張機能の識別子、その他の個人データは含まれません。",
   "search.assist.date": "日付アシスト",
-  "Shows the current date when you type 'date'": "'date' と入力すると現在の日付を表示します",
+  "Shows the current date when you type 'date'.": "'date' と入力すると現在の日付を表示します。",
   "search.assist.math": "計算アシスト",
-  "Automatically evaluates math expressions typed into the search input":
-    "検索ボックスに入力した数式を自動で計算します",
-  "e.g., `cos(pi / 6) * (3^2 - 4) + sin(45deg) + sqrt(20) = 9.50936975510832`":
-    "例：`cos(pi / 6) * (3^2 - 4) + sin(45deg) + sqrt(20) = 9.50936975510832`",
+  "Automatically evaluates math expressions typed into the search input.":
+    "検索ボックスに入力した数式を自動で計算します。",
+  "E.g., `cos(pi / 6) * (3^2 - 4) + sin(45deg) + sqrt(20) = 9.50936975510832`.":
+    "例：`cos(pi / 6) * (3^2 - 4) + sin(45deg) + sqrt(20) = 9.50936975510832`。",
   "search.assist.definitions": "辞書アシスト",
-  "Shows word definitions when you include definition keywords in the search input":
-    "検索ボックスに定義キーワードを含めると、単語の定義を表示します",
-  "e.g., `morning def` or `morning definition`": "例：`morning def` または `morning definition`",
-  "Definitions are sourced from": "定義データ提供元",
+  "Shows word definitions when you include definition keywords in the search input.":
+    "検索ボックスに定義キーワードを含めると、単語の定義を表示します。",
+  "E.g., `morning def` or `morning definition`.": "例：`morning def` または `morning definition`。",
+  "Definitions are sourced from:": "定義データ提供元：",
   "search.assist.conversions": "単位換算アシスト",
-  "Converts units directly from the search input": "検索ボックスから直接単位を換算します",
-  "e.g., `1 ft => 0.3048 m`": "例：`1 ft => 0.3048 m`",
-  "Supports length, weight, temperature, time, volume, area, speed, angle, data, and 170+ currencies":
-    "長さ、重さ、温度、時間、体積、面積、速度、角度、データ単位、170以上の通貨に対応しています",
-  "Currency conversion rates are sourced from": "為替レート提供元",
+  "Converts units directly from the search input.": "検索ボックスから直接単位を換算します。",
+  "E.g., `1 ft => 0.3048 m`.": "例：`1 ft => 0.3048 m`。",
+  "Supports length, weight, temperature, time, volume, area, speed, angle, data, and 170+ currencies.":
+    "長さ、重さ、温度、時間、体積、面積、速度、角度、データ単位、170以上の通貨に対応しています。",
+  "Currency conversion rates are sourced from:": "為替レート提供元：",
   "search.assist.passwordGenerator": "パスワード生成",
-  "Generates passwords directly from the search input, entirely locally":
-    "検索ボックスから直接、完全にローカルでパスワードを生成します",
-  "No data is sent anywhere; password generation happens on your device":
-    "データはどこにも送信されません。パスワード生成はお使いのデバイス上で行われます",
-  "Type `pw <length> <flags>` or `password <length> <flags>` to generate a password":
-    "パスワードを生成するには `pw <length> <flags>` または `password <length> <flags>` と入力します",
-  "e.g., `password 16 luns` generates a 16 character password with lowercase letters, uppercase letters, numbers, and symbols":
-    "例：`password 16 luns` は、小文字・大文字・数字・記号を含む16文字のパスワードを生成します",
-  flags: "フラグ",
-  "`l` - lowercase letters": "`l` - 小文字",
-  "`u` - uppercase letters": "`u` - 大文字",
-  "`n` - numbers": "`n` - 数字",
-  "`s` - symbols": "`s` - 記号",
-  "`m` - memorable": "`m` - 覚えやすい",
-  "if no arguments are specified, defaults to `16 luns`":
-    "引数を指定しない場合は `16 luns` が既定値です",
-  "Order of arguments and flags does not matter": "引数とフラグの順序は問いません",
+  "Generates passwords directly from the search input, entirely locally.":
+    "検索ボックスから直接、完全にローカルでパスワードを生成します。",
+  "No data is sent anywhere; password generation happens on your device.":
+    "データはどこにも送信されません。パスワード生成はお使いのデバイス上で行われます。",
+  "Type `pw <length> <flags>` or `password <length> <flags>` to generate a password.":
+    "パスワードを生成するには `pw <length> <flags>` または `password <length> <flags>` と入力します。",
+  "E.g., `password 16 luns` generates a 16 character password with lowercase letters, uppercase letters, numbers, and symbols.":
+    "例：`password 16 luns` は、小文字・大文字・数字・記号を含む16文字のパスワードを生成します。",
+  "Flags:": "フラグ：",
+  "`l` - lowercase letters.": "`l` - 小文字。",
+  "`u` - uppercase letters.": "`u` - 大文字。",
+  "`n` - numbers.": "`n` - 数字。",
+  "`s` - symbols.": "`s` - 記号。",
+  "`m` - memorable.": "`m` - 覚えやすい。",
+  "If no arguments are specified, defaults to `16 luns`.":
+    "引数を指定しない場合は `16 luns` が既定値です。",
+  "Order of arguments and flags does not matter.": "引数とフラグの順序は問いません。",
   "search.focusedBorderColor": "フォーカス時の枠線色",
-  "(use #00000000 for none)": "（なしにする場合は #00000000）",
+  "(Use #00000000 for none.)": "（なしにする場合は #00000000。）",
   "search.font.type": "検索フォントの種類",
   "search.font.custom": "カスタム検索フォント",
   "search.textColor": "検索テキスト色",
   "search.placeholderTextColor": "プレースホルダーの文字色",
   "search.searchIconColor": "検索アイコン色",
-  "This changes the -> color": "これは -> の色を変更します",
+  "This changes the -> color.": "これは -> の色を変更します。",
   "search.bookmarkIconColor": "ブックマークアイコン色",
-  "This changes the // color": "これは // の色を変更します",
+  "This changes the // color.": "これは // の色を変更します。",
   "search.selectIconColor": "選択アイコン色",
-  "This changes the > color": "これは > の色を変更します",
+  "This changes the > color.": "これは > の色を変更します。",
   "search.linkTextColor": "リンク文字色",
   hotkeys: "ショートカットキー",
   "Modifier keys are specified as `<c-x>`, `<m-x>`, and `<a-x>` for `ctrl+x`, `meta+x`, and `alt+x`. Combined modifiers are written like `<c-a-x>` or `<c-m-x>`. Use `<space>` for the space key.":
@@ -223,12 +223,12 @@ export const ja = {
   "bookmarks.type": "ブックマークの種類",
   "user-defined": "ユーザー定義",
   "default-blocky": "デフォルトブロック",
-  "Tip: `Ctrl+click` or `Middle click` to open a bookmark in a new tab":
-    "ヒント：`Ctrl+クリック` または `中クリック` でブックマークを新しいタブで開けます",
+  "Tip: `Ctrl+click` or `Middle click` to open a bookmark in a new tab.":
+    "ヒント：`Ctrl+クリック` または `中クリック` でブックマークを新しいタブで開けます。",
   "bookmarks.showBookmarkNames": "ブックマーク名を表示",
   "bookmarks.numberKeys": "数字キーを有効化",
-  "Enabling numberKeys -> makes it so that pressing 1 opens first bookmark, 2 opens second bookmark, and so on (0 activates the back button)":
-    "numberKeys -> を有効にすると、1で最初のブックマーク、2で2番目のブックマーク、というように開けます（0は戻るボタンを起動します）",
+  "Enabling numberKeys -> makes it so that pressing 1 opens first bookmark, 2 opens second bookmark, and so on (0 activates the back button).":
+    "NumberKeys -> を有効にすると、1で最初のブックマーク、2で2番目のブックマーク、というように開けます（0は戻るボタンを起動します）。",
   "bookmarks.enablePagination": "ページ分割を有効化",
   "When enabled, bookmark rows beyond maxBookmarkRowsPerPage are split into extra pages. Use the Prev/Next buttons or [ and ] keys to move between pages.":
     "有効にすると、maxBookmarkRowsPerPage を超えるブックマーク行は追加ページに分割されます。前へ／次へボタン、または [ と ] キーでページを移動します。",
@@ -241,19 +241,19 @@ export const ja = {
   "bookmarks.userDefinedCols": "ユーザー定義ブックマークの列数",
   "bookmarks.userDefined": "ユーザー定義ブックマーク",
   "Valid icon types you can use:": "使用できるアイコンタイプ：",
-  "Find available icon types at": "利用可能なアイコンタイプはこちらで確認できます",
-  "remixicon icon types should be formatted as":
-    "Remix Icon のアイコンタイプは次の形式で入力します",
-  "You can also use Nerd Font icons. Check the cheat sheet at":
-    "Nerd Font アイコンも使用できます。チートシートはこちらです",
-  "nerdfont icon types should be formatted as": "Nerd Font のアイコンタイプは次の形式で入力します",
-  "fontawesome icon types should be formatted as":
-    "Font Awesome のアイコンタイプは次の形式で入力します",
-  "simpleicons icon types should be formatted as":
-    "Simple Icons のアイコンタイプは次の形式で入力します",
-  "`url` icon types should be formatted as": "`url` アイコンタイプは次の形式で入力します",
-  "You can use URLs as icon types (right click > copy image address)":
-    "URL をアイコンタイプとして使用できます（右クリック > 画像アドレスをコピー）",
+  "Find available icon types at:": "利用可能なアイコンタイプはこちらで確認できます：",
+  "Remix Icon types should be formatted as:": "Remix Icon のアイコンタイプは次の形式で入力します：",
+  "You can also use Nerd Font icons. Check the cheat sheet at:":
+    "Nerd Font アイコンも使用できます。チートシートはこちらです：",
+  "Nerd Font icon types should be formatted as:":
+    "Nerd Font のアイコンタイプは次の形式で入力します：",
+  "Font Awesome icon types should be formatted as:":
+    "Font Awesome のアイコンタイプは次の形式で入力します：",
+  "Simple Icons types should be formatted as:":
+    "Simple Icons のアイコンタイプは次の形式で入力します：",
+  "`url` icon types should be formatted as:": "`url` アイコンタイプは次の形式で入力します：",
+  "You can use URLs as icon types (right click > copy image address).":
+    "URL をアイコンタイプとして使用できます（右クリック > 画像アドレスをコピー）。",
   "You can also use the icon picker on the right of each icon input.":
     "各アイコン入力欄の右側にあるアイコンピッカーも使えます。",
   "collapse all": "すべて折りたたむ",
@@ -270,24 +270,24 @@ export const ja = {
   "bookmarks.defaultBlockyColorType": "デフォルトブロックの色タイプ",
   "bookmarks.defaultBlockyColor": "デフォルトブロックの色",
   "bookmarks.bookmarksLocationChromium": "Chromium ブックマークの場所",
-  "(only applies to chromium based browsers)": "（Chromium ベースのブラウザーにのみ適用）",
+  "(Only applies to Chromium-based browsers.)": "（Chromium ベースのブラウザーにのみ適用。）",
   root: "ルート",
   "Selecting root displays every top-level bookmark folder.":
     "ルートを選択すると、最上位のブックマークフォルダーがすべて表示されます。",
   "bookmarks bar": "ブックマーク バー",
   mobile: "モバイル",
   "bookmarks.bookmarksLocationFirefox": "Firefox ブックマークの場所",
-  "(only applies to firefox based browsers)": "（Firefox ベースのブラウザーにのみ適用）",
+  "(Only applies to Firefox-based browsers.)": "（Firefox ベースのブラウザーにのみ適用。）",
   menu: "メニュー",
   toolbar: "ツールバー",
   other: "その他",
   "bookmarks.defaultFaviconSource": "デフォルトファビコンの取得元",
-  "(determines where bookmark favicons are fetched from)":
-    "（ブックマークのファビコンをどこから取得するかを決めます）",
+  "(Determines where bookmark favicons are fetched from.)":
+    "（ブックマークのファビコンをどこから取得するかを決めます。）",
   extras: "追加機能",
   "extras.snow.enabled": "雪エフェクト",
-  "Fun snow effect": "楽しい雪のエフェクト",
-  "Winter mode enables snow during december": "冬モードでは12月に雪エフェクトが有効になります",
+  "Fun snow effect.": "楽しい雪のエフェクト。",
+  "Winter mode enables snow during December.": "冬モードでは12月に雪エフェクトが有効になります。",
   on: "オン",
   winter: "冬モード",
   off: "オフ",
@@ -302,31 +302,31 @@ export const ja = {
   "options language": "設定言語",
   "options show options button": "設定ボタンを表示",
   "toggle user section": "ユーザーセクションを展開／折りたたみ",
-  "input name...": "名前を入力...",
+  "Input name...": "名前を入力...",
   "toggle title section": "タイトルセクションを展開／折りたたみ",
-  "input title...": "タイトルを入力...",
+  "Input title...": "タイトルを入力...",
   "title dynamic enabled": "動的タイトルを有効化",
-  "input speed (ms)...": "速度（ミリ秒）を入力...",
+  "Input speed (ms)...": "速度（ミリ秒）を入力...",
   "enter character count...": "文字数を入力...",
   "toggle message section": "メッセージセクションを展開／折りたたみ",
   "message enabled": "メッセージを有効化",
-  "input font url...": "フォント URL を入力...",
-  "input color...": "色を入力...",
-  "input size...": "サイズを入力...",
-  "input text...": "テキストを入力...",
+  "Input font URL...": "フォント URL を入力...",
+  "Input color...": "色を入力...",
+  "Input size...": "サイズを入力...",
+  "Input text...": "テキストを入力...",
   "toggle wallpaper section": "壁紙セクションを展開／折りたたみ",
   "wallpaper enabled": "壁紙を有効化",
-  "input brightness (0.0-1.0)...": "明るさ（0.0-1.0）を入力...",
-  "input blur...": "ぼかし値を入力...",
+  "Input brightness (0.0-1.0)...": "明るさ（0.0-1.0）を入力...",
+  "Input blur...": "ぼかし値を入力...",
   "toggle ui section": "UI セクションを展開／折りたたみ",
-  "input blur strength...": "ぼかしの強さを入力...",
+  "Input blur strength...": "ぼかしの強さを入力...",
   "toggle animations section": "アニメーションセクションを展開／折りたたみ",
   "animations enabled": "アニメーションを有効化",
   "toggle search section": "検索セクションを展開／折りたたみ",
   "search enabled": "検索を有効化",
   "search use custom engine": "カスタム検索エンジンを使う",
-  "E.g https://www.google.com/search?q={}": "例 https://www.google.com/search?q={}",
-  "input placeholder...": "プレースホルダーを入力...",
+  "E.g., https://www.google.com/search?q={}": "例 https://www.google.com/search?q={}",
+  "Input placeholder...": "プレースホルダーを入力...",
   "search buttons clear": "クリアボタンを表示",
   "search buttons search": "検索ボタンを表示",
   "search recognize links": "リンクを認識",
@@ -342,87 +342,89 @@ export const ja = {
   "bookmarks show bookmark names": "ブックマーク名を表示",
   "bookmarks number keys": "ブックマーク数字キーを有効化",
   "bookmarks enable pagination": "ブックマークのページ分割を有効化",
-  "input number...": "数値を入力...",
-  "input icon-type...": "アイコンタイプを入力...",
+  "Input number...": "数値を入力...",
+  "Input icon-type...": "アイコンタイプを入力...",
   "toggle extras section": "追加機能セクションを展開／折りたたみ",
-  "save (ctrl+s)": "保存（ctrl+s）",
-  "save & export (ctrl+e)": "保存してエクスポート（ctrl+e）",
-  "import & save (ctrl+i)": "インポートして保存（ctrl+i）",
-  "input your save (THIS WILL OVERWRITE YOUR CURRENT CONFIG)":
-    "インポートする保存データを入力（現在の設定は上書きされます）",
-  "input was empty, nothing imported": "入力が空のため、何もインポートされませんでした",
-  "incorrect save format, use MTAB_SAVE_FORMAT_v#.#.#_ or {legacyPrefix} for legacy saves":
-    "保存形式が正しくありません。MTAB_SAVE_FORMAT_v#.#.#_ を使用してください。旧形式の保存データには {legacyPrefix} を使用してください",
-  "invalid save format, expected MTAB_SAVE_FORMAT_v#.#.#_":
-    "保存形式が無効です。MTAB_SAVE_FORMAT_v#.#.#_ が必要です",
-  "incorrect save format": "保存形式が正しくありません",
-  "failed to parse legacy save format": "旧形式の保存データを解析できませんでした",
-  "invalid config data": "設定データが無効です",
-  "config saved & copied to clipboard": "設定を保存し、クリップボードにコピーしました",
-  "could not save config to clipboard": "設定をクリップボードにコピーできませんでした",
-  "search.customEngineURL must contain {}, aborting save":
-    "search.customEngineURL には {} が必要です。保存を中止しました",
-  "changes saved": "変更を保存しました",
-  "do you want to reset your options to default? this cannot be undone.":
+  "Save (Ctrl+S)": "保存（ctrl+s）",
+  "Save & export (Ctrl+E)": "保存してエクスポート（ctrl+e）",
+  "Import & save (Ctrl+I)": "インポートして保存（ctrl+i）",
+  "Input your save. This will overwrite your current config.":
+    "インポートする保存データを入力（現在の設定は上書きされます）。",
+  "Input was empty, nothing imported.": "入力が空のため、何もインポートされませんでした。",
+  "Incorrect save format, use MTAB_SAVE_FORMAT_v#.#.#_ or {legacyPrefix} for legacy saves.":
+    "保存形式が正しくありません。MTAB_SAVE_FORMAT_v#.#.#_ を使用してください。旧形式の保存データには {legacyPrefix} を使用してください。",
+  "Invalid save format, expected MTAB_SAVE_FORMAT_v#.#.#_.":
+    "保存形式が無効です。MTAB_SAVE_FORMAT_v#.#.#_ が必要です。",
+  "Incorrect save format.": "保存形式が正しくありません。",
+  "Failed to parse legacy save format.": "旧形式の保存データを解析できませんでした。",
+  "Invalid config data.": "設定データが無効です。",
+  "Config saved & copied to clipboard.": "設定を保存し、クリップボードにコピーしました。",
+  "Could not save config to clipboard.": "設定をクリップボードにコピーできませんでした。",
+  "The search.customEngineURL must contain {}; aborting save.":
+    "search.customEngineURL には {} が必要です。保存を中止しました。",
+  "Changes saved.": "変更を保存しました。",
+  "Do you want to reset your options to default? This cannot be undone.":
     "設定をデフォルトに戻しますか？この操作は元に戻せません。",
   cancel: "キャンセル",
-  "options reset to default": "設定をデフォルトに戻しました",
-  "you selected no, options did not reset": "キャンセルされたため、設定はリセットされませんでした",
-  "input your bookmark or folder": "インポートするブックマークまたはフォルダーを入力",
-  "could not import your bookmark or folder":
-    "ブックマークまたはフォルダーをインポートできませんでした",
-  "incorrect format, expected MTAB_USER_DEFINED_BOOKMARK_FORMAT_v#.#.#_ or MTAB_USER_DEFINED_FOLDER_FORMAT_v#.#.#_":
-    "形式が正しくありません。MTAB_USER_DEFINED_BOOKMARK_FORMAT_v#.#.#_ または MTAB_USER_DEFINED_FOLDER_FORMAT_v#.#.#_ が必要です",
-  "invalid bookmark data": "ブックマークデータが無効です",
-  "input your bookmarks and folders to import (THIS WILL OVERWRITE YOUR CURRENT BOOKMARKS AND FOLDERS)":
-    "インポートするブックマークとフォルダーを入力（現在のブックマークとフォルダーは上書きされます）",
-  "incorrect format, expected MTAB_USER_USER_DEFINED_BOOKMARKS_FORMAT_v#.#.#_":
-    "形式が正しくありません。MTAB_USER_USER_DEFINED_BOOKMARKS_FORMAT_v#.#.#_ が必要です",
-  "imported {bookmarks} bookmarks and {folders} folders":
-    "{bookmarks} 件のブックマークと {folders} 件のフォルダーをインポートしました",
-  "bookmark copied to clipboard": "ブックマークをクリップボードにコピーしました",
-  "folder and contents copied to clipboard": "フォルダーとその内容をクリップボードにコピーしました",
-  "{bookmarks} bookmarks and {folders} folders copied to clipboard":
-    "{bookmarks} 件のブックマークと {folders} 件のフォルダーをクリップボードにコピーしました",
-  "paste here...": "ここに貼り付け...",
+  "Options reset to default.": "設定をデフォルトに戻しました。",
+  "You selected no, options did not reset.":
+    "キャンセルされたため、設定はリセットされませんでした。",
+  "Input your bookmark or folder.": "インポートするブックマークまたはフォルダーを入力。",
+  "Could not import your bookmark or folder.":
+    "ブックマークまたはフォルダーをインポートできませんでした。",
+  "Incorrect format, expected MTAB_USER_DEFINED_BOOKMARK_FORMAT_v#.#.#_ or MTAB_USER_DEFINED_FOLDER_FORMAT_v#.#.#_.":
+    "形式が正しくありません。MTAB_USER_DEFINED_BOOKMARK_FORMAT_v#.#.#_ または MTAB_USER_DEFINED_FOLDER_FORMAT_v#.#.#_ が必要です。",
+  "Invalid bookmark data.": "ブックマークデータが無効です。",
+  "Input your bookmarks and folders to import. This will overwrite your current bookmarks and folders.":
+    "インポートするブックマークとフォルダーを入力（現在のブックマークとフォルダーは上書きされます）。",
+  "Incorrect format, expected MTAB_USER_USER_DEFINED_BOOKMARKS_FORMAT_v#.#.#_.":
+    "形式が正しくありません。MTAB_USER_USER_DEFINED_BOOKMARKS_FORMAT_v#.#.#_ が必要です。",
+  "Imported {bookmarks} bookmarks and {folders} folders.":
+    "{bookmarks} 件のブックマークと {folders} 件のフォルダーをインポートしました。",
+  "Bookmark copied to clipboard.": "ブックマークをクリップボードにコピーしました。",
+  "Folder and contents copied to clipboard.":
+    "フォルダーとその内容をクリップボードにコピーしました。",
+  "{bookmarks} bookmarks and {folders} folders copied to clipboard.":
+    "{bookmarks} 件のブックマークと {folders} 件のフォルダーをクリップボードにコピーしました。",
+  "Paste here...": "ここに貼り付け...",
   ok: "OK",
   confirm: "確認",
   "Icon picker": "アイコンピッカー",
-  "choose icon": "アイコンを選択",
+  "Choose icon": "アイコンを選択",
   "Search by icon name, family, or full icon type.":
     "アイコン名、ファミリー、完全なアイコンタイプで検索できます。",
-  "search icons...": "アイコンを検索...",
-  "no icons found": "アイコンが見つかりません",
-  "showing {visible} of {total} icons; search to narrow results":
-    "{total} 個中 {visible} 個のアイコンを表示中。検索して絞り込めます",
-  "showing {total} icons": "{total} 個のアイコンを表示中",
-  "choose color": "色を選択",
-  "choose color for {field}": "{field} の色を選択",
-  "choose icon for {field}": "{field} のアイコンを選択",
+  "Search icons...": "アイコンを検索...",
+  "No icons found.": "アイコンが見つかりません。",
+  "Showing {visible} of {total} icons; search to narrow results.":
+    "{total} 個中 {visible} 個のアイコンを表示中。検索して絞り込めます。",
+  "Showing {total} icons.": "{total} 個のアイコンを表示中。",
+  "Choose color": "色を選択",
+  "Choose color for {field}": "{field} の色を選択",
+  "Choose icon for {field}": "{field} のアイコンを選択",
   Notifications: "通知",
   "Toast action": "トースト操作",
   [customMessageHelp]: `以下のように \\ を使えます：
 
-- 日付パーツ
-- \\yyyy -> 西暦年（例："2020"）
-- \\yy -> 西暦年の下2桁（例："20"）
-- \\M -> 月名（例："October"）
-- \\m -> 月名の短縮形（例："Oct"）
-- \\m$ -> 数字の月（例："11"）
-- \\D -> 曜日名（例："Monday"）
-- \\d -> 曜日名の短縮形（例："Mon"）
+- 日付パーツ：
+- \\yyyy -> 西暦年（例："2020"）。
+- \\yy -> 西暦年の下2桁（例："20"）。
+- \\M -> 月名（例："October"）。
+- \\m -> 月名の短縮形（例："Oct"）。
+- \\m$ -> 数字の月（例："11"）。
+- \\D -> 曜日名（例："Monday"）。
+- \\d -> 曜日名の短縮形（例："Mon"）。
 
-- \\d$ -> 日にち（例："08"）
-- 時刻パーツ
-- \\h% -> 時（12時間制、例："01"）
-- \\hh -> ゼロ埋めされた時（例："01"）
-- \\mm -> ゼロ埋めされた分（例："02"）
-- \\ss -> ゼロ埋めされた秒（例："03"）
+- \\d$ -> 日にち（例："08"）。
+- 時刻パーツ：
+- \\h% -> 時（12時間制、例："01"）。
+- \\hh -> ゼロ埋めされた時（例："01"）。
+- \\mm -> ゼロ埋めされた分（例："02"）。
+- \\ss -> ゼロ埋めされた秒（例："03"）。
 
-- 午前／午後パーツ
-- \\md -> 小文字の午前／午後表記（例："am" または "pm"）
-- \\MD -> 大文字の午前／午後表記（例："AM" または "PM"）
-- \\n -> 改行`,
+- 午前／午後パーツ：
+- \\md -> 小文字の午前／午後表記（例："am" または "pm"）。
+- \\MD -> 大文字の午前／午後表記（例："AM" または "PM"）。
+- \\n -> 改行。`,
   Untitled: "無題",
   "toggle collapse bookmark settings": "ブックマーク設定を展開／折りたたみ",
   "reposition bookmark": "ブックマークを並べ替え",
@@ -446,11 +448,11 @@ export const ja = {
   "folder.iconColor": "フォルダーアイコンの色",
   "folder.fill": "フォルダーの塗りつぶし色",
   "folder.contents": "フォルダーの内容",
-  "input url...": "URL を入力...",
-  "input color... (leave empty for bookmarks.defaultIconColor)":
+  "Input URL...": "URL を入力...",
+  "Input color... (leave empty for bookmarks.defaultIconColor)":
     "色を入力...（空欄の場合は bookmarks.defaultIconColor を使用）",
-  "input color... (leave empty for default)": "色を入力...（空欄の場合はデフォルトを使用）",
-  "input icon-type... (leave empty for bookmarks.defaultFolderIconType)":
+  "Input color... (leave empty for default)": "色を入力...（空欄の場合はデフォルトを使用）",
+  "Input icon-type... (leave empty for bookmarks.defaultFolderIconType)":
     "アイコンタイプを入力...（空欄の場合は bookmarks.defaultFolderIconType を使用）",
   "reorder wallpaper": "壁紙を並べ替え",
   "delete wallpaper": "壁紙を削除",
@@ -461,12 +463,12 @@ export const ja = {
   "add url": "URL を追加",
   "upload file": "ファイルをアップロード",
   "add solid color": "単色を追加",
-  "Input wallpaper URL": "壁紙 URL を入力",
-  "Input wallpaper color (e.g. #171717)": "壁紙の色を入力（例：#171717）",
-  "Edit wallpaper URL": "壁紙 URL を編集",
-  "Edit wallpaper color (e.g. #171717)": "壁紙の色を編集（例：#171717）",
+  "Input wallpaper URL.": "壁紙 URL を入力。",
+  "Input wallpaper color (e.g. #171717).": "壁紙の色を入力（例：#171717）。",
+  "Edit wallpaper URL.": "壁紙 URL を編集。",
+  "Edit wallpaper color (e.g. #171717).": "壁紙の色を編集（例：#171717）。",
   video: "動画",
-  "do you want to reset all wallpapers for the selected type? this cannot be undone.":
+  "Do you want to reset all wallpapers for the selected type? This cannot be undone.":
     "選択した種類の壁紙をすべてリセットしますか？この操作は元に戻せません。",
   Search: "検索",
   "Search the web": "Web を検索",
