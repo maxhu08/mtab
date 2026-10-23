@@ -59,7 +59,7 @@ const ignoredStaticText = new Set([
   "nf-...",
   "fontawesome:",
   "fontawesome.com",
-  "(using v7.1.0)",
+  "(using v7.3.1)",
   "fa-... fa-...",
   "simpleicons:",
   "icones.js.org",
