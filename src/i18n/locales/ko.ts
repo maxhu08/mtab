@@ -4,6 +4,10 @@ export const ko = {
   "download wallpaper": "배경화면 다운로드",
   "could not download wallpaper": "배경화면을 다운로드하지 못했습니다",
   export: "내보내기",
+  "copy to clipboard": "클립보드에 복사",
+  or: "또는",
+  "upload config": "설정 업로드",
+  "could not read file": "파일을 읽을 수 없습니다",
   "download config": "설정 다운로드",
   "download wallpapers": "배경화면 다운로드",
   "wallpapers are not included in the config because they can be too large. you can download them separately as a zip file.":

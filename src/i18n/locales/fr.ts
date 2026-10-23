@@ -4,6 +4,10 @@ export const fr = {
   "download wallpaper": "télécharger le fond d’écran",
   "could not download wallpaper": "impossible de télécharger le fond d’écran",
   export: "exporter",
+  "copy to clipboard": "copier dans le presse-papiers",
+  or: "ou",
+  "upload config": "importer une configuration",
+  "could not read file": "impossible de lire le fichier",
   "download config": "télécharger la configuration",
   "download wallpapers": "télécharger les fonds d’écran",
   "wallpapers are not included in the config because they can be too large. you can download them separately as a zip file.":

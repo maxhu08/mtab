@@ -14,6 +14,10 @@ type InputDialogOptions = {
   confirmText?: string;
   cancelText?: string;
   defaultValue?: string;
+  fileInput?: {
+    text: string;
+    accept: string;
+  };
 };
 type ActionDialogOptions = {
   cancelText?: string;
@@ -22,6 +26,11 @@ type ActionDialogOptions = {
 
   description?: string;
   variant?: "export";
+
+  additionalAction?: {
+    text: string;
+    onAction: () => void | Promise<void>;
+  };
 
   secondaryAction?: {
     text: string;
@@ -143,6 +152,41 @@ export const showInputDialog = (
 
   actions.append(cancelButton, confirmButton);
   dialog.append(textEl, inputContainerEl, actions);
+
+  if (options.fileInput) {
+    const separator = document.createElement("p");
+    separator.className = "my-3 text-center text-base text-neutral-400";
+    separator.textContent = t("or");
+
+    const fileInput = document.createElement("input");
+    fileInput.type = "file";
+    fileInput.accept = options.fileInput.accept;
+    fileInput.hidden = true;
+
+    const uploadButton = document.createElement("button");
+    uploadButton.type = "button";
+    uploadButton.className =
+      "w-full cursor-pointer rounded-md bg-emerald-500 px-3 py-2 text-base text-white transition hover:bg-emerald-600";
+    uploadButton.textContent = options.fileInput.text;
+    uploadButton.addEventListener("click", () => fileInput.click());
+    fileInput.addEventListener("change", async () => {
+      const file = fileInput.files?.[0];
+      if (!file) return;
+
+      try {
+        inputEl.value = await file.text();
+        inputEl.focus();
+      } catch {
+        toast.error(t("could not read file"));
+      }
+      fileInput.value = "";
+    });
+
+    dialog.insertBefore(separator, actions);
+    dialog.insertBefore(uploadButton, actions);
+    dialog.append(fileInput);
+  }
+
   overlay.appendChild(dialog);
   document.body.appendChild(overlay);
 
@@ -183,7 +227,7 @@ export const showInputDialog = (
         cancel();
       }
 
-      if (event.key === "Enter") {
+      if (event.key === "Enter" && !(event.target instanceof HTMLButtonElement)) {
         event.preventDefault();
         submit();
       }
@@ -258,6 +302,19 @@ export const showActionDialog = (text: string, options: ActionDialogOptions): Pr
   } else {
     actions.append(cancelButton, actionButton);
     dialog.append(textEl);
+  }
+
+  const additionalButton = options.additionalAction ? document.createElement("button") : null;
+  if (additionalButton && options.additionalAction) {
+    const separator = document.createElement("p");
+    separator.className = "text-center text-base text-neutral-400";
+    separator.textContent = t("or");
+
+    additionalButton.type = "button";
+    additionalButton.className = actionButton.className;
+    additionalButton.textContent = options.additionalAction.text;
+    actions.insertBefore(separator, secondaryButton ?? cancelButton);
+    actions.insertBefore(additionalButton, secondaryButton ?? cancelButton);
   }
 
   if (options.description) {
@@ -354,6 +411,9 @@ export const showActionDialog = (text: string, options: ActionDialogOptions): Pr
 
     secondaryButton?.addEventListener("click", () => {
       if (options.secondaryAction) void runAction(options.secondaryAction.onAction);
+    });
+    additionalButton?.addEventListener("click", () => {
+      if (options.additionalAction) void runAction(options.additionalAction.onAction);
     });
 
     actionButton.focus();

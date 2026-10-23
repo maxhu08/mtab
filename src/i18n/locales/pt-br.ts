@@ -4,6 +4,10 @@ export const ptBR = {
   "download wallpaper": "baixar papel de parede",
   "could not download wallpaper": "não foi possível baixar o papel de parede",
   export: "exportar",
+  "copy to clipboard": "copiar para a área de transferência",
+  or: "ou",
+  "upload config": "enviar configuração",
+  "could not read file": "não foi possível ler o arquivo",
   "download config": "baixar configuração",
   "download wallpapers": "baixar papéis de parede",
   "wallpapers are not included in the config because they can be too large. you can download them separately as a zip file.":

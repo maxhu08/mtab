@@ -4,6 +4,10 @@ export const ja = {
   "download wallpaper": "壁紙をダウンロード",
   "could not download wallpaper": "壁紙をダウンロードできませんでした",
   export: "エクスポート",
+  "copy to clipboard": "クリップボードにコピー",
+  or: "または",
+  "upload config": "設定をアップロード",
+  "could not read file": "ファイルを読み取れませんでした",
   "download config": "設定をダウンロード",
   "download wallpapers": "壁紙をダウンロード",
   "wallpapers are not included in the config because they can be too large. you can download them separately as a zip file.":

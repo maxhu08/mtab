@@ -4,6 +4,10 @@ export const it = {
   "download wallpaper": "scarica sfondo",
   "could not download wallpaper": "impossibile scaricare lo sfondo",
   export: "esporta",
+  "copy to clipboard": "copia negli appunti",
+  or: "oppure",
+  "upload config": "carica configurazione",
+  "could not read file": "impossibile leggere il file",
   "download config": "scarica configurazione",
   "download wallpapers": "scarica sfondi",
   "wallpapers are not included in the config because they can be too large. you can download them separately as a zip file.":

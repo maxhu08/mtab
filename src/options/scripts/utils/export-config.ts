@@ -12,6 +12,23 @@ import {
   listMixedUploadedWallpaperFiles
 } from "~/src/utils/mixed-wallpaper-storage";
 
+const exportConfig = async (copy = false) => {
+  try {
+    const config = await saveConfig(false);
+    if (!config) return;
+
+    const text = `MTAB_SAVE_FORMAT_v${chrome.runtime.getManifest().version}_${JSON.stringify(config)}`;
+    if (copy) {
+      await navigator.clipboard.writeText(text);
+      toast.success(t("config saved & copied to clipboard"));
+    } else {
+      downloadFile(new Blob([text], { type: "text/plain;charset=utf-8" }), "config.txt");
+    }
+  } catch {
+    toast.error(t(copy ? "could not save config to clipboard" : "could not export config"));
+  }
+};
+
 export const saveAndExportConfig = async () => {
   if (document.getElementById("mtab-action-dialog-overlay")) return;
 
@@ -29,21 +46,10 @@ export const saveAndExportConfig = async () => {
         "wallpapers are not included in the config because they can be too large. you can download them separately as a zip file."
       ) + (empty ? `\n\n${t("no uploaded wallpapers to download")}` : ""),
     actionText: t("download config"),
-    onAction: async () => {
-      try {
-        const config = await saveConfig(false);
-        if (!config) return;
-
-        downloadFile(
-          new Blob(
-            [`MTAB_SAVE_FORMAT_v${chrome.runtime.getManifest().version}_${JSON.stringify(config)}`],
-            { type: "text/plain;charset=utf-8" }
-          ),
-          "config.txt"
-        );
-      } catch {
-        toast.error(t("could not export config"));
-      }
+    onAction: () => exportConfig(),
+    additionalAction: {
+      text: t("copy to clipboard"),
+      onAction: () => exportConfig(true)
     },
 
     secondaryAction: {

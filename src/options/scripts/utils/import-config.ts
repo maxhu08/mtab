@@ -10,7 +10,13 @@ import { t } from "~/src/options/scripts/i18n";
 
 export const importConfigAndSave = async () => {
   const dataToImport = await showInputDialog(
-    t("input your save (THIS WILL OVERWRITE YOUR CURRENT CONFIG)")
+    t("input your save (THIS WILL OVERWRITE YOUR CURRENT CONFIG)"),
+    {
+      fileInput: {
+        text: t("upload config"),
+        accept: ".txt,text/plain"
+      }
+    }
   );
 
   if (dataToImport === null) {

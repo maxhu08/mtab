@@ -4,6 +4,10 @@ export const de = {
   "download wallpaper": "Hintergrundbild herunterladen",
   "could not download wallpaper": "Hintergrundbild konnte nicht heruntergeladen werden",
   export: "Exportieren",
+  "copy to clipboard": "In die Zwischenablage kopieren",
+  or: "oder",
+  "upload config": "Konfiguration hochladen",
+  "could not read file": "Datei konnte nicht gelesen werden",
   "download config": "Konfiguration herunterladen",
   "download wallpapers": "Hintergrundbilder herunterladen",
   "wallpapers are not included in the config because they can be too large. you can download them separately as a zip file.":

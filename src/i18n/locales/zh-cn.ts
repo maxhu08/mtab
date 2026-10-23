@@ -4,6 +4,10 @@ export const zhCN = {
   "download wallpaper": "下载壁纸",
   "could not download wallpaper": "无法下载壁纸",
   export: "导出",
+  "copy to clipboard": "复制到剪贴板",
+  or: "或",
+  "upload config": "上传配置",
+  "could not read file": "无法读取文件",
   "download config": "下载配置",
   "download wallpapers": "下载壁纸",
   "wallpapers are not included in the config because they can be too large. you can download them separately as a zip file.":
