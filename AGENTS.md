@@ -171,3 +171,7 @@ function bar(condition) {
 ## Check
 
 Run `bun check` after every change.
+
+## Build
+
+Always rebuild after making changes.
