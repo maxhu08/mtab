@@ -1,0 +1,3 @@
+# Keep Parcel's lazy loader compatible with extension CSP, which blocks inline import maps.
+Chrome >= 104
+Firefox >= 109

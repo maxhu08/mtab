@@ -23,6 +23,7 @@ import { initCustomCSSHighlight } from "~/src/options/scripts/utils/custom-css-h
 import { initColorInputControls } from "~/src/options/scripts/utils/color-inputs";
 import { initIconInputControls } from "~/src/options/scripts/utils/icon-inputs";
 import { initializeI18n } from "~/src/options/scripts/i18n";
+import { deferIconFonts } from "~/src/options/scripts/utils/icon-fonts";
 
 const initialize = (config: Config, optionsData: OptionsData) => {
   const logo = document.getElementById("mtab-logo") as HTMLImageElement;
@@ -75,6 +76,7 @@ const initialize = (config: Config, optionsData: OptionsData) => {
     requestAnimationFrame(() => {
       document.documentElement.classList.remove("options-initializing");
       window.dispatchEvent(new Event("options-ready"));
+      deferIconFonts();
     });
   });
 };

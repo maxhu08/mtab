@@ -1,11 +1,4 @@
-import {
-  FONTAWESOME_BRANDS_LIST,
-  FONTAWESOME_REGULAR_LIST,
-  FONTAWESOME_SOLID_LIST
-} from "~/src/options/scripts/utils/icons/fontawesome";
-import { NERDFONTS_LIST } from "~/src/options/scripts/utils/icons/nerdfonts";
-import { REMIXICONS_LIST } from "~/src/options/scripts/utils/icons/remixicons";
-import { SIMPLEICONS_LIST } from "~/src/options/scripts/utils/icons/simpleicons";
+import { loadIconFonts } from "~/src/options/scripts/utils/icon-fonts";
 import { createBookmarkIcon } from "~/src/utils/bookmark-icon";
 import { t } from "~/src/options/scripts/i18n";
 
@@ -44,54 +37,6 @@ const ACTION_OVERLAY_ID = "mtab-action-dialog-overlay";
 const ICON_PICKER_OVERLAY_ID = "mtab-icon-picker-overlay";
 const ICON_PICKER_RENDER_LIMIT = 100;
 const ICON_PICKER_PREVIEW_COLOR = "currentColor";
-
-type IconPickerItem = {
-  name: string;
-  value: string;
-  search: string;
-};
-
-type IconPickerSection = {
-  title: string;
-  items: IconPickerItem[];
-};
-
-const ICON_PICKER_SECTIONS: IconPickerSection[] = [
-  {
-    title: "Remix Icon",
-    items: REMIXICONS_LIST.map((name) => createIconPickerItem("remixicon", name, `ri-${name}`))
-  },
-  {
-    title: "Font Awesome",
-    items: [
-      ...FONTAWESOME_BRANDS_LIST.map((name) =>
-        createIconPickerItem("fontawesome brands", name, `fa-brands fa-${name}`)
-      ),
-      ...FONTAWESOME_REGULAR_LIST.map((name) =>
-        createIconPickerItem("fontawesome regular", name, `fa-regular fa-${name}`)
-      ),
-      ...FONTAWESOME_SOLID_LIST.map((name) =>
-        createIconPickerItem("fontawesome solid", name, `fa-solid fa-${name}`)
-      )
-    ]
-  },
-  {
-    title: "Nerd Fonts",
-    items: NERDFONTS_LIST.map((name) => createIconPickerItem("nerdfonts", name, `nf-${name}`))
-  },
-  {
-    title: "Simple Icons",
-    items: SIMPLEICONS_LIST.map((name) => createIconPickerItem("simpleicons", name, `si-${name}`))
-  }
-];
-
-function createIconPickerItem(family: string, name: string, value: string): IconPickerItem {
-  return {
-    name,
-    value,
-    search: `${family} ${name} ${value}`.toLowerCase()
-  };
-}
 
 export const showInputDialog = (
   text: string,
@@ -420,7 +365,9 @@ export const showActionDialog = (text: string, options: ActionDialogOptions): Pr
   });
 };
 
-export const showIconPickerModal = (currentValue = ""): Promise<string | null> => {
+export const showIconPickerModal = async (currentValue = ""): Promise<string | null> => {
+  loadIconFonts();
+  const catalog = await import("~/src/options/scripts/utils/icons/catalog");
   const existingOverlay = document.getElementById(ICON_PICKER_OVERLAY_ID);
   if (existingOverlay) existingOverlay.remove();
 
@@ -602,7 +549,7 @@ export const showIconPickerModal = (currentValue = ""): Promise<string | null> =
     const renderResults = () => {
       const terms = searchInputEl.value.trim().toLowerCase().split(/\s+/).filter(Boolean);
       const fragment = document.createDocumentFragment();
-      const sectionMatches = ICON_PICKER_SECTIONS.map((section) => {
+      const sectionMatches = catalog.ICON_PICKER_SECTIONS.map((section) => {
         const matches = terms.length
           ? section.items.filter((item) => terms.every((term) => item.search.includes(term)))
           : section.items;

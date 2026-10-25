@@ -1,0 +1,133 @@
+/* Remix Icon v4.9.1, https://remixicon.com
+ * Copyright RemixIcon.com, Remix Icon License v1.0:
+ * https://github.com/Remix-Design/RemixIcon/blob/v4.9.1/License
+ */
+:root :is(
+  .ri-add-line,
+  .ri-arrow-down-s-line,
+  .ri-bookmark-fill,
+  .ri-collapse-horizontal-line,
+  .ri-delete-bin-6-line,
+  .ri-delete-bin-line,
+  .ri-download-line,
+  .ri-draggable,
+  .ri-emotion-sad-line,
+  .ri-expand-horizontal-s-line,
+  .ri-folder-add-line,
+  .ri-folder-fill,
+  .ri-folder-reduce-line,
+  .ri-image-upload-line,
+  .ri-link,
+  .ri-link-m,
+  .ri-palette-line,
+  .ri-prohibited-2-line,
+  .ri-share-2-line
+)::before {
+  content: "";
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  vertical-align: -0.125em;
+  background-color: currentColor;
+  mask-repeat: no-repeat;
+  mask-position: center;
+  mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  -webkit-mask-size: contain;
+}
+
+.ri-add-line::before {
+  mask-image: url("../../assets/icons/options/add-line.svg");
+  -webkit-mask-image: url("../../assets/icons/options/add-line.svg");
+}
+
+.ri-arrow-down-s-line::before {
+  mask-image: url("../../assets/icons/options/arrow-down-s-line.svg");
+  -webkit-mask-image: url("../../assets/icons/options/arrow-down-s-line.svg");
+}
+
+.ri-bookmark-fill::before {
+  mask-image: url("../../assets/icons/options/bookmark-fill.svg");
+  -webkit-mask-image: url("../../assets/icons/options/bookmark-fill.svg");
+}
+
+.ri-collapse-horizontal-line::before {
+  mask-image: url("../../assets/icons/options/collapse-horizontal-line.svg");
+  -webkit-mask-image: url("../../assets/icons/options/collapse-horizontal-line.svg");
+}
+
+.ri-delete-bin-6-line::before {
+  mask-image: url("../../assets/icons/options/delete-bin-6-line.svg");
+  -webkit-mask-image: url("../../assets/icons/options/delete-bin-6-line.svg");
+}
+
+.ri-delete-bin-line::before {
+  mask-image: url("../../assets/icons/options/delete-bin-line.svg");
+  -webkit-mask-image: url("../../assets/icons/options/delete-bin-line.svg");
+}
+
+.ri-download-line::before {
+  mask-image: url("../../assets/icons/options/download-line.svg");
+  -webkit-mask-image: url("../../assets/icons/options/download-line.svg");
+}
+
+.ri-draggable::before {
+  mask-image: url("../../assets/icons/options/draggable.svg");
+  -webkit-mask-image: url("../../assets/icons/options/draggable.svg");
+}
+
+.ri-emotion-sad-line::before {
+  mask-image: url("../../assets/icons/options/emotion-sad-line.svg");
+  -webkit-mask-image: url("../../assets/icons/options/emotion-sad-line.svg");
+}
+
+.ri-expand-horizontal-s-line::before {
+  mask-image: url("../../assets/icons/options/expand-horizontal-s-line.svg");
+  -webkit-mask-image: url("../../assets/icons/options/expand-horizontal-s-line.svg");
+}
+
+.ri-folder-add-line::before {
+  mask-image: url("../../assets/icons/options/folder-add-line.svg");
+  -webkit-mask-image: url("../../assets/icons/options/folder-add-line.svg");
+}
+
+.ri-folder-fill::before {
+  mask-image: url("../../assets/icons/options/folder-fill.svg");
+  -webkit-mask-image: url("../../assets/icons/options/folder-fill.svg");
+}
+
+.ri-folder-reduce-line::before {
+  mask-image: url("../../assets/icons/options/folder-reduce-line.svg");
+  -webkit-mask-image: url("../../assets/icons/options/folder-reduce-line.svg");
+}
+
+.ri-image-upload-line::before {
+  mask-image: url("../../assets/icons/options/image-upload-line.svg");
+  -webkit-mask-image: url("../../assets/icons/options/image-upload-line.svg");
+}
+
+.ri-link::before {
+  mask-image: url("../../assets/icons/options/link.svg");
+  -webkit-mask-image: url("../../assets/icons/options/link.svg");
+}
+
+.ri-link-m::before {
+  mask-image: url("../../assets/icons/options/link-m.svg");
+  -webkit-mask-image: url("../../assets/icons/options/link-m.svg");
+}
+
+.ri-palette-line::before {
+  mask-image: url("../../assets/icons/options/palette-line.svg");
+  -webkit-mask-image: url("../../assets/icons/options/palette-line.svg");
+}
+
+.ri-prohibited-2-line::before {
+  mask-image: url("../../assets/icons/options/prohibited-2-line.svg");
+  -webkit-mask-image: url("../../assets/icons/options/prohibited-2-line.svg");
+}
+
+.ri-share-2-line::before {
+  mask-image: url("../../assets/icons/options/share-2-line.svg");
+  -webkit-mask-image: url("../../assets/icons/options/share-2-line.svg");
+}
