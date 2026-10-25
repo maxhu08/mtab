@@ -113,7 +113,9 @@ describe("options language resolution", () => {
     expect(resolveLanguage(undefined, "it-IT")).toBe("it");
     expect(resolveLanguage(undefined, "ja-JP")).toBe("ja");
     expect(resolveLanguage(undefined, "ko-KR")).toBe("ko");
+    expect(resolveLanguage(undefined, "ru")).toBe("ru");
     expect(resolveLanguage(undefined, "ru-RU")).toBe("ru");
+    expect(resolveLanguage(undefined, "ru_RU")).toBe("ru");
   });
 
   test("uses Brazilian Portuguese for Portuguese browser locales", () => {
@@ -168,6 +170,19 @@ describe("translations", () => {
     expect(translate("zh-CN", "Changes saved.")).toBe("更改已保存。");
   });
 
+  test("translates Russian export and bookmark controls", () => {
+    expect(translate("ru", "Export")).toBe("Экспорт");
+    expect(translate("ru", "upload config")).toBe("загрузить конфигурацию");
+    expect(translate("ru", "download wallpapers")).toBe("скачать обои");
+    expect(translate("ru", "Could not export config.")).toBe(
+      "Не удалось экспортировать конфигурацию."
+    );
+    expect(translate("ru", "bookmarks.bookmarksLocationChromium")).toBe(
+      "расположение закладок Chromium"
+    );
+    expect(translate("ru", "collapse folder contents")).toBe("свернуть содержимое папки");
+  });
+
   test("substitutes all message values", () => {
     expect(
       translate("zh-CN", "Imported {bookmarks} bookmarks and {folders} folders.", {
@@ -175,6 +190,12 @@ describe("translations", () => {
         folders: 1
       })
     ).toBe("已导入 2 个书签和 1 个文件夹。");
+    expect(
+      translate("ru", "Imported {bookmarks} bookmarks and {folders} folders.", {
+        bookmarks: 2,
+        folders: 1
+      })
+    ).toBe("Импортировано закладок: 2, папок: 1.");
   });
 
   test("keeps every locale complete and non-empty", () => {

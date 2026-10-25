@@ -1,20 +1,34 @@
 import { customMessageHelp } from "~/src/i18n/messages";
 
 export const ru = {
+  "download wallpaper": "скачать обои",
+  "Could not download wallpaper.": "Не удалось скачать обои.",
+  Export: "Экспорт",
+  "copy to clipboard": "скопировать в буфер обмена",
+  or: "или",
+  "upload config": "загрузить конфигурацию",
+  "Could not read file.": "Не удалось прочитать файл.",
+  "download config": "скачать конфигурацию",
+  "download wallpapers": "скачать обои",
+  "Wallpapers are not included in the config because they can be too large. You can download them separately as a ZIP file.":
+    "Обои не включаются в конфигурацию, так как могут занимать слишком много места. Их можно скачать отдельно в виде ZIP-архива.",
+  "No uploaded wallpapers to download.": "Нет загруженных обоев для скачивания.",
+  "Could not export wallpapers.": "Не удалось экспортировать обои.",
+  "Could not export config.": "Не удалось экспортировать конфигурацию.",
   "options ヽ(・ω・*)": "настройки ヽ(・ω・*)",
   logo: "логотип",
   options: "настройки",
   "options.language": "язык",
   "options.showOptionsButton": "показывать кнопку настроек",
-  "Tip: you can still access the options by pressing `extensions > mtab > options`":
-    "Подсказка: настройки по-прежнему доступны через «расширения > mtab > параметры»",
+  "Tip: you can still access the options by pressing `extensions > mtab > options`.":
+    "Подсказка: настройки по-прежнему доступны через «расширения > mtab > параметры».",
   user: "пользователь",
   "user.name": "имя пользователя",
   title: "заголовок",
   "title.defaultTitle": "заголовок по умолчанию",
   "title.dynamic.enabled": "динамический заголовок",
-  "When enabled, the page title changes to match what is in the search bar":
-    "При включении заголовок страницы меняется в соответствии с текстом в строке поиска",
+  "When enabled, the page title changes to match what is in the search bar.":
+    "При включении заголовок страницы меняется в соответствии с текстом в строке поиска.",
   "title.effect": "эффект заголовка",
   none: "нет",
   typewriter: "печатная машинка",
@@ -24,17 +38,17 @@ export const ru = {
   default: "по умолчанию",
   custom: "свой",
   "title.customFavicon": "своя иконка сайта",
-  "Note: customFavicon is not included when exporting and importing configs due to taking too much space":
-    "Примечание: своя иконка не включается в экспорт и импорт конфигурации, так как занимает слишком много места",
+  "Note: customFavicon is not included when exporting and importing configs due to taking too much space.":
+    "Примечание: своя иконка не включается в экспорт и импорт конфигурации, так как занимает слишком много места.",
   reset: "сбросить",
-  "live preview": "предпросмотр",
+  "Live preview": "Предпросмотр",
   message: "сообщение",
   "message.enabled": "включить сообщение",
   "message.font.type": "тип шрифта",
   "message.font.custom": "свой шрифт",
-  "Use a Google Fonts URL to choose a font": "Используйте URL Google Fonts, чтобы выбрать шрифт",
-  "Example: `https://fonts.googleapis.com/css2?family=Anton+SC&display=swap`":
-    "Пример: `https://fonts.googleapis.com/css2?family=Anton+SC&display=swap`",
+  "Use a Google Fonts URL to choose a font.": "Используйте URL Google Fonts, чтобы выбрать шрифт.",
+  "Example: `https://fonts.googleapis.com/css2?family=Anton+SC&display=swap`.":
+    "Пример: `https://fonts.googleapis.com/css2?family=Anton+SC&display=swap`.",
   "message.textColor": "цвет текста",
   "message.textSize": "размер текста",
   "message.type": "тип сообщения",
@@ -43,11 +57,11 @@ export const ru = {
   "time-12": "время (12-часовой формат)",
   "time-24": "время (24-часовой формат)",
   weather: "погода",
-  "Note: you need to have location permissions set to `allow` for weather messages to work":
-    "Примечание: для работы сообщений о погоде необходимо разрешить доступ к геолокации (`allow`)",
-  "Weather data may be delayed due to being cached in 5 minutes intervals for faster load times":
-    "Данные о погоде могут запаздывать, так как кэшируются с интервалом 5 минут для ускорения загрузки",
-  "All weather data from": "Все данные о погоде предоставлены",
+  "Note: you need to have location permissions set to `allow` for weather messages to work.":
+    "Примечание: для работы сообщений о погоде необходимо разрешить доступ к геолокации (`allow`).",
+  "Weather data may be delayed due to being cached in 5 minutes intervals for faster load times.":
+    "Данные о погоде могут запаздывать, так как кэшируются с интервалом 5 минут для ускорения загрузки.",
+  "All weather data from:": "Все данные о погоде предоставлены:",
   "message.weather.unitsType": "единицы температуры",
   "message.customText": "своё сообщение",
   wallpaper: "обои",
@@ -59,22 +73,22 @@ export const ru = {
   "solid-color": "сплошной цвет",
   mixed: "смешанные",
   "wallpaper.urls": "URL обоев",
-  "Tip: you can use video file formats like MP4, MOV, and more":
-    "Подсказка: можно использовать видеоформаты — MP4, MOV и другие",
-  "To use URLs as wallpapers (right click > copy image address)":
-    "Чтобы использовать URL в качестве обоев (правый клик > копировать адрес изображения)",
+  "Tip: you can use video file formats like MP4, MOV, and more.":
+    "Подсказка: можно использовать видеоформаты — MP4, MOV и другие.",
+  "To use URLs as wallpapers (right click > copy image address).":
+    "Чтобы использовать URL в качестве обоев (правый клик > копировать адрес изображения).",
   "wallpaper.fileUploads": "загруженные файлы обоев",
-  "Tip: you can upload PNG, JPG, WEBP, GIF, MP4, and more":
-    "Подсказка: можно загружать PNG, JPG, WEBP, GIF, MP4 и другие форматы",
-  "It is recommended to scale images to match your resolution for faster loading times":
-    "Рекомендуется масштабировать изображения под разрешение экрана для более быстрой загрузки",
-  "Note: fileUploads wallpapers are not included when exporting and importing configs due to taking too much space":
-    "Примечание: загруженные обои не включаются в экспорт и импорт конфигурации, так как занимают слишком много места",
+  "Tip: you can upload PNG, JPG, WEBP, GIF, MP4, and more.":
+    "Подсказка: можно загружать PNG, JPG, WEBP, GIF, MP4 и другие форматы.",
+  "It is recommended to scale images to match your resolution for faster loading times.":
+    "Рекомендуется масштабировать изображения под разрешение экрана для более быстрой загрузки.",
+  "Note: fileUploads wallpapers are not included when exporting and importing configs due to taking too much space.":
+    "Примечание: загруженные обои не включаются в экспорт и импорт конфигурации, так как занимают слишком много места.",
   "wallpaper.solidColors": "сплошные цвета",
   "wallpaper.random": "случайные обои",
   "You can hover your cursor in the bottom-left corner on the new tab page to see wallpaper credits.":
     "Наведите курсор в левый нижний угол новой вкладки, чтобы увидеть авторов обоев.",
-  "Random wallpapers are sourced from": "Случайные обои берутся из",
+  "Random wallpapers are sourced from:": "Случайные обои берутся из:",
   "wallpaper.mixed": "смешанные обои",
   "Mix URL, file-upload, and solid-color items in one rotation list.":
     "Смешивайте URL, загруженные файлы и сплошные цвета в одном списке ротации.",
@@ -124,76 +138,79 @@ export const ru = {
   "animations.bookmarkType": "анимация закладок",
   search: "поиск",
   "search.enabled": "включить поиск",
-  "Tip: press `Ctrl+Enter` to open your search in a new tab":
-    "Подсказка: нажмите `Ctrl+Enter`, чтобы открыть поиск в новой вкладке",
+  "Tip: press `Ctrl+Enter` to open your search in a new tab.":
+    "Подсказка: нажмите `Ctrl+Enter`, чтобы открыть поиск в новой вкладке.",
   "search.engine": "поисковая система",
   "search.useCustomEngine": "использовать свою поисковую систему",
   "search.customEngineURL": "URL своей поисковой системы",
-  "Use `{}` to represent the search query": "Используйте `{}` для обозначения поискового запроса",
-  "Example: `https://www.google.com/search?q={}`": "Пример: `https://www.google.com/search?q={}`",
+  "Use `{}` to represent the search query.": "Используйте `{}` для обозначения поискового запроса.",
+  "Example: `https://www.google.com/search?q={}`.": "Пример: `https://www.google.com/search?q={}`.",
   "search.placeholderText": "текст-заполнитель поиска",
   "search.bookmarkPlaceholderText": "текст-заполнитель поиска закладок",
   "search.buttons.clear": "показывать кнопку очистки",
   "When enabled, shows a button to quickly clear the search input.":
     "При включении показывает кнопку для быстрой очистки поля поиска.",
   "search.buttons.search": "показывать кнопку поиска",
-  "When enabled, shows a button to submit your search.": "При включении показывает кнопку для отправки поиска.",
+  "When enabled, shows a button to submit your search.":
+    "При включении показывает кнопку для отправки поиска.",
   "search.recognizeLinks": "распознавать ссылки",
-  "Automatically detects links in search results and opens them directly instead of running a search":
-    "Автоматически определяет ссылки в поле поиска и открывает их напрямую, вместо выполнения поиска",
-  "e.g., typing `example.com` navigates directly to `https://example.com` instead of performing a search":
-    "например, ввод `example.com` сразу откроет `https://example.com`, а не выполнит поиск",
+  "Automatically detects links in search results and opens them directly instead of running a search.":
+    "Автоматически определяет ссылки в поле поиска и открывает их напрямую, вместо выполнения поиска.",
+  "E.g., typing `example.com` navigates directly to `https://example.com` instead of performing a search.":
+    "Например, ввод `example.com` сразу откроет `https://example.com`, а не выполнит поиск.",
   "search.suggestions": "поисковые подсказки",
-  "Shows live query suggestions as you type": "Показывает подсказки по запросу по мере ввода",
-  "Suggestions are sourced from DuckDuckGo's public autocomplete suggestions API and are not based on your personal search history. Requests are sent directly from your browser to DuckDuckGo and do not include cookies, accounts, extension identifiers, or other personal data":
-    "Подсказки берутся из публичного API автодополнения DuckDuckGo и не основаны на вашей личной истории поиска. Запросы отправляются напрямую из браузера в DuckDuckGo и не содержат cookie, аккаунтов, идентификаторов расширения или других персональных данных",
+  "Shows live query suggestions as you type.": "Показывает подсказки по запросу по мере ввода.",
+  "Suggestions are sourced from DuckDuckGo's public autocomplete suggestions API and are not based on your personal search history. Requests are sent directly from your browser to DuckDuckGo and do not include cookies, accounts, extension identifiers, or other personal data.":
+    "Подсказки берутся из публичного API автодополнения DuckDuckGo и не основаны на вашей личной истории поиска. Запросы отправляются напрямую из браузера в DuckDuckGo и не содержат cookie, аккаунтов, идентификаторов расширения или других персональных данных.",
   "search.assist.date": "помощник по дате",
-  "Shows the current date when you type 'date'": "Показывает текущую дату при вводе 'date'",
+  "Shows the current date when you type 'date'.": "Показывает текущую дату при вводе 'date'.",
   "search.assist.math": "математический помощник",
-  "Automatically evaluates math expressions typed into the search input":
-    "Автоматически вычисляет математические выражения, введённые в поле поиска",
-  "e.g., `cos(pi / 6) * (3^2 - 4) + sin(45deg) + sqrt(20) = 9.50936975510832`":
-    "например: `cos(pi / 6) * (3^2 - 4) + sin(45deg) + sqrt(20) = 9.50936975510832`",
+  "Automatically evaluates math expressions typed into the search input.":
+    "Автоматически вычисляет математические выражения, введённые в поле поиска.",
+  "E.g., `cos(pi / 6) * (3^2 - 4) + sin(45deg) + sqrt(20) = 9.50936975510832`.":
+    "Например: `cos(pi / 6) * (3^2 - 4) + sin(45deg) + sqrt(20) = 9.50936975510832`.",
   "search.assist.definitions": "помощник по определениям",
-  "Shows word definitions when you include definition keywords in the search input":
-    "Показывает определения слов, если в поле поиска есть ключевые слова определения",
-  "e.g., `morning def` or `morning definition`": "например: `morning def` или `morning definition`",
-  "Definitions are sourced from": "Определения предоставлены",
+  "Shows word definitions when you include definition keywords in the search input.":
+    "Показывает определения слов, если в поле поиска есть ключевые слова определения.",
+  "E.g., `morning def` or `morning definition`.":
+    "Например: `morning def` или `morning definition`.",
+  "Definitions are sourced from:": "Определения предоставлены:",
   "search.assist.conversions": "помощник по конвертации",
-  "Converts units directly from the search input": "Конвертирует единицы прямо из поля поиска",
-  "e.g., `1 ft => 0.3048 m`": "например: `1 ft => 0.3048 m`",
-  "Supports length, weight, temperature, time, volume, area, speed, angle, data, and 170+ currencies":
-    "Поддерживает длину, вес, температуру, время, объём, площадь, скорость, углы, данные и более 170 валют",
-  "Currency conversion rates are sourced from": "Курсы валют предоставлены",
+  "Converts units directly from the search input.": "Конвертирует единицы прямо из поля поиска.",
+  "E.g., `1 ft => 0.3048 m`.": "Например: `1 ft => 0.3048 m`.",
+  "Supports length, weight, temperature, time, volume, area, speed, angle, data, and 170+ currencies.":
+    "Поддерживает длину, вес, температуру, время, объём, площадь, скорость, углы, данные и более 170 валют.",
+  "Currency conversion rates are sourced from:": "Курсы валют предоставлены:",
   "search.assist.passwordGenerator": "генератор паролей",
-  "Generates passwords directly from the search input, entirely locally":
-    "Генерирует пароли прямо из поля поиска, полностью локально",
-  "No data is sent anywhere; password generation happens on your device":
-    "Данные никуда не отправляются; генерация пароля происходит на вашем устройстве",
-  "Type `pw <length> <flags>` or `password <length> <flags>` to generate a password":
-    "Введите `pw <length> <flags>` или `password <length> <flags>`, чтобы сгенерировать пароль",
-  "e.g., `password 16 luns` generates a 16 character password with lowercase letters, uppercase letters, numbers, and symbols":
-    "например, `password 16 luns` генерирует 16-символьный пароль с строчными, прописными буквами, цифрами и символами",
-  flags: "флаги",
-  "`l` - lowercase letters": "`l` — строчные буквы",
-  "`u` - uppercase letters": "`u` — прописные буквы",
-  "`n` - numbers": "`n` — цифры",
-  "`s` - symbols": "`s` — символы",
-  "`m` - memorable": "`m` — запоминающийся",
-  "if no arguments are specified, defaults to `16 luns`": "если аргументы не указаны, по умолчанию используется `16 luns`",
-  "Order of arguments and flags does not matter": "Порядок аргументов и флагов не имеет значения",
+  "Generates passwords directly from the search input, entirely locally.":
+    "Генерирует пароли прямо из поля поиска, полностью локально.",
+  "No data is sent anywhere; password generation happens on your device.":
+    "Данные никуда не отправляются; генерация пароля происходит на вашем устройстве.",
+  "Type `pw <length> <flags>` or `password <length> <flags>` to generate a password.":
+    "Введите `pw <length> <flags>` или `password <length> <flags>`, чтобы сгенерировать пароль.",
+  "E.g., `password 16 luns` generates a 16 character password with lowercase letters, uppercase letters, numbers, and symbols.":
+    "Например, `password 16 luns` генерирует 16-символьный пароль с строчными, прописными буквами, цифрами и символами.",
+  "Flags:": "Флаги:",
+  "`l` - lowercase letters.": "`l` — строчные буквы.",
+  "`u` - uppercase letters.": "`u` — прописные буквы.",
+  "`n` - numbers.": "`n` — цифры.",
+  "`s` - symbols.": "`s` — символы.",
+  "`m` - memorable.": "`m` — запоминающийся.",
+  "If no arguments are specified, defaults to `16 luns`.":
+    "Если аргументы не указаны, по умолчанию используется `16 luns`.",
+  "Order of arguments and flags does not matter.": "Порядок аргументов и флагов не имеет значения.",
   "search.focusedBorderColor": "цвет рамки при фокусе",
-  "(use #00000000 for none)": "(используйте #00000000, чтобы убрать цвет)",
+  "(Use #00000000 for none.)": "(Используйте #00000000, чтобы убрать цвет.)",
   "search.font.type": "тип шрифта поиска",
   "search.font.custom": "свой шрифт поиска",
   "search.textColor": "цвет текста поиска",
   "search.placeholderTextColor": "цвет текста-заполнителя",
   "search.searchIconColor": "цвет иконки поиска",
-  "This changes the -> color": "Меняет цвет ->",
+  "This changes the -> color.": "Меняет цвет ->.",
   "search.bookmarkIconColor": "цвет иконки закладок",
-  "This changes the // color": "Меняет цвет //",
+  "This changes the // color.": "Меняет цвет //.",
   "search.selectIconColor": "цвет иконки выбора",
-  "This changes the > color": "Меняет цвет >",
+  "This changes the > color.": "Меняет цвет >.",
   "search.linkTextColor": "цвет текста ссылок",
   hotkeys: "горячие клавиши",
   "Modifier keys are specified as `<c-x>`, `<m-x>`, and `<a-x>` for `ctrl+x`, `meta+x`, and `alt+x`. Combined modifiers are written like `<c-a-x>` or `<c-m-x>`. Use `<space>` for the space key.":
@@ -207,12 +224,12 @@ export const ru = {
   "bookmarks.type": "тип закладок",
   "user-defined": "пользовательские",
   "default-blocky": "стандартные блоки",
-  "Tip: `Ctrl+click` or `Middle click` to open a bookmark in a new tab":
-    "Подсказка: `Ctrl+клик` или клик средней кнопкой мыши открывает закладку в новой вкладке",
+  "Tip: `Ctrl+click` or `Middle click` to open a bookmark in a new tab.":
+    "Подсказка: `Ctrl+клик` или клик средней кнопкой мыши открывает закладку в новой вкладке.",
   "bookmarks.showBookmarkNames": "показывать названия закладок",
   "bookmarks.numberKeys": "включить цифровые клавиши",
-  "Enabling numberKeys -> makes it so that pressing 1 opens first bookmark, 2 opens second bookmark, and so on (0 activates the back button)":
-    "При включении numberKeys -> нажатие 1 открывает первую закладку, 2 — вторую и так далее (0 активирует кнопку «назад»)",
+  "Enabling numberKeys -> makes it so that pressing 1 opens first bookmark, 2 opens second bookmark, and so on (0 activates the back button).":
+    "При включении numberKeys -> нажатие 1 открывает первую закладку, 2 — вторую и так далее (0 активирует кнопку «назад»).",
   "bookmarks.enablePagination": "включить постраничную навигацию",
   "When enabled, bookmark rows beyond maxBookmarkRowsPerPage are split into extra pages. Use the Prev/Next buttons or [ and ] keys to move between pages.":
     "При включении строки закладок сверх maxBookmarkRowsPerPage разбиваются на дополнительные страницы. Используйте кнопки «Пред/След» или клавиши [ и ] для перехода между страницами.",
@@ -225,19 +242,24 @@ export const ru = {
   "bookmarks.userDefinedCols": "число столбцов пользовательских закладок",
   "bookmarks.userDefined": "пользовательские закладки",
   "Valid icon types you can use:": "Допустимые типы иконок:",
-  "Find available icon types at": "Доступные типы иконок можно найти на",
-  "remixicon icon types should be formatted as": "Типы иконок Remix Icon должны быть в формате",
-  "You can also use Nerd Font icons. Check the cheat sheet at":
-    "Также можно использовать иконки Nerd Font. Шпаргалка находится на",
-  "nerdfont icon types should be formatted as": "Типы иконок Nerd Font должны быть в формате",
-  "fontawesome icon types should be formatted as": "Типы иконок Font Awesome должны быть в формате",
-  "simpleicons icon types should be formatted as": "Типы иконок Simple Icons должны быть в формате",
-  "`url` icon types should be formatted as": "Типы иконок `url` должны быть в формате",
-  "You can use URLs as icon types (right click > copy image address)":
-    "Можно использовать URL в качестве типов иконок (правый клик > копировать адрес изображения)",
+  "Find available icon types at:": "Доступные типы иконок можно найти на:",
+  "Remix Icon types should be formatted as:": "Типы иконок Remix Icon должны быть в формате:",
+  "You can also use Nerd Font icons. Check the cheat sheet at:":
+    "Также можно использовать иконки Nerd Font. Шпаргалка находится на:",
+  "Nerd Font icon types should be formatted as:": "Типы иконок Nerd Font должны быть в формате:",
+  "Font Awesome icon types should be formatted as:":
+    "Типы иконок Font Awesome должны быть в формате:",
+  "Simple Icons types should be formatted as:": "Типы иконок Simple Icons должны быть в формате:",
+  "`url` icon types should be formatted as:": "Типы иконок `url` должны быть в формате:",
+  "You can use URLs as icon types (right click > copy image address).":
+    "Можно использовать URL в качестве типов иконок (правый клик > копировать адрес изображения).",
   "You can also use the icon picker on the right of each icon input.":
     "Также можно использовать выбор иконок справа от каждого поля ввода иконки.",
   "collapse all": "свернуть всё",
+  "collapse contents": "свернуть содержимое",
+  "collapse folder contents": "свернуть содержимое папки",
+  "expand contents": "развернуть содержимое",
+  "expand folder contents": "развернуть содержимое папки",
   "add bookmark": "добавить закладку",
   "add folder": "добавить папку",
   "import bookmark or folder": "импортировать закладку или папку",
@@ -246,17 +268,26 @@ export const ru = {
   "bookmarks.defaultBlockyCols": "число столбцов стандартных блоков",
   "bookmarks.defaultBlockyColorType": "тип цвета стандартных блоков",
   "bookmarks.defaultBlockyColor": "цвет стандартных блоков",
+  "bookmarks.bookmarksLocationChromium": "расположение закладок Chromium",
+  "(Only applies to Chromium-based browsers.)":
+    "(Применяется только к браузерам на базе Chromium.)",
+  root: "корень",
+  "Selecting root displays every top-level bookmark folder.":
+    "При выборе корня отображаются все папки закладок верхнего уровня.",
+  "bookmarks bar": "панель закладок",
+  mobile: "мобильные закладки",
   "bookmarks.bookmarksLocationFirefox": "расположение закладок Firefox",
-  "(only applies to firefox based browsers)": "(применяется только к браузерам на базе Firefox)",
+  "(Only applies to Firefox-based browsers.)": "(Применяется только к браузерам на базе Firefox.)",
   menu: "меню",
   toolbar: "панель инструментов",
   other: "другое",
   "bookmarks.defaultFaviconSource": "источник иконок закладок по умолчанию",
-  "(determines where bookmark favicons are fetched from)": "(определяет, откуда загружаются иконки закладок)",
+  "(Determines where bookmark favicons are fetched from.)":
+    "(Определяет, откуда загружаются иконки закладок.)",
   extras: "дополнительно",
   "extras.snow.enabled": "эффект снега",
-  "Fun snow effect": "Забавный эффект снега",
-  "Winter mode enables snow during december": "Зимний режим включает снег в декабре",
+  "Fun snow effect.": "Забавный эффект снега.",
+  "Winter mode enables snow during December.": "Зимний режим включает снег в декабре.",
   on: "вкл",
   winter: "зима",
   off: "выкл",
@@ -271,31 +302,31 @@ export const ru = {
   "options language": "язык настроек",
   "options show options button": "показывать кнопку настроек",
   "toggle user section": "свернуть или развернуть раздел пользователя",
-  "input name...": "введите имя...",
+  "Input name...": "Введите имя...",
   "toggle title section": "свернуть или развернуть раздел заголовка",
-  "input title...": "введите заголовок...",
+  "Input title...": "Введите заголовок...",
   "title dynamic enabled": "динамический заголовок",
-  "input speed (ms)...": "введите скорость (мс)...",
+  "Input speed (ms)...": "Введите скорость (мс)...",
   "enter character count...": "введите количество символов...",
   "toggle message section": "свернуть или развернуть раздел сообщения",
   "message enabled": "включить сообщение",
-  "input font url...": "введите URL шрифта...",
-  "input color...": "введите цвет...",
-  "input size...": "введите размер...",
-  "input text...": "введите текст...",
+  "Input font URL...": "Введите URL шрифта...",
+  "Input color...": "Введите цвет...",
+  "Input size...": "Введите размер...",
+  "Input text...": "Введите текст...",
   "toggle wallpaper section": "свернуть или развернуть раздел обоев",
   "wallpaper enabled": "включить обои",
-  "input brightness (0.0-1.0)...": "введите яркость (0.0–1.0)...",
-  "input blur...": "введите размытие...",
+  "Input brightness (0.0-1.0)...": "Введите яркость (0.0–1.0)...",
+  "Input blur...": "Введите размытие...",
   "toggle ui section": "свернуть или развернуть раздел интерфейса",
-  "input blur strength...": "введите силу размытия...",
+  "Input blur strength...": "Введите силу размытия...",
   "toggle animations section": "свернуть или развернуть раздел анимаций",
   "animations enabled": "включить анимации",
   "toggle search section": "свернуть или развернуть раздел поиска",
   "search enabled": "включить поиск",
   "search use custom engine": "использовать свою поисковую систему",
-  "E.g https://www.google.com/search?q={}": "Напр. https://www.google.com/search?q={}",
-  "input placeholder...": "введите текст-заполнитель...",
+  "E.g., https://www.google.com/search?q={}": "Напр. https://www.google.com/search?q={}",
+  "Input placeholder...": "Введите текст-заполнитель...",
   "search buttons clear": "показывать кнопку очистки",
   "search buttons search": "показывать кнопку поиска",
   "search recognize links": "распознавать ссылки",
@@ -311,61 +342,62 @@ export const ru = {
   "bookmarks show bookmark names": "показывать названия закладок",
   "bookmarks number keys": "цифровые клавиши для закладок",
   "bookmarks enable pagination": "постраничная навигация закладок",
-  "input number...": "введите число...",
-  "input icon-type...": "введите тип иконки...",
+  "Input number...": "Введите число...",
+  "Input icon-type...": "Введите тип иконки...",
   "toggle extras section": "свернуть или развернуть дополнительный раздел",
-  "save (ctrl+s)": "сохранить (ctrl+s)",
-  "save & export (ctrl+e)": "сохранить и экспортировать (ctrl+e)",
-  "import & save (ctrl+i)": "импортировать и сохранить (ctrl+i)",
-  "input your save (THIS WILL OVERWRITE YOUR CURRENT CONFIG)":
-    "вставьте сохранение (ЭТО ПЕРЕЗАПИШЕТ ТЕКУЩУЮ КОНФИГУРАЦИЮ)",
-  "input was empty, nothing imported": "ввод пуст, ничего не импортировано",
-  "incorrect save format, use MTAB_SAVE_FORMAT_v#.#.#_ or {legacyPrefix} for legacy saves":
-    "неверный формат сохранения, используйте MTAB_SAVE_FORMAT_v#.#.#_ или {legacyPrefix} для старых сохранений",
-  "invalid save format, expected MTAB_SAVE_FORMAT_v#.#.#_":
-    "неверный формат сохранения, ожидается MTAB_SAVE_FORMAT_v#.#.#_",
-  "incorrect save format": "неверный формат сохранения",
-  "failed to parse legacy save format": "не удалось разобрать старый формат сохранения",
-  "invalid config data": "некорректные данные конфигурации",
-  "config saved & copied to clipboard": "конфигурация сохранена и скопирована в буфер обмена",
-  "could not save config to clipboard": "не удалось скопировать конфигурацию в буфер обмена",
-  "search.customEngineURL must contain {}, aborting save":
-    "search.customEngineURL должен содержать {}, сохранение отменено",
-  "changes saved": "изменения сохранены",
-  "do you want to reset your options to default? this cannot be undone.":
-    "сбросить настройки к значениям по умолчанию? это действие нельзя отменить.",
+  "Save (Ctrl+S)": "Сохранить (ctrl+s)",
+  "Save & export (Ctrl+E)": "Сохранить и экспортировать (ctrl+e)",
+  "Import & save (Ctrl+I)": "Импортировать и сохранить (ctrl+i)",
+  "Input your save. This will overwrite your current config.":
+    "Вставьте сохранение. Это перезапишет текущую конфигурацию.",
+  "Input was empty, nothing imported.": "Ввод пуст, ничего не импортировано.",
+  "Incorrect save format, use MTAB_SAVE_FORMAT_v#.#.#_ or {legacyPrefix} for legacy saves.":
+    "Неверный формат сохранения, используйте MTAB_SAVE_FORMAT_v#.#.#_ или {legacyPrefix} для старых сохранений.",
+  "Invalid save format, expected MTAB_SAVE_FORMAT_v#.#.#_.":
+    "Неверный формат сохранения, ожидается MTAB_SAVE_FORMAT_v#.#.#_.",
+  "Incorrect save format.": "Неверный формат сохранения.",
+  "Failed to parse legacy save format.": "Не удалось разобрать старый формат сохранения.",
+  "Invalid config data.": "Некорректные данные конфигурации.",
+  "Config saved & copied to clipboard.": "Конфигурация сохранена и скопирована в буфер обмена.",
+  "Could not save config to clipboard.": "Не удалось скопировать конфигурацию в буфер обмена.",
+  "The search.customEngineURL must contain {}; aborting save.":
+    "search.customEngineURL должен содержать {}, сохранение отменено.",
+  "Changes saved.": "Изменения сохранены.",
+  "Do you want to reset your options to default? This cannot be undone.":
+    "Сбросить настройки к значениям по умолчанию? Это действие нельзя отменить.",
   cancel: "отмена",
-  "options reset to default": "настройки сброшены к значениям по умолчанию",
-  "you selected no, options did not reset": "вы выбрали «нет», настройки не сброшены",
-  "input your bookmark or folder": "вставьте закладку или папку",
-  "could not import your bookmark or folder": "не удалось импортировать закладку или папку",
-  "incorrect format, expected MTAB_USER_DEFINED_BOOKMARK_FORMAT_v#.#.#_ or MTAB_USER_DEFINED_FOLDER_FORMAT_v#.#.#_":
-    "неверный формат, ожидается MTAB_USER_DEFINED_BOOKMARK_FORMAT_v#.#.#_ или MTAB_USER_DEFINED_FOLDER_FORMAT_v#.#.#_",
-  "invalid bookmark data": "некорректные данные закладки",
-  "input your bookmarks and folders to import (THIS WILL OVERWRITE YOUR CURRENT BOOKMARKS AND FOLDERS)":
-    "вставьте закладки и папки для импорта (ЭТО ПЕРЕЗАПИШЕТ ТЕКУЩИЕ ЗАКЛАДКИ И ПАПКИ)",
-  "incorrect format, expected MTAB_USER_USER_DEFINED_BOOKMARKS_FORMAT_v#.#.#_":
-    "неверный формат, ожидается MTAB_USER_USER_DEFINED_BOOKMARKS_FORMAT_v#.#.#_",
-  "imported {bookmarks} bookmarks and {folders} folders":
-    "импортировано закладок: {bookmarks}, папок: {folders}",
-  "bookmark copied to clipboard": "закладка скопирована в буфер обмена",
-  "folder and contents copied to clipboard": "папка и её содержимое скопированы в буфер обмена",
-  "{bookmarks} bookmarks and {folders} folders copied to clipboard":
-    "скопировано закладок: {bookmarks}, папок: {folders} в буфер обмена",
-  "paste here...": "вставьте сюда...",
+  "Options reset to default.": "Настройки сброшены к значениям по умолчанию.",
+  "You selected no, options did not reset.": "Вы выбрали «нет», настройки не сброшены.",
+  "Input your bookmark or folder.": "Вставьте закладку или папку.",
+  "Could not import your bookmark or folder.": "Не удалось импортировать закладку или папку.",
+  "Incorrect format, expected MTAB_USER_DEFINED_BOOKMARK_FORMAT_v#.#.#_ or MTAB_USER_DEFINED_FOLDER_FORMAT_v#.#.#_.":
+    "Неверный формат, ожидается MTAB_USER_DEFINED_BOOKMARK_FORMAT_v#.#.#_ или MTAB_USER_DEFINED_FOLDER_FORMAT_v#.#.#_.",
+  "Invalid bookmark data.": "Некорректные данные закладки.",
+  "Input your bookmarks and folders to import. This will overwrite your current bookmarks and folders.":
+    "Вставьте закладки и папки для импорта. Это перезапишет текущие закладки и папки.",
+  "Incorrect format, expected MTAB_USER_USER_DEFINED_BOOKMARKS_FORMAT_v#.#.#_.":
+    "Неверный формат, ожидается MTAB_USER_USER_DEFINED_BOOKMARKS_FORMAT_v#.#.#_.",
+  "Imported {bookmarks} bookmarks and {folders} folders.":
+    "Импортировано закладок: {bookmarks}, папок: {folders}.",
+  "Bookmark copied to clipboard.": "Закладка скопирована в буфер обмена.",
+  "Folder and contents copied to clipboard.": "Папка и её содержимое скопированы в буфер обмена.",
+  "{bookmarks} bookmarks and {folders} folders copied to clipboard.":
+    "Скопировано закладок: {bookmarks}, папок: {folders} в буфер обмена.",
+  "Paste here...": "Вставьте сюда...",
   ok: "ок",
   confirm: "подтвердить",
   "Icon picker": "выбор иконки",
-  "choose icon": "выбрать иконку",
-  "Search by icon name, family, or full icon type.": "Ищите по названию иконки, семейству или полному типу иконки.",
-  "search icons...": "поиск иконок...",
-  "no icons found": "иконки не найдены",
-  "showing {visible} of {total} icons; search to narrow results":
-    "показано {visible} из {total} иконок; используйте поиск, чтобы сузить результаты",
-  "showing {total} icons": "показано иконок: {total}",
-  "choose color": "выбрать цвет",
-  "choose color for {field}": "выбрать цвет для {field}",
-  "choose icon for {field}": "выбрать иконку для {field}",
+  "Choose icon": "Выбрать иконку",
+  "Search by icon name, family, or full icon type.":
+    "Ищите по названию иконки, семейству или полному типу иконки.",
+  "Search icons...": "Поиск иконок...",
+  "No icons found.": "Иконки не найдены.",
+  "Showing {visible} of {total} icons; search to narrow results.":
+    "Показано {visible} из {total} иконок; используйте поиск, чтобы сузить результаты.",
+  "Showing {total} icons.": "Показано иконок: {total}.",
+  "Choose color": "Выбрать цвет",
+  "Choose color for {field}": "Выбрать цвет для {field}",
+  "Choose icon for {field}": "Выбрать иконку для {field}",
   Notifications: "уведомления",
   "Toast action": "действие уведомления",
   [customMessageHelp]: `Можно использовать \\ для обозначения:\n\n- Компоненты даты\n- \\yyyy -> полный год (например, "2020")\n- \\yy -> две последние цифры года (например, "20")\n- \\M -> полное название месяца (например, "October")\n- \\m -> сокращённое название месяца (например, "Oct")\n- \\m$ -> номер месяца (например, "11")\n- \\D -> полное название дня недели (например, "Monday")\n- \\d -> сокращённое название дня недели (например, "Mon")\n\n- \\d$ -> число месяца (например, "08")\n- Компоненты времени\n- \\h% -> часы (12-часовой формат, например, "01")\n- \\hh -> часы с ведущим нулём (например, "01")\n- \\mm -> минуты с ведущим нулём (например, "02")\n- \\ss -> секунды с ведущим нулём (например, "03")\n\n- Компоненты периода суток\n- \\md -> период суток в нижнем регистре (например, "am" или "pm")\n- \\MD -> период суток в верхнем регистре (например, "AM" или "PM")\n- \\n -> новая строка`,
@@ -392,12 +424,13 @@ export const ru = {
   "folder.iconColor": "цвет иконки папки",
   "folder.fill": "заливка папки",
   "folder.contents": "содержимое папки",
-  "input url...": "введите URL...",
-  "input color... (leave empty for bookmarks.defaultIconColor)":
-    "введите цвет... (оставьте пустым для bookmarks.defaultIconColor)",
-  "input color... (leave empty for default)": "введите цвет... (оставьте пустым для значения по умолчанию)",
-  "input icon-type... (leave empty for bookmarks.defaultFolderIconType)":
-    "введите тип иконки... (оставьте пустым для bookmarks.defaultFolderIconType)",
+  "Input URL...": "Введите URL...",
+  "Input color... (leave empty for bookmarks.defaultIconColor)":
+    "Введите цвет... (оставьте пустым для bookmarks.defaultIconColor)",
+  "Input color... (leave empty for default)":
+    "Введите цвет... (оставьте пустым для значения по умолчанию)",
+  "Input icon-type... (leave empty for bookmarks.defaultFolderIconType)":
+    "Введите тип иконки... (оставьте пустым для bookmarks.defaultFolderIconType)",
   "reorder wallpaper": "изменить порядок обоев",
   "delete wallpaper": "удалить обои",
   "edit url": "изменить URL",
@@ -407,13 +440,13 @@ export const ru = {
   "add url": "добавить URL",
   "upload file": "загрузить файл",
   "add solid color": "добавить сплошной цвет",
-  "Input wallpaper URL": "Введите URL обоев",
-  "Input wallpaper color (e.g. #171717)": "Введите цвет обоев (например, #171717)",
-  "Edit wallpaper URL": "Изменить URL обоев",
-  "Edit wallpaper color (e.g. #171717)": "Изменить цвет обоев (например, #171717)",
+  "Input wallpaper URL.": "Введите URL обоев.",
+  "Input wallpaper color (e.g. #171717).": "Введите цвет обоев (например, #171717).",
+  "Edit wallpaper URL.": "Изменить URL обоев.",
+  "Edit wallpaper color (e.g. #171717).": "Изменить цвет обоев (например, #171717).",
   video: "видео",
-  "do you want to reset all wallpapers for the selected type? this cannot be undone.":
-    "сбросить все обои выбранного типа? это действие нельзя отменить.",
+  "Do you want to reset all wallpapers for the selected type? This cannot be undone.":
+    "Сбросить все обои выбранного типа? Это действие нельзя отменить.",
   Search: "Поиск",
   "Search the web": "Искать в интернете",
   "Clear search": "Очистить поиск",
