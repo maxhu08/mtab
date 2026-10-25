@@ -21,6 +21,13 @@ html {
   transition-property: none;
 }
 
+#search-input,
+#bookmark-search-input,
+#search-results-container * {
+  font-variant-ligatures: none;
+  font-feature-settings: "liga" 0, "clig" 0, "dlig" 0, "calt" 0;
+}
+
 #cover {
   z-index: 0;
   pointer-events: none;
@@ -37,6 +44,14 @@ html {
 
 #wallpaper {
   overflow: hidden;
+}
+
+@media (min-width: 768px) {
+  #message.message-single-line {
+    width: max-content;
+    max-width: 95vw;
+    white-space: nowrap;
+  }
 }
 
 #wallpaper-credit-anchor {

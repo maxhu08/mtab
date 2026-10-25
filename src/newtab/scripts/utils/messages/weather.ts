@@ -83,24 +83,15 @@ const getWeatherMessage = (data: OpenMeteoResponse, unitsType: "f" | "c"): strin
 };
 
 const getWeatherEmoji = (weatherCode: number): string => {
-  if (weatherCode === 0)
-    return "☀️"; // clear sky
-  else if (weatherCode === 1 || weatherCode === 2)
-    return "🌤️"; // mainly clear
-  else if (weatherCode === 3)
-    return "☁️"; // overcast
-  else if (weatherCode === 45 || weatherCode === 48)
-    return "☁️"; // fog
-  else if (weatherCode === 51 || weatherCode === 53 || weatherCode === 55)
-    return "🌦️"; // drizzle
-  else if (weatherCode === 61 || weatherCode === 63 || weatherCode === 65)
-    return "🌧️"; // rain
-  else if (weatherCode === 71 || weatherCode === 73 || weatherCode === 75)
-    return "❄️"; // snowfall
-  else if (weatherCode === 95)
-    return "⛈️"; // thunderstorm
-  else if (weatherCode === 96 || weatherCode === 99)
-    return "🌩️"; // thunderstorm with hail
+  if (weatherCode === 0) return "☀️"; // clear sky
+  else if (weatherCode === 1 || weatherCode === 2) return "🌤️"; // mainly clear
+  else if (weatherCode === 3) return "☁️"; // overcast
+  else if (weatherCode === 45 || weatherCode === 48) return "☁️"; // fog
+  else if (weatherCode === 51 || weatherCode === 53 || weatherCode === 55) return "🌦️"; // drizzle
+  else if (weatherCode === 61 || weatherCode === 63 || weatherCode === 65) return "🌧️"; // rain
+  else if (weatherCode === 71 || weatherCode === 73 || weatherCode === 75) return "❄️"; // snowfall
+  else if (weatherCode === 95) return "⛈️"; // thunderstorm
+  else if (weatherCode === 96 || weatherCode === 99) return "🌩️"; // thunderstorm with hail
   else return "☁️"; // default
 };
 

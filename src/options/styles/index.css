@@ -1,3 +1,10 @@
+.options-page-layout,
+.options-page-layout > main,
+.options-page-layout > main > section {
+  grid-template-columns: minmax(0, 1fr);
+  min-width: 0;
+}
+
 /* fix to prevent border transition */
 .bookmark-user-defined-item {
   width: 100%;
@@ -435,6 +442,27 @@
 
 .options-icon-picker-hover-indicator.is-visible {
   opacity: 1;
+}
+
+.options-icon-picker-empty {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: 1rem;
+}
+
+.options-icon-picker-empty-icon {
+  display: grid;
+  width: 4rem;
+  height: 4rem;
+  place-items: center;
+  line-height: 1;
+}
+
+.options-icon-picker-empty-icon i {
+  font-size: 3rem;
 }
 
 .options-icon-picker-result:focus-visible {

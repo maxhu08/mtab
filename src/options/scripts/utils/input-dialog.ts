@@ -14,11 +14,29 @@ type InputDialogOptions = {
   confirmText?: string;
   cancelText?: string;
   defaultValue?: string;
+  fileInput?: {
+    text: string;
+    accept: string;
+  };
 };
 type ActionDialogOptions = {
   cancelText?: string;
   actionText?: string;
   onAction: () => void | Promise<void>;
+
+  description?: string;
+  variant?: "export";
+
+  additionalAction?: {
+    text: string;
+    onAction: () => void | Promise<void>;
+  };
+
+  secondaryAction?: {
+    text: string;
+    disabled: boolean;
+    onAction: () => void | Promise<void>;
+  };
 };
 
 const OVERLAY_ID = "mtab-input-dialog-overlay";
@@ -113,7 +131,7 @@ export const showInputDialog = (
   inputEl.autocomplete = "off";
   inputEl.className =
     "w-full bg-transparent text-base text-white placeholder-neutral-500 outline-none";
-  inputEl.placeholder = options.placeholder ?? t("paste here...");
+  inputEl.placeholder = options.placeholder ?? t("Paste here...");
   inputEl.value = options.defaultValue ?? "";
   inputContainerEl.append(inputEl);
 
@@ -134,6 +152,41 @@ export const showInputDialog = (
 
   actions.append(cancelButton, confirmButton);
   dialog.append(textEl, inputContainerEl, actions);
+
+  if (options.fileInput) {
+    const separator = document.createElement("p");
+    separator.className = "my-3 text-center text-base text-neutral-400";
+    separator.textContent = t("or");
+
+    const fileInput = document.createElement("input");
+    fileInput.type = "file";
+    fileInput.accept = options.fileInput.accept;
+    fileInput.hidden = true;
+
+    const uploadButton = document.createElement("button");
+    uploadButton.type = "button";
+    uploadButton.className =
+      "w-full cursor-pointer rounded-md bg-emerald-500 px-3 py-2 text-base text-white transition hover:bg-emerald-600";
+    uploadButton.textContent = options.fileInput.text;
+    uploadButton.addEventListener("click", () => fileInput.click());
+    fileInput.addEventListener("change", async () => {
+      const file = fileInput.files?.[0];
+      if (!file) return;
+
+      try {
+        inputEl.value = await file.text();
+        inputEl.focus();
+      } catch {
+        toast.error(t("Could not read file."));
+      }
+      fileInput.value = "";
+    });
+
+    dialog.insertBefore(separator, actions);
+    dialog.insertBefore(uploadButton, actions);
+    dialog.append(fileInput);
+  }
+
   overlay.appendChild(dialog);
   document.body.appendChild(overlay);
 
@@ -174,7 +227,7 @@ export const showInputDialog = (
         cancel();
       }
 
-      if (event.key === "Enter") {
+      if (event.key === "Enter" && !(event.target instanceof HTMLButtonElement)) {
         event.preventDefault();
         submit();
       }
@@ -206,8 +259,7 @@ export const showActionDialog = (text: string, options: ActionDialogOptions): Pr
   overlay.style.transition = "opacity 160ms ease";
 
   const dialog = document.createElement("div");
-  dialog.className =
-    "w-full max-w-xl rounded-md border-2 border-rose-500 bg-neutral-900 p-4 text-base shadow-2xl";
+  dialog.className = `w-full max-w-xl rounded-md border-2 ${options.variant === "export" ? "border-emerald-500" : "border-rose-500"} bg-neutral-900 p-4 text-base shadow-2xl`;
   dialog.setAttribute("role", "dialog");
   dialog.setAttribute("aria-modal", "true");
   dialog.setAttribute("aria-label", text);
@@ -231,12 +283,56 @@ export const showActionDialog = (text: string, options: ActionDialogOptions): Pr
 
   const actionButton = document.createElement("button");
   actionButton.type = "button";
-  actionButton.className =
-    "cursor-pointer rounded-md bg-rose-500 px-3 py-2 text-base text-white transition hover:bg-rose-600";
+  actionButton.className = `cursor-pointer rounded-md ${options.variant === "export" ? "bg-emerald-500 hover:bg-emerald-600" : "bg-rose-500 hover:bg-rose-600"} px-3 py-2 text-base text-white transition`;
   actionButton.textContent = options.actionText ?? t("confirm");
 
-  actions.append(cancelButton, actionButton);
-  dialog.append(textEl, actions);
+  const secondaryButton = options.secondaryAction ? document.createElement("button") : null;
+
+  if (secondaryButton && options.secondaryAction) {
+    secondaryButton.type = "button";
+    secondaryButton.className =
+      "cursor-pointer rounded-md bg-emerald-500 px-3 py-2 text-base text-white transition hover:bg-emerald-600 disabled:cursor-not-allowed disabled:opacity-50";
+    secondaryButton.textContent = options.secondaryAction.text;
+    secondaryButton.disabled = options.secondaryAction.disabled;
+
+    actions.className = "mt-4 grid grid-cols-1 gap-2";
+    cancelButton.classList.add("mt-2");
+    actions.append(actionButton, secondaryButton, cancelButton);
+    dialog.append(textEl);
+  } else {
+    actions.append(cancelButton, actionButton);
+    dialog.append(textEl);
+  }
+
+  const additionalButton = options.additionalAction ? document.createElement("button") : null;
+  if (additionalButton && options.additionalAction) {
+    const separator = document.createElement("p");
+    separator.className = "text-center text-base text-neutral-400";
+    separator.textContent = t("or");
+
+    additionalButton.type = "button";
+    additionalButton.className = actionButton.className;
+    additionalButton.textContent = options.additionalAction.text;
+    actions.insertBefore(separator, secondaryButton ?? cancelButton);
+    actions.insertBefore(additionalButton, secondaryButton ?? cancelButton);
+  }
+
+  if (options.description) {
+    const description = document.createElement("p");
+    description.id = "mtab-action-dialog-description";
+    description.className = "mt-3 whitespace-pre-line text-base text-neutral-400";
+    description.textContent = options.description;
+
+    dialog.setAttribute("aria-describedby", description.id);
+
+    if (secondaryButton) {
+      actions.insertBefore(description, secondaryButton);
+    } else {
+      dialog.append(description);
+    }
+  }
+
+  dialog.append(actions);
   overlay.appendChild(dialog);
   document.body.appendChild(overlay);
 
@@ -265,9 +361,11 @@ export const showActionDialog = (text: string, options: ActionDialogOptions): Pr
       resolve(false);
     };
 
-    const runAction = async () => {
+    const runAction = async (action = options.onAction) => {
+      if (isClosing) return;
+
       await cleanup();
-      await options.onAction();
+      await action();
       resolve(true);
     };
 
@@ -277,9 +375,26 @@ export const showActionDialog = (text: string, options: ActionDialogOptions): Pr
         void cancel();
       }
 
-      if (event.key === "Enter") {
+      if (event.key === "Enter" && !(event.target instanceof HTMLButtonElement)) {
         event.preventDefault();
         void runAction();
+      }
+
+      if (event.key === "Tab") {
+        const buttons = Array.from(dialog.querySelectorAll("button")).filter(
+          (button) => !button.disabled
+        );
+
+        const first = buttons[0];
+        const last = buttons[buttons.length - 1];
+
+        if (event.shiftKey && document.activeElement === first) {
+          event.preventDefault();
+          last?.focus();
+        } else if (!event.shiftKey && document.activeElement === last) {
+          event.preventDefault();
+          first?.focus();
+        }
       }
     };
 
@@ -293,6 +408,15 @@ export const showActionDialog = (text: string, options: ActionDialogOptions): Pr
     actionButton.addEventListener("click", () => {
       void runAction();
     });
+
+    secondaryButton?.addEventListener("click", () => {
+      if (options.secondaryAction) void runAction(options.secondaryAction.onAction);
+    });
+    additionalButton?.addEventListener("click", () => {
+      if (options.additionalAction) void runAction(options.additionalAction.onAction);
+    });
+
+    actionButton.focus();
   });
 };
 
@@ -309,7 +433,7 @@ export const showIconPickerModal = (currentValue = ""): Promise<string | null> =
 
   const dialog = document.createElement("div");
   dialog.className =
-    "options-icon-picker-dialog grid max-h-[min(48rem,calc(100vh-2rem))] w-full max-w-6xl grid-rows-[auto_auto_minmax(0,1fr)_auto] gap-3 rounded-md border-2 border-emerald-500 bg-neutral-900 p-4 text-base shadow-2xl";
+    "options-icon-picker-dialog grid h-[min(48rem,calc(100vh-2rem))] w-full max-w-6xl grid-rows-[auto_auto_minmax(0,1fr)_auto] gap-3 rounded-md border-2 border-emerald-500 bg-neutral-900 p-4 text-base shadow-2xl";
   dialog.setAttribute("role", "dialog");
   dialog.setAttribute("aria-modal", "true");
   dialog.setAttribute("aria-label", t("Icon picker"));
@@ -323,7 +447,7 @@ export const showIconPickerModal = (currentValue = ""): Promise<string | null> =
 
   const titleEl = document.createElement("p");
   titleEl.className = "text-base text-white";
-  titleEl.textContent = t("choose icon");
+  titleEl.textContent = t("Choose icon");
 
   const helperEl = document.createElement("p");
   helperEl.className = "text-base text-neutral-500";
@@ -340,7 +464,7 @@ export const showIconPickerModal = (currentValue = ""): Promise<string | null> =
   searchInputEl.autocomplete = "off";
   searchInputEl.className =
     "w-full bg-transparent text-base text-white placeholder-neutral-500 outline-none";
-  searchInputEl.placeholder = t("search icons...");
+  searchInputEl.placeholder = t("Search icons...");
   searchContainerEl.append(searchInputEl);
 
   const resultsEl = document.createElement("div");
@@ -348,6 +472,23 @@ export const showIconPickerModal = (currentValue = ""): Promise<string | null> =
 
   const hoverIndicatorEl = document.createElement("div");
   hoverIndicatorEl.className = "options-icon-picker-hover-indicator";
+
+  const emptyStateEl = document.createElement("div");
+  emptyStateEl.className = "options-icon-picker-empty text-neutral-500";
+
+  const emptyStateIconEl = document.createElement("span");
+  emptyStateIconEl.className = "options-icon-picker-empty-icon";
+  const emptyStateIcon = createBookmarkIcon(
+    "ri-emotion-sad-line",
+    ICON_PICKER_PREVIEW_COLOR,
+    ICON_PICKER_PREVIEW_COLOR
+  );
+  if (emptyStateIcon) emptyStateIconEl.append(emptyStateIcon.iconEl);
+
+  const emptyStateTextEl = document.createElement("p");
+  emptyStateTextEl.className = "text-base";
+  emptyStateTextEl.textContent = t("No icons found.");
+  emptyStateEl.append(emptyStateIconEl, emptyStateTextEl);
 
   const footerEl = document.createElement("div");
   footerEl.className = "grid gap-2";
@@ -567,17 +708,19 @@ export const showIconPickerModal = (currentValue = ""): Promise<string | null> =
       resultsEl.append(fragment, hoverIndicatorEl);
 
       if (totalMatches === 0) {
-        countEl.textContent = t("no icons found");
+        resultsEl.prepend(emptyStateEl);
+        countEl.classList.add("hidden");
         return;
       }
 
+      countEl.classList.remove("hidden");
       countEl.textContent =
         totalMatches > totalVisible
-          ? t("showing {visible} of {total} icons; search to narrow results", {
+          ? t("Showing {visible} of {total} icons; search to narrow results.", {
               visible: totalVisible,
               total: totalMatches
             })
-          : t("showing {total} icons", { total: totalMatches });
+          : t("Showing {total} icons.", { total: totalMatches });
     };
 
     resultsEl.addEventListener("pointerleave", () => {

@@ -1,6 +1,7 @@
 import {
   BookmarkNode,
   BookmarkNodeBookmark,
+  BookmarksLocationChromium,
   BookmarksLocationFirefox,
   DefaultBlockyColorType,
   DefaultFaviconSource
@@ -9,6 +10,7 @@ import { convertBrowserBookmarksToBookmarkNodes } from "~/src/newtab/scripts/uti
 import { flattenBookmarks } from "~/src/newtab/scripts/utils/bookmarks/flatten-bookmarks";
 
 type BrowserBookmarkCacheKey = {
+  bookmarksLocationChromium: BookmarksLocationChromium;
   bookmarksLocationFirefox: BookmarksLocationFirefox;
   defaultBlockyColorType: DefaultBlockyColorType;
   defaultBlockyColor: string;
@@ -31,6 +33,7 @@ export const getBrowserBookmarkNodes = (key: BrowserBookmarkCacheKey): Promise<B
 
   cachedNodesKey = cacheKey;
   cachedNodesPromise = convertBrowserBookmarksToBookmarkNodes(
+    key.bookmarksLocationChromium,
     key.bookmarksLocationFirefox,
     key.defaultBlockyColorType,
     key.defaultBlockyColor,

@@ -32,7 +32,7 @@ export const exportAllBookmarkNodes = async () => {
 
   const counts = countNodes(bookmarkNodesToExport);
   toast.success(
-    t("{bookmarks} bookmarks and {folders} folders copied to clipboard", {
+    t("{bookmarks} bookmarks and {folders} folders copied to clipboard.", {
       bookmarks: counts[0],
       folders: counts[1]
     })

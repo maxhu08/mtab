@@ -24,7 +24,9 @@
       data-expand="false"
       data-position="top-center"
     ></div>
-    <div class="mx-auto grid w-[95%] grid-flow-row sm:w-[80%] md:w-[60%] lg:w-[50%] xl:w-[40%]">
+    <div
+      class="options-page-layout mx-auto grid w-[95%] min-w-0 grid-flow-row sm:w-[80%] md:w-[60%] lg:w-[50%] xl:w-[40%]"
+    >
       <div class="grid place-items-center gap-4 p-4">
         <img
           id="mtab-logo"
@@ -51,7 +53,7 @@
           <span id="user-agent-text" class="text-orange-500"></span>
         </p>
       </div>
-      <main class="grid grid-flow-row pt-16">
+      <main class="grid min-w-0 grid-flow-row pt-16">
         <!-- options -->
         <div class="mb-4 grid grid-cols-[1fr_max-content_1fr] items-center gap-2">
           <div class="grid grid-cols-[max-content_auto] items-center gap-2">
@@ -68,12 +70,14 @@
           <div class="h-[1px] flex-grow rounded-md bg-neutral-500"></div>
         </div>
         <section id="options-section" class="mb-20 grid grid-flow-row gap-4">
-          <div class="grid w-full grid-cols-[max-content_auto] place-items-center">
+          <div
+            class="grid w-full min-w-0 gap-2 sm:grid-cols-[max-content_minmax(0,1fr)] sm:place-items-center"
+          >
             <p class="text-base text-white">options.language</p>
-            <div class="options-language-select ml-auto">
+            <div class="options-language-select w-full min-w-0 sm:ml-auto sm:w-auto sm:max-w-full">
               <select
                 id="options-language-select"
-                class="cursor-pointer rounded-md bg-neutral-800 px-3 py-2 text-base text-white"
+                class="w-full min-w-0 cursor-pointer rounded-md bg-neutral-800 px-3 py-2 text-base text-white sm:w-auto sm:max-w-full"
                 aria-label="options language"
               ></select>
               <i class="options-language-select-arrow ri-arrow-down-s-line" aria-hidden="true"></i>
@@ -97,7 +101,7 @@
             </div>
           </div>
           <p class="text-base text-neutral-500">
-            Tip: you can still access the options by pressing `extensions > mtab > options`
+            Tip: you can still access the options by pressing `extensions &gt; mtab &gt; options`.
           </p>
         </section>
         <!-- user -->
@@ -127,7 +131,7 @@
                 type="text"
                 autocomplete="off"
                 class="w-full bg-transparent text-white placeholder-neutral-500 outline-none"
-                placeholder="input name..."
+                placeholder="Input name..."
               />
             </div>
           </div>
@@ -159,7 +163,7 @@
                 type="text"
                 autocomplete="off"
                 class="w-full bg-transparent text-white placeholder-neutral-500 outline-none"
-                placeholder="input title..."
+                placeholder="Input title..."
               />
             </div>
           </div>
@@ -182,7 +186,7 @@
               </div>
             </div>
             <p class="text-base text-neutral-500">
-              When enabled, the page title changes to match what is in the search bar
+              When enabled, the page title changes to match what is in the search bar.
             </p>
           </div>
           <div class="grid gap-2 text-base">
@@ -217,7 +221,7 @@
                     step="1"
                     autocomplete="off"
                     class="w-full bg-transparent text-white placeholder-neutral-500 outline-none"
-                    placeholder="input speed (ms)..."
+                    placeholder="Input speed (ms)..."
                   />
                 </div>
               </div>
@@ -262,7 +266,7 @@
               <p class="text-base text-white">title.customFavicon</p>
               <p class="text-base text-neutral-500">
                 Note: customFavicon is not included when exporting and importing configs due to
-                taking too much space
+                taking too much space.
               </p>
               <div class="grid grid-cols-2 gap-2">
                 <input
@@ -278,7 +282,7 @@
                   <span class="text-base text-white">reset</span>
                 </button>
               </div>
-              <p class="text-base text-neutral-500">live preview</p>
+              <p class="text-base text-neutral-500">Live preview</p>
               <div
                 id="live-favicon-preview"
                 class="grid aspect-square w-16 place-items-center overflow-hidden rounded-md bg-neutral-800"
@@ -341,8 +345,8 @@
               <div class="grid gap-2">
                 <p class="text-base text-white">message.font.custom</p>
                 <p class="text-base text-neutral-500">
-                  Use a Google Fonts URL to choose a font<br />
-                  Example: `https://fonts.googleapis.com/css2?family=Anton+SC&display=swap`
+                  Use a Google Fonts URL to choose a font.<br />
+                  Example: `https://fonts.googleapis.com/css2?family=Anton+SC&amp;display=swap`.
                 </p>
                 <div
                   id="message-font-custom-container"
@@ -353,7 +357,7 @@
                     type="text"
                     autocomplete="off"
                     class="w-full bg-transparent text-white placeholder-neutral-500 outline-none"
-                    placeholder="input font url..."
+                    placeholder="Input font URL..."
                   />
                 </div>
               </div>
@@ -369,7 +373,7 @@
                   type="text"
                   autocomplete="off"
                   class="w-full bg-transparent text-white placeholder-neutral-500 outline-none"
-                  placeholder="input color..."
+                  placeholder="Input color..."
                 />
               </div>
             </div>
@@ -385,7 +389,7 @@
                   step="any"
                   autocomplete="off"
                   class="w-full bg-transparent text-white placeholder-neutral-500 outline-none"
-                  placeholder="input size..."
+                  placeholder="Input size..."
                 />
               </div>
             </div>
@@ -433,12 +437,12 @@
             <div id="message-type-weather-section" class="grid grid-flow-row gap-4">
               <p class="text-base text-neutral-500">
                 Note: you need to have location permissions set to `allow` for weather messages to
-                work <br />
+                work. <br />
                 <br />
                 Weather data may be delayed due to being cached in 5 minutes intervals for faster
-                load times<br />
+                load times.<br />
                 <br />
-                All weather data from
+                All weather data from:
                 <a
                   href="https://open-meteo.com"
                   target="_blank"
@@ -480,7 +484,7 @@
                     type="text"
                     autocomplete="off"
                     class="w-full bg-transparent text-white placeholder-neutral-500 outline-none"
-                    placeholder="input text..."
+                    placeholder="Input text..."
                   />
                 </div>
               </div>
@@ -567,9 +571,9 @@
                 <div class="grid gap-2">
                   <p class="text-base text-white">wallpaper.urls</p>
                   <p class="text-base text-neutral-500">
-                    Tip: you can use video file formats like MP4, MOV, and more
+                    Tip: you can use video file formats like MP4, MOV, and more.
                     <br />
-                    To use URLs as wallpapers (right click > copy image address)
+                    To use URLs as wallpapers (right click &gt; copy image address).
                   </p>
                 </div>
               </div>
@@ -577,13 +581,13 @@
                 <div class="grid gap-2">
                   <p class="text-base text-white">wallpaper.fileUploads</p>
                   <p class="text-base text-neutral-500">
-                    Tip: you can upload PNG, JPG, WEBP, GIF, MP4, and more
+                    Tip: you can upload PNG, JPG, WEBP, GIF, MP4, and more.
                     <br /><br />
                     It is recommended to scale images to match your resolution for faster loading
-                    times
+                    times.
                     <br /><br />
                     Note: fileUploads wallpapers are not included when exporting and importing
-                    configs due to taking too much space
+                    configs due to taking too much space.
                   </p>
                   <input
                     type="file"
@@ -607,7 +611,7 @@
                     wallpaper credits.
                     <br />
                     <br />
-                    Random wallpapers are sourced from
+                    Random wallpapers are sourced from:
                     <a
                       href="https://picsum.photos/"
                       target="_blank"
@@ -666,7 +670,7 @@
                       step="any"
                       autocomplete="off"
                       class="w-full bg-transparent text-white placeholder-neutral-500 outline-none"
-                      placeholder="input brightness (0.0-1.0)..."
+                      placeholder="Input brightness (0.0-1.0)..."
                     />
                   </div>
                 </div>
@@ -681,7 +685,7 @@
                       type="text"
                       autocomplete="off"
                       class="w-full bg-transparent text-white placeholder-neutral-500 outline-none"
-                      placeholder="input blur..."
+                      placeholder="Input blur..."
                     />
                   </div>
                 </div>
@@ -769,7 +773,7 @@
                   type="text"
                   autocomplete="off"
                   class="w-full bg-transparent text-white placeholder-neutral-500 outline-none"
-                  placeholder="input color..."
+                  placeholder="Input color..."
                 />
               </div>
             </div>
@@ -786,7 +790,7 @@
                   type="text"
                   autocomplete="off"
                   class="w-full bg-transparent text-white placeholder-neutral-500 outline-none"
-                  placeholder="input color..."
+                  placeholder="Input color..."
                 />
               </div>
             </div>
@@ -801,7 +805,7 @@
                   type="text"
                   autocomplete="off"
                   class="w-full bg-transparent text-white placeholder-neutral-500 outline-none"
-                  placeholder="input blur strength..."
+                  placeholder="Input blur strength..."
                 />
               </div>
             </div>
@@ -818,7 +822,7 @@
                 type="text"
                 autocomplete="off"
                 class="w-full bg-transparent text-white placeholder-neutral-500 outline-none"
-                placeholder="input color..."
+                placeholder="Input color..."
               />
             </div>
           </div>
@@ -1069,7 +1073,7 @@
               </div>
             </div>
             <span class="text-base text-neutral-500"
-              >Tip: press `Ctrl+Enter` to open your search in a new tab</span
+              >Tip: press `Ctrl+Enter` to open your search in a new tab.</span
             >
           </div>
           <div id="search-enabled-section" class="grid grid-flow-row gap-4">
@@ -1179,8 +1183,8 @@
             <div id="search-use-custom-engine-section" class="grid gap-2">
               <p class="text-base text-white">search.customEngineURL</p>
               <span class="text-base text-neutral-500"
-                >Use `{}` to represent the search query<br />Example:
-                `https://www.google.com/search?q={}`</span
+                >Use `{}` to represent the search query.<br />Example:
+                `https://www.google.com/search?q={}`.</span
               >
               <div
                 id="search-custom-engine-url-container"
@@ -1191,7 +1195,7 @@
                   type="text"
                   autocomplete="off"
                   class="w-full bg-transparent text-white placeholder-neutral-500 outline-none"
-                  placeholder="E.g https://www.google.com/search?q={}"
+                  placeholder="E.g., https://www.google.com/search?q={}"
                 />
               </div>
             </div>
@@ -1206,7 +1210,7 @@
                   type="text"
                   autocomplete="off"
                   class="w-full bg-transparent text-white placeholder-neutral-500 outline-none"
-                  placeholder="input placeholder..."
+                  placeholder="Input placeholder..."
                 />
               </div>
             </div>
@@ -1221,7 +1225,7 @@
                   type="text"
                   autocomplete="off"
                   class="w-full bg-transparent text-white placeholder-neutral-500 outline-none"
-                  placeholder="input placeholder..."
+                  placeholder="Input placeholder..."
                 />
               </div>
             </div>
@@ -1289,10 +1293,10 @@
               </div>
               <p class="text-base text-neutral-500">
                 Automatically detects links in search results and opens them directly instead of
-                running a search
+                running a search.
                 <br /><br />
-                e.g., typing `example.com` navigates directly to `https://example.com` instead of
-                performing a search
+                E.g., typing `example.com` navigates directly to `https://example.com` instead of
+                performing a search.
               </p>
             </div>
             <div class="grid gap-2">
@@ -1314,11 +1318,11 @@
                 </div>
               </div>
               <p class="text-base text-neutral-500">
-                Shows live query suggestions as you type<br /><br />
+                Shows live query suggestions as you type.<br /><br />
                 Suggestions are sourced from DuckDuckGo's public autocomplete suggestions API and
                 are not based on your personal search history. Requests are sent directly from your
                 browser to DuckDuckGo and do not include cookies, accounts, extension identifiers,
-                or other personal data
+                or other personal data.
               </p>
             </div>
             <div class="grid gap-2">
@@ -1339,7 +1343,7 @@
                   </label>
                 </div>
               </div>
-              <p class="text-base text-neutral-500">Shows the current date when you type 'date'</p>
+              <p class="text-base text-neutral-500">Shows the current date when you type 'date'.</p>
             </div>
             <div class="grid gap-2">
               <div class="grid w-full grid-cols-[max-content_auto] place-items-center">
@@ -1360,9 +1364,9 @@
                 </div>
               </div>
               <p class="text-base text-neutral-500">
-                Automatically evaluates math expressions typed into the search input
-                <br /><br />e.g., `cos(pi / 6) * (3^2 - 4) + sin(45deg) + sqrt(20) =
-                9.50936975510832`
+                Automatically evaluates math expressions typed into the search input.
+                <br /><br />E.g., `cos(pi / 6) * (3^2 - 4) + sin(45deg) + sqrt(20) =
+                9.50936975510832`.
               </p>
             </div>
             <div class="grid gap-2">
@@ -1384,11 +1388,11 @@
                 </div>
               </div>
               <p class="text-base text-neutral-500">
-                Shows word definitions when you include definition keywords in the search input
+                Shows word definitions when you include definition keywords in the search input.
                 <br /><br />
-                e.g., `morning def` or `morning definition`
+                E.g., `morning def` or `morning definition`.
                 <br /><br />
-                Definitions are sourced from
+                Definitions are sourced from:
                 <a
                   href="https://github.com/open-dictionary/english-dictionary"
                   target="_blank"
@@ -1416,14 +1420,14 @@
                 </div>
               </div>
               <p class="text-base text-neutral-500">
-                Converts units directly from the search input
+                Converts units directly from the search input.
                 <br /><br />
-                e.g., `1 ft => 0.3048 m`
+                E.g., `1 ft =&gt; 0.3048 m`.
                 <br /><br />
                 Supports length, weight, temperature, time, volume, area, speed, angle, data, and
-                170+ currencies
+                170+ currencies.
                 <br /><br />
-                Currency conversion rates are sourced from
+                Currency conversion rates are sourced from:
                 <a
                   href="https://hexarate.paikama.co"
                   target="_blank"
@@ -1451,27 +1455,27 @@
                 </div>
               </div>
               <p class="text-base text-neutral-500">
-                Generates passwords directly from the search input, entirely locally
+                Generates passwords directly from the search input, entirely locally.
                 <br /><br />
-                No data is sent anywhere; password generation happens on your device
+                No data is sent anywhere; password generation happens on your device.
                 <br /><br />
                 Type `pw &lt;length&gt; &lt;flags&gt;` or `password &lt;length&gt; &lt;flags&gt;` to
-                generate a password
+                generate a password.
                 <br /><br />
-                e.g., `password 16 luns` generates a 16 character password with lowercase letters,
-                uppercase letters, numbers, and symbols
+                E.g., `password 16 luns` generates a 16 character password with lowercase letters,
+                uppercase letters, numbers, and symbols.
                 <br /><br />
-                flags
-                <br />`l` - lowercase letters <br />`u` - uppercase letters <br />`n` - numbers
-                <br />`s` - symbols <br />`m` - memorable <br /><br />
-                if no arguments are specified, defaults to `16 luns`
+                Flags:
+                <br />`l` - lowercase letters. <br />`u` - uppercase letters. <br />`n` - numbers.
+                <br />`s` - symbols. <br />`m` - memorable. <br /><br />
+                If no arguments are specified, defaults to `16 luns`.
                 <br /><br />
-                Order of arguments and flags does not matter
+                Order of arguments and flags does not matter.
               </p>
             </div>
             <div class="grid gap-2">
               <p class="text-base text-white">search.focusedBorderColor</p>
-              <span class="text-base text-neutral-500">(use #00000000 for none)</span>
+              <span class="text-base text-neutral-500">(Use #00000000 for none.)</span>
               <div
                 id="search-focused-border-color-container"
                 class="w-full rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base"
@@ -1481,7 +1485,7 @@
                   type="text"
                   autocomplete="off"
                   class="w-full bg-transparent text-white placeholder-neutral-500 outline-none"
-                  placeholder="input color..."
+                  placeholder="Input color..."
                 />
               </div>
             </div>
@@ -1506,8 +1510,8 @@
               <div class="grid gap-2">
                 <p class="text-base text-white">search.font.custom</p>
                 <p class="text-base text-neutral-500">
-                  Use a Google Fonts URL to choose a font<br />
-                  Example: `https://fonts.googleapis.com/css2?family=Anton+SC&display=swap`
+                  Use a Google Fonts URL to choose a font.<br />
+                  Example: `https://fonts.googleapis.com/css2?family=Anton+SC&amp;display=swap`.
                 </p>
                 <div
                   id="search-font-custom-container"
@@ -1518,7 +1522,7 @@
                     type="text"
                     autocomplete="off"
                     class="w-full bg-transparent text-white placeholder-neutral-500 outline-none"
-                    placeholder="input font url..."
+                    placeholder="Input font URL..."
                   />
                 </div>
               </div>
@@ -1534,7 +1538,7 @@
                   type="text"
                   autocomplete="off"
                   class="w-full bg-transparent text-white placeholder-neutral-500 outline-none"
-                  placeholder="input color..."
+                  placeholder="Input color..."
                 />
               </div>
             </div>
@@ -1549,13 +1553,13 @@
                   type="text"
                   autocomplete="off"
                   class="w-full bg-transparent text-white placeholder-neutral-500 outline-none"
-                  placeholder="input color..."
+                  placeholder="Input color..."
                 />
               </div>
             </div>
             <div class="grid gap-2">
               <p class="text-base text-white">search.searchIconColor</p>
-              <p class="text-base text-neutral-500">This changes the -> color</p>
+              <p class="text-base text-neutral-500">This changes the -&gt; color.</p>
               <div
                 id="search-search-icon-color-container"
                 class="w-full rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base"
@@ -1565,13 +1569,13 @@
                   type="text"
                   autocomplete="off"
                   class="w-full bg-transparent text-white placeholder-neutral-500 outline-none"
-                  placeholder="input color..."
+                  placeholder="Input color..."
                 />
               </div>
             </div>
             <div class="grid gap-2">
               <p class="text-base text-white">search.bookmarkIconColor</p>
-              <p class="text-base text-neutral-500">This changes the // color</p>
+              <p class="text-base text-neutral-500">This changes the // color.</p>
               <div
                 id="search-bookmark-icon-color-container"
                 class="w-full rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base"
@@ -1581,13 +1585,13 @@
                   type="text"
                   autocomplete="off"
                   class="w-full bg-transparent text-white placeholder-neutral-500 outline-none"
-                  placeholder="input color..."
+                  placeholder="Input color..."
                 />
               </div>
             </div>
             <div class="grid gap-2">
               <p class="text-base text-white">search.selectIconColor</p>
-              <p class="text-base text-neutral-500">This changes the > color</p>
+              <p class="text-base text-neutral-500">This changes the &gt; color.</p>
               <div
                 id="search-select-icon-color-container"
                 class="w-full rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base"
@@ -1597,7 +1601,7 @@
                   type="text"
                   autocomplete="off"
                   class="w-full bg-transparent text-white placeholder-neutral-500 outline-none"
-                  placeholder="input color..."
+                  placeholder="Input color..."
                 />
               </div>
             </div>
@@ -1613,7 +1617,7 @@
                     type="text"
                     autocomplete="off"
                     class="w-full bg-transparent text-white placeholder-neutral-500 outline-none"
-                    placeholder="input color..."
+                    placeholder="Input color..."
                   />
                 </div>
               </div>
@@ -1660,45 +1664,51 @@
           </div>
           <div id="hotkeys-enabled-section">
             <div class="grid grid-flow-row gap-2 rounded-md bg-neutral-800 p-2">
-              <div class="grid grid-cols-[max-content_auto_max-content]">
+              <div
+                class="grid grid-cols-[minmax(0,1fr)_max-content] gap-2 sm:grid-cols-[max-content_auto_max-content] sm:gap-0"
+              >
                 <p class="my-auto text-base text-white">hotkeys.activationKey&nbsp;</p>
                 <span id="hotkeys-activation-key-status" class="my-auto text-base text-neutral-500"
                   >(none)</span
                 >
                 <div
                   id="hotkeys-activation-key-container"
-                  class="w-full rounded-md border-2 border-transparent bg-neutral-900 p-1 text-base"
+                  class="col-span-2 w-full min-w-0 rounded-md border-2 border-transparent bg-neutral-900 p-1 text-base sm:col-span-1"
                 >
                   <input
                     id="hotkeys-activation-key-input"
                     type="text"
                     autocomplete="off"
                     spellcheck="false"
-                    class="w-full bg-transparent px-2 py-1 text-white placeholder-neutral-500 outline-none"
+                    class="w-full min-w-0 bg-transparent px-2 py-1 text-white placeholder-neutral-500 outline-none"
                   />
                 </div>
               </div>
               <div class="my-auto h-[1px] rounded-md bg-neutral-500"></div>
-              <div class="grid grid-cols-[max-content_auto_max-content]">
+              <div
+                class="grid grid-cols-[minmax(0,1fr)_max-content] gap-2 sm:grid-cols-[max-content_auto_max-content] sm:gap-0"
+              >
                 <p class="my-auto text-base text-white">hotkeys.closePageKey&nbsp;</p>
                 <span id="hotkeys-close-page-key-status" class="my-auto text-base text-neutral-500"
                   >(none)</span
                 >
                 <div
                   id="hotkeys-close-page-key-container"
-                  class="w-full rounded-md border-2 border-transparent bg-neutral-900 p-1 text-base"
+                  class="col-span-2 w-full min-w-0 rounded-md border-2 border-transparent bg-neutral-900 p-1 text-base sm:col-span-1"
                 >
                   <input
                     id="hotkeys-close-page-key-input"
                     type="text"
                     autocomplete="off"
                     spellcheck="false"
-                    class="w-full bg-transparent px-2 py-1 text-white placeholder-neutral-500 outline-none"
+                    class="w-full min-w-0 bg-transparent px-2 py-1 text-white placeholder-neutral-500 outline-none"
                   />
                 </div>
               </div>
               <div class="my-auto h-[1px] rounded-md bg-neutral-500"></div>
-              <div class="grid grid-cols-[max-content_auto_max-content]">
+              <div
+                class="grid grid-cols-[minmax(0,1fr)_max-content] gap-2 sm:grid-cols-[max-content_auto_max-content] sm:gap-0"
+              >
                 <p class="my-auto text-base text-white">hotkeys.searchBookmarksKey&nbsp;</p>
                 <span
                   id="hotkeys-search-bookmarks-key-status"
@@ -1707,14 +1717,14 @@
                 >
                 <div
                   id="hotkeys-search-bookmarks-key-container"
-                  class="w-full rounded-md border-2 border-transparent bg-neutral-900 p-1 text-base"
+                  class="col-span-2 w-full min-w-0 rounded-md border-2 border-transparent bg-neutral-900 p-1 text-base sm:col-span-1"
                 >
                   <input
                     id="hotkeys-search-bookmarks-key-input"
                     type="text"
                     autocomplete="off"
                     spellcheck="false"
-                    class="w-full bg-transparent px-2 py-1 text-white placeholder-neutral-500 outline-none"
+                    class="w-full min-w-0 bg-transparent px-2 py-1 text-white placeholder-neutral-500 outline-none"
                   />
                 </div>
               </div>
@@ -1771,7 +1781,7 @@
             class="grid grid-flow-row gap-4"
           >
             <p class="text-base text-neutral-500">
-              Tip: `Ctrl+click` or `Middle click` to open a bookmark in a new tab
+              Tip: `Ctrl+click` or `Middle click` to open a bookmark in a new tab.
             </p>
             <div class="grid gap-2 text-base">
               <div class="grid w-full grid-cols-[max-content_auto] place-items-center">
@@ -1811,8 +1821,8 @@
                 </div>
               </div>
               <p class="text-neutral-500">
-                Enabling numberKeys -> makes it so that pressing 1 opens first bookmark, 2 opens
-                second bookmark, and so on (0 activates the back button)
+                Enabling numberKeys -&gt; makes it so that pressing 1 opens first bookmark, 2 opens
+                second bookmark, and so on (0 activates the back button).
               </p>
             </div>
             <div class="grid gap-2 text-base">
@@ -1851,7 +1861,7 @@
                   step="1"
                   autocomplete="off"
                   class="w-full bg-transparent text-white placeholder-neutral-500 outline-none"
-                  placeholder="input number..."
+                  placeholder="Input number..."
                 />
               </div>
             </div>
@@ -1901,7 +1911,7 @@
                   type="text"
                   autocomplete="off"
                   class="w-full bg-transparent text-white placeholder-neutral-500 outline-none"
-                  placeholder="input color..."
+                  placeholder="Input color..."
                 />
               </div>
             </div>
@@ -1916,7 +1926,7 @@
                   type="text"
                   autocomplete="off"
                   class="w-full bg-transparent text-white placeholder-neutral-500 outline-none"
-                  placeholder="input icon-type..."
+                  placeholder="Input icon-type..."
                 />
               </div>
             </div>
@@ -1936,7 +1946,7 @@
                     step="1"
                     autocomplete="off"
                     class="w-full bg-transparent text-white placeholder-neutral-500 outline-none"
-                    placeholder="input number..."
+                    placeholder="Input number..."
                   />
                 </div>
               </div>
@@ -1947,7 +1957,7 @@
               <p class="text-neutral-500">
                 <span class="text-indigo-500">remixicon:</span>
                 <br />
-                Find available icon types at
+                Find available icon types at:
                 <a
                   href="https://remixicon.com"
                   target="_blank"
@@ -1956,11 +1966,11 @@
                 >
                 (using v4.9.1)
                 <br />
-                remixicon icon types should be formatted as <span class="text-sky-500">ri-...</span>
+                Remix Icon types should be formatted as: <span class="text-sky-500">ri-...</span>
               </p>
               <p class="text-neutral-500">
                 <span class="text-indigo-500">nerdfonts:</span><br />
-                You can also use Nerd Font icons. Check the cheat sheet at
+                You can also use Nerd Font icons. Check the cheat sheet at:
                 <a
                   href="https://www.nerdfonts.com/cheat-sheet"
                   target="_blank"
@@ -1968,27 +1978,28 @@
                   >nerdfonts.com</a
                 >
                 <br />
-                nerdfont icon types should be formatted as <span class="text-sky-500">nf-...</span>
+                Nerd Font icon types should be formatted as:
+                <span class="text-sky-500">nf-...</span>
               </p>
               <p class="text-neutral-500">
                 <span class="text-indigo-500">fontawesome:</span>
                 <br />
-                Find available icon types at
+                Find available icon types at:
                 <a
                   href="https://fontawesome.com/search"
                   target="_blank"
                   class="cursor-pointer text-blue-500 transition hover:text-blue-600"
                   >fontawesome.com</a
                 >
-                (using v7.1.0)
+                (using v7.3.1)
                 <br />
-                fontawesome icon types should be formatted as
+                Font Awesome icon types should be formatted as:
                 <span class="text-sky-500">fa-... fa-...</span>
               </p>
               <p class="text-neutral-500">
                 <span class="text-indigo-500">simpleicons:</span>
                 <br />
-                Find available icon types at
+                Find available icon types at:
                 <a
                   href="https://icones.js.org/collection/simple-icons"
                   target="_blank"
@@ -1996,13 +2007,13 @@
                   >icones.js.org</a
                 >
                 <br />
-                simpleicons icon types should be formatted as
+                Simple Icons types should be formatted as:
                 <span class="text-sky-500">si-...</span>
               </p>
               <p class="text-neutral-500">
                 <span class="text-indigo-500">url:</span><br />
-                You can use URLs as icon types (right click > copy image address)<br />
-                `url` icon types should be formatted as
+                You can use URLs as icon types (right click &gt; copy image address).<br />
+                `url` icon types should be formatted as:
                 <span class="text-sky-500">url-https://...</span>
               </p>
               <br />
@@ -2074,7 +2085,7 @@
                     step="1"
                     autocomplete="off"
                     class="w-full bg-transparent text-white placeholder-neutral-500 outline-none"
-                    placeholder="input number..."
+                    placeholder="Input number..."
                   />
                 </div>
               </div>
@@ -2107,15 +2118,57 @@
                       type="text"
                       autocomplete="off"
                       class="w-full bg-transparent text-white placeholder-neutral-500 outline-none"
-                      placeholder="input color..."
+                      placeholder="Input color..."
                     />
                   </div>
                 </div>
               </div>
               <div class="grid gap-2 text-base">
-                <p class="text-white">bookmarks.bookmarksLocationFirefox</p>
-                <p class="text-neutral-500">(only applies to firefox based browsers)</p>
+                <p class="text-white">bookmarks.bookmarksLocationChromium</p>
+                <p class="text-neutral-500">(Only applies to Chromium-based browsers.)</p>
+                <p class="text-neutral-500">
+                  Selecting root displays every top-level bookmark folder.
+                </p>
                 <div class="grid grid-cols-2 gap-2">
+                  <button
+                    id="bookmarks-location-chromium-root-button"
+                    class="rounded-md bg-neutral-800 py-2 outline-none hover:bg-neutral-700"
+                  >
+                    <span class="text-white">root</span>
+                  </button>
+                  <button
+                    id="bookmarks-location-chromium-bookmarks-bar-button"
+                    class="rounded-md bg-neutral-800 py-2 outline-none hover:bg-neutral-700"
+                  >
+                    <span class="text-white">bookmarks bar</span>
+                  </button>
+                  <button
+                    id="bookmarks-location-chromium-other-button"
+                    class="rounded-md bg-neutral-800 py-2 outline-none hover:bg-neutral-700"
+                  >
+                    <span class="text-white">other</span>
+                  </button>
+                  <button
+                    id="bookmarks-location-chromium-mobile-button"
+                    class="rounded-md bg-neutral-800 py-2 outline-none hover:bg-neutral-700"
+                  >
+                    <span class="text-white">mobile</span>
+                  </button>
+                </div>
+              </div>
+              <div class="grid gap-2 text-base">
+                <p class="text-white">bookmarks.bookmarksLocationFirefox</p>
+                <p class="text-neutral-500">(Only applies to Firefox-based browsers.)</p>
+                <p class="text-neutral-500">
+                  Selecting root displays every top-level bookmark folder.
+                </p>
+                <div class="grid grid-cols-2 gap-2">
+                  <button
+                    id="bookmarks-location-firefox-root-button"
+                    class="rounded-md bg-neutral-800 py-2 outline-none hover:bg-neutral-700"
+                  >
+                    <span class="text-white">root</span>
+                  </button>
                   <button
                     id="bookmarks-location-firefox-menu-button"
                     class="rounded-md bg-neutral-800 py-2 outline-none hover:bg-neutral-700"
@@ -2142,7 +2195,7 @@
             <div class="grid gap-2 text-base">
               <p class="text-white">bookmarks.defaultFaviconSource</p>
               <p class="text-base text-neutral-500">
-                (determines where bookmark favicons are fetched from)
+                (Determines where bookmark favicons are fetched from.)
               </p>
               <div class="grid grid-cols-2 gap-2">
                 <button
@@ -2180,10 +2233,10 @@
           <div class="grid gap-2 text-base">
             <p class="text-white">extras.snow.enabled</p>
             <p class="text-base text-neutral-500">
-              Fun snow effect
+              Fun snow effect.
               <br />
               <br />
-              Winter mode enables snow during december
+              Winter mode enables snow during December.
             </p>
             <div class="grid grid-cols-2 gap-2">
               <button

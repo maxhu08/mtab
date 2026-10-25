@@ -23,7 +23,8 @@ export const saveMessageSettingsToDraft = (draft: Config) => {
   draft.message.font.custom = messageFontCustomInputEl.value;
 
   draft.message.textColor = messageTextColorInputEl.value;
-  draft.message.textSize = parseFloat(messageTextSizeInputEl.value);
+  const textSize = Number.parseFloat(messageTextSizeInputEl.value);
+  if (Number.isFinite(textSize)) draft.message.textSize = textSize;
 
   const selectedTypeEl = getSelectedButton("message-type");
   const messageTypePairs: Record<string, MessageType> = {

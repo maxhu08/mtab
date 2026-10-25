@@ -48,7 +48,7 @@ Microsoft Edge
 
 ## star-history
 
-[![Star History Chart](https://api.star-history.com/svg?repos=maxhu08/mtab&type=Date)](https://star-history.com/#maxhu08/mtab&Date)
+[![Star History Chart](https://star-history.dera.page/svg?repos=maxhu08/mtab&type=Date)](https://star-history.dera.page/#maxhu08/mtab&Date)
 
 ## contributing
 

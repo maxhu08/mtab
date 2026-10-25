@@ -1,18 +1,19 @@
 import { AnimationBookmarkType } from "~/src/utils/config";
 import { bookmarkSearchInputEl, contentEl } from "~/src/newtab/scripts/ui";
 
+export const normalizeBookmarkUrl = (url: string) =>
+  /^[a-z][a-z\d+.-]*:/i.test(url) ? url : `https://${url}`;
+
 export const openBookmark = (
   bookmarkUrl: string,
   animationsEnabled: boolean,
   animationsType: AnimationBookmarkType,
   openInNewTab: boolean = false
 ) => {
-  if (!/^[a-z][a-z\d+.-]*:/i.test(bookmarkUrl)) {
-    bookmarkUrl = `https://${bookmarkUrl}`;
-  }
+  const url = normalizeBookmarkUrl(bookmarkUrl);
 
   if (openInNewTab) {
-    chrome.tabs.create({ url: bookmarkUrl, active: false });
+    chrome.tabs.create({ url, active: false });
     bookmarkSearchInputEl.value = "";
 
     return;
@@ -28,9 +29,9 @@ export const openBookmark = (
     }, animationDuration - 10);
 
     setTimeout(() => {
-      window.location.href = bookmarkUrl;
+      window.location.href = url;
     }, animationDuration + 20);
   } else {
-    window.location.href = bookmarkUrl;
+    window.location.href = url;
   }
 };

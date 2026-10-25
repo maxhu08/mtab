@@ -119,6 +119,7 @@ export const listenToKeys = (config: Config) => {
     }
 
     bookmarksPromise = getBrowserFlattenedBookmarks({
+      bookmarksLocationChromium: config.bookmarks.bookmarksLocationChromium,
       bookmarksLocationFirefox: config.bookmarks.bookmarksLocationFirefox,
       defaultBlockyColorType: config.bookmarks.defaultBlockyColorType,
       defaultBlockyColor: config.bookmarks.defaultBlockyColor,
@@ -145,7 +146,7 @@ export const listenToKeys = (config: Config) => {
     const inBookmarkSearch = bookmarkSearchSectionEl.classList.contains("grid");
     const searchResultsVisible = searchResultsSectionEl.classList.contains("block");
     const activeHotkeyMappings: Partial<Record<string, MtabHotkeyAction>> = {
-      ...(!searchFocused && !bookmarkSearchFocused && activationKey
+      ...(!searchFocused && !bookmarkSearchFocused && config.search.enabled && activationKey
         ? { [activationKey]: "activation" as const }
         : {})
     };
@@ -236,7 +237,7 @@ export const listenToKeys = (config: Config) => {
       config.bookmarks.type === "default-blocky"
     ) {
       if (!searchFocused && !bookmarkSearchFocused) {
-        if (key === "0" && navigateOpenFolderParent()) {
+        if (config.bookmarks.numberKeys && key === "0" && navigateOpenFolderParent()) {
           e.preventDefault();
           return;
         }
@@ -311,7 +312,7 @@ export const listenToKeys = (config: Config) => {
   searchInputEl.addEventListener("keydown", (e) => {
     if (e.key === "Enter" && !e.repeat) {
       e.preventDefault();
-      runSearchFromInput(e.ctrlKey);
+      runSearchFromInput(e.ctrlKey || (e.metaKey && navigator.platform.startsWith("Mac")));
     }
   });
 

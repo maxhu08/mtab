@@ -188,16 +188,6 @@ export const handleConversionCurrency = async (
     } satisfies ConversionCurrencyResult;
   }
 
-  // If exactly "1 USD" -> don't fetch; return 1 -> 1
-  if (leftParsed.amount === 1 && fromCode === "USD") {
-    return {
-      type: "conversion-currency",
-      before: `1 USD`,
-      after: `1 ${toCode}`,
-      timestamp: Date.now()
-    } satisfies ConversionCurrencyResult;
-  }
-
   try {
     const rate = await getHexaRateLatestCached(fromCode, toCode);
     const converted = leftParsed.amount * rate.mid;

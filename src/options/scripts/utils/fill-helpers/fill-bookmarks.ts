@@ -1,5 +1,6 @@
 import {
   BookmarkLineOrientation,
+  BookmarksLocationChromium,
   BookmarksLocationFirefox,
   BookmarksType,
   Config,
@@ -15,6 +16,11 @@ import {
   bookmarksDefaultBlockyColsInputEl,
   bookmarksDefaultBlockyColorInputEl,
   bookmarksShowBookmarkNamesCheckboxEl,
+  bookmarksLocationChromiumRootButtonEl,
+  bookmarksLocationChromiumBookmarksBarButtonEl,
+  bookmarksLocationChromiumOtherButtonEl,
+  bookmarksLocationChromiumMobileButtonEl,
+  bookmarksLocationFirefoxRootButtonEl,
   bookmarksLocationFirefoxMenuButtonEl,
   bookmarksLocationFirefoxToolbarButtonEl,
   bookmarksLocationFirefoxOtherButtonEl,
@@ -38,6 +44,7 @@ import { fillBookmarkNodeBookmarks } from "~/src/options/scripts/utils/fill-help
 export const fillBookmarksInputs = (config: Config) => {
   bookmarksShowBookmarkNamesCheckboxEl.checked = config.bookmarks.showBookmarkNames;
 
+  bookmarksUserDefinedColsInputEl.value = config.bookmarks.userDefinedCols.toString();
   bookmarksDefaultBlockyColsInputEl.value = config.bookmarks.defaultBlockyCols.toString();
   bookmarksDefaultBlockyColorInputEl.value = config.bookmarks.defaultBlockyColor;
 
@@ -50,10 +57,7 @@ export const fillBookmarksInputs = (config: Config) => {
 
   // prettier-ignore
   const bookmarksTypePairs: Record<BookmarksType, () => void> = {
-    "user-defined": () => {
-      bookmarksUserDefinedColsInputEl.value = config.bookmarks.userDefinedCols.toString();
-      bookmarksTypeUserDefinedButtonEl.click();
-    },
+    "user-defined": () => bookmarksTypeUserDefinedButtonEl.click(),
     "default": () => bookmarksTypeDefaultButtonEl.click(),
     "default-blocky": () => bookmarksTypeDefaultBlockyButtonEl.click(),
     "none": () => bookmarksTypeNoneButtonEl.click()
@@ -81,7 +85,18 @@ export const fillBookmarksInputs = (config: Config) => {
   bookmarksDefaultBlockyColorTypePairs[config.bookmarks.defaultBlockyColorType]();
 
   // prettier-ignore
+  const bookmarksLocationChromiumPairs: Record<BookmarksLocationChromium, () => void> = {
+    "root": () => bookmarksLocationChromiumRootButtonEl.click(),
+    "bookmarks-bar": () => bookmarksLocationChromiumBookmarksBarButtonEl.click(),
+    "other": () => bookmarksLocationChromiumOtherButtonEl.click(),
+    "mobile": () => bookmarksLocationChromiumMobileButtonEl.click()
+  };
+
+  bookmarksLocationChromiumPairs[config.bookmarks.bookmarksLocationChromium]();
+
+  // prettier-ignore
   const bookmarksLocationFirefoxPairs: Record<BookmarksLocationFirefox, () => void> = {
+    "root": () => bookmarksLocationFirefoxRootButtonEl.click(),
     "menu": () => bookmarksLocationFirefoxMenuButtonEl.click(),
     "toolbar": () => bookmarksLocationFirefoxToolbarButtonEl.click(),
     "other": () => bookmarksLocationFirefoxOtherButtonEl.click()

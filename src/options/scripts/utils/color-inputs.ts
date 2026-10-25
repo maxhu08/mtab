@@ -91,13 +91,13 @@ const createColorControl = ({ container, input }: ColorFieldInput): void => {
   previewEl.className = "options-color-picker";
   previewEl.setAttribute(
     "aria-label",
-    t("choose color for {field}", {
+    t("Choose color for {field}", {
       field: input.id.replace(/-input$/, "").replace(/-/g, " ")
     })
   );
   previewEl.setAttribute("aria-haspopup", "dialog");
   previewEl.setAttribute("aria-expanded", "false");
-  previewEl.setAttribute("data-tippy-content", t("choose color"));
+  previewEl.setAttribute("data-tippy-content", t("Choose color"));
 
   const popupEl = document.createElement("div");
   popupEl.className = "options-color-picker-popup";
@@ -116,6 +116,7 @@ const createColorControl = ({ container, input }: ColorFieldInput): void => {
     if (!pendingValue || input.value === pendingValue) return;
 
     input.value = pendingValue;
+    input.dispatchEvent(new Event("input", { bubbles: true }));
     syncColorInputControl(input);
   };
 

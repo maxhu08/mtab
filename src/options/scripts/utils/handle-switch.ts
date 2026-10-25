@@ -285,7 +285,7 @@ const handleBookmarksTypeSwitch = () => {
 
 const handleUserDefinedOrDefaultBlockySwitch = () => {
   // prettier-ignore
-  const bookmarksUserDefinedOrDefaultBlockySection = document.getElementById("bookmarks-user-defined-or-default-blocky-section") as HTMLDivElement
+  const bookmarksUserDefinedOrDefaultBlockySection = document.getElementById("bookmarks-user-defined-or-default-blocky-section") as HTMLDivElement;
 
   const hide = () => setSectionVisibility(bookmarksUserDefinedOrDefaultBlockySection, false);
   const show = () => setSectionVisibility(bookmarksUserDefinedOrDefaultBlockySection, true);
@@ -324,7 +324,7 @@ const handleBookmarksDefaultBlockyColorTypeSwitch = () => {
 
 const handleBookmarksDefaultOrDefaultBlockySwitch = () => {
   // prettier-ignore
-  const bookmarksDefaultOrDefaultBlockySection = document.getElementById("bookmarks-default-or-default-blocky-section") as HTMLDivElement
+  const bookmarksDefaultOrDefaultBlockySection = document.getElementById("bookmarks-default-or-default-blocky-section") as HTMLDivElement;
 
   const hide = () => setSectionVisibility(bookmarksDefaultOrDefaultBlockySection, false);
   const show = () => setSectionVisibility(bookmarksDefaultOrDefaultBlockySection, true);

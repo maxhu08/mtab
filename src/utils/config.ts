@@ -17,7 +17,7 @@ export const getConfig = (f: ({ config }: { config: Config }) => void) => {
     // fill empty properties
     const mergedConfig = deepMerge(structuredClone(defaultConfig), data.config);
     // migrate old config to new version
-    const finalizedConfig = migrateOldConfig(mergedConfig);
+    const finalizedConfig = migrateOldConfig(mergedConfig, data.config);
 
     f({
       config: finalizedConfig
@@ -188,6 +188,7 @@ export const defaultConfig: Config = {
     defaultBlockyCols: 4,
     defaultBlockyColorType: "custom",
     defaultBlockyColor: "#ffffff",
+    bookmarksLocationChromium: "root",
     bookmarksLocationFirefox: "toolbar",
     defaultFaviconSource: "duckduckgo"
   },
@@ -265,7 +266,8 @@ export type BookmarkNodeBookmark = {
 };
 export type DefaultBlockyColorType = "random" | "custom";
 export type DefaultFaviconSource = "google" | "duckduckgo";
-export type BookmarksLocationFirefox = "menu" | "toolbar" | "other";
+export type BookmarksLocationFirefox = "root" | "menu" | "toolbar" | "other";
+export type BookmarksLocationChromium = "root" | "bookmarks-bar" | "other" | "mobile";
 export type FontType = "default" | "custom";
 export type SnowEnabledType = "on" | "off" | "winter";
 
@@ -381,6 +383,7 @@ export interface Config {
     defaultBlockyCols: number;
     defaultBlockyColorType: DefaultBlockyColorType;
     defaultBlockyColor: string;
+    bookmarksLocationChromium: BookmarksLocationChromium;
     bookmarksLocationFirefox: BookmarksLocationFirefox;
     defaultFaviconSource: DefaultFaviconSource;
   };

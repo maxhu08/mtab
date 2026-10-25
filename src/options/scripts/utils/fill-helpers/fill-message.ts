@@ -13,6 +13,7 @@ import {
   messageTypeTime12ButtonEl,
   messageTypeTime24ButtonEl,
   messageTypeWeatherButtonEl,
+  messageWeatherUnitsTypeCButton,
   messageWeatherUnitsTypeFButton
 } from "~/src/options/scripts/ui";
 import { fillLocalizedDefaultValue } from "~/src/i18n";
@@ -43,7 +44,7 @@ export const fillMessageInputs = (config: Config) => {
 
   const messageWeatherUnitTypePairs: Record<"f" | "c", HTMLButtonElement> = {
     f: messageWeatherUnitsTypeFButton,
-    c: messageWeatherUnitsTypeFButton
+    c: messageWeatherUnitsTypeCButton
   };
   messageWeatherUnitTypePairs[config.message.weather.unitsType].click();
 

@@ -1,20 +1,34 @@
 import { customMessageHelp } from "~/src/i18n/messages";
 
 export const ko = {
+  "download wallpaper": "배경화면 다운로드",
+  "Could not download wallpaper.": "배경화면을 다운로드하지 못했습니다.",
+  Export: "내보내기",
+  "copy to clipboard": "클립보드에 복사",
+  or: "또는",
+  "upload config": "설정 업로드",
+  "Could not read file.": "파일을 읽을 수 없습니다.",
+  "download config": "설정 다운로드",
+  "download wallpapers": "배경화면 다운로드",
+  "Wallpapers are not included in the config because they can be too large. You can download them separately as a ZIP file.":
+    "배경화면은 파일 크기가 클 수 있어 설정에 포함되지 않습니다. ZIP 파일로 별도로 다운로드할 수 있습니다.",
+  "No uploaded wallpapers to download.": "다운로드할 업로드된 배경화면이 없습니다.",
+  "Could not export wallpapers.": "배경화면을 내보내지 못했습니다.",
+  "Could not export config.": "설정을 내보내지 못했습니다.",
   "options ヽ(・ω・*)": "설정 ヽ(・ω・*)",
   logo: "로고",
   options: "설정",
   "options.language": "언어",
   "options.showOptionsButton": "설정 버튼 표시",
-  "Tip: you can still access the options by pressing `extensions > mtab > options`":
-    "팁: `확장 프로그램 > mtab > 옵션`을 눌러 설정 페이지에 계속 접근할 수 있습니다",
+  "Tip: you can still access the options by pressing `extensions > mtab > options`.":
+    "팁: `확장 프로그램 > mtab > 옵션`을 눌러 설정 페이지에 계속 접근할 수 있습니다.",
   user: "사용자",
   "user.name": "사용자 이름",
   title: "제목",
   "title.defaultTitle": "기본 제목",
   "title.dynamic.enabled": "동적 제목 사용",
-  "When enabled, the page title changes to match what is in the search bar":
-    "활성화하면 페이지 제목이 검색창에 입력된 내용에 맞춰 바뀝니다",
+  "When enabled, the page title changes to match what is in the search bar.":
+    "활성화하면 페이지 제목이 검색창에 입력된 내용에 맞춰 바뀝니다.",
   "title.effect": "제목 효과",
   none: "없음",
   typewriter: "타자 효과",
@@ -24,17 +38,17 @@ export const ko = {
   default: "기본값",
   custom: "사용자 지정",
   "title.customFavicon": "사용자 지정 사이트 아이콘",
-  "Note: customFavicon is not included when exporting and importing configs due to taking too much space":
-    "참고: 사용자 지정 사이트 아이콘은 용량이 커서 설정 내보내기 및 가져오기에 포함되지 않습니다",
+  "Note: customFavicon is not included when exporting and importing configs due to taking too much space.":
+    "참고: 사용자 지정 사이트 아이콘은 용량이 커서 설정 내보내기 및 가져오기에 포함되지 않습니다.",
   reset: "초기화",
-  "live preview": "실시간 미리보기",
+  "Live preview": "실시간 미리보기",
   message: "메시지",
   "message.enabled": "메시지 사용",
   "message.font.type": "글꼴 유형",
   "message.font.custom": "사용자 지정 글꼴",
-  "Use a Google Fonts URL to choose a font": "Google Fonts URL로 글꼴을 선택하세요",
-  "Example: `https://fonts.googleapis.com/css2?family=Anton+SC&display=swap`":
-    "예: `https://fonts.googleapis.com/css2?family=Anton+SC&display=swap`",
+  "Use a Google Fonts URL to choose a font.": "Google Fonts URL로 글꼴을 선택하세요.",
+  "Example: `https://fonts.googleapis.com/css2?family=Anton+SC&display=swap`.":
+    "예: `https://fonts.googleapis.com/css2?family=Anton+SC&display=swap`.",
   "message.textColor": "텍스트 색상",
   "message.textSize": "텍스트 크기",
   "message.type": "메시지 유형",
@@ -43,11 +57,11 @@ export const ko = {
   "time-12": "12시간 형식",
   "time-24": "24시간 형식",
   weather: "날씨",
-  "Note: you need to have location permissions set to `allow` for weather messages to work":
-    "참고: 날씨 메시지를 사용하려면 위치 권한을 `allow`로 설정해야 합니다",
-  "Weather data may be delayed due to being cached in 5 minutes intervals for faster load times":
-    "더 빠른 로딩을 위해 날씨 데이터는 5분 간격으로 캐시되므로 지연될 수 있습니다",
-  "All weather data from": "모든 날씨 데이터 출처",
+  "Note: you need to have location permissions set to `allow` for weather messages to work.":
+    "참고: 날씨 메시지를 사용하려면 위치 권한을 `allow`로 설정해야 합니다.",
+  "Weather data may be delayed due to being cached in 5 minutes intervals for faster load times.":
+    "더 빠른 로딩을 위해 날씨 데이터는 5분 간격으로 캐시되므로 지연될 수 있습니다.",
+  "All weather data from:": "모든 날씨 데이터 출처:",
   "message.weather.unitsType": "날씨 온도 단위",
   "message.customText": "사용자 지정 메시지",
   wallpaper: "배경화면",
@@ -59,22 +73,22 @@ export const ko = {
   "solid-color": "단색",
   mixed: "혼합",
   "wallpaper.urls": "배경화면 URL",
-  "Tip: you can use video file formats like MP4, MOV, and more":
-    "팁: MP4, MOV 등 동영상 파일 형식도 사용할 수 있습니다",
-  "To use URLs as wallpapers (right click > copy image address)":
-    "URL을 배경화면으로 사용하려면(오른쪽 클릭 > 이미지 주소 복사)",
+  "Tip: you can use video file formats like MP4, MOV, and more.":
+    "팁: MP4, MOV 등 동영상 파일 형식도 사용할 수 있습니다.",
+  "To use URLs as wallpapers (right click > copy image address).":
+    "URL을 배경화면으로 사용하려면(오른쪽 클릭 > 이미지 주소 복사).",
   "wallpaper.fileUploads": "업로드한 배경화면 파일",
-  "Tip: you can upload PNG, JPG, WEBP, GIF, MP4, and more":
-    "팁: PNG, JPG, WEBP, GIF, MP4 등 다양한 형식을 업로드할 수 있습니다",
-  "It is recommended to scale images to match your resolution for faster loading times":
-    "더 빠른 로딩을 위해 이미지를 화면 해상도에 맞게 조정하는 것이 좋습니다",
-  "Note: fileUploads wallpapers are not included when exporting and importing configs due to taking too much space":
-    "참고: 업로드한 배경화면 파일은 용량이 커서 설정 내보내기 및 가져오기에 포함되지 않습니다",
+  "Tip: you can upload PNG, JPG, WEBP, GIF, MP4, and more.":
+    "팁: PNG, JPG, WEBP, GIF, MP4 등 다양한 형식을 업로드할 수 있습니다.",
+  "It is recommended to scale images to match your resolution for faster loading times.":
+    "더 빠른 로딩을 위해 이미지를 화면 해상도에 맞게 조정하는 것이 좋습니다.",
+  "Note: fileUploads wallpapers are not included when exporting and importing configs due to taking too much space.":
+    "참고: 업로드한 배경화면 파일은 용량이 커서 설정 내보내기 및 가져오기에 포함되지 않습니다.",
   "wallpaper.solidColors": "단색 배경화면",
   "wallpaper.random": "무작위 배경화면",
   "You can hover your cursor in the bottom-left corner on the new tab page to see wallpaper credits.":
     "새 탭 페이지의 왼쪽 아래 모서리에 커서를 올리면 배경화면 출처를 볼 수 있습니다.",
-  "Random wallpapers are sourced from": "무작위 배경화면 출처",
+  "Random wallpapers are sourced from:": "무작위 배경화면 출처:",
   "wallpaper.mixed": "혼합 배경화면",
   "Mix URL, file-upload, and solid-color items in one rotation list.":
     "하나의 순환 목록에 URL, 파일 업로드, 단색 항목을 함께 넣을 수 있습니다.",
@@ -124,13 +138,13 @@ export const ko = {
   "animations.bookmarkType": "북마크 표시 애니메이션",
   search: "검색",
   "search.enabled": "검색 사용",
-  "Tip: press `Ctrl+Enter` to open your search in a new tab":
-    "팁: `Ctrl+Enter`를 누르면 검색 결과를 새 탭에서 엽니다",
+  "Tip: press `Ctrl+Enter` to open your search in a new tab.":
+    "팁: `Ctrl+Enter`를 누르면 검색 결과를 새 탭에서 엽니다.",
   "search.engine": "검색 엔진",
   "search.useCustomEngine": "사용자 지정 검색 엔진 사용",
   "search.customEngineURL": "사용자 지정 검색 엔진 URL",
-  "Use `{}` to represent the search query": "검색어를 나타낼 때 `{}`를 사용하세요",
-  "Example: `https://www.google.com/search?q={}`": "예: `https://www.google.com/search?q={}`",
+  "Use `{}` to represent the search query.": "검색어를 나타낼 때 `{}`를 사용하세요.",
+  "Example: `https://www.google.com/search?q={}`.": "예: `https://www.google.com/search?q={}`.",
   "search.placeholderText": "검색 자리 표시자 텍스트",
   "search.bookmarkPlaceholderText": "북마크 검색 자리 표시자 텍스트",
   "search.buttons.clear": "지우기 버튼 표시",
@@ -140,62 +154,62 @@ export const ko = {
   "When enabled, shows a button to submit your search.":
     "활성화하면 검색을 실행하는 버튼이 표시됩니다.",
   "search.recognizeLinks": "링크 인식",
-  "Automatically detects links in search results and opens them directly instead of running a search":
-    "검색어에서 링크를 자동으로 감지해 검색하지 않고 바로 엽니다",
-  "e.g., typing `example.com` navigates directly to `https://example.com` instead of performing a search":
-    "예: `example.com`을 입력하면 검색을 실행하는 대신 `https://example.com`으로 바로 이동합니다",
+  "Automatically detects links in search results and opens them directly instead of running a search.":
+    "검색어에서 링크를 자동으로 감지해 검색하지 않고 바로 엽니다.",
+  "E.g., typing `example.com` navigates directly to `https://example.com` instead of performing a search.":
+    "예: `example.com`을 입력하면 검색을 실행하는 대신 `https://example.com`으로 바로 이동합니다.",
   "search.suggestions": "검색 제안",
-  "Shows live query suggestions as you type": "입력하는 동안 실시간 검색어 제안을 표시합니다",
-  "Suggestions are sourced from DuckDuckGo's public autocomplete suggestions API and are not based on your personal search history. Requests are sent directly from your browser to DuckDuckGo and do not include cookies, accounts, extension identifiers, or other personal data":
-    "검색 제안은 DuckDuckGo의 공개 자동완성 제안 API에서 제공되며 개인 검색 기록을 기반으로 하지 않습니다. 요청은 브라우저에서 DuckDuckGo로 직접 전송되며 쿠키, 계정, 확장 프로그램 식별자 또는 기타 개인 데이터를 포함하지 않습니다",
+  "Shows live query suggestions as you type.": "입력하는 동안 실시간 검색어 제안을 표시합니다.",
+  "Suggestions are sourced from DuckDuckGo's public autocomplete suggestions API and are not based on your personal search history. Requests are sent directly from your browser to DuckDuckGo and do not include cookies, accounts, extension identifiers, or other personal data.":
+    "검색 제안은 DuckDuckGo의 공개 자동완성 제안 API에서 제공되며 개인 검색 기록을 기반으로 하지 않습니다. 요청은 브라우저에서 DuckDuckGo로 직접 전송되며 쿠키, 계정, 확장 프로그램 식별자 또는 기타 개인 데이터를 포함하지 않습니다.",
   "search.assist.date": "날짜 도우미",
-  "Shows the current date when you type 'date'": "'date'를 입력하면 현재 날짜를 표시합니다",
+  "Shows the current date when you type 'date'.": "'date'를 입력하면 현재 날짜를 표시합니다.",
   "search.assist.math": "수학 도우미",
-  "Automatically evaluates math expressions typed into the search input":
-    "검색창에 입력한 수식을 자동으로 계산합니다",
-  "e.g., `cos(pi / 6) * (3^2 - 4) + sin(45deg) + sqrt(20) = 9.50936975510832`":
-    "예: `cos(pi / 6) * (3^2 - 4) + sin(45deg) + sqrt(20) = 9.50936975510832`",
+  "Automatically evaluates math expressions typed into the search input.":
+    "검색창에 입력한 수식을 자동으로 계산합니다.",
+  "E.g., `cos(pi / 6) * (3^2 - 4) + sin(45deg) + sqrt(20) = 9.50936975510832`.":
+    "예: `cos(pi / 6) * (3^2 - 4) + sin(45deg) + sqrt(20) = 9.50936975510832`.",
   "search.assist.definitions": "사전 도우미",
-  "Shows word definitions when you include definition keywords in the search input":
-    "검색창에 정의 관련 키워드를 입력하면 단어 뜻을 표시합니다",
-  "e.g., `morning def` or `morning definition`": "예: `morning def` 또는 `morning definition`",
-  "Definitions are sourced from": "단어 뜻 출처",
+  "Shows word definitions when you include definition keywords in the search input.":
+    "검색창에 정의 관련 키워드를 입력하면 단어 뜻을 표시합니다.",
+  "E.g., `morning def` or `morning definition`.": "예: `morning def` 또는 `morning definition`.",
+  "Definitions are sourced from:": "단어 뜻 출처:",
   "search.assist.conversions": "단위 변환 도우미",
-  "Converts units directly from the search input": "검색창에서 바로 단위를 변환합니다",
-  "e.g., `1 ft => 0.3048 m`": "예: `1 ft => 0.3048 m`",
-  "Supports length, weight, temperature, time, volume, area, speed, angle, data, and 170+ currencies":
-    "길이, 무게, 온도, 시간, 부피, 면적, 속도, 각도, 데이터 단위와 170개 이상의 통화를 지원합니다",
-  "Currency conversion rates are sourced from": "통화 환율 출처",
+  "Converts units directly from the search input.": "검색창에서 바로 단위를 변환합니다.",
+  "E.g., `1 ft => 0.3048 m`.": "예: `1 ft => 0.3048 m`.",
+  "Supports length, weight, temperature, time, volume, area, speed, angle, data, and 170+ currencies.":
+    "길이, 무게, 온도, 시간, 부피, 면적, 속도, 각도, 데이터 단위와 170개 이상의 통화를 지원합니다.",
+  "Currency conversion rates are sourced from:": "통화 환율 출처:",
   "search.assist.passwordGenerator": "비밀번호 생성기",
-  "Generates passwords directly from the search input, entirely locally":
-    "검색창에서 비밀번호를 생성하며 모든 과정은 로컬에서 처리됩니다",
-  "No data is sent anywhere; password generation happens on your device":
-    "어떤 데이터도 외부로 전송되지 않으며 비밀번호 생성은 기기에서만 이루어집니다",
-  "Type `pw <length> <flags>` or `password <length> <flags>` to generate a password":
-    "비밀번호를 만들려면 `pw <length> <flags>` 또는 `password <length> <flags>`를 입력하세요",
-  "e.g., `password 16 luns` generates a 16 character password with lowercase letters, uppercase letters, numbers, and symbols":
-    "예: `password 16 luns`는 소문자, 대문자, 숫자, 기호가 포함된 16자 비밀번호를 생성합니다",
-  flags: "플래그",
-  "`l` - lowercase letters": "`l` - 소문자",
-  "`u` - uppercase letters": "`u` - 대문자",
-  "`n` - numbers": "`n` - 숫자",
-  "`s` - symbols": "`s` - 기호",
-  "`m` - memorable": "`m` - 기억하기 쉬움",
-  "if no arguments are specified, defaults to `16 luns`":
-    "인수를 지정하지 않으면 기본값은 `16 luns`입니다",
-  "Order of arguments and flags does not matter": "인수와 플래그의 순서는 상관없습니다",
+  "Generates passwords directly from the search input, entirely locally.":
+    "검색창에서 비밀번호를 생성하며 모든 과정은 로컬에서 처리됩니다.",
+  "No data is sent anywhere; password generation happens on your device.":
+    "어떤 데이터도 외부로 전송되지 않으며 비밀번호 생성은 기기에서만 이루어집니다.",
+  "Type `pw <length> <flags>` or `password <length> <flags>` to generate a password.":
+    "비밀번호를 만들려면 `pw <length> <flags>` 또는 `password <length> <flags>`를 입력하세요.",
+  "E.g., `password 16 luns` generates a 16 character password with lowercase letters, uppercase letters, numbers, and symbols.":
+    "예: `password 16 luns`는 소문자, 대문자, 숫자, 기호가 포함된 16자 비밀번호를 생성합니다.",
+  "Flags:": "플래그:",
+  "`l` - lowercase letters.": "`l` - 소문자.",
+  "`u` - uppercase letters.": "`u` - 대문자.",
+  "`n` - numbers.": "`n` - 숫자.",
+  "`s` - symbols.": "`s` - 기호.",
+  "`m` - memorable.": "`m` - 기억하기 쉬움.",
+  "If no arguments are specified, defaults to `16 luns`.":
+    "인수를 지정하지 않으면 기본값은 `16 luns`입니다.",
+  "Order of arguments and flags does not matter.": "인수와 플래그의 순서는 상관없습니다.",
   "search.focusedBorderColor": "포커스 테두리 색상",
-  "(use #00000000 for none)": "(없음으로 설정하려면 #00000000 사용)",
+  "(Use #00000000 for none.)": "(없음으로 설정하려면 #00000000 사용.)",
   "search.font.type": "검색 글꼴 유형",
   "search.font.custom": "사용자 지정 검색 글꼴",
   "search.textColor": "검색 텍스트 색상",
   "search.placeholderTextColor": "자리 표시자 텍스트 색상",
   "search.searchIconColor": "검색 아이콘 색상",
-  "This changes the -> color": "-> 색상을 변경합니다",
+  "This changes the -> color.": "-> 색상을 변경합니다.",
   "search.bookmarkIconColor": "북마크 아이콘 색상",
-  "This changes the // color": "// 색상을 변경합니다",
+  "This changes the // color.": "// 색상을 변경합니다.",
   "search.selectIconColor": "선택 아이콘 색상",
-  "This changes the > color": "> 색상을 변경합니다",
+  "This changes the > color.": "> 색상을 변경합니다.",
   "search.linkTextColor": "링크 텍스트 색상",
   hotkeys: "단축키",
   "Modifier keys are specified as `<c-x>`, `<m-x>`, and `<a-x>` for `ctrl+x`, `meta+x`, and `alt+x`. Combined modifiers are written like `<c-a-x>` or `<c-m-x>`. Use `<space>` for the space key.":
@@ -209,12 +223,12 @@ export const ko = {
   "bookmarks.type": "북마크 유형",
   "user-defined": "사용자 정의",
   "default-blocky": "기본 블록형",
-  "Tip: `Ctrl+click` or `Middle click` to open a bookmark in a new tab":
-    "팁: `Ctrl+클릭` 또는 `가운데 클릭`으로 북마크를 새 탭에서 열 수 있습니다",
+  "Tip: `Ctrl+click` or `Middle click` to open a bookmark in a new tab.":
+    "팁: `Ctrl+클릭` 또는 `가운데 클릭`으로 북마크를 새 탭에서 열 수 있습니다.",
   "bookmarks.showBookmarkNames": "북마크 이름 표시",
   "bookmarks.numberKeys": "숫자 키 사용",
-  "Enabling numberKeys -> makes it so that pressing 1 opens first bookmark, 2 opens second bookmark, and so on (0 activates the back button)":
-    "숫자 키를 켜면 1은 첫 번째 북마크, 2는 두 번째 북마크처럼 열리며 0은 뒤로 가기 버튼을 실행합니다",
+  "Enabling numberKeys -> makes it so that pressing 1 opens first bookmark, 2 opens second bookmark, and so on (0 activates the back button).":
+    "숫자 키를 켜면 1은 첫 번째 북마크, 2는 두 번째 북마크처럼 열리며 0은 뒤로 가기 버튼을 실행합니다.",
   "bookmarks.enablePagination": "페이지 나누기 사용",
   "When enabled, bookmark rows beyond maxBookmarkRowsPerPage are split into extra pages. Use the Prev/Next buttons or [ and ] keys to move between pages.":
     "활성화하면 maxBookmarkRowsPerPage를 초과하는 북마크 행이 추가 페이지로 나뉩니다. Prev/Next 버튼 또는 [ 및 ] 키로 페이지를 이동하세요.",
@@ -227,19 +241,23 @@ export const ko = {
   "bookmarks.userDefinedCols": "사용자 정의 북마크 열 수",
   "bookmarks.userDefined": "사용자 정의 북마크",
   "Valid icon types you can use:": "사용할 수 있는 아이콘 유형:",
-  "Find available icon types at": "사용 가능한 아이콘 유형 찾기",
-  "remixicon icon types should be formatted as": "Remix Icon 아이콘 유형 형식",
-  "You can also use Nerd Font icons. Check the cheat sheet at":
-    "Nerd Font 아이콘도 사용할 수 있습니다. 치트 시트 보기",
-  "nerdfont icon types should be formatted as": "Nerd Font 아이콘 유형 형식",
-  "fontawesome icon types should be formatted as": "Font Awesome 아이콘 유형 형식",
-  "simpleicons icon types should be formatted as": "Simple Icons 아이콘 유형 형식",
-  "`url` icon types should be formatted as": "`url` 아이콘 유형 형식",
-  "You can use URLs as icon types (right click > copy image address)":
-    "URL을 아이콘 유형으로 사용할 수 있습니다(오른쪽 클릭 > 이미지 주소 복사)",
+  "Find available icon types at:": "사용 가능한 아이콘 유형 찾기:",
+  "Remix Icon types should be formatted as:": "Remix Icon 아이콘 유형 형식:",
+  "You can also use Nerd Font icons. Check the cheat sheet at:":
+    "Nerd Font 아이콘도 사용할 수 있습니다. 치트 시트 보기:",
+  "Nerd Font icon types should be formatted as:": "Nerd Font 아이콘 유형 형식:",
+  "Font Awesome icon types should be formatted as:": "Font Awesome 아이콘 유형 형식:",
+  "Simple Icons types should be formatted as:": "Simple Icons 아이콘 유형 형식:",
+  "`url` icon types should be formatted as:": "`url` 아이콘 유형 형식:",
+  "You can use URLs as icon types (right click > copy image address).":
+    "URL을 아이콘 유형으로 사용할 수 있습니다(오른쪽 클릭 > 이미지 주소 복사).",
   "You can also use the icon picker on the right of each icon input.":
     "각 아이콘 입력란 오른쪽의 아이콘 선택기도 사용할 수 있습니다.",
   "collapse all": "모두 접기",
+  "collapse contents": "내용 접기",
+  "collapse folder contents": "폴더 내용 접기",
+  "expand contents": "내용 펼치기",
+  "expand folder contents": "폴더 내용 펼치기",
   "add bookmark": "북마크 추가",
   "add folder": "폴더 추가",
   "import bookmark or folder": "북마크 또는 폴더 가져오기",
@@ -248,18 +266,25 @@ export const ko = {
   "bookmarks.defaultBlockyCols": "기본 블록형 열 수",
   "bookmarks.defaultBlockyColorType": "기본 블록형 색상 유형",
   "bookmarks.defaultBlockyColor": "기본 블록형 색상",
+  "bookmarks.bookmarksLocationChromium": "Chromium 북마크 위치",
+  "(Only applies to Chromium-based browsers.)": "(Chromium 기반 브라우저에만 적용.)",
+  root: "루트",
+  "Selecting root displays every top-level bookmark folder.":
+    "루트를 선택하면 모든 최상위 북마크 폴더가 표시됩니다.",
+  "bookmarks bar": "북마크바",
+  mobile: "모바일",
   "bookmarks.bookmarksLocationFirefox": "Firefox 북마크 위치",
-  "(only applies to firefox based browsers)": "(Firefox 기반 브라우저에만 적용)",
+  "(Only applies to Firefox-based browsers.)": "(Firefox 기반 브라우저에만 적용.)",
   menu: "메뉴",
   toolbar: "도구 모음",
   other: "기타",
   "bookmarks.defaultFaviconSource": "기본 사이트 아이콘 출처",
-  "(determines where bookmark favicons are fetched from)":
-    "(북마크 사이트 아이콘을 가져올 위치를 결정합니다)",
+  "(Determines where bookmark favicons are fetched from.)":
+    "(북마크 사이트 아이콘을 가져올 위치를 결정합니다.)",
   extras: "추가 기능",
   "extras.snow.enabled": "눈 효과",
-  "Fun snow effect": "재미있는 눈 내림 효과",
-  "Winter mode enables snow during december": "겨울 모드는 12월에 눈 효과를 켭니다",
+  "Fun snow effect.": "재미있는 눈 내림 효과.",
+  "Winter mode enables snow during December.": "겨울 모드는 12월에 눈 효과를 켭니다.",
   on: "켜기",
   winter: "겨울 모드",
   off: "끄기",
@@ -274,31 +299,31 @@ export const ko = {
   "options language": "설정 언어",
   "options show options button": "설정 버튼 표시",
   "toggle user section": "사용자 섹션 펼치기/접기",
-  "input name...": "이름 입력...",
+  "Input name...": "이름 입력...",
   "toggle title section": "제목 섹션 펼치기/접기",
-  "input title...": "제목 입력...",
+  "Input title...": "제목 입력...",
   "title dynamic enabled": "동적 제목 사용",
-  "input speed (ms)...": "속도 입력(ms)...",
+  "Input speed (ms)...": "속도 입력(ms)...",
   "enter character count...": "문자 수 입력...",
   "toggle message section": "메시지 섹션 펼치기/접기",
   "message enabled": "메시지 사용",
-  "input font url...": "글꼴 URL 입력...",
-  "input color...": "색상 입력...",
-  "input size...": "크기 입력...",
-  "input text...": "텍스트 입력...",
+  "Input font URL...": "글꼴 URL 입력...",
+  "Input color...": "색상 입력...",
+  "Input size...": "크기 입력...",
+  "Input text...": "텍스트 입력...",
   "toggle wallpaper section": "배경화면 섹션 펼치기/접기",
   "wallpaper enabled": "배경화면 사용",
-  "input brightness (0.0-1.0)...": "밝기 입력(0.0-1.0)...",
-  "input blur...": "흐림 값 입력...",
+  "Input brightness (0.0-1.0)...": "밝기 입력(0.0-1.0)...",
+  "Input blur...": "흐림 값 입력...",
   "toggle ui section": "인터페이스 섹션 펼치기/접기",
-  "input blur strength...": "흐림 강도 입력...",
+  "Input blur strength...": "흐림 강도 입력...",
   "toggle animations section": "애니메이션 섹션 펼치기/접기",
   "animations enabled": "애니메이션 사용",
   "toggle search section": "검색 섹션 펼치기/접기",
   "search enabled": "검색 사용",
   "search use custom engine": "사용자 지정 검색 엔진 사용",
-  "E.g https://www.google.com/search?q={}": "예: https://www.google.com/search?q={}",
-  "input placeholder...": "자리 표시자 입력...",
+  "E.g., https://www.google.com/search?q={}": "예: https://www.google.com/search?q={}",
+  "Input placeholder...": "자리 표시자 입력...",
   "search buttons clear": "지우기 버튼 표시",
   "search buttons search": "검색 버튼 표시",
   "search recognize links": "링크 인식",
@@ -314,86 +339,86 @@ export const ko = {
   "bookmarks show bookmark names": "북마크 이름 표시",
   "bookmarks number keys": "북마크 숫자 키 사용",
   "bookmarks enable pagination": "북마크 페이지 나누기 사용",
-  "input number...": "숫자 입력...",
-  "input icon-type...": "아이콘 유형 입력...",
+  "Input number...": "숫자 입력...",
+  "Input icon-type...": "아이콘 유형 입력...",
   "toggle extras section": "추가 기능 섹션 펼치기/접기",
-  "save (ctrl+s)": "저장(ctrl+s)",
-  "save & export (ctrl+e)": "저장 및 내보내기(ctrl+e)",
-  "import & save (ctrl+i)": "가져오기 및 저장(ctrl+i)",
-  "input your save (THIS WILL OVERWRITE YOUR CURRENT CONFIG)":
-    "가져올 저장 데이터를 입력하세요(현재 설정을 덮어씁니다)",
-  "input was empty, nothing imported": "입력이 비어 있어 아무것도 가져오지 않았습니다",
-  "incorrect save format, use MTAB_SAVE_FORMAT_v#.#.#_ or {legacyPrefix} for legacy saves":
-    "저장 형식이 올바르지 않습니다. MTAB_SAVE_FORMAT_v#.#.#_를 사용하거나 기존 저장 데이터에는 {legacyPrefix}를 사용하세요",
-  "invalid save format, expected MTAB_SAVE_FORMAT_v#.#.#_":
-    "저장 형식이 유효하지 않습니다. MTAB_SAVE_FORMAT_v#.#.#_가 필요합니다",
-  "incorrect save format": "저장 형식이 올바르지 않습니다",
-  "failed to parse legacy save format": "기존 저장 형식을 해석하지 못했습니다",
-  "invalid config data": "설정 데이터가 유효하지 않습니다",
-  "config saved & copied to clipboard": "설정을 저장하고 클립보드에 복사했습니다",
-  "could not save config to clipboard": "설정을 클립보드에 복사하지 못했습니다",
-  "search.customEngineURL must contain {}, aborting save":
-    "search.customEngineURL에는 {}가 포함되어야 하므로 저장을 취소합니다",
-  "changes saved": "변경 사항이 저장되었습니다",
-  "do you want to reset your options to default? this cannot be undone.":
+  "Save (Ctrl+S)": "저장(ctrl+s)",
+  "Save & export (Ctrl+E)": "저장 및 내보내기(ctrl+e)",
+  "Import & save (Ctrl+I)": "가져오기 및 저장(ctrl+i)",
+  "Input your save. This will overwrite your current config.":
+    "가져올 저장 데이터를 입력하세요(현재 설정을 덮어씁니다).",
+  "Input was empty, nothing imported.": "입력이 비어 있어 아무것도 가져오지 않았습니다.",
+  "Incorrect save format, use MTAB_SAVE_FORMAT_v#.#.#_ or {legacyPrefix} for legacy saves.":
+    "저장 형식이 올바르지 않습니다. MTAB_SAVE_FORMAT_v#.#.#_를 사용하거나 기존 저장 데이터에는 {legacyPrefix}를 사용하세요.",
+  "Invalid save format, expected MTAB_SAVE_FORMAT_v#.#.#_.":
+    "저장 형식이 유효하지 않습니다. MTAB_SAVE_FORMAT_v#.#.#_가 필요합니다.",
+  "Incorrect save format.": "저장 형식이 올바르지 않습니다.",
+  "Failed to parse legacy save format.": "기존 저장 형식을 해석하지 못했습니다.",
+  "Invalid config data.": "설정 데이터가 유효하지 않습니다.",
+  "Config saved & copied to clipboard.": "설정을 저장하고 클립보드에 복사했습니다.",
+  "Could not save config to clipboard.": "설정을 클립보드에 복사하지 못했습니다.",
+  "The search.customEngineURL must contain {}; aborting save.":
+    "search.customEngineURL에는 {}가 포함되어야 하므로 저장을 취소합니다.",
+  "Changes saved.": "변경 사항이 저장되었습니다.",
+  "Do you want to reset your options to default? This cannot be undone.":
     "설정을 기본값으로 초기화하시겠습니까? 이 작업은 되돌릴 수 없습니다.",
   cancel: "취소",
-  "options reset to default": "설정이 기본값으로 초기화되었습니다",
-  "you selected no, options did not reset": "취소되어 설정이 초기화되지 않았습니다",
-  "input your bookmark or folder": "가져올 북마크 또는 폴더 데이터를 입력하세요",
-  "could not import your bookmark or folder": "북마크 또는 폴더를 가져오지 못했습니다",
-  "incorrect format, expected MTAB_USER_DEFINED_BOOKMARK_FORMAT_v#.#.#_ or MTAB_USER_DEFINED_FOLDER_FORMAT_v#.#.#_":
-    "형식이 올바르지 않습니다. MTAB_USER_DEFINED_BOOKMARK_FORMAT_v#.#.#_ 또는 MTAB_USER_DEFINED_FOLDER_FORMAT_v#.#.#_가 필요합니다",
-  "invalid bookmark data": "북마크 데이터가 유효하지 않습니다",
-  "input your bookmarks and folders to import (THIS WILL OVERWRITE YOUR CURRENT BOOKMARKS AND FOLDERS)":
-    "가져올 북마크와 폴더 데이터를 입력하세요(현재 북마크와 폴더를 덮어씁니다)",
-  "incorrect format, expected MTAB_USER_USER_DEFINED_BOOKMARKS_FORMAT_v#.#.#_":
-    "형식이 올바르지 않습니다. MTAB_USER_USER_DEFINED_BOOKMARKS_FORMAT_v#.#.#_가 필요합니다",
-  "imported {bookmarks} bookmarks and {folders} folders":
-    "북마크 {bookmarks}개와 폴더 {folders}개를 가져왔습니다",
-  "bookmark copied to clipboard": "북마크를 클립보드에 복사했습니다",
-  "folder and contents copied to clipboard": "폴더와 내용을 클립보드에 복사했습니다",
-  "{bookmarks} bookmarks and {folders} folders copied to clipboard":
-    "북마크 {bookmarks}개와 폴더 {folders}개를 클립보드에 복사했습니다",
-  "paste here...": "여기에 붙여넣기...",
+  "Options reset to default.": "설정이 기본값으로 초기화되었습니다.",
+  "You selected no, options did not reset.": "취소되어 설정이 초기화되지 않았습니다.",
+  "Input your bookmark or folder.": "가져올 북마크 또는 폴더 데이터를 입력하세요.",
+  "Could not import your bookmark or folder.": "북마크 또는 폴더를 가져오지 못했습니다.",
+  "Incorrect format, expected MTAB_USER_DEFINED_BOOKMARK_FORMAT_v#.#.#_ or MTAB_USER_DEFINED_FOLDER_FORMAT_v#.#.#_.":
+    "형식이 올바르지 않습니다. MTAB_USER_DEFINED_BOOKMARK_FORMAT_v#.#.#_ 또는 MTAB_USER_DEFINED_FOLDER_FORMAT_v#.#.#_가 필요합니다.",
+  "Invalid bookmark data.": "북마크 데이터가 유효하지 않습니다.",
+  "Input your bookmarks and folders to import. This will overwrite your current bookmarks and folders.":
+    "가져올 북마크와 폴더 데이터를 입력하세요(현재 북마크와 폴더를 덮어씁니다).",
+  "Incorrect format, expected MTAB_USER_USER_DEFINED_BOOKMARKS_FORMAT_v#.#.#_.":
+    "형식이 올바르지 않습니다. MTAB_USER_USER_DEFINED_BOOKMARKS_FORMAT_v#.#.#_가 필요합니다.",
+  "Imported {bookmarks} bookmarks and {folders} folders.":
+    "북마크 {bookmarks}개와 폴더 {folders}개를 가져왔습니다.",
+  "Bookmark copied to clipboard.": "북마크를 클립보드에 복사했습니다.",
+  "Folder and contents copied to clipboard.": "폴더와 내용을 클립보드에 복사했습니다.",
+  "{bookmarks} bookmarks and {folders} folders copied to clipboard.":
+    "북마크 {bookmarks}개와 폴더 {folders}개를 클립보드에 복사했습니다.",
+  "Paste here...": "여기에 붙여넣기...",
   ok: "확인",
   confirm: "확인",
   "Icon picker": "아이콘 선택기",
-  "choose icon": "아이콘 선택",
+  "Choose icon": "아이콘 선택",
   "Search by icon name, family, or full icon type.":
     "아이콘 이름, 패밀리 또는 전체 아이콘 유형으로 검색하세요.",
-  "search icons...": "아이콘 검색...",
-  "no icons found": "아이콘을 찾을 수 없습니다",
-  "showing {visible} of {total} icons; search to narrow results":
-    "전체 {total}개 중 {visible}개 아이콘 표시 중; 검색해서 결과를 좁혀보세요",
-  "showing {total} icons": "아이콘 {total}개 표시 중",
-  "choose color": "색상 선택",
-  "choose color for {field}": "{field} 색상 선택",
-  "choose icon for {field}": "{field} 아이콘 선택",
+  "Search icons...": "아이콘 검색...",
+  "No icons found.": "아이콘을 찾을 수 없습니다.",
+  "Showing {visible} of {total} icons; search to narrow results.":
+    "전체 {total}개 중 {visible}개 아이콘 표시 중; 검색해서 결과를 좁혀보세요.",
+  "Showing {total} icons.": "아이콘 {total}개 표시 중.",
+  "Choose color": "색상 선택",
+  "Choose color for {field}": "{field} 색상 선택",
+  "Choose icon for {field}": "{field} 아이콘 선택",
   Notifications: "알림",
   "Toast action": "토스트 동작",
   [customMessageHelp]: `다음과 같이 \\를 사용할 수 있습니다:
 
-- 날짜 부분
-- \\yyyy -> 전체 연도(예: "2020")
-- \\yy -> 연도의 마지막 두 자리(예: "20")
-- \\M -> 전체 월 이름(예: "October")
-- \\m -> 축약 월 이름(예: "Oct")
-- \\m$ -> 숫자 월(예: "11")
-- \\D -> 전체 요일 이름(예: "Monday")
-- \\d -> 축약 요일 이름(예: "Mon")
+- 날짜 부분:
+- \\yyyy -> 전체 연도(예: "2020").
+- \\yy -> 연도의 마지막 두 자리(예: "20").
+- \\M -> 전체 월 이름(예: "October").
+- \\m -> 축약 월 이름(예: "Oct").
+- \\m$ -> 숫자 월(예: "11").
+- \\D -> 전체 요일 이름(예: "Monday").
+- \\d -> 축약 요일 이름(예: "Mon").
 
-- \\d$ -> 월 중 날짜(예: "08")
-- 시간 부분
-- \\h% -> 시간(12시간 형식, 예: "01")
-- \\hh -> 0으로 채운 시간(예: "01")
-- \\mm -> 0으로 채운 분(예: "02")
-- \\ss -> 0으로 채운 초(예: "03")
+- \\d$ -> 월 중 날짜(예: "08").
+- 시간 부분:
+- \\h% -> 시간(12시간 형식, 예: "01").
+- \\hh -> 0으로 채운 시간(예: "01").
+- \\mm -> 0으로 채운 분(예: "02").
+- \\ss -> 0으로 채운 초(예: "03").
 
-- 오전/오후 부분
-- \\md -> 소문자 오전/오후 표시(예: "am" 또는 "pm")
-- \\MD -> 대문자 오전/오후 표시(예: "AM" 또는 "PM")
-- \\n -> 줄바꿈`,
+- 오전/오후 부분:
+- \\md -> 소문자 오전/오후 표시(예: "am" 또는 "pm").
+- \\MD -> 대문자 오전/오후 표시(예: "AM" 또는 "PM").
+- \\n -> 줄바꿈.`,
   Untitled: "제목 없음",
   "toggle collapse bookmark settings": "북마크 설정 펼치기/접기",
   "reposition bookmark": "북마크 위치 변경",
@@ -417,11 +442,11 @@ export const ko = {
   "folder.iconColor": "폴더 아이콘 색상",
   "folder.fill": "폴더 채우기 색상",
   "folder.contents": "폴더 내용",
-  "input url...": "URL 입력...",
-  "input color... (leave empty for bookmarks.defaultIconColor)":
+  "Input URL...": "URL 입력...",
+  "Input color... (leave empty for bookmarks.defaultIconColor)":
     "색상 입력...(비워 두면 bookmarks.defaultIconColor 사용)",
-  "input color... (leave empty for default)": "색상 입력...(비워 두면 기본값 사용)",
-  "input icon-type... (leave empty for bookmarks.defaultFolderIconType)":
+  "Input color... (leave empty for default)": "색상 입력...(비워 두면 기본값 사용)",
+  "Input icon-type... (leave empty for bookmarks.defaultFolderIconType)":
     "아이콘 유형 입력...(비워 두면 bookmarks.defaultFolderIconType 사용)",
   "reorder wallpaper": "배경화면 순서 변경",
   "delete wallpaper": "배경화면 삭제",
@@ -432,12 +457,12 @@ export const ko = {
   "add url": "URL 추가",
   "upload file": "파일 업로드",
   "add solid color": "단색 추가",
-  "Input wallpaper URL": "배경화면 URL 입력",
-  "Input wallpaper color (e.g. #171717)": "배경화면 색상 입력(예: #171717)",
-  "Edit wallpaper URL": "배경화면 URL 편집",
-  "Edit wallpaper color (e.g. #171717)": "배경화면 색상 편집(예: #171717)",
+  "Input wallpaper URL.": "배경화면 URL 입력.",
+  "Input wallpaper color (e.g. #171717).": "배경화면 색상 입력(예: #171717).",
+  "Edit wallpaper URL.": "배경화면 URL 편집.",
+  "Edit wallpaper color (e.g. #171717).": "배경화면 색상 편집(예: #171717).",
   video: "동영상",
-  "do you want to reset all wallpapers for the selected type? this cannot be undone.":
+  "Do you want to reset all wallpapers for the selected type? This cannot be undone.":
     "선택한 유형의 모든 배경화면을 초기화하시겠습니까? 이 작업은 되돌릴 수 없습니다.",
   Search: "검색",
   "Search the web": "웹 검색",

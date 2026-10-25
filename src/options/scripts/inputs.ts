@@ -10,6 +10,7 @@ import {
   searchEngineYandexButtonEl,
   searchEngineStartpageButtonEl,
   searchEngineEcosiaButtonEl,
+  searchEngineKagiButtonEl,
   searchUseCustomEngineCheckboxEl
 } from "~/src/options/scripts/ui";
 import { listenToHotkeyInputs } from "~/src/options/scripts/utils/hotkey-inputs";
@@ -38,7 +39,8 @@ export const listenToInputs = () => {
     searchEngineYahooButtonEl,
     searchEngineYandexButtonEl,
     searchEngineStartpageButtonEl,
-    searchEngineEcosiaButtonEl
+    searchEngineEcosiaButtonEl,
+    searchEngineKagiButtonEl
   ];
 
   arrayOfSearchEngines.forEach((searchEngine) => {
@@ -72,17 +74,17 @@ export const listenToInputs = () => {
 
   tippy("#save-button", {
     ...base,
-    content: t("save (ctrl+s)")
+    content: t("Save (Ctrl+S)")
   });
 
   tippy("#export-button", {
     ...base,
-    content: t("save & export (ctrl+e)")
+    content: t("Save & export (Ctrl+E)")
   });
 
   tippy("#import-button", {
     ...base,
-    content: t("import & save (ctrl+i)")
+    content: t("Import & save (Ctrl+I)")
   });
 
   const resetToDefaultBtn = document.getElementById("reset-to-default-button") as HTMLButtonElement;

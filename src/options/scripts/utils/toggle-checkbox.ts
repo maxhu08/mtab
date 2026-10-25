@@ -7,6 +7,7 @@ import {
   searchEngineYandexButtonEl,
   searchEngineStartpageButtonEl,
   searchEngineEcosiaButtonEl,
+  searchEngineKagiButtonEl,
   searchUseCustomEngineCheckboxEl
 } from "~/src/options/scripts/ui";
 
@@ -103,6 +104,10 @@ const handleUseCustomEngineChecked = () => {
         }
         case "search-engine-ecosia-button": {
           searchEngineEcosiaButtonEl.setAttribute("aria-pressed", "false");
+          break;
+        }
+        case "search-engine-kagi-button": {
+          searchEngineKagiButtonEl.setAttribute("aria-pressed", "false");
           break;
         }
       }

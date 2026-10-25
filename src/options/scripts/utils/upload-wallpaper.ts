@@ -39,6 +39,7 @@ import {
 } from "~/src/options/scripts/utils/preview";
 import { getSelectedButton } from "~/src/options/scripts/utils/get-selected-button";
 import { showActionDialog, showInputDialog } from "~/src/options/scripts/utils/input-dialog";
+import { downloadFile, wallpaperFilename } from "~/src/options/scripts/utils/download-file";
 import { logger } from "~/src/utils/logger";
 import { t } from "~/src/options/scripts/i18n";
 
@@ -244,6 +245,33 @@ const addTileDeleteButton = (item: HTMLElement, onDelete: () => void) => {
   });
 };
 
+const addTileDownloadButton = (
+  item: HTMLElement,
+  name: string,
+  getFile: () => Promise<Blob | undefined>
+) => {
+  appendGalleryActionButton({
+    parent: item,
+    className:
+      "wallpaper-gallery-download-button absolute bottom-1.5 right-1.5 z-20 hidden h-7 w-7 place-items-center rounded-md bg-indigo-500 text-white transition hover:bg-indigo-600 group-hover:grid group-focus-within:grid focus-visible:outline focus-visible:outline-2 focus-visible:outline-white",
+    tooltip: t("download wallpaper"),
+    html: '<i class="ri-download-line"></i>',
+    onClick: async () => {
+      try {
+        const file = await getFile();
+        if (!file) throw new Error("Stored wallpaper is missing");
+
+        downloadFile(file, wallpaperFilename(name, file.type));
+      } catch {
+        toast.error(t("Could not download wallpaper."));
+      }
+    }
+  });
+
+  const badge = item.querySelector("span");
+  if (badge) badge.classList.add("group-hover:hidden", "group-focus-within:hidden");
+};
+
 const openWallpaperFilePickerForAdd = () => {
   pendingWallpaperFileReplacement = null;
   wallpaperFileUploadInputEl.multiple = true;
@@ -338,7 +366,7 @@ const initWallpaperGalleryTooltips = () => {
 
   wallpaperGalleryTooltipDelegate = delegate(wallpaperGalleryEl, {
     target:
-      ".wallpaper-gallery-drag-handle, .wallpaper-gallery-delete-button, .wallpaper-gallery-add-mixed-segment, .wallpaper-gallery-edit-button",
+      ".wallpaper-gallery-drag-handle, .wallpaper-gallery-delete-button, .wallpaper-gallery-add-mixed-segment, .wallpaper-gallery-edit-button, .wallpaper-gallery-download-button",
     placement: "top",
     theme: "dark",
     animation: "shift-away",
@@ -563,7 +591,7 @@ const previewSelected = async () => {
 
 const addMixedEntryForAction = async (action: MixedAddAction) => {
   if (action === "url") {
-    const value = await showInputDialog(t("Input wallpaper URL"));
+    const value = await showInputDialog(t("Input wallpaper URL."));
     if (!value) return;
 
     const added = await addMixedWallpaperURL(value);
@@ -573,7 +601,7 @@ const addMixedEntryForAction = async (action: MixedAddAction) => {
   }
 
   if (action === "solid-color") {
-    const value = await showInputDialog(t("Input wallpaper color (e.g. #171717)"));
+    const value = await showInputDialog(t("Input wallpaper color (e.g. #171717)."));
     if (!value) return;
 
     const added = await addMixedWallpaperSolidColor(value);
@@ -589,7 +617,7 @@ export const addWallpaperForActiveType = async () => {
   const type = getActiveWallpaperType();
 
   if (type === "url") {
-    const value = await showInputDialog(t("Input wallpaper URL"));
+    const value = await showInputDialog(t("Input wallpaper URL."));
     if (!value) return;
 
     const normalized = value.trim();
@@ -602,7 +630,7 @@ export const addWallpaperForActiveType = async () => {
   }
 
   if (type === "solid-color") {
-    const value = await showInputDialog(t("Input wallpaper color (e.g. #171717)"));
+    const value = await showInputDialog(t("Input wallpaper color (e.g. #171717)."));
     if (!value) return;
 
     const normalized = value.trim();
@@ -679,7 +707,7 @@ const deleteMixedEntry = async (id: string) => {
 const editURLAtIndex = async (index: number) => {
   if (index < 0 || index >= wallpaperUrls.length) return;
 
-  const value = await showInputDialog(t("Edit wallpaper URL"), {
+  const value = await showInputDialog(t("Edit wallpaper URL."), {
     defaultValue: wallpaperUrls[index],
     confirmText: t("save")
   });
@@ -696,7 +724,7 @@ const editURLAtIndex = async (index: number) => {
 const editSolidColorAtIndex = async (index: number) => {
   if (index < 0 || index >= wallpaperSolidColors.length) return;
 
-  const value = await showInputDialog(t("Edit wallpaper color (e.g. #171717)"), {
+  const value = await showInputDialog(t("Edit wallpaper color (e.g. #171717)."), {
     defaultValue: wallpaperSolidColors[index],
     confirmText: t("save")
   });
@@ -721,7 +749,7 @@ const editMixedEntry = async (entry: {
   }
 
   const prompt =
-    entry.kind === "url" ? t("Edit wallpaper URL") : t("Edit wallpaper color (e.g. #171717)");
+    entry.kind === "url" ? t("Edit wallpaper URL.") : t("Edit wallpaper color (e.g. #171717).");
   const value = await showInputDialog(prompt, {
     defaultValue: entry.value,
     confirmText: t("save")
@@ -890,6 +918,7 @@ const renderFileGallery = async (renderNonce: number) => {
       addTileTypeBadge(item, "file-upload", () => {
         openWallpaperFilePickerForReplacement({ scope: "file-upload", fileId: file.id });
       });
+      addTileDownloadButton(item, file.name, () => getUploadedWallpaperFile(file.id));
 
       item.addEventListener("click", () => {
         if (shouldIgnoreGalleryClick()) return;
@@ -932,7 +961,7 @@ const appendMixedEntryMedia = async ({
 
   if (entry.kind === "url") {
     const isVideo =
-      /\.(mp4|webm|ogg|mov)(\?.*)?$/i.test(entry.value) || entry.value.startsWith("data:video/");
+      /\.(mp4|webm|ogg|mov)([?#].*)?$/i.test(entry.value) || entry.value.startsWith("data:video/");
 
     if (isVideo) {
       const video = document.createElement("video");
@@ -1028,6 +1057,11 @@ const renderMixedGallery = async (renderNonce: number) => {
       addTileTypeBadge(item, entry.kind, () => {
         void editMixedEntry(entry);
       });
+
+      const file = entry.kind === "file-upload" ? fileMetaMap.get(entry.value) : undefined;
+      if (file) {
+        addTileDownloadButton(item, file.name, () => getMixedUploadedWallpaperFile(file.id));
+      }
 
       item.addEventListener("click", () => {
         if (shouldIgnoreGalleryClick()) return;
@@ -1185,7 +1219,7 @@ export const handleWallpaperFileUpload = () => {
 
   wallpaperResetAllButtonEl.onclick = () => {
     void showActionDialog(
-      t("do you want to reset all wallpapers for the selected type? this cannot be undone."),
+      t("Do you want to reset all wallpapers for the selected type? This cannot be undone."),
       {
         cancelText: t("cancel"),
         actionText: t("reset"),

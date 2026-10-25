@@ -1,19 +1,33 @@
 import { customMessageHelp } from "~/src/i18n/messages";
 
 export const fr = {
+  "download wallpaper": "télécharger le fond d’écran",
+  "Could not download wallpaper.": "Impossible de télécharger le fond d’écran.",
+  Export: "Exporter",
+  "copy to clipboard": "copier dans le presse-papiers",
+  or: "ou",
+  "upload config": "importer une configuration",
+  "Could not read file.": "Impossible de lire le fichier.",
+  "download config": "télécharger la configuration",
+  "download wallpapers": "télécharger les fonds d’écran",
+  "Wallpapers are not included in the config because they can be too large. You can download them separately as a ZIP file.":
+    "Les fonds d’écran ne sont pas inclus dans la configuration, car ils peuvent être trop volumineux. Vous pouvez les télécharger séparément dans un fichier ZIP.",
+  "No uploaded wallpapers to download.": "Aucun fond d’écran importé à télécharger.",
+  "Could not export wallpapers.": "Impossible d’exporter les fonds d’écran.",
+  "Could not export config.": "Impossible d’exporter la configuration.",
   "options ヽ(・ω・*)": "Paramètres ヽ(・ω・*)",
   logo: "Logo",
   options: "Paramètres",
   "options.language": "Langue",
   "options.showOptionsButton": "Afficher le bouton des paramètres",
-  "Tip: you can still access the options by pressing `extensions > mtab > options`":
+  "Tip: you can still access the options by pressing `extensions > mtab > options`.":
     "Astuce : vous pouvez toujours accéder aux paramètres via `extensions > mtab > options`.",
   user: "Utilisateur",
   "user.name": "Nom d’utilisateur",
   title: "Titre",
   "title.defaultTitle": "Titre par défaut",
   "title.dynamic.enabled": "Activer le titre dynamique",
-  "When enabled, the page title changes to match what is in the search bar":
+  "When enabled, the page title changes to match what is in the search bar.":
     "Une fois activé, le titre de la page reprend le contenu de la barre de recherche.",
   "title.effect": "Effet de titre",
   none: "Aucun",
@@ -24,18 +38,18 @@ export const fr = {
   default: "Par défaut",
   custom: "Personnalisé",
   "title.customFavicon": "Favicon personnalisé",
-  "Note: customFavicon is not included when exporting and importing configs due to taking too much space":
+  "Note: customFavicon is not included when exporting and importing configs due to taking too much space.":
     "Remarque : customFavicon n’est pas inclus dans l’exportation ni l’importation des configurations, car il occupe trop d’espace.",
   reset: "Réinitialiser",
-  "live preview": "Aperçu en direct",
+  "Live preview": "Aperçu en direct",
   message: "Message",
   "message.enabled": "Activer les messages",
   "message.font.type": "Type de police",
   "message.font.custom": "Police personnalisée",
-  "Use a Google Fonts URL to choose a font":
+  "Use a Google Fonts URL to choose a font.":
     "Utilisez une URL Google Fonts pour choisir une police.",
-  "Example: `https://fonts.googleapis.com/css2?family=Anton+SC&display=swap`":
-    "Exemple : `https://fonts.googleapis.com/css2?family=Anton+SC&display=swap`",
+  "Example: `https://fonts.googleapis.com/css2?family=Anton+SC&display=swap`.":
+    "Exemple : `https://fonts.googleapis.com/css2?family=Anton+SC&display=swap`.",
   "message.textColor": "Couleur du texte",
   "message.textSize": "Taille du texte",
   "message.type": "Type de message",
@@ -44,11 +58,11 @@ export const fr = {
   "time-12": "Heure (12 h)",
   "time-24": "Heure (24 h)",
   weather: "Météo",
-  "Note: you need to have location permissions set to `allow` for weather messages to work":
+  "Note: you need to have location permissions set to `allow` for weather messages to work.":
     "Remarque : l’autorisation de localisation doit être définie sur `allow` pour que les messages météo fonctionnent.",
-  "Weather data may be delayed due to being cached in 5 minutes intervals for faster load times":
+  "Weather data may be delayed due to being cached in 5 minutes intervals for faster load times.":
     "Les données météo peuvent avoir jusqu’à 5 minutes de retard, car elles sont mises en cache pour accélérer le chargement.",
-  "All weather data from": "Toutes les données météo proviennent de",
+  "All weather data from:": "Toutes les données météo proviennent de:",
   "message.weather.unitsType": "Unité de température",
   "message.customText": "Message personnalisé",
   wallpaper: "Fond d’écran",
@@ -60,22 +74,22 @@ export const fr = {
   "solid-color": "Couleur unie",
   mixed: "Mixte",
   "wallpaper.urls": "URL des fonds d’écran",
-  "Tip: you can use video file formats like MP4, MOV, and more":
+  "Tip: you can use video file formats like MP4, MOV, and more.":
     "Astuce : vous pouvez utiliser des formats vidéo comme MP4, MOV, etc.",
-  "To use URLs as wallpapers (right click > copy image address)":
-    "Pour utiliser des URL comme fonds d’écran (clic droit > copier l’adresse de l’image)",
+  "To use URLs as wallpapers (right click > copy image address).":
+    "Pour utiliser des URL comme fonds d’écran (clic droit > copier l’adresse de l’image).",
   "wallpaper.fileUploads": "Fichiers de fond d’écran importés",
-  "Tip: you can upload PNG, JPG, WEBP, GIF, MP4, and more":
+  "Tip: you can upload PNG, JPG, WEBP, GIF, MP4, and more.":
     "Astuce : vous pouvez importer des fichiers PNG, JPG, WEBP, GIF, MP4, etc.",
-  "It is recommended to scale images to match your resolution for faster loading times":
+  "It is recommended to scale images to match your resolution for faster loading times.":
     "Il est recommandé d’adapter les images à votre résolution pour accélérer le chargement.",
-  "Note: fileUploads wallpapers are not included when exporting and importing configs due to taking too much space":
+  "Note: fileUploads wallpapers are not included when exporting and importing configs due to taking too much space.":
     "Remarque : les fonds d’écran fileUploads ne sont pas inclus dans l’exportation ni l’importation des configurations, car ils occupent trop d’espace.",
   "wallpaper.solidColors": "Fonds en couleur unie",
   "wallpaper.random": "Fond d’écran aléatoire",
   "You can hover your cursor in the bottom-left corner on the new tab page to see wallpaper credits.":
     "Sur la page de nouvel onglet, survolez le coin inférieur gauche pour afficher les crédits du fond d’écran.",
-  "Random wallpapers are sourced from": "Les fonds d’écran aléatoires proviennent de",
+  "Random wallpapers are sourced from:": "Les fonds d’écran aléatoires proviennent de:",
   "wallpaper.mixed": "Fonds d’écran mixtes",
   "Mix URL, file-upload, and solid-color items in one rotation list.":
     "Mélangez des URL, des fichiers importés et des couleurs unies dans une même liste de rotation.",
@@ -125,14 +139,15 @@ export const fr = {
   "animations.bookmarkType": "Animation des favoris",
   search: "Recherche",
   "search.enabled": "Activer la recherche",
-  "Tip: press `Ctrl+Enter` to open your search in a new tab":
+  "Tip: press `Ctrl+Enter` to open your search in a new tab.":
     "Astuce : appuyez sur `Ctrl+Enter` pour ouvrir votre recherche dans un nouvel onglet.",
   "search.engine": "Moteur de recherche",
   "search.useCustomEngine": "Utiliser un moteur de recherche personnalisé",
   "search.customEngineURL": "URL du moteur de recherche personnalisé",
-  "Use `{}` to represent the search query":
-    "Utilisez `{}` pour représenter la requête de recherche",
-  "Example: `https://www.google.com/search?q={}`": "Exemple : `https://www.google.com/search?q={}`",
+  "Use `{}` to represent the search query.":
+    "Utilisez `{}` pour représenter la requête de recherche.",
+  "Example: `https://www.google.com/search?q={}`.":
+    "Exemple : `https://www.google.com/search?q={}`.",
   "search.placeholderText": "Texte indicatif de la recherche",
   "search.bookmarkPlaceholderText": "Texte indicatif de la recherche dans les favoris",
   "search.buttons.clear": "Afficher le bouton Effacer",
@@ -142,67 +157,67 @@ export const fr = {
   "When enabled, shows a button to submit your search.":
     "Une fois activé, affiche un bouton pour lancer la recherche.",
   "search.recognizeLinks": "Reconnaître les liens",
-  "Automatically detects links in search results and opens them directly instead of running a search":
+  "Automatically detects links in search results and opens them directly instead of running a search.":
     "Détecte automatiquement les liens dans la saisie de recherche et les ouvre directement au lieu de lancer une recherche.",
-  "e.g., typing `example.com` navigates directly to `https://example.com` instead of performing a search":
+  "E.g., typing `example.com` navigates directly to `https://example.com` instead of performing a search.":
     "Par exemple, saisir `example.com` ouvre directement `https://example.com` au lieu de lancer une recherche.",
   "search.suggestions": "Suggestions de recherche",
-  "Shows live query suggestions as you type":
+  "Shows live query suggestions as you type.":
     "Affiche des suggestions de requête en temps réel pendant la saisie.",
-  "Suggestions are sourced from DuckDuckGo's public autocomplete suggestions API and are not based on your personal search history. Requests are sent directly from your browser to DuckDuckGo and do not include cookies, accounts, extension identifiers, or other personal data":
+  "Suggestions are sourced from DuckDuckGo's public autocomplete suggestions API and are not based on your personal search history. Requests are sent directly from your browser to DuckDuckGo and do not include cookies, accounts, extension identifiers, or other personal data.":
     "Les suggestions proviennent de l’API publique de saisie semi-automatique de DuckDuckGo et ne reposent pas sur votre historique de recherche personnel. Les requêtes sont envoyées directement depuis votre navigateur à DuckDuckGo et n’incluent ni cookies, ni comptes, ni identifiants d’extension, ni autres données personnelles.",
   "search.assist.date": "Assistant de date",
-  "Shows the current date when you type 'date'":
+  "Shows the current date when you type 'date'.":
     "Affiche la date du jour lorsque vous saisissez `date`.",
   "search.assist.math": "Assistant de calcul",
-  "Automatically evaluates math expressions typed into the search input":
+  "Automatically evaluates math expressions typed into the search input.":
     "Calcule automatiquement les expressions mathématiques saisies dans le champ de recherche.",
-  "e.g., `cos(pi / 6) * (3^2 - 4) + sin(45deg) + sqrt(20) = 9.50936975510832`":
+  "E.g., `cos(pi / 6) * (3^2 - 4) + sin(45deg) + sqrt(20) = 9.50936975510832`.":
     "Par exemple, `cos(pi / 6) * (3^2 - 4) + sin(45deg) + sqrt(20) = 9.50936975510832`.",
   "search.assist.definitions": "Assistant de définitions",
-  "Shows word definitions when you include definition keywords in the search input":
+  "Shows word definitions when you include definition keywords in the search input.":
     "Affiche les définitions des mots lorsque vous ajoutez des mots-clés de définition dans la recherche.",
-  "e.g., `morning def` or `morning definition`":
+  "E.g., `morning def` or `morning definition`.":
     "Par exemple, `morning def` ou `morning definition`.",
-  "Definitions are sourced from": "Les définitions proviennent de",
+  "Definitions are sourced from:": "Les définitions proviennent de:",
   "search.assist.conversions": "Assistant de conversion",
-  "Converts units directly from the search input":
+  "Converts units directly from the search input.":
     "Convertit les unités directement depuis le champ de recherche.",
-  "e.g., `1 ft => 0.3048 m`": "Par exemple, `1 ft => 0.3048 m`.",
-  "Supports length, weight, temperature, time, volume, area, speed, angle, data, and 170+ currencies":
+  "E.g., `1 ft => 0.3048 m`.": "Par exemple, `1 ft => 0.3048 m`.",
+  "Supports length, weight, temperature, time, volume, area, speed, angle, data, and 170+ currencies.":
     "Prend en charge la longueur, le poids, la température, la durée, le volume, la surface, la vitesse, les angles, les données et plus de 170 devises.",
-  "Currency conversion rates are sourced from": "Les taux de change proviennent de",
+  "Currency conversion rates are sourced from:": "Les taux de change proviennent de:",
   "search.assist.passwordGenerator": "Générateur de mots de passe",
-  "Generates passwords directly from the search input, entirely locally":
+  "Generates passwords directly from the search input, entirely locally.":
     "Génère des mots de passe directement depuis le champ de recherche, entièrement en local.",
-  "No data is sent anywhere; password generation happens on your device":
+  "No data is sent anywhere; password generation happens on your device.":
     "Aucune donnée n’est envoyée ; la génération du mot de passe se fait sur votre appareil.",
-  "Type `pw <length> <flags>` or `password <length> <flags>` to generate a password":
+  "Type `pw <length> <flags>` or `password <length> <flags>` to generate a password.":
     "Saisissez `pw <length> <flags>` ou `password <length> <flags>` pour générer un mot de passe.",
-  "e.g., `password 16 luns` generates a 16 character password with lowercase letters, uppercase letters, numbers, and symbols":
+  "E.g., `password 16 luns` generates a 16 character password with lowercase letters, uppercase letters, numbers, and symbols.":
     "Par exemple, `password 16 luns` génère un mot de passe de 16 caractères avec des minuscules, des majuscules, des chiffres et des symboles.",
-  flags: "Options",
-  "`l` - lowercase letters": "`l` – lettres minuscules",
-  "`u` - uppercase letters": "`u` – lettres majuscules",
-  "`n` - numbers": "`n` – chiffres",
-  "`s` - symbols": "`s` – symboles",
-  "`m` - memorable": "`m` – facile à retenir",
-  "if no arguments are specified, defaults to `16 luns`":
+  "Flags:": "Options:",
+  "`l` - lowercase letters.": "`l` – lettres minuscules.",
+  "`u` - uppercase letters.": "`u` – lettres majuscules.",
+  "`n` - numbers.": "`n` – chiffres.",
+  "`s` - symbols.": "`s` – symboles.",
+  "`m` - memorable.": "`m` – facile à retenir.",
+  "If no arguments are specified, defaults to `16 luns`.":
     "Si aucun argument n’est précisé, la valeur par défaut est `16 luns`.",
-  "Order of arguments and flags does not matter":
+  "Order of arguments and flags does not matter.":
     "L’ordre des arguments et des options n’a pas d’importance.",
   "search.focusedBorderColor": "Couleur de la bordure au focus",
-  "(use #00000000 for none)": "(utilisez #00000000 pour aucune)",
+  "(Use #00000000 for none.)": "(Utilisez #00000000 pour aucune.)",
   "search.font.type": "Type de police de la recherche",
   "search.font.custom": "Police personnalisée de la recherche",
   "search.textColor": "Couleur du texte de recherche",
   "search.placeholderTextColor": "Couleur du texte indicatif",
   "search.searchIconColor": "Couleur de l’icône de recherche",
-  "This changes the -> color": "Modifie la couleur de ->",
+  "This changes the -> color.": "Modifie la couleur de ->.",
   "search.bookmarkIconColor": "Couleur de l’icône des favoris",
-  "This changes the // color": "Modifie la couleur de //",
+  "This changes the // color.": "Modifie la couleur de //.",
   "search.selectIconColor": "Couleur de l’icône de sélection",
-  "This changes the > color": "Modifie la couleur de >",
+  "This changes the > color.": "Modifie la couleur de >.",
   "search.linkTextColor": "Couleur du texte des liens",
   hotkeys: "Raccourcis clavier",
   "Modifier keys are specified as `<c-x>`, `<m-x>`, and `<a-x>` for `ctrl+x`, `meta+x`, and `alt+x`. Combined modifiers are written like `<c-a-x>` or `<c-m-x>`. Use `<space>` for the space key.":
@@ -216,11 +231,11 @@ export const fr = {
   "bookmarks.type": "Type de favoris",
   "user-defined": "Défini par l’utilisateur",
   "default-blocky": "Blocs par défaut",
-  "Tip: `Ctrl+click` or `Middle click` to open a bookmark in a new tab":
+  "Tip: `Ctrl+click` or `Middle click` to open a bookmark in a new tab.":
     "Astuce : utilisez `Ctrl+click` ou `Middle click` pour ouvrir un favori dans un nouvel onglet.",
   "bookmarks.showBookmarkNames": "Afficher le nom des favoris",
   "bookmarks.numberKeys": "Activer les touches numériques",
-  "Enabling numberKeys -> makes it so that pressing 1 opens first bookmark, 2 opens second bookmark, and so on (0 activates the back button)":
+  "Enabling numberKeys -> makes it so that pressing 1 opens first bookmark, 2 opens second bookmark, and so on (0 activates the back button).":
     "Activer numberKeys -> permet d’ouvrir le premier favori avec 1, le deuxième avec 2, et ainsi de suite (0 active le bouton Retour).",
   "bookmarks.enablePagination": "Activer la pagination",
   "When enabled, bookmark rows beyond maxBookmarkRowsPerPage are split into extra pages. Use the Prev/Next buttons or [ and ] keys to move between pages.":
@@ -234,23 +249,27 @@ export const fr = {
   "bookmarks.userDefinedCols": "Nombre de colonnes des favoris personnalisés",
   "bookmarks.userDefined": "Favoris personnalisés",
   "Valid icon types you can use:": "Types d’icônes valides :",
-  "Find available icon types at": "Retrouvez les types d’icônes disponibles sur",
-  "remixicon icon types should be formatted as":
-    "Les types d’icônes remixicon doivent être au format",
-  "You can also use Nerd Font icons. Check the cheat sheet at":
-    "Vous pouvez aussi utiliser des icônes Nerd Font. Consultez l’aide-mémoire sur",
-  "nerdfont icon types should be formatted as":
-    "Les types d’icônes nerdfont doivent être au format",
-  "fontawesome icon types should be formatted as":
-    "Les types d’icônes fontawesome doivent être au format",
-  "simpleicons icon types should be formatted as":
-    "Les types d’icônes simpleicons doivent être au format",
-  "`url` icon types should be formatted as": "Les types d’icônes `url` doivent être au format",
-  "You can use URLs as icon types (right click > copy image address)":
-    "Vous pouvez utiliser des URL comme types d’icônes (clic droit > copier l’adresse de l’image)",
+  "Find available icon types at:": "Retrouvez les types d’icônes disponibles sur:",
+  "Remix Icon types should be formatted as:":
+    "Les types d’icônes remixicon doivent être au format:",
+  "You can also use Nerd Font icons. Check the cheat sheet at:":
+    "Vous pouvez aussi utiliser des icônes Nerd Font. Consultez l’aide-mémoire sur:",
+  "Nerd Font icon types should be formatted as:":
+    "Les types d’icônes nerdfont doivent être au format:",
+  "Font Awesome icon types should be formatted as:":
+    "Les types d’icônes fontawesome doivent être au format:",
+  "Simple Icons types should be formatted as:":
+    "Les types d’icônes simpleicons doivent être au format:",
+  "`url` icon types should be formatted as:": "Les types d’icônes `url` doivent être au format:",
+  "You can use URLs as icon types (right click > copy image address).":
+    "Vous pouvez utiliser des URL comme types d’icônes (clic droit > copier l’adresse de l’image).",
   "You can also use the icon picker on the right of each icon input.":
     "Vous pouvez également utiliser le sélecteur d’icônes à droite de chaque champ d’icône.",
   "collapse all": "Tout réduire",
+  "collapse contents": "Réduire le contenu",
+  "collapse folder contents": "Réduire le contenu du dossier",
+  "expand contents": "Développer le contenu",
+  "expand folder contents": "Développer le contenu du dossier",
   "add bookmark": "Ajouter un favori",
   "add folder": "Ajouter un dossier",
   "import bookmark or folder": "Importer un favori ou un dossier",
@@ -259,19 +278,27 @@ export const fr = {
   "bookmarks.defaultBlockyCols": "Nombre de colonnes par défaut des blocs",
   "bookmarks.defaultBlockyColorType": "Type de couleur par défaut des blocs",
   "bookmarks.defaultBlockyColor": "Couleur par défaut des blocs",
+  "bookmarks.bookmarksLocationChromium": "Emplacement des favoris Chromium",
+  "(Only applies to Chromium-based browsers.)":
+    "(S’applique uniquement aux navigateurs basés sur Chromium.)",
+  root: "Racine",
+  "Selecting root displays every top-level bookmark folder.":
+    "Sélectionner la racine affiche tous les dossiers de favoris de premier niveau.",
+  "bookmarks bar": "Barre de favoris",
+  mobile: "Mobile",
   "bookmarks.bookmarksLocationFirefox": "Emplacement des favoris Firefox",
-  "(only applies to firefox based browsers)":
-    "(s’applique uniquement aux navigateurs basés sur Firefox)",
+  "(Only applies to Firefox-based browsers.)":
+    "(S’applique uniquement aux navigateurs basés sur Firefox.)",
   menu: "Menu",
   toolbar: "Barre d’outils",
   other: "Autre",
   "bookmarks.defaultFaviconSource": "Source de favicon par défaut",
-  "(determines where bookmark favicons are fetched from)":
-    "(détermine d’où sont récupérés les favicons des favoris)",
+  "(Determines where bookmark favicons are fetched from.)":
+    "(Détermine d’où sont récupérés les favicons des favoris.)",
   extras: "Fonctionnalités supplémentaires",
   "extras.snow.enabled": "Effet neige",
-  "Fun snow effect": "Effet neige amusant",
-  "Winter mode enables snow during december": "Le mode hiver active la neige en décembre",
+  "Fun snow effect.": "Effet neige amusant.",
+  "Winter mode enables snow during December.": "Le mode hiver active la neige en décembre.",
   on: "Activé",
   winter: "Hiver",
   off: "Désactivé",
@@ -286,31 +313,31 @@ export const fr = {
   "options language": "langue des paramètres",
   "options show options button": "afficher le bouton des paramètres",
   "toggle user section": "afficher/masquer la section Utilisateur",
-  "input name...": "saisir un nom...",
+  "Input name...": "Saisir un nom...",
   "toggle title section": "afficher/masquer la section Titre",
-  "input title...": "saisir un titre...",
+  "Input title...": "Saisir un titre...",
   "title dynamic enabled": "titre dynamique activé",
-  "input speed (ms)...": "saisir une vitesse (ms)...",
+  "Input speed (ms)...": "Saisir une vitesse (ms)...",
   "enter character count...": "saisir le nombre de caractères...",
   "toggle message section": "afficher/masquer la section Message",
   "message enabled": "messages activés",
-  "input font url...": "saisir l’URL de la police...",
-  "input color...": "saisir une couleur...",
-  "input size...": "saisir une taille...",
-  "input text...": "saisir un texte...",
+  "Input font URL...": "Saisir l’URL de la police...",
+  "Input color...": "Saisir une couleur...",
+  "Input size...": "Saisir une taille...",
+  "Input text...": "Saisir un texte...",
   "toggle wallpaper section": "afficher/masquer la section Fond d’écran",
   "wallpaper enabled": "fond d’écran activé",
-  "input brightness (0.0-1.0)...": "saisir la luminosité (0.0-1.0)...",
-  "input blur...": "saisir un flou...",
+  "Input brightness (0.0-1.0)...": "Saisir la luminosité (0.0-1.0)...",
+  "Input blur...": "Saisir un flou...",
   "toggle ui section": "afficher/masquer la section Interface",
-  "input blur strength...": "saisir l’intensité du flou...",
+  "Input blur strength...": "Saisir l’intensité du flou...",
   "toggle animations section": "afficher/masquer la section Animations",
   "animations enabled": "animations activées",
   "toggle search section": "afficher/masquer la section Recherche",
   "search enabled": "recherche activée",
   "search use custom engine": "utiliser un moteur de recherche personnalisé",
-  "E.g https://www.google.com/search?q={}": "Ex. https://www.google.com/search?q={}",
-  "input placeholder...": "saisir un texte indicatif...",
+  "E.g., https://www.google.com/search?q={}": "Ex. https://www.google.com/search?q={}",
+  "Input placeholder...": "Saisir un texte indicatif...",
   "search buttons clear": "bouton Effacer de la recherche",
   "search buttons search": "bouton Rechercher de la recherche",
   "search recognize links": "reconnaissance des liens par la recherche",
@@ -326,69 +353,90 @@ export const fr = {
   "bookmarks show bookmark names": "afficher le nom des favoris",
   "bookmarks number keys": "touches numériques des favoris",
   "bookmarks enable pagination": "pagination des favoris activée",
-  "input number...": "saisir un nombre...",
-  "input icon-type...": "saisir un type d’icône...",
+  "Input number...": "Saisir un nombre...",
+  "Input icon-type...": "Saisir un type d’icône...",
   "toggle extras section": "afficher/masquer la section Extras",
-  "save (ctrl+s)": "enregistrer (ctrl+s)",
-  "save & export (ctrl+e)": "enregistrer et exporter (ctrl+e)",
-  "import & save (ctrl+i)": "importer et enregistrer (ctrl+i)",
-  "input your save (THIS WILL OVERWRITE YOUR CURRENT CONFIG)":
-    "collez votre sauvegarde (CECI ÉCRASERA VOTRE CONFIGURATION ACTUELLE)",
-  "input was empty, nothing imported": "Le champ était vide : rien n’a été importé",
-  "incorrect save format, use MTAB_SAVE_FORMAT_v#.#.#_ or {legacyPrefix} for legacy saves":
-    "Format de sauvegarde incorrect : utilisez MTAB_SAVE_FORMAT_v#.#.#_ ou {legacyPrefix} pour les anciennes sauvegardes",
-  "invalid save format, expected MTAB_SAVE_FORMAT_v#.#.#_":
-    "Format de sauvegarde non valide : MTAB_SAVE_FORMAT_v#.#.#_ attendu",
-  "incorrect save format": "Format de sauvegarde incorrect",
-  "failed to parse legacy save format": "Impossible d’analyser l’ancien format de sauvegarde",
-  "invalid config data": "Données de configuration non valides",
-  "config saved & copied to clipboard":
-    "Configuration enregistrée et copiée dans le presse-papiers",
-  "could not save config to clipboard":
-    "Impossible de copier la configuration dans le presse-papiers",
-  "search.customEngineURL must contain {}, aborting save":
-    "search.customEngineURL doit contenir {}, enregistrement annulé",
-  "changes saved": "Modifications enregistrées",
-  "do you want to reset your options to default? this cannot be undone.":
+  "Save (Ctrl+S)": "Enregistrer (ctrl+s)",
+  "Save & export (Ctrl+E)": "Enregistrer et exporter (ctrl+e)",
+  "Import & save (Ctrl+I)": "Importer et enregistrer (ctrl+i)",
+  "Input your save. This will overwrite your current config.":
+    "Collez votre sauvegarde. Ceci écrasera votre configuration actuelle.",
+  "Input was empty, nothing imported.": "Le champ était vide : rien n’a été importé.",
+  "Incorrect save format, use MTAB_SAVE_FORMAT_v#.#.#_ or {legacyPrefix} for legacy saves.":
+    "Format de sauvegarde incorrect : utilisez MTAB_SAVE_FORMAT_v#.#.#_ ou {legacyPrefix} pour les anciennes sauvegardes.",
+  "Invalid save format, expected MTAB_SAVE_FORMAT_v#.#.#_.":
+    "Format de sauvegarde non valide : MTAB_SAVE_FORMAT_v#.#.#_ attendu.",
+  "Incorrect save format.": "Format de sauvegarde incorrect.",
+  "Failed to parse legacy save format.": "Impossible d’analyser l’ancien format de sauvegarde.",
+  "Invalid config data.": "Données de configuration non valides.",
+  "Config saved & copied to clipboard.":
+    "Configuration enregistrée et copiée dans le presse-papiers.",
+  "Could not save config to clipboard.":
+    "Impossible de copier la configuration dans le presse-papiers.",
+  "The search.customEngineURL must contain {}; aborting save.":
+    "search.customEngineURL doit contenir {}, enregistrement annulé.",
+  "Changes saved.": "Modifications enregistrées.",
+  "Do you want to reset your options to default? This cannot be undone.":
     "Voulez-vous rétablir les paramètres par défaut ? Cette action est irréversible.",
   cancel: "Annuler",
-  "options reset to default": "Paramètres rétablis par défaut",
-  "you selected no, options did not reset":
-    "Vous avez choisi Non : les paramètres n’ont pas été réinitialisés",
-  "input your bookmark or folder": "Collez votre favori ou votre dossier",
-  "could not import your bookmark or folder": "Impossible d’importer votre favori ou votre dossier",
-  "incorrect format, expected MTAB_USER_DEFINED_BOOKMARK_FORMAT_v#.#.#_ or MTAB_USER_DEFINED_FOLDER_FORMAT_v#.#.#_":
-    "Format incorrect : MTAB_USER_DEFINED_BOOKMARK_FORMAT_v#.#.#_ ou MTAB_USER_DEFINED_FOLDER_FORMAT_v#.#.#_ attendu",
-  "invalid bookmark data": "Données de favori non valides",
-  "input your bookmarks and folders to import (THIS WILL OVERWRITE YOUR CURRENT BOOKMARKS AND FOLDERS)":
-    "Collez les favoris et dossiers à importer (CECI ÉCRASERA VOS FAVORIS ET DOSSIERS ACTUELS)",
-  "incorrect format, expected MTAB_USER_USER_DEFINED_BOOKMARKS_FORMAT_v#.#.#_":
-    "Format incorrect : MTAB_USER_USER_DEFINED_BOOKMARKS_FORMAT_v#.#.#_ attendu",
-  "imported {bookmarks} bookmarks and {folders} folders":
-    "{bookmarks} favoris et {folders} dossiers importés",
-  "bookmark copied to clipboard": "Favori copié dans le presse-papiers",
-  "folder and contents copied to clipboard": "Dossier et contenu copiés dans le presse-papiers",
-  "{bookmarks} bookmarks and {folders} folders copied to clipboard":
-    "{bookmarks} favoris et {folders} dossiers copiés dans le presse-papiers",
-  "paste here...": "collez ici...",
+  "Options reset to default.": "Paramètres rétablis par défaut.",
+  "You selected no, options did not reset.":
+    "Vous avez choisi Non : les paramètres n’ont pas été réinitialisés.",
+  "Input your bookmark or folder.": "Collez votre favori ou votre dossier.",
+  "Could not import your bookmark or folder.":
+    "Impossible d’importer votre favori ou votre dossier.",
+  "Incorrect format, expected MTAB_USER_DEFINED_BOOKMARK_FORMAT_v#.#.#_ or MTAB_USER_DEFINED_FOLDER_FORMAT_v#.#.#_.":
+    "Format incorrect : MTAB_USER_DEFINED_BOOKMARK_FORMAT_v#.#.#_ ou MTAB_USER_DEFINED_FOLDER_FORMAT_v#.#.#_ attendu.",
+  "Invalid bookmark data.": "Données de favori non valides.",
+  "Input your bookmarks and folders to import. This will overwrite your current bookmarks and folders.":
+    "Collez les favoris et dossiers à importer. Ceci écrasera vos favoris et dossiers actuels.",
+  "Incorrect format, expected MTAB_USER_USER_DEFINED_BOOKMARKS_FORMAT_v#.#.#_.":
+    "Format incorrect : MTAB_USER_USER_DEFINED_BOOKMARKS_FORMAT_v#.#.#_ attendu.",
+  "Imported {bookmarks} bookmarks and {folders} folders.":
+    "{bookmarks} favoris et {folders} dossiers importés.",
+  "Bookmark copied to clipboard.": "Favori copié dans le presse-papiers.",
+  "Folder and contents copied to clipboard.": "Dossier et contenu copiés dans le presse-papiers.",
+  "{bookmarks} bookmarks and {folders} folders copied to clipboard.":
+    "{bookmarks} favoris et {folders} dossiers copiés dans le presse-papiers.",
+  "Paste here...": "Collez ici...",
   ok: "OK",
   confirm: "Confirmer",
   "Icon picker": "Sélecteur d’icônes",
-  "choose icon": "choisir une icône",
+  "Choose icon": "Choisir une icône",
   "Search by icon name, family, or full icon type.":
     "Recherchez par nom d’icône, famille ou type d’icône complet.",
-  "search icons...": "rechercher des icônes...",
-  "no icons found": "aucune icône trouvée",
-  "showing {visible} of {total} icons; search to narrow results":
-    "{visible} icônes sur {total} affichées ; lancez une recherche pour affiner les résultats",
-  "showing {total} icons": "{total} icônes affichées",
-  "choose color": "choisir une couleur",
-  "choose color for {field}": "choisir la couleur de {field}",
-  "choose icon for {field}": "choisir l’icône de {field}",
+  "Search icons...": "Rechercher des icônes...",
+  "No icons found.": "Aucune icône trouvée.",
+  "Showing {visible} of {total} icons; search to narrow results.":
+    "{visible} icônes sur {total} affichées ; lancez une recherche pour affiner les résultats.",
+  "Showing {total} icons.": "{total} icônes affichées.",
+  "Choose color": "Choisir une couleur",
+  "Choose color for {field}": "Choisir la couleur de {field}",
+  "Choose icon for {field}": "Choisir l’icône de {field}",
   Notifications: "Notifications",
   "Toast action": "Action de notification",
-  [customMessageHelp]:
-    'Vous pouvez utiliser \\ pour représenter :\n\n- Composants de date\n- \\yyyy -> Année complète (par ex. "2020")\n- \\yy -> Deux derniers chiffres de l’année (par ex. "20")\n- \\M -> Nom complet du mois (par ex. "octobre")\n- \\m -> Nom abrégé du mois (par ex. "oct")\n- \\m$ -> Mois au format numérique (par ex. "11")\n- \\D -> Nom complet du jour de la semaine (par ex. "lundi")\n- \\d -> Nom abrégé du jour de la semaine (par ex. "lun")\n\n- \\d$ -> Jour du mois au format numérique (par ex. "08")\n- Composants horaires\n- \\h% -> Heures (format 12 h, par ex. "01")\n- \\hh -> Heures (avec zéro initial, par ex. "01")\n- \\mm -> Minutes (avec zéro initial, par ex. "02")\n- \\ss -> Secondes (avec zéro initial, par ex. "03")\n\n- Indicateurs AM/PM\n- \\md -> Indicateur en minuscules (par ex. "am" ou "pm")\n- \\MD -> Indicateur en majuscules (par ex. "AM" ou "PM")\n- \\n -> Nouvelle ligne',
+  [customMessageHelp]: `Vous pouvez utiliser \\ pour représenter :
+
+- Composants de date:
+- \\yyyy -> Année complète (par ex. "2020").
+- \\yy -> Deux derniers chiffres de l’année (par ex. "20").
+- \\M -> Nom complet du mois (par ex. "octobre").
+- \\m -> Nom abrégé du mois (par ex. "oct").
+- \\m$ -> Mois au format numérique (par ex. "11").
+- \\D -> Nom complet du jour de la semaine (par ex. "lundi").
+- \\d -> Nom abrégé du jour de la semaine (par ex. "lun").
+
+- \\d$ -> Jour du mois au format numérique (par ex. "08").
+- Composants horaires:
+- \\h% -> Heures (format 12 h, par ex. "01").
+- \\hh -> Heures (avec zéro initial, par ex. "01").
+- \\mm -> Minutes (avec zéro initial, par ex. "02").
+- \\ss -> Secondes (avec zéro initial, par ex. "03").
+
+- Indicateurs AM/PM:
+- \\md -> Indicateur en minuscules (par ex. "am" ou "pm").
+- \\MD -> Indicateur en majuscules (par ex. "AM" ou "PM").
+- \\n -> Nouvelle ligne.`,
   Untitled: "Sans titre",
   "toggle collapse bookmark settings": "développer/réduire les paramètres du favori",
   "reposition bookmark": "déplacer le favori",
@@ -412,13 +460,13 @@ export const fr = {
   "folder.iconColor": "Couleur de l’icône du dossier",
   "folder.fill": "Couleur de remplissage du dossier",
   "folder.contents": "Contenu du dossier",
-  "input url...": "saisir une URL...",
-  "input color... (leave empty for bookmarks.defaultIconColor)":
-    "saisir une couleur... (laisser vide pour bookmarks.defaultIconColor)",
-  "input color... (leave empty for default)":
-    "saisir une couleur... (laisser vide pour la valeur par défaut)",
-  "input icon-type... (leave empty for bookmarks.defaultFolderIconType)":
-    "saisir un type d’icône... (laisser vide pour bookmarks.defaultFolderIconType)",
+  "Input URL...": "Saisir une URL...",
+  "Input color... (leave empty for bookmarks.defaultIconColor)":
+    "Saisir une couleur... (laisser vide pour bookmarks.defaultIconColor)",
+  "Input color... (leave empty for default)":
+    "Saisir une couleur... (laisser vide pour la valeur par défaut)",
+  "Input icon-type... (leave empty for bookmarks.defaultFolderIconType)":
+    "Saisir un type d’icône... (laisser vide pour bookmarks.defaultFolderIconType)",
   "reorder wallpaper": "réordonner le fond d’écran",
   "delete wallpaper": "supprimer le fond d’écran",
   "edit url": "modifier l’URL",
@@ -428,12 +476,13 @@ export const fr = {
   "add url": "ajouter une URL",
   "upload file": "importer un fichier",
   "add solid color": "ajouter une couleur unie",
-  "Input wallpaper URL": "Saisissez l’URL du fond d’écran",
-  "Input wallpaper color (e.g. #171717)": "Saisissez la couleur du fond d’écran (par ex. #171717)",
-  "Edit wallpaper URL": "Modifier l’URL du fond d’écran",
-  "Edit wallpaper color (e.g. #171717)": "Modifier la couleur du fond d’écran (par ex. #171717)",
+  "Input wallpaper URL.": "Saisissez l’URL du fond d’écran.",
+  "Input wallpaper color (e.g. #171717).":
+    "Saisissez la couleur du fond d’écran (par ex. #171717).",
+  "Edit wallpaper URL.": "Modifier l’URL du fond d’écran.",
+  "Edit wallpaper color (e.g. #171717).": "Modifier la couleur du fond d’écran (par ex. #171717).",
   video: "Vidéo",
-  "do you want to reset all wallpapers for the selected type? this cannot be undone.":
+  "Do you want to reset all wallpapers for the selected type? This cannot be undone.":
     "Voulez-vous réinitialiser tous les fonds d’écran du type sélectionné ? Cette action est irréversible.",
   Search: "Recherche",
   "Search the web": "Rechercher sur le Web",

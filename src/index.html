@@ -19,25 +19,25 @@
     <div id="wallpaper" aria-hidden="true" class="fixed top-0 z-[-1] h-screen w-screen"></div>
     <main
       id="content"
-      class="m-padding-bottom top-distance absolute grid w-[95%] max-w-[50rem] place-items-center gap-2 md:w-[80%]"
+      class="m-padding-bottom top-distance absolute grid w-[95%] min-w-0 max-w-[50rem] place-items-center gap-2 md:w-[80%]"
     >
-      <div class="grid w-full grid-flow-row place-items-center gap-2 md:gap-4">
+      <div class="grid w-full min-w-0 grid-flow-row place-items-center gap-2 md:gap-4">
         <p
           id="message"
           role="status"
           aria-live="polite"
           class="font-message text-size-message overflow-hidden whitespace-pre-wrap text-center font-semibold text-white"
         ></p>
-        <div class="grid w-full gap-2">
+        <div class="grid w-full min-w-0 gap-2">
           <section
             id="search-section"
             aria-label="Search"
-            class="grid w-full grid-flow-row place-items-center gap-2"
+            class="grid w-full min-w-0 grid-flow-row place-items-center gap-2"
           >
             <div
               id="search-container"
               role="search"
-              class="font-search corner-style grid w-full grid-cols-[max-content_auto_max-content] border-2 border-transparent p-1 text-base opacity-0 md:p-2 md:text-2xl"
+              class="font-search corner-style grid w-full min-w-0 grid-cols-[max-content_minmax(0,1fr)_max-content] border-2 border-transparent p-1 text-base opacity-0 md:p-2 md:text-2xl"
             >
               <span aria-hidden="true" class="search-search-icon-color select-none font-semibold"
                 >->&nbsp;</span
@@ -47,7 +47,7 @@
                 type="text"
                 autocomplete="off"
                 aria-label="Search the web"
-                class="font-search placeholder-color-search text-transition-none bg-transparent outline-none"
+                class="font-search placeholder-color-search text-transition-none min-w-0 bg-transparent outline-none"
               />
               <div id="search-input-buttons" class="hidden items-center gap-3 px-1">
                 <button
@@ -80,12 +80,21 @@
               aria-label="Search assistant"
               class="hidden w-full gap-2"
             ></div>
-            <div id="bookmarks-container" role="region" aria-label="Bookmarks"></div>
+            <div
+              id="bookmarks-container"
+              role="region"
+              aria-label="Bookmarks"
+              class="w-full min-w-0"
+            ></div>
           </section>
-          <section id="bookmark-search-section" aria-label="Bookmark search" class="hidden w-full">
+          <section
+            id="bookmark-search-section"
+            aria-label="Bookmark search"
+            class="hidden w-full min-w-0"
+          >
             <div
               id="bookmark-search-container"
-              class="font-search corner-style grid w-full grid-cols-[max-content_auto] border-2 border-transparent p-1 text-base md:p-2 md:text-2xl"
+              class="font-search corner-style grid w-full min-w-0 grid-cols-[max-content_minmax(0,1fr)] border-2 border-transparent p-1 text-base md:p-2 md:text-2xl"
             >
               <span aria-hidden="true" class="search-bookmark-icon-color select-none font-semibold"
                 >//&nbsp;</span
@@ -95,11 +104,15 @@
                 type="text"
                 autocomplete="off"
                 aria-label="Search bookmarks"
-                class="font-bookmark-search placeholder-color-bookmark-search bg-transparent outline-none"
+                class="font-bookmark-search placeholder-color-bookmark-search min-w-0 bg-transparent outline-none"
               />
             </div>
           </section>
-          <section id="search-results-section" aria-label="Search results" class="hidden w-full">
+          <section
+            id="search-results-section"
+            aria-label="Search results"
+            class="hidden w-full min-w-0"
+          >
             <div
               id="search-results-container"
               role="listbox"
