@@ -29,7 +29,7 @@
     "commitlint": "commitlint",
     "lint": "oxlint src scripts --deny-warnings",
     "lint:fix": "bun run lint --fix",
-    "test": "bun test",
+    "test": "bun test tests",
     "check": "bun run format:check && bun run lint && bun run typecheck && bun run test",
     "prepare": "husky",
     "typecheck": "tsc -p tsconfig.json --noEmit"
@@ -50,6 +50,7 @@
     "@parcel/config-default": "2.16.3",
     "@parcel/core": "2.16.3",
     "@parcel/resolver-default": "2.16.3",
+    "@types/bun": "^1.4.4",
     "@types/chrome": "^0.1.43",
     "@types/node": "^25.9.9",
     "@types/sortablejs": "^1.15.9",

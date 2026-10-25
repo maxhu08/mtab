@@ -1,25 +1,26 @@
 import { describe, expect, test } from "bun:test";
 import {
+  type TranslationKey,
   fillLocalizedDefaultValue,
   normalizeDefaultValue,
   resolveLanguage,
   translate
-} from "./index.ts";
-import { de } from "./locales/de.ts";
-import { es } from "./locales/es.ts";
-import { fr } from "./locales/fr.ts";
-import { it } from "./locales/it.ts";
-import { ja } from "./locales/ja.ts";
-import { ko } from "./locales/ko.ts";
-import { ptBR } from "./locales/pt-br.ts";
-import { ru } from "./locales/ru.ts";
-import { zhCN } from "./locales/zh-cn.ts";
+} from "~/src/i18n";
+import { de } from "~/src/i18n/locales/de";
+import { es } from "~/src/i18n/locales/es";
+import { fr } from "~/src/i18n/locales/fr";
+import { it } from "~/src/i18n/locales/it";
+import { ja } from "~/src/i18n/locales/ja";
+import { ko } from "~/src/i18n/locales/ko";
+import { ptBR } from "~/src/i18n/locales/pt-br";
+import { ru } from "~/src/i18n/locales/ru";
+import { zhCN } from "~/src/i18n/locales/zh-cn";
 
 const messages = { de, es, fr, it, ja, ko, "pt-BR": ptBR, ru, "zh-CN": zhCN };
 
-const normalize = (value) => value.replace(/\s+/g, " ").trim();
+const normalize = (value: string) => value.replace(/\s+/g, " ").trim();
 
-const decode = (value) =>
+const decode = (value: string) =>
   value
     .split("&lt;")
     .join("<")
@@ -75,7 +76,7 @@ const ignoredStaticText = new Set([
   "//"
 ]);
 
-const findMissingStaticText = async (path) => {
+const findMissingStaticText = async (path: string) => {
   const html = await Bun.file(new URL(path, import.meta.url)).text();
   const text = [...html.matchAll(/(?:^|>)([^<]+)(?=<|$)/g)]
     .map((match) => normalize(decode(match[1])))
@@ -133,14 +134,14 @@ describe("options language resolution", () => {
 
 describe("translations", () => {
   test("only normalizes values known to originate from a default", () => {
-    let handleInput;
+    let handleInput!: () => void;
     const input = {
       value: "",
       dataset: {},
-      addEventListener: (_event, listener) => {
+      addEventListener: (_event: string, listener: () => void) => {
         handleInput = listener;
       }
-    };
+    } as HTMLInputElement;
 
     fillLocalizedDefaultValue(input, "user", "user");
     expect(input.value).toBe("user");
@@ -206,18 +207,18 @@ describe("translations", () => {
   });
 
   test("preserves interpolation placeholders in every locale", () => {
-    const placeholders = (value) =>
+    const placeholders = (value: string) =>
       [...value.matchAll(/\{[^{}]+\}/g)].map((match) => match[0]).sort();
 
     Object.values(messages).forEach((locale) => {
       Object.keys(zhCN).forEach((key) => {
-        expect(placeholders(locale[key])).toEqual(placeholders(key));
+        expect(placeholders(locale[key as TranslationKey])).toEqual(placeholders(key));
       });
     });
   });
 
   test("preserves technical tokens in every locale", () => {
-    const tokens = (value) =>
+    const tokens = (value: string) =>
       [
         ...value.matchAll(
           /https?:\/\/[^\s)`]+|MTAB_[A-Za-z0-9_.#]*[A-Za-z0-9_#]|\\[A-Za-z]+[$%]?|\{\}/g
@@ -228,8 +229,8 @@ describe("translations", () => {
 
     Object.values(messages).forEach((locale) => {
       Object.keys(zhCN).forEach((key) => {
-        expect(tokens(locale[key])).toEqual(tokens(key));
-        expect(locale[key]).not.toContain("[[[");
+        expect(tokens(locale[key as TranslationKey])).toEqual(tokens(key));
+        expect(locale[key as TranslationKey]).not.toContain("[[[");
       });
     });
   });
@@ -257,7 +258,7 @@ describe("translations", () => {
     Object.values(messages).forEach((locale) => {
       Object.entries(requiredLiterals).forEach((entry) => {
         entry[1].forEach((literal) => {
-          expect(locale[entry[0]]).toContain(literal);
+          expect(locale[entry[0] as TranslationKey]).toContain(literal);
         });
       });
 
@@ -265,20 +266,24 @@ describe("translations", () => {
         locale[
           "When enabled, bookmark rows beyond maxBookmarkRowsPerPage are split into extra pages. Use the Prev/Next buttons or [ and ] keys to move between pages."
         ];
-      expect(pagination.replaceAll("`", "")).toMatch(/\[\s+\S+\s+\]/u);
+      expect(pagination.replace(/`/g, "")).toMatch(/\[\s+\S+\s+\]/u);
     });
   });
 
   test("covers static text and translatable attributes on every extension page", async () => {
-    expect(await findMissingStaticText("../options.html")).toEqual([]);
-    expect(await findMissingStaticText("../index.html")).toEqual([]);
-    expect(await findMissingStaticText("../popup.html")).toEqual([]);
+    expect(await findMissingStaticText("../src/options.html")).toEqual([]);
+    expect(await findMissingStaticText("../src/index.html")).toEqual([]);
+    expect(await findMissingStaticText("../src/popup.html")).toEqual([]);
   });
 });
 
 describe("extension entrypoints", () => {
   test("avoid top-level await because Parcel wraps entries in non-async functions", async () => {
-    const paths = ["../newtab/scripts/init.ts", "../options/scripts/init.ts", "../popup/popup.ts"];
+    const paths = [
+      "../src/newtab/scripts/init.ts",
+      "../src/options/scripts/init.ts",
+      "../src/popup/popup.ts"
+    ];
     const sources = await Promise.all(
       paths.map((path) => Bun.file(new URL(path, import.meta.url)).text())
     );
