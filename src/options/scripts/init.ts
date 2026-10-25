@@ -2,7 +2,8 @@ import { fillInputs } from "~/src/options/scripts/utils/fill-inputs";
 import { listenToKeys } from "~/src/options/scripts/keybinds";
 import { listenToInputs } from "~/src/options/scripts/inputs";
 import { handleWallpaperFileUpload } from "~/src/options/scripts/utils/upload-wallpaper";
-import { getConfig } from "~/src/utils/config";
+import { Config, getConfig } from "~/src/utils/config";
+import { getOptionsData, OptionsData } from "~/src/utils/options-data";
 import { getUserAgent } from "~/src/utils/user-agent";
 import { handleSwitches } from "~/src/options/scripts/utils/handle-switch";
 import {
@@ -12,7 +13,6 @@ import {
 import { handleCustomFaviconUpload } from "~/src/options/scripts/utils/upload-favicon";
 import { createCollapseGroups } from "~/src/options/scripts/utils/collapse-option";
 import { handleControls } from "~/src/options/scripts/utils/control-utils";
-import { getSelectedButton } from "~/src/options/scripts/utils/get-selected-button";
 import { renderWallpaperGallery } from "~/src/options/scripts/utils/upload-wallpaper";
 import {
   initDelegatedHandlers,
@@ -24,7 +24,7 @@ import { initColorInputControls } from "~/src/options/scripts/utils/color-inputs
 import { initIconInputControls } from "~/src/options/scripts/utils/icon-inputs";
 import { initializeI18n } from "~/src/options/scripts/i18n";
 
-const initialize = () => {
+const initialize = (config: Config, optionsData: OptionsData) => {
   const logo = document.getElementById("mtab-logo") as HTMLImageElement;
   logo.classList.add("animate-up-bouncy");
 
@@ -38,16 +38,10 @@ const initialize = () => {
     }
   );
 
-  createCollapseGroups();
+  createCollapseGroups(optionsData);
   initCustomCSSHighlight();
   initColorInputControls();
   initIconInputControls();
-
-  getConfig((data) => {
-    fillInputs(data.config);
-
-    fixAllToggleCheckboxSections();
-  });
 
   const manifest = chrome.runtime.getManifest();
   const displayVersion =
@@ -65,17 +59,28 @@ const initialize = () => {
 
   handleSwitches();
 
-  const selectedWallpaperTypeButton = getSelectedButton("wallpaper-type");
-  if (selectedWallpaperTypeButton) selectedWallpaperTypeButton.click();
-  void renderWallpaperGallery();
-
   listenAllToggleCheckboxSections();
+
+  fillInputs(config);
+  fixAllToggleCheckboxSections();
 
   handleControls();
 
   initDelegatedHandlers();
   initTooltipsDelegated();
   initSortableForExistingDropzones();
+
+  // Only local layout work blocks releasing the hint, never wallpaper media downloads.
+  void Promise.all([document.fonts.ready, renderWallpaperGallery()]).finally(() => {
+    requestAnimationFrame(() => {
+      document.documentElement.classList.remove("options-initializing");
+      window.dispatchEvent(new Event("options-ready"));
+    });
+  });
 };
 
-void initializeI18n().then(initialize);
+void Promise.all([
+  initializeI18n(),
+  new Promise<{ config: Config }>(getConfig),
+  new Promise<{ optionsData: OptionsData }>(getOptionsData)
+]).then((data) => initialize(data[1].config, data[2].optionsData));

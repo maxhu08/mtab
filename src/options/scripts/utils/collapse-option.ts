@@ -1,26 +1,20 @@
-import { getOptionsData } from "~/src/utils/options-data";
+import { getOptionsData, OptionsData } from "~/src/utils/options-data";
 import { modifyNestedObject } from "~/src/utils/modify";
 
-export const createCollapseGroups = () => {
-  getOptionsData((data) => {
-    const sectionsExpanded = data.optionsData.sectionsExpanded;
+export const createCollapseGroups = (optionsData: OptionsData) => {
+  const sectionsExpanded = optionsData.sectionsExpanded;
 
-    newCollapseGroup("options-collapse-button", "options-section", sectionsExpanded.options);
-    newCollapseGroup("user-collapse-button", "user-section", sectionsExpanded.user);
-    newCollapseGroup("title-collapse-button", "title-section", sectionsExpanded.title);
-    newCollapseGroup("message-collapse-button", "message-section", sectionsExpanded.message);
-    newCollapseGroup("wallpaper-collapse-button", "wallpaper-section", sectionsExpanded.wallpaper);
-    newCollapseGroup("ui-collapse-button", "ui-section", sectionsExpanded.ui);
-    newCollapseGroup(
-      "animations-collapse-button",
-      "animations-section",
-      sectionsExpanded.animations
-    );
-    newCollapseGroup("search-collapse-button", "search-section", sectionsExpanded.search);
-    newCollapseGroup("hotkeys-collapse-button", "hotkeys-section", sectionsExpanded.hotkeys);
-    newCollapseGroup("bookmarks-collapse-button", "bookmarks-section", sectionsExpanded.bookmarks);
-    newCollapseGroup("extras-collapse-button", "extras-section", sectionsExpanded.extras);
-  });
+  newCollapseGroup("options-collapse-button", "options-section", sectionsExpanded.options);
+  newCollapseGroup("user-collapse-button", "user-section", sectionsExpanded.user);
+  newCollapseGroup("title-collapse-button", "title-section", sectionsExpanded.title);
+  newCollapseGroup("message-collapse-button", "message-section", sectionsExpanded.message);
+  newCollapseGroup("wallpaper-collapse-button", "wallpaper-section", sectionsExpanded.wallpaper);
+  newCollapseGroup("ui-collapse-button", "ui-section", sectionsExpanded.ui);
+  newCollapseGroup("animations-collapse-button", "animations-section", sectionsExpanded.animations);
+  newCollapseGroup("search-collapse-button", "search-section", sectionsExpanded.search);
+  newCollapseGroup("hotkeys-collapse-button", "hotkeys-section", sectionsExpanded.hotkeys);
+  newCollapseGroup("bookmarks-collapse-button", "bookmarks-section", sectionsExpanded.bookmarks);
+  newCollapseGroup("extras-collapse-button", "extras-section", sectionsExpanded.extras);
 };
 
 export const collapseOptionSection = (optionSection: HTMLElement) => {

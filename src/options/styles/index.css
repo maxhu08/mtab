@@ -1,3 +1,13 @@
+:root.options-initializing {
+  overflow-anchor: none;
+}
+
+.options-initializing *,
+.options-initializing *::before,
+.options-initializing *::after {
+  transition: none !important;
+}
+
 .options-page-layout,
 .options-page-layout > main,
 .options-page-layout > main > section {
