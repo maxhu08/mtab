@@ -845,6 +845,22 @@
           </div>
           <div class="grid gap-2">
             <p class="text-base text-white">ui.customCSS</p>
+            <p id="ui-custom-css-description" class="text-base text-neutral-500">
+              Customize the new-tab page with CSS. Use #content to adjust overall width, position,
+              and spacing; #message for the greeting’s font, size, and color; #search-container for
+              the search bar’s background, border, and padding; and #search-input for its text.
+              Target #bookmarks-container for the bookmark area and .bookmark-node-icon for bookmark
+              icons. Use your browser’s Inspect tool to find more selectors.
+            </p>
+            <button
+              id="ui-custom-css-expand-button"
+              type="button"
+              aria-controls="ui-custom-css-container"
+              aria-haspopup="dialog"
+              class="w-full cursor-pointer rounded-md bg-neutral-500 p-2 transition hover:bg-neutral-600"
+            >
+              <span class="text-base text-white">expand editor</span>
+            </button>
             <div
               id="ui-custom-css-container"
               class="w-full rounded-md border-2 border-transparent bg-neutral-800 p-1 text-base"
@@ -857,6 +873,7 @@
                 ></pre>
                 <textarea
                   id="ui-custom-css-textarea"
+                  aria-label="ui.customCSS"
                   type="text"
                   autocomplete="off"
                   spellcheck="false"
@@ -2308,6 +2325,26 @@
             </button>
           </div>
         </div>
+      </div>
+    </div>
+    <div
+      id="expanded-editor"
+      class="expanded-editor"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="expanded-editor-title"
+      aria-describedby="ui-custom-css-description"
+      hidden
+    >
+      <div class="expanded-editor-header">
+        <h2 id="expanded-editor-title" class="min-w-0 break-words text-base text-white"></h2>
+        <button
+          id="expanded-editor-close"
+          type="button"
+          class="shrink-0 cursor-pointer rounded-md bg-neutral-500 p-2 transition hover:bg-neutral-600"
+        >
+          <span class="text-base text-white">close editor</span>
+        </button>
       </div>
     </div>
     <!-- <3 -->

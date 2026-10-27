@@ -115,6 +115,10 @@ export const ko = {
   sharp: "각진 모서리",
   round: "둥근 모서리",
   "ui.customCSS": "사용자 지정 CSS",
+  "expand editor": "편집기 확대",
+  "close editor": "편집기 닫기",
+  "Customize the new-tab page with CSS. Use #content to adjust overall width, position, and spacing; #message for the greeting’s font, size, and color; #search-container for the search bar’s background, border, and padding; and #search-input for its text. Target #bookmarks-container for the bookmark area and .bookmark-node-icon for bookmark icons. Use your browser’s Inspect tool to find more selectors.":
+    "CSS로 새 탭 페이지를 꾸밀 수 있습니다. #content로 전체 너비, 위치와 간격을, #message로 인사말의 글꼴, 크기와 색상을, #search-container로 검색창의 배경, 테두리와 안쪽 여백을, #search-input으로 입력 텍스트를 조정하세요. #bookmarks-container는 북마크 영역에, .bookmark-node-icon은 북마크 아이콘에 사용합니다. 브라우저의 검사 도구로 더 많은 선택자를 찾을 수 있습니다.",
   animations: "애니메이션",
   "animations.enabled": "애니메이션 사용",
   "animations.bookmarkTiming": "북마크 애니메이션 순서",

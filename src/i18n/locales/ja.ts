@@ -115,6 +115,10 @@ export const ja = {
   sharp: "角ばった",
   round: "丸み",
   "ui.customCSS": "カスタム CSS",
+  "expand editor": "エディターを拡大",
+  "close editor": "エディターを閉じる",
+  "Customize the new-tab page with CSS. Use #content to adjust overall width, position, and spacing; #message for the greeting’s font, size, and color; #search-container for the search bar’s background, border, and padding; and #search-input for its text. Target #bookmarks-container for the bookmark area and .bookmark-node-icon for bookmark icons. Use your browser’s Inspect tool to find more selectors.":
+    "CSS で新しいタブページをカスタマイズできます。#content で全体の幅・位置・間隔、#message で挨拶のフォント・サイズ・色、#search-container で検索バーの背景・枠線・内側の余白、#search-input で入力テキストを調整します。#bookmarks-container はブックマーク領域、.bookmark-node-icon はブックマークのアイコンに使えます。その他のセレクターはブラウザーの検証ツールで確認できます。",
   animations: "アニメーション",
   "animations.enabled": "アニメーションを有効化",
   "animations.bookmarkTiming": "ブックマークのアニメーションタイミング",

@@ -115,6 +115,10 @@ export const ru = {
   sharp: "острые",
   round: "скруглённые",
   "ui.customCSS": "свой CSS",
+  "expand editor": "развернуть редактор",
+  "close editor": "закрыть редактор",
+  "Customize the new-tab page with CSS. Use #content to adjust overall width, position, and spacing; #message for the greeting’s font, size, and color; #search-container for the search bar’s background, border, and padding; and #search-input for its text. Target #bookmarks-container for the bookmark area and .bookmark-node-icon for bookmark icons. Use your browser’s Inspect tool to find more selectors.":
+    "Настройте страницу новой вкладки с помощью CSS. Используйте #content для общей ширины, положения и отступов; #message для шрифта, размера и цвета приветствия; #search-container для фона, рамки и внутренних отступов строки поиска; а #search-input для её текста. #bookmarks-container задаёт область закладок, а .bookmark-node-icon — их значки. Другие селекторы можно найти с помощью инструмента проверки элементов в браузере.",
   animations: "анимации",
   "animations.enabled": "включить анимации",
   "animations.bookmarkTiming": "тайминг анимации закладок",

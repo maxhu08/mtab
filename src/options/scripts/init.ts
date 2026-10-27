@@ -20,6 +20,7 @@ import {
   initTooltipsDelegated
 } from "~/src/options/scripts/utils/bookmarks/handle-bookmark-ui";
 import { initCustomCSSHighlight } from "~/src/options/scripts/utils/custom-css-highlight";
+import { initExpandedEditor } from "~/src/options/scripts/utils/expanded-editor";
 import { initColorInputControls } from "~/src/options/scripts/utils/color-inputs";
 import { initIconInputControls } from "~/src/options/scripts/utils/icon-inputs";
 import { initializeI18n } from "~/src/options/scripts/i18n";
@@ -41,6 +42,7 @@ const initialize = (config: Config, optionsData: OptionsData) => {
 
   createCollapseGroups(optionsData);
   initCustomCSSHighlight();
+  initExpandedEditor();
   initColorInputControls();
   initIconInputControls();
 

@@ -117,6 +117,10 @@ export const de = {
   sharp: "Eckig",
   round: "Abgerundet",
   "ui.customCSS": "Benutzerdefiniertes CSS",
+  "expand editor": "Editor vergrößern",
+  "close editor": "Editor schließen",
+  "Customize the new-tab page with CSS. Use #content to adjust overall width, position, and spacing; #message for the greeting’s font, size, and color; #search-container for the search bar’s background, border, and padding; and #search-input for its text. Target #bookmarks-container for the bookmark area and .bookmark-node-icon for bookmark icons. Use your browser’s Inspect tool to find more selectors.":
+    "Passe die Neuer-Tab-Seite mit CSS an. Verwende #content für Breite, Position und Abstände; #message für Schriftart, Größe und Farbe der Begrüßung; #search-container für Hintergrund, Rahmen und Innenabstände der Suchleiste; und #search-input für deren Text. Mit #bookmarks-container gestaltest du den Lesezeichenbereich und mit .bookmark-node-icon die Lesezeichensymbole. Weitere Selektoren findest du mit dem Untersuchen-Werkzeug deines Browsers.",
   animations: "Animationen",
   "animations.enabled": "Animationen aktivieren",
   "animations.bookmarkTiming": "Timing der Lesezeichenanimation",

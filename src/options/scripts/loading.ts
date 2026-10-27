@@ -43,6 +43,7 @@
     // A refresh during initialization must not replace the last settled layout.
     if (document.documentElement.classList.contains("options-initializing")) return;
 
+    window.dispatchEvent(new Event("options-before-layout-snapshot"));
     sessionStorage.setItem(
       "options-layout",
       `:root.options-initializing body { min-height: ${document.documentElement.scrollHeight}px !important; }\n` +

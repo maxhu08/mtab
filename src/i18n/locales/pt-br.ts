@@ -116,6 +116,10 @@ export const ptBR = {
   sharp: "Retos",
   round: "Arredondados",
   "ui.customCSS": "CSS personalizado",
+  "expand editor": "expandir editor",
+  "close editor": "fechar editor",
+  "Customize the new-tab page with CSS. Use #content to adjust overall width, position, and spacing; #message for the greeting’s font, size, and color; #search-container for the search bar’s background, border, and padding; and #search-input for its text. Target #bookmarks-container for the bookmark area and .bookmark-node-icon for bookmark icons. Use your browser’s Inspect tool to find more selectors.":
+    "Personalize a página de nova aba com CSS. Use #content para ajustar a largura, posição e espaçamento; #message para a fonte, tamanho e cor da saudação; #search-container para o fundo, borda e espaçamento interno da barra de pesquisa; e #search-input para seu texto. Use #bookmarks-container para a área de favoritos e .bookmark-node-icon para seus ícones. Use a ferramenta Inspecionar do navegador para encontrar mais seletores.",
   animations: "Animações",
   "animations.enabled": "Ativar animações",
   "animations.bookmarkTiming": "Tempo da animação dos favoritos",

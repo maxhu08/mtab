@@ -4,7 +4,7 @@ import { importConfigAndSave } from "~/src/options/scripts/utils/import-config";
 
 export const listenToKeys = () => {
   document.addEventListener("keydown", (e) => {
-    if (e.ctrlKey && e.key === "s") {
+    if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "s") {
       e.preventDefault();
 
       saveConfig();

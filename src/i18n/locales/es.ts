@@ -115,6 +115,10 @@ export const es = {
   sharp: "Recto",
   round: "Redondeado",
   "ui.customCSS": "CSS personalizado",
+  "expand editor": "ampliar editor",
+  "close editor": "cerrar editor",
+  "Customize the new-tab page with CSS. Use #content to adjust overall width, position, and spacing; #message for the greeting’s font, size, and color; #search-container for the search bar’s background, border, and padding; and #search-input for its text. Target #bookmarks-container for the bookmark area and .bookmark-node-icon for bookmark icons. Use your browser’s Inspect tool to find more selectors.":
+    "Personaliza la página de nueva pestaña con CSS. Usa #content para ajustar el ancho, la posición y el espaciado; #message para la fuente, el tamaño y el color del saludo; #search-container para el fondo, el borde y el relleno de la barra de búsqueda; y #search-input para su texto. Usa #bookmarks-container para el área de marcadores y .bookmark-node-icon para sus iconos. Usa la herramienta Inspeccionar del navegador para encontrar más selectores.",
   animations: "Animaciones",
   "animations.enabled": "Activar animaciones",
   "animations.bookmarkTiming": "Temporización de animaciones de marcadores",

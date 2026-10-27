@@ -116,6 +116,10 @@ export const fr = {
   sharp: "Angles vifs",
   round: "Arrondi",
   "ui.customCSS": "CSS personnalisé",
+  "expand editor": "agrandir l’éditeur",
+  "close editor": "fermer l’éditeur",
+  "Customize the new-tab page with CSS. Use #content to adjust overall width, position, and spacing; #message for the greeting’s font, size, and color; #search-container for the search bar’s background, border, and padding; and #search-input for its text. Target #bookmarks-container for the bookmark area and .bookmark-node-icon for bookmark icons. Use your browser’s Inspect tool to find more selectors.":
+    "Personnalisez la page de nouvel onglet avec du CSS. Utilisez #content pour la largeur, la position et l’espacement ; #message pour la police, la taille et la couleur du message d’accueil ; #search-container pour le fond, la bordure et les marges internes de la barre de recherche ; et #search-input pour son texte. Ciblez #bookmarks-container pour la zone des favoris et .bookmark-node-icon pour leurs icônes. Utilisez l’outil Inspecter du navigateur pour trouver d’autres sélecteurs.",
   animations: "Animations",
   "animations.enabled": "Activer les animations",
   "animations.bookmarkTiming": "Temporisation de l’animation des favoris",

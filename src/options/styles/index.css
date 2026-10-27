@@ -1,3 +1,5 @@
+@import "./expanded-editor.css";
+
 :root.options-initializing {
   overflow-anchor: none;
 }

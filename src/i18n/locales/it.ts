@@ -116,6 +116,10 @@ export const it = {
   sharp: "Spigolosi",
   round: "Arrotondati",
   "ui.customCSS": "CSS personalizzato",
+  "expand editor": "espandi editor",
+  "close editor": "chiudi editor",
+  "Customize the new-tab page with CSS. Use #content to adjust overall width, position, and spacing; #message for the greeting’s font, size, and color; #search-container for the search bar’s background, border, and padding; and #search-input for its text. Target #bookmarks-container for the bookmark area and .bookmark-node-icon for bookmark icons. Use your browser’s Inspect tool to find more selectors.":
+    "Personalizza la pagina nuova scheda con CSS. Usa #content per larghezza, posizione e spaziatura; #message per carattere, dimensione e colore del saluto; #search-container per sfondo, bordo e spaziatura interna della barra di ricerca; e #search-input per il suo testo. Usa #bookmarks-container per l’area dei segnalibri e .bookmark-node-icon per le loro icone. Usa lo strumento Ispeziona del browser per trovare altri selettori.",
   animations: "Animazioni",
   "animations.enabled": "Attiva le animazioni",
   "animations.bookmarkTiming": "Tempistica dell'animazione dei segnalibri",

@@ -1,0 +1,47 @@
+html.expanded-editor-open {
+  overflow: hidden;
+  scrollbar-gutter: stable;
+  overflow-anchor: none;
+}
+
+.expanded-editor {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: grid;
+  grid-template-rows: auto auto minmax(0, 1fr);
+  gap: 0.5rem;
+  background: #171717;
+  padding: 1rem;
+}
+
+.expanded-editor[hidden] {
+  display: none;
+}
+
+.expanded-editor-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.expanded-editor > p {
+  max-height: 25dvh;
+  overflow: auto;
+}
+
+.expanded-editor #ui-custom-css-container,
+.expanded-editor .custom-css-editor {
+  display: grid;
+  min-width: 0;
+  min-height: 0;
+  grid-template-rows: minmax(0, 1fr);
+}
+
+.expanded-editor .custom-css-highlight,
+.expanded-editor .custom-css-textarea {
+  min-width: 0;
+  min-height: 0;
+  height: 100%;
+}

@@ -115,6 +115,10 @@ export const zhCN = {
   sharp: "直角",
   round: "圆角",
   "ui.customCSS": "自定义 CSS",
+  "expand editor": "展开编辑器",
+  "close editor": "关闭编辑器",
+  "Customize the new-tab page with CSS. Use #content to adjust overall width, position, and spacing; #message for the greeting’s font, size, and color; #search-container for the search bar’s background, border, and padding; and #search-input for its text. Target #bookmarks-container for the bookmark area and .bookmark-node-icon for bookmark icons. Use your browser’s Inspect tool to find more selectors.":
+    "使用 CSS 自定义新标签页。用 #content 调整整体宽度、位置和间距；#message 调整问候语的字体、大小和颜色；#search-container 调整搜索栏的背景、边框和内边距；#search-input 调整输入文字。#bookmarks-container 用于书签区域，.bookmark-node-icon 用于书签图标。使用浏览器的检查工具查找更多选择器。",
   animations: "动画",
   "animations.enabled": "启用动画",
   "animations.bookmarkTiming": "书签动画时序",
