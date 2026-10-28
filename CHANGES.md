@@ -1,7 +1,5 @@
-# Changes in 1.13.5
+# Changes in 1.13.6
 
 in this release:
 
-- improve options ui
-- add russian to localizations
-- performance improvements
+- improve editors in options page
